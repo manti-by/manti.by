@@ -1,0 +1,108 @@
+/**
+  * @desc Default Style
+  * @package M2 Micro Framework
+  * @author Alexander Chaika
+  */
+  
+/************************* Default Site styles ********************************/
+
+body { background: white; font-family: Arial, Tahoma, Verdana; font-size: 12px; 
+    margin: 0; padding: 0; }
+
+h1, h2 { font-family: Arial, Tahoma, Verdana; }
+h1, h2, h3, h4, h5, h6 { border-bottom: 1px solid #EAEAEA; }
+
+h1, h2 { font-size: 26px; margin: 3px 0 15px 0; padding: 0 0 8px 0; font-weight: normal; }
+h3 { font-size: 18px; margin: 0px 0 3px 0; font-weight: normal; }
+h4 { font-size: 14px; margin: 0px 0; }
+h5 { font-size: 12px; margin: 0px 0; }
+h6 { font-size: 11px; margin: 0px 0; }
+
+a { color: #ff721d; }
+a img { border: none !important; }
+
+code, pre { margin: 6px; padding: 12px; white-space: pre-line;
+            background: #FFC; border: 1px dashed #CCC; }
+
+blockquote { margin: 0 0 0 10px;}
+
+b { font-weight: normal;}
+sup { color: red; font-size: 120%; font-weight: bold; padding-left: 5px; }
+
+label { display: block; float: left; width: 130px; font-weight: bold; clear: left; }
+
+fieldset { border: 1px solid #CCC; margin: 5px; padding: 5px 10px; }
+
+input, select, textarea { background: #EEE; border: 1px solid #CCC; padding: 2px;
+                          width: 250px; }
+
+textarea { width: 300px; height: 120px; font-size: 12px; font-family: Arial; }
+textarea#description { width: 500px; height: 400px; }
+
+input[type="button"],
+input[type="submit"] { padding: 3px 24px; width: auto; font-size: 12px !important;
+                       background: #EEE url(../images/button.png) repeat-x; 
+                       cursor: pointer; }
+
+input[type="checkbox"] { width: auto; }
+
+ul { padding-left: 25px; }
+
+td { vertical-align: top; }
+
+a.button { padding: 2px 9px; width: auto; font-size: 12px !important; 
+           text-decoration: none; border: 1px solid #CCC; color: black !important;
+           background: #EEE url(../images/button.png) repeat-x; }
+
+#loader,
+#popup  { display: none; position: fixed; left: 50%; top: 200px;
+          margin-left: -150px; padding-top: 100px; width: 300px; height: 50px;
+          color: #666; border: 2px solid #EEE; text-align: center;
+          background: white url(../images/loader.gif) no-repeat center center;
+          -webkit-box-shadow: 2px 2px 4px #CCC; -moz-box-shadow: 2px 2px 4px #CCC;
+          box-shadow: 2px 2px 4px #CCC;}
+
+#popup { padding: 12px; height: auto; background: white; text-align: left; }
+
+#popup input[type=text] { background: white; border: none; width: auto; padding: 0; margin: 0; }
+
+.req { background: #EEE url(../images/req.png) no-repeat top right; }
+
+.error { margin-bottom: 12px; padding: 12px; background: #FAA; font-size: 14px;
+         border-top: 3px solid #900; border-bottom: 3px solid #900; }
+
+.message { margin-bottom: 12px; padding: 12px; background: #AFA; font-size: 14px;
+           border-top: 3px solid #090; border-bottom: 3px solid #090; }
+
+.hide_this { float: right; cursor: pointer; font-size: 10px;
+             position: relative; top: -9px; right: -9px; margin: 0; padding: 3px;
+             color: #5d5d5d; border: 1px dashed #666; }
+
+.small, .smallgrey { font-size: 11px; font-weight: normal; }
+.smallgrey, .grey { color: #5d5d5d; }
+
+.lightgrey { color: #777; }
+
+.invisible {position: absolute; left: -1000px; }
+.hidden { display: none; }
+
+.l50 { width: 50%; float: left; }
+.r50 { width: 50%; float: right; }
+
+.fl { float: left; }
+.fr { float: right; }
+.cls { clear: both; }
+
+/************************* Template Site styles *******************************/
+
+#wrapper { width: 1000px; margin: 10px auto; padding: 10px;
+           background: white; border: 1px solid #CCC; }
+
+.submit { padding-left: 3px; }
+#insert textarea { width: 500px; height: 70px; }
+
+#popup { display: none; position: fixed; top: 300px; left: 50%; width: 800px;
+    margin-left: -400px; border: 1px solid #CCC; background: white; z-index: 1000;
+    -webkit-box-shadow: 3px 3px 6px #CCC; -moz-box-shadow: 3px 3px 6px #CCC; box-shadow: 3px 3px 6px #CCC;}
+
+#popup .head { text-align: right; padding: 2px 0; cursor: pointer; color: #b40202; }
