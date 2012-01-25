@@ -57,8 +57,12 @@
         private function loadModule($module, $default = null) {
             // get config
             $config = $this->system->getConfig();
-            if (!$default) {
-                $default = $config['default_module'];
+            if (empty($module)) {
+                if (empty($default)) {
+                    $module = $config['default_module'];
+                } else {
+                    $module = $default;
+                }
             }
             
             // check modules existance
@@ -66,7 +70,7 @@
                 include_once $config['doc_root'].DS.'modules'.DS.$module.DS.'controller.php';
                 $module_name = ucfirst($module).'Controller';
             } else {
-                include_once $config['doc_root'].DS.'modules'.DS.$default.DS.'controller.php';
+                include_once $config['doc_root'].DS.'modules'.DS.$config['default_module'].DS.'controller.php';
                 $module_name = ucfirst($default).'Controller';
             }
             
