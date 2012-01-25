@@ -26,6 +26,7 @@
     require_once 'system.php';
     require_once 'database.php';
     require_once 'sef.php';
+    require_once 'user.php';
     
     // get main controller
     require_once dirname(__FILE__) . DS .'modules'. DS. 'controller.php';

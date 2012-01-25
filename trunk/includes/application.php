@@ -19,24 +19,24 @@
             // init sef to parse request string
             Sef::init();
             
-            // log request
-            $database = Database::getInstance();
+            // get system metrics
             $system = System::getInstance();
-
-            // compile log data and add to DB
             $module = substr($system->getCmd('module'), 0, 50);
             $action = substr($system->getCmd('action'), 0, 50);
             $task   = substr($system->getCmd('task'), 0, 50);
             $id     = substr($system->getCmd('id'), 0, 50);
 
-            $ip      = substr($system->getUserIp(), 0, 50);
-            $browser = substr($system->getUserBrowser(), 0, 255);
-            $referer = substr($system->getReferer(), 0, 500);
+            // get user metrics
+            $user = User::getInstance();
+            $ip      = substr($user->getIp(), 0, 50);
+            $browser = substr($user->getUserAgent(), 0, 255);
+            $referer = substr($user->getReferer(), 0, 500);
 
-            $query = "INSERT DELAYED INTO `#__logstat` 
+            // save request log into db
+            $query = "INSERT DELAYED INTO `#__log` 
                 (`module`, `action`, `task`, `refid`, `ip`, `browser`, `referer`, `sessionid`) 
                 VALUES ('$module', '$action', '$task', '$id', '$ip', '$browser', '$referer', '".session_id()."')";
-            $result = $database->query($query);
+            Database::getInstance()->query($query);
         }
         
         /**

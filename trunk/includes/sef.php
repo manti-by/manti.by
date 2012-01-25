@@ -8,15 +8,29 @@
       * @version 1.0
       */
     class Sef extends Application {
-        private $alias;
-        private $database;
-        
+        private $storage;        
+        protected static $instance = null;
+
         /**
-          * Default cunstructor for SEF 
+          * Singleton protection
           */
-        public function __construct() {
-            $this->alias = array();
-            $this->database = Database::getInstance();
+        private function __construct() {
+            // Try connect to DB
+            $this->storage = array();
+            
+        }
+        private function __clone() {}
+        private function __wakeup() {}
+    
+        /**
+          * GetInstance class method
+          * @return object $instance
+          */
+        public static function getInstance() {
+            if (is_null(self::$instance)) {
+                self::$instance = new Sef;
+            }
+            return self::$instance;
         }
         
         /**
@@ -24,14 +38,14 @@
           */
         public static function init() {
             // get global config
-            $config = System::getInstance()->getConfig();
+            $database = Database::getInstance();
             
             // update view counter
-            $this->database->query("
-                UPDATE `#__sef_alias` 
+            $database->query("
+                UPDATE `#__sef` 
                 SET `viewed` = `viewed` + 1
-                WHERE `request` = '".$this->database->escape($_SERVER['REQUEST_URI'])."' 
-                   OR `alias` = '".$this->database->escape($_SERVER['REQUEST_URI'])."'");
+                WHERE `request` = '".$database->escape($_SERVER['REQUEST_URI'])."' 
+                   OR `link` = '".$database->escape($_SERVER['REQUEST_URI'])."'");
             
             // if sef enabled
             if ($config['sef_enabled']) {
@@ -58,28 +72,30 @@
           */
         public static function getReal($link) {
             // check memory
-            if ($this->sefMemCheck($link)) {
+            if (self::checkStorage($link)) {
                 // if exist, get array value by key
-                return $this->alias[$link];
+                $storage = self::getStorage();
+                return $storage[$link];
             }            
             
             // try to get real link
-            $result = $this->database->query("
-                SELECT `request` FROM `#__sef_alias` 
-                WHERE `link` = '".$this->database->escape($link)."'");
+            $database = Database::getInstance();
+            $result = $database->query("
+                SELECT `request` FROM `#__sef` 
+                WHERE `link` = '".$database->escape($link)."'");
             if ($result) {
-                $request = $this->database->getField();
+                $request = $database->getField();
 
                 // update view counter
-                $this->database->query("
-                    UPDATE `#__sef_aliases` SET `viewed` = `viewed` + 1
-                    WHERE `link` = '".$this->database->escape($link)."'");
+                $database->query("
+                    UPDATE `#__sef` SET `viewed` = `viewed` + 1
+                    WHERE `link` = '".$database->escape($link)."'");
             } else {
                 $request = $link;
             }
 
             // add to mem storage
-            $this->addToMemory($request, $link);
+            self::addToStorage($request, $link);
             return $request;
         }
 
@@ -90,24 +106,26 @@
           */
         public static function getSef($request) {
             // check memory
-            if ($this->sefMemCheck($request)) {
-                $flip = array_flip($this->alias);
+            if (self::checkStorage($request)) {
+                $storage = self::getStorage();
+                $flip = array_flip($storage);
                 return $flip[$request];
             }            
             
             // try to get real link
-            $result = $this->database->query("
-                SELECT `link` FROM `#__sef_alias` 
-                WHERE `request` = '".$this->database->escape($request)."'");
+            $database = Database::getInstance();
+            $result = $database->query("
+                SELECT `link` FROM `#__sef` 
+                WHERE `request` = '".$database->escape($request)."'");
             if ($result) {
-                $link = $this->database->getField();
+                $link = $database->getField();
             } else {
                 // if request not in sef links, try to create it
                 $link = self::createLink($request);
             }
 
             // replace ampersands and add to mem storage
-            $this->addToMemory($request, $link);
+            self::addToStorage($request, $link);
             return str_replace('&', '&amp;', $link);
         }
 
@@ -117,8 +135,10 @@
           * @return string $link
           */
         private static function createLink($request) {
+            // get config
             $config = System::getInstance()->getConfig();
             
+            // sef map creation
             $sef_map = array(
                 '/\?module\=blog\&action\=show\&id\=(.*)/' => array(
                     'table'  => 'blog',
@@ -133,12 +153,13 @@
                 preg_match($pattern, $request, $matches);
                 if ($matches) {
                     // if pattern found, get table and alias fields
-                    $result = $this->database->query("
+                    $database = Database::getInstance();
+                    $result = $database->query("
                         SELECT `".$source['field']."` FROM `#__".$source['table']."` 
                         WHERE `id` = '".$matches[1]."'");
 
                     if ($result) {
-                        $alias = $this->database->getField();
+                        $alias = $database->getField();
                     } else {
                         // @TODO: I dont understand, why it's happend
                         // but it's very strage... and we generate "date" for this
@@ -148,13 +169,13 @@
                     // Insert new route to redirection
                     $link = $source['prefix'] . $alias . $source['suffix'];
                     $database->query("
-                        INSERT INTO `#__sef_alias` (`request`, `link`)
-                        VALUES ('".$this->database->escape($request)."', '".$this->database->escape($link)."');");
+                        INSERT INTO `#__sef` (`request`, `link`)
+                        VALUES ('".$database->escape($request)."', '".$database->escape($link)."');");
 
                     // add to aliases cache
-                    $this->alias[$request] = $link;
+                    $result = self::addToStorage($request, $link);
                     
-                    if ($this->database->getResult() > 0) {
+                    if ($database->getResult() > 0) {
                         return $link;
                     } else {
                         return $request;
@@ -165,14 +186,18 @@
         }
         
         /**
-          * Check existing link
+          * Check existing link in storage
           * @param type $link 
           * @return string $link if exists
           */
-        public function sefMemCheck($link) {
-            if (isset($this->alias[$link])) {
+        private static function checkStorage($link) {
+            // get storage data
+            $data = self::getInstance()->getStorageData();
+            
+            // check both array sides
+            if (isset($data[$link])) {
                 return true;
-            } elseif (in_array($link, $this->alias)) {
+            } elseif (in_array($link, $data)) {
                 return true;
             } else {
                 return false;
@@ -180,12 +205,50 @@
         }
         
         /**
-          * Add to mem sef request-link pair
+          * STATIC: Add to storage sef request-link pair
           * @param string $request 
           * @param string $link 
           * @return bool $state
           */
-        private function addToMemory($request, $link) {
-            $this->alias[$link] = $request;
+        private static function addToStorage($request, $link) {
+            // check if already added
+            if (self::checkStorage($request)) {
+                return true;
+            }
+            
+            // add to object
+            return self::getInstance()->addToStorageData($request, $link);
+        }
+        
+        /**
+          * Add to storage sef request-link pair
+          * @param string $request 
+          * @param string $link 
+          * @return bool $state
+          */
+        private function addToStorageData($request, $link) {
+            try {
+                $this->storage[$request] = $link;
+            } catch (Exception $e) {
+                return $this->_throw($e->getMessage());
+            }
+            
+            return true;
+        }
+        
+        /**
+          * STATIC: Get storage array of request-link pairs
+          * @return array $storage
+          */
+        private static function getStorage() {
+            return self::getInstance()->getStorageData();
+        }
+        
+        /**
+          * Get storage array of request-link pairs
+          * @return array $storage
+          */
+        private function getStorageData() {
+            return $this->storage;
         }
     }
