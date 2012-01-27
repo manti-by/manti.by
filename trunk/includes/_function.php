@@ -7,7 +7,7 @@
       * @subpackage Library
       * @author Alexander Chaika
       */
-
+    
     /**
       * Return human representation of error level
       * @param int $number error level
