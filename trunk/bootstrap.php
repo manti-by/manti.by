@@ -22,5 +22,5 @@
     
     // system classes
     set_include_path(DOC_ROOT . DS . 'includes;' . get_include_path());
-    require_once 'function.php';
-    require_once 'autoload.php';
+    require_once '_function.php';
+    require_once '_autoload.php';
