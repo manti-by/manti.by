@@ -7,7 +7,7 @@
       */
 ?>
 <html>
-
+    <?php include 'head.php'; ?>
     <body>
         <div id="popup">
             <div class="head">[X] <?php echo T('Close'); ?></div>
