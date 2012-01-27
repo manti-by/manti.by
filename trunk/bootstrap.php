@@ -12,6 +12,7 @@
     // define globals
     define('NL', chr(13).chr(10));
     define('DS', DIRECTORY_SEPARATOR);
+    define('DOC_ROOT', dirname(__FILE__));
 
     // errors & messages levels
     define('ERROR',   1);
@@ -20,15 +21,6 @@
     define('MESSAGE', 8);
     
     // system classes
-    set_include_path(dirname(__FILE__) . DS .'includes;'.get_include_path());
+    set_include_path(DOC_ROOT . DS . 'includes;' . get_include_path());
     require_once 'function.php';
-    require_once 'application.php';
-    require_once 'system.php';
-    require_once 'database.php';
-    require_once 'sef.php';
-    require_once 'user.php';
-    
-    // get main controller
-    require_once dirname(__FILE__) . DS .'modules'. DS. 'controller.php';
-    require_once dirname(__FILE__) . DS .'modules'. DS. 'model.php';
-    require_once dirname(__FILE__) . DS .'modules'. DS. 'view.php';
+    require_once 'autoload.php';

@@ -302,7 +302,7 @@
                 }
 
                 if (empty($this->config['doc_root'])) {
-                    $this->config['doc_root']   = dirname(dirname(__FILE__));
+                    $this->config['doc_root']   = DOC_ROOT;
                 }
 
                 return $this->_clean();
