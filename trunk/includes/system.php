@@ -314,8 +314,16 @@
         /**
           * Redirect user to page
           * @param string $url OPTIONAL if empty redirect to home page (default null)
+          * @param string $message OPTIONAL 
+          * @param bool $is_error OPTIONAL 
           */
-        public function redirect($url = null) {
+        public function redirect($url = null, $message = null, $is_error = false) {
+            // set message if present
+            if (!empty($message)) {
+                $_SESSION['message'] = $message;
+                $_SESSION['is_error'] = $is_error;
+            }
+            
             // redirect to parent page or index
             if (empty($url)) {
                 if (empty($_SESSION['redirect'])) {

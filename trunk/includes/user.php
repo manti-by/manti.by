@@ -133,16 +133,15 @@
           * @param int $user_id
           * @return object $data or false if not exist
           */
-        public function setupSession($id) {
+        public function setupSession($id, $remember = true) {
             // set session
             $_SESSION['user_id'] = $id;
             
             // set cookie
-            $remember = $this->system->getCmd('remember', 'off');
-            if ($remember != 'off') {
-                setCookie('token', md5($config['secret'] . $options['email']));
+            if ($remember) {
+                setCookie('auth_token', md5($config['secret'] . $options['email']));
             } else {
-                setCookie('token', '');
+                setCookie('auth_token', '');
             }
                 
             // add info to user object
@@ -174,8 +173,8 @@
           */
         public function isLoggined() {
             // get cookie uid
-            if (isset($_COOKIE['token'])) {
-                $id = $this->getId(array('cookie' => $_COOKIE['token']));
+            if (isset($_COOKIE['auth_token'])) {
+                $id = $this->getId(array('cookie' => $_COOKIE['auth_token']));
             } else {
                 $id = 0;
             }
