@@ -6,7 +6,7 @@
   */
 
 $(document).ready(function(){
-    $('#popup .head').click(function() {
-        $('#popup').hide();
+    $('.hide_this').click(function() {
+        $(this).parent('div').fadeOut(400);
     });
 });

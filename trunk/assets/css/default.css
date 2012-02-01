@@ -26,7 +26,7 @@ code, pre { margin: 6px; padding: 12px; white-space: pre-line;
 
 blockquote { margin: 0 0 0 10px;}
 
-b { font-weight: normal;}
+b { font-weight: normal; }
 sup { color: red; font-size: 120%; font-weight: bold; padding-left: 5px; }
 
 label { display: block; float: left; width: 130px; font-weight: bold; clear: left; }
@@ -92,6 +92,8 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
 .fl { float: left; }
 .fr { float: right; }
 .cls { clear: both; }
+
+.big { font-size: 130%; font-weight: bold; }
 
 /************************* Template Site styles *******************************/
 

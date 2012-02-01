@@ -52,8 +52,7 @@
                 VALUES ('".$options['email']."', '".md5($options['password'])."')");
             
             $result = $this->database->getResult();
-            
-            if ($this->database->getLastResult() > 0) {
+            if ($result) {
                 return $this->database->getLastInsertId();
             } else {
                 return false;
@@ -76,7 +75,7 @@
                     LIMIT 0, 1");
 
                 $result = $this->database->getResult();
-                if ($this->database->getLastResult() > 0) {
+                if ($result) {
                     return $result;
                 }
             }
@@ -90,7 +89,7 @@
                     LIMIT 0, 1");
 
                 $result = $this->database->getResult();
-                if ($this->database->getLastResult() > 0) {
+                if ($result) {
                     return $result;
                 }
             }
@@ -108,18 +107,17 @@
             $this->database->query("
                 SELECT u.*, g.`name` AS `group` 
                 FROM `#__user` AS u
-                JOIN `#__user_group` AS g ON u.`group_id` = g.`id`
+                JOIN `#__group` AS g ON g.`id` = u.`group_id`
                 WHERE u.`id` = $id
                 LIMIT 0, 1");
             
             $result = $this->database->getObject();
-            if ($this->database->getLastResult() > 0) {
+            if ($result) {
                 // add data to object
-                $this->id = $result['id'];
-                $this->name = $result['name'];
-                $this->email = $result['email'];
-                $this->password = $result['password'];
-                $this->group = $result['group'];
+                $this->id = $result->id;
+                $this->email = $result->email;
+                $this->password = $result->password;
+                $this->group = $result->group;
                 
                 // return data
                 return $result;
