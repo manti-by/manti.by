@@ -12,8 +12,18 @@
         private $helper;
         private $entity = false;
         
-        public function isLoggined() {
+        /**
+          * Model class constructor with DB init
+          */
+        public function __construct() {
+            // get user helper
             $this->helper = User::getInstance();
+            
+            // construct parent class
+            parent::__construct();
+        }
+        
+        public function isLoggined() {
             return $this->helper->isLoggined();
         }
         

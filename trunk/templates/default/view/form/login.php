@@ -6,10 +6,15 @@
       * @author Alexander Chaika
       */
 ?>
-<h1><?php echo $options['title']; ?></h1>
-<form id="login-form" method="POST">
+<form id="login-form" method="POST" action="<?php echo Sef::getSef('index.php'); ?>">
     <input type="hidden" name="module" value="user" />
     <input type="hidden" name="action" value="login" />
+    <p class="big">
+        <?php echo T('To access closed site areas please login first'); ?>
+    </p>
+    <p>
+        &nbsp;
+    </p>
     <p>
         <label for="email"><?php echo T('Email'); ?></label>
         <input type="text" name="email" value="" />
@@ -19,13 +24,10 @@
         <input type="text" name="password" value="" />
     </p>
     <p>
-        <label for="remember">&nbsp;</label>
-        <input type="checkbox" name="remember" value="1" />
-        <?php echo T('Remember me'); ?>
-    </p>
-    <p>
         <label for="submit">&nbsp;</label>
         <input type="submit" name="submit" value="<?php echo T('Login'); ?>" />
+        <input type="checkbox" name="remember" value="1" />
+        <?php echo T('Remember me'); ?>
     </p>
 </form>
 

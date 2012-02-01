@@ -15,11 +15,6 @@
             $options['action'] = $this->system->getCmd('action'); 
             $method = $options['action'].'Action';
             
-            // check user permissions
-            if (!$this->model->isLoggined()) {
-                $method = 'loginformAction';
-            }
-            
             // route action
             if (is_callable(array($this, $method))) {
                 return $this->$method($options);
@@ -31,7 +26,7 @@
         private function loginformAction($options) {
             // get login form
             $options['title'] = 'Login page';
-            $options['body'] = $this->view->getContents('form', 'login');
+            $options['body'] = $this->view->getContents('form', 'login', $options);
             return $options;
         }
         
@@ -49,12 +44,12 @@
             
             // check login
             if ($this->model->login($options)) {
-                $this->_throw(T('You succesfully logined'));
+                $this->_clean(T('You succesfully logined'));
             } else {
-                $this->_clean(T('Could not find user with given credentials'));
+                $this->_throw(T('Could not find user with given credentials'));
             }
             
             // redirest to frontpage
-            $this->loadModule('front')->dispatch();
+            return $this->loadModule('front')->dispatch();
         }
     }
