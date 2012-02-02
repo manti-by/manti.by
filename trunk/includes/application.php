@@ -70,7 +70,7 @@
             if (empty($message)) return false;
             
             // add message to global error stack
-            $this->addToStack(print_r(debug_backtrace()), $level);
+            $this->addToStack($message, $level);
 
             // set message to current object
             $this->message = $message;

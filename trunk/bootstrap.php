@@ -6,6 +6,9 @@
       * @author Alexander Chaika
       */
 
+    // set working mode
+    ini_set('display_errors', 0);
+    
     // Simple ACL hook
     define('M2_MICRO', 1);
         
