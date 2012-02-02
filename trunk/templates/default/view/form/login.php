@@ -29,5 +29,11 @@
         <input type="checkbox" name="remember" value="1" />
         <?php echo T('Remember me'); ?>
     </p>
+    <p>
+        <label for="submit">&nbsp;</label>
+        <a href="<?php echo Sef::getSef('index.php?module=user&action=registerform'); ?>"><?php echo T('Register'); ?></a>
+        <?php echo T('or'); ?>
+        <a href="<?php echo Sef::getSef('index.php?module=user&action=forgotform'); ?>"><?php echo T('Forgot password?'); ?></a>
+    </p>
 </form>
 

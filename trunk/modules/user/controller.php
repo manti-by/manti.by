@@ -30,6 +30,13 @@
             return $options;
         }
         
+        private function registerformAction($options) {
+            // get login form
+            $options['title'] = 'Register page';
+            $options['body'] = $this->view->getContents('form', 'register', $options);
+            return $options;
+        }
+        
         private function loginAction($options) {
             // get credentials
             $options['email'] = $this->system->getCmd('email');
