@@ -7,10 +7,11 @@
       */
 
     // load system classes
-    spl_autoload_register('autoload_system_libraries');
-    function autoload_system_libraries($class) {
-        require_once $class . '.php';
-    }
+    require_once DOC_ROOT . DS . 'includes' . DS . 'application.php';
+    require_once DOC_ROOT . DS . 'includes' . DS . 'database.php';
+    require_once DOC_ROOT . DS . 'includes' . DS . 'system.php';
+    require_once DOC_ROOT . DS . 'includes' . DS . 'sef.php';
+    require_once DOC_ROOT . DS . 'includes' . DS . 'user.php';
     
     // simply load mvc structure for modules
     require_once DOC_ROOT . DS . 'modules' . DS . 'controller.php';
