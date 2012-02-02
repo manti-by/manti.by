@@ -97,5 +97,5 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
 #wrapper { width: 1000px; margin: 10px auto; padding: 10px;
            background: white; border: 1px solid #CCC; }
 
-#message { position: fixed; top: 0; width: 1000px; }
+#message { position: fixed; top: 0; left: 50%; width: 1000px; margin-left: -500px; }
 
