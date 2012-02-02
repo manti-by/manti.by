@@ -26,7 +26,7 @@ code, pre { margin: 6px; padding: 12px; white-space: pre-line;
 
 blockquote { margin: 0 0 0 10px;}
 
-b { font-weight: normal;}
+b { font-weight: normal; }
 sup { color: red; font-size: 120%; font-weight: bold; padding-left: 5px; }
 
 label { display: block; float: left; width: 130px; font-weight: bold; clear: left; }
@@ -54,25 +54,15 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
            text-decoration: none; border: 1px solid #CCC; color: black !important;
            background: #EEE url(../images/button.png) repeat-x; }
 
-#loader,
-#popup  { display: none; position: fixed; left: 50%; top: 200px;
-          margin-left: -150px; padding-top: 100px; width: 300px; height: 50px;
-          color: #666; border: 2px solid #EEE; text-align: center;
-          background: white url(../images/loader.gif) no-repeat center center;
-          -webkit-box-shadow: 2px 2px 4px #CCC; -moz-box-shadow: 2px 2px 4px #CCC;
-          box-shadow: 2px 2px 4px #CCC;}
-
-#popup { padding: 12px; height: auto; background: white; text-align: left; }
-
-#popup input[type=text] { background: white; border: none; width: auto; padding: 0; margin: 0; }
-
 .req { background: #EEE url(../images/req.png) no-repeat top right; }
 
-.error { margin-bottom: 12px; padding: 12px; background: #FAA; font-size: 14px;
-         border-top: 3px solid #900; border-bottom: 3px solid #900; }
+.error, .warning,
+.message { margin: 5px 0; padding: 15px; font-size: 14px;
+    border: none; border-top: 3px solid; border-bottom: 3px solid; }
 
-.message { margin-bottom: 12px; padding: 12px; background: #AFA; font-size: 14px;
-           border-top: 3px solid #090; border-bottom: 3px solid #090; }
+.error { background: #FAA; border-color: #900; }
+.warning { background: #FFA; border-color: #990; }
+.message { background: #AFA; border-color: #090; }
 
 .hide_this { float: right; cursor: pointer; font-size: 10px;
              position: relative; top: -9px; right: -9px; margin: 0; padding: 3px;
@@ -93,16 +83,19 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
 .fr { float: right; }
 .cls { clear: both; }
 
+.big { font-size: 130%; font-weight: bold; }
+
+.rounded { border-radius: 5px; }
+.shadow { box-shadow: 3px 3px 5px #CCC; }
+
 /************************* Template Site styles *******************************/
+
+#popup { display: none; position: fixed; top: 300px; left: 50%; width: 600px;
+    margin-left: -300px; padding: 15px; border: 1px solid #CCC; 
+    background: white; z-index: 1000; }
 
 #wrapper { width: 1000px; margin: 10px auto; padding: 10px;
            background: white; border: 1px solid #CCC; }
 
-.submit { padding-left: 3px; }
-#insert textarea { width: 500px; height: 70px; }
+#message { position: fixed; top: 0; left: 50%; width: 1000px; margin-left: -500px; }
 
-#popup { display: none; position: fixed; top: 300px; left: 50%; width: 800px;
-    margin-left: -400px; border: 1px solid #CCC; background: white; z-index: 1000;
-    -webkit-box-shadow: 3px 3px 6px #CCC; -moz-box-shadow: 3px 3px 6px #CCC; box-shadow: 3px 3px 6px #CCC;}
-
-#popup .head { text-align: right; padding: 2px 0; cursor: pointer; color: #b40202; }

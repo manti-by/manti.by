@@ -47,13 +47,13 @@
           */
         public function create($options) {
             // get items
+            $config = System::getInstance()->getConfig();
             $this->database->query("
                 INSERT INTO #__user (`email`, `password`)
-                VALUES ('".$options['email']."', '".md5($options['password'])."')");
+                VALUES ('".$options['email']."', '".md5($config['secret'].$options['password'])."')");
             
             $result = $this->database->getResult();
-            
-            if ($this->database->getLastResult() > 0) {
+            if ($result) {
                 return $this->database->getLastInsertId();
             } else {
                 return false;
@@ -67,16 +67,17 @@
           */
         public function getId($options) {
             // check email & pass
+            $config = System::getInstance()->getConfig();
             if (isset($options['email']) && isset($options['password'])) {
                 $this->database->query("
                     SELECT `id` 
                     FROM `#__user`
                     WHERE `email` = '".$options['email']."'
-                      AND `password` = '".md5($options['password'])."'
+                      AND `password` = '".md5($config['secret'].$options['password'])."'
                     LIMIT 0, 1");
 
-                $result = $this->database->getResult();
-                if ($this->database->getLastResult() > 0) {
+                $result = $this->database->getField();
+                if ($result) {
                     return $result;
                 }
             }
@@ -89,8 +90,8 @@
                     WHERE MD5(CONCAT('".$config['secret']."', `email`)) = '".$options['cookie']."'
                     LIMIT 0, 1");
 
-                $result = $this->database->getResult();
-                if ($this->database->getLastResult() > 0) {
+                $result = $this->database->getField();
+                if ($result) {
                     return $result;
                 }
             }
@@ -108,18 +109,17 @@
             $this->database->query("
                 SELECT u.*, g.`name` AS `group` 
                 FROM `#__user` AS u
-                JOIN `#__user_group` AS g ON u.`group_id` = g.`id`
+                JOIN `#__group` AS g ON g.`id` = u.`group_id`
                 WHERE u.`id` = $id
                 LIMIT 0, 1");
             
             $result = $this->database->getObject();
-            if ($this->database->getLastResult() > 0) {
+            if ($result) {
                 // add data to object
-                $this->id = $result['id'];
-                $this->name = $result['name'];
-                $this->email = $result['email'];
-                $this->password = $result['password'];
-                $this->group = $result['group'];
+                $this->id = $result->id;
+                $this->email = $result->email;
+                $this->password = $result->password;
+                $this->group = $result->group;
                 
                 // return data
                 return $result;
@@ -134,12 +134,15 @@
           * @return object $data or false if not exist
           */
         public function setupSession($id, $remember = true) {
+            // get config
+            $config = System::getInstance()->getConfig();
+            
             // set session
             $_SESSION['user_id'] = $id;
             
             // set cookie
             if ($remember) {
-                setCookie('auth_token', md5($config['secret'] . $options['email']));
+                setCookie('auth_token', md5($config['secret'].$options['email']));
             } else {
                 setCookie('auth_token', '');
             }
@@ -231,8 +234,8 @@
             
             $result = $this->database->getResult();
 
-            if ($this->database->getLastResult() > 0) {
-                return $result;
+            if ($result) {
+                return true;
             } else {
                 return false;
             }

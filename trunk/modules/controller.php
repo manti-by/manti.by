@@ -54,7 +54,7 @@
           * @param string $default OPTIONAL default module name
           * @return object $module
           */
-        private function loadModule($module, $default = null) {
+        protected function loadModule($module, $default = null) {
             // get config
             $config = $this->system->getConfig();
             if (empty($module)) {
