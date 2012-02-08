@@ -153,7 +153,7 @@
         
         /**
           * Clear user session data
-          * @return object $data or false if not exist
+          * @return bool TRUE
           */
         public function clearSession() {
             // clear session data
@@ -172,7 +172,7 @@
         
         /**
           * Clear user session data
-          * @return object $data or false if not exist
+          * @return bool $result
           */
         public function isLoggined() {
             // get cookie uid
@@ -188,6 +188,40 @@
             }
             
             return false;
+        }
+
+        /**
+          * Check user by email
+          * @param array $email
+          * @return bool $result
+          */
+        public function checkEmail($email) {
+            // get items
+            $this->database->query("
+                SELECT `id` FROM `#__user` 
+                WHERE `email` = '".$email."' 
+                LIMIT 0, 1");
+            
+            $result = $this->database->getResult();
+            return ($result ? true : false);
+        }
+        
+        /**
+          * Set new pass for user by email
+          * @param string $email
+          * @param string $password
+          * @return bool $result
+          */
+        public function setNewPassword($email, $password) {
+            // get items
+            $this->database->query("
+                UPDATE `#__user` 
+                SET `password` = '".$password."'
+                WHERE `email` = '".$email."'
+                LIMIT 0, 1");
+            
+            $result = $this->database->getResult();
+            return ($result ? true : false);
         }
 
         /**
@@ -218,26 +252,5 @@
           */
         public function getReferer() {
             return (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : false);
-        }
-
-        /**
-          * Check user by email
-          * @param array $options['email']
-          * @return int $user_id or 0 if not exist
-          */
-        public function checkEmail($options) {
-            // get items
-            $this->database->query("
-                SELECT `id` FROM `#__user` 
-                WHERE `email` = '".$options['email']."' 
-                LIMIT 0, 1");
-            
-            $result = $this->database->getResult();
-
-            if ($result) {
-                return true;
-            } else {
-                return false;
-            }
         }
     }

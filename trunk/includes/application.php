@@ -27,7 +27,7 @@
             $id     = substr($system->getCmd('id'), 0, 50);
 
             // get user metrics
-            $user = User::getInstance();
+            $user    = User::getInstance();
             $ip      = substr($user->getIp(), 0, 50);
             $browser = substr($user->getUserAgent(), 0, 255);
             $referer = substr($user->getReferer(), 0, 500);
@@ -116,7 +116,7 @@
         protected function logLastMessage() {
             // get last message from stack
             $message = $this->getLastFromStack();
-            $msg = getErrorStringFromInt($message['level']) . '] ' . $message['message'] . NL;
+            $msg = '[' . getErrorStringFromInt($message['level']) . '] ' . $message['message'] . NL;
             
             // return result
             return $this->saveToLog($msg);
