@@ -149,7 +149,7 @@
                     $uid = strtoupper(uniqid(time()));
                     $headers  = "MIME-Version: 1.0\r\n";
                     $headers .= "X-Mailer: PHP/" . phpversion()."\n";
-                    $headers .= "From: ".$config['mail_from']."\r\n";
+                    $headers .= "From: ".$this->config['mail_from']."\r\n";
                     $headers .= "Content-Type:multipart/mixed;";
                     $headers .= "boundary=\"----------".$uid."\"\n\n";
 
@@ -165,7 +165,7 @@
                 } else {
                     $headers  = "MIME-Version: 1.0\r\n";
                     $headers .= "Content-type: text/html; charset=utf-8\r\n";
-                    $headers .= "From: ".$config['mail_from']."\r\n";
+                    $headers .= "From: ".$this->config['mail_from']."\r\n";
                     $headers .= "X-Mailer: PHP/" . phpversion()."\n";
 
                     $desc = $description;
