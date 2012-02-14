@@ -88,11 +88,17 @@
             $references = parse_ini_file($lang_file);
         }
 
-        // remove spaces
+        // remove spaces and other characters
         $key = strtolower(str_replace(' ', '_', $text));
-
+        $key = preg_replace("/[^a-z_]/i", "", $key);
+        
+        // cut long strings
+        if (strlen($key) > 16) {
+            $key = substr($key, 0, 16) . '-' . strlen($key);
+        }
+        
         // check for token
-        if (array_key_exists($text, $references)) {
+        if (array_key_exists($key, $references)) {
             return $references[$key];
         } else {
             // write key to ini file
