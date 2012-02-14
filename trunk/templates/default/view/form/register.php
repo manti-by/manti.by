@@ -8,8 +8,9 @@
 ?>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#submit').click(function(e){
+        $('#save').click(function(e){
             e.preventDefault();
+            var uname_regex = /[^a-z]/i;
             var email_regex = /^[a-z_0-9\-\.]+@[a-z_0-9\-\.]+\.[a-z]{2,6}$/i;
             
             // reset errors
@@ -17,7 +18,13 @@
             $('#register-form .form_error').hide();
             
             // check fields
-            if ($('#email').val() == '') {
+            if ($('#username').val() == '') {
+                $('#username').css('border-color', 'red');
+                $('#username').next('.form_error').html('<?php echo T('Please enter username'); ?>').show();
+            } else if (uname_regex.test($('#username').val())) {
+                $('#username').css('border-color', 'red');
+                $('#username').next('.form_error').html('<?php echo T('Username not valid'); ?>').show();
+            } else if ($('#email').val() == '') {
                 $('#email').css('border-color', 'red');
                 $('#email').next('.form_error').html('<?php echo T('Please enter email'); ?>').show();
             } else if (!email_regex.test($('#email').val())) {
@@ -34,7 +41,6 @@
                 $('#confirm').next('.form_error').html('<?php echo T('Passwords do not match'); ?>').show();
             } else {
                 $('#register-form').submit();
-                return true;
             }
             return false;
         });
@@ -48,6 +54,12 @@
     </p>
     <p>
         &nbsp;
+    </p>
+    <p>
+        <label for="username"><?php echo T('Username'); ?></label>
+        <input type="text" name="username" id="username" value="<?php echo $options['username']; ?>" />
+        <span class="form_error"></span>
+        <span class="small grey form_notice"><?php echo T('Only lowercase letters, not numbers and other symbols'); ?></span>
     </p>
     <p>
         <label for="email"><?php echo T('Email'); ?></label>
@@ -65,11 +77,11 @@
         <span class="form_error"></span>
     </p>
     <p>
-        <label for="submit">&nbsp;</label>
-        <input type="submit" name="submit" id="submit" value="<?php echo T('Register'); ?>" />
+        <label for="save">&nbsp;</label>
+        <input type="button" name="save" id="save" value="<?php echo T('Register'); ?>" />
     </p>
     <p>
-        <label for="submit">&nbsp;</label>
+        <label>&nbsp;</label>
         <a href="<?php echo Sef::getSef('index.php?module=user&action=loginform'); ?>"><?php echo T('Login'); ?></a>
         <?php echo T('or'); ?>
         <a href="<?php echo Sef::getSef('index.php?module=user&action=forgotform'); ?>"><?php echo T('Forgot password?'); ?></a>
