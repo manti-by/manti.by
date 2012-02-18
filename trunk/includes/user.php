@@ -12,7 +12,7 @@
     
     class User extends Application {
         private $id;
-        private $name;
+        private $username;
         private $email;
         private $password;
         private $group;
@@ -49,8 +49,8 @@
             // get items
             $config = System::getInstance()->getConfig();
             $this->database->query("
-                INSERT INTO #__user (`email`, `password`)
-                VALUES ('".$options['email']."', '".md5($config['secret'].$options['password'])."')");
+                INSERT INTO #__user (`username`, `email`, `password`)
+                VALUES ('".$options['username']."', '".$options['email']."', '".md5($config['secret'].$options['password'])."')");
             
             $result = $this->database->getResult();
             if ($result) {
@@ -117,6 +117,7 @@
             if ($result) {
                 // add data to object
                 $this->id = $result->id;
+                $this->username = $result->username;
                 $this->email = $result->email;
                 $this->password = $result->password;
                 $this->group = $result->group;
@@ -152,8 +153,25 @@
         }
         
         /**
+          * Check user session and try to setup it
+          * @return bool $result
+          */
+        public function checkSession() {
+            // check local data
+            if (empty($this->id) ||
+                empty($this->username) ||
+                empty($this->email) ||
+                empty($this->password) ||
+                empty($this->group)) {
+                   // try to load
+                   return $this->load($_SESSION['user_id']);
+            }
+            return true;
+        }
+        
+        /**
           * Clear user session data
-          * @return object $data or false if not exist
+          * @return bool TRUE
           */
         public function clearSession() {
             // clear session data
@@ -162,7 +180,7 @@
             
             // clear user object
             $this->id = null;
-            $this->name = null;
+            $this->username = null;
             $this->email = null;
             $this->password = null;
             $this->group = null;
@@ -172,24 +190,67 @@
         
         /**
           * Clear user session data
-          * @return object $data or false if not exist
+          * @return bool $result
           */
         public function isLoggined() {
-            // get cookie uid
+            // check cookie
             if (isset($_COOKIE['auth_token'])) {
-                $id = $this->getId(array('cookie' => $_COOKIE['auth_token']));
-            } else {
-                $id = 0;
+                $this->id = $this->getId(array('cookie' => $_COOKIE['auth_token']));
+                return $this->checkSession();
             }
             
-            // we have User ID
-            if ($id > 0 || (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0)) {
-                return true;
+            // check session
+            if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
+                $this->id = $_SESSION['user_id'];
+                return $this->checkSession();
             }
             
             return false;
         }
 
+        /**
+          * Check user by email
+          * @param array $email
+          * @return bool $result
+          */
+        public function checkEmail($email) {
+            // get items
+            $this->database->query("
+                SELECT `id` FROM `#__user` 
+                WHERE `email` = '".$email."' 
+                LIMIT 0, 1");
+            
+            $result = $this->database->getResult();
+            return ($result ? true : false);
+        }
+        
+        /**
+          * Set new pass for user by email
+          * @param string $email
+          * @param string $password
+          * @return bool $result
+          */
+        public function setNewPassword($email, $password) {
+            // get items
+            $this->database->query("
+                UPDATE `#__user` 
+                SET `password` = '".$password."'
+                WHERE `email` = '".$email."'
+                LIMIT 0, 1");
+            
+            $result = $this->database->getResult();
+            return ($result ? true : false);
+        }
+
+        /**
+          * Get username
+          * @return string $username
+          */
+        public function getUsername() {
+            $this->checkSession();
+            return $this->username;
+        }
+        
         /**
           * Get user IP
           * @return string $ip
@@ -218,26 +279,5 @@
           */
         public function getReferer() {
             return (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : false);
-        }
-
-        /**
-          * Check user by email
-          * @param array $options['email']
-          * @return int $user_id or 0 if not exist
-          */
-        public function checkEmail($options) {
-            // get items
-            $this->database->query("
-                SELECT `id` FROM `#__user` 
-                WHERE `email` = '".$options['email']."' 
-                LIMIT 0, 1");
-            
-            $result = $this->database->getResult();
-
-            if ($result) {
-                return true;
-            } else {
-                return false;
-            }
         }
     }

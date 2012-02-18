@@ -80,19 +80,25 @@
         $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'en');
         
         // check language existance
-        $lang_file = dirname(dirname(__FILE__)) . DS . 'language' . DS . $language . '.ini';
+        $lang_file = DOC_ROOT . DS . 'language' . DS . $language . '.ini';
         if (file_exists($lang_file)) {
             $references = parse_ini_file($lang_file);
         } else {
-            $lang_file = dirname(dirname(__FILE__)) . DS . 'language' . DS . 'en.ini';
+            $lang_file = DOC_ROOT . DS . 'language' . DS . 'en.ini';
             $references = parse_ini_file($lang_file);
         }
 
-        // remove spaces
+        // remove spaces and other characters
         $key = strtolower(str_replace(' ', '_', $text));
-
+        $key = preg_replace("/[^a-z_]/i", "", $key);
+        
+        // cut long strings
+        if (strlen($key) > 16) {
+            $key = substr($key, 0, 16) . '-' . strlen($key);
+        }
+        
         // check for token
-        if (array_key_exists($text, $references)) {
+        if (array_key_exists($key, $references)) {
             return $references[$key];
         } else {
             // write key to ini file

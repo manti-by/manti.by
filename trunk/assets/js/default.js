@@ -15,4 +15,9 @@ $(document).ready(function() {
     $('.hide_this').click(function() {
         $(this).parent('div').fadeOut(400);
     });
+    
+    // move loader
+    $('body').mousemove(function(e){
+        $('#loader').css('left', e.pageX + 16).css('top', e.pageY - 16);
+    });
 });

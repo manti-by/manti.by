@@ -64,14 +64,18 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
 .warning { background: #FFA; border-color: #990; }
 .message { background: #AFA; border-color: #090; }
 
+.form_error { display: none; color: red; font-size: 11px; padding-left: 5px;
+    position: absolute; width: 250px; overflow: visible; }
+.form_notice { margin-left: 130px; display: block; }
+
 .hide_this { float: right; cursor: pointer; font-size: 10px;
              position: relative; top: -9px; right: -9px; margin: 0; padding: 3px;
              color: #5d5d5d; border: 1px dashed #666; }
 
-.small, .smallgrey { font-size: 11px; font-weight: normal; }
-.smallgrey, .grey { color: #5d5d5d; }
-
-.lightgrey { color: #777; }
+.small { font-size: 11px; font-weight: normal; }
+.grey { color: #666; }
+.lightgrey { color: #999; }
+.darkgrey { color: #333; }
 
 .invisible {position: absolute; left: -1000px; }
 .hidden { display: none; }
@@ -82,6 +86,11 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
 .fl { float: left; }
 .fr { float: right; }
 .cls { clear: both; }
+
+.ltr { text-align: left; }
+.rtl { text-align: right; }
+.ct { text-align: center; }
+.jt { text-align: justify; }
 
 .big { font-size: 130%; font-weight: bold; }
 
@@ -99,3 +108,5 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
 
 #message { position: fixed; top: 0; left: 50%; width: 1000px; margin-left: -500px; }
 
+#loader { display: none; position: absolute; width: 32px; height: 32px;
+    background: transparent url(../images/loader.gif) no-repeat center center; }
