@@ -7,11 +7,14 @@
       */
 
     // start session
+    if (isset($_COOKIE['PHPSESSID'])) {
+        session_id($_COOKIE['PHPSESSID']);
+    }
     session_start();
 
     // set working mode
     ini_set('display_errors', 1);
-    
+
     // Simple ACL hook
     define('M2_MICRO', 1);
         

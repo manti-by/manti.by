@@ -317,7 +317,7 @@
           * @param string $message OPTIONAL 
           * @param bool $is_error OPTIONAL 
           */
-        public function redirect($url = null, $message = null, $is_error = false) {
+        public static function redirect($url = null, $message = null, $is_error = false) {
             // set message if present
             if (!empty($message)) {
                 $_SESSION['message'] = $message;
@@ -328,6 +328,7 @@
             if (empty($url)) {
                 if (empty($_SESSION['redirect'])) {
                     header('Location: ' . $this->config['http_host']);
+                    header('Set-Cookie: PHPSESSID='.session_id().';');
                 } else {
                     $location = $_SESSION['redirect'];
                     $_SESSION['redirect'] = '';
@@ -338,6 +339,42 @@
                 header('Location: ' . $url);
             }
             die;
+        }
+        
+        /**
+          * Get domain parts
+          * @return array $domain parts
+          */
+        public function getDomainParts() {
+            // set message if present
+            if (empty($this->config)) {
+                $this->parseConfig();
+            }
+            
+            // check domain
+            if (empty($this->config['http_host'])) {
+                return $this->_throw(T('Could not get current domain'), ERROR);
+            }
+            
+            // parse config
+            $domain = explode('.', str_replace('http://', '', $this->config['http_host']));
+            if (count($domain) == 2) {
+                $result['name'] = $domain[0];
+                $result['zone'] = $domain[1];
+            } else if (count($domain) == 3) {
+                $result['subname'] = $domain[0];
+                $result['name'] = $domain[1];
+                $result['zone'] = $domain[2];
+            } else if (count($domain) > 3) {
+                $result['etc'] = array_slice($domain, 0, count($domain)-3);
+                $result['subname'] = $domain[count($domain)-3];
+                $result['name'] = $domain[count($domain)-2];
+                $result['zone'] = $domain[count($domain)-1];
+            } else {
+                return $this->_throw(T('Invalid domain'));
+            }
+            
+            return $result;
         }
         
         /**

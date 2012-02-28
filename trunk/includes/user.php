@@ -62,10 +62,10 @@
         
         /**
           * Get user id by email and pass or cookie token
-          * @param array $options[email+password || cookie]
+          * @param array $options[email+password || cookie] OPTIONAL
           * @return int $user_id or 0 if not exist
           */
-        public function getId($options) {
+        public function getId($options = null) {
             // check email & pass
             $config = System::getInstance()->getConfig();
             if (isset($options['email']) && isset($options['password'])) {
@@ -96,6 +96,30 @@
                 }
             }
             
+            // check username
+            if (isset($options['username'])) {
+                $this->database->query("
+                    SELECT `id` 
+                    FROM `#__user` 
+                    WHERE `username` = '".$options['username']."'
+                    LIMIT 0, 1");
+
+                $result = $this->database->getField();
+                if ($result) {
+                    return $result;
+                }
+            }
+            
+            // check internal id
+            if ((int)$this->id > 0) {
+                return $this->id;
+            }
+            
+            // check session
+            if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
+                return $_SESSION['user_id'];
+            }
+            
             return false;
         }
         
@@ -105,6 +129,11 @@
           * @return object $data or false if not exist
           */
         public function load($id) {
+            // check id
+            if (empty($id)) {
+                return $this->_throw('User id could not be empty', NOTICE);
+            }
+            
             // get items
             $this->database->query("
                 SELECT u.*, g.`name` AS `group` 
@@ -193,18 +222,17 @@
           * @return bool $result
           */
         public function isLoggined() {
-            // check cookie
-            if (isset($_COOKIE['auth_token'])) {
-                $this->id = $this->getId(array('cookie' => $_COOKIE['auth_token']));
-                return $this->checkSession();
+            // get cookie uid
+            if (isset($_COOKIE['token']) && $this->getId(array('cookie' => $_COOKIE['token'])) > 0) {
+                return true;
             }
-            
+
             // check session
             if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
                 $this->id = $_SESSION['user_id'];
                 return $this->checkSession();
             }
-            
+
             return false;
         }
 

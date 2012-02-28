@@ -23,12 +23,14 @@
           */
         public function render($options = null) {
             // check empty format
-            if (empty($options) && !isset($options['format'])) {
-                $options = array('format' => 'page');
+            if (empty($options) && !isset($options['output'])) {
+                $options = array('output' => 'page');
             }            
             
             // route output
-            switch ($options['format']) {
+            switch ($options['output']) {
+                default:
+                    $options['data'] = $this->wrapPage($options);
                 case 'html':
                     // set headers
                     header('HTTP/1.1 200 OK');
@@ -41,18 +43,13 @@
                     // output html data
                     echo $options['data'];
                     break;
-                default:
-                case 'page':
+                case 'json':
                     // set headers
                     header('HTTP/1.1 200 OK');
-                    header('Content-Type: text/html; charset=UTF-8');
-                    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-                    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-                    header('Cache-Control: no-cache, must-revalidate');
-                    header('Pragma: no-cache');
+                    header('Content-type: application/json');
                     
-                    // output html data
-                    echo $this->wrapPage($options);
+                    // output json data
+                    echo json_encode($options['data']);
                     break;
                 case 'log':
                     // Add log record
@@ -60,6 +57,34 @@
                 break;
             }
             return;
+        }
+        
+        /**
+          * Render items array
+          * @param array $options
+          * @return string $html
+          */
+        public function renderItemsArray($options) {
+            // get entity
+            if (empty($options['entity'])) {
+                return $this->_throw(T('Entity for list rendering not found'));
+            }
+            
+            // if no items
+            if (empty($options['data']) || count($options['data']) == 0) {
+                $options['data'] = T('No '.$options['entity'].' found');
+                return $this->getContents($options['entity'], 'category', $options);
+            }
+            
+            // render each item
+            $items_html = '';
+            foreach($options['data'] as $item) {
+                $items_html .= $this->getContents($options['entity'], 'item', array('data' => $item));
+            }
+            
+            // render category
+            $options['data'] = $items_html;
+            return $this->getContents($options['entity'], 'category', $options);
         }
         
         /**
@@ -74,28 +99,28 @@
         
         /**
           * Get HTML contents for TYPE/NAME entity
+          * @param string $type
+          * @param string $name
           * @param array $options
-          * @param bool $mode OPTIONAL if true - template view
+          * @param bool $view OPTIONAL if true - template view
           * @return string $html
           */
         public function getContents($type, $name, $options = null, $view = true) {
             // get content type
+            $view = ($view ? 'view' . DS : '');
             $type = (!empty($type) ? $type . DS : '');
             $name = (!empty($name) ? $name : 'index');
             
             // compile template prefix and postfix
             $prefix = $this->config['doc_root'] . DS . 'templates' . DS;
-            if ($view) {
-                $postfix = DS . 'view' . DS . $type . $name . '.php';
-            } else {
-                $postfix = DS . $type . $name . '.php';
-            }
+            $postfix = DS . $view . $type . $name . '.php';
             
             // check content file existance
-            $content_file_name = convertOSPath($prefix . $options['template'] . $postfix);
+            $content_file_name = realpath($prefix . $options['template'] . $postfix);
             if (!file_exists($content_file_name)) {
                 // check default template for view
-                $content_file_name = convertOSPath($prefix . $this->config['template'] . $postfix);
+                $fname = $prefix . $this->config['template'] . $postfix;
+                $content_file_name = realpath($prefix . $this->config['template'] . $postfix);
                 if (!file_exists($content_file_name)) {
                     $content_file = array(
                         (!empty($options['template']) ? $options['template'] : $this->config['template']),

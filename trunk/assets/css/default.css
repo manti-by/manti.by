@@ -27,7 +27,7 @@ code, pre { margin: 6px; padding: 12px; white-space: pre-line;
 blockquote { margin: 0 0 0 10px;}
 
 b { font-weight: normal; }
-sup { color: red; font-size: 120%; font-weight: bold; padding-left: 5px; }
+sup { font-size: 120%; font-weight: bold; padding-left: 5px; }
 
 label { display: block; float: left; width: 130px; font-weight: bold; clear: left; }
 
@@ -40,9 +40,9 @@ textarea { width: 300px; height: 120px; font-size: 12px; font-family: Arial; }
 textarea#description { width: 500px; height: 400px; }
 
 input[type="button"],
-input[type="submit"] { padding: 3px 24px; width: auto; font-size: 12px !important;
-                       background: #EEE url(../images/button.png) repeat-x; 
-                       cursor: pointer; }
+input[type="submit"] { padding: 3px 24px; margin: 2px 2px 2px 0; width: auto;
+                       cursor: pointer;  font-size: 12px !important;
+                       background: #EEE url(../images/button.png) repeat-x; }
 
 input[type="checkbox"] { width: auto; }
 
@@ -73,6 +73,7 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
              color: #5d5d5d; border: 1px dashed #666; }
 
 .small { font-size: 11px; font-weight: normal; }
+.big { font-size: 16px; font-weight: bold; }
 .grey { color: #666; }
 .lightgrey { color: #999; }
 .darkgrey { color: #333; }
@@ -92,8 +93,6 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
 .ct { text-align: center; }
 .jt { text-align: justify; }
 
-.big { font-size: 130%; font-weight: bold; }
-
 .rounded { border-radius: 5px; }
 .shadow { box-shadow: 3px 3px 5px #CCC; }
 
@@ -110,3 +109,5 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
 
 #loader { display: none; position: absolute; width: 32px; height: 32px;
     background: transparent url(../images/loader.gif) no-repeat center center; }
+
+#popup .head { text-align: right; padding: 2px 0; cursor: pointer; color: #b40202; }

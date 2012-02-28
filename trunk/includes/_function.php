@@ -49,28 +49,6 @@
     }
     
     /**
-      * convert "bad" OS path slashes
-      * @param string $path
-      * @return string $converted_path
-      */
-    function convertOSPath($path) {
-        $win_ds = '\\';
-        $nix_ds = '/';
-        
-        // check directory separator
-        // replace and remove dublicates
-        if ($nix_ds == DS) {
-            $result = str_replace($win_ds, $nix_ds, $path);
-            $result = str_replace($nix_ds.$nix_ds, $nix_ds, $path);
-        } else {
-            $result = str_replace($nix_ds, $win_ds, $path);
-            $result = str_replace($win_ds.$win_ds, $win_ds, $path);
-        }
-        
-        return $result;
-    }
-    
-    /**
       * Function for translate tokens from dictionaries
       * @param string $text text to translate
       * @param string $language optional translate to
@@ -102,10 +80,12 @@
             return $references[$key];
         } else {
             // write key to ini file
-            $lang_file = dirname(dirname(__FILE__)) . DS . 'language' . DS . 'en.ini';
-            $handler = fopen($lang_file, 'a');
-            fwrite($handler, $key . ' = "' . $text . '"' . NL);
-            fclose($handler);
+            if (strlen($key) > 0 && strlen($text) > 0) {
+                $lang_file = dirname(dirname(__FILE__)) . DS . 'language' . DS . 'en.ini';
+                $handler = fopen($lang_file, 'a');
+                fwrite($handler, $key . ' = "' . $text . '"' . NL);
+                fclose($handler);
+            }
             
             return $text;
         }
