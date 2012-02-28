@@ -19,11 +19,11 @@
             if (is_callable(array($this, $method))) {
                 return $this->$method($options);
             } else {
-                return $this->categoryAction($options);
+                return $this->listAction($options);
             }
         }
 
-        private function categoryAction($options) {
+        private function listAction($options) {
             // get category ID
             $category_id = $this->system->getCmd('id', null);
             
@@ -37,8 +37,9 @@
             }
             
             // get category items and render it
+            $options['entity'] = 'blog';
             $options['data'] = $this->model->getCategoryItems($category_id);
-            $options['body'] = $this->view->renderCategoryItems($options);
+            $options['body'] = $this->view->renderItemsArray($options);
             
             return $options;
         }
