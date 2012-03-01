@@ -328,15 +328,17 @@
             if (empty($url)) {
                 if (empty($_SESSION['redirect'])) {
                     header('Location: ' . $this->config['http_host']);
-                    header('Set-Cookie: PHPSESSID='.session_id().';');
+                    header('Set-Cookie: PHPSESSID='.session_id().';expires='.date('r', time() + 60 * 30).';');
                 } else {
                     $location = $_SESSION['redirect'];
-                    $_SESSION['redirect'] = '';
-                    header('Location: ' . $location);
+                    unset($_SESSION['redirect']);
                     
+                    header('Location: ' . $location);
+                    header('Set-Cookie: PHPSESSID='.session_id().';expires='.date('r', time() + 60 * 30).';');
                 }
             } else {
                 header('Location: ' . $url);
+                header('Set-Cookie: PHPSESSID='.session_id().';expires='.date('r', time() + 60 * 30).';');
             }
             die;
         }
@@ -375,6 +377,19 @@
             }
             
             return $result;
+        }
+        
+        /**
+          * Get 3th domain
+          * @return string $domain
+          */
+        public function getSubDomain() {
+            $domain = $this->getDomainParts();
+            if (isset($domain['subname'])) {
+                return $domain['subname'];
+            } else {
+                return false;
+            }
         }
         
         /**
