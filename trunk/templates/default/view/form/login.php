@@ -21,7 +21,7 @@
     </p>
     <p>
         <label for="password"><?php echo T('Password'); ?></label>
-        <input type="text" name="password" value="" />
+        <input type="password" name="password" value="" />
     </p>
     <p>
         <label for="submit">&nbsp;</label>

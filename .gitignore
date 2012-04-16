@@ -1,2 +1,4 @@
 #.gitignore
 trunk/includes/config.ini
+trunk/assests/error.log
+trunk/assests/upload/*

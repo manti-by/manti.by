@@ -21,7 +21,7 @@
     // define globals
     define('NL', chr(13).chr(10));
     define('DS', DIRECTORY_SEPARATOR);
-    define('DOC_ROOT', dirname(__FILE__));
+    define('DOC_ROOT', __DIR__);
 
     // errors & messages levels
     define('ERROR',   1);
