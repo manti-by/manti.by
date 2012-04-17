@@ -5,7 +5,7 @@
       * @package M2 Micro Framework
       * @subpackage Library
       * @author Alexander Chaika
-      * @version 1.0
+      * @version 1.1
       */
     class Sef extends Application {
         private $storage;        
@@ -38,6 +38,7 @@
           */
         public static function init() {
             // get global config
+            $config = System::getInstance()->getConfig();
             $database = Database::getInstance();
             
             // update view counter
@@ -53,14 +54,10 @@
                 $request = substr(self::getReal($_SERVER['REQUEST_URI']), 1);
     
                 // delete question symbol
-                // and check, if we have request alias
+                // and inject request data
                 $result = strstr($request, "?");
                 if ($result) {
-                    $route = explode('&', $result);
-                    foreach($route as $item) {
-                        $value = explode('=', $item);
-                        $_REQUEST[$value[0]] = $_REQUEST[$value[1]];
-                    }
+                    parse_str($result, $_REQUEST);
                 }
             }
         }
@@ -71,13 +68,17 @@
           * @return string $request
           */
         public static function getReal($link) {
+            // get config
+            $config = System::getInstance()->getConfig();
+            if (!$config['sef_enabled']) return $link;
+
             // check memory
             if (self::checkStorage($link)) {
                 // if exist, get array value by key
                 $storage = self::getStorage();
                 return $storage[$link];
-            }            
-            
+            }
+
             // try to get real link
             $database = Database::getInstance();
             $result = $database->query("
@@ -105,6 +106,10 @@
           * @return string $link
           */
         public static function getSef($request) {
+            // get config
+            $config = System::getInstance()->getConfig();
+            if (!$config['sef_enabled']) return $request;
+
             // check memory
             if (self::checkStorage($request)) {
                 $storage = self::getStorage();
@@ -137,11 +142,12 @@
         private static function createLink($request) {
             // get config
             $config = System::getInstance()->getConfig();
-            
+            if (!$config['sef_enabled']) return $request;
+
             // sef map creation
             $sef_map = array(
                 '/\?module\=blog\&action\=show\&id\=(.*)/' => array(
-                    'table'  => 'blog',
+                    'table'  => 'post',
                     'field'  => 'alias',
                     'prefix' => '/blog/',
                     'suffix' => $config['sef_suffix']
