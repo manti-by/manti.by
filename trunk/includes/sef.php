@@ -145,14 +145,7 @@
             if (!$config['sef_enabled']) return $request;
 
             // sef map creation
-            $sef_map = array(
-                '/\?module\=blog\&action\=show\&id\=(.*)/' => array(
-                    'table'  => 'post',
-                    'field'  => 'alias',
-                    'prefix' => '/blog/',
-                    'suffix' => $config['sef_suffix']
-                 )
-            );
+            $sef_map = include 'sef_map.php';
 
             // search by pattern
             foreach($sef_map as $pattern => $source) {
