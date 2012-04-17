@@ -25,7 +25,11 @@
             </div>
         <?php endif; ?>
         <div id="wrapper">
+            <?php include 'topmenu.php'; ?>
+
             <?php echo $options['body']; ?>
+
+            <?php include 'footer.php'; ?>
         </div>
     </body>
 </html>
