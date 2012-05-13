@@ -44,9 +44,9 @@
             }
             
             // get credentials
-            $options['email'] = $this->system->getCmd('email', $options['email']);
-            $options['password'] = $this->system->getCmd('password', $options['password']);
-            $options['remember'] = ($this->system->getCmd('remember', $options['remember']) ? true : false);
+            $options['email'] = $this->system->getCmd('email');
+            $options['password'] = $this->system->getCmd('password');
+            $options['remember'] = ($this->system->getCmd('remember') ? true : false);
             
             if (isset($_COOKIE['auth_token']) && !empty($_COOKIE['auth_token'])) {
                 $options['cookie'] = $_COOKIE['auth_token'];
