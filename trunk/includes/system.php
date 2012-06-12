@@ -302,7 +302,7 @@
                 }
 
                 if (empty($this->config['doc_root'])) {
-                    $this->config['doc_root']   = DOC_ROOT;
+                    $this->config['doc_root']   = ROOT_PATH;
                 }
 
                 return $this->_clean();

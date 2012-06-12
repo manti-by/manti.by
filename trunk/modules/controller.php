@@ -71,7 +71,7 @@
                 $module_name = ucfirst($module).'Controller';
             } else {
                 include_once $config['doc_root'].DS.'modules'.DS.$config['default_module'].DS.'controller.php';
-                $module_name = ucfirst($default).'Controller';
+                $module_name = ucfirst($config['default_module']).'Controller';
             }
             
             return new $module_name();

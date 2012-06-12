@@ -23,8 +23,8 @@
           */
         public function render($options = null) {
             // check empty format
-            if (empty($options) && !isset($options['output'])) {
-                $options = array('output' => 'page');
+            if (!isset($options['output'])) {
+                $options['output'] = 'page';
             }            
             
             // route output
@@ -114,21 +114,25 @@
             // compile template prefix and postfix
             $prefix = $this->config['doc_root'] . DS . 'templates' . DS;
             $postfix = DS . $view . $type . $name . '.php';
-            
+            if (isset($options['template']) && !empty($options['template'])) {
+                $content_template_name = realpath($prefix . $options['template'] . $postfix);
+            } else {
+                $content_template_name = false;
+            }
+            $default_template_name = realpath($prefix . $this->config['template'] . $postfix);
+           
             // check content file existance
-            $content_file_name = realpath($prefix . $options['template'] . $postfix);
-            if (!file_exists($content_file_name)) {
-                // check default template for view
-                $fname = $prefix . $this->config['template'] . $postfix;
-                $content_file_name = realpath($prefix . $this->config['template'] . $postfix);
-                if (!file_exists($content_file_name)) {
-                    $content_file = array(
-                        (!empty($options['template']) ? $options['template'] : $this->config['template']),
-                        (!empty($type) ? $options['type'] : 'none'),
-                        (!empty($options['name']) ? $options['name'] : 'Undefined')
-                    );
-                    return $this->_throw('Template file for ' . implode('/', $content_file) . ' not found');
-                }
+            if ($content_template_name && file_exists($content_template_name)) {
+                $content_file_name = $content_template_name;
+            } elseif (file_exists($default_template_name)) {
+                $content_file_name = $default_template_name;
+            } else {
+                $content_file = array(
+                    (!empty($options['template']) ? $options['template'] : $this->config['template']),
+                    (!empty($type) ? $options['type'] : 'none'),
+                    (!empty($options['name']) ? $options['name'] : 'Undefined')
+                );
+                return $this->_throw('Template file for ' . implode('/', $content_file) . ' not found');
             }
             
             // render to buffer

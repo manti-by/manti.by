@@ -58,11 +58,11 @@
         $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'en');
         
         // check language existance
-        $lang_file = DOC_ROOT . DS . 'language' . DS . $language . '.ini';
+        $lang_file = ROOT_PATH . DS . 'language' . DS . $language . '.ini';
         if (file_exists($lang_file)) {
             $references = parse_ini_file($lang_file);
         } else {
-            $lang_file = DOC_ROOT . DS . 'language' . DS . 'en.ini';
+            $lang_file = ROOT_PATH . DS . 'language' . DS . 'en.ini';
             $references = parse_ini_file($lang_file);
         }
 

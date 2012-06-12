@@ -21,7 +21,8 @@
     // define globals
     define('NL', chr(13).chr(10));
     define('DS', DIRECTORY_SEPARATOR);
-    define('DOC_ROOT', __DIR__);
+    define('ROOT_PATH', __DIR__);
+    define('LIB_PATH', ROOT_PATH . DS . 'includes');
 
     // errors & messages levels
     define('ERROR',   1);
@@ -30,6 +31,5 @@
     define('MESSAGE', 8);
     
     // system classes
-    set_include_path(DOC_ROOT . DS . 'includes;' . get_include_path());
-    require_once '_function.php';
-    require_once '_autoload.php';
+    require_once LIB_PATH . DS . '_function.php';
+    require_once LIB_PATH . DS . '_autoload.php';
