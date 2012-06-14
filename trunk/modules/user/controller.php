@@ -19,10 +19,27 @@
             if (is_callable(array($this, $method))) {
                 return $this->$method($options);
             } else {
-                return $this->loginformAction($options);
+                return $this->indexAction($options);
             }
         }
 
+        private function indexAction($options) {
+            return $this->dashboardAction($options);
+        }
+        
+        private function dashboardAction($options) {
+            // check login state
+            if (!$this->model->isLoggined()) {
+                $this->_throw(T('You currently not loggined'));
+                return $this->loginformAction($options);
+            }
+            
+            // Show dashboard
+            $options['title'] = 'Your Dashboard';
+            $options['body'] = $this->view->getContents('user', 'dashboard', $options);
+            return $options;
+        }
+        
         private function loginformAction($options) {
             // check login state
             if ($this->model->isLoggined()) {
@@ -32,7 +49,7 @@
             
             // get login form
             $options['title'] = 'Login page';
-            $options['body'] = $this->view->getContents('form', 'login', $options);
+            $options['body'] = $this->view->getContents('user', 'login', $options);
             return $options;
         }
                 
@@ -74,7 +91,7 @@
             
             // get login form
             $options['title'] = 'Logout page';
-            $options['body'] = $this->view->getContents('form', 'logout', $options);
+            $options['body'] = $this->view->getContents('user', 'logout', $options);
             return $options;
         }
         
@@ -98,7 +115,7 @@
         private function forgotformAction($options) {
             // get login form
             $options['title'] = 'Forgot password page';
-            $options['body'] = $this->view->getContents('form', 'forgot', $options);
+            $options['body'] = $this->view->getContents('user', 'forgot', $options);
             return $options;
         }
         
@@ -140,7 +157,7 @@
             
             // get login form
             $options['title'] = 'Register page';
-            $options['body'] = $this->view->getContents('form', 'register', $options);
+            $options['body'] = $this->view->getContents('user', 'register', $options);
             return $options;
         }
         
