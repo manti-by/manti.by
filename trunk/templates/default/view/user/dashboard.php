@@ -8,7 +8,7 @@
 ?>
 <div id="dashboard">
     <ul>
-        <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=add');?>"><?php echo T('Add new post'); ?></a></li>
+        <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=edit');?>"><?php echo T('Add new post'); ?></a></li>
     </ul>
 </div>
 

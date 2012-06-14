@@ -25,20 +25,19 @@
 
         private function listAction($options) {
             // get category ID
-            $category_id = $this->system->getCmd('id', null);
+            $tags = $this->system->getCmd('tags', null);
             
             // get category title
-            if ($category_id) {
-                $category = $this->model->getCategory($category_id);
-                $options['title'] = $category->name;
+            if ($tags) {
+                $options['data'] = $this->model->getPostsByTags($tags);
+                $options['title'] = 'Search by tags: ' . implode(', ', $tags);
             } else {
-                $config = $this->system->getConfig();
+                $options['data'] = $this->model->getPosts($tags);
                 $options['title'] = $config['site_title'] . ' Blog Pages';
             }
             
             // get category items and render it
             $options['entity'] = 'blog';
-            $options['data'] = $this->model->getCategoryItems($category_id);
             $options['body'] = $this->view->renderItemsArray($options);
             
             return $options;
@@ -50,7 +49,7 @@
             
             // get category title
             if ($post_id) {
-                $options['data'] = $this->model->getPost($category_id);
+                $options['data'] = $this->model->getPost($post_id);
                 $options['title'] = $options['data']->name;
             } else {
                 return $this->_404($options);
@@ -58,8 +57,7 @@
             
             // get category items and render it
             $options['entity'] = 'blog';
-            $options['data'] = $this->model->getCategoryItems($category_id);
-            $options['body'] = $this->view->renderItemsArray($options);
+            $options['body'] = $this->view->getContents('blog', 'item', $options);
             
             return $options;
         }
@@ -77,7 +75,7 @@
             
             // get category items and render it
             $options['title'] = 'Edit post';
-            $options['body'] = $this->view->getContents('form', 'edit_post', $options);
+            $options['body'] = $this->view->getContents('blog', 'edit_post', $options);
             
             return $options;
         }

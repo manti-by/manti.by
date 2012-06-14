@@ -10,13 +10,13 @@
       */
     class BlogModel extends Model {
         
-        public function getCategory($id){
+        public function getPost($id){
             // check empty value
             if (empty($id)) {
                 return false;
             }
             
-            $this->database->query("SELECT * FROM `category` WHERE `id` = " . $id);
+            $this->database->query("CALL GET_POST_BY_ID($id)");
             if ($this->database->getResult() > 0) {
                 return $this->database->getObjectsArray();
             } else {
@@ -24,17 +24,22 @@
             }
         }
         
-        public function getCategoryItems($id){
-            // check empty value
-            if (empty($id)) {
+        public function getPosts($limit = 0){
+            $this->database->query("CALL GET_POSTS($id)");
+            if ($this->database->getResult() > 0) {
+                return $this->database->getObjectsArray();
+            } else {
                 return false;
             }
+        }
+        
+        public function getPostsByTags($tags, $limit = 0){
+            if (empty($tags)) {
+                return $this->getPosts();
+            }
             
-            $this->database->query("
-                SELECT p.*, c.`name` as category FROM `post` p
-                JOIN `category` c ON c.`id` = p.`category_id`
-                WHERE `category_id` = " . $id);
-            
+            $tags = implode(',', $tags);
+            $this->database->query("CALL GET_POSTS_BY_TAGS('$tags', $limit)");
             if ($this->database->getResult() > 0) {
                 return $this->database->getObjectsArray();
             } else {
