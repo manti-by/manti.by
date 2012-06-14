@@ -158,4 +158,13 @@
             echo '<code>['.var_dump(debug_backtrace()).'</code>';
             return;
         }
+        
+        /**
+          * 404 Page
+          * @param array $options OPTIONAL
+          */
+        public function _404($options = null) {
+            echo '<div id="page-404">Page not found</div>';
+            return;
+        }
     }
