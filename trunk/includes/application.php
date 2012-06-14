@@ -132,8 +132,8 @@
 
             // get last message from stack
             $message = $this->getLastFromStack();
-            
-            $filename = realpath(ROOT_PATH . $config['error_log']);
+
+            $filename = realpath(ROOT_PATH . DS . $config['error_log']);
             $string = '[' . date('D M d H:i:s Y') . '] '
                     . $msg . NL;
             
