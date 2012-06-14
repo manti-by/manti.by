@@ -73,7 +73,7 @@
             // if no items
             if (empty($options['data']) || count($options['data']) == 0) {
                 $options['data'] = T('No '.$options['entity'].' found');
-                return $this->getContents($options['entity'], 'category', $options);
+                return $this->getContents($options['entity'], 'list', $options);
             }
             
             // render each item
@@ -84,7 +84,7 @@
             
             // render category
             $options['data'] = $items_html;
-            return $this->getContents($options['entity'], 'category', $options);
+            return $this->getContents($options['entity'], 'list', $options);
         }
         
         /**
