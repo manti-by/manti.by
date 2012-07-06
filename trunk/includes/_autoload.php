@@ -1,19 +1,25 @@
 <?php
     /**
-      * Global autoload functions for classes
+      * Global autoload class
       * @package M2 Micro Framework
       * @subpackage Library
       * @author Alexander Chaika
       */
 
-    // load system classes
-    require_once LIB_PATH . DS . 'application.php';
-    require_once LIB_PATH . DS . 'database.php';
-    require_once LIB_PATH . DS . 'system.php';
-    require_once LIB_PATH . DS . 'sef.php';
-    require_once LIB_PATH . DS . 'user.php';
-    
-    // simply load mvc structure for modules
-    require_once ROOT_PATH . DS . 'modules' . DS . 'controller.php';
-    require_once ROOT_PATH . DS . 'modules' . DS . 'model.php';
-    require_once ROOT_PATH . DS . 'modules' . DS . 'view.php';
+    class Autoload {
+
+        private static $_lastLoadedFilename;
+
+        public static function load($className) {
+            if (preg_match('/(Controller|Model|View)/i', $className, $matches)) {
+                $module_name = strtolower(substr($className, strlen(stristr($className, $matches[0]))));
+                self::$_lastLoadedFilename = ROOT_PATH . DS . 'modules' . $module_name . DS . strtolower($matches[0]) . '.php';
+            } else {
+                self::$_lastLoadedFilename = LIB_PATH . DS . strtolower($className) . '.php';
+            }
+            require_once self::$_lastLoadedFilename;
+        }
+    }
+
+    // Register our loader
+    spl_autoload_register(array('Autoload', 'load'));
