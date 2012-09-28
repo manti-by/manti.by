@@ -1,6 +1,8 @@
 /**
-  * @desc Default Style
+  * Default Style sheet for framework
+  * @name $default-css
   * @package M2 Micro Framework
+  * @subpackage Template
   * @author Alexander Chaika
   */
   
@@ -97,13 +99,12 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
 .shadow { box-shadow: 3px 3px 5px #CCC; }
 
 /************************* Template Site styles *******************************/
+.wrapper { width: 960px; margin: 0 auto; padding: 10px;
+    background: white; border: 1px solid #CCC; }
 
 #popup { display: none; position: fixed; top: 300px; left: 50%; width: 600px;
     margin-left: -300px; padding: 15px; border: 1px solid #CCC; 
     background: white; z-index: 1000; }
-
-#wrapper { width: 1000px; margin: 10px auto; padding: 10px;
-           background: white; border: 1px solid #CCC; }
 
 #message { position: fixed; top: 0; left: 50%; width: 1000px; margin-left: -500px; }
 
