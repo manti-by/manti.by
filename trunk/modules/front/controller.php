@@ -10,21 +10,8 @@
       */
     class FrontController extends Controller {
 
-        public function dispatch() {
-            // get action
-            $options['action'] = $this->system->getCmd('action'); 
-            
-            // route action
-            $method = $options['action'].'Action';
-            if (is_callable(array($this, $method))) {
-                return $this->$method($options);
-            } else {
-                return $this->indexAction($options);
-            }
-        }
-
-        private function indexAction($options) {
-            // get frontpage contents items
+        public function indexAction($options) {
+            // Get frontpage contents items
             $options['title'] = 'Default Frontpage of M2 Micro Framework';
             $options['body'] = '<h1>Default Frontpage of M2 Micro Framework</h1>';
             return $options;

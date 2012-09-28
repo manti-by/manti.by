@@ -8,5 +8,4 @@
       * @subpackage Modules
       * @author Alexander Chaika
       */
-    class BlogView extends View {
-    }
+    class BlogView extends View { }

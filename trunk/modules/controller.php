@@ -2,131 +2,109 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-      * Default controller class
-      * dispach first call and render output result
-      * @name $controller
-      * @package M2 Micro Framework
-      * @subpackage Modules
-      * @author Alexander Chaika
-      */
+     * Default controller class
+     * dispach first call and render output result
+     * @name $controller
+     * @package M2 Micro Framework
+     * @subpackage Modules
+     * @author Alexander Chaika
+     */
     class Controller extends Application {
-        
         /**
-          * Class constructor which loads MVC structure
-          */
+         * Class name
+         */
+        protected static $_name;
+
+        /**
+         * Class constructor which loads MVC structure
+         */
         public function  __construct() {
             // get class name
             $full_name = get_class($this);
-            $this->name = strtolower(substr($full_name, 0, strpos($full_name, 'Controller')));
-            
+            self::$_name = strtolower(substr($full_name, 0, strpos($full_name, 'Controller')));
+
             // get system classes
             $this->system = System::getInstance();
-            
+
             // get MVC classes
-            $this->model = $this->getModel();
-            $this->view = $this->getView();
+            $this->model = Model::getModel(self::$_name);
+            $this->view  = View::getView(self::$_name);
         }
-        
+
         /**
-          * Dispatch action which load module called in cmd params
-          * and render output result
-          * @return bool $result
-          */
+         * Overide non exist methods calls
+         * @param $name method name
+         * @param $args method args
+         * @return array $options
+         */
+        public function __call($name, $args) {
+            return $this->view->_404(array('page' => $name, 'args' => $args));
+        }
+
+        /**
+         * Dispatch action which load module called in cmd params
+         * and render output result
+         */
         public function dispatch() {
             // we have startup errors
             if ($this->isMessagePresent()) {
                 $this->view->offline();
-                return false;
             }
 
             // load module
             $module = $this->loadModule($this->system->getCmd('module'));
-            $result = $module->dispatch();
+            $result = $module->route();
 
             // render page
             $this->view->render($result);
-            return true;
         }
-        
+
         /**
-          * Method which load modules
-          * @param string $module module name
-          * @param string $default OPTIONAL default module name
-          * @return object $module
-          */
-        protected function loadModule($module, $default = null) {
+         * Route request to action
+         */
+        public function route() {
+            // get action
+            $options['action'] = $this->system->getCmd('action', 'index');
+            $method = $options['action'].'Action';
+
+            return $this->$method($options);
+        }
+
+        /**
+         * Method which load modules
+         * @param string $module module name
+         * @return object $module
+         */
+        protected function loadModule($module) {
             // get config
             $config = $this->system->getConfig();
             if (empty($module)) {
                 if (empty($default)) {
-                    $module = $config['default_module'];
+                    $module_name = $config['default_module'] . 'Controller';
                 } else {
-                    $module = $default;
+                    $module_name = $default . 'Controller';
                 }
-            }
-            
-            // check modules existance
-            if (file_exists($config['doc_root'].DS.'modules'.DS.$module.DS.'controller.php')) {
-                include_once $config['doc_root'].DS.'modules'.DS.$module.DS.'controller.php';
-                $module_name = ucfirst($module).'Controller';
             } else {
-                include_once $config['doc_root'].DS.'modules'.DS.$config['default_module'].DS.'controller.php';
-                $module_name = ucfirst($config['default_module']).'Controller';
+                $module_name = $module . 'Controller';
             }
-            
+
             return new $module_name();
-        }
-        
-        /**
-          * Default getModel method
-          * @return object $model current model for controller
-          */
-        protected function getModel($name = null) {
-            // get config
-            $config = $this->system->getConfig();
-            
-            // check parent class
-            if (empty($this->name) && empty($name)) {
-                include_once $config['doc_root'].DS.'modules'.DS.'model.php';
-            } elseif(!empty($name)) {
-                include_once $config['doc_root'].DS.'modules'.DS.$name.DS.'model.php';
-            } else {
-                include_once $config['doc_root'].DS.'modules'.DS.$this->name.DS.'model.php';
-            }
-            
-            // get class name
-            if (!empty($name)) {
-                $model_name = ucfirst($name).'Model';
-            } else {
-                $model_name = ucfirst($this->name).'Model';
-            }
-            return new $model_name();
         }
 
         /**
-          * Default getView method
-          * @return object $view current view for controller
-          */
-        protected function getView($name = null) {
-            // get config
-            $config = $this->system->getConfig();
-            
-            // check parent class
-            if (empty($this->name) && empty($name)) {
-                include_once $config['doc_root'].DS.'modules'.DS.'view.php';
-            } elseif(!empty($name)) {
-                include_once $config['doc_root'].DS.'modules'.DS.$name.DS.'view.php';
+         * Check user permissions
+         * @param array $options
+         * @return bool|array $options
+         */
+        protected function checkPermissions($options) {
+            // check login state
+            if (!Model::getModel('user')->isLoggined()) {
+                $this->_throw(T('You don\'t have permissions to view this page'));
+                $options['access'] = 'denied';
+                $options = $this->view->_404($options);
             } else {
-                include_once $config['doc_root'].DS.'modules'.DS.$this->name.DS.'view.php';
+                $options['access'] = 'granted';
             }
-            
-            // get class name
-            if (!empty($name)) {
-                $view_name = ucfirst($name).'View';
-            } else {
-                $view_name = ucfirst($this->name).'View';
-            }
-            
-            return new $view_name();
+            return $options;
         }
     }

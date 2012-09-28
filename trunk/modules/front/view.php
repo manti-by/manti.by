@@ -3,10 +3,9 @@
 
     /**
       * @desc Front View Class
-      * @name $fronView 
+      * @name $frontView
       * @package M2 Micro Framework
       * @subpackage Modules
       * @author Alexander Chaika
       */
-    class FrontView extends View {
-    }
+    class FrontView extends View { }

@@ -8,5 +8,4 @@
       * @subpackage Modules
       * @author Alexander Chaika
       */
-    class FrontModel extends Model {
-    }
+    class FrontModel extends Model { }

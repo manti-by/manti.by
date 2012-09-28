@@ -2,73 +2,71 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-      * @desc User Model class
-      * @name $userModel
-      * @package M2 Micro Framework
-      * @subpackage Modules
-      * @author Alexander Chaika
-      */
+     * User Model class
+     * @name $userModel
+     * @package M2 Micro Framework
+     * @subpackage Modules
+     * @author Alexander Chaika
+     */
     class UserModel extends Model {
-        private $helper;
         private $entity = false;
         
         /**
-          * Model class constructor with DB init
-          */
+         * Model class constructor with DB init
+         */
         public function __construct() {
-            // get user helper
-            $this->helper = User::getInstance();
+            // Get user helper
+            $this->entity = UserEntity::getInstance();
             
-            // construct parent class
+            // Construct parent class
             parent::__construct();
         }
         
         public function isLoggined() {
-            return $this->helper->isLoggined();
+            return $this->entity->isLoggined();
         }
         
         public function checkEmail($email) {
-            return $this->helper->checkEmail($email);
+            return $this->entity->checkEmail($email);
         }
         
         public function create($options) {
-            // try create user
-            $user_id = $this->helper->create($options);
+            // Try create user
+            $user_id = $this->entity->create($options);
             if ($user_id) {
-                // login if success
-                $this->entity = $this->helper->setupSession($user_id, $remember);
-                return $this->entity;
+                // Login if success
+                $remember = (isset($options['remember']) ? $options['remember'] : false);
+                return $this->entity->setupSession($user_id, $remember);
             }
             return false;
         }
         
         public function login($options) {
-            // check user
-            $user_id = $this->helper->getId($options);
+            // Check user
+            $user_id = $this->entity->getId($options);
             if ($user_id) {
-                // login if success
+                // Login if success
                 $remember = (isset($options['remember']) ? $options['remember'] : false);
-                $this->entity = $this->helper->setupSession($user_id, $remember);
-                return $this->entity;
+                return $this->entity->setupSession($user_id, $remember);
             }
             return false;            
         }
         
         public function logout($options) {
-            // simply clear user session
-            return $this->helper->clearSession();
+            // Simply clear user session
+            return $this->entity->clearSession();
         }
         
         public function createNewPassword($email) {
-            // get system helper & config
+            // Get system helper & config
             $system = System::getInstance();
             $config = $system->getConfig();
             
-            // generate and set new password
+            // Generate and set new password
             $password = substr(md5($config['secret'] . time()), 0, 8);
-            $result = $this->helper->setNewPassword($email, $password);
+            $result = $this->entity->setNewPassword($email, $password);
             
-            // send message if success
+            // Send message if success
             if ($result) {
                 $title = T('Your new password on ').$config['site_title'];
                 $message = T('Your new password is ').$password;

@@ -3,85 +3,78 @@
 
     /**
       * @desc Blog Controller class
-      * @name $frontController 
+      * @name $blogController
       * @package M2 Micro Framework
       * @subpackage Modules
       * @author Alexander Chaika
       */
     class BlogController extends Controller {
 
-        public function dispatch() {
-            // get action
-            $options['action'] = $this->system->getCmd('action'); 
-            
-            // route action
-            $method = $options['action'].'Action';
-            if (is_callable(array($this, $method))) {
-                return $this->$method($options);
-            } else {
-                return $this->listAction($options);
-            }
+        public function indexAction($options) {
+            return $this->listAction($options);
         }
 
-        private function listAction($options) {
-            // get category ID
-            $tags = $this->system->getCmd('tags', null);
+        public function listAction($options) {
+            // Get Config
+            $config = System::getInstance()->getConfig();
+
+            // Get category ID
+            $tags = $this->system->getCmd('id');
             
-            // get category title
+            // Get category title
             if ($tags) {
                 $options['data'] = $this->model->getPostsByTags($tags);
                 $options['title'] = 'Search by tags: ' . implode(', ', $tags);
             } else {
-                $options['data'] = $this->model->getPosts($tags);
-                $options['title'] = $config['site_title'] . ' Blog Pages';
+                $options['data'] = $this->model->getPosts();
+                $options['title'] = $config['site_title'];
             }
             
             // get category items and render it
-            $options['entity'] = 'blog';
+            $options['module'] = 'blog';
             $options['body'] = $this->view->renderItemsArray($options);
             
             return $options;
         }
 
-        private function showAction($options) {
-            // get category ID
-            $post_id = $this->system->getCmd('id', null);
+        public function showAction($options) {
+            // Get item ID
+            $post_id = $this->system->getCmd('id');
             
-            // get category title
+            // Get item title and data
             if ($post_id) {
                 $options['data'] = $this->model->getPost($post_id);
                 $options['title'] = $options['data']->name;
             } else {
-                return $this->_404($options);
+                return $this->view->_404($options);
             }
             
-            // get category items and render it
-            $options['entity'] = 'blog';
+            // Render blog item
             $options['body'] = $this->view->getContents('blog', 'item', $options);
             
             return $options;
         }
 
-        private function editAction($options) {
-            // get category ID
-            $options['id'] = $this->system->getCmd('id', null);
+        public function editAction($options) {
+            // Get item ID
+            $options['id'] = $this->system->getCmd('id');
             
-            // get category title
+            // Get item title
             if ($options['id']) {
                 $options['data'] = $this->model->getPost($options['id']);
             } else {
                 $options['data'] = null;
             }
             
-            // get category items and render it
+            // Render edit form
             $options['title'] = 'Edit post';
-            $options['body'] = $this->view->getContents('blog', 'edit_post', $options);
+            $options['body'] = $this->view->getContents('blog', 'edit', $options);
             
             return $options;
         }
-        
-        private function saveAction($options) {
-            // get post ID
+
+        public function saveAction($options) {
+            // Get post ID
             $options['id'] = $this->system->getCmd('id', null);
             
             // Update or create new

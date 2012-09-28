@@ -11,7 +11,7 @@
     class BlogModel extends Model {
         
         public function getPost($id){
-            // check empty value
+            // Check empty value
             if (empty($id)) {
                 return false;
             }
@@ -24,8 +24,8 @@
             }
         }
         
-        public function getPosts($limit = 0){
-            $this->database->query("CALL GET_POSTS($id)");
+        public function getPosts($limit = 10){
+            $this->database->query("CALL GET_POSTS($limit)");
             if ($this->database->getResult() > 0) {
                 return $this->database->getObjectsArray();
             } else {
