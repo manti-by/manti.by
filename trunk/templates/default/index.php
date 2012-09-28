@@ -1,10 +1,13 @@
 <?php
+    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
+
     /**
-      * Default template file
-      * @package M2 Micro Framework
-      * @subpackage Template
-      * @author Alexander Chaika
-      */
+     * Default template file
+     * @name $template-index
+     * @package M2 Micro Framework
+     * @subpackage Template
+     * @author Alexander Chaika
+     */
 
      $stack = $this->getLastFromStack();
      $message = $stack['message'];
@@ -12,24 +15,30 @@
 
 ?>
 <html>
-    <?php include 'head.php'; ?>
+    <head>
+        <title><?php echo strip_tags($options['title']); ?></title>
+        <link type="text/css" rel="stylesheet" href="<?php echo $this->config['http_host']; ?>/assets/css/default.css" />
+        <link type="text/css" rel="stylesheet" href="<?php echo $this->config['http_host']; ?>/templates/default/style.css" />
+        <script type="text/javascript" src="<?php echo $this->config['http_host']; ?>/assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo $this->config['http_host']; ?>/assets/js/default.js"></script>
+    </head>
     <body>
-        <div id="popup">
-            <div class="head">[X] <?php echo T('Close'); ?></div>
-            <div class="content"></div>
-        </div>
-        <?php if($this->isMessagePresent()) : ?>
-            <div id="message" class="<?php echo $class; ?>">
-                <div class="hide_this">[X] <?php echo T('Close'); ?></div>
-                <div><?php echo $message; ?></div>
-            </div>
-        <?php endif; ?>
-        <div id="wrapper">
-            <?php include 'topmenu.php'; ?>
+        <?php echo $this->getContents('plugin', 'popup'); ?>
+        <?php echo $this->getContents('plugin', 'messages'); ?>
 
+        <div id="header" class="wrapper">
+            <?php echo $this->getContents('plugin', 'topmenu'); ?>
+            <?php echo $this->getContents('plugin', 'toolbar'); ?>
+            <div class="cls"></div>
+        </div>
+
+        <div id="content" class="wrapper">
             <?php echo $options['body']; ?>
-
-            <?php include 'footer.php'; ?>
         </div>
+
+        <div id="footer" class="wrapper">
+            marco_manti&copy; 2006 - <?php echo date('Y'); ?>
+        </div>
+
     </body>
 </html>

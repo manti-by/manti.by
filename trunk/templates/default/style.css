@@ -1,3 +1,4 @@
+.wrapper { border: none; border-bottom: 1px solid #CCC; }
 
 ul#topmenu { margin: 5px 0; padding: 0; }
 #topmenu li { list-style: none; display: inline; padding-right: 10px; }
