@@ -1,4 +1,6 @@
 <?php
+    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
+
     /**
       * Cache Class
       * @name $cache
@@ -9,9 +11,7 @@
       */
     class Cache extends Application {
 
-        public static function set() {
-        }
+        public static function set() { }
 
-        public static function get() {
-        }
+        public static function get() { }
     }

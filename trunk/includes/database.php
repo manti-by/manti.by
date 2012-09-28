@@ -2,13 +2,13 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-      * Class for database operations
-      * NOTICE: This class implemented as Singleton
-      * @name $database
-      * @package M2 Micro Framework
-      * @subpackage Library
-      * @author Alexander Chaika
-      */
+     * Class for database operations (Uses MySQLi extention)
+     * NOTICE: This class implemented as Singleton
+     * @name $database
+     * @package M2 Micro Framework
+     * @subpackage Library
+     * @author Alexander Chaika
+     */
     class Database extends Application {
         private $cid;
         private $res;
@@ -21,44 +21,44 @@
         private $db_prefix;
 
         private $query;
-        
+
         protected static $instance = null;
 
         /**
-          * Singleton protection
-          */
+         * Singleton protection
+         */
         private function __construct() {
             // Try connect to DB
             $this->connect();
         }
         private function __clone() {}
         private function __wakeup() {}
-    
+
         /**
-          * GetInstance class method
-          * @return object $instance
-          */
+         * GetInstance class method
+         * @return object $instance
+         */
         public static function getInstance() {
             if (is_null(self::$instance)) {
                 self::$instance = new Database;
             }
             return self::$instance;
         }
-        
+
         /**
-          * Connect to DB and select TABLE
-          * @return bool $state
-          */
+         * Connect to DB and select TABLE
+         * @return bool $state
+         */
         public function connect() {
-            // get config
+            // Get config
             $config = System::getInstance()->getConfig();
-            
-            // already initialized?
-            if (!empty($this->cid) && is_resource($this->cid)) {
+
+            // Already initialized?
+            if (!empty($this->cid) && is_object($this->cid)) {
                 return $this->cid;
             }
-            
-            // parse config
+
+            // Parse config
             if (!empty($config)) {
                 $this->db_path = $config['db_path'];
                 $this->db_port = $config['db_port'];
@@ -71,19 +71,19 @@
                 return $this->_throw(T('Invalid config'), ERROR);
             }
 
-            // connect to DB
-            $this->cid = mysql_pconnect($this->db_path.':'.$this->db_port, $this->db_user, $this->db_pass);
+            // Connect to DB
+            $this->cid = mysqli_connect($this->db_path.':'.$this->db_port, $this->db_user, $this->db_pass);
             if (!$this->cid) {
                 return $this->_throw($this->getError(), ERROR, $this->getLastErrorNum());
             }
-            
-            // set encoding
+
+            // Set encoding
             if (!empty($this->db_encoding)) {
-                mysql_query("SET NAMES '".$this->db_encoding."'");
+                mysqli_query($this->cid, "SET NAMES '".$this->db_encoding."'");
             }
 
-            // select table
-            if (!mysql_select_db($this->db_base, $this->cid)) {
+            // Select table
+            if (!mysqli_select_db($this->cid, $this->db_base)) {
                 return $this->_throw($this->getError(), ERROR, $this->getLastErrorNum());
             }
 
@@ -91,11 +91,11 @@
         }
 
         /**
-          * Close connection to DB
-          * @return bool $state
-          */
+         * Close connection to DB
+         * @return bool $state
+         */
         public function close() {
-            if (!mysql_close($this->cid)) {
+            if (!mysqli_close($this->cid)) {
                 return $this->_throw($this->getError());
             } else {
                 return $this->_clean();
@@ -103,37 +103,37 @@
         }
 
         /**
-          * Replace #__ to db prefix
-          * @param string $query query to execute
-          * @return string $query with replaced prefix
-          */
+         * Replace #__ to db prefix
+         * @param string $query query to execute
+         * @return string $query with replaced prefix
+         */
         private function replacePrefix($query) {
             return str_replace('#__', $this->db_prefix, $query);
         }
 
         /**
-          * Set and execute query
-          * if success return number of affected rows or false
-          * !write the names of all tables without the prefix, but like #__
-          * @param string $query query to execute
-          * @return int $state count of affected rows
-          */
+         * Set and execute query
+         * if success return number of affected rows or false
+         * !write the names of all tables without the prefix, but like #__
+         * @param string $query query to execute
+         * @return int $state count of affected rows
+         */
         public function query($query) {
             $this->query = $this->replacePrefix($query);
-            $this->res = mysql_query($this->query, $this->cid);
+            $this->res = mysqli_query($this->cid, $this->query);
 
             if ($this->getLastErrorNum() > 0) {
                 return $this->_throw($this->getError(), ERROR, $this->getLastErrorNum());
             } else {
-                $this->result = mysql_affected_rows($this->cid);
+                $this->result = mysqli_affected_rows($this->cid);
                 return $this->result;
             }
         }
 
         /**
-          * Execute last query
-          * @return bool $state
-          */
+         * Execute last query
+         * @return bool $state
+         */
         public function exec() {
             if (!empty($this->query)) {
                 return $this->query($this->query);
@@ -143,10 +143,10 @@
         }
 
         /**
-          * Set query
-          * @param string $query optional query to execute
-          * @return bool $state
-          */
+         * Set query
+         * @param string $query optional query to execute
+         * @return bool $state
+         */
         public function setQuery($query = null) {
             if (!empty($query)) {
                 $this->query = $query;
@@ -157,9 +157,9 @@
         }
 
         /**
-          * Get last query
-          * @return string|bool $query or false
-          */
+         * Get last query
+         * @return string|bool $query or false
+         */
         public function getQuery() {
             if (!empty($this->query)) {
                 return $this->query;
@@ -169,8 +169,8 @@
         }
 
         /**
-          * Print last query
-          */
+         * Print last query
+         */
         public function printQuery() {
             $query = $this->getQuery();
             $query = (empty($query) ? T('No queries executed') : $this->replacePrefix($query));
@@ -178,17 +178,17 @@
         }
 
         /**
-          * Get first field value of result
-          * @return string|bool $result
-          */
+         * Get first field value of result
+         * @return string|bool $result
+         */
         public function getField() {
-            // check result
+            // Check result
             if (!$this->checkResult()) {
                 return false;
             }
 
-            // return first field
-            $row = mysql_fetch_row($this->res);
+            // Return first field
+            $row = mysqli_fetch_row($this->res);
             if (!$row || empty($row)) {
                 return false;
             } else {
@@ -197,33 +197,33 @@
         }
 
         /**
-          * Get first resulting object of query
-          * @return object|bool $result resulted object or false
-          */
+         * Get first resulting object of query
+         * @return object|bool $result resulted object or false
+         */
         public function getObject() {
-            // check result
+            // Check result
             if (!$this->checkResult()) {
                 return false;
             }
 
-            // return object
-            $obj = mysql_fetch_object($this->res);
+            // Return object
+            $obj = mysqli_fetch_object($this->res);
             if (!$obj || empty($obj)) return false;
             else return $obj;
         }
 
         /**
-          * Get result objects array of query
-          * @return array|bool $result resulted array of objects or false
-          */
+         * Get result objects array of query
+         * @return array|bool $result resulted array of objects or false
+         */
         public function getObjectsArray() {
-            // check result
+            // Check result
             if (!$this->checkResult()) {
                 return false;
             }
 
-            // return objects
-            while($obj = mysql_fetch_object($this->res)) {
+            // Return objects
+            while($obj = mysqli_fetch_object($this->res)) {
                 if (!$obj || empty($obj)) break;
                 $arr[] = $obj;
             }
@@ -231,17 +231,17 @@
         }
 
         /**
-          * Get result array of query
-          * @return array|bool $result resulted array of rows (arrays too) or false
-          */
+         * Get result array of query
+         * @return array|bool $result resulted array of rows (arrays too) or false
+         */
         public function getArray() {
-            // check result
+            // Check result
             if (!$this->checkResult()) {
                 return false;
             }
 
-            // return array
-            while($row = mysql_fetch_array($this->res, MYSQL_NUM)) {
+            // Return array
+            while($row = mysqli_fetch_array($this->res, MYSQL_NUM)) {
                 if (!$row || empty($row)) break;
                 $arr[] = $row[0];
             }
@@ -249,17 +249,19 @@
         }
 
         /**
-          * Get array of named pairs
-          * @return array|bool $result associative array of pairs (id => $field) or false
-          */
+         * Get array of named pairs
+         * @param string $index - array index name
+         * @param string $field - array field name
+         * @return array|bool $result associative array of pairs ($index => $field) or false
+         */
         public function getPairs($index, $field) {
-            // check result
+            // Check result
             if (!$this->checkResult()) {
                 return false;
             }
 
-            // return pairs
-            while($obj = mysql_fetch_object($this->res)) {
+            // Return pairs
+            while($obj = mysqli_fetch_object($this->res)) {
                 if (!$obj || empty($obj)) break;
                 if (empty($obj->$index)) {
                     return $this->_throw(T('DB incorect index'));
@@ -270,9 +272,9 @@
         }
 
         /**
-          * Check last operation result
-          * @return bool $result
-          */
+         * Check last operation result
+         * @return bool $result
+         */
         private function checkResult() {
             if ($this->result < 1 && $this->getLastErrorNum() != 0) {
                 return $this->_throw($this->getError(), ERROR, -1);
@@ -284,47 +286,43 @@
         }
 
         /**
-          * Get last error string with error number
-          * @return string $error last mysql error string and number
-          */
+         * Get last error string with error number
+         * @return string $error last mysql error string and number
+         */
         public function getError() {
-            return mysql_errno($this->cid).': '.mysql_error($this->cid);
+            return mysqli_errno($this->cid).': '.mysqli_error($this->cid);
         }
 
         /**
-          * Get last error message
-          * @return string $error last mysql error string
-          */
+         * Get last error message
+         * @return string $error last mysql error string
+         */
         public function getLastErrorMsg() {
-            return mysql_error($this->cid);
+            return mysqli_error($this->cid);
         }
 
         /**
-          * Get last error number
-          * @return int $error_number last mysql error number
-          */
+         * Get last error number
+         * @return int $error_number last mysql error number
+         */
         public function getLastErrorNum() {
-            return (int)mysql_errno($this->cid);
+            return (int)mysqli_errno($this->cid);
         }
 
         /**
-          * Get last insert id
-          * @return int $id
-          */
+         * Get last insert id
+         * @return int $id
+         */
         public function getLastInsertId() {
-            return (int)mysql_insert_id($this->cid);
+            return (int)mysqli_insert_id($this->cid);
         }
-        
+
         /**
-          * Escape string characters
-          * @param string $string 
-          * @return string $result
-          */
+         * Escape string characters
+         * @param string $string
+         * @return string $result
+         */
         public function escape($string) {
-            return mysql_real_escape_string($string);
-        }
-        
-        public function escapeFunctionName() {
-            return 'mysql_real_escape_string';
+            return mysqli_real_escape_string($this->cid, $string);
         }
     }
