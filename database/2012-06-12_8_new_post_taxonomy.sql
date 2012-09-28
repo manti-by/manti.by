@@ -4,7 +4,6 @@ ALTER TABLE `post`
 
 DROP TABLE `category`;
 
-
 SET FOREIGN_KEY_CHECKS=0;
 
 DROP TABLE IF EXISTS `post_tags`;
@@ -19,3 +18,5 @@ CREATE TABLE `post_tags` (
   CONSTRAINT `fk_post_tags_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_post_tags_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+SET FOREIGN_KEY_CHECKS=1;

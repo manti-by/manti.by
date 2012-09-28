@@ -11,9 +11,29 @@
     class GalleryController extends Controller {
 
         public function indexAction($options) {
-            // Get frontpage contents items
-            $options['title'] = 'Gallery of M2 Micro Framework';
-            $options['body'] = '<h1>Gallery of M2 Micro Framework</h1>';
+            return $this->listAction($options);
+        }
+
+        public function listAction($options) {
+            // Get Config
+            $config = System::getInstance()->getConfig();
+
+            // Get category ID
+            $tags = $this->system->getCmd('id');
+
+            // Get category title
+            if ($tags) {
+                $options['data'] = $this->model->getGalleryByTags($tags);
+                $options['title'] = 'Search by tags: ' . implode(', ', $tags);
+            } else {
+                $options['data'] = $this->model->getGallery();
+                $options['title'] = $config['site_title'];
+            }
+
+            // get category items and render it
+            $options['module'] = 'gallery';
+            $options['body'] = $this->view->renderItemsArray($options);
+
             return $options;
         }
     }

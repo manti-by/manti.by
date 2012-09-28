@@ -14,9 +14,32 @@
         private $link_path;
 
         public function __construct() {
+            parent::__construct();
+
             $this->file_path = realpath(ROOT_PATH . $this->config['gallery_path']);
             $this->link_path = $this->config['http_host'] . $this->config['gallery_path'];
         }
 
-        private function getGalleriesList() { }
+        public function getGalleryByTags($tags, $limit = 0) {
+            if (empty($tags)) {
+                return $this->getGalleryList();
+            }
+
+            $tags = implode(',', $tags);
+            $this->database->query("CALL GET_GALLERY_BY_TAGS('$tags', $limit)");
+            if ($this->database->getResult() > 0) {
+                return $this->database->getObjectsArray();
+            } else {
+                return false;
+            }
+        }
+
+        public function getGallery($limit = 10) {
+            $this->database->query("CALL GET_GALLERY($limit)");
+            if ($this->database->getResult() > 0) {
+                return $this->database->getObjectsArray();
+            } else {
+                return false;
+            }
+        }
     }
