@@ -21,12 +21,10 @@
             $this->storage = array();
 
         }
-        private function __clone() {}
-        private function __wakeup() {}
 
         /**
          * GetInstance class method
-         * @return object $instance
+         * @return Current_Class_Name $instance
          */
         public static function getInstance() {
             if (is_null(self::$instance)) {

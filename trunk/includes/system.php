@@ -23,12 +23,10 @@
             // Parse config file
             $this->parseConfig();
         }
-        private function __clone() {}
-        private function __wakeup() {}
 
         /**
          * GetInstance class method
-         * @return object $instance
+         * @return Current_Class_Name $instance
          */
         public static function getInstance() {
             if (is_null(self::$instance)) {
@@ -194,7 +192,6 @@
 
         /**
          * Resize image
-         * @todo This is function not tested properly!
          * @param string $sname source
          * @param string $dname destination
          * @param int $width width to resize
