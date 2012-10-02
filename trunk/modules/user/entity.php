@@ -27,8 +27,6 @@
             // Get db handler
             $this->database = Database::getInstance();
         }
-        private function __clone() {}
-        private function __wakeup() {}
         
         /**
           * GetInstance class method
@@ -180,9 +178,9 @@
             if ($result) {
                 // Set cookie
                 if ($remember) {
-                    setCookie('auth_token', md5($config['secret'] . $email));
+                    setCookie('token', md5($config['secret'] . $result->email));
                 } else {
-                    setCookie('auth_token', '');
+                    setCookie('token', '');
                 }
 
                 return $this;
@@ -269,12 +267,15 @@
          * @return bool $result
          */
         public function setNewPassword($email, $password) {
+            // get config
+            $config = System::getInstance()->getConfig();
+
             // Get items
             $this->database->query("
                 UPDATE `#__user` 
-                SET `password` = '".$password."'
-                WHERE `email` = '".$email."'
-                LIMIT 0, 1");
+                SET `password` = '" . md5($config['secret'] . $password) . "'
+                WHERE `email` = '" . $email . "'
+                LIMIT 1");
             
             $result = $this->database->getResult();
             return ($result ? true : false);
