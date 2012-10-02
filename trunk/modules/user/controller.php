@@ -106,7 +106,7 @@
             // check existing email
             if ($this->model->checkEmail($options['email'])){
                 if ($this->model->createNewPassword($options['email'])) {
-                    $this->_clean(T('Your new password sended to given email'));
+                    $this->_clean(T('Your new password has been sent to given email'));
                     return $this->loginformAction($options);
                 } else {
                     $this->_throw(T('Could not reset your password, please try later'), ERROR);
