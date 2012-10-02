@@ -40,5 +40,6 @@
             marco_manti&copy; 2006 - <?php echo date('Y'); ?>
         </div>
 
+        <?php echo $this->getContents('plugin', 'debug'); ?>
     </body>
 </html>
