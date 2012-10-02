@@ -10,16 +10,9 @@
      * @author Alexander Chaika
      */
     class Database extends Application {
-        private $cid;
         private $res;
-
-        private $db_path;
-        private $db_port;
-        private $db_user;
-        private $db_pass;
-        private $db_base;
+        private $mysqli;
         private $db_prefix;
-
         private $query;
 
         protected static $instance = null;
@@ -31,12 +24,10 @@
             // Try connect to DB
             $this->connect();
         }
-        private function __clone() {}
-        private function __wakeup() {}
 
         /**
          * GetInstance class method
-         * @return object $instance
+         * @return Current_Class_Name $instance
          */
         public static function getInstance() {
             if (is_null(self::$instance)) {
@@ -54,40 +45,37 @@
             $config = System::getInstance()->getConfig();
 
             // Already initialized?
-            if (!empty($this->cid) && is_object($this->cid)) {
-                return $this->cid;
+            if (!empty($this->mysqli) && is_object($this->mysqli)) {
+                return $this->mysqli;
             }
 
             // Parse config
-            if (!empty($config)) {
-                $this->db_path = $config['db_path'];
-                $this->db_port = $config['db_port'];
-                $this->db_user = $config['db_user'];
-                $this->db_pass = $config['db_pass'];
-                $this->db_base = $config['db_base'];
+            if (!empty($config) && isset($config['db_path']) && isset($config['db_port'])
+                && isset($config['db_user']) && isset($config['db_pass']) && isset($config['db_base'])) {
                 $this->db_prefix = $config['db_prefix'];
-                $this->db_encoding = $config['db_encoding'];
             } else {
-                return $this->_throw(T('Invalid config'), ERROR);
+                return $this->_throw(T('Invalid DB config'), ERROR);
             }
 
             // Connect to DB
-            $this->cid = mysqli_connect($this->db_path.':'.$this->db_port, $this->db_user, $this->db_pass);
-            if (!$this->cid) {
+            $this->mysqli = new mysqli(
+                $config['db_path'] . ':' .
+                $config['db_port'],
+                $config['db_user'],
+                $config['db_pass'],
+                $config['db_base']
+            );
+
+            if (!$this->mysqli) {
                 return $this->_throw($this->getError(), ERROR, $this->getLastErrorNum());
             }
 
             // Set encoding
             if (!empty($this->db_encoding)) {
-                mysqli_query($this->cid, "SET NAMES '".$this->db_encoding."'");
+                $this->mysqli->query($this->cid, "SET NAMES '" . $config['db_encoding'] . "'");
             }
 
-            // Select table
-            if (!mysqli_select_db($this->cid, $this->db_base)) {
-                return $this->_throw($this->getError(), ERROR, $this->getLastErrorNum());
-            }
-
-            return $this->cid;
+            return $this->mysqli;
         }
 
         /**
@@ -95,7 +83,7 @@
          * @return bool $state
          */
         public function close() {
-            if (!mysqli_close($this->cid)) {
+            if (!$this->mysqli->close()) {
                 return $this->_throw($this->getError());
             } else {
                 return $this->_clean();
@@ -120,12 +108,12 @@
          */
         public function query($query) {
             $this->query = $this->replacePrefix($query);
-            $this->res = mysqli_query($this->cid, $this->query);
+            $this->res = $this->mysqli->query($this->query);
 
             if ($this->getLastErrorNum() > 0) {
                 return $this->_throw($this->getError(), ERROR, $this->getLastErrorNum());
             } else {
-                $this->result = mysqli_affected_rows($this->cid);
+                $this->result = $this->mysqli->affected_rows;
                 return $this->result;
             }
         }
@@ -188,7 +176,7 @@
             }
 
             // Return first field
-            $row = mysqli_fetch_row($this->res);
+            $row = $this->res->fetch_row();
             if (!$row || empty($row)) {
                 return false;
             } else {
@@ -207,9 +195,16 @@
             }
 
             // Return object
-            $obj = mysqli_fetch_object($this->res);
-            if (!$obj || empty($obj)) return false;
-            else return $obj;
+            $obj = $this->res->fetch_object();
+            if (!$obj || empty($obj)) {
+                return false;
+            } else {
+                // Flush buffer and return
+                //$this->mysqli->next_result();
+                //$this->mysqli->store_result();
+
+                return $obj;
+            }
         }
 
         /**
@@ -223,7 +218,7 @@
             }
 
             // Return objects
-            while($obj = mysqli_fetch_object($this->res)) {
+            while($obj = $this->res->fetch_object()) {
                 if (!$obj || empty($obj)) break;
                 $arr[] = $obj;
             }
@@ -241,7 +236,7 @@
             }
 
             // Return array
-            while($row = mysqli_fetch_array($this->res, MYSQL_NUM)) {
+            while($row = $this->res->fetch_array(MYSQLI_NUM)) {
                 if (!$row || empty($row)) break;
                 $arr[] = $row[0];
             }
@@ -261,10 +256,10 @@
             }
 
             // Return pairs
-            while($obj = mysqli_fetch_object($this->res)) {
+            while($obj = $this->res->fetch_object()) {
                 if (!$obj || empty($obj)) break;
                 if (empty($obj->$index)) {
-                    return $this->_throw(T('DB incorect index'));
+                    return $this->_throw(T('Incorrect DB index'));
                 }
                 $arr[(int)$obj->$index] = $obj->$field;
             }
@@ -276,7 +271,7 @@
          * @return bool $result
          */
         private function checkResult() {
-            if ($this->result < 1 && $this->getLastErrorNum() != 0) {
+            if (($this->result < 1 && $this->getLastErrorNum() != 0) || !$this->res) {
                 return $this->_throw($this->getError(), ERROR, -1);
             } elseif ($this->result < 1 && $this->getLastErrorNum() == 0) {
                 return $this->_throw(T('Empty result'), NOTICE);
@@ -290,7 +285,7 @@
          * @return string $error last mysql error string and number
          */
         public function getError() {
-            return mysqli_errno($this->cid).': '.mysqli_error($this->cid);
+            return $this->mysqli->errno .' : '. $this->mysqli->error;
         }
 
         /**
@@ -298,7 +293,7 @@
          * @return string $error last mysql error string
          */
         public function getLastErrorMsg() {
-            return mysqli_error($this->cid);
+            return $this->mysqli->error;
         }
 
         /**
@@ -306,7 +301,7 @@
          * @return int $error_number last mysql error number
          */
         public function getLastErrorNum() {
-            return (int)mysqli_errno($this->cid);
+            return (int)$this->mysqli->errno;
         }
 
         /**
@@ -314,7 +309,7 @@
          * @return int $id
          */
         public function getLastInsertId() {
-            return (int)mysqli_insert_id($this->cid);
+            return (int)$this->mysqli->insert_id;
         }
 
         /**
@@ -323,6 +318,6 @@
          * @return string $result
          */
         public function escape($string) {
-            return mysqli_real_escape_string($this->cid, $string);
+            return $this->mysqli->escape_string($string);
         }
     }
