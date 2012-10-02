@@ -13,9 +13,19 @@
         public static function load($className) {
             if (preg_match('/(Controller|Model|View|Entity)/i', $className, $matches)) {
                 $module_name = strtolower(substr($className, 0, strlen($className) - strlen(stristr($className, $matches[0]))));
-                self::$_lastLoadedFilename = ROOT_PATH . DS . 'modules' . DS . $module_name . DS . strtolower($matches[0]) . '.php';
+                if (file_exists($file_name = ROOT_PATH . DS . 'modules' . DS . $module_name . DS . strtolower($matches[0]) . '.php')) {
+                    self::$_lastLoadedFilename = $file_name;
+                } else {
+                    throw new Exception($className . ' ' . T('could not be found'));
+                }
             } else {
-                self::$_lastLoadedFilename = LIB_PATH . DS . strtolower($className) . '.php';
+                if (file_exists($file_name = LIB_PATH . DS . strtolower($className) . '.php')) {
+                    self::$_lastLoadedFilename = $file_name;
+                } else if (file_exists($file_name = LIB_PATH . DS . 'controls' . DS . strtolower($className) . '.php')) {
+                    self::$_lastLoadedFilename = $file_name;
+                } else {
+                    throw new Exception($className . ' ' . T('could not be found'));
+                }
             }
             require_once self::$_lastLoadedFilename;
         }
