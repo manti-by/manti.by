@@ -14,9 +14,11 @@ sef_enabled = 1
 sef_suffix = ".html"
 
 [error handlers]
-error_level = 3
-log_level = 1
-error_log = "/error.log"
+default_error_level = 3
+log_write_level = 1
+debug_level_max = 3
+debug_level_skip = 2
+error_log = "../../log/app_error.log"
 
 [image & file upload]
 allowed_file_extentions = png,jpg,mp3,zip
