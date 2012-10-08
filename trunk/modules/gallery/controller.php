@@ -15,11 +15,8 @@
         }
 
         public function listAction($options) {
-            // Get Config
-            $config = System::getInstance()->getConfig();
-
             // Get category ID
-            $tags = $this->system->getCmd('id');
+            $tags = System::getInstance()->getCmd('id');
 
             // Get category title
             if ($tags) {
@@ -27,7 +24,7 @@
                 $options['title'] = 'Search by tags: ' . implode(', ', $tags);
             } else {
                 $options['data'] = $this->model->getGallery();
-                $options['title'] = $config['site_title'];
+                $options['title'] = Application::$config['site_title'];
             }
 
             // get category items and render it

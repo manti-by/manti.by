@@ -58,19 +58,15 @@
         }
         
         public function createNewPassword($email) {
-            // Get system helper & config
-            $system = System::getInstance();
-            $config = $system->getConfig();
-            
             // Generate and set new password
-            $password = substr(md5($config['secret'] . time()), 0, 8);
+            $password = substr(md5(Application::$config['secret'] . time()), 0, Application::$config['new_pass_length']);
             $result = $this->entity->setNewPassword($email, $password);
             
             // Send message if success
             if ($result) {
-                $title = T('Your new password on ').$config['site_title'];
-                $message = T('Your new password is ').$password;
-                return $system->mail($email, $title, $message);
+                $title = T('Your new password on ') . Application::$config['site_title'];
+                $message = T('Your new password is ') . $password;
+                return System::getInstance()->mail($email, $title, $message);
             } else {
                 return false;
             }

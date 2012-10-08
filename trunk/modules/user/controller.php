@@ -48,9 +48,9 @@
             }
             
             // Get credentials
-            $options['email'] = $this->system->getCmd('email');
-            $options['password'] = $this->system->getCmd('password');
-            $options['remember'] = ($this->system->getCmd('remember') ? true : false);
+            $options['email'] = System::getInstance()->getCmd('email');
+            $options['password'] = System::getInstance()->getCmd('password');
+            $options['remember'] = (System::getInstance()->getCmd('remember') ? true : false);
             
             if (isset($_COOKIE['auth_token']) && !empty($_COOKIE['auth_token'])) {
                 $options['cookie'] = $_COOKIE['auth_token'];
@@ -95,10 +95,10 @@
 
         public function forgotAction($options) {
             // Get email
-            $options['email'] = $this->system->getCmd('email', $options['email']);
+            $options['email'] = System::getInstance()->getCmd('email', $options['email']);
             
             // Check valid email
-            if (!$this->system->isValidEmail($options['email'])){
+            if (!System::getInstance()->isValidEmail($options['email'])){
                 $this->_throw(T('Please enter valid email address'), ERROR);
                 return $this->forgotformAction($options);
             }
@@ -143,9 +143,9 @@
             }
             
             // Get credentials
-            $options['username'] = $this->system->getCmd('username', $options['username']);
-            $options['email'] = $this->system->getCmd('email', $options['email']);
-            $options['password'] = $this->system->getCmd('password', $options['password']);
+            $options['username'] = System::getInstance()->getCmd('username', $options['username']);
+            $options['email'] = System::getInstance()->getCmd('email', $options['email']);
+            $options['password'] = System::getInstance()->getCmd('password', $options['password']);
             
             // Check valid username
             if (preg_match('/[^a-z]/i', $options['username'])){
@@ -154,7 +154,7 @@
             }
             
             // Check valid email
-            if (!$this->system->isValidEmail($options['email'])){
+            if (!System::getInstance()->isValidEmail($options['email'])){
                 $this->_throw(T('Please enter valid email address'), ERROR);
                 return $this->registerformAction($options);
             }

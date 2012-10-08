@@ -19,8 +19,6 @@
             if (isset($options['reference_id'])) {
                 $this->_options['reference_id'] = $options['reference_id'];
             }
-
-            $this->config = System::getInstance()->getConfig();
         }
 
         /**

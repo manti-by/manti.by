@@ -23,9 +23,6 @@
             $full_name = get_class($this);
             self::$_name = strtolower(substr($full_name, 0, strpos($full_name, 'Controller')));
 
-            // get system classes
-            $this->system = System::getInstance();
-
             // get MVC classes
             $this->model = Model::getModel(self::$_name);
             $this->view  = View::getView(self::$_name);
@@ -52,7 +49,7 @@
             }
 
             // load module
-            $module = $this->loadModule($this->system->getCmd('module'));
+            $module = $this->loadModule(System::getInstance()->getCmd('module'));
             $result = $module->route();
 
             // render page
@@ -64,7 +61,7 @@
          */
         public function route() {
             // get action
-            $options['action'] = $this->system->getCmd('action', 'index');
+            $options['action'] = System::getInstance()->getCmd('action', 'index');
             $method = $options['action'].'Action';
 
             return $this->$method($options);
@@ -76,11 +73,10 @@
          * @return object $module
          */
         protected function loadModule($module) {
-            // get config
-            $config = $this->system->getConfig();
+            // Check module name
             if (empty($module)) {
                 if (empty($default)) {
-                    $module_name = $config['default_module'] . 'Controller';
+                    $module_name = Application::$config['default_module'] . 'Controller';
                 } else {
                     $module_name = $default . 'Controller';
                 }

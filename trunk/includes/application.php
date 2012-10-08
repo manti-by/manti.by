@@ -9,10 +9,12 @@
      * @author Alexander Chaika
      */
     class Application {
-        protected $message;
-        protected $result;
 
+        public static $config = array();
         protected static $instance = null;
+
+        protected $message = null;
+        protected $result = 0;
 
         /**
          * Init application
@@ -21,15 +23,19 @@
          * Save stats into DB
          */
         public static function init() {
+            // Parse application config
+            if (!self::parseConfig()) {
+                die('Configuration error');
+            }
+
             // Init sef to parse request string
             Sef::init();
 
             // Get system metrics
-            $system = System::getInstance();
-            $module = substr($system->getCmd('module'), 0, 50);
-            $action = substr($system->getCmd('action'), 0, 50);
-            $task   = substr($system->getCmd('task'), 0, 50);
-            $id     = substr($system->getCmd('id'), 0, 50);
+            $module = substr(System::getInstance()->getCmd('module'), 0, 50);
+            $action = substr(System::getInstance()->getCmd('action'), 0, 50);
+            $task   = substr(System::getInstance()->getCmd('task'), 0, 50);
+            $id     = substr(System::getInstance()->getCmd('id'), 0, 50);
 
             // Get user metrics
             $ip      = substr(UserEntity::getIp(), 0, 50);
@@ -40,7 +46,54 @@
             $query = "INSERT DELAYED INTO `#___log`
                     (`module`, `action`, `task`, `refid`, `ip`, `browser`, `referer`, `sessionid`)
                     VALUES ('$module', '$action', '$task', '$id', '$ip', '$browser', '$referer', '".session_id()."')";
+
             Database::getInstance()->query($query);
+        }
+
+        /**
+         * Parse config from Application INI file
+         * @return bool $state
+         */
+        public static function parseConfig() {
+            // Parse config file
+            $config = parse_ini_file(realpath(LIB_PATH . DS . 'config.ini'));
+
+            if (!empty($config)) {
+                // Parse config to object
+                foreach ($config as $key => $value) {
+                    Application::$config[$key] = $value;
+                }
+
+                // Define http_host & doc_root if empty
+                if (empty(Application::$config['http_host'])) {
+                    Application::$config['http_host']  = 'http://' . $_SERVER['HTTP_HOST'];
+                }
+
+                if (empty(Application::$config['doc_root'])) {
+                    Application::$config['doc_root']   = ROOT_PATH;
+                }
+
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        /**
+         * Clean all stacks
+         */
+        public static function clean() {
+            unset($GLOBALS['stack']);
+            return;
+        }
+
+        /**
+         * Close application
+         */
+        public static function shutdown() {
+            Database::getInstance()->close();
+            self::clean();
+            die;
         }
 
         /**
@@ -62,14 +115,14 @@
 
         /**
          * Throw error and add message to error stack
-         * @todo add save to log by error levels
          * @param string $message error message
-         * @param int $level OPTIONAL error number (default WARNING)
-         * @param int $result OPTIONAL last result number (default 0)
-         * @param bool $log OPTIONAL save to log file (default true)
+         * @param int $level OPTIONAL error number
          * @return bool FALSE
          */
-        protected function _throw($message, $level = WARNING, $result = 0, $log = true) {
+        protected function _throw($message, $level = null) {
+            // Check default message level
+            if (empty($level)) $level = self::$config['default_error_level'];
+
             // Check empty message
             if (empty($message)) return false;
 
@@ -78,12 +131,11 @@
 
             // Set message to current object
             $this->message = $message;
-            $this->result = $result;
+            $this->result = 0;
 
             // Log error
-            // @todo: add log levels
-            if ($log) {
-                $this->logLastMessage();
+            if ($level >= self::$config['log_write_level']) {
+                $this->saveToLog();
             }
 
             return false;
@@ -92,58 +144,42 @@
         /**
          * Clean errors stack and add message to messages stack
          * @param string $message OPTIONAL message to show (default null)
-         * @param bool $log OPTIONAL save to log file (default false)
          * @return bool TRUE
          */
-        protected function _clean($message = null, $log = false) {
+        protected function _clean($message = null) {
             // Add message to global messages stack
             if (!empty($message)) {
                 $this->addToStack($message, MESSAGE);
             }
 
             // Clean errors
-            $this->message = '';
+            $this->message = null;
             $this->result = 1;
 
             // Log error
-            if ($log !== false) {
-                $this->logLastMessage();
+            if (MESSAGE >= self::$config['log_write_level']) {
+                $this->saveToLog();
             }
 
             return true;
         }
 
         /**
-         * Put to file last error record
-         * @return bool $result write operation result
-         */
-        protected function logLastMessage() {
-            // Get last message from stack
-            $message = $this->getLastFromStack();
-            $msg = '[' . getErrorStringFromInt($message['level']) . '] ' . $message['message'] . NL;
-
-            // Return result
-            return $this->saveToLog($msg);
-        }
-
-        /**
          * Put into log file current message
-         * @param $message
+         * @param string $message OPTIONAL if not set log last from stack
          * @return bool $result write operation result
          */
-        public function saveToLog($message) {
-            // Get config
-            $config = System::getInstance()->getConfig();
-
+        public function saveToLog($message = null) {
             // Trying to get last message from stack
             if (empty($message)) {
                 $message = $this->getLastFromStack();
-                $message = $message['message'] . '(' . $message['level'] . ')';
+                if (!$message) return false;
+
+                $message = $message['level'] . ': ' . $message['message'] . ' (' . $message['debug'] . ')';
             }
 
-            $filename = realpath(ROOT_PATH . DS . $config['error_log']);
-            $string = '[' . date('D M d H:i:s Y') . '] '
-                . $message . NL;
+            $filename = realpath(ROOT_PATH . DS . self::$config['error_log']);
+            $string = '[' . date('D M d H:i:s Y') . '] ' . $message . NL;
 
             if (is_writable($filename)) {
                 $handle = fopen($filename, 'a+');
@@ -166,14 +202,47 @@
          * @return int $index index of inserted item
          */
         public function addToStack($message, $level = WARNING){
-            // check stack
-            if (empty($GLOBALS['stack'])) $GLOBALS['stack'] = array();
+            // Compile debug info
+            $debug = debug_backtrace();
+            $debug_info = array();
+            $skip = 0; $max = 0;
+            foreach ($debug as $item) {
+                if ($skip >= self::$config['debug_level_skip']) {
+                    $debug_info[] =
+                        $item['class'] . '->' .
+                        $item['function'] . ' in ' .
+                        str_replace(self::$config['doc_root'], '', $item['file']) . ':' .
+                        $item['line'];
+                }
 
-            // add object
-            return array_unshift($GLOBALS['stack'], array(
-                'message' => $message,
-                'level' => $level
-            ));
+                // Check debug depth
+                if ($max >= self::$config['debug_level_max']) {
+                    break;
+                } else {
+                    $skip++; $max++;
+                }
+            }
+
+            // Check stack
+            if (!isset($GLOBALS['stack'])) $GLOBALS['stack'] = array();
+
+            // Update stack
+            if (is_array($GLOBALS['stack'])) {
+                $GLOBALS['stack'][] = array(
+                    'message'   => $message,
+                    'level'     => getErrorStringFromInt($level),
+                    'debug'     => implode('; ', array_reverse($debug_info))
+                );
+            } else {
+                $GLOBALS['stack'] = array(
+                    array(
+                    'message'   => $message,
+                    'level'     => getErrorStringFromInt($level),
+                    'debug'     => implode('; ', array_reverse($debug_info))
+                ));
+            }
+
+            return $GLOBALS['stack'];
         }
 
         /**
@@ -181,7 +250,7 @@
          * @return array $stack messages stack
          */
         public function getStack() {
-            return (isset($GLOBALS['stack']) ? $GLOBALS['stack'] : array());
+            return (isset($GLOBALS['stack']) ? array_reverse($GLOBALS['stack']) : array());
         }
 
         /**
@@ -190,7 +259,7 @@
          */
         public function getLastFromStack() {
             if (empty($GLOBALS['stack'])) $GLOBALS['stack'] = array();
-            return (count($GLOBALS['stack']) > 0 ? $GLOBALS['stack'][0] : false);
+            return (count($GLOBALS['stack']) > 0 ? reset($GLOBALS['stack']) : false);
         }
 
         /**
@@ -203,22 +272,5 @@
             } else {
                 return true;
             }
-        }
-
-        /**
-         * Clean all stacks
-         */
-        public static function clean() {
-            unset($GLOBALS['stack']);
-            return;
-        }
-
-        /**
-         * Close application
-         */
-        public static function shutdown() {
-            Database::getInstance()->close();
-            self::clean();
-            die;
         }
     }

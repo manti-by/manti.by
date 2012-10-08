@@ -21,9 +21,9 @@
 
             // Create path mapping
             $this->_map = array(
-                'preview'   => $this->config['preview_path'],
-                'release'   => $this->config['release_path'],
-                'cover'     => $this->config['cover_path']
+                'preview'   => Application::$config['preview_path'],
+                'release'   => Application::$config['release_path'],
+                'cover'     => Application::$config['cover_path']
             );
         }
 

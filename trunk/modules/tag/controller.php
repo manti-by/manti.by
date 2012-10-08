@@ -16,7 +16,7 @@
 
         public function searchAction($options) {
             // Get category ID
-            $tags = $this->system->getCmd('tags');
+            $tags = System::getInstance()->getCmd('tags');
             
             // Get category title
             if ($tags) {

@@ -11,9 +11,7 @@
     class Model extends Application {
         protected $cid;
         protected $database;
-
         protected $user;
-        protected $config;
 
         protected static $models = array();
 
@@ -28,9 +26,6 @@
             if (empty($this->cid)) {
                 $this->cid = $this->database->connect();
             }
-
-            // get config helper
-            $this->config = System::getInstance()->getConfig();
         }
 
         /**

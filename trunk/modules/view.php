@@ -11,13 +11,6 @@
     class View extends Application {
 
         /**
-         * View class constructor
-         */
-        public function __construct() {
-            $this->config = System::getInstance()->getConfig();
-        }
-
-        /**
          * Default getView method
          * @param string $name
          * @return object $view
@@ -134,14 +127,14 @@
             $name = (!empty($name) ? $name : 'index');
 
             // compile template prefix and postfix
-            $prefix = $this->config['doc_root'] . DS . 'templates' . DS;
+            $prefix = Application::$config['doc_root'] . DS . 'templates' . DS;
             $postfix = DS . $type . $name . '.php';
             if (isset($options['template']) && !empty($options['template'])) {
                 $content_template_name = realpath($prefix . $options['template'] . $postfix);
             } else {
                 $content_template_name = false;
             }
-            $default_template_name = realpath($prefix . $this->config['template'] . $postfix);
+            $default_template_name = realpath($prefix . Application::$config['template'] . $postfix);
 
             // check content file existance
             if ($content_template_name && file_exists($content_template_name)) {
@@ -150,7 +143,7 @@
                 $content_file_name = $default_template_name;
             } else {
                 $content_file = array(
-                    (!empty($options['template']) ? $options['template'] : $this->config['template']),
+                    (!empty($options['template']) ? $options['template'] : Application::$config['template']),
                     (!empty($type) ? $type : 'none'),
                     (!empty($name) ? $name : 'Undefined')
                 );
@@ -188,7 +181,7 @@
          */
         public function _404($options = null) {
             $options['title'] = 'Page Not Found';
-            $options['body'] = $this->view->getContents('plugin', '404', $options);
+            $options['body'] = $this->getContents('plugin', '404', $options);
             return $options;
         }
     }

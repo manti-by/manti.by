@@ -38,7 +38,6 @@
          */
         public static function init() {
             // Get global config
-            $config = System::getInstance()->getConfig();
             $database = Database::getInstance();
 
             // Update view counter
@@ -49,7 +48,7 @@
                        OR `link` = '".$database->escape($_SERVER['REQUEST_URI'])."'");
 
             // If sef enabled
-            if ($config['sef_enabled']) {
+            if (Application::$config['sef_enabled']) {
                 // Get request string
                 $request = substr(self::getReal($_SERVER['REQUEST_URI']), 1);
 
@@ -69,8 +68,7 @@
          */
         public static function getReal($link) {
             // Get config
-            $config = System::getInstance()->getConfig();
-            if (!$config['sef_enabled']) return $link;
+            if (!Application::$config['sef_enabled']) return $link;
 
             // Check memory
             if (self::checkStorage($link)) {
@@ -107,8 +105,7 @@
          */
         public static function getSef($request) {
             // Get config
-            $config = System::getInstance()->getConfig();
-            if (!$config['sef_enabled']) return $request;
+            if (!Application::$config['sef_enabled']) return $request;
 
             // Check memory
             if (self::checkStorage($request)) {
@@ -141,8 +138,7 @@
          */
         private static function createLink($request) {
             // Get config
-            $config = System::getInstance()->getConfig();
-            if (!$config['sef_enabled']) return $request;
+            if (!Application::$config['sef_enabled']) return $request;
 
             // Sef map creation
             $sef_map = include 'sef_map.php';

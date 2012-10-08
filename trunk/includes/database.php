@@ -41,38 +41,38 @@
          * @return bool $state
          */
         public function connect() {
-            // Get config
-            $config = System::getInstance()->getConfig();
-
             // Already initialized?
             if (!empty($this->mysqli) && is_object($this->mysqli)) {
                 return $this->mysqli;
             }
 
             // Parse config
-            if (!empty($config) && isset($config['db_path']) && isset($config['db_port'])
-                && isset($config['db_user']) && isset($config['db_pass']) && isset($config['db_base'])) {
-                $this->db_prefix = $config['db_prefix'];
+            if (isset(Application::$config['db_path']) &&
+                isset(Application::$config['db_port']) &&
+                isset(Application::$config['db_user']) &&
+                isset(Application::$config['db_pass']) &&
+                isset(Application::$config['db_base'])) {
+                    $this->db_prefix = Application::$config['db_prefix'];
             } else {
                 return $this->_throw(T('Invalid DB config'), ERROR);
             }
 
             // Connect to DB
             $this->mysqli = new mysqli(
-                $config['db_path'] . ':' .
-                $config['db_port'],
-                $config['db_user'],
-                $config['db_pass'],
-                $config['db_base']
+                Application::$config['db_path'] . ':' .
+                Application::$config['db_port'],
+                Application::$config['db_user'],
+                Application::$config['db_pass'],
+                Application::$config['db_base']
             );
 
             if (!$this->mysqli) {
-                return $this->_throw($this->getError(), ERROR, $this->getLastErrorNum());
+                return $this->_throw($this->getError(), ERROR);
             }
 
             // Set encoding
             if (!empty($this->db_encoding)) {
-                $this->mysqli->query($this->cid, "SET NAMES '" . $config['db_encoding'] . "'");
+                $this->mysqli->query($this->cid, "SET NAMES '" . Application::$config['db_encoding'] . "'");
             }
 
             return $this->mysqli;
@@ -111,7 +111,7 @@
             $this->res = $this->mysqli->query($this->query);
 
             if ($this->getLastErrorNum() > 0) {
-                return $this->_throw($this->getError(), ERROR, $this->getLastErrorNum());
+                return $this->_throw($this->getError(), ERROR);
             } else {
                 $this->result = $this->mysqli->affected_rows;
                 return $this->result;
@@ -180,6 +180,7 @@
             if (!$row || empty($row)) {
                 return false;
             } else {
+                $this->res->free();
                 return $row[0];
             }
         }
@@ -199,10 +200,7 @@
             if (!$obj || empty($obj)) {
                 return false;
             } else {
-                // Flush buffer and return
-                //$this->mysqli->next_result();
-                //$this->mysqli->store_result();
-
+                $this->res->free();
                 return $obj;
             }
         }
@@ -222,6 +220,8 @@
                 if (!$obj || empty($obj)) break;
                 $arr[] = $obj;
             }
+
+            $this->res->free();
             return $arr;
         }
 
@@ -240,6 +240,8 @@
                 if (!$row || empty($row)) break;
                 $arr[] = $row[0];
             }
+
+            $this->res->free();
             return $arr;
         }
 
@@ -263,6 +265,8 @@
                 }
                 $arr[(int)$obj->$index] = $obj->$field;
             }
+
+            $this->res->free();
             return $arr;
         }
 
@@ -272,7 +276,7 @@
          */
         private function checkResult() {
             if (($this->result < 1 && $this->getLastErrorNum() != 0) || !$this->res) {
-                return $this->_throw($this->getError(), ERROR, -1);
+                return $this->_throw($this->getError(), ERROR);
             } elseif ($this->result < 1 && $this->getLastErrorNum() == 0) {
                 return $this->_throw(T('Empty result'), NOTICE);
             } else {

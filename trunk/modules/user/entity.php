@@ -46,10 +46,9 @@
          */
         public function create($options) {
             // Get items
-            $config = System::getInstance()->getConfig();
             $this->database->query("
                 INSERT INTO #__user (`username`, `email`, `password`)
-                VALUES ('".$options['username']."', '".$options['email']."', '".md5($config['secret'].$options['password'])."')");
+                VALUES ('".$options['username']."', '".$options['email']."', '".md5(Application::$config['secret'].$options['password'])."')");
             
             $result = $this->database->getResult();
             if ($result) {
@@ -66,13 +65,12 @@
          */
         public function getId($options = null) {
             // Check email & pass
-            $config = System::getInstance()->getConfig();
             if (isset($options['email']) && isset($options['password'])) {
                 $this->database->query("
                     SELECT `id` 
                     FROM `#__user`
                     WHERE `email` = '".$options['email']."'
-                      AND `password` = '".md5($config['secret'].$options['password'])."'
+                      AND `password` = '".md5(Application::$config['secret'].$options['password'])."'
                     LIMIT 0, 1");
 
                 $result = $this->database->getField();
@@ -86,7 +84,7 @@
                 $this->database->query("
                     SELECT `id` 
                     FROM `#__user` 
-                    WHERE MD5(CONCAT('".$config['secret']."', `email`)) = '".$options['cookie']."'
+                    WHERE MD5(CONCAT('".Application::$config['secret']."', `email`)) = '".$options['cookie']."'
                     LIMIT 0, 1");
 
                 $result = $this->database->getField();
@@ -169,16 +167,13 @@
                 return $this->_throw(T('User ID could not be empty'), WARNING);
             }
 
-            // Get config
-            $config = System::getInstance()->getConfig();
-            
             // Set session
             $_SESSION['user_id'] = $id;
             $result = $this->checkSession();
             if ($result) {
                 // Set cookie
                 if ($remember) {
-                    setCookie('token', md5($config['secret'] . $result->email));
+                    setCookie('token', md5(Application::$config['secret'] . $result->email));
                 } else {
                     setCookie('token', '');
                 }
@@ -267,13 +262,10 @@
          * @return bool $result
          */
         public function setNewPassword($email, $password) {
-            // get config
-            $config = System::getInstance()->getConfig();
-
             // Get items
             $this->database->query("
                 UPDATE `#__user` 
-                SET `password` = '" . md5($config['secret'] . $password) . "'
+                SET `password` = '" . md5(Application::$config['secret'] . $password) . "'
                 WHERE `email` = '" . $email . "'
                 LIMIT 1");
             

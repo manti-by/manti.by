@@ -11,18 +11,8 @@
      * @version 1.0
      */
     class System extends Application {
-        // System config
-        private $config;
 
         protected static $instance = null;
-
-        /**
-         * Singleton protection
-         */
-        private function __construct() {
-            // Parse config file
-            $this->parseConfig();
-        }
 
         /**
          * GetInstance class method
@@ -33,43 +23,6 @@
                 self::$instance = new System;
             }
             return self::$instance;
-        }
-
-        /**
-         * Get Server config
-         * @return array $config server params
-         */
-        public function getConfig() {
-            // Global config
-            if (empty($this->config)) {
-                $this->parseConfig();
-            }
-
-            return $this->config;
-        }
-
-        /**
-         * Set Server config
-         * @param array $config server params
-         */
-        public function setConfig($config) {
-            // Global config
-            $this->config = $config;
-        }
-
-        /**
-         * Set/Get config param
-         * @param string $name
-         * @param mixed $value OPTIONAL (!NOT null)
-         * @return mixed $value
-         */
-        public function configAttr($name, $value = null) {
-            // Set new value if present
-            if ($value !== null) {
-                $this->config[$name] = $value;
-            }
-
-            return $this->config[$name];
         }
 
         /**
@@ -101,13 +54,13 @@
                             $this->_throw(T('Error transfer file').' [' . $_FILES[$param]["name"][$key] . ']!') ;
                         } else {
                             $file_parts  = pathinfo($_FILES[$param]['name'][$key]);
-                            $allowed_ext = explode(',', $this->config['allowed_file_extentions']);
+                            $allowed_ext = explode(',', Application::$config['allowed_file_extentions']);
 
                             // check file extension
                             if (in_array(strtolower($file_parts['extension']), $allowed_ext)) {
                                 $temp_file   = $_FILES[$param]['tmp_name'][$key];
-                                $upload_path = (!empty($upload_path) ? $upload_path : $this->config['upload_image_path']);
-                                $target_path = $this->config['doc_root']. '/' . $upload_path . '/';
+                                $upload_path = (!empty($upload_path) ? $upload_path : Application::$config['upload_image_path']);
+                                $target_path = Application::$config['doc_root']. '/' . $upload_path . '/';
 
                                 // generate unique name
                                 $target_name = uniqid(time()) . '.' . $file_parts['extension'];
@@ -150,7 +103,7 @@
                     $uid = strtoupper(uniqid(time()));
                     $headers  = "MIME-Version: 1.0\r\n";
                     $headers .= "X-Mailer: PHP/" . phpversion()."\n";
-                    $headers .= "From: ".$this->config['mail_from']."\r\n";
+                    $headers .= "From: ".Application::$config['mail_from']."\r\n";
                     $headers .= "Content-Type:multipart/mixed;";
                     $headers .= "boundary=\"----------".$uid."\"\n\n";
 
@@ -166,7 +119,7 @@
                 } else {
                     $headers  = "MIME-Version: 1.0\r\n";
                     $headers .= "Content-type: text/html; charset=utf-8\r\n";
-                    $headers .= "From: ".$this->config['mail_from']."\r\n";
+                    $headers .= "From: ".Application::$config['mail_from']."\r\n";
                     $headers .= "X-Mailer: PHP/" . phpversion()."\n";
 
                     $desc = $description;
@@ -174,7 +127,7 @@
 
                 // Try to send email
                 try {
-                    $result = mail($email, $title, $desc, $headers, '-f'.$this->config['mail_from']);
+                    $result = mail($email, $title, $desc, $headers, '-f'.Application::$config['mail_from']);
 
                     // Send mail failed
                     if ($result) {
@@ -212,7 +165,7 @@
                     $source = imagecreatefrompng($sname);
                     break;
                 default:
-                    return $this->_throw(T('This is not an image'));
+                    return $this->_throw(T('This is not an image') . ': ' . $sname);
             }
 
             // Get source dimensions
@@ -283,35 +236,6 @@
         }
 
         /**
-         * Parse config from Application INI file
-         * @return bool $state
-         */
-        public function parseConfig() {
-            // Parse config file
-            $this->config = parse_ini_file('config.ini');
-
-            if (!empty($this->config)) {
-                // Parse config to object
-                foreach($this->config as $key => $value) {
-                    $this->config[$key] = $value;
-                }
-
-                // Define http_host & doc_root if empty
-                if (empty($this->config['http_host'])) {
-                    $this->config['http_host']  = 'http://' . $_SERVER['HTTP_HOST'];
-                }
-
-                if (empty($this->config['doc_root'])) {
-                    $this->config['doc_root']   = ROOT_PATH;
-                }
-
-                return $this->_clean();
-            } else {
-                return $this->_throw(T('Could not parse config'), ERROR);
-            }
-        }
-
-        /**
          * Redirect user to page
          * @param string $url OPTIONAL if empty redirect to home page (default null)
          * @param string $message OPTIONAL
@@ -327,7 +251,7 @@
             // Redirect to parent page or index
             if (empty($url)) {
                 if (empty($_SESSION['redirect'])) {
-                    header('Location: ' . System::getInstance()->config['http_host']);
+                    header('Location: ' . Application::$config['http_host']);
                     header('Set-Cookie: PHPSESSID='.session_id().';expires='.date('r', time() + 60 * 30).';');
                 } else {
                     $location = $_SESSION['redirect'];
@@ -348,18 +272,13 @@
          * @return array $domain parts
          */
         public function getDomainParts() {
-            // Set message if present
-            if (empty($this->config)) {
-                $this->parseConfig();
-            }
-
             // Check domain
-            if (empty($this->config['http_host'])) {
+            if (empty(Application::$config['http_host'])) {
                 return $this->_throw(T('Could not get current domain'), ERROR);
             }
 
             // Parse config
-            $domain = explode('.', str_replace('http://', '', $this->config['http_host']));
+            $domain = explode('.', str_replace('http://', '', Application::$config['http_host']));
             if (count($domain) == 2) {
                 $result['name'] = $domain[0];
                 $result['zone'] = $domain[1];
@@ -397,7 +316,7 @@
          * @return bool $state
          */
         public function isGzip() {
-            if (!$this->config['gzip']) return false;
+            if (!Application::$config['gzip']) return false;
             if (headers_sent() || connection_aborted()) return false;
             if (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip') !== false) return false;
             if (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip') !== false) return false;

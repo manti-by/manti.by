@@ -15,11 +15,8 @@
         }
 
         public function listAction($options) {
-            // Get Config
-            $config = System::getInstance()->getConfig();
-
             // Get category ID
-            $tags = $this->system->getCmd('id');
+            $tags = System::getInstance()->getCmd('id');
             
             // Get category title
             if ($tags) {
@@ -27,7 +24,7 @@
                 $options['title'] = 'Search by tags: ' . implode(', ', $tags);
             } else {
                 $options['data'] = $this->model->getPosts();
-                $options['title'] = $config['site_title'];
+                $options['title'] = Application::$config['site_title'];
             }
             
             // get category items and render it
@@ -39,7 +36,7 @@
 
         public function showAction($options) {
             // Get item ID
-            $post_id = $this->system->getCmd('id');
+            $post_id = System::getInstance()->getCmd('id');
             
             // Get item title and data
             if ($post_id) {
@@ -57,7 +54,7 @@
 
         public function editAction($options) {
             // Get item ID
-            $options['id'] = $this->system->getCmd('id');
+            $options['id'] = System::getInstance()->getCmd('id');
             
             // Get item title
             if ($options['id']) {
@@ -75,7 +72,7 @@
 
         public function saveAction($options) {
             // Get post ID
-            $options['id'] = $this->system->getCmd('id', null);
+            $options['id'] = System::getInstance()->getCmd('id', null);
             
             // Update or create new
             if ($options['id']) {

@@ -19,8 +19,6 @@
             if (isset($options['type'])) {
                 $this->_options['type'] = $options['type'];
             }
-
-            $this->config = System::getInstance()->getConfig();
         }
 
         /**

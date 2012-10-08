@@ -16,8 +16,8 @@
         public function __construct() {
             parent::__construct();
 
-            $this->file_path = realpath(ROOT_PATH . $this->config['gallery_path']);
-            $this->link_path = $this->config['http_host'] . $this->config['gallery_path'];
+            $this->file_path = realpath(ROOT_PATH . Application::$config['gallery_path']);
+            $this->link_path = Application::$config['http_host'] . Application::$config['gallery_path'];
         }
 
         public function getGalleryByTags($tags, $limit = 0) {
