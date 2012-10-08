@@ -146,7 +146,6 @@
             $options['username'] = $this->system->getCmd('username', $options['username']);
             $options['email'] = $this->system->getCmd('email', $options['email']);
             $options['password'] = $this->system->getCmd('password', $options['password']);
-            $options['confirm'] = $this->system->getCmd('confirm', $options['confirm']);
             
             // Check valid username
             if (preg_match('/[^a-z]/i', $options['username'])){
@@ -163,12 +162,6 @@
             // Check existing email
             if ($this->model->checkEmail($options['email'])){
                 $this->_throw(T('User with given email already registered'), ERROR);
-                return $this->registerformAction($options);
-            }
-            
-            // Check passwords
-            if ($options['password'] != $options['confirm']){
-                $this->_throw(T('Passwords do not match'), ERROR);
                 return $this->registerformAction($options);
             }
             
