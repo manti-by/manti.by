@@ -10,6 +10,6 @@
      */
 ?>
 <div id="popup">
-    <div class="head">[X] <?php echo T('Close'); ?></div>
+    <div class="head hide_this">[X] <?php echo T('Close'); ?></div>
     <div class="content"></div>
 </div>

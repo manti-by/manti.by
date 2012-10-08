@@ -1,4 +1,14 @@
 .wrapper { border: none; border-bottom: 1px solid #CCC; }
 
+.red-button { border: 1px solid #CCC; border-radius: 2px; box-shadow: 3px 3px 3px #AAA; color: white;
+    font-size: 18px !important; text-transform: uppercase;
+    background: #b40202 url(./images/red-button.png) repeat-x top left  !important; }
+
 ul#topmenu { margin: 5px 0; padding: 0; }
 #topmenu li { list-style: none; display: inline; padding-right: 10px; }
+
+#edit-post-form #name, #edit-post-form #teaser,
+#edit-post-form #description, #edit-post-form #metadesc { width: 600px; font-size: 18px; }
+
+#edit-post-form .tag-wrap { min-width: 523px; }
+#edit-post-form .tag-wrap .tag-input { width: 100px; }

@@ -23,7 +23,7 @@ h6 { font-size: 11px; margin: 0px 0; }
 a { color: #ff721d; }
 a img { border: none !important; }
 
-code, pre { margin: 6px; padding: 12px; white-space: pre-line;
+code, pre { margin: 6px; padding: 12px; white-space: pre;
             background: #FFC; border: 1px dashed #CCC; }
 
 blockquote { margin: 0 0 0 10px;}
@@ -36,27 +36,23 @@ label { display: block; float: left; width: 130px; font-weight: bold; clear: lef
 fieldset { border: 1px solid #CCC; margin: 5px; padding: 5px 10px; }
 
 input, select, textarea { background: #EEE; border: 1px solid #CCC; padding: 2px;
-                          width: 250px; }
+                          min-width: 250px; }
 
-textarea { width: 300px; height: 120px; font-size: 12px; font-family: Arial; }
-textarea#description { width: 500px; height: 400px; }
+textarea { min-width: 300px; height: 120px; font-size: 12px; font-family: Arial; }
 
 input[type="button"],
-input[type="submit"] { padding: 3px 24px; margin: 2px 2px 2px 0; width: auto;
-                       cursor: pointer;  font-size: 12px !important;
+input[type="submit"] { padding: 3px 24px; margin: 2px 2px 2px 0; min-width: 0;
+                       cursor: pointer;  font-size: 12px;
                        background: #EEE url(../images/button.png) repeat-x; }
 
 input[type="checkbox"] { width: auto; }
 
 ul { padding-left: 25px; }
-
 td { vertical-align: top; }
 
-a.button { padding: 2px 9px; width: auto; font-size: 12px !important; 
-           text-decoration: none; border: 1px solid #CCC; color: black !important;
+a.button { padding: 2px 9px; width: auto; font-size: 12px;
+           text-decoration: none; border: 1px solid #CCC; color: black;
            background: #EEE url(../images/button.png) repeat-x; }
-
-.req { background: #EEE url(../images/req.png) no-repeat top right; }
 
 .error, .warning,
 .message { margin: 5px 0; padding: 15px; font-size: 14px;
@@ -76,9 +72,11 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
 
 .small { font-size: 11px; font-weight: normal; }
 .big { font-size: 16px; font-weight: bold; }
+
 .grey { color: #666; }
 .lightgrey { color: #999; }
 .darkgrey { color: #333; }
+.red { color: #F00; }
 
 .invisible {position: absolute; left: -1000px; }
 .hidden { display: none; }
@@ -114,10 +112,11 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px !important;
 #popup .head { text-align: right; padding: 2px 0; cursor: pointer; color: #b40202; }
 
 .tag { display: inline-block; }
-.tag-wrap { display: inline-block; margin: 2px; border: 1px solid #CCC; }
-.tag .tag-input { background: white; border: none; width: 100px; font-size: 120%; }
+.tag-wrap { display: inline-block; margin: 2px; border: 1px solid #CCC; background: #EEE; }
+.tag .tag-input { position: relative; top: 1px; margin: 3px 0 4px 0; border: none; font-size: 120%;}
 .tag .tag-add { padding: 6px 24px; }
 
 .tag ul { display: inline-block; margin: 0; padding: 0; }
-.tag ul li { display: inline-block; list-style: none; margin: 2px; padding: 2px 4px; border: 1px solid #CCC; }
+.tag ul li { display: inline-block; list-style: none; margin: 2px; padding: 2px 4px; border: 1px solid #CCC;
+    background: #FFC; }
 .tag ul li .tag-del { margin: 0 0 0 3px; padding: 0 2px; }
