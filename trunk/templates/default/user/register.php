@@ -13,18 +13,15 @@
     $(document).ready(function(){
         $('#save').click(function(e){
             e.preventDefault();
-            var uname_regex = /[^a-z]/i;
-            var email_regex = /^[a-z_0-9\-\.]+@[a-z_0-9\-\.]+\.[a-z]{2,6}$/i;
+            var uname_regex = /[^a-z\.\_\-]/i;
+            var email_regex = /^[a-z0-9\.\_\-]+@[a-z0-9\.\_\-]+\.[a-z]{2,6}$/i;
             
             // reset errors
             $('#register-form input').css('border-color', '#CCC');
             $('#register-form .form_error').hide();
             
             // check fields
-            if ($('#username').val() == '') {
-                $('#username').css('border-color', 'red');
-                $('#username').next('.form_error').html('<?php echo T('Please enter username'); ?>').show();
-            } else if (uname_regex.test($('#username').val())) {
+            if (uname_regex.test($('#username').val())) {
                 $('#username').css('border-color', 'red');
                 $('#username').next('.form_error').html('<?php echo T('Username not valid'); ?>').show();
             } else if ($('#email').val() == '') {
@@ -36,12 +33,6 @@
             } else if ($('#password').val() == '') {
                 $('#password').css('border-color', 'red');
                 $('#password').next('.form_error').html('<?php echo T('Please enter password'); ?>').show();
-            } else if ($('#confirm').val() == '') {
-                $('#confirm').css('border-color', 'red');
-                $('#confirm').next('.form_error').html('<?php echo T('Please reenter password'); ?>').show();
-            } else if ($('#password').val() != $('#confirm').val()) {
-                $('#confirm').css('border-color', 'red');
-                $('#confirm').next('.form_error').html('<?php echo T('Passwords do not match'); ?>').show();
             } else {
                 $('#register-form').submit();
             }
@@ -65,18 +56,13 @@
         <span class="small grey form_notice"><?php echo T('Only lowercase letters, not numbers and other symbols'); ?></span>
     </p>
     <p>
-        <label for="email"><?php echo T('Email'); ?></label>
+        <label for="email"><?php echo T('Email'); ?> <span class="red">*</span></label>
         <input type="text" name="email" id="email" value="<?php echo $options['email']; ?>" />
         <span class="form_error"></span>
     </p>
     <p>
-        <label for="password"><?php echo T('Password'); ?></label>
+        <label for="password"><?php echo T('Password'); ?> <span class="red">*</span></label>
         <input type="password" name="password" id="password" value="<?php echo $options['password']; ?>" />
-        <span class="form_error"></span>
-    </p>
-    <p>
-        <label for="password"><?php echo T('Retype Password'); ?></label>
-        <input type="password" name="confirm" id="confirm" value="<?php echo $options['confirm']; ?>" />
         <span class="form_error"></span>
     </p>
     <p>
