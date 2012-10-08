@@ -15,7 +15,6 @@
     // set working mode
     date_default_timezone_set('Europe/Minsk');
     ini_set('display_errors', 1);
-    ini_set('error_reporting', 'E_ALL & ~E_NOTICE & ~E_DEPRECATED');
 
     // Simple ACL hook
     define('M2_MICRO', 1);
