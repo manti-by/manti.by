@@ -31,35 +31,72 @@
     <input type="hidden" name="module" value="blog" />
     <input type="hidden" name="action" value="save" />
     <input type="hidden" name="id" value="<?php echo $options['id']; ?>" />
-    <p class="big">
-        <?php echo T('Please enter post details below'); ?>
-    </p>
+    <h1><?php echo T('Please enter post details below'); ?></h1>
+    <fieldset>
+        <h2><?php echo T('General information'); ?></h2>
+        <p>
+            <label for="name"><?php echo T('Title'); ?></label>
+            <input type="text" name="name" id="name" value="<?php echo $options['name']; ?>" />
+            <span class="form_error"></span>
+        </p>
+        <p>
+            <label for="teaser"><?php echo T('Teaser'); ?></label>
+            <textarea name="teaser" id="teaser"><?php echo $options['teaser']; ?></textarea>
+            <span class="form_error"></span>
+        </p>
+        <p>
+            <label for="description"><?php echo T('Description'); ?></label>
+            <textarea name="description" id="description"><?php echo $options['description']; ?></textarea>
+            <span class="form_error"></span>
+        </p>
+        <p>
+            <label for="metakeys"><?php echo T('Metakeys'); ?></label>
+            <?php
+                $tags = new Tag($options['metakeys'], array('name' => 'metakeys'));
+                echo $tags->render();
+            ?>
+            <span class="form_error"></span>
+        </p>
+        <p>
+            <label for="metadesc"><?php echo T('Metadesc'); ?></label>
+            <textarea name="metadesc" id="metadesc"><?php echo $options['metadesc']; ?></textarea>
+            <span class="form_error"></span>
+        </p>
+    </fieldset>
+    <fieldset>
+        <h2><?php echo T('Additional information'); ?></h2>
+        <p>
+            <label for="preview"><?php echo T('Preview file'); ?></label>
+            <?php
+                $preview = new File($options['preview_id'], array('name' => 'preview', 'type' => 'preview'));
+                echo $preview->render();
+            ?>
+        </p>
+        <p>
+            <label for="release"><?php echo T('Release file'); ?></label>
+            <?php
+                $release = new File($options['release_id'], array('name' => 'release', 'type' => 'release'));
+                echo $release->render();
+            ?>
+        </p>
+        <p>
+            <label for="cover"><?php echo T('Cover file'); ?></label>
+            <?php
+                $cover = new File($options['cover_id'], array('name' => 'cover', 'type' => 'cover'));
+                echo $cover->render();
+            ?>
+        </p>
+        <p>
+            <label for="relations"><?php echo T('Relations'); ?></label>
+            <?php
+                $relations = new Relations($options['relations'], array('name' => 'relations'));
+                echo $relations->render();
+            ?>
+        </p>
+    </fieldset>
     <p>
-        &nbsp;
-    </p>
-    <p>
-        <label for="name"><?php echo T('Title'); ?></label>
-        <input type="text" name="name" id="name" value="<?php echo $options['name']; ?>" />
-        <span class="form_error"></span>
-    </p>
-    <p>
-        <label for="teaser"><?php echo T('Teaser'); ?></label>
-        <textarea name="teaser" id="teaser"><?php echo $options['teaser']; ?></textarea>
-        <span class="form_error"></span>
-    </p>
-    <p>
-        <label for="description"><?php echo T('Description'); ?></label>
-        <textarea name="description" id="description"><?php echo $options['description']; ?></textarea>
-        <span class="form_error"></span>
-    </p>
-    <p>
-        <label for="metadesc"><?php echo T('Metadesc'); ?></label>
-        <textarea name="metadesc" id="metadesc"><?php echo $options['metadesc']; ?></textarea>
-        <span class="form_error"></span>
-    </p>
-    <p>
-        <label for="save">&nbsp;</label>
-        <input type="button" name="save" id="save" value="<?php echo T('Save'); ?>" />
+        <input type="button" name="save" id="save" value="<?php echo T('Save'); ?>" class="red-button" />
+        <input type="button" name="reset" value="<?php echo T('Reset'); ?>" class="red-button" />
     </p>
 </form>
 
