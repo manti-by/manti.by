@@ -1,0 +1,3372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project version="2.0.0a10" title="">
+  <file path="tests\database_test.php" hash="8494cfac1ba55947266e1ca24e2c8c60" package="Default">
+    <include line="13" type="Include" package="Default">
+      <name>../trunk/bootstrap.php</name>
+    </include>
+    <class final="false" abstract="false" namespace="global" line="8" package="M2 Micro Framework\Tests">
+      <extends>\PHPUnit_Framework_TestCase</extends>
+      <name>DatabaseTest</name>
+      <full_name>\DatabaseTest</full_name>
+      <docblock line="2">
+        <description><![CDATA[Test cases for Database class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="2" name="package" description="M2 Micro Framework"/>
+        <tag line="2" name="subpackage" description="Tests"/>
+        <tag line="2" name="author" description="Alexander Chaika"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="9" namespace="global" package="Default">
+        <name>$database</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="11" package="M2 Micro Framework\Tests">
+        <name>setUpBeforeClass</name>
+        <full_name>setUpBeforeClass</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="19" package="M2 Micro Framework\Tests">
+        <name>setUp</name>
+        <full_name>setUp</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="24" package="M2 Micro Framework\Tests">
+        <name>testInsertQuery</name>
+        <full_name>testInsertQuery</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="38" package="M2 Micro Framework\Tests">
+        <name>testUpdateQuery</name>
+        <full_name>testUpdateQuery</full_name>
+        <docblock line="35">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="35" name="depends" description="testInsertQuery"/>
+        </docblock>
+        <argument line="38">
+          <name>$insert_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="53" package="M2 Micro Framework\Tests">
+        <name>testSelectValue</name>
+        <full_name>testSelectValue</full_name>
+        <docblock line="50">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="50" name="depends" description="testInsertQuery"/>
+        </docblock>
+        <argument line="53">
+          <name>$insert_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="68" package="M2 Micro Framework\Tests">
+        <name>testSelectObject</name>
+        <full_name>testSelectObject</full_name>
+        <docblock line="65">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="65" name="depends" description="testInsertQuery"/>
+        </docblock>
+        <argument line="68">
+          <name>$insert_id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="80" package="M2 Micro Framework\Tests">
+        <name>testSelectArray</name>
+        <full_name>testSelectArray</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="93" package="M2 Micro Framework\Tests">
+        <name>testSelectObjectsArray</name>
+        <full_name>testSelectObjectsArray</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="106" package="M2 Micro Framework\Tests">
+        <name>testSelectPairs</name>
+        <full_name>testSelectPairs</full_name>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file tests\database_test.php</error>
+      <error line="9" code="50018">No DocBlock was found for property $database</error>
+      <error line="11" code="50010">No DocBlock was found for method setUpBeforeClass()</error>
+      <error line="19" code="50010">No DocBlock was found for method setUp()</error>
+      <error line="24" code="50010">No DocBlock was found for method testInsertQuery()</error>
+      <error line="35" code="50012">No short description for method testUpdateQuery()</error>
+      <error line="35" code="50015">Argument $insert_id is missing from the Docblock of testUpdateQuery()</error>
+      <error line="50" code="50012">No short description for method testSelectValue()</error>
+      <error line="50" code="50015">Argument $insert_id is missing from the Docblock of testSelectValue()</error>
+      <error line="65" code="50012">No short description for method testSelectObject()</error>
+      <error line="65" code="50015">Argument $insert_id is missing from the Docblock of testSelectObject()</error>
+      <error line="80" code="50010">No DocBlock was found for method testSelectArray()</error>
+      <error line="93" code="50010">No DocBlock was found for method testSelectObjectsArray()</error>
+      <error line="106" code="50010">No DocBlock was found for method testSelectPairs()</error>
+    </parse_markers>
+  </file>
+  <file path="tests\user_test.php" hash="4472fc725806128a1d7a993b08d96bd9" package="Default">
+    <include line="14" type="Include" package="Default">
+      <name>../trunk/bootstrap.php</name>
+    </include>
+    <class final="false" abstract="false" namespace="global" line="8" package="M2 Micro Framework\Tests">
+      <extends>\PHPUnit_Framework_TestCase</extends>
+      <name>UserTest</name>
+      <full_name>\UserTest</full_name>
+      <docblock line="2">
+        <description><![CDATA[Test cases for Database class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="2" name="package" description="M2 Micro Framework"/>
+        <tag line="2" name="subpackage" description="Tests"/>
+        <tag line="2" name="author" description="Alexander Chaika"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="9" namespace="global" package="Default">
+        <name>$user</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="10" namespace="global" package="Default">
+        <name>$database</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="12" package="M2 Micro Framework\Tests">
+        <name>setUpBeforeClass</name>
+        <full_name>setUpBeforeClass</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="20" package="M2 Micro Framework\Tests">
+        <name>setUp</name>
+        <full_name>setUp</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="28" package="M2 Micro Framework\Tests">
+        <name>tearDown</name>
+        <full_name>tearDown</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="33" package="M2 Micro Framework\Tests">
+        <name>testCreateUser</name>
+        <full_name>testCreateUser</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="47" package="M2 Micro Framework\Tests">
+        <name>testCheckEmailTrue</name>
+        <full_name>testCheckEmailTrue</full_name>
+        <docblock line="44">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="44" name="depends" description="testCreateUser"/>
+        </docblock>
+        <argument line="47">
+          <name>$data</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="55" package="M2 Micro Framework\Tests">
+        <name>testCheckEmailFalse</name>
+        <full_name>testCheckEmailFalse</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="66" package="M2 Micro Framework\Tests">
+        <name>testGetIdByLoginPass</name>
+        <full_name>testGetIdByLoginPass</full_name>
+        <docblock line="63">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="63" name="depends" description="testCreateUser"/>
+        </docblock>
+        <argument line="66">
+          <name>$data</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="78" package="M2 Micro Framework\Tests">
+        <name>testGetIdByCookie</name>
+        <full_name>testGetIdByCookie</full_name>
+        <docblock line="75">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="75" name="depends" description="testCreateUser"/>
+        </docblock>
+        <argument line="78">
+          <name>$data</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="92" package="M2 Micro Framework\Tests">
+        <name>testLoad</name>
+        <full_name>testLoad</full_name>
+        <docblock line="89">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="89" name="depends" description="testCreateUser"/>
+        </docblock>
+        <argument line="92">
+          <name>$data</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="104" package="M2 Micro Framework\Tests">
+        <name>testSetupSession</name>
+        <full_name>testSetupSession</full_name>
+        <docblock line="101">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="101" name="depends" description="testCreateUser"/>
+        </docblock>
+        <argument line="104">
+          <name>$data</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="116" package="M2 Micro Framework\Tests">
+        <name>testSetupSessionWithCookie</name>
+        <full_name>testSetupSessionWithCookie</full_name>
+        <docblock line="113">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="113" name="depends" description="testCreateUser"/>
+        </docblock>
+        <argument line="116">
+          <name>$data</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="128" package="M2 Micro Framework\Tests">
+        <name>testIsLogginedTrue</name>
+        <full_name>testIsLogginedTrue</full_name>
+        <docblock line="125">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="125" name="depends" description="testSetupSession"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="139" package="M2 Micro Framework\Tests">
+        <name>testClearSession</name>
+        <full_name>testClearSession</full_name>
+        <docblock line="136">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="136" name="depends" description="testSetupSessionWithCookie"/>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="151" package="M2 Micro Framework\Tests">
+        <name>testIsLogginedFalse</name>
+        <full_name>testIsLogginedFalse</full_name>
+        <docblock line="148">
+          <description><![CDATA[]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="148" name="depends" description="testClearSession"/>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file tests\user_test.php</error>
+      <error line="9" code="50018">No DocBlock was found for property $user</error>
+      <error line="10" code="50018">No DocBlock was found for property $database</error>
+      <error line="12" code="50010">No DocBlock was found for method setUpBeforeClass()</error>
+      <error line="20" code="50010">No DocBlock was found for method setUp()</error>
+      <error line="28" code="50010">No DocBlock was found for method tearDown()</error>
+      <error line="33" code="50010">No DocBlock was found for method testCreateUser()</error>
+      <error line="44" code="50012">No short description for method testCheckEmailTrue()</error>
+      <error line="44" code="50015">Argument $data is missing from the Docblock of testCheckEmailTrue()</error>
+      <error line="55" code="50010">No DocBlock was found for method testCheckEmailFalse()</error>
+      <error line="63" code="50012">No short description for method testGetIdByLoginPass()</error>
+      <error line="63" code="50015">Argument $data is missing from the Docblock of testGetIdByLoginPass()</error>
+      <error line="75" code="50012">No short description for method testGetIdByCookie()</error>
+      <error line="75" code="50015">Argument $data is missing from the Docblock of testGetIdByCookie()</error>
+      <error line="89" code="50012">No short description for method testLoad()</error>
+      <error line="89" code="50015">Argument $data is missing from the Docblock of testLoad()</error>
+      <error line="101" code="50012">No short description for method testSetupSession()</error>
+      <error line="101" code="50015">Argument $data is missing from the Docblock of testSetupSession()</error>
+      <error line="113" code="50012">No short description for method testSetupSessionWithCookie()</error>
+      <error line="113" code="50015">Argument $data is missing from the Docblock of testSetupSessionWithCookie()</error>
+      <error line="125" code="50012">No short description for method testIsLogginedTrue()</error>
+      <error line="136" code="50012">No short description for method testClearSession()</error>
+      <error line="148" code="50012">No short description for method testIsLogginedFalse()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\bootstrap.php" hash="ba39e5bf705a92cdea29a0be5da2ab67" package="M2 Micro Framework\Main">
+    <docblock line="2">
+      <description><![CDATA[]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="desc" description="Bootstrap base engine classes"/>
+      <tag line="2" name="package" description="M2 Micro Framework"/>
+      <tag line="2" name="subpackage" description="Main"/>
+      <tag line="2" name="author" description="Alexander Chaika"/>
+    </docblock>
+    <include line="36" type="Require Once" package="Default">
+      <name/>
+      <docblock line="35">
+        <description><![CDATA[]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="35" name="noinspection" description="PhpIncludeInspection"/>
+      </docblock>
+    </include>
+    <include line="37" type="Require Once" package="Default">
+      <name/>
+    </include>
+    <constant namespace="global" line="20" package="M2 Micro Framework\Main">
+      <name>M2_MICRO</name>
+      <full_name>\M2_MICRO</full_name>
+      <value><![CDATA[1]]></value>
+    </constant>
+    <constant namespace="global" line="23" package="M2 Micro Framework\Main">
+      <name>NL</name>
+      <full_name>\NL</full_name>
+      <value><![CDATA[chr(13) . chr(10)]]></value>
+    </constant>
+    <constant namespace="global" line="24" package="M2 Micro Framework\Main">
+      <name>DS</name>
+      <full_name>\DS</full_name>
+      <value><![CDATA[DIRECTORY_SEPARATOR]]></value>
+    </constant>
+    <constant namespace="global" line="25" package="M2 Micro Framework\Main">
+      <name>ROOT_PATH</name>
+      <full_name>\ROOT_PATH</full_name>
+      <value><![CDATA[__DIR__]]></value>
+    </constant>
+    <constant namespace="global" line="26" package="M2 Micro Framework\Main">
+      <name>LIB_PATH</name>
+      <full_name>\LIB_PATH</full_name>
+      <value><![CDATA[(ROOT_PATH . DS) . ]]></value>
+    </constant>
+    <constant namespace="global" line="29" package="M2 Micro Framework\Main">
+      <name>ERROR</name>
+      <full_name>\ERROR</full_name>
+      <value><![CDATA[1]]></value>
+    </constant>
+    <constant namespace="global" line="30" package="M2 Micro Framework\Main">
+      <name>WARNING</name>
+      <full_name>\WARNING</full_name>
+      <value><![CDATA[2]]></value>
+    </constant>
+    <constant namespace="global" line="31" package="M2 Micro Framework\Main">
+      <name>NOTICE</name>
+      <full_name>\NOTICE</full_name>
+      <value><![CDATA[6]]></value>
+    </constant>
+    <constant namespace="global" line="32" package="M2 Micro Framework\Main">
+      <name>MESSAGE</name>
+      <full_name>\MESSAGE</full_name>
+      <value><![CDATA[8]]></value>
+    </constant>
+    <parse_markers>
+      <critical line="2" code="50008">No short description for file trunk\bootstrap.php</critical>
+    </parse_markers>
+  </file>
+  <file path="trunk\includes\application.php" hash="dce415d2bad88d76cf28b4081dd2c91b" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Library">
+      <extends/>
+      <name>Application</name>
+      <full_name>\Application</full_name>
+      <docblock line="4">
+        <description><![CDATA[Base inherited application class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$application"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Library"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+      <property final="false" static="true" visibility="public" line="14" namespace="global" package="Default">
+        <name>$config</name>
+        <default><![CDATA[array()]]></default>
+      </property>
+      <property final="false" static="true" visibility="protected" line="15" namespace="global" package="Default">
+        <name>$instance</name>
+        <default><![CDATA[null]]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="17" namespace="global" package="Default">
+        <name>$message</name>
+        <default><![CDATA[null]]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="18" namespace="global" package="Default">
+        <name>$result</name>
+        <default><![CDATA[0]]></default>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="26" package="M2 Micro Framework\Library">
+        <name>init</name>
+        <full_name>init</full_name>
+        <docblock line="20">
+          <description><![CDATA[Init application
+Get parse current route
+Get global user params
+Save stats into DB]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="58" package="M2 Micro Framework\Library">
+        <name>parseConfig</name>
+        <full_name>parseConfig</full_name>
+        <docblock line="54">
+          <description><![CDATA[Parse config from Application INI file]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="54" name="return" description="$state" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="86" package="M2 Micro Framework\Library">
+        <name>clean</name>
+        <full_name>clean</full_name>
+        <docblock line="83">
+          <description><![CDATA[Clean all stacks]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="95" package="M2 Micro Framework\Library">
+        <name>shutdown</name>
+        <full_name>shutdown</full_name>
+        <docblock line="92">
+          <description><![CDATA[Close application]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="105" package="M2 Micro Framework\Library">
+        <name>getMessage</name>
+        <full_name>getMessage</full_name>
+        <docblock line="101">
+          <description><![CDATA[Get last error message]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="101" name="return" description="$error error message" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="114" package="M2 Micro Framework\Library">
+        <name>getResult</name>
+        <full_name>getResult</full_name>
+        <docblock line="109">
+          <description><![CDATA[Get last result number
+if $count < 0, we have error]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="109" name="return" description="$count count returned or updated rows" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="124" package="M2 Micro Framework\Library">
+        <name>_throw</name>
+        <full_name>_throw</full_name>
+        <docblock line="118">
+          <description><![CDATA[Throw error and add message to error stack]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="118" name="param" description="error message" type="string" variable="$message">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="118" name="param" description="OPTIONAL error number" type="int" variable="$level">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="118" name="return" description="FALSE" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="124">
+          <name>$message</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="124">
+          <name>$level</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="151" package="M2 Micro Framework\Library">
+        <name>_clean</name>
+        <full_name>_clean</full_name>
+        <docblock line="146">
+          <description><![CDATA[Clean errors stack and add message to messages stack]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="146" name="param" description="OPTIONAL message to show (default null)" type="string" variable="$message">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="146" name="return" description="TRUE" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="151">
+          <name>$message</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="174" package="M2 Micro Framework\Library">
+        <name>saveToLog</name>
+        <full_name>saveToLog</full_name>
+        <docblock line="169">
+          <description><![CDATA[Put into log file current message]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="169" name="param" description="OPTIONAL if not set log last from stack" type="string" variable="$message">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="169" name="return" description="$result write operation result" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="174">
+          <name>$message</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="204" package="M2 Micro Framework\Library">
+        <name>addToStack</name>
+        <full_name>addToStack</full_name>
+        <docblock line="198">
+          <description><![CDATA[Put message to error stack]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="198" name="param" description="error message" type="string" variable="$message">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="198" name="param" description="OPTIONAL error level (default WARNING)" type="int" variable="$level">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="198" name="return" description="$index index of inserted item" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="204">
+          <name>$message</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="204">
+          <name>$level</name>
+          <default><![CDATA[WARNING]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="252" package="M2 Micro Framework\Library">
+        <name>getStack</name>
+        <full_name>getStack</full_name>
+        <docblock line="248">
+          <description><![CDATA[Return messages stack]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="248" name="return" description="$stack messages stack" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="261" package="M2 Micro Framework\Library">
+        <name>logSQL</name>
+        <full_name>logSQL</full_name>
+        <docblock line="256">
+          <description><![CDATA[Put SQL query to query queue]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="256" name="param" description="SQL query" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="256" name="return" description="$result" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="261">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="290" package="M2 Micro Framework\Library">
+        <name>getSQL</name>
+        <full_name>getSQL</full_name>
+        <docblock line="286">
+          <description><![CDATA[Get SQL queue]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="286" name="return" description="$sql sql stack" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="298" package="M2 Micro Framework\Library">
+        <name>getLastFromStack</name>
+        <full_name>getLastFromStack</full_name>
+        <docblock line="294">
+          <description><![CDATA[Get last message from stack]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="294" name="return" description="$message last message from stack" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="307" package="M2 Micro Framework\Library">
+        <name>isMessagePresent</name>
+        <full_name>isMessagePresent</full_name>
+        <docblock line="303">
+          <description><![CDATA[Check error stack]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="303" name="return" description="$state TRUE - if we have errors, FALSE otherwise" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\includes\application.php</error>
+      <error line="14" code="50018">No DocBlock was found for property $config</error>
+      <error line="15" code="50018">No DocBlock was found for property $instance</error>
+      <error line="17" code="50018">No DocBlock was found for property $message</error>
+      <error line="18" code="50018">No DocBlock was found for property $result</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\includes\cache.php" hash="6c1a4e588143135224762f569cff8987" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Library">
+      <extends>\Application</extends>
+      <name>Cache</name>
+      <full_name>\Cache</full_name>
+      <docblock line="4">
+        <description><![CDATA[Cache Class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$cache"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Library"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.3RC2"/>
+      </docblock>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="14" package="M2 Micro Framework\Library">
+        <name>set</name>
+        <full_name>set</full_name>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="16" package="M2 Micro Framework\Library">
+        <name>get</name>
+        <full_name>get</full_name>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\includes\cache.php</error>
+      <error line="14" code="50010">No DocBlock was found for method set()</error>
+      <error line="16" code="50010">No DocBlock was found for method get()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\includes\controls\control.php" hash="cbe1bad455edb334f8518ce04b3b03b0" package="Default">
+    <class final="false" abstract="false" namespace="global" line="9" package="M2 Micro Framework\Library Tags">
+      <extends>\Application</extends>
+      <name>Control</name>
+      <full_name>\Control</full_name>
+      <docblock line="2">
+        <description><![CDATA[Control helper class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="2" name="package" description="M2 Micro Framework"/>
+        <tag line="2" name="subpackage" description="Library Tags"/>
+        <tag line="2" name="author" description="Alexander Chaika"/>
+        <tag line="2" name="since" description="0.3RC2"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="11" namespace="global" package="Default">
+        <name>$_data</name>
+        <default><![CDATA[array()]]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="12" namespace="global" package="Default">
+        <name>$_options</name>
+        <default><![CDATA[array('id' => '', 'class' => '', 'name' => '')]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="19" package="M2 Micro Framework\Library Tags">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="14">
+          <description><![CDATA[Class constructor]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="14" name="param" description="(optional)" type="mixed" variable="$data">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="14" name="param" description="(optional)" type="mixed" variable="$options">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="19">
+          <name>$data</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+        <argument line="19">
+          <name>$options</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="36" package="M2 Micro Framework\Library Tags">
+        <name>setData</name>
+        <full_name>setData</full_name>
+        <docblock line="31">
+          <description><![CDATA[Set data set]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="31" name="param" description="for set" type="\$data" variable="$data">
+            <type by_reference="false">\$data</type>
+          </tag>
+          <tag line="31" name="return" description="$tags" type="array|bool">
+            <type by_reference="false">array</type>
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="36">
+          <name>$data</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="57" package="M2 Micro Framework\Library Tags">
+        <name>appendData</name>
+        <full_name>appendData</full_name>
+        <docblock line="52">
+          <description><![CDATA[Append data to existing value set]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="52" name="param" description="to append" type="\$data" variable="$data">
+            <type by_reference="false">\$data</type>
+          </tag>
+          <tag line="52" name="return" description="$data" type="array|bool">
+            <type by_reference="false">array</type>
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="57">
+          <name>$data</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="77" package="M2 Micro Framework\Library Tags">
+        <name>getData</name>
+        <full_name>getData</full_name>
+        <docblock line="73">
+          <description><![CDATA[Get data]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="73" name="return" description="$data" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="86" package="M2 Micro Framework\Library Tags">
+        <name>setOptions</name>
+        <full_name>setOptions</full_name>
+        <docblock line="81">
+          <description><![CDATA[Set options]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="81" name="param" description="for set" type="\$options" variable="$options">
+            <type by_reference="false">\$options</type>
+          </tag>
+          <tag line="81" name="return" description="$options" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="86">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="112" package="M2 Micro Framework\Library Tags">
+        <name>getOptions</name>
+        <full_name>getOptions</full_name>
+        <docblock line="108">
+          <description><![CDATA[Get options]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="108" name="return" description="$options" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="120" package="M2 Micro Framework\Library Tags">
+        <name>render</name>
+        <full_name>render</full_name>
+        <docblock line="116">
+          <description><![CDATA[Return HTML markup for control]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="116" name="return" description="$html" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\includes\controls\control.php</error>
+      <error line="11" code="50018">No DocBlock was found for property $_data</error>
+      <error line="12" code="50018">No DocBlock was found for property $_options</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\includes\controls\file.php" hash="c48aca4e864b19623590c884210bd46c" package="Default">
+    <class final="false" abstract="false" namespace="global" line="9" package="M2 Micro Framework\Library Tags">
+      <extends>\Control</extends>
+      <name>File</name>
+      <full_name>\File</full_name>
+      <docblock line="2">
+        <description><![CDATA[File control helper]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="2" name="package" description="M2 Micro Framework"/>
+        <tag line="2" name="subpackage" description="Library Tags"/>
+        <tag line="2" name="author" description="Alexander Chaika"/>
+        <tag line="2" name="since" description="0.3RC2"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="16" package="M2 Micro Framework\Library Tags">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="11">
+          <description><![CDATA[Class constructor]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="11" name="param" description="(optional)" type="mixed" variable="$data">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="11" name="param" description="(optional)" type="mixed" variable="$options">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="16">
+          <name>$data</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+        <argument line="16">
+          <name>$options</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="29" package="M2 Micro Framework\Library Tags">
+        <name>render</name>
+        <full_name>render</full_name>
+        <docblock line="25">
+          <description><![CDATA[Return HTML markup for control]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="25" name="return" description="" type="bool|string">
+            <type by_reference="false">bool</type>
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\includes\controls\file.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\includes\controls\relations.php" hash="8a409333197414f47571a5c043f029ab" package="Default">
+    <class final="false" abstract="false" namespace="global" line="9" package="M2 Micro Framework\Library Tags">
+      <extends>\Control</extends>
+      <name>Relations</name>
+      <full_name>\Relations</full_name>
+      <docblock line="2">
+        <description><![CDATA[Relations control helper]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="2" name="package" description="M2 Micro Framework"/>
+        <tag line="2" name="subpackage" description="Library Tags"/>
+        <tag line="2" name="author" description="Alexander Chaika"/>
+        <tag line="2" name="since" description="0.3RC2"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="16" package="M2 Micro Framework\Library Tags">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="11">
+          <description><![CDATA[Class constructor]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="11" name="param" description="(optional)" type="mixed" variable="$data">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="11" name="param" description="(optional)" type="mixed" variable="$options">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="16">
+          <name>$data</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+        <argument line="16">
+          <name>$options</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="29" package="M2 Micro Framework\Library Tags">
+        <name>render</name>
+        <full_name>render</full_name>
+        <docblock line="25">
+          <description><![CDATA[Return HTML markup for control]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="25" name="return" description="" type="bool|string">
+            <type by_reference="false">bool</type>
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\includes\controls\relations.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\includes\controls\tag.php" hash="18327be20e2a0b5da2b4820fb80a1986" package="Default">
+    <class final="false" abstract="false" namespace="global" line="10" package="M2 Micro Framework\Library Tags">
+      <extends>\Control</extends>
+      <name>Tag</name>
+      <full_name>\Tag</full_name>
+      <docblock line="2">
+        <description><![CDATA[Tag control helper]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="2" name="package" description="M2 Micro Framework"/>
+        <tag line="2" name="subpackage" description="Library Tags"/>
+        <tag line="2" name="author" description="Alexander Chaika"/>
+        <tag line="2" name="since" description="0.3RC2"/>
+        <tag line="2" name="todo" description=": Fix first empty tag"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="16" package="M2 Micro Framework\Library Tags">
+        <name>render</name>
+        <full_name>render</full_name>
+        <docblock line="12">
+          <description><![CDATA[Return HTML markup for control]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="12" name="return" description="$html" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\includes\controls\tag.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\includes\database.php" hash="6f44e533b388982269cde697f7845221" package="Default">
+    <class final="false" abstract="false" namespace="global" line="13" package="M2 Micro Framework\Library">
+      <extends>\Application</extends>
+      <name>Database</name>
+      <full_name>\Database</full_name>
+      <docblock line="4">
+        <description><![CDATA[Class for database operations (Uses MySQLi extention)
+NOTICE: This class implemented as Singleton]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$database"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Library"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="14" namespace="global" package="Default">
+        <name>$res</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="false" visibility="private" line="15" namespace="global" package="Default">
+        <name>$mysqli</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="false" visibility="private" line="16" namespace="global" package="Default">
+        <name>$db_prefix</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="false" visibility="private" line="17" namespace="global" package="Default">
+        <name>$query</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="true" visibility="protected" line="19" namespace="global" package="Default">
+        <name>$instance</name>
+        <default><![CDATA[null]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="24" package="M2 Micro Framework\Library">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="21">
+          <description><![CDATA[Singleton protection]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="33" package="M2 Micro Framework\Library">
+        <name>getInstance</name>
+        <full_name>getInstance</full_name>
+        <docblock line="29">
+          <description><![CDATA[GetInstance class method]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="29" name="return" description="$instance" type="\Current_Class_Name">
+            <type by_reference="false">\Current_Class_Name</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="44" package="M2 Micro Framework\Library">
+        <name>connect</name>
+        <full_name>connect</full_name>
+        <docblock line="40">
+          <description><![CDATA[Connect to DB and select TABLE]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="40" name="return" description="$state" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="86" package="M2 Micro Framework\Library">
+        <name>close</name>
+        <full_name>close</full_name>
+        <docblock line="82">
+          <description><![CDATA[Close connection to DB]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="82" name="return" description="$state" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="99" package="M2 Micro Framework\Library">
+        <name>replacePrefix</name>
+        <full_name>replacePrefix</full_name>
+        <docblock line="94">
+          <description><![CDATA[Replace #__ to db prefix]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="94" name="param" description="query to execute" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="94" name="return" description="$query with replaced prefix" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="99">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="110" package="M2 Micro Framework\Library">
+        <name>query</name>
+        <full_name>query</full_name>
+        <docblock line="103">
+          <description><![CDATA[Set and execute query
+if success return number of affected rows or false
+!write the names of all tables without the prefix, but like #__]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="103" name="param" description="query to execute" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="103" name="return" description="$state count of affected rows" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="110">
+          <name>$query</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="129" package="M2 Micro Framework\Library">
+        <name>exec</name>
+        <full_name>exec</full_name>
+        <docblock line="125">
+          <description><![CDATA[Execute last query]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="125" name="return" description="$state" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="142" package="M2 Micro Framework\Library">
+        <name>setQuery</name>
+        <full_name>setQuery</full_name>
+        <docblock line="137">
+          <description><![CDATA[Set query]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="137" name="param" description="optional query to execute" type="string" variable="$query">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="137" name="return" description="$state" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="142">
+          <name>$query</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="155" package="M2 Micro Framework\Library">
+        <name>getQuery</name>
+        <full_name>getQuery</full_name>
+        <docblock line="151">
+          <description><![CDATA[Get last query]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="151" name="return" description="$query or false" type="string|bool">
+            <type by_reference="false">string</type>
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="166" package="M2 Micro Framework\Library">
+        <name>printQuery</name>
+        <full_name>printQuery</full_name>
+        <docblock line="163">
+          <description><![CDATA[Print last query]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="176" package="M2 Micro Framework\Library">
+        <name>getField</name>
+        <full_name>getField</full_name>
+        <docblock line="172">
+          <description><![CDATA[Get first field value of result]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="172" name="return" description="$result" type="string|bool">
+            <type by_reference="false">string</type>
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="196" package="M2 Micro Framework\Library">
+        <name>getObject</name>
+        <full_name>getObject</full_name>
+        <docblock line="192">
+          <description><![CDATA[Get first resulting object of query]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="192" name="return" description="$result resulted object or false" type="object|bool">
+            <type by_reference="false">object</type>
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="216" package="M2 Micro Framework\Library">
+        <name>getObjectsArray</name>
+        <full_name>getObjectsArray</full_name>
+        <docblock line="212">
+          <description><![CDATA[Get result objects array of query]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="212" name="return" description="$result resulted array of objects or false" type="array|bool">
+            <type by_reference="false">array</type>
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="236" package="M2 Micro Framework\Library">
+        <name>getArray</name>
+        <full_name>getArray</full_name>
+        <docblock line="232">
+          <description><![CDATA[Get result array of query]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="232" name="return" description="$result resulted array of rows (arrays too) or false" type="array|bool">
+            <type by_reference="false">array</type>
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="258" package="M2 Micro Framework\Library">
+        <name>getPairs</name>
+        <full_name>getPairs</full_name>
+        <docblock line="252">
+          <description><![CDATA[Get array of named pairs]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="252" name="param" description="- array index name" type="string" variable="$index">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="252" name="param" description="- array field name" type="string" variable="$field">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="252" name="return" description="$result associative array of pairs ($index =&gt; $field) or false" type="array|bool">
+            <type by_reference="false">array</type>
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="258">
+          <name>$index</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="258">
+          <name>$field</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="281" package="M2 Micro Framework\Library">
+        <name>checkResult</name>
+        <full_name>checkResult</full_name>
+        <docblock line="277">
+          <description><![CDATA[Check last operation result]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="277" name="return" description="$result" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="295" package="M2 Micro Framework\Library">
+        <name>getError</name>
+        <full_name>getError</full_name>
+        <docblock line="291">
+          <description><![CDATA[Get last error string with error number]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="291" name="return" description="$error last mysql error string and number" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="303" package="M2 Micro Framework\Library">
+        <name>getLastErrorMsg</name>
+        <full_name>getLastErrorMsg</full_name>
+        <docblock line="299">
+          <description><![CDATA[Get last error message]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="299" name="return" description="$error last mysql error string" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="311" package="M2 Micro Framework\Library">
+        <name>getLastErrorNum</name>
+        <full_name>getLastErrorNum</full_name>
+        <docblock line="307">
+          <description><![CDATA[Get last error number]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="307" name="return" description="$error_number last mysql error number" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="319" package="M2 Micro Framework\Library">
+        <name>getLastInsertId</name>
+        <full_name>getLastInsertId</full_name>
+        <docblock line="315">
+          <description><![CDATA[Get last insert id]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="315" name="return" description="$id" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="328" package="M2 Micro Framework\Library">
+        <name>escape</name>
+        <full_name>escape</full_name>
+        <docblock line="323">
+          <description><![CDATA[Escape string characters]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="323" name="param" description="" type="string" variable="$string">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="323" name="return" description="$result" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="328">
+          <name>$string</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\includes\database.php</error>
+      <error line="14" code="50018">No DocBlock was found for property $res</error>
+      <error line="15" code="50018">No DocBlock was found for property $mysqli</error>
+      <error line="16" code="50018">No DocBlock was found for property $db_prefix</error>
+      <error line="17" code="50018">No DocBlock was found for property $query</error>
+      <error line="19" code="50018">No DocBlock was found for property $instance</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\includes\sef.php" hash="69be06f9a98d8bd0e6aa56773c0c08a1" package="Default">
+    <include line="144" type="Include" package="Default">
+      <name>sef_map.php</name>
+    </include>
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Library">
+      <extends>\Application</extends>
+      <name>Sef</name>
+      <full_name>\Sef</full_name>
+      <docblock line="4">
+        <description><![CDATA[Class for SEF url handlings]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$sef"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Library"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.2RC1"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="13" namespace="global" package="Default">
+        <name>$storage</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="true" visibility="protected" line="14" namespace="global" package="Default">
+        <name>$instance</name>
+        <default><![CDATA[null]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="19" package="M2 Micro Framework\Library">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="16">
+          <description><![CDATA[Singleton protection]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="29" package="M2 Micro Framework\Library">
+        <name>getInstance</name>
+        <full_name>getInstance</full_name>
+        <docblock line="25">
+          <description><![CDATA[GetInstance class method]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="25" name="return" description="$instance" type="\Current_Class_Name">
+            <type by_reference="false">\Current_Class_Name</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="39" package="M2 Micro Framework\Library">
+        <name>init</name>
+        <full_name>init</full_name>
+        <docblock line="36">
+          <description><![CDATA[Init SEF engine]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="69" package="M2 Micro Framework\Library">
+        <name>getReal</name>
+        <full_name>getReal</full_name>
+        <docblock line="64">
+          <description><![CDATA[Get real link from DB]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="64" name="param" description="" type="string" variable="$link">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="64" name="return" description="$request" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="69">
+          <name>$link</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="106" package="M2 Micro Framework\Library">
+        <name>getSef</name>
+        <full_name>getSef</full_name>
+        <docblock line="101">
+          <description><![CDATA[Get sef link from DB]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="101" name="param" description="" type="string" variable="$request">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="101" name="return" description="$link" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="106">
+          <name>$request</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="private" namespace="global" line="139" package="M2 Micro Framework\Library">
+        <name>createLink</name>
+        <full_name>createLink</full_name>
+        <docblock line="134">
+          <description><![CDATA[Create SEF link]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="134" name="param" description="" type="string" variable="$request">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="134" name="return" description="$link" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="139">
+          <name>$request</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="private" namespace="global" line="188" package="M2 Micro Framework\Library">
+        <name>checkStorage</name>
+        <full_name>checkStorage</full_name>
+        <docblock line="183">
+          <description><![CDATA[Check existing link in storage]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="183" name="param" description="" type="string" variable="$link">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="183" name="return" description="$link if exists" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="188">
+          <name>$link</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="private" namespace="global" line="208" package="M2 Micro Framework\Library">
+        <name>addToStorage</name>
+        <full_name>addToStorage</full_name>
+        <docblock line="202">
+          <description><![CDATA[STATIC: Add to storage sef request-link pair]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="202" name="param" description="" type="string" variable="$request">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="202" name="param" description="" type="string" variable="$link">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="202" name="return" description="$state" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="208">
+          <name>$request</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="208">
+          <name>$link</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="224" package="M2 Micro Framework\Library">
+        <name>addToStorageData</name>
+        <full_name>addToStorageData</full_name>
+        <docblock line="218">
+          <description><![CDATA[Add to storage sef request-link pair]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="218" name="param" description="" type="string" variable="$request">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="218" name="param" description="" type="string" variable="$link">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="218" name="return" description="$state" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="224">
+          <name>$request</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="224">
+          <name>$link</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="private" namespace="global" line="238" package="M2 Micro Framework\Library">
+        <name>getStorage</name>
+        <full_name>getStorage</full_name>
+        <docblock line="234">
+          <description><![CDATA[STATIC: Get storage array of request-link pairs]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="234" name="return" description="$storage" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="246" package="M2 Micro Framework\Library">
+        <name>getStorageData</name>
+        <full_name>getStorageData</full_name>
+        <docblock line="242">
+          <description><![CDATA[Get storage array of request-link pairs]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="242" name="return" description="$storage" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\includes\sef.php</error>
+      <error line="13" code="50018">No DocBlock was found for property $storage</error>
+      <error line="14" code="50018">No DocBlock was found for property $instance</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\includes\sef_map.php" hash="69d3e78f939f05dd2c74e661c3f1609e" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\includes\sef_map.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\includes\system.php" hash="d54fd3a4a2c635b660d534da04a989b0" package="Default">
+    <class final="false" abstract="false" namespace="global" line="13" package="M2 Micro Framework\Library">
+      <extends>\Application</extends>
+      <name>System</name>
+      <full_name>\System</full_name>
+      <docblock line="4">
+        <description><![CDATA[Class for system operations
+NOTICE: This class implemented as Singleton]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$system"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Library"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.2RC1"/>
+      </docblock>
+      <property final="false" static="true" visibility="protected" line="15" namespace="global" package="Default">
+        <name>$instance</name>
+        <default><![CDATA[null]]></default>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="21" package="M2 Micro Framework\Library">
+        <name>getInstance</name>
+        <full_name>getInstance</full_name>
+        <docblock line="17">
+          <description><![CDATA[GetInstance class method]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="17" name="return" description="$instance" type="\Current_Class_Name">
+            <type by_reference="false">\Current_Class_Name</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="35" package="M2 Micro Framework\Library">
+        <name>getCmd</name>
+        <full_name>getCmd</full_name>
+        <docblock line="28">
+          <description><![CDATA[Get variable from Request or upload file and return uploaded file name]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="28" name="param" description="name of requested variable" type="string" variable="$param">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="28" name="param" description="optional default value if not exist" type="mixed" variable="$default">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="28" name="param" description="optional upload path if file" type="mixed" variable="$upload_path">
+            <type by_reference="false">mixed</type>
+          </tag>
+          <tag line="28" name="return" description="$value value or uploaded file name" type="mixed">
+            <type by_reference="false">mixed</type>
+          </tag>
+        </docblock>
+        <argument line="35">
+          <name>$param</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="35">
+          <name>$default</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+        <argument line="35">
+          <name>$upload_path</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="95" package="M2 Micro Framework\Library">
+        <name>mail</name>
+        <full_name>mail</full_name>
+        <docblock line="87">
+          <description><![CDATA[Send mail via standart PHP mailer]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="87" name="param" description="send to" type="string" variable="$email">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="87" name="param" description="title of message" type="string" variable="$title">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="87" name="param" description="message body" type="string" variable="$description">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="87" name="param" description="OPTIONAL local file name for attachment" type="string" variable="$attach">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="87" name="return" description="$state" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="95">
+          <name>$email</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="95">
+          <name>$title</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="95">
+          <name>$description</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="95">
+          <name>$attach</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="155" package="M2 Micro Framework\Library">
+        <name>resize</name>
+        <full_name>resize</full_name>
+        <docblock line="146">
+          <description><![CDATA[Resize image]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="146" name="param" description="source" type="string" variable="$sname">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="146" name="param" description="destination" type="string" variable="$dname">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="146" name="param" description="width to resize" type="int" variable="$width">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="146" name="param" description="height to resize" type="int" variable="$height">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="146" name="param" description="(optional: 0 - with aspect ratio, other - head-on)" type="int" variable="$mode">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="146" name="return" description="$result" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="155">
+          <name>$sname</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="155">
+          <name>$dname</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="155">
+          <name>$width</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="155">
+          <name>$height</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="155">
+          <name>$mode</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="232" package="M2 Micro Framework\Library">
+        <name>isValidEmail</name>
+        <full_name>isValidEmail</full_name>
+        <docblock line="227">
+          <description><![CDATA[Email validation]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="227" name="param" description="check if valid email address" type="string" variable="$email">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="227" name="return" description="$valid" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="232">
+          <name>$email</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="244" package="M2 Micro Framework\Library">
+        <name>redirect</name>
+        <full_name>redirect</full_name>
+        <docblock line="238">
+          <description><![CDATA[Redirect user to page]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="238" name="param" description="OPTIONAL if empty redirect to home page (default null)" type="string" variable="$url">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="238" name="param" description="OPTIONAL" type="string" variable="$message">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="238" name="param" description="OPTIONAL" type="bool" variable="$is_error">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="244">
+          <name>$url</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+        <argument line="244">
+          <name>$message</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+        <argument line="244">
+          <name>$is_error</name>
+          <default><![CDATA[false]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="274" package="M2 Micro Framework\Library">
+        <name>getDomainParts</name>
+        <full_name>getDomainParts</full_name>
+        <docblock line="270">
+          <description><![CDATA[Get domain parts]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="270" name="return" description="$domain parts" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="305" package="M2 Micro Framework\Library">
+        <name>getSubDomain</name>
+        <full_name>getSubDomain</full_name>
+        <docblock line="301">
+          <description><![CDATA[Get 3th domain]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="301" name="return" description="$domain" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="318" package="M2 Micro Framework\Library">
+        <name>isGzip</name>
+        <full_name>isGzip</full_name>
+        <docblock line="314">
+          <description><![CDATA[Check if gzip enabled and work]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="314" name="return" description="$state" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="332" package="M2 Micro Framework\Library">
+        <name>getCoords</name>
+        <full_name>getCoords</full_name>
+        <docblock line="327">
+          <description><![CDATA[Get coords from yamaps service]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="327" name="param" description="" type="string" variable="$address">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="327" name="return" description="$coords" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="332">
+          <name>$address</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\includes\system.php</error>
+      <error line="15" code="50018">No DocBlock was found for property $instance</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\includes\_autoload.php" hash="183efbbaa334187ff48bff9353c8d294" package="Default">
+    <include line="32" type="Require Once" package="Default">
+      <name/>
+    </include>
+    <class final="false" abstract="false" namespace="global" line="11" package="M2 Micro Framework\Library">
+      <extends/>
+      <name>Autoload</name>
+      <full_name>\Autoload</full_name>
+      <docblock line="2">
+        <description><![CDATA[Global autoload class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="2" name="name" description="$_autoload"/>
+        <tag line="2" name="package" description="M2 Micro Framework"/>
+        <tag line="2" name="subpackage" description="Library"/>
+        <tag line="2" name="author" description="Alexander Chaika"/>
+        <tag line="2" name="since" description="0.2RC1"/>
+      </docblock>
+      <property final="false" static="true" visibility="private" line="13" namespace="global" package="Default">
+        <name>$_lastLoadedFilename</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="15" package="M2 Micro Framework\Library">
+        <name>load</name>
+        <full_name>load</full_name>
+        <argument line="15">
+          <name>$className</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\includes\_autoload.php</error>
+      <error line="13" code="50018">No DocBlock was found for property $_lastLoadedFilename</error>
+      <error line="15" code="50010">No DocBlock was found for method load()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\includes\_function.php" hash="e25b2bdc244580852fe26f5f9f5dcf5b" package="Default">
+    <function namespace="global" line="18" package="Default">
+      <name>getErrorStringFromInt</name>
+      <full_name>\getErrorStringFromInt</full_name>
+      <docblock line="13">
+        <description><![CDATA[Return human representation of error level]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="13" name="param" description="error level" type="int" variable="$number">
+          <type by_reference="false">int</type>
+        </tag>
+        <tag line="13" name="return" description="$display_name" type="string">
+          <type by_reference="false">string</type>
+        </tag>
+      </docblock>
+      <argument line="18">
+        <name>$number</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+    </function>
+    <function namespace="global" line="39" package="Default">
+      <name>getDefaultModule</name>
+      <full_name>\getDefaultModule</full_name>
+      <docblock line="35">
+        <description><![CDATA[Return first applicable module]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="35" name="return" description="$module_name" type="bool|string">
+          <type by_reference="false">bool</type>
+          <type by_reference="false">string</type>
+        </tag>
+      </docblock>
+    </function>
+    <function namespace="global" line="58" package="Default">
+      <name>T</name>
+      <full_name>\T</full_name>
+      <docblock line="53">
+        <description><![CDATA[Function for translate tokens from dictionaries]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="53" name="param" description="text to translate" type="string" variable="$text">
+          <type by_reference="false">string</type>
+        </tag>
+        <tag line="53" name="return" description="$text translated text" type="string">
+          <type by_reference="false">string</type>
+        </tag>
+      </docblock>
+      <argument line="58">
+        <name>$text</name>
+        <default><![CDATA[]]></default>
+        <type/>
+      </argument>
+    </function>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\includes\_function.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\index.php" hash="1369ff9ab5c4394bf49c0fc65f198afe" package="M2 Micro Framework\Main">
+    <docblock line="2">
+      <description><![CDATA[Front index controller]]></description>
+      <long-description><![CDATA[]]></long-description>
+      <tag line="2" name="package" description="M2 Micro Framework"/>
+      <tag line="2" name="subpackage" description="Main"/>
+      <tag line="2" name="author" description="Alexander Chaika"/>
+    </docblock>
+    <include line="10" type="Require Once" package="Default">
+      <name>bootstrap.php</name>
+    </include>
+  </file>
+  <file path="trunk\modules\blog\controller.php" hash="49fff698c06d2622ff00565883a5aaa0" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Controller</extends>
+      <name>BlogController</name>
+      <full_name>\BlogController</full_name>
+      <docblock line="4">
+        <description><![CDATA[Blog Controller class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$blogController"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="14" package="M2 Micro Framework\Modules">
+        <name>indexAction</name>
+        <full_name>indexAction</full_name>
+        <argument line="14">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="18" package="M2 Micro Framework\Modules">
+        <name>listAction</name>
+        <full_name>listAction</full_name>
+        <argument line="18">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="38" package="M2 Micro Framework\Modules">
+        <name>showAction</name>
+        <full_name>showAction</full_name>
+        <argument line="38">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="56" package="M2 Micro Framework\Modules">
+        <name>editAction</name>
+        <full_name>editAction</full_name>
+        <argument line="56">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="74" package="M2 Micro Framework\Modules">
+        <name>saveAction</name>
+        <full_name>saveAction</full_name>
+        <argument line="74">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\blog\controller.php</error>
+      <error line="14" code="50010">No DocBlock was found for method indexAction()</error>
+      <error line="18" code="50010">No DocBlock was found for method listAction()</error>
+      <error line="38" code="50010">No DocBlock was found for method showAction()</error>
+      <error line="56" code="50010">No DocBlock was found for method editAction()</error>
+      <error line="74" code="50010">No DocBlock was found for method saveAction()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\blog\model.php" hash="06eddcba6e938d81664fab0803f93b2e" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Model</extends>
+      <name>BlogModel</name>
+      <full_name>\BlogModel</full_name>
+      <docblock line="4">
+        <description><![CDATA[Blog Model class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$blogModel"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="14" package="M2 Micro Framework\Modules">
+        <name>getPost</name>
+        <full_name>getPost</full_name>
+        <argument line="14">
+          <name>$id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="28" package="M2 Micro Framework\Modules">
+        <name>getPosts</name>
+        <full_name>getPosts</full_name>
+        <argument line="28">
+          <name>$limit</name>
+          <default><![CDATA[10]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="37" package="M2 Micro Framework\Modules">
+        <name>getPostsByTags</name>
+        <full_name>getPostsByTags</full_name>
+        <argument line="37">
+          <name>$tags</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="37">
+          <name>$limit</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="51" package="M2 Micro Framework\Modules">
+        <name>getRelations</name>
+        <full_name>getRelations</full_name>
+        <argument line="51">
+          <name>$id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\blog\model.php</error>
+      <error line="14" code="50010">No DocBlock was found for method getPost()</error>
+      <error line="28" code="50010">No DocBlock was found for method getPosts()</error>
+      <error line="37" code="50010">No DocBlock was found for method getPostsByTags()</error>
+      <error line="51" code="50010">No DocBlock was found for method getRelations()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\blog\view.php" hash="e2aa91715f996e282242ad0845878d98" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\View</extends>
+      <name>BlogView</name>
+      <full_name>\BlogView</full_name>
+      <docblock line="4">
+        <description><![CDATA[Blog View Class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$blogView"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\blog\view.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\controller.php" hash="2c7d4050a2aa3f34b4f65ec8cd6a2308" package="Default">
+    <class final="false" abstract="false" namespace="global" line="13" package="M2 Micro Framework\Modules">
+      <extends>\Application</extends>
+      <name>Controller</name>
+      <full_name>\Controller</full_name>
+      <docblock line="4">
+        <description><![CDATA[Default controller class
+dispatch first call and render output result]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$controller"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+      <property final="false" static="true" visibility="protected" line="17" namespace="global" package="Default">
+        <name>$_name</name>
+        <default><![CDATA[]]></default>
+        <docblock line="14">
+          <description><![CDATA[Class name]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="22" package="M2 Micro Framework\Modules">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="19">
+          <description><![CDATA[Class constructor which loads MVC structure]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="38" package="M2 Micro Framework\Modules">
+        <name>__call</name>
+        <full_name>__call</full_name>
+        <docblock line="32">
+          <description><![CDATA[Overide non exist methods calls]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="32" name="param" description="method name" type="\$name" variable="$name">
+            <type by_reference="false">\$name</type>
+          </tag>
+          <tag line="32" name="param" description="method args" type="\$args" variable="$args">
+            <type by_reference="false">\$args</type>
+          </tag>
+          <tag line="32" name="return" description="$options" type="array">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="38">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="38">
+          <name>$args</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="46" package="M2 Micro Framework\Modules">
+        <name>dispatch</name>
+        <full_name>dispatch</full_name>
+        <docblock line="42">
+          <description><![CDATA[Dispatch action which load module called in cmd params
+and render output result]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="63" package="M2 Micro Framework\Modules">
+        <name>route</name>
+        <full_name>route</full_name>
+        <docblock line="60">
+          <description><![CDATA[Route request to action]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="76" package="M2 Micro Framework\Modules">
+        <name>loadModule</name>
+        <full_name>loadModule</full_name>
+        <docblock line="71">
+          <description><![CDATA[Method which load modules]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="71" name="param" description="module name" type="string" variable="$module">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="71" name="return" description="$module" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="76">
+          <name>$module</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="protected" namespace="global" line="96" package="M2 Micro Framework\Modules">
+        <name>checkPermissions</name>
+        <full_name>checkPermissions</full_name>
+        <docblock line="91">
+          <description><![CDATA[Check user permissions]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="91" name="param" description="" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="91" name="return" description="$options" type="bool|array">
+            <type by_reference="false">bool</type>
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="96">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\controller.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\entity.php" hash="c0310ebe15284511efae989206774e5e" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Application</extends>
+      <name>Entity</name>
+      <full_name>\Entity</full_name>
+      <docblock line="4">
+        <description><![CDATA[Default entity class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$entity"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.2RC1"/>
+      </docblock>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\entity.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\file\controller.php" hash="4e350888e136d960b0ef604fc73779db" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Controller</extends>
+      <name>FileController</name>
+      <full_name>\FileController</full_name>
+      <docblock line="4">
+        <description><![CDATA[File Controller class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$fileController"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.3RC2"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="14" package="M2 Micro Framework\Modules">
+        <name>indexAction</name>
+        <full_name>indexAction</full_name>
+        <argument line="14">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\file\controller.php</error>
+      <error line="14" code="50010">No DocBlock was found for method indexAction()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\file\model.php" hash="7d7121a8d21a6dd2e1beea0a924e9602" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Model</extends>
+      <name>FileModel</name>
+      <full_name>\FileModel</full_name>
+      <docblock line="4">
+        <description><![CDATA[File Model class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$fileModel"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.3RC2"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="14" namespace="global" package="Default">
+        <name>$_map</name>
+        <default><![CDATA[array()]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="19" package="M2 Micro Framework\Modules">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="16">
+          <description><![CDATA[Construct model and create file map]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="37" package="M2 Micro Framework\Modules">
+        <name>getList</name>
+        <full_name>getList</full_name>
+        <docblock line="31">
+          <description><![CDATA[Return file list by type]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="31" name="param" description="file type" type="\$type" variable="$type">
+            <type by_reference="false">\$type</type>
+          </tag>
+          <tag line="31" name="param" description="(optional)" type="int" variable="$limit">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="31" name="return" description="$result" type="bool|array">
+            <type by_reference="false">bool</type>
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="37">
+          <name>$type</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="37">
+          <name>$limit</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="57" package="M2 Micro Framework\Modules">
+        <name>update</name>
+        <full_name>update</full_name>
+        <docblock line="51">
+          <description><![CDATA[Update DB file entries]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="51" name="param" description="file type" type="\$type" variable="$type">
+            <type by_reference="false">\$type</type>
+          </tag>
+          <tag line="51" name="return" description="$result" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+          <tag line="51" name="todo" description="Update functionality"/>
+        </docblock>
+        <argument line="57">
+          <name>$type</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\file\model.php</error>
+      <error line="14" code="50018">No DocBlock was found for property $_map</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\file\view.php" hash="0c289b98b4c63f2c33b32487e75b28b5" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\View</extends>
+      <name>TagView</name>
+      <full_name>\TagView</full_name>
+      <docblock line="4">
+        <description><![CDATA[Tag View Class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$tagView"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.3RC2"/>
+      </docblock>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\file\view.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\front\controller.php" hash="f772eac44dd806320dede820cbcb6a04" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Controller</extends>
+      <name>FrontController</name>
+      <full_name>\FrontController</full_name>
+      <docblock line="4">
+        <description><![CDATA[Front Controller class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$frontController"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="14" package="M2 Micro Framework\Modules">
+        <name>indexAction</name>
+        <full_name>indexAction</full_name>
+        <argument line="14">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\front\controller.php</error>
+      <error line="14" code="50010">No DocBlock was found for method indexAction()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\front\model.php" hash="e19b8229a6a8640b3327a4ae48ff7294" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Model</extends>
+      <name>FrontModel</name>
+      <full_name>\FrontModel</full_name>
+      <docblock line="4">
+        <description><![CDATA[Front Model class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$frontModel"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\front\model.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\front\view.php" hash="2b545fdb8d7114a945497c804cfb1b97" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\View</extends>
+      <name>FrontView</name>
+      <full_name>\FrontView</full_name>
+      <docblock line="4">
+        <description><![CDATA[Front View Class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$frontView"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\front\view.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\gallery\controller.php" hash="bebedc57f5d4915c520af4056a77facb" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Controller</extends>
+      <name>GalleryController</name>
+      <full_name>\GalleryController</full_name>
+      <docblock line="4">
+        <description><![CDATA[Gallery Controller class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$galleryController"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.2RC1"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="14" package="M2 Micro Framework\Modules">
+        <name>indexAction</name>
+        <full_name>indexAction</full_name>
+        <argument line="14">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="18" package="M2 Micro Framework\Modules">
+        <name>listAction</name>
+        <full_name>listAction</full_name>
+        <argument line="18">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\gallery\controller.php</error>
+      <error line="14" code="50010">No DocBlock was found for method indexAction()</error>
+      <error line="18" code="50010">No DocBlock was found for method listAction()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\gallery\model.php" hash="b699defe62dcdb1e95b6a92c685f6ba1" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Model</extends>
+      <name>GalleryModel</name>
+      <full_name>\GalleryModel</full_name>
+      <docblock line="4">
+        <description><![CDATA[Gallery Model class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$galleryModel"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.2RC1"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="14" namespace="global" package="Default">
+        <name>$file_path</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="false" visibility="private" line="15" namespace="global" package="Default">
+        <name>$link_path</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="17" package="M2 Micro Framework\Modules">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="24" package="M2 Micro Framework\Modules">
+        <name>getGalleryByTags</name>
+        <full_name>getGalleryByTags</full_name>
+        <argument line="24">
+          <name>$tags</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="24">
+          <name>$limit</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="38" package="M2 Micro Framework\Modules">
+        <name>getGallery</name>
+        <full_name>getGallery</full_name>
+        <argument line="38">
+          <name>$limit</name>
+          <default><![CDATA[10]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\gallery\model.php</error>
+      <error line="14" code="50018">No DocBlock was found for property $file_path</error>
+      <error line="15" code="50018">No DocBlock was found for property $link_path</error>
+      <error line="17" code="50010">No DocBlock was found for method __construct()</error>
+      <error line="24" code="50010">No DocBlock was found for method getGalleryByTags()</error>
+      <error line="38" code="50010">No DocBlock was found for method getGallery()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\gallery\view.php" hash="c6cff5add3b54192fff199578e98b012" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\View</extends>
+      <name>GalleryView</name>
+      <full_name>\GalleryView</full_name>
+      <docblock line="4">
+        <description><![CDATA[Gallery View Class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$galleryView"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.2RC1"/>
+      </docblock>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\gallery\view.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\model.php" hash="c79ec467fa77b1bc675bdf17712cbe1f" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Application</extends>
+      <name>Model</name>
+      <full_name>\Model</full_name>
+      <docblock line="4">
+        <description><![CDATA[Default model class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$model"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+      <property final="false" static="false" visibility="protected" line="13" namespace="global" package="Default">
+        <name>$cid</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="14" namespace="global" package="Default">
+        <name>$database</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="false" visibility="protected" line="15" namespace="global" package="Default">
+        <name>$user</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="true" visibility="protected" line="17" namespace="global" package="Default">
+        <name>$models</name>
+        <default><![CDATA[array()]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="22" package="M2 Micro Framework\Modules">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="19">
+          <description><![CDATA[Model class constructor with DB init]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="37" package="M2 Micro Framework\Modules">
+        <name>getModel</name>
+        <full_name>getModel</full_name>
+        <docblock line="32">
+          <description><![CDATA[Default getModel method]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="32" name="param" description="" type="string" variable="$name">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="32" name="return" description="$model" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="37">
+          <name>$name</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\model.php</error>
+      <error line="13" code="50018">No DocBlock was found for property $cid</error>
+      <error line="14" code="50018">No DocBlock was found for property $database</error>
+      <error line="15" code="50018">No DocBlock was found for property $user</error>
+      <error line="17" code="50018">No DocBlock was found for property $models</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\tag\controller.php" hash="a5c9bbcf974ef4b2a8638013363f31ea" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Controller</extends>
+      <name>TagController</name>
+      <full_name>\TagController</full_name>
+      <docblock line="4">
+        <description><![CDATA[Tag Controller class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$tagController"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.3RC2"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="14" package="M2 Micro Framework\Modules">
+        <name>indexAction</name>
+        <full_name>indexAction</full_name>
+        <argument line="14">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="18" package="M2 Micro Framework\Modules">
+        <name>searchAction</name>
+        <full_name>searchAction</full_name>
+        <argument line="18">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\tag\controller.php</error>
+      <error line="14" code="50010">No DocBlock was found for method indexAction()</error>
+      <error line="18" code="50010">No DocBlock was found for method searchAction()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\tag\model.php" hash="dd55c8ac1e188afa953921002ccc9d84" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Model</extends>
+      <name>TagModel</name>
+      <full_name>\TagModel</full_name>
+      <docblock line="4">
+        <description><![CDATA[Tag Model class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$tagModel"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.3RC2"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="14" package="M2 Micro Framework\Modules">
+        <name>getPosts</name>
+        <full_name>getPosts</full_name>
+        <argument line="14">
+          <name>$limit</name>
+          <default><![CDATA[10]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="23" package="M2 Micro Framework\Modules">
+        <name>getPostsByTags</name>
+        <full_name>getPostsByTags</full_name>
+        <argument line="23">
+          <name>$tags</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="23">
+          <name>$limit</name>
+          <default><![CDATA[0]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\tag\model.php</error>
+      <error line="14" code="50010">No DocBlock was found for method getPosts()</error>
+      <error line="23" code="50010">No DocBlock was found for method getPostsByTags()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\tag\view.php" hash="8503735905c317646cd2fe7d9960dffd" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\View</extends>
+      <name>FileView</name>
+      <full_name>\FileView</full_name>
+      <docblock line="4">
+        <description><![CDATA[File View Class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$fileView"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.3RC2"/>
+      </docblock>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\tag\view.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\user\controller.php" hash="7622868004adcc854534dea328838ad8" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Controller</extends>
+      <name>UserController</name>
+      <full_name>\UserController</full_name>
+      <docblock line="4">
+        <description><![CDATA[User Controller class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$userController"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="14" package="M2 Micro Framework\Modules">
+        <name>indexAction</name>
+        <full_name>indexAction</full_name>
+        <argument line="14">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="18" package="M2 Micro Framework\Modules">
+        <name>dashboardAction</name>
+        <full_name>dashboardAction</full_name>
+        <argument line="18">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="31" package="M2 Micro Framework\Modules">
+        <name>loginformAction</name>
+        <full_name>loginformAction</full_name>
+        <argument line="31">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="44" package="M2 Micro Framework\Modules">
+        <name>loginAction</name>
+        <full_name>loginAction</full_name>
+        <argument line="44">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="73" package="M2 Micro Framework\Modules">
+        <name>logoutAction</name>
+        <full_name>logoutAction</full_name>
+        <argument line="73">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="90" package="M2 Micro Framework\Modules">
+        <name>forgotformAction</name>
+        <full_name>forgotformAction</full_name>
+        <argument line="90">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="97" package="M2 Micro Framework\Modules">
+        <name>forgotAction</name>
+        <full_name>forgotAction</full_name>
+        <argument line="97">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="126" package="M2 Micro Framework\Modules">
+        <name>registerformAction</name>
+        <full_name>registerformAction</full_name>
+        <argument line="126">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="139" package="M2 Micro Framework\Modules">
+        <name>registerAction</name>
+        <full_name>registerAction</full_name>
+        <argument line="139">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\user\controller.php</error>
+      <error line="14" code="50010">No DocBlock was found for method indexAction()</error>
+      <error line="18" code="50010">No DocBlock was found for method dashboardAction()</error>
+      <error line="31" code="50010">No DocBlock was found for method loginformAction()</error>
+      <error line="44" code="50010">No DocBlock was found for method loginAction()</error>
+      <error line="73" code="50010">No DocBlock was found for method logoutAction()</error>
+      <error line="90" code="50010">No DocBlock was found for method forgotformAction()</error>
+      <error line="97" code="50010">No DocBlock was found for method forgotAction()</error>
+      <error line="126" code="50010">No DocBlock was found for method registerformAction()</error>
+      <error line="139" code="50010">No DocBlock was found for method registerAction()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\user\entity.php" hash="91d3da013eaf6af4cb8178ca36620cf6" package="Default">
+    <class final="false" abstract="false" namespace="global" line="14" package="M2 Micro Framework\Library">
+      <extends>\Entity</extends>
+      <name>UserEntity</name>
+      <full_name>\UserEntity</full_name>
+      <docblock line="4">
+        <description><![CDATA[Entity class for user operations
+NOTICE: This class implemented as Singleton]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$database"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Library"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.2RC2"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="15" namespace="global" package="Default">
+        <name>$id</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="false" visibility="private" line="16" namespace="global" package="Default">
+        <name>$username</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="false" visibility="private" line="17" namespace="global" package="Default">
+        <name>$email</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="false" visibility="private" line="18" namespace="global" package="Default">
+        <name>$password</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="false" visibility="private" line="19" namespace="global" package="Default">
+        <name>$group</name>
+        <default><![CDATA[]]></default>
+      </property>
+      <property final="false" static="true" visibility="protected" line="21" namespace="global" package="Default">
+        <name>$instance</name>
+        <default><![CDATA[null]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="private" namespace="global" line="27" package="M2 Micro Framework\Library">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="23">
+          <description><![CDATA[Singleton protection]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="23" name="param" description="user ID for load" type="int" variable="$id">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="27">
+          <name>$id</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="36" package="M2 Micro Framework\Library">
+        <name>getInstance</name>
+        <full_name>getInstance</full_name>
+        <docblock line="32">
+          <description><![CDATA[GetInstance class method]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="32" name="return" description="$instance" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="48" package="M2 Micro Framework\Library">
+        <name>create</name>
+        <full_name>create</full_name>
+        <docblock line="43">
+          <description><![CDATA[Create user by email and pass]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="43" name="param" description="" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="43" name="return" description="$uid or 0 if not exist" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="48">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="67" package="M2 Micro Framework\Library">
+        <name>getId</name>
+        <full_name>getId</full_name>
+        <docblock line="62">
+          <description><![CDATA[Get user id by email and pass or cookie token]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="62" name="param" description="|| cookie] OPTIONAL" type="array" variable="$options[email+password">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="62" name="return" description="$user_id or 0 if not exist" type="int">
+            <type by_reference="false">int</type>
+          </tag>
+        </docblock>
+        <argument line="67">
+          <name>$options</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="129" package="M2 Micro Framework\Library">
+        <name>load</name>
+        <full_name>load</full_name>
+        <docblock line="124">
+          <description><![CDATA[Load user data to self object by id]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="124" name="param" description="user ID" type="int" variable="$id">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="124" name="return" description="$data or false if not exist" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="129">
+          <name>$id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="165" package="M2 Micro Framework\Library">
+        <name>setupSession</name>
+        <full_name>setupSession</full_name>
+        <docblock line="159">
+          <description><![CDATA[Setup user session by id]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="159" name="param" description="user ID" type="int" variable="$id">
+            <type by_reference="false">int</type>
+          </tag>
+          <tag line="159" name="param" description="(optional) save session" type="bool" variable="$remember">
+            <type by_reference="false">bool</type>
+          </tag>
+          <tag line="159" name="return" description="$this or false if not exist" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="165">
+          <name>$id</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="165">
+          <name>$remember</name>
+          <default><![CDATA[true]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="192" package="M2 Micro Framework\Library">
+        <name>checkSession</name>
+        <full_name>checkSession</full_name>
+        <docblock line="188">
+          <description><![CDATA[Check user session and try to setup it]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="188" name="return" description="$result" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="209" package="M2 Micro Framework\Library">
+        <name>clearSession</name>
+        <full_name>clearSession</full_name>
+        <docblock line="205">
+          <description><![CDATA[Clear user session data]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="205" name="return" description="TRUE" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="228" package="M2 Micro Framework\Library">
+        <name>isLoggined</name>
+        <full_name>isLoggined</full_name>
+        <docblock line="224">
+          <description><![CDATA[Clear user session data]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="224" name="return" description="$result" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="248" package="M2 Micro Framework\Library">
+        <name>checkEmail</name>
+        <full_name>checkEmail</full_name>
+        <docblock line="243">
+          <description><![CDATA[Check user by email]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="243" name="param" description="" type="array" variable="$email">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="243" name="return" description="$result" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="248">
+          <name>$email</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="265" package="M2 Micro Framework\Library">
+        <name>setNewPassword</name>
+        <full_name>setNewPassword</full_name>
+        <docblock line="259">
+          <description><![CDATA[Set new pass for user by email]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="259" name="param" description="" type="string" variable="$email">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="259" name="param" description="" type="string" variable="$password">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="259" name="return" description="$result" type="bool">
+            <type by_reference="false">bool</type>
+          </tag>
+        </docblock>
+        <argument line="265">
+          <name>$email</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="265">
+          <name>$password</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="281" package="M2 Micro Framework\Library">
+        <name>getUsername</name>
+        <full_name>getUsername</full_name>
+        <docblock line="277">
+          <description><![CDATA[Get username]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="277" name="return" description="$username" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="290" package="M2 Micro Framework\Library">
+        <name>getIp</name>
+        <full_name>getIp</full_name>
+        <docblock line="286">
+          <description><![CDATA[Get user IP]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="286" name="return" description="$ip" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="304" package="M2 Micro Framework\Library">
+        <name>getUserAgent</name>
+        <full_name>getUserAgent</full_name>
+        <docblock line="300">
+          <description><![CDATA[Get user browser]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="300" name="return" description="$user_agent" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="312" package="M2 Micro Framework\Library">
+        <name>getReferer</name>
+        <full_name>getReferer</full_name>
+        <docblock line="308">
+          <description><![CDATA[Get referer]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="308" name="return" description="$referer" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\user\entity.php</error>
+      <error line="15" code="50018">No DocBlock was found for property $id</error>
+      <error line="16" code="50018">No DocBlock was found for property $username</error>
+      <error line="17" code="50018">No DocBlock was found for property $email</error>
+      <error line="18" code="50018">No DocBlock was found for property $password</error>
+      <error line="19" code="50018">No DocBlock was found for property $group</error>
+      <error line="21" code="50018">No DocBlock was found for property $instance</error>
+      <error line="62" code="50014">Name of argument $options does not match with the DocBlock's name $options[email+password in getId()</error>
+      <notice line="62" code="50013">Parameter $options[email+password could not be found in getId()</notice>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\user\model.php" hash="9e317f8aadf2563d2078ddf6a8f6ca6f" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Model</extends>
+      <name>UserModel</name>
+      <full_name>\UserModel</full_name>
+      <docblock line="4">
+        <description><![CDATA[User Model class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$userModel"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+      <property final="false" static="false" visibility="private" line="13" namespace="global" package="Default">
+        <name>$entity</name>
+        <default><![CDATA[false]]></default>
+      </property>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="18" package="M2 Micro Framework\Modules">
+        <name>__construct</name>
+        <full_name>__construct</full_name>
+        <docblock line="15">
+          <description><![CDATA[Model class constructor with DB init]]></description>
+          <long-description><![CDATA[]]></long-description>
+        </docblock>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="26" package="M2 Micro Framework\Modules">
+        <name>isLoggined</name>
+        <full_name>isLoggined</full_name>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="30" package="M2 Micro Framework\Modules">
+        <name>checkEmail</name>
+        <full_name>checkEmail</full_name>
+        <argument line="30">
+          <name>$email</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="34" package="M2 Micro Framework\Modules">
+        <name>create</name>
+        <full_name>create</full_name>
+        <argument line="34">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="45" package="M2 Micro Framework\Modules">
+        <name>login</name>
+        <full_name>login</full_name>
+        <argument line="45">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="56" package="M2 Micro Framework\Modules">
+        <name>logout</name>
+        <full_name>logout</full_name>
+        <argument line="56">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="61" package="M2 Micro Framework\Modules">
+        <name>createNewPassword</name>
+        <full_name>createNewPassword</full_name>
+        <argument line="61">
+          <name>$email</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\user\model.php</error>
+      <error line="13" code="50018">No DocBlock was found for property $entity</error>
+      <error line="26" code="50010">No DocBlock was found for method isLoggined()</error>
+      <error line="30" code="50010">No DocBlock was found for method checkEmail()</error>
+      <error line="34" code="50010">No DocBlock was found for method create()</error>
+      <error line="45" code="50010">No DocBlock was found for method login()</error>
+      <error line="56" code="50010">No DocBlock was found for method logout()</error>
+      <error line="61" code="50010">No DocBlock was found for method createNewPassword()</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\user\view.php" hash="f67d3bef271bbf49be152dc312e38fbd" package="Default">
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\View</extends>
+      <name>UserView</name>
+      <full_name>\UserView</full_name>
+      <docblock line="4">
+        <description><![CDATA[]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="desc" description="User View Class"/>
+        <tag line="4" name="name" description="$userView"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\user\view.php</error>
+      <critical line="4" code="50005">No short description for class \UserView</critical>
+    </parse_markers>
+  </file>
+  <file path="trunk\modules\view.php" hash="a36dd286377d9a89ea22c8442ecb76dd" package="Default">
+    <include line="158" type="Include" package="Default">
+      <name/>
+    </include>
+    <class final="false" abstract="false" namespace="global" line="12" package="M2 Micro Framework\Modules">
+      <extends>\Application</extends>
+      <name>View</name>
+      <full_name>\View</full_name>
+      <docblock line="4">
+        <description><![CDATA[View class]]></description>
+        <long-description><![CDATA[]]></long-description>
+        <tag line="4" name="name" description="$view"/>
+        <tag line="4" name="package" description="M2 Micro Framework"/>
+        <tag line="4" name="subpackage" description="Modules"/>
+        <tag line="4" name="author" description="Alexander Chaika"/>
+        <tag line="4" name="since" description="0.1"/>
+      </docblock>
+      <method final="false" abstract="false" static="true" visibility="public" namespace="global" line="19" package="M2 Micro Framework\Modules">
+        <name>getView</name>
+        <full_name>getView</full_name>
+        <docblock line="14">
+          <description><![CDATA[Default getView method]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="14" name="param" description="" type="string" variable="$name">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="14" name="return" description="$view" type="object">
+            <type by_reference="false">object</type>
+          </tag>
+        </docblock>
+        <argument line="19">
+          <name>$name</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="29" package="M2 Micro Framework\Modules">
+        <name>render</name>
+        <full_name>render</full_name>
+        <docblock line="25">
+          <description><![CDATA[Render action]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="25" name="param" description="" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="29">
+          <name>$options</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="85" package="M2 Micro Framework\Modules">
+        <name>renderItemsArray</name>
+        <full_name>renderItemsArray</full_name>
+        <docblock line="80">
+          <description><![CDATA[Render items array]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="80" name="param" description="" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="80" name="return" description="$html" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="85">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="113" package="M2 Micro Framework\Modules">
+        <name>wrapPage</name>
+        <full_name>wrapPage</full_name>
+        <docblock line="108">
+          <description><![CDATA[Wrap HTML data to Page]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="108" name="param" description="" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="108" name="return" description="$html" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="113">
+          <name>$options</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="125" package="M2 Micro Framework\Modules">
+        <name>getContents</name>
+        <full_name>getContents</full_name>
+        <docblock line="118">
+          <description><![CDATA[Get HTML contents for TYPE/NAME entity]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="118" name="param" description="" type="string" variable="$type">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="118" name="param" description="" type="string" variable="$name">
+            <type by_reference="false">string</type>
+          </tag>
+          <tag line="118" name="param" description="" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="118" name="return" description="$html" type="string">
+            <type by_reference="false">string</type>
+          </tag>
+        </docblock>
+        <argument line="125">
+          <name>$type</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="125">
+          <name>$name</name>
+          <default><![CDATA[]]></default>
+          <type/>
+        </argument>
+        <argument line="125">
+          <name>$options</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="171" package="M2 Micro Framework\Modules">
+        <name>offline</name>
+        <full_name>offline</full_name>
+        <docblock line="167">
+          <description><![CDATA[Offline render action]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="167" name="param" description="OPTIONAL" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+        </docblock>
+        <argument line="171">
+          <name>$options</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+      <method final="false" abstract="false" static="false" visibility="public" namespace="global" line="183" package="M2 Micro Framework\Modules">
+        <name>_404</name>
+        <full_name>_404</full_name>
+        <docblock line="178">
+          <description><![CDATA[404 Page]]></description>
+          <long-description><![CDATA[]]></long-description>
+          <tag line="178" name="param" description="OPTIONAL" type="array" variable="$options">
+            <type by_reference="false">array</type>
+          </tag>
+          <tag line="178" name="return" description="$options" type="array|null">
+            <type by_reference="false">array</type>
+            <type by_reference="false">null</type>
+          </tag>
+        </docblock>
+        <argument line="183">
+          <name>$options</name>
+          <default><![CDATA[null]]></default>
+          <type/>
+        </argument>
+      </method>
+    </class>
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\modules\view.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\blog\edit.php" hash="32b9194920d4618766a7b67b470b6e9b" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\blog\edit.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\blog\item.php" hash="8e67070bf89757ce6d3a1439a25b1e20" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\blog\item.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\blog\list.php" hash="728663099770e6dc3df14b7ef4f33cac" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\blog\list.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\gallery\edit.php" hash="5cf8fd120fbb8db3a06eb187a6f89607" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\gallery\edit.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\gallery\item.php" hash="65a5fb71d10e4585beadf49064173e4e" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\gallery\item.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\gallery\list.php" hash="fb21f971df4c36d54efebc7422c72ec9" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\gallery\list.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\index.php" hash="2433f8dbd23fc5081e8a8e7c148446d7" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\index.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\plugin\404.php" hash="cf02204a6da06ff5ba702d3cd0563e05" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\plugin\404.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\plugin\debug.php" hash="639f6ba48e544630031c00be903253f9" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\plugin\debug.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\plugin\messages.php" hash="e39bda62f0871ac442288233f27262a9" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\plugin\messages.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\plugin\popup.php" hash="b6d06b7460de030991be05094532f9a7" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\plugin\popup.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\plugin\toolbar.php" hash="f237976f31a3356434290130526351c5" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\plugin\toolbar.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\plugin\topmenu.php" hash="a80e33c8943ce14ba0c14a6eb64b954d" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\plugin\topmenu.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\user\dashboard.php" hash="b1a26ed353216581bc58c90846255571" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\user\dashboard.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\user\forgot.php" hash="6cd36130166ede3e8fb5302c9f672859" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\user\forgot.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\user\login.php" hash="7e12c5c2307ee4aef6120767b4248d89" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\user\login.php</error>
+    </parse_markers>
+  </file>
+  <file path="trunk\templates\default\user\register.php" hash="751c2bbb731bc8fda992be9ed0781ca4" package="Default">
+    <parse_markers>
+      <error line="0" code="50007">No page-level DocBlock was found in file trunk\templates\default\user\register.php</error>
+    </parse_markers>
+  </file>
+  <package name="Default" full_name="Default"/>
+  <package name="M2 Micro Framework" full_name="M2 Micro Framework">
+    <package name="Library" full_name="M2 Micro Framework\Library"/>
+    <package name="Library Tags" full_name="M2 Micro Framework\Library Tags"/>
+    <package name="Main" full_name="M2 Micro Framework\Main"/>
+    <package name="Modules" full_name="M2 Micro Framework\Modules"/>
+    <package name="Tests" full_name="M2 Micro Framework\Tests"/>
+  </package>
+  <namespace name="global" full_name="global"/>
+  <marker count="2">todo</marker>
+  <marker count="0">fixme</marker>
+  <deprecated count="0"/>
+</project>
