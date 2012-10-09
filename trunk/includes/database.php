@@ -8,6 +8,7 @@
      * @package M2 Micro Framework
      * @subpackage Library
      * @author Alexander Chaika
+     * @since 0.1
      */
     class Database extends Application {
         private $res;
@@ -109,6 +110,9 @@
         public function query($query) {
             $this->query = $this->replacePrefix($query);
             $this->res = $this->mysqli->query($this->query);
+
+            // Add debug info
+            $this->logSQL($this->query);
 
             if ($this->getLastErrorNum() > 0) {
                 return $this->_throw($this->getError(), ERROR);

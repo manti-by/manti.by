@@ -7,6 +7,7 @@
      * @package M2 Micro Framework
      * @subpackage Library
      * @author Alexander Chaika
+     * @since 0.1
      */
     class Application {
 
@@ -84,6 +85,7 @@
          */
         public static function clean() {
             unset($GLOBALS['stack']);
+            unset($GLOBALS['sql']);
             return;
         }
 
@@ -172,9 +174,7 @@
         public function saveToLog($message = null) {
             // Trying to get last message from stack
             if (empty($message)) {
-                $message = $this->getLastFromStack();
-                if (!$message) return false;
-
+                if (!$message = $this->getLastFromStack()) return false;
                 $message = $message['level'] . ': ' . $message['message'] . ' (' . $message['debug'] . ')';
             }
 
@@ -251,6 +251,44 @@
          */
         public function getStack() {
             return (isset($GLOBALS['stack']) ? array_reverse($GLOBALS['stack']) : array());
+        }
+
+        /**
+         * Put SQL query to query queue
+         * @param string $query SQL query
+         * @return bool $result
+         */
+        public function logSQL($query){
+            // Check stack
+            if (!isset($GLOBALS['sql'])) $GLOBALS['sql'] = array();
+
+            // Clean query
+            $query = explode(PHP_EOL, $query);
+            $result = array();
+            foreach ($query as $line) {
+                if (!empty($line)) {
+                    if (strlen($line) <= 120) $result[] = trim($line);
+                    else $result[] = substr(trim($line), 0, 120) . ' [...]';
+                }
+            }
+            $query = implode(PHP_EOL, $result);
+
+            // Update stack
+            if (is_array($GLOBALS['sql'])) {
+                $GLOBALS['sql'][] = $query;
+            } else {
+                $GLOBALS['sql'] = array($query);
+            }
+
+            return $GLOBALS['sql'];
+        }
+
+        /**
+         * Get SQL queue
+         * @return array $sql sql stack
+         */
+        public function getSQL(){
+            return (isset($GLOBALS['sql']) ? $GLOBALS['sql'] : array());
         }
 
         /**
