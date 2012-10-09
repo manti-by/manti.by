@@ -2,12 +2,13 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-      * @desc Tag Model class
-      * @name $tagModel
-      * @package M2 Micro Framework
-      * @subpackage Modules
-      * @author Alexander Chaika
-      */
+     * Tag Model class
+     * @name $tagModel
+     * @package M2 Micro Framework
+     * @subpackage Modules
+     * @author Alexander Chaika
+     * @since 0.3RC2
+     */
     class TagModel extends Model {
         
         public function getPosts($limit = 10){

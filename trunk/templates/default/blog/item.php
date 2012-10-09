@@ -6,6 +6,7 @@
      * @author Alexander Chaika
      * @package M2 Micro Framework
      * @subpackage Template
+     * @since 0.1
      */
 ?>
 <div class="item">

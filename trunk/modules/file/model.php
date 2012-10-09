@@ -2,12 +2,13 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-      * @desc File Model class
-      * @name $fileModel
-      * @package M2 Micro Framework
-      * @subpackage Modules
-      * @author Alexander Chaika
-      */
+     * File Model class
+     * @name $fileModel
+     * @package M2 Micro Framework
+     * @subpackage Modules
+     * @author Alexander Chaika
+     * @since 0.3RC2
+     */
     class FileModel extends Model {
 
         private $_map = array();

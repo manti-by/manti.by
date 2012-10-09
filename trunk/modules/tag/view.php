@@ -2,10 +2,11 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-      * @desc File View Class
-      * @name $fileView
-      * @package M2 Micro Framework
-      * @subpackage Modules
-      * @author Alexander Chaika
-      */
+     * File View Class
+     * @name $fileView
+     * @package M2 Micro Framework
+     * @subpackage Modules
+     * @author Alexander Chaika
+     * @since 0.3RC2
+     */
     class FileView extends View { }

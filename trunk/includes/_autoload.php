@@ -1,9 +1,11 @@
 <?php
     /**
      * Global autoload class
+     * @name $_autoload
      * @package M2 Micro Framework
      * @subpackage Library
      * @author Alexander Chaika
+     * @since 0.2RC1
      */
 
     class Autoload {

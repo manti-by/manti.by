@@ -4,6 +4,7 @@
      * @package M2 Micro Framework
      * @subpackage Library Tags
      * @author Alexander Chaika
+     * @since 0.3RC2
      * @todo: Fix first empty tag
      */
     class Tag extends Control {

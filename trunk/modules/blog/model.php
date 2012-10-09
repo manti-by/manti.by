@@ -2,12 +2,13 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-      * @desc Blog Model class
-      * @name $blogModel
-      * @package M2 Micro Framework
-      * @subpackage Modules
-      * @author Alexander Chaika
-      */
+     * Blog Model class
+     * @name $blogModel
+     * @package M2 Micro Framework
+     * @subpackage Modules
+     * @author Alexander Chaika
+     * @since 0.1
+     */
     class BlogModel extends Model {
         
         public function getPost($id){

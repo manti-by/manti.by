@@ -7,7 +7,7 @@
      * @package M2 Micro Framework
      * @subpackage Library
      * @author Alexander Chaika
-     * @version 1.1
+     * @since 0.2RC1
      */
     class Sef extends Application {
         private $storage;
@@ -182,7 +182,7 @@
 
         /**
          * Check existing link in storage
-         * @param type $link
+         * @param string $link
          * @return string $link if exists
          */
         private static function checkStorage($link) {

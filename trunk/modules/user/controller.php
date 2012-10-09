@@ -7,7 +7,8 @@
      * @package M2 Micro Framework
      * @subpackage Modules
      * @author Alexander Chaika
-      */
+     * @since 0.1
+     */
     class UserController extends Controller {
 
         public function indexAction($options) {

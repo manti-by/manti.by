@@ -7,6 +7,7 @@
      * @package M2 Micro Framework
      * @subpackage Template
      * @author Alexander Chaika
+     * @since 0.2RC2
      */
 
     $stack = $this->getStack();

@@ -2,12 +2,13 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-      * @desc Blog Controller class
-      * @name $blogController
-      * @package M2 Micro Framework
-      * @subpackage Modules
-      * @author Alexander Chaika
-      */
+     * Blog Controller class
+     * @name $blogController
+     * @package M2 Micro Framework
+     * @subpackage Modules
+     * @author Alexander Chaika
+     * @since 0.1
+     */
     class BlogController extends Controller {
 
         public function indexAction($options) {

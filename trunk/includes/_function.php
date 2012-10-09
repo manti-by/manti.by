@@ -3,9 +3,11 @@
 
     /**
      * Global system functions
+     * @name $_functions
      * @package M2 Micro Framework
      * @subpackage Library
      * @author Alexander Chaika
+     * @since 0.2RC1
      */
 
     /**

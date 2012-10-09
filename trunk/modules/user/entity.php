@@ -8,6 +8,7 @@
      * @package M2 Micro Framework
      * @subpackage Library
      * @author Alexander Chaika
+     * @since 0.2RC2
      */
     
     class UserEntity extends Entity {
@@ -286,7 +287,7 @@
          * Get user IP
          * @return string $ip
          */
-        public function getIp() {
+        public static function getIp() {
             if (isset($_SERVER['HTTP_CLIENT_IP'])) {
                 return $_SERVER['HTTP_CLIENT_IP'];
             } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -300,7 +301,7 @@
          * Get user browser
          * @return string $user_agent
          */
-        public function getUserAgent() {
+        public static function getUserAgent() {
             return (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : false);
         }
 
@@ -308,7 +309,7 @@
          * Get referer
          * @return string $referer
          */
-        public function getReferer() {
+        public static function getReferer() {
             return (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : false);
         }
     }

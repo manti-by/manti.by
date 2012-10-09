@@ -3,11 +3,12 @@
 
     /**
      * Default controller class
-     * dispach first call and render output result
+     * dispatch first call and render output result
      * @name $controller
      * @package M2 Micro Framework
      * @subpackage Modules
      * @author Alexander Chaika
+     * @since 0.1
      */
     class Controller extends Application {
         /**

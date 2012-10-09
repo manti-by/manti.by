@@ -2,12 +2,13 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-      * @desc Gallery Model class
-      * @name $galleryModel
-      * @package M2 Micro Framework
-      * @subpackage Modules
-      * @author Alexander Chaika
-      */
+     * Gallery Model class
+     * @name $galleryModel
+     * @package M2 Micro Framework
+     * @subpackage Modules
+     * @author Alexander Chaika
+     * @since 0.2RC1
+     */
     class GalleryModel extends Model {
 
         private $file_path;

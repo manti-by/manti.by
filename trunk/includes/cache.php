@@ -7,7 +7,7 @@
       * @package M2 Micro Framework
       * @subpackage Library
       * @author Alexander Chaika
-      * @version 1.0
+      * @since 0.3RC2
       */
     class Cache extends Application {
 

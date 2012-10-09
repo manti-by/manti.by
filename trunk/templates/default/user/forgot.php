@@ -7,6 +7,7 @@
      * @package M2 Micro Framework
      * @subpackage Template
      * @author Alexander Chaika
+     * @since 0.1
      */
 ?>
 <form id="forgot-form" method="POST" action="<?php echo Sef::getSef('index.php'); ?>">
