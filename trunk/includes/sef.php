@@ -37,6 +37,9 @@
          * Init SEF engine
          */
         public static function init() {
+            // Get config
+            if (!Application::$config['sef_enabled']) return;
+
             // Get global config
             $database = Database::getInstance();
 
@@ -45,19 +48,16 @@
                     UPDATE `#___sef_alias`
                     SET `viewed` = `viewed` + 1
                     WHERE `request` = '".$database->escape($_SERVER['REQUEST_URI'])."'
-                       OR `link` = '".$database->escape($_SERVER['REQUEST_URI'])."'");
+                       OR `link` = '".$database->escape($_SERVER['REQUEST_URI'])."';");
 
-            // If sef enabled
-            if (Application::$config['sef_enabled']) {
-                // Get request string
-                $request = substr(self::getReal($_SERVER['REQUEST_URI']), 1);
+            // Get request string
+            $request = substr(self::getReal($_SERVER['REQUEST_URI']), 1);
 
-                // Delete question symbol
-                // and inject request data
-                $result = strstr($request, "?");
-                if ($result) {
-                    parse_str($result, $_REQUEST);
-                }
+            // Delete question symbol
+            // and inject request data
+            $result = strstr($request, "?");
+            if ($result) {
+                parse_str($result, $_REQUEST);
             }
         }
 
@@ -81,14 +81,14 @@
             $database = Database::getInstance();
             $result = $database->query("
                     SELECT `request` FROM `#___sef_alias`
-                    WHERE `link` = '".$database->escape($link)."'");
+                    WHERE `link` = '".$database->escape($link)."';");
             if ($result) {
                 $request = $database->getField();
 
                 // Update view counter
                 $database->query("
                         UPDATE `#___sef_alias` SET `viewed` = `viewed` + 1
-                        WHERE `link` = '".$database->escape($link)."'");
+                        WHERE `link` = '".$database->escape($link)."';");
             } else {
                 $request = $link;
             }
@@ -118,7 +118,7 @@
             $database = Database::getInstance();
             $result = $database->query("
                     SELECT `link` FROM `#___sef_alias`
-                    WHERE `request` = '".$database->escape($request)."'");
+                    WHERE `request` = '".$database->escape($request)."';");
             if ($result) {
                 $link = $database->getField();
             } else {
@@ -151,7 +151,7 @@
                     $database = Database::getInstance();
                     $result = $database->query("
                             SELECT `".$source['field']."` FROM `#__".$source['table']."`
-                            WHERE `id` = '".$matches[1]."'");
+                            WHERE `id` = '".$matches[1]."';");
 
                     if ($result) {
                         $alias = $database->getField();
