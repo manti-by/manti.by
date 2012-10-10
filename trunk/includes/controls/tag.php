@@ -5,7 +5,6 @@
      * @subpackage Library Tags
      * @author Alexander Chaika
      * @since 0.3RC2
-     * @todo: Fix first empty tag
      */
     class Tag extends Control {
 
@@ -74,7 +73,8 @@
                     </script>';
 
                 // Create header
-                $html .= '<input type="hidden" id="' . $this->_options['id'] . '" name="' . $this->_options['name'] . '" value="' . implode(',', $this->_tags) . '" />';
+                $value = !empty($this->_tags) && count($this->_tags) > 0 ? implode(',', $this->_tags) : '';
+                $html .= '<input type="hidden" id="' . $this->_options['id'] . '" name="' . $this->_options['name'] . '" value="' . $value . '" />';
                 $html .= '<div class="tag-wrap">';
                 $html .= '<ul id="' . $this->_options['id'] . '-control" class="' . $this->_options['class'] . '-control">';
 
