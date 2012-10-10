@@ -24,7 +24,7 @@
          * Singleton protection
          * @param int $id user ID for load
          */
-        private function __construct($id = null) {
+        protected function __construct($id = null) {
             // Get db handler
             $this->database = Database::getInstance();
         }
@@ -281,6 +281,15 @@
         public function getUsername() {
             $this->checkSession();
             return $this->username;
+        }
+
+        /**
+         * Get user group
+         * @return string $username
+         */
+        public function getGroup() {
+            $this->checkSession();
+            return $this->group;
         }
         
         /**

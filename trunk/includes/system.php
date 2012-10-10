@@ -15,6 +15,11 @@
         protected static $instance = null;
 
         /**
+         * Singleton protection
+         */
+        protected function __construct() { }
+
+        /**
          * GetInstance class method
          * @return Current_Class_Name $instance
          */
@@ -315,7 +320,7 @@
          * Check if gzip enabled and work
          * @return bool $state
          */
-        public function isGzip() {
+        public static function isGzip() {
             if (!Application::$config['gzip']) return false;
             if (headers_sent() || connection_aborted()) return false;
             if (strpos($_SERVER['HTTP_ACCEPT_ENCODING'], 'x-gzip') !== false) return false;
@@ -329,7 +334,7 @@
          * @param string $address
          * @return array $coords
          */
-        public function getCoords($address) {
+        public static function getCoords($address) {
             // Open CURL session
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_FAILONERROR, 1);
@@ -345,5 +350,17 @@
             curl_close($curl);
 
             return $coords;
+        }
+
+        /**
+         * Convert size in bytes to human readable
+         * @param int $bytes
+         * @param int $decimals OPTIONAL
+         * @return string $result
+         */
+        public static function humanReadableFilesize($bytes, $decimals = 2) {
+            $sizes = 'BKMGTP';
+            $factor = floor((strlen($bytes) - 1) / 3);
+            return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sizes[$factor];
         }
     }

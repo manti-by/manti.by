@@ -18,6 +18,22 @@
         protected $result = 0;
 
         /**
+         * Singleton protection
+         */
+        protected function __construct() { }
+
+        /**
+         * GetInstance class method
+         * @return Current_Class_Name $instance
+         */
+        public static function getInstance() {
+            if (is_null(self::$instance)) {
+                self::$instance = new Database;
+            }
+            return self::$instance;
+        }
+
+        /**
          * Init application
          * Get parse current route
          * Get global user params
@@ -121,7 +137,7 @@
          * @param int $level OPTIONAL error number
          * @return bool FALSE
          */
-        protected function _throw($message, $level = null) {
+        public function _throw($message, $level = null) {
             // Check default message level
             if (empty($level)) $level = self::$config['default_error_level'];
 
@@ -148,7 +164,7 @@
          * @param string $message OPTIONAL message to show (default null)
          * @return bool TRUE
          */
-        protected function _clean($message = null) {
+        public function _clean($message = null) {
             // Add message to global messages stack
             if (!empty($message)) {
                 $this->addToStack($message, MESSAGE);

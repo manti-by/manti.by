@@ -16,7 +16,7 @@
         /**
          * Singleton protection
          */
-        private function __construct() {
+        protected function __construct() {
             // Try connect to DB
             $this->storage = array();
 

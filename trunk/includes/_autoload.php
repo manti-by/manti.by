@@ -18,7 +18,7 @@
                 if (file_exists($file_name = ROOT_PATH . DS . 'modules' . DS . $module_name . DS . strtolower($matches[0]) . '.php')) {
                     self::$_lastLoadedFilename = $file_name;
                 } else {
-                    throw new Exception($className . ' ' . T('could not be found'));
+                    Application::getInstance()->_throw($className . ' ' . T('could not be found'));
                 }
             } else {
                 if (file_exists($file_name = LIB_PATH . DS . strtolower($className) . '.php')) {
@@ -26,7 +26,7 @@
                 } else if (file_exists($file_name = LIB_PATH . DS . 'controls' . DS . strtolower($className) . '.php')) {
                     self::$_lastLoadedFilename = $file_name;
                 } else {
-                    throw new Exception($className . ' ' . T('could not be found'));
+                    Application::getInstance()->_throw($className . ' ' . T('could not be found'));
                 }
             }
             require_once self::$_lastLoadedFilename;
