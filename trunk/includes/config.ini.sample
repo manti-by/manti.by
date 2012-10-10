@@ -1,37 +1,46 @@
-; configuraion of M2 Micro Framework
+; configuration of M2 Micro Framework
 [general settings]
 http_host =
 doc_root =
 mail_from = "marco.manti@gmail.com"
-secret = ca9b2e0b6ffbb11c2480b097d3897097
+secret = 21232f297a57a5a743894a0e4a801fc3
+new_pass_length = 10
+site_title = "New site"
 default_module = front
+date_format = "M d, Y"
 template = default
 language = en
 gzip = 0
 
 [sef config]
-sef_enabled = 1
+sef_enabled = 0
 sef_suffix = ".html"
 
 [error handlers]
-default_error_level = 3
-log_write_level = 1
+default_error_level = 2
+log_write_level = 6
 debug_level_max = 3
 debug_level_skip = 2
 error_log = "../../log/app_error.log"
 
-[image & file upload]
-allowed_file_extentions = png,jpg,mp3,zip
-upload_image_path = "/data/upload/images"
-upload_thumb_path = "/data/upload/thumbs"
+[content files]
+allowed_file_extensions = "png,jpg,mp3,zip"
+
+[music releases in blog module]
+preview_path = "./content/preview"
+release_path = "./content/release"
+covers_path = "./content/covers"
+
+[gallery settings]
+gallery_path = "./content/gallery"
 thumb_width = 90
 thumb_height = 90
 
 [database credentials]
-db_path = localhost
-db_port = 3336
+db_path = "127.0.0.1"
+db_port = 3306
 db_user = root
-db_pass = Dalt0nik
-db_base = niiar
+db_pass = password
+db_base = default
 db_prefix =
 db_encoding = utf8
