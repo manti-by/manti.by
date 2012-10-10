@@ -9,8 +9,7 @@ BEGIN
         WHERE pr.`original_id` = _id;
     ELSE
         SELECT p.`id` AS `id`, p.`name` AS `name`
-        FROM `post_relations` AS pr
-        LEFT JOIN `post` AS p ON p.`id` = pr.`destination_id`;
+		FROM `post` AS p;
     END IF;
 END
 ;;
