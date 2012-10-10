@@ -20,6 +20,7 @@
     </head>
     <body>
         <?php echo $this->getContents('plugin', 'popup'); ?>
+        <?php echo $this->getContents('plugin', 'loader'); ?>
         <?php echo $this->getContents('plugin', 'messages'); ?>
 
         <div id="header" class="wrapper">
