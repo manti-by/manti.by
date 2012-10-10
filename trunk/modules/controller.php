@@ -51,7 +51,11 @@
 
             // load module
             $module = $this->loadModule(System::getInstance()->getCmd('module'));
-            $result = $module->route();
+            if ($module) {
+                $result = $module->route();
+            } else {
+                $result = $this->view->_404();
+            }
 
             // render page
             $this->view->render($result);
@@ -71,7 +75,7 @@
         /**
          * Method which load modules
          * @param string $module module name
-         * @return object $module
+         * @return object|bool $module
          */
         protected function loadModule($module) {
             // Check module name
@@ -85,7 +89,11 @@
                 $module_name = $module . 'Controller';
             }
 
-            return new $module_name();
+            if (class_exists($module_name)) {
+                return new $module_name();
+            } else {
+                return false;
+            }
         }
 
         /**
