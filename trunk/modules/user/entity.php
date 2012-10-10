@@ -49,7 +49,7 @@
             // Get items
             $this->database->query("
                 INSERT INTO #__user (`username`, `email`, `password`)
-                VALUES ('".$options['username']."', '".$options['email']."', '".md5(Application::$config['secret'].$options['password'])."')");
+                VALUES ('".$options['username']."', '".$options['email']."', '".md5(Application::$config['secret'].$options['password'])."');");
             
             $result = $this->database->getResult();
             if ($result) {
@@ -72,7 +72,7 @@
                     FROM `#__user`
                     WHERE `email` = '".$options['email']."'
                       AND `password` = '".md5(Application::$config['secret'].$options['password'])."'
-                    LIMIT 0, 1");
+                    LIMIT 0, 1;");
 
                 $result = $this->database->getField();
                 if ($result) {
@@ -86,7 +86,7 @@
                     SELECT `id` 
                     FROM `#__user` 
                     WHERE MD5(CONCAT('".Application::$config['secret']."', `email`)) = '".$options['cookie']."'
-                    LIMIT 0, 1");
+                    LIMIT 0, 1;");
 
                 $result = $this->database->getField();
                 if ($result) {
@@ -100,7 +100,7 @@
                     SELECT `id` 
                     FROM `#__user` 
                     WHERE `username` = '".$options['username']."'
-                    LIMIT 0, 1");
+                    LIMIT 0, 1;");
 
                 $result = $this->database->getField();
                 if ($result) {
@@ -138,7 +138,7 @@
                 FROM `#__user` AS u
                 JOIN `#__group` AS g ON g.`id` = u.`group_id`
                 WHERE u.`id` = $id
-                LIMIT 0, 1");
+                LIMIT 0, 1;");
             
             $result = $this->database->getObject();
             if ($result) {
@@ -250,7 +250,7 @@
             $this->database->query("
                 SELECT `id` FROM `#__user` 
                 WHERE `email` = '".$email."' 
-                LIMIT 0, 1");
+                LIMIT 0, 1;");
             
             $result = $this->database->getResult();
             return ($result ? true : false);
@@ -268,7 +268,7 @@
                 UPDATE `#__user` 
                 SET `password` = '" . md5(Application::$config['secret'] . $password) . "'
                 WHERE `email` = '" . $email . "'
-                LIMIT 1");
+                LIMIT 1;");
             
             $result = $this->database->getResult();
             return ($result ? true : false);
