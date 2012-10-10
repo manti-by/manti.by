@@ -28,21 +28,18 @@
          */
         public function render() {
             if ($html = parent::render()) {
-                $this->_data = Model::getModel('file')->getList($this->_options['type']);
+                $this->_data = Model::getModel('file')->getDBList($this->_options['type']);
                 if ($this->_data) {
                     // Create script
                     $html .= '
                         <script type="text/javascript">
                             $(document).ready(function() {
                                 $(\'#edit\').click(function() {
-                                    $(\'#popup #content\').html($(\'#' . $this->_options['id'] . '-data\').html());
-                                    $(\'#popup\').show();
+                                    $.fn.popupShow($(\'#' . $this->_options['id'] . '-data\').html());
                                 });
 
                                 $(\'#close\').click(function() {
-                                    $(\'#' . $this->_options['id'] . '-data\').html($(\'#popup .content\').html());
-                                    $(\'#popup .content\').html(\'\');
-                                    $(\'#popup\').hide();
+                                    $(\'#' . $this->_options['id'] . '-data\').html($.fn.popupHide());
                                 });
                             });
                         </script>';
@@ -71,8 +68,9 @@
                     $html .= '</div>';
 
                     return $html;
+                } else {
+                    return '<div id="' . $this->_options['id'] . '" class="' . $this->_options['class'] . ' files">'.T('No files found') .'</div>';
                 }
-                return $html;
             } else {
                 return false;
             }

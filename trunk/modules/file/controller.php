@@ -8,14 +8,35 @@
      * @subpackage Modules
      * @author Alexander Chaika
      * @since 0.3RC2
+     * @todo Implement file adding
      */
     class FileController extends Controller {
 
         public function indexAction($options) {
-            // Get frontpage contents items
-            $options['title'] = 'Default file list of M2 Micro Framework';
-            $options['body']  = '<h1>File page of M2 Micro Framework</h1>';
+            return $this->listAction($options);
+        }
 
+        public function listAction($options) {
+            // Get all files list
+            $options['title'] = 'File list from DB';
+            $options['data'] = $this->model->getDBList();
+            $options['body']  = $this->view->getContents('file', 'dblist', $options);
+
+            return $options;
+        }
+
+        public function filesystemAction($options) {
+            // Get all files list
+            $options['title'] = 'File list from FS';
+            $options['data'] = $this->model->getFSList();
+            $options['body']  = $this->view->getContents('file', 'fslist', $options);
+
+            return $options;
+        }
+
+        public function addAction($options) {
+            $options['output'] = 'json';
+            $options['data'] = array('result' => 'success');
             return $options;
         }
     }

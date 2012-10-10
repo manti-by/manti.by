@@ -35,20 +35,17 @@
                         <script type="text/javascript">
                             $(document).ready(function() {
                                 $(\'#edit\').click(function() {
-                                    $(\'#popup #content\').html($(\'#' . $this->_options['id'] . '-data\').html());
-                                    $(\'#popup\').show();
+                                    $.fn.popupShow($(\'#' . $this->_options['id'] . '-data\').html());
                                 });
 
                                 $(\'#close\').click(function() {
-                                    $(\'#' . $this->_options['id'] . '-data\').html($(\'#popup .content\').html());
-                                    $(\'#popup .content\').html(\'\');
-                                    $(\'#popup\').hide();
+                                    $(\'#' . $this->_options['id'] . '-data\').html($.fn.popupHide());
                                 });
                             });
                         </script>';
 
                     // Create header
-                    $html .= '<div id="' . $this->_options['id'] . '" class="' . $this->_options['class'] . ' files">';
+                    $html .= '<div id="' . $this->_options['id'] . '" class="' . $this->_options['class'] . ' relations">';
                     $html .= '<div id="' . $this->_options['id'] . '-notice">' . $this->_data . ' ' . T('items') . '</div>';
                     $html .= '<div id="' . $this->_options['id'] . '-data">';
 
@@ -71,8 +68,9 @@
                     $html .= '</div>';
 
                     return $html;
+                } else {
+                    return '<div id="' . $this->_options['id'] . '" class="' . $this->_options['class'] . ' relations">'.T('No posts found') .'</div>';
                 }
-                return $html;
             } else {
                 return false;
             }
