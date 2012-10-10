@@ -20,9 +20,4 @@ $(document).ready(function() {
     $('.accordion').click(function() {
         $(this).next().toggle(400);
     });
-
-    // move loader
-    $('body').mousemove(function(e){
-        $('#loader').css('left', e.pageX + 16).css('top', e.pageY - 16);
-    });
 });
