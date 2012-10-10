@@ -54,6 +54,8 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
            text-decoration: none; border: 1px solid #CCC; color: black;
            background: #EEE url(../images/button.png) repeat-x; }
 
+.accordion { cursor: pointer; }
+
 .error, .warning,
 .message { margin: 5px 0; padding: 15px; font-size: 14px;
     border: none; border-top: 3px solid; border-bottom: 3px solid; }
