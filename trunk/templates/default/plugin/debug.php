@@ -13,13 +13,16 @@
     $stack = $this->getStack();
     $sql = $this->getSQL();
 
+    $user = UserEntity::getInstance();
 ?>
-<div id="debug" class="wrapper">
-    <h2>Debug info</h2>
+<?php if ($user->getGroup() == 'Root' && Application::$config['show_debug_panel']) : ?>
+    <div id="debug" class="wrapper">
+        <h2>Debug info</h2>
 
-    <h3 class="accordion">MESSAGES STACK</h3>
-    <pre><?php var_dump($stack); ?></pre>
+        <h3 class="accordion">MESSAGES STACK</h3>
+        <pre><?php var_dump($stack); ?></pre>
 
-    <h3 class="accordion">SQL QUEUE</h3>
-    <pre><?php echo implode('<hr />', $sql); ?></pre>
-</div>
+        <h3 class="accordion">SQL QUEUE</h3>
+        <pre><?php echo implode('<hr />', $sql); ?></pre>
+    </div>
+<?php endif; ?>
