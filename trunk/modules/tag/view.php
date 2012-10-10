@@ -9,4 +9,4 @@
      * @author Alexander Chaika
      * @since 0.3RC2
      */
-    class FileView extends View { }
+    class TagView extends View { }
