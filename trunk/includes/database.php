@@ -92,6 +92,20 @@
         }
 
         /**
+         * Check last operation result
+         * @return bool $result
+         */
+        private function checkResult() {
+            if (($this->result < 1 && $this->getLastErrorNum() != 0) || !$this->res) {
+                return $this->_throw($this->getError(), ERROR);
+            } elseif ($this->result < 1 && $this->getLastErrorNum() == 0) {
+                return $this->_throw(T('Empty result'), NOTICE);
+            } else {
+                return true;
+            }
+        }
+
+        /**
          * Replace #__ to db prefix
          * @param string $query query to execute
          * @return string $query with replaced prefix
@@ -109,7 +123,10 @@
          */
         public function query($query) {
             $this->query = $this->replacePrefix($query);
-            $this->res = $this->mysqli->query($this->query);
+            $this->res = $this->mysqli->query($this->query, MYSQLI_STORE_RESULT);
+
+            // Check CALL result
+            if ($this->mysqli->next_result()) $this->mysqli->store_result();
 
             // Add debug info
             $this->logSQL($this->query);
@@ -184,7 +201,6 @@
             if (!$row || empty($row)) {
                 return false;
             } else {
-                $this->res->free();
                 return $row[0];
             }
         }
@@ -204,7 +220,6 @@
             if (!$obj || empty($obj)) {
                 return false;
             } else {
-                $this->res->free();
                 return $obj;
             }
         }
@@ -225,7 +240,6 @@
                 $arr[] = $obj;
             }
 
-            $this->res->free();
             return $arr;
         }
 
@@ -245,7 +259,6 @@
                 $arr[] = $row[0];
             }
 
-            $this->res->free();
             return $arr;
         }
 
@@ -264,28 +277,15 @@
             // Return pairs
             while($obj = $this->res->fetch_object()) {
                 if (!$obj || empty($obj)) break;
+
                 if (empty($obj->$index)) {
                     return $this->_throw(T('Incorrect DB index'));
                 }
+
                 $arr[(int)$obj->$index] = $obj->$field;
             }
 
-            $this->res->free();
             return $arr;
-        }
-
-        /**
-         * Check last operation result
-         * @return bool $result
-         */
-        private function checkResult() {
-            if (($this->result < 1 && $this->getLastErrorNum() != 0) || !$this->res) {
-                return $this->_throw($this->getError(), ERROR);
-            } elseif ($this->result < 1 && $this->getLastErrorNum() == 0) {
-                return $this->_throw(T('Empty result'), NOTICE);
-            } else {
-                return true;
-            }
         }
 
         /**
