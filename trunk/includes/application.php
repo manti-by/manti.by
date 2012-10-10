@@ -250,7 +250,7 @@
          * @return array $stack messages stack
          */
         public function getStack() {
-            return (isset($GLOBALS['stack']) ? array_reverse($GLOBALS['stack']) : array());
+            return (isset($GLOBALS['stack']) ? $GLOBALS['stack'] : array());
         }
 
         /**
