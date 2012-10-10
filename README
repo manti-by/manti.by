@@ -1,4 +1,6 @@
 M2 micro framework by Alexander Chaika (marco.manti@gmail.com).
 
 Source link: https://github.com/marco-manti/M2_micro/
-Current version: 0.3RC2
+Current version: 0.3RC3
+
+Requirements: PHP 5.3+, MySQL 5.0+, MySQLi PHP driver.

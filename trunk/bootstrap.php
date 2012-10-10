@@ -1,9 +1,10 @@
 <?php
     /**
-     * @desc Bootstrap base engine classes
+     * Bootstrap base engine classes
      * @package M2 Micro Framework
      * @subpackage Main
      * @author Alexander Chaika
+     * @since 0.1
      */
 
     // start session
@@ -32,6 +33,5 @@
     define('MESSAGE', 8);
 
     // system classes
-/** @noinspection PhpIncludeInspection */
-require_once LIB_PATH . DS . '_function.php';
+    require_once LIB_PATH . DS . '_function.php';
     require_once LIB_PATH . DS . '_autoload.php';

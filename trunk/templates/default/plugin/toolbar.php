@@ -18,6 +18,7 @@
             <?php echo T('Hi') . ' ' . $user->getUsername(); ?>!
         </div>
         <a href="<?php echo Sef::getSef('index.php?module=user'); ?>"><?php echo T('Dashboard'); ?></a> |
+        <a href="<?php echo Sef::getSef('index.php?module=file'); ?>"><?php echo T('Files'); ?></a> |
         <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Logout'); ?></a>
     <?php else : ?>
         <a href="<?php echo Sef::getSef('index.php?module=user&action=loginform'); ?>"><?php echo T('Login'); ?></a> |

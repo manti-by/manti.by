@@ -17,6 +17,7 @@ sef_enabled = 0
 sef_suffix = ".html"
 
 [error handlers]
+show_debug_panel = 0
 default_error_level = 2
 log_write_level = 6
 debug_level_max = 3

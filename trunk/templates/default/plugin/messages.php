@@ -12,7 +12,7 @@
 
     $stack = $this->getLastFromStack();
     $message = $stack['message'];
-    $class = strtolower(getErrorStringFromInt($stack['level']));
+    $class = strtolower($stack['level']);
 ?>
 <?php if ($this->isMessagePresent()) : ?>
     <div id="message" class="<?php echo $class; ?>">
