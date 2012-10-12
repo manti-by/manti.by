@@ -123,10 +123,7 @@
          */
         public function query($query) {
             $this->query = $this->replacePrefix($query);
-            $this->res = $this->mysqli->query($this->query, MYSQLI_STORE_RESULT);
-
-            // Check CALL result
-            if ($this->mysqli->next_result()) $this->mysqli->store_result();
+            $this->res = $this->mysqli->query($this->query);
 
             // Add debug info
             $this->logSQL($this->query);
@@ -198,6 +195,10 @@
 
             // Return first field
             $row = $this->res->fetch_row();
+
+            // Check CALL result
+            if ($this->mysqli->next_result()) $this->mysqli->store_result();
+
             if (!$row || empty($row)) {
                 return false;
             } else {
@@ -217,6 +218,10 @@
 
             // Return object
             $obj = $this->res->fetch_object();
+
+            // Check CALL result
+            if ($this->mysqli->next_result()) $this->mysqli->store_result();
+
             if (!$obj || empty($obj)) {
                 return false;
             } else {
@@ -240,6 +245,9 @@
                 $arr[] = $obj;
             }
 
+            // Check CALL result
+            if ($this->mysqli->next_result()) $this->mysqli->store_result();
+
             return $arr;
         }
 
@@ -258,6 +266,9 @@
                 if (!$row || empty($row)) break;
                 $arr[] = $row[0];
             }
+
+            // Check CALL result
+            if ($this->mysqli->next_result()) $this->mysqli->store_result();
 
             return $arr;
         }
@@ -284,6 +295,9 @@
 
                 $arr[(int)$obj->$index] = $obj->$field;
             }
+
+            // Check CALL result
+            if ($this->mysqli->next_result()) $this->mysqli->store_result();
 
             return $arr;
         }
