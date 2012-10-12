@@ -9,7 +9,7 @@ BEGIN
         WHERE pr.`original_id` = _id;
     ELSE
         SELECT p.`id` AS `id`, p.`name` AS `name`
-		FROM `post` AS p;
+        FROM `post` AS p;
     END IF;
 END
 ;;

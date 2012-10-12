@@ -69,12 +69,19 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 
 .small { font-size: 11px; font-weight: normal; }
 .big { font-size: 16px; font-weight: bold; }
+.bold { font-weight: bold; }
+
+.center { text-align: center; }
+.left { text-align: left; }
+.right { text-align: right; }
+.justify { text-align: justify; }
 
 .white { color: #FFF; }
 .lightgrey { color: #AAA; }
 .grey { color: #666; }
 .darkgrey { color: #333; }
 .red { color: #F00; }
+.green { color: #090; }
 
 .bg-lightgrey { background-color: #AAA; }
 .bg-darkgrey { background-color: #333; }
@@ -104,8 +111,8 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 
 #popup { display: none; position: fixed; top: 250px; left: 50%; min-width: 400px;
     margin-left: -200px; padding: 15px; box-shadow: 3px 3px 3px #999;
-    background: url(../images/black-bg-50.png); z-index: 1000; }
-#popup .content { padding: 15px; border: 1px solid #CCC; background: #FFF; }
+    background: url(../images/black-bg-75.png); z-index: 1000; }
+#popup .content { padding: 15px; border: 1px solid #CCC; background: #FFF; min-height: 150px; }
 
 #message { position: fixed; top: 0; left: 50%; width: 1000px; margin-left: -500px; }
 

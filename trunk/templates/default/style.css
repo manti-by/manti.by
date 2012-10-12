@@ -12,3 +12,5 @@ ul#topmenu { margin: 5px 0; padding: 0; }
 
 #edit-post-form .tag-wrap { min-width: 523px; }
 #edit-post-form .tag-wrap .tag-input { width: 100px; }
+
+#file-table a { display: inline-block; min-width: 40px; }

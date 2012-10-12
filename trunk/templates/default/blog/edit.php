@@ -96,8 +96,8 @@
         </p>
     </fieldset>
     <p>
-        <input type="button" name="save" id="save" value="<?php echo T('Save'); ?>" class="red-button" />
-        <input type="button" name="reset" value="<?php echo T('Reset'); ?>" class="red-button" />
+        <input type="button" name="save" id="save" value="<?php echo T('Save'); ?>" />
+        <input type="button" name="reset" value="<?php echo T('Reset'); ?>" />
     </p>
 </form>
 
