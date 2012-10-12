@@ -3,10 +3,12 @@ SET FOREIGN_KEY_CHECKS=0;
 DROP TABLE IF EXISTS `files`;
 CREATE TABLE `files` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `type` enum('set','preview') DEFAULT 'set',
+  `type` varchar(32) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `description` text,
   `source` text NOT NULL,
+  `size` int(11) unsigned DEFAULT NULL,
+  `md5` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

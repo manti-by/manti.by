@@ -29,35 +29,23 @@
         }
 
         /**
-         * Return file list from DB by type
+         * Get filelist
          * @param string $type OPTIONAL file type
          * @param int $limit OPTIONAL
-         * @return bool|array $result
-         */
-        public function getDBList($type = null, $limit = 0) {
-            // Check map
-            if (!array_key_exists($type, $this->_map) && $type !== null) {
-                return $this->_throw(T('File type') . ' ' . $type . ' ' . T('not available'));
-            }
-
-            $this->database->query("CALL GET_FILES('$type', $limit);");
-            if ($this->database->getResult() > 0) {
-                return $this->database->getPairs('id', 'name');
-            } else {
-                return false;
-            }
-        }
-
-        /**
-         * Get filelist from local system
-         * @param string $type OPTIONAL file type
          * @return array|bool $result
          */
-        public function getFSList($type = null) {
+        public function getList($type = null, $limit = 100) {
             // Check map
             if (!array_key_exists($type, $this->_map) && $type != null) {
                 $this->_throw(T('File type') . ' "' . $type . '" ' . T('not available, scan all pathes'));
                 $type = null;
+            }
+
+            // Get files from DB
+            $db_files = array();
+            $this->database->query("CALL GET_FILES('$type', $limit);");
+            if ($this->database->getResult() > 0) {
+                $db_files = $this->database->getPairs('id', 'source');
             }
 
             // Scan filesystem
@@ -65,8 +53,18 @@
             if ($type == null) {
                 $result = array();
                 foreach ($this->_map as $type => $path) {
+                    $data = $this->getDirList($path);
+
+                    // Check in DB
+                    foreach ($db_files as $id => $source) {
+                        if (array_key_exists($source, $data)) {
+                            $data[$source]['id'] = $id;
+                        }
+                    }
+
+                    // Compile result
                     $result[$type] = array(
-                        'data' => $this->getDirList($path),
+                        'data' => $data,
                         'path' => $path
                     );
                 }
@@ -86,16 +84,92 @@
             $result = array();
             $iterator = new RecursiveDirectoryIterator($directory);
             foreach ($iterator as $path) {
+                // Remove root path from file link
                 $current = $path->__toString();
+                $current = str_ireplace(ROOT_PATH, '.', $current);
                 $pathinfo = pathinfo($current);
 
                 // Check available extension
                 if (in_array($pathinfo['extension'], explode(',', Application::$config['allowed_file_extensions']))) {
+                    // Convert to unix routes
+                    $source = str_replace(DS , '/', $current);
+                    $source = str_replace('//' , '/', $source);
+
+                    // Add file info
                     $file = fopen($current, "r");
-                    $result[$current] = $pathinfo + fstat($file);
+                    $result[$source] = $pathinfo + fstat($file);
                 }
             }
 
             return $result;
+        }
+
+        /**
+         * Add file to DB
+         * @param array $options
+         * @return int|bool $insert_id
+         */
+        public function add($options) {
+            $file = ROOT_PATH . $options['source'];
+            if (file_exists($file)) {
+                // Get type - parent file folder
+                $pathinfo = pathinfo($file);
+                $type = end(explode(DS, realpath($pathinfo['dirname'])));
+
+                // Get file info
+                $file_source = fopen($file, "r");
+                $fstat = fstat($file_source);
+
+                // Convert to unix routes
+                $source = str_replace(DS , '/', $options['source']);
+                $source = str_replace('//' , '/', $source);
+
+                // Create or update file
+                $this->database->query("CALL UPSERT_FILE('".$type."', '".$options['name']."','".$options['description']."','".$source."',".$fstat['size'].",'".md5_file($file)."');");
+                if ($this->database->getResult() > 0) {
+                    return $this->database->getField();
+                } else {
+                    return false;
+                }
+            } else {
+                return $this->_throw(T('File does not exist'), ERROR);
+            }
+        }
+
+        /**
+         * Remove file from DB
+         * @param int $id
+         * @return bool $result
+         */
+        public function remove($id) {
+            // Create or update file
+            $this->database->query("CALL REMOVE_FILE('".$id."');");
+            if ($this->database->getResult() > 0) {
+                return $this->database->getField();
+            } else {
+                return $this->_throw(T('File does not exist'));
+            }
+        }
+
+        /**
+         * Remove file from DB
+         * @param string $source
+         * @return bool $result
+         */
+        public function delete($source) {
+            // Remove file from DB
+            $this->database->query("CALL REMOVE_FILE('".$source."');");
+
+            // Remove file from FS
+            $file = ROOT_PATH . $source;
+            if (file_exists($file)) {
+                if (unlink($file)) {
+                    return true;
+                } else {
+                    return $this->_throw(T('You dont have permissions to delete this file'));
+                }
+            } else {
+                return $this->_throw(T('File does not exist'), ERROR);
+            }
         }
     }

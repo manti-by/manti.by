@@ -2,10 +2,16 @@ DROP PROCEDURE IF EXISTS `GET_FILES`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_FILES`(IN `_type` varchar(32), IN `_limit` int)
 BEGIN
-    SELECT `id`, `name`
-    FROM `files`
-    WHERE `type` = _type
-    LIMIT _limit;
+    IF (_type <> '') THEN
+        SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
+        FROM `files`
+        WHERE `type` = _type
+        LIMIT _limit;
+    ELSE
+        SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
+        FROM `files`
+        LIMIT _limit;
+    END IF;
 END
 ;;
 DELIMITER ;

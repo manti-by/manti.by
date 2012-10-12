@@ -18,7 +18,7 @@
          */
         public function printFileArray($array) {
             // Print head
-            $result  = '<table cellpadding="5" cellspacing="0" width="100%" class="file-table">';
+            $result  = '<table id="file-table" cellpadding="5" cellspacing="0" width="100%">';
             $result .= '<tr>';
             $result .= '<th>' . T('Filename') . '</th>';
             $result .= '<th>' . T('Filesize') . '</th>';
@@ -26,25 +26,47 @@
             $result .= '</tr>';
 
             // Print body
+            $i = 0;
             foreach ($array as $id => $current) {
                 if (!isset($current['basename'])) {
                     $result .= '<tr><td colspan="3" class="bg-darkgrey white">' . $current['path'] . '</td></tr>';
 
-                    $class = '';
                     foreach ($current['data'] as $filename => $data) {
-                        $result .= '<tr>';
-                        $result .= '<td>' . $data['basename'] . '</td>';
-                        $result .= '<td>' . System::humanReadableFilesize($data['size']) . '</td>';
-                        $result .= '<td><a href="#add" class="file-add" rel="' . $filename . '">Add</a></td>';
+                        $db_file_exist = isset($data['id']) && $data['id'] > 0 ? true : false;
+                        $class = $db_file_exist ? ' green' : '';
+
+                        $result .= '<tr id="file-'.$i.'">';
+                        $result .= '<td class="file-name'.$class.'">' . $data['basename'] . '</td>';
+                        $result .= '<td class="file-size">' . System::humanReadableFilesize($data['size']) . '</td>';
+
+                        $result .= '<td class="file-actions"><a href="#delete" class="file-delete red" rel_id="file-'.$i.'" rel="' . $filename . '">' . T('Delete') . '</a> ';
+                        if ($db_file_exist) {
+                            $result .= '<a href="#remove" class="file-remove" rel_id="file-'.$i.'" rel="' . $data['id'] . '">' . T('Remove') . '</a></td>';
+                        } else {
+                            $result .= '<a href="#add" class="file-add green" rel_id="file-'.$i.'" rel="' . $filename . '">' . T('Add') . '</a></td>';
+                        }
+
                         $result .= '</tr>';
+                        $i++;
                     }
                 } else {
-                    $result .= '<tr>';
-                    $result .= '<td>' . $current['basename'] . '</td>';
-                    $result .= '<td>' . System::humanReadableFilesize($current['size']) . '</td>';
-                    $result .= '<td><a href="#add" class="file-add" rel="' . $id . '">Add</a></td>';
+                    $db_file_exist = isset($data['id']) && $data['id'] > 0 ? true : false;
+                    $class = $db_file_exist ? ' green' : '';
+
+                    $result .= '<tr id="file-'.$i.'">';
+                    $result .= '<td class="file-name'.$class.'">' . $current['basename'] . '</td>';
+                    $result .= '<td class="file-size">' . System::humanReadableFilesize($current['size']) . '</td>';
+
+                    $result .= '<td class="file-actions"><a href="#delete" class="file-delete red" rel_id="file-'.$i.'" rel="' . $id . '">' . T('Delete') . '</a> ';
+                    if ($db_file_exist) {
+                        $result .= '<a href="#remove" class="file-remove" rel_id="file-'.$i.'" rel="' . $data['id'] . '">' . T('Remove') . '</a></td>';
+                    } else {
+                        $result .= '<a href="#add" class="file-add green" rel_id="file-'.$i.'" rel="' . $id . '">' . T('Add') . '</a></td>';
+                    }
+
                     $result .= '</tr>';
                 }
+                $i++;
             }
             $result .= '</table>';
 
