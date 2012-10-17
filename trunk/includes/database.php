@@ -95,7 +95,7 @@
          * Check last operation result
          * @return bool $result
          */
-        private function checkResult() {
+        public function checkResult() {
             if (($this->result < 1 && $this->getLastErrorNum() != 0) || !$this->res) {
                 return $this->_throw($this->getError(), ERROR);
             } elseif ($this->result < 1 && $this->getLastErrorNum() == 0) {
@@ -122,6 +122,7 @@
          * @return int $state count of affected rows
          */
         public function query($query) {
+            // Execute
             $this->query = $this->replacePrefix($query);
             $this->res = $this->mysqli->query($this->query);
 
@@ -131,7 +132,10 @@
             if ($this->getLastErrorNum() > 0) {
                 return $this->_throw($this->getError(), ERROR);
             } else {
-                $this->result = $this->mysqli->affected_rows;
+                if ($this->mysqli->next_result()) {
+                    $this->result = $this->mysqli->affected_rows ? $this->mysqli->affected_rows : 1;
+                    $this->mysqli->store_result();
+                }
                 return $this->result;
             }
         }
@@ -194,10 +198,12 @@
             }
 
             // Return first field
+            $this->mysqli->store_result();
             $row = $this->res->fetch_row();
 
             // Check CALL result
-            if ($this->mysqli->next_result()) $this->mysqli->store_result();
+            //if ($this->mysqli->next_result()) $this->mysqli->store_result();
+            $this->res->free_result();
 
             if (!$row || empty($row)) {
                 return false;
@@ -220,7 +226,8 @@
             $obj = $this->res->fetch_object();
 
             // Check CALL result
-            if ($this->mysqli->next_result()) $this->mysqli->store_result();
+            //if ($this->mysqli->next_result()) $this->mysqli->store_result();
+            $this->res->free_result();
 
             if (!$obj || empty($obj)) {
                 return false;
@@ -246,7 +253,8 @@
             }
 
             // Check CALL result
-            if ($this->mysqli->next_result()) $this->mysqli->store_result();
+            //if ($this->mysqli->next_result()) $this->mysqli->store_result();
+            $this->res->free_result();
 
             return $arr;
         }
@@ -268,7 +276,8 @@
             }
 
             // Check CALL result
-            if ($this->mysqli->next_result()) $this->mysqli->store_result();
+            //if ($this->mysqli->next_result()) $this->mysqli->store_result();
+            $this->res->free_result();
 
             return $arr;
         }
@@ -297,7 +306,7 @@
             }
 
             // Check CALL result
-            if ($this->mysqli->next_result()) $this->mysqli->store_result();
+            $this->res->free_result();
 
             return $arr;
         }
