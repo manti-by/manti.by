@@ -66,26 +66,61 @@
             
             // Render edit form
             $options['title'] = 'Edit post';
-            $options['body'] = $this->view->getContents('blog', 'edit', $options);
+            $options['body'] = $this->view->getContents('blog', 'edit', $options['data']);
             
             return $options;
         }
 
         public function saveAction($options) {
-            // Get post ID
-            $options['id'] = System::getInstance()->getCmd('id', null);
-            
-            // Update or create new
-            if ($options['id']) {
-                $options['result'] = $this->model->updatePost($options);
-            } else {
-                $options['result'] = $this->model->createPost($options);
+            $options['output'] = 'json';
+            $options['id'] = System::getInstance()->getCmd('id');
+
+            $options['name'] = System::getInstance()->getCmd('name');
+            if (empty($options['name'])) {
+                $options['data'] = array('result' => 'error', 'error' => T('Post title could not be empty'));
+                return $options;
             }
-            
-            // Send result
-            if ($options['result']) {
-                $options['title'] = 'Save post';
-                $options['body'] = $this->view->getContents('form', 'edit_post', $options);
+
+            $options['description'] = System::getInstance()->getCmd('description');
+            if (empty($options['description'])) {
+                $options['data'] = array('result' => 'error', 'error' => T('Post description could not be empty'));
+                return $options;
+            }
+
+            $options['teaser']      = System::getInstance()->getCmd('teaser');
+            if (empty($options['teaser'])) {
+                $options['teaser'] = substr(strip_tags($options['description']), 0, Application::$config['teaser_length']);
+            }
+
+            $options['metakeys'] = System::getInstance()->getCmd('metakeys');
+
+            $options['metadesc'] = System::getInstance()->getCmd('metadesc');
+            if (empty($options['metadesc'])) {
+                $options['metadesc'] = substr(strip_tags($options['description']), 0, Application::$config['metadesc_length']);
+            }
+
+            $options['is_music'] = System::getInstance()->getCmd('is_music', 0);
+
+            if ($options['is_music']) {
+                $options['preview'] = System::getInstance()->getCmd('preview');
+                $options['release'] = System::getInstance()->getCmd('release');
+                $options['covers'] = System::getInstance()->getCmd('covers');
+                $options['relations'] = System::getInstance()->getCmd('relations');
+
+                $options['catnum'] = System::getInstance()->getCmd('catnum');
+                $options['genre'] = System::getInstance()->getCmd('genre');
+                $options['quality'] = System::getInstance()->getCmd('quality');
+                $options['length'] = System::getInstance()->getCmd('length');
+                $options['file-size'] = System::getInstance()->getCmd('file-size');
+                $options['tracklist'] = System::getInstance()->getCmd('tracklist');
+            }
+
+            // Save result
+            if ($options['result'] = $this->model->savePost($options)) {
+                $options['data'] = array('result' => 'success', 'id' => $options['result'], 'options' => $options);
+            } else {
+                $error =  $this->getLastFromStack();
+                $options['data'] = array('result' => 'error', 'error' => $error['message']);
             }
             
             return $options;

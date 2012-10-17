@@ -8,6 +8,7 @@
      * @subpackage Modules
      * @author Alexander Chaika
      * @since 0.1
+     * @todo savePost()
      */
     class BlogModel extends Model {
         
@@ -18,20 +19,12 @@
             }
             
             $this->database->query("CALL GET_POST_BY_ID($id);");
-            if ($this->database->getResult() > 0) {
-                return $this->database->getObjectsArray();
-            } else {
-                return false;
-            }
+            return $this->database->getObjectsArray();
         }
         
         public function getPosts($limit = 10){
             $this->database->query("CALL GET_POSTS($limit);");
-            if ($this->database->getResult() > 0) {
-                return $this->database->getObjectsArray();
-            } else {
-                return false;
-            }
+            return $this->database->getObjectsArray();
         }
         
         public function getPostsByTags($tags, $limit = 0){
@@ -41,20 +34,17 @@
 
             $tags = implode(',', $tags);
             $this->database->query("CALL GET_POSTS_BY_TAGS('$tags', $limit);");
-            if ($this->database->getResult() > 0) {
-                return $this->database->getObjectsArray();
-            } else {
-                return false;
-            }
+            return $this->database->getObjectsArray();
         }
 
         public function getRelations($id){
             $id = (int)$id;
             $this->database->query("CALL GET_POST_RELATIONS($id);");
-            if ($this->database->getResult() > 0) {
-                return $this->database->getPairs('id', 'name');
-            } else {
-                return false;
-            }
+            return $this->database->getPairs('id', 'name');
+        }
+
+        public function savePost($options){
+            // $this->database->query("CALL UPSERT_POST();");
+            return 1;
         }
     }
