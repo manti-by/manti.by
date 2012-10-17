@@ -37,6 +37,10 @@ gallery_path = "./content/gallery"
 thumb_width = 90
 thumb_height = 90
 
+[blog settings]
+teaser_length = 250
+metadesc_length = 250
+
 [database credentials]
 db_path = "127.0.0.1"
 db_port = 3306
