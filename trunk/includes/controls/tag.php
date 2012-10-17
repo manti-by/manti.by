@@ -15,85 +15,94 @@
         public function render() {
             // Check parent errors
             if (parent::render()) {
-                // Render markup
-                $html  = '<div class="tag">';
-                $html .= '
-                    <script type="text/javascript">
-                        $(document).ready(function() {
-                            // Delete action for tag
-                            $(\'.' . $this->_options['class'] . '-del\').live(\'click\', function() {
-                                // Get params
-                                var rel = $(this).attr(\'rel\');
-                                var val = $(\'li#\' + rel).attr(\'rel\');
-                                var tags = $(\'#' . $this->_options['id'] . '\').val().split(\',\');
+                ob_start();
+                ?>
+                    <div class="tag">
+                        <script type="text/javascript">
+                            $(document).ready(function() {
+                                var tag_id      = '<?php echo $this->_options['id']; ?>';
+                                var tag_class   = '<?php echo $this->_options['class']; ?>';
+                                var tag_name    = '<?php echo $this->_options['name']; ?>';
 
-                                // Remove value from hidden input and control
-                                for (var i = 0; i < tags.length; i++) {
-                                    if (tags[i] == val) {
-                                        tags.splice(i, 1);
-                                        $(\'#' . $this->_options['id'] . '\').val(tags.join(\',\'));
-                                        $(\'li#\' + rel).remove();
-                                        return true;
+                                // Delete action for tag
+                                $('.' + tag_class + '-del').live('click', function() {
+                                    // Get params
+                                    var rel = $(this).attr('rel');
+                                    var val = $('li#' + rel).attr('rel');
+                                    var tags = $('#' + tag_id).val().split(',');
+
+                                    // Remove value from hidden input and control
+                                    for (var i = 0; i < tags.length; i++) {
+                                        if (tags[i] == val) {
+                                            tags.splice(i, 1);
+                                            $('#' + tag_id).val(tags.join(','));
+                                            $('li#' + rel).remove();
+                                            return true;
+                                        }
                                     }
-                                }
-                                return false;
-                            });
-
-                            // Add new tag
-                            $(\'#' . $this->_options['id'] . '-add\').click(function() {
-                                // Check tag length
-                                var val = $(\'#' . $this->_options['id'] . '-input\').val();
-                                if (val.length < 3) {
-                                    alert(\'' . T('Minimum tag length 3 symbols') . '\');
                                     return false;
-                                }
-
-                                // Check existing
-                                var tags = $(\'#' . $this->_options['id'] . '\').val().split(\',\');
-                                if (tags.indexOf(val) >= 0) {
-                                    alert(\'' . T('This tag already exists') . '\');
-                                    return false;
-                                }
+                                });
 
                                 // Add new tag
-                                tags.push(val);
-                                $(\'#' . $this->_options['id'] . '\').val(tags.join(\',\'));
+                                $('#' + tag_id + '-add').click(function() {
+                                    // Check tag length
+                                    var val = $('#' + tag_id + '-input').val();
+                                    if (val.length < 3) {
+                                        alert('<?php echo T('Minimum tag length 3 symbols'); ?>');
+                                        return false;
+                                    }
 
-                                // Create new control for this tag
-                                var index = tags.length + 1;
-                                $(\'ul#' . $this->_options['id'] . '-control\').append(\'<li id="' . $this->_options['id'] . '-item-\' + index + \'" class="' . $this->_options['class'] . '-item" rel="\' + val + \'">\' + val + \'<input type="button" name="' . $this->_options['name'] . '-del-\' + index + \'" id="' . $this->_options['id'] . '-del-\' + index + \'" rel="' . $this->_options['id'] . '-item-\' + index + \'" class="' . $this->_options['class'] . '-del tag-del" value="X" /></li>\');
+                                    // Check existing
+                                    var tags = $('#' + tag_id).val().split(',');
+                                    if (tags.indexOf(val) >= 0) {
+                                        alert('<?php echo T('This tag already exists'); ?>');
+                                        return false;
+                                    }
 
-                                return true;
+                                    // Add new tag
+                                    tags.push(val);
+                                    $('#' + tag_id).val(tags.join(','));
+
+                                    // Create new control for this tag
+                                    var index = tags.length + 1;
+                                    $('ul#' + tag_id + '-control').append(
+                                        '<li id="' + tag_id + '-item-' + index + '" class="' + tag_class + '-item" rel="' + val + '">' +
+                                            val +
+                                            '<input type="button" name="' + tag_name + '-del-' + index + '" id="' + tag_id + '-del-' + index + '" rel="' + tag_id + '-item-' + index + '" class="' + tag_class + '-del tag-del" value="X" />' +
+                                        '</li>'
+                                    );
+
+                                    return true;
+                                });
+
+                                $('.tag-wrap').click(function() {
+                                    $(this).children('.tag-input').focus();
+                                });
                             });
+                        </script>
 
-                            $(\'.tag-wrap\').click(function() {
-                                $(this).children(\'.tag-input\').focus();
-                            });
-                        });
-                    </script>';
-
-                // Create header
-                $value = !empty($this->_tags) && count($this->_tags) > 0 ? implode(',', $this->_tags) : '';
-                $html .= '<input type="hidden" id="' . $this->_options['id'] . '" name="' . $this->_options['name'] . '" value="' . $value . '" />';
-                $html .= '<div class="tag-wrap">';
-                $html .= '<ul id="' . $this->_options['id'] . '-control" class="' . $this->_options['class'] . '-control">';
-
-                // Create body
-                $i = 1;
-                foreach ($this->_data as $tag) {
-                    $html .= '<li id="' . $this->_options['id'] . '-item-' . $i . '" class="' . $this->_options['class'] . '-item" rel="' . $tag . '">';
-                        $html .= $tag;
-                        $html .= '<input type="button" name="' . $this->_options['name'] . '-del-' . $i . '" id="' . $this->_options['id'] . '-del-' . $i . '" rel="' . $this->_options['id'] . '-item-' . $i . '" class="' . $this->_options['class'] . '-del tag-del" value="X" />';
-                    $html .= '</li>';
-                    $i++;
-                }
-                $html .= '</ul>';
-
-                // Create input
-                $html .= '<input type="text" name="' . $this->_options['name'] . '-input" id="' . $this->_options['id'] . '-input" class="tag-input" value="" />';
-                $html .= '</div>';
-                $html .= '<input type="button" name="' . $this->_options['name'] . '-add" id="' . $this->_options['id'] . '-add" class="tag-add" value="Add" />';
-                $html .= '</div>';
+                        <?php
+                            $value = !empty($this->_value) && count($this->_value) > 0 ? implode(',', $this->_value) : '';
+                            $i = 1;
+                        ?>
+                        <input type="hidden" id="<?php echo $this->_options['id']; ?>" name="<?php echo $this->_options['name']; ?>" value="<?php echo $value; ?>" />
+                        <div class="tag-wrap">
+                            <ul id="<?php echo $this->_options['id']; ?>-control" class="<?php echo $this->_options['class']; ?>-control">
+                                <?php foreach ($this->_value as $tag) : ?>
+                                    <li id="<?php echo $this->_options['id']; ?>-item-<?php echo $i; ?>" class="<?php echo $this->_options['class']; ?>-item" rel="<?php echo $tag; ?>">
+                                        <?php echo $tag; ?>
+                                        <input type="button" name="<?php echo $this->_options['name']; ?>-del-<?php echo $i; ?>" id="<?php echo $this->_options['id']; ?>-del-<?php echo $i; ?>" rel="<?php echo $this->_options['id']; ?>-item-<?php echo $i; ?>" class="<?php echo $this->_options['class']; ?>-del tag-del" value="X" />
+                                    </li>
+                                    <?php $i++; ?>
+                                <?php endforeach; ?>
+                            </ul>
+                            <input type="text" name="<?php echo $this->_options['name']; ?>-input" id="<?php echo $this->_options['id']; ?>-input" class="tag-input" value="" />
+                        </div>
+                        <input type="button" name="<?php echo $this->_options['name']; ?>-add" id="<?php echo $this->_options['id']; ?>-add" class="tag-add" value="Add" />
+                    </div>
+                <?php
+                $html = ob_get_contents();
+                ob_end_clean();
 
                 return $html;
             } else {

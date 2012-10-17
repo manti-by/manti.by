@@ -8,13 +8,15 @@
      */
     class File extends Control {
 
+        protected $_selected = array();
+
         /**
          * Class constructor
-         * @param mixed $data (optional)
+         * @param mixed $value (optional)
          * @param mixed $options (optional)
          */
-        public function __construct($data = null, $options = null) {
-            parent::__construct($data, $options);
+        public function __construct($value = null, $options = null) {
+            parent::__construct($value, $options);
 
             // Set file type
             if (isset($options['type'])) {
@@ -28,44 +30,54 @@
          */
         public function render() {
             if ($html = parent::render()) {
-                $this->_data = Model::getModel('file')->getDBList($this->_options['type']);
+                $this->_data = Model::getModel('file')->getApproved($this->_options['type']);
                 if ($this->_data) {
-                    // Create script
-                    $html .= '
+                    ob_start();
+                    ?>
                         <script type="text/javascript">
                             $(document).ready(function() {
-                                $(\'#edit\').click(function() {
-                                    $.fn.popupShow($(\'#' . $this->_options['id'] . '-data\').html());
+                                var file_id     = '<?php echo $this->_options['id']; ?>';
+                                var file_class  = '<?php echo $this->_options['class']; ?>';
+                                var file_name   = '<?php echo $this->_options['name']; ?>';
+
+                                $('#' + file_id + '-edit').click(function(e) {
+                                    $('#' + file_id + '-data').css('left', e.pageX).css('top', e.pageY).show();
                                 });
 
-                                $(\'#close\').click(function() {
-                                    $(\'#' . $this->_options['id'] . '-data\').html($.fn.popupHide());
+                                $('.' + file_class).click(function() {
+                                    var file_ids = [];
+                                    $('.' + file_class + ':checked').each(function() {
+                                        file_ids.push($(this).val());
+                                    });
+                                    $('#' + file_id).val(file_ids.join(','));
+                                    $('#' + file_id + '-notice span').html(file_ids.length);
                                 });
                             });
-                        </script>';
+                        </script>
 
-                    // Create header
-                    $html .= '<div id="' . $this->_options['id'] . '" class="' . $this->_options['class'] . ' files">';
-                    $html .= '<div id="' . $this->_options['id'] . '-notice">' . $this->_data . ' ' . T('items') . '</div>';
-                    $html .= '<div id="' . $this->_options['id'] . '-data">';
-
-                    // Create body
-                    $html .= '<ul class="hidden">';
-                    foreach ($this->_data as $id => $label) {
-                        $html .= '<li>';
-                        $html .= '<input type="checkbox" name="' . $this->_options['name'] . '" value="' . $id . '" />';
-                        $html .= $label;
-                        $html .= '</li>';
-                    }
-
-                    // Close body
-                    $html .= '<input type="button" name="' . $this->_options['name'] . '-close" id="' . $this->_options['id'] . '-close" class="file-close" value="Close" />';
-                    $html .= '</ul>';
-                    $html .= '</div>';
-
-                    // Edit button
-                    $html .= '<input type="button" name="' . $this->_options['name'] . '-edit" id="' . $this->_options['id'] . '-edit" class="file-edit" value="Edit" />';
-                    $html .= '</div>';
+                        <div class="<?php echo $this->_options['class']; ?> files">
+                            <input type="hidden" name="<?php echo $this->_options['name']; ?>" id="<?php echo $this->_options['id']; ?>" value="<?php echo implode(',', $this->_value); ?>" />
+                            <div id="<?php echo $this->_options['id']; ?>-notice">
+                                <span class="bold"><?php echo count($this->_value); ?></span>/<?php echo count($this->_data); ?> <?php echo T('items'); ?>
+                                <input type="button" name="<?php echo $this->_options['name']; ?>-edit" id="<?php echo $this->_options['id']; ?>-edit" class="file-edit" value="<?php echo T('Edit'); ?>" />
+                            </div>
+                            <div id="<?php echo $this->_options['id']; ?>-data" class="hidden popup">
+                                <div class="hide_this">[X] <?php echo T('Close'); ?></div>
+                                <div class="content">
+                                    <ul>
+                                        <?php foreach ($this->_data as $id => $label) : ?>
+                                        <li>
+                                            <input type="checkbox" name="<?php echo $this->_options['name']; ?>-items" class="<?php echo $this->_options['class']; ?>" value="<?php echo $id; ?>" <?php if (in_array($id, $this->_selected)) echo 'checked="checked"'; ?>/>
+                                            <?php echo $label; ?>
+                                        </li>
+                                        <?php endforeach; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    $html = ob_get_contents();
+                    ob_end_clean();
 
                     return $html;
                 } else {

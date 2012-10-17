@@ -8,7 +8,7 @@
      */
     class Control extends Application {
 
-        protected $_data = array();
+        protected $_value = array();
         protected $_options = array('id' => '', 'class' => '', 'name' => '');
 
         /**
@@ -16,10 +16,10 @@
          * @param mixed $data (optional)
          * @param mixed $options (optional)
          */
-        public function __construct($data = null, $options = null) {
+        public function __construct($value = null, $options = null) {
             // Set initial tags
-            if (!empty($data)) {
-                $this->setData($data);
+            if (!empty($value)) {
+                $this->setValue($value);
             }
 
             // Set initial options
@@ -30,52 +30,52 @@
 
         /**
          * Set data set
-         * @param $data for set
+         * @param $value for set
          * @return array|bool $tags
          */
-        public function setData($data) {
+        public function setValue($value) {
             // Check empty
-            if (empty($data)) {
-                return $this->_throw(T('Control data could not be empty'), NOTICE);
+            if (empty($value)) {
+                return $this->_throw(T('Control value could not be empty'), NOTICE);
             }
 
             // Set values
-            if (is_array($data)) {
-                $this->_data = $data;
+            if (is_array($value)) {
+                $this->_value = $value;
             } else {
-                $this->_data = array($data);
+                $this->_value = array($value);
             }
 
-            return $this->_data = array_unique($this->_data);
+            return $this->_value = array_unique($this->_value);
         }
 
         /**
          * Append data to existing value set
-         * @param $data to append
+         * @param $value to append
          * @return array|bool $data
          */
-        public function appendData($data) {
+        public function appendValue($value) {
             // Check empty
-            if (empty($data)) {
+            if (empty($value)) {
                 return $this->_throw(T('Control data could not be empty'), NOTICE);
             }
 
             // Append values
-            if (is_array($data)) {
-                $this->_data = $this->_data + $data;
+            if (is_array($value)) {
+                $this->_value = $this->_value + $value;
             } else {
-                $this->_data = $this->_data + array($data);
+                $this->_value = $this->_value + array($value);
             }
 
-            return $this->_data = array_unique($this->_data);
+            return $this->_value = array_unique($this->_value);
         }
 
         /**
          * Get data
-         * @return array $data
+         * @return array $value
          */
-        public function getData() {
-            return $this->_data;
+        public function getValue() {
+            return $this->_value;
         }
 
         /**
@@ -134,6 +134,6 @@
             }
 
             // Render markup and return
-            return '<input type="text" name="' . $this->_options['name'] . '" id="' . $this->_options['id'] . '" class="' . $this->_options['class'] . '" value="' . implode(',', $this->_data) . '" />';
+            return '<input type="text" name="' . $this->_options['name'] . '" id="' . $this->_options['id'] . '" class="' . $this->_options['class'] . '" value="' . implode(',', $this->_value) . '" />';
         }
     }
