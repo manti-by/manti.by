@@ -9,6 +9,7 @@
      * @subpackage Library
      * @author Alexander Chaika
      * @since 0.2RC2
+     * @todo TEST IT!!!
      */
     
     class UserEntity extends Entity {
@@ -47,16 +48,8 @@
          */
         public function create($options) {
             // Get items
-            $this->database->query("
-                INSERT INTO #__user (`username`, `email`, `password`)
-                VALUES ('".$options['username']."', '".$options['email']."', '".md5(Application::$config['secret'].$options['password'])."');");
-            
-            $result = $this->database->getResult();
-            if ($result) {
-                return $this->database->getLastInsertId();
-            } else {
-                return false;
-            }
+            $this->database->query("CALL UPSERT_USER(0, '".$options['username']."','".$options['email']."','".md5(Application::$config['secret'].$options['password'])."');");
+            return $this->database->getLastInsertId();
         }
         
         /**
@@ -67,43 +60,24 @@
         public function getId($options = null) {
             // Check email & pass
             if (isset($options['email']) && isset($options['password'])) {
-                $this->database->query("
-                    SELECT `id` 
-                    FROM `#__user`
-                    WHERE `email` = '".$options['email']."'
-                      AND `password` = '".md5(Application::$config['secret'].$options['password'])."'
-                    LIMIT 0, 1;");
-
-                $result = $this->database->getField();
-                if ($result) {
+                $this->database->query("CALL CHECK_LOGIN('".$options['email']."','".md5(Application::$config['secret'].$options['password'])."');");
+                if ($result = $this->database->getField()) {
                     return $result;
                 }
             }
             
             // Check cookie
             if (isset($options['cookie'])) {
-                $this->database->query("
-                    SELECT `id` 
-                    FROM `#__user` 
-                    WHERE MD5(CONCAT('".Application::$config['secret']."', `email`)) = '".$options['cookie']."'
-                    LIMIT 0, 1;");
-
-                $result = $this->database->getField();
-                if ($result) {
+                $this->database->query("CALL CHECK_COOKIE('".Application::$config['secret']."','".$options['cookie']."');");
+                if ($result = $this->database->getField()) {
                     return $result;
                 }
             }
             
             // Check username
             if (isset($options['username'])) {
-                $this->database->query("
-                    SELECT `id` 
-                    FROM `#__user` 
-                    WHERE `username` = '".$options['username']."'
-                    LIMIT 0, 1;");
-
-                $result = $this->database->getField();
-                if ($result) {
+                $this->database->query("CALL CHECK_USERNAME('".$options['username']."');");
+                if ($result = $this->database->getField()) {
                     return $result;
                 }
             }
@@ -129,19 +103,12 @@
         public function load($id) {
             // Check id
             if (empty($id)) {
-                return $this->_throw('User id could not be empty', NOTICE);
+                return $this->_throw('User id could not be empty');
             }
             
             // Get items
-            $this->database->query("
-                SELECT u.*, g.`name` AS `group` 
-                FROM `#__user` AS u
-                JOIN `#__group` AS g ON g.`id` = u.`group_id`
-                WHERE u.`id` = $id
-                LIMIT 0, 1;");
-            
-            $result = $this->database->getObject();
-            if ($result) {
+            $this->database->query("CALL GET_USER_BY_ID($id);");
+            if ($result = $this->database->getObject()) {
                 // Add data to object
                 $this->id = $result->id;
                 $this->username = $result->username;
@@ -195,10 +162,12 @@
                 empty($this->username) ||
                 empty($this->email) ||
                 empty($this->password) ||
-                empty($this->group)) {
-                   // try to load
-                   return $this->load($_SESSION['user_id']);
+                empty($this->group) ||
+                empty($_SESSION['user_id'])) {
+                    // try to load
+                    return $this->load($_SESSION['user_id']);
             }
+
             return true;
         }
         
@@ -227,7 +196,8 @@
          */
         public function isLoggined() {
             // Get cookie uid
-            if (isset($_COOKIE['token']) && $this->getId(array('cookie' => $_COOKIE['token'])) > 0) {
+            if (isset($_COOKIE['token']) && $user_id = $this->getId(array('cookie' => $_COOKIE['token']))) {
+                if (!isset($_SESSION['user_id'])) $_SESSION['user_id'] = $user_id;
                 return true;
             }
 
@@ -247,13 +217,8 @@
          */
         public function checkEmail($email) {
             // Get items
-            $this->database->query("
-                SELECT `id` FROM `#__user` 
-                WHERE `email` = '".$email."' 
-                LIMIT 0, 1;");
-            
-            $result = $this->database->getResult();
-            return ($result ? true : false);
+            $this->database->query("CALL CHECK_EMAIL('".$email."');");
+            return ($this->database->checkResult() ? true : false);
         }
         
         /**
@@ -264,14 +229,8 @@
          */
         public function setNewPassword($email, $password) {
             // Get items
-            $this->database->query("
-                UPDATE `#__user` 
-                SET `password` = '" . md5(Application::$config['secret'] . $password) . "'
-                WHERE `email` = '" . $email . "'
-                LIMIT 1;");
-            
-            $result = $this->database->getResult();
-            return ($result ? true : false);
+            $this->database->query("CALL UPDATE_PASSWORD('".$email."','".md5(Application::$config['secret'] . $password)."');");
+            return ($this->database->checkResult() ? true : false);
         }
 
         /**
