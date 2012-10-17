@@ -28,19 +28,11 @@
 
             $tags = implode(',', $tags);
             $this->database->query("CALL GET_GALLERY_BY_TAGS('$tags', $limit)");
-            if ($this->database->getResult() > 0) {
-                return $this->database->getObjectsArray();
-            } else {
-                return false;
-            }
+            return $this->database->getObjectsArray();
         }
 
         public function getGallery($limit = 10) {
             $this->database->query("CALL GET_GALLERY($limit)");
-            if ($this->database->getResult() > 0) {
-                return $this->database->getObjectsArray();
-            } else {
-                return false;
-            }
+            $this->database->getObjectsArray();
         }
     }
