@@ -15,14 +15,14 @@
 
     $user = UserEntity::getInstance();
 ?>
-<?php if ($user->getGroup() == 'Root' && Application::$config['show_debug_panel']) : ?>
+<?php if (Application::$config['show_debug_panel']) : ?>
     <div id="debug" class="wrapper">
         <h2>Debug info</h2>
 
-        <h3 class="accordion">MESSAGES STACK</h3>
-        <pre><?php var_dump($stack); ?></pre>
+        <h3 class="accordion">MESSAGES STACK (<?php echo count($stack); ?> items)</h3>
+        <pre class="hidden"><?php var_dump($stack); ?></pre>
 
-        <h3 class="accordion">SQL QUEUE</h3>
-        <pre><?php echo implode('<hr />', $sql); ?></pre>
+        <h3 class="accordion">SQL QUEUE (<?php echo count($sql); ?> items)</h3>
+        <pre class="hidden"><?php echo implode('<hr />', $sql); ?></pre>
     </div>
 <?php endif; ?>
