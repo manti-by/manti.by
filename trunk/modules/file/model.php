@@ -24,8 +24,23 @@
             $this->_map = array(
                 'preview'   => realpath(Application::$config['preview_path']),
                 'release'   => realpath(Application::$config['release_path']),
-                'cover'     => realpath(Application::$config['covers_path'])
+                'covers'    => realpath(Application::$config['covers_path'])
             );
+        }
+
+        /**
+         * Get approved (in DB) filelist
+         * @param string $type OPTIONAL file type
+         * @param int $limit OPTIONAL
+         * @return array|bool $result
+         */
+        public function getApproved($type = null, $limit = 100) {
+            // Check map
+            $type = $this->checkMap($type);
+
+            // Get files from DB
+            $this->database->query("CALL GET_FILES('$type', $limit);");
+            return $this->database->getPairs('id', 'source');
         }
 
         /**
@@ -36,15 +51,12 @@
          */
         public function getList($type = null, $limit = 100) {
             // Check map
-            if (!array_key_exists($type, $this->_map) && $type != null) {
-                $this->_throw(T('File type') . ' "' . $type . '" ' . T('not available, scan all pathes'));
-                $type = null;
-            }
+            $type = $this->checkMap($type);
 
             // Get files from DB
             $db_files = array();
             $this->database->query("CALL GET_FILES('$type', $limit);");
-            if ($this->database->getResult() > 0) {
+            if ($this->database->checkResult()) {
                 $db_files = $this->database->getPairs('id', 'source');
             }
 
@@ -73,6 +85,71 @@
             }
 
             return $result;
+        }
+
+        /**
+         * Add file to DB
+         * @param array $options
+         * @return int|bool $insert_id
+         */
+        public function add($options) {
+            $file = ROOT_PATH . $options['source'];
+            if (file_exists($file)) {
+                // Get type - parent file folder
+                $pathinfo = pathinfo($file);
+                $type = end(explode(DS, realpath($pathinfo['dirname'])));
+
+                // Get file info
+                $file_source = fopen($file, "r");
+                $fstat = fstat($file_source);
+
+                // Convert to unix routes
+                $source = str_replace(DS , '/', $options['source']);
+                $source = str_replace('//' , '/', $source);
+
+                // Create or update file
+                $this->database->query("CALL UPSERT_FILE('".$type."', '".$options['name']."','".$options['description']."','".$source."',".$fstat['size'].",'".md5_file($file)."');");
+                return $this->database->getField();
+            } else {
+                return $this->_throw(T('File does not exist'), ERROR);
+            }
+        }
+
+        /**
+         * Remove file from DB
+         * @param int $id
+         * @return bool $result
+         */
+        public function remove($id) {
+            // Create or update file
+            $this->database->query("CALL REMOVE_FILE('".$id."');");
+            if ($this->database->checkResult()) {
+                return $this->database->getField();
+            } else {
+                return $this->_throw(T('File does not exist'));
+            }
+        }
+
+        /**
+         * Remove file from DB
+         * @param string $source
+         * @return bool $result
+         */
+        public function delete($source) {
+            // Remove file from DB
+            $this->database->query("CALL REMOVE_FILE('".$source."');");
+
+            // Remove file from FS
+            $file = ROOT_PATH . $source;
+            if (file_exists($file)) {
+                if (unlink($file)) {
+                    return true;
+                } else {
+                    return $this->_throw(T('You dont have permissions to delete this file'));
+                }
+            } else {
+                return $this->_throw(T('File does not exist'), ERROR);
+            }
         }
 
         /**
@@ -105,71 +182,15 @@
         }
 
         /**
-         * Add file to DB
-         * @param array $options
-         * @return int|bool $insert_id
+         * Check available files map
+         * @param $type
+         * @return string|null $type
          */
-        public function add($options) {
-            $file = ROOT_PATH . $options['source'];
-            if (file_exists($file)) {
-                // Get type - parent file folder
-                $pathinfo = pathinfo($file);
-                $type = end(explode(DS, realpath($pathinfo['dirname'])));
-
-                // Get file info
-                $file_source = fopen($file, "r");
-                $fstat = fstat($file_source);
-
-                // Convert to unix routes
-                $source = str_replace(DS , '/', $options['source']);
-                $source = str_replace('//' , '/', $source);
-
-                // Create or update file
-                $this->database->query("CALL UPSERT_FILE('".$type."', '".$options['name']."','".$options['description']."','".$source."',".$fstat['size'].",'".md5_file($file)."');");
-                if ($this->database->getResult() > 0) {
-                    return $this->database->getField();
-                } else {
-                    return false;
-                }
-            } else {
-                return $this->_throw(T('File does not exist'), ERROR);
+        private function checkMap($type) {
+            if (!array_key_exists($type, $this->_map) && $type != null) {
+                $this->_throw(T('File type') . ' "' . $type . '" ' . T('not available, return all pathes'));
+                $type = null;
             }
-        }
-
-        /**
-         * Remove file from DB
-         * @param int $id
-         * @return bool $result
-         */
-        public function remove($id) {
-            // Create or update file
-            $this->database->query("CALL REMOVE_FILE('".$id."');");
-            if ($this->database->getResult() > 0) {
-                return $this->database->getField();
-            } else {
-                return $this->_throw(T('File does not exist'));
-            }
-        }
-
-        /**
-         * Remove file from DB
-         * @param string $source
-         * @return bool $result
-         */
-        public function delete($source) {
-            // Remove file from DB
-            $this->database->query("CALL REMOVE_FILE('".$source."');");
-
-            // Remove file from FS
-            $file = ROOT_PATH . $source;
-            if (file_exists($file)) {
-                if (unlink($file)) {
-                    return true;
-                } else {
-                    return $this->_throw(T('You dont have permissions to delete this file'));
-                }
-            } else {
-                return $this->_throw(T('File does not exist'), ERROR);
-            }
+            return $type;
         }
     }

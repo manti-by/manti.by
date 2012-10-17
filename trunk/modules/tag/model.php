@@ -13,11 +13,7 @@
         
         public function getPosts($limit = 10){
             $this->database->query("CALL GET_POSTS($limit)");
-            if ($this->database->getResult() > 0) {
-                return $this->database->getObjectsArray();
-            } else {
-                return false;
-            }
+            return $this->database->getObjectsArray();
         }
         
         public function getPostsByTags($tags, $limit = 0){
@@ -27,10 +23,6 @@
             
             $tags = implode(',', $tags);
             $this->database->query("CALL GET_POSTS_BY_TAGS('$tags', $limit)");
-            if ($this->database->getResult() > 0) {
-                return $this->database->getObjectsArray();
-            } else {
-                return false;
-            }
+            return $this->database->getObjectsArray();
         }
     }
