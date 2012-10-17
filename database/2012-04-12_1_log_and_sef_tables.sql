@@ -1,10 +1,7 @@
 SET FOREIGN_KEY_CHECKS=0;
 
--- ----------------------------
--- Table structure for log
--- ----------------------------
-DROP TABLE IF EXISTS `log`;
-CREATE TABLE `log` (
+DROP TABLE IF EXISTS `_log`;
+CREATE TABLE `_log` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `module` varchar(50) DEFAULT NULL,
   `action` varchar(50) DEFAULT NULL,
@@ -20,11 +17,9 @@ CREATE TABLE `log` (
   KEY `ik_module` (`module`) USING BTREE
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Table structure for sef
--- ----------------------------
-DROP TABLE IF EXISTS `sef`;
-CREATE TABLE `sef` (
+
+DROP TABLE IF EXISTS `_sef_alias`;
+CREATE TABLE `_sef_alias` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `request` varchar(255) NOT NULL,
   `link` varchar(255) NOT NULL,

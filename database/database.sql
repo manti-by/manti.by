@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50525
 File Encoding         : 65001
 
-Date: 2012-10-12 15:59:23
+Date: 2012-10-17 17:56:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -27,6 +27,7 @@ CREATE TABLE `files` (
   `source` text NOT NULL,
   `size` int(11) unsigned DEFAULT NULL,
   `md5` varchar(32) DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -100,6 +101,13 @@ CREATE TABLE `post` (
   `teaser` varchar(512) DEFAULT NULL,
   `description` text NOT NULL,
   `metadesc` varchar(255) DEFAULT NULL,
+  `is_music` tinyint(1) DEFAULT '0',
+  `catnum` varchar(16) DEFAULT NULL,
+  `genre` varchar(32) DEFAULT NULL,
+  `quality` varchar(255) DEFAULT NULL,
+  `length` varchar(16) DEFAULT NULL,
+  `file-size` int(11) unsigned DEFAULT NULL,
+  `tracklist` text,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -186,11 +194,11 @@ CREATE TABLE `tags` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) unsigned NOT NULL DEFAULT '4',
+  `username` varchar(64) DEFAULT NULL,
   `email` varchar(64) NOT NULL,
   `password` varchar(32) NOT NULL,
   `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `group_id` int(11) unsigned NOT NULL DEFAULT '4',
-  `username` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_email` (`email`),
   KEY `fk_user_group_id` (`group_id`),
@@ -200,7 +208,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'marco.manti@gmail.com', '29dcc7d516b248c7fceb80cbafa71baa', '2012-10-10 19:54:32', '1', 'Admin');
+INSERT INTO `user` VALUES ('1', '1', 'Admin', 'marco.manti@gmail.com', '29dcc7d516b248c7fceb80cbafa71baa', '2012-10-10 19:54:32');
 
 -- ----------------------------
 -- Table structure for `_log`
@@ -220,11 +228,7 @@ CREATE TABLE `_log` (
   PRIMARY KEY (`id`),
   KEY `ik_browser` (`browser`) USING BTREE,
   KEY `ik_module` (`module`) USING BTREE
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of _log
--- ----------------------------
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `_sef_alias`
@@ -243,6 +247,67 @@ CREATE TABLE `_sef_alias` (
 -- ----------------------------
 
 -- ----------------------------
+-- Procedure structure for `CHECK_COOKIE`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `CHECK_COOKIE`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_COOKIE`(IN `_cookie` varchar(32), IN `_secret` varchar(32))
+BEGIN
+    SELECT `id` 
+    FROM `user` 
+    WHERE MD5(CONCAT(_secret, `email`)) = _cookie
+    LIMIT 0, 1;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `CHECK_EMAIL`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `CHECK_EMAIL`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_EMAIL`(IN `_email` varchar(32))
+BEGIN
+    SELECT `id` 
+    FROM `user` 
+    WHERE `email` = _email 
+    LIMIT 0, 1;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `CHECK_LOGIN`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `CHECK_LOGIN`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_LOGIN`(IN `_email` varchar(32), IN `_password` varchar(32))
+BEGIN
+    SELECT `id` 
+    FROM `user`
+    WHERE `email` = _email
+      AND `password` = _password
+    LIMIT 0, 1;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `CHECK_USERNAME`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `CHECK_USERNAME`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_USERNAME`(IN `_username` varchar(32))
+BEGIN
+    SELECT `id` 
+    FROM `user` 
+    WHERE `username` = _username
+    LIMIT 0, 1;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
 -- Procedure structure for `GET_FILES`
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `GET_FILES`;
@@ -250,13 +315,13 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_FILES`(IN `_type` varchar(32), IN `_limit` int)
 BEGIN
     IF (_type <> '') THEN
-		    SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
-		    FROM `files`
-		    WHERE `type` = _type
+        SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
+        FROM `files`
+        WHERE `type` = _type
         LIMIT _limit;
     ELSE
-		    SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
-		    FROM `files`
+        SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
+        FROM `files`
         LIMIT _limit;
     END IF;
 END
@@ -475,8 +540,24 @@ BEGIN
         WHERE pr.`original_id` = _id;
     ELSE
         SELECT p.`id` AS `id`, p.`name` AS `name`
-				FROM `post` AS p;
+        FROM `post` AS p;
     END IF;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `GET_USER_BY_ID`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `GET_USER_BY_ID`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_USER_BY_ID`(IN `_id` int)
+BEGIN
+    SELECT u.*, g.`name` AS `group` 
+    FROM `user` AS u
+    JOIN `group` AS g ON g.`id` = u.`group_id`
+    WHERE u.`id` = _id
+    LIMIT 0, 1;
 END
 ;;
 DELIMITER ;
@@ -499,6 +580,21 @@ END
 DELIMITER ;
 
 -- ----------------------------
+-- Procedure structure for `UPDATE_PASSWORD`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `UPDATE_PASSWORD`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_PASSWORD`(IN `_email` varchar(64), IN `_password` varchar(32))
+BEGIN
+    UPDATE `user` 
+    SET `password` = _password
+    WHERE `email` = _email
+    LIMIT 1;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
 -- Procedure structure for `UPSERT_FILE`
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `UPSERT_FILE`;
@@ -516,12 +612,37 @@ BEGIN
         UPDATE `files`
         SET `type` = _type, `name` = _name, `description` = _description, `size` = _size
         WHERE `id` = __id;
+
+        SELECT __id AS record_id;
     ELSE
         INSERT INTO `files` (`type`, `name`, `description`, `source`, `size`, `md5`)
-				VALUES (_type, _name, _description, _source, _size, _md5);
-    END IF;
+        VALUES (_type, _name, _description, _source, _size, _md5);
 
-    SELECT LAST_INSERT_ID() AS record_id;
+        SELECT LAST_INSERT_ID() AS record_id;
+    END IF;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `UPSERT_USER`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `UPSERT_USER`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPSERT_USER`(IN `_id` int, IN `_username` varchar(64), IN `_email` varchar(64), IN `_password` varchar(32))
+BEGIN
+    IF (_id > 0) THEN
+        UPDATE `user`
+        SET `username` = _username, `email` = _email, `password` = _password
+        WHERE `id` = __id;
+
+        SELECT __id AS record_id;
+    ELSE
+        INSERT INTO `user` (`username`, `email`, `password`)
+        VALUES (_username, _email, _password);
+
+        SELECT LAST_INSERT_ID() AS record_id;
+    END IF;
 END
 ;;
 DELIMITER ;

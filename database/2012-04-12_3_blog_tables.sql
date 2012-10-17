@@ -1,8 +1,5 @@
 SET FOREIGN_KEY_CHECKS=0;
 
--- ----------------------------
--- Table structure for `category`
--- ----------------------------
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -10,14 +7,8 @@ CREATE TABLE `category` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of category
--- ----------------------------
 INSERT INTO `category` VALUES ('1', 'Default');
 
--- ----------------------------
--- Table structure for `post`
--- ----------------------------
 DROP TABLE IF EXISTS `post`;
 CREATE TABLE `post` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
