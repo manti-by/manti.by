@@ -22,7 +22,7 @@
             ob_start();
             
             // setup database object
-            $this->user = User::getInstance();
+            $this->user = UserEntity::getInstance();
         }
         
         public function tearDown() {

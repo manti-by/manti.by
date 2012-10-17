@@ -23,7 +23,7 @@
         
         public function testInsertQuery() {
             // insert recort into DB
-            $query = "INSERT INTO `#__sef` (`request`, `link`) 
+            $query = "INSERT INTO `#____sef` (`request`, `link`) 
                       VALUES ('test_oldurl', 'test_newurl');";
             $result = $this->database->query($query);
             
@@ -37,7 +37,7 @@
           */
         public function testUpdateQuery($insert_id) {
             // insert recort into DB
-            $query = "UPDATE `#__sef` 
+            $query = "UPDATE `#____sef` 
                       SET `request`= 'test_oldurl-updated', `link` = 'test_newurl-updated'
                       WHERE `id` = ".$insert_id.";";
             $result = $this->database->query($query);
@@ -53,7 +53,7 @@
         public function testSelectValue($insert_id) {
             // insert recort into DB
             $query = "SELECT `request`
-                      FROM `#__sef` 
+                      FROM `#____sef` 
                       WHERE `id` = ".$insert_id.";";
             $this->database->query($query);
             $result = $this->database->getField();
@@ -68,7 +68,7 @@
         public function testSelectObject($insert_id) {
             // insert recort into DB
             $query = "SELECT *
-                      FROM `#__sef` 
+                      FROM `#____sef` 
                       WHERE `id` = ".$insert_id.";";
             $this->database->query($query);
             $result = $this->database->getObject();
@@ -80,7 +80,7 @@
         public function testSelectArray() {
             // insert recort into DB
             $query = "SELECT `request`
-                      FROM `#__sef` 
+                      FROM `#___sef` 
                       LIMIT 0, 100;";
             $this->database->query($query);
             $result = $this->database->getArray();
@@ -93,7 +93,7 @@
         public function testSelectObjectsArray() {
             // insert recort into DB
             $query = "SELECT *
-                      FROM `#__sef` 
+                      FROM `#___sef` 
                       LIMIT 0, 100;";
             $this->database->query($query);
             $result = $this->database->getObjectsArray();
@@ -106,7 +106,7 @@
         public function testSelectPairs() {
             // insert recort into DB
             $query = "SELECT *
-                      FROM `#__sef` 
+                      FROM `#___sef` 
                       LIMIT 0, 100;";
             $this->database->query($query);
             $result = $this->database->getPairs('id', 'request');
