@@ -37,8 +37,6 @@
                 function(response) {
                     $.fn.loaderHide();
                     if (response.result == 'success') {
-                        $.fn.popupShow('<?php echo T('File saved into DB'); ?>');
-
                         $('#' + rel_id + ' .file-name').addClass('green');
                         $('#' + rel_id + ' .file-actions a.file-add').remove();
                         $('#' + rel_id + ' .file-actions').append(
