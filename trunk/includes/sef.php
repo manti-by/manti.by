@@ -8,6 +8,7 @@
      * @subpackage Library
      * @author Alexander Chaika
      * @since 0.2RC1
+     * @todo TEST IT!!!
      */
     class Sef extends Application {
         private $storage;
@@ -42,21 +43,11 @@
 
             // Get global config
             $database = Database::getInstance();
+            $database->query("CALL UPDATE_SEF_COUNTER('".$database->escape($_SERVER['REQUEST_URI'])."','".$database->escape($_SERVER['REQUEST_URI'])."');");
 
-            // Update view counter
-            $database->query("
-                    UPDATE `#___sef_alias`
-                    SET `viewed` = `viewed` + 1
-                    WHERE `request` = '".$database->escape($_SERVER['REQUEST_URI'])."'
-                       OR `link` = '".$database->escape($_SERVER['REQUEST_URI'])."';");
-
-            // Get request string
+            // Get request string, delete question symbol and inject request data
             $request = substr(self::getReal($_SERVER['REQUEST_URI']), 1);
-
-            // Delete question symbol
-            // and inject request data
-            $result = strstr($request, "?");
-            if ($result) {
+            if ($result = strstr($request, "?")) {
                 parse_str($result, $_REQUEST);
             }
         }
@@ -70,25 +61,17 @@
             // Get config
             if (!Application::$config['sef_enabled']) return $link;
 
-            // Check memory
+            // Check memory, if exist, get array value by key
             if (self::checkStorage($link)) {
-                // if exist, get array value by key
                 $storage = self::getStorage();
                 return $storage[$link];
             }
 
             // Try to get real link
             $database = Database::getInstance();
-            $result = $database->query("
-                    SELECT `request` FROM `#___sef_alias`
-                    WHERE `link` = '".$database->escape($link)."';");
-            if ($result) {
-                $request = $database->getField();
-
-                // Update view counter
-                $database->query("
-                        UPDATE `#___sef_alias` SET `viewed` = `viewed` + 1
-                        WHERE `link` = '".$database->escape($link)."';");
+            $database->query("CALL GET_SEF('".$database->escape($link)."');");
+            if ($request = $database->getObject()) {
+                $request = $request->request;
             } else {
                 $request = $link;
             }
@@ -107,7 +90,7 @@
             // Get config
             if (!Application::$config['sef_enabled']) return $request;
 
-            // Check memory
+            // Check memory, if exist, get array value by value (flip)
             if (self::checkStorage($request)) {
                 $storage = self::getStorage();
                 $flip = array_flip($storage);
@@ -116,13 +99,10 @@
 
             // Try to get real link
             $database = Database::getInstance();
-            $result = $database->query("
-                    SELECT `link` FROM `#___sef_alias`
-                    WHERE `request` = '".$database->escape($request)."';");
-            if ($result) {
-                $link = $database->getField();
+            $database->query("CALL GET_SEF('".$database->escape($request)."');");
+            if (!$link = $database->getObject()) {
+                $link = $link->link;
             } else {
-                // If request not in sef links, try to create it
                 $link = self::createLink($request);
             }
 
@@ -149,23 +129,17 @@
                 if ($matches) {
                     // If pattern found, get table and alias fields
                     $database = Database::getInstance();
-                    $result = $database->query("
-                            SELECT `".$source['field']."` FROM `#__".$source['table']."`
-                            WHERE `id` = '".$matches[1]."';");
+                    $database->query("CALL GET_SEF_MAP_ALIAS('".$source['field']."','".$source['table']."',".(int)$matches[1].");");
 
-                    if ($result) {
-                        $alias = $database->getField();
-                    } else {
-                        // @TODO: I dont understand, why it's happend
-                        // but it's very strange... and we generate "date" for this
+                    // I dont understand, why it's happened
+                    // but it's very strange... and we generate "date" for this
+                    if (!$alias = $database->getField()) {
                         $alias = date('Y-m-d_H-i-s');
                     }
 
                     // Insert new route to redirection
                     $link = $source['prefix'] . $alias . $source['suffix'];
-                    $database->query("
-                            INSERT INTO `#___sef_alias` (`request`, `link`)
-                            VALUES ('".$database->escape($request)."', '".$database->escape($link)."');");
+                    $database->query("CALL UPSERT_SEF('".$database->escape($request)."','".$database->escape($link)."');");
 
                     // Add to aliases cache
                     self::addToStorage($request, $link);

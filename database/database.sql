@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50525
 File Encoding         : 65001
 
-Date: 2012-10-17 17:56:02
+Date: 2012-10-18 14:29:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,11 +29,7 @@ CREATE TABLE `files` (
   `md5` varchar(32) DEFAULT NULL,
   `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of files
--- ----------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `gallery`
@@ -228,7 +224,7 @@ CREATE TABLE `_log` (
   PRIMARY KEY (`id`),
   KEY `ik_browser` (`browser`) USING BTREE,
   KEY `ik_module` (`module`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `_sef_alias`
@@ -240,11 +236,12 @@ CREATE TABLE `_sef_alias` (
   `link` varchar(255) NOT NULL,
   `viewed` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of _sef_alias
 -- ----------------------------
+INSERT INTO `_sef_alias` VALUES ('1', 'request/request', 'link/link', '0');
 
 -- ----------------------------
 -- Procedure structure for `CHECK_COOKIE`
@@ -254,9 +251,9 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_COOKIE`(IN `_cookie` varchar(32), IN `_secret` varchar(32))
 BEGIN
     SELECT `id` 
-    FROM `user` 
-    WHERE MD5(CONCAT(_secret, `email`)) = _cookie
-    LIMIT 0, 1;
+		FROM `user` 
+		WHERE MD5(CONCAT(_secret, `email`)) = _cookie
+		LIMIT 0, 1;
 END
 ;;
 DELIMITER ;
@@ -270,8 +267,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_EMAIL`(IN `_email` varchar(32
 BEGIN
     SELECT `id` 
     FROM `user` 
-    WHERE `email` = _email 
-    LIMIT 0, 1;
+		WHERE `email` = _email 
+		LIMIT 0, 1;
 END
 ;;
 DELIMITER ;
@@ -284,7 +281,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_LOGIN`(IN `_email` varchar(32), IN `_password` varchar(32))
 BEGIN
     SELECT `id` 
-    FROM `user`
+		FROM `user`
     WHERE `email` = _email
       AND `password` = _password
     LIMIT 0, 1;
@@ -300,9 +297,9 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_USERNAME`(IN `_username` varchar(32))
 BEGIN
     SELECT `id` 
-    FROM `user` 
-    WHERE `username` = _username
-    LIMIT 0, 1;
+		FROM `user` 
+		WHERE `username` = _username
+		LIMIT 0, 1;
 END
 ;;
 DELIMITER ;
@@ -315,13 +312,13 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_FILES`(IN `_type` varchar(32), IN `_limit` int)
 BEGIN
     IF (_type <> '') THEN
-        SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
-        FROM `files`
-        WHERE `type` = _type
+		    SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
+		    FROM `files`
+		    WHERE `type` = _type
         LIMIT _limit;
     ELSE
-        SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
-        FROM `files`
+		    SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
+		    FROM `files`
         LIMIT _limit;
     END IF;
 END
@@ -540,8 +537,37 @@ BEGIN
         WHERE pr.`original_id` = _id;
     ELSE
         SELECT p.`id` AS `id`, p.`name` AS `name`
-        FROM `post` AS p;
+				FROM `post` AS p;
     END IF;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `GET_SEF`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `GET_SEF`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_SEF`(IN `_link` varchar(255))
+BEGIN
+    SELECT * 
+    FROM `_sef_alias`
+    WHERE `link` LIKE _link
+       OR `request` LIKE _link;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `GET_SEF_MAP_ALIAS`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `GET_SEF_MAP_ALIAS`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_SEF_MAP_ALIAS`(IN `_field` varchar(255), IN `_table` varchar(255), IN `_id` int)
+BEGIN
+    SELECT _field 
+    FROM _table
+    WHERE `id` = _id;
 END
 ;;
 DELIMITER ;
@@ -554,10 +580,10 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_USER_BY_ID`(IN `_id` int)
 BEGIN
     SELECT u.*, g.`name` AS `group` 
-    FROM `user` AS u
-    JOIN `group` AS g ON g.`id` = u.`group_id`
-    WHERE u.`id` = _id
-    LIMIT 0, 1;
+		FROM `user` AS u
+		JOIN `group` AS g ON g.`id` = u.`group_id`
+		WHERE u.`id` = _id
+		LIMIT 0, 1;
 END
 ;;
 DELIMITER ;
@@ -587,9 +613,24 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_PASSWORD`(IN `_email` varchar(64), IN `_password` varchar(32))
 BEGIN
     UPDATE `user` 
-    SET `password` = _password
-    WHERE `email` = _email
-    LIMIT 1;
+		SET `password` = _password
+		WHERE `email` = _email
+		LIMIT 1;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `UPDATE_SEF_COUNTER`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `UPDATE_SEF_COUNTER`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_SEF_COUNTER`(IN `_request` varchar(255),IN `_link` varchar(255))
+BEGIN
+	UPDATE `_sef_alias`
+	SET `viewed` = `viewed` + 1
+	WHERE `request` = _request
+		 OR `link` = _link;
 END
 ;;
 DELIMITER ;
@@ -616,10 +657,25 @@ BEGIN
         SELECT __id AS record_id;
     ELSE
         INSERT INTO `files` (`type`, `name`, `description`, `source`, `size`, `md5`)
-        VALUES (_type, _name, _description, _source, _size, _md5);
+				VALUES (_type, _name, _description, _source, _size, _md5);
 
-        SELECT LAST_INSERT_ID() AS record_id;
+		    SELECT LAST_INSERT_ID() AS record_id;
     END IF;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `UPSERT_SEF`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `UPSERT_SEF`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPSERT_SEF`(IN `_request` varchar(255), IN `_link` varchar(255))
+BEGIN
+    INSERT INTO `_sef_alias` (`request`,`link`)
+    VALUES (_request, _link);
+
+    SELECT LAST_INSERT_ID() AS result;
 END
 ;;
 DELIMITER ;
@@ -639,9 +695,9 @@ BEGIN
         SELECT __id AS record_id;
     ELSE
         INSERT INTO `user` (`username`, `email`, `password`)
-        VALUES (_username, _email, _password);
+				VALUES (_username, _email, _password);
 
-        SELECT LAST_INSERT_ID() AS record_id;
+		    SELECT LAST_INSERT_ID() AS record_id;
     END IF;
 END
 ;;
