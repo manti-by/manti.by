@@ -68,9 +68,11 @@
                     $data = $this->getDirList($path);
 
                     // Check in DB
-                    foreach ($db_files as $id => $source) {
-                        if (array_key_exists($source, $data)) {
-                            $data[$source]['id'] = $id;
+                    if (count($db_files)) {
+                        foreach ($db_files as $id => $source) {
+                            if (array_key_exists($source, $data)) {
+                                $data[$source]['id'] = $id;
+                            }
                         }
                     }
 
