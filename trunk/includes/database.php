@@ -202,7 +202,6 @@
             $row = $this->res->fetch_row();
 
             // Check CALL result
-            //if ($this->mysqli->next_result()) $this->mysqli->store_result();
             $this->res->free_result();
 
             if (!$row || empty($row)) {
@@ -226,7 +225,6 @@
             $obj = $this->res->fetch_object();
 
             // Check CALL result
-            //if ($this->mysqli->next_result()) $this->mysqli->store_result();
             $this->res->free_result();
 
             if (!$obj || empty($obj)) {
@@ -253,7 +251,6 @@
             }
 
             // Check CALL result
-            //if ($this->mysqli->next_result()) $this->mysqli->store_result();
             $this->res->free_result();
 
             return $arr;
@@ -276,7 +273,6 @@
             }
 
             // Check CALL result
-            //if ($this->mysqli->next_result()) $this->mysqli->store_result();
             $this->res->free_result();
 
             return $arr;
