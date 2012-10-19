@@ -72,47 +72,48 @@
         }
 
         public function saveAction($options) {
-            $options['output'] = 'json';
-            $options['id'] = System::getInstance()->getCmd('id');
+            $system = System::getInstance();
 
-            $options['name'] = System::getInstance()->getCmd('name');
+            $options['output'] = 'json';
+            $options['id'] = $system->getCmd('id', 0);
+
+            $options['name'] = $system->getCmd('name', '');
             if (empty($options['name'])) {
                 $options['data'] = array('result' => 'error', 'error' => T('Post title could not be empty'));
                 return $options;
             }
 
-            $options['description'] = System::getInstance()->getCmd('description');
+            $options['description'] = $system->getCmd('description', '');
             if (empty($options['description'])) {
                 $options['data'] = array('result' => 'error', 'error' => T('Post description could not be empty'));
                 return $options;
             }
 
-            $options['teaser']      = System::getInstance()->getCmd('teaser');
+            $options['teaser'] = $system->getCmd('teaser', '');
             if (empty($options['teaser'])) {
                 $options['teaser'] = substr(strip_tags($options['description']), 0, Application::$config['teaser_length']);
             }
 
-            $options['metakeys'] = System::getInstance()->getCmd('metakeys');
+            $options['metakeys'] = $system->getCmd('metakeys', '');
 
-            $options['metadesc'] = System::getInstance()->getCmd('metadesc');
+            $options['metadesc'] = $system->getCmd('metadesc', '');
             if (empty($options['metadesc'])) {
                 $options['metadesc'] = substr(strip_tags($options['description']), 0, Application::$config['metadesc_length']);
             }
 
-            $options['is_music'] = System::getInstance()->getCmd('is_music', 0);
+            $options['is_music'] = $system->getCmd('is_music', 0);
 
             if ($options['is_music']) {
-                $options['preview'] = System::getInstance()->getCmd('preview');
-                $options['release'] = System::getInstance()->getCmd('release');
-                $options['covers'] = System::getInstance()->getCmd('covers');
-                $options['relations'] = System::getInstance()->getCmd('relations');
+                $options['preview'] = $system->getCmd('preview', '');
+                $options['release'] = $system->getCmd('release', '');
+                $options['covers'] = $system->getCmd('covers', '');
+                $options['relations'] = $system->getCmd('relations', '');
 
-                $options['catnum'] = System::getInstance()->getCmd('catnum');
-                $options['genre'] = System::getInstance()->getCmd('genre');
-                $options['quality'] = System::getInstance()->getCmd('quality');
-                $options['length'] = System::getInstance()->getCmd('length');
-                $options['file-size'] = System::getInstance()->getCmd('file-size');
-                $options['tracklist'] = System::getInstance()->getCmd('tracklist');
+                $options['catnum'] = $system->getCmd('catnum', '');
+                $options['genre'] = $system->getCmd('genre', '');
+                $options['quality'] = $system->getCmd('quality', '');
+                $options['length'] = $system->getCmd('length', '');
+                $options['tracklist'] = $system->getCmd('tracklist', '');
             }
 
             // Save result

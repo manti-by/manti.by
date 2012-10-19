@@ -137,12 +137,6 @@
             <span class="form_error"></span>
         </p>
         <p>
-            <label for="file-size"><?php echo T('File size'); ?></label>
-            <input type="text" name="file-size" id="file-size" value="<?php echo $options['file-size']; ?>" />
-            <a href="<?php echo Sef::getSef('index.php?module=file'); ?>" target="_blank"><?php echo T('Show files'); ?></a>
-            <span class="form_error"></span>
-        </p>
-        <p>
             <label for="tracklist"><?php echo T('Tracklist'); ?></label>
             <textarea name="tracklist" id="tracklist"><?php echo $options['tracklist']; ?></textarea>
             <span class="form_error"></span>
