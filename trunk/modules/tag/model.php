@@ -25,4 +25,20 @@
             $this->database->query("CALL GET_POSTS_BY_TAGS('$tags', $limit)");
             return $this->database->getObjectsArray();
         }
+
+        /**
+         * Upsert tags and return its ids
+         * @param string $tags comma separated list
+         * @return array $result
+         */
+        public function processTags($tags) {
+            $return = array();
+            $this->database->query("CALL UPSERT_TAGS('". $tags ."');");
+            if ($result = $this->database->getObjectsArray()) {
+                foreach ($result as $item) {
+                    $return[] = $item->id;
+                }
+            }
+            return $return;
+        }
     }
