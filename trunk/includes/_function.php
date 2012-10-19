@@ -91,3 +91,14 @@
             return $text;
         }
     }
+
+    /**
+     * Remove from comma separated string array empty values
+     * @param string $string
+     * @return array $result
+     */
+    function cleanCommaString($string) {
+        $result = explode(',', $string);
+        $result = array_diff($result, array('', null));
+        return implode(',', $result);
+    }
