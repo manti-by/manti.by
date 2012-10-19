@@ -13,12 +13,14 @@ BEGIN
         UPDATE `files`
         SET `type` = _type, `name` = _name, `description` = _description, `size` = _size
         WHERE `id` = __id;
+
+        SELECT __id;
     ELSE
         INSERT INTO `files` (`type`, `name`, `description`, `source`, `size`, `md5`)
         VALUES (_type, _name, _description, _source, _size, _md5);
-    END IF;
 
-    SELECT LAST_INSERT_ID() AS record_id;
+        SELECT LAST_INSERT_ID();
+    END IF;
 END
 ;;
 DELIMITER ;

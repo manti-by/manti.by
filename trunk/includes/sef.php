@@ -20,12 +20,11 @@
         protected function __construct() {
             // Try connect to DB
             $this->storage = array();
-
         }
 
         /**
          * GetInstance class method
-         * @return Current_Class_Name $instance
+         * @return Sef $instance
          */
         public static function getInstance() {
             if (is_null(self::$instance)) {

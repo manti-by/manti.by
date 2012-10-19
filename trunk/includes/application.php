@@ -24,7 +24,7 @@
 
         /**
          * GetInstance class method
-         * @return Current_Class_Name $instance
+         * @return Application $instance
          */
         public static function getInstance() {
             if (is_null(self::$instance)) {

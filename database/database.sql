@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50525
 File Encoding         : 65001
 
-Date: 2012-10-18 14:29:43
+Date: 2012-10-19 17:58:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,6 +30,10 @@ CREATE TABLE `files` (
   `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of files
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `gallery`
@@ -102,11 +106,10 @@ CREATE TABLE `post` (
   `genre` varchar(32) DEFAULT NULL,
   `quality` varchar(255) DEFAULT NULL,
   `length` varchar(16) DEFAULT NULL,
-  `file-size` int(11) unsigned DEFAULT NULL,
   `tracklist` text,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of post
@@ -125,7 +128,7 @@ CREATE TABLE `post_files` (
   KEY `fk_post_files_file_id` (`file_id`),
   CONSTRAINT `fk_post_files_file_id` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_post_files_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of post_files
@@ -164,7 +167,7 @@ CREATE TABLE `post_tags` (
   KEY `fk_post_tags_tag_id` (`tag_id`),
   CONSTRAINT `fk_post_tags_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_post_tags_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of post_tags
@@ -178,7 +181,7 @@ CREATE TABLE `tags` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tags
@@ -224,7 +227,11 @@ CREATE TABLE `_log` (
   PRIMARY KEY (`id`),
   KEY `ik_browser` (`browser`) USING BTREE,
   KEY `ik_module` (`module`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=108 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of _log
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `_sef_alias`
@@ -241,7 +248,6 @@ CREATE TABLE `_sef_alias` (
 -- ----------------------------
 -- Records of _sef_alias
 -- ----------------------------
-INSERT INTO `_sef_alias` VALUES ('1', 'request/request', 'link/link', '0');
 
 -- ----------------------------
 -- Procedure structure for `CHECK_COOKIE`
@@ -251,9 +257,9 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_COOKIE`(IN `_cookie` varchar(32), IN `_secret` varchar(32))
 BEGIN
     SELECT `id` 
-		FROM `user` 
-		WHERE MD5(CONCAT(_secret, `email`)) = _cookie
-		LIMIT 0, 1;
+    FROM `user` 
+    WHERE MD5(CONCAT(_secret, `email`)) = _cookie
+    LIMIT 0, 1;
 END
 ;;
 DELIMITER ;
@@ -267,8 +273,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_EMAIL`(IN `_email` varchar(32
 BEGIN
     SELECT `id` 
     FROM `user` 
-		WHERE `email` = _email 
-		LIMIT 0, 1;
+    WHERE `email` = _email 
+    LIMIT 0, 1;
 END
 ;;
 DELIMITER ;
@@ -281,7 +287,7 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_LOGIN`(IN `_email` varchar(32), IN `_password` varchar(32))
 BEGIN
     SELECT `id` 
-		FROM `user`
+    FROM `user`
     WHERE `email` = _email
       AND `password` = _password
     LIMIT 0, 1;
@@ -297,9 +303,90 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_USERNAME`(IN `_username` varchar(32))
 BEGIN
     SELECT `id` 
-		FROM `user` 
-		WHERE `username` = _username
-		LIMIT 0, 1;
+    FROM `user` 
+    WHERE `username` = _username
+    LIMIT 0, 1;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `CREATE_FILE_RELATIONS`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `CREATE_FILE_RELATIONS`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CREATE_FILE_RELATIONS`(IN `_post_id` int,IN `_ids` varchar(255))
+BEGIN
+    DECLARE _index INT Default 0;
+    DECLARE _current VARCHAR(255);
+
+    default_loop: LOOP
+        SET _index = _index + 1;
+        SET _current = SPLIT_STR(_ids, ",", _index);
+
+        SELECT _current;
+        IF _current = '' THEN
+            LEAVE default_loop;
+        END IF;
+
+        # Do Inserts
+        INSERT INTO `post_files` (`post_id`, `file_id`)
+        VALUES (_post_id, _current);
+    END LOOP default_loop;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `CREATE_POST_RELATIONS`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `CREATE_POST_RELATIONS`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CREATE_POST_RELATIONS`(IN `_post_id` int,IN `_ids` varchar(255))
+BEGIN
+    DECLARE _index INT Default 0;
+    DECLARE _current VARCHAR(255);
+
+    default_loop: LOOP
+        SET _index = _index + 1;
+        SET _current = SPLIT_STR(_ids, ",", _index);
+
+        SELECT _current;
+        IF _current = '' THEN
+            LEAVE default_loop;
+        END IF;
+
+        # Do Inserts
+        INSERT INTO `post_relations` (`original_id`, `destination_id`)
+        VALUES (_post_id, _current);
+    END LOOP default_loop;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `CREATE_TAGS_RELATIONS`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `CREATE_TAGS_RELATIONS`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `CREATE_TAGS_RELATIONS`(IN `_post_id` int,IN `_ids` varchar(255))
+BEGIN
+    DECLARE _index INT Default 0;
+    DECLARE _current VARCHAR(255);
+
+    default_loop: LOOP
+        SET _index = _index + 1;
+        SET _current = SPLIT_STR(_ids, ",", _index);
+
+        SELECT _current;
+        IF _current = '' THEN
+            LEAVE default_loop;
+        END IF;
+
+        # Do Inserts
+        INSERT INTO `post_tags` (`post_id`, `tag_id`)
+        VALUES (_post_id, _current);
+    END LOOP default_loop;
 END
 ;;
 DELIMITER ;
@@ -312,13 +399,13 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_FILES`(IN `_type` varchar(32), IN `_limit` int)
 BEGIN
     IF (_type <> '') THEN
-		    SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
-		    FROM `files`
-		    WHERE `type` = _type
+        SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
+        FROM `files`
+        WHERE `type` = _type
         LIMIT _limit;
     ELSE
-		    SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
-		    FROM `files`
+        SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
+        FROM `files`
         LIMIT _limit;
     END IF;
 END
@@ -537,7 +624,7 @@ BEGIN
         WHERE pr.`original_id` = _id;
     ELSE
         SELECT p.`id` AS `id`, p.`name` AS `name`
-				FROM `post` AS p;
+        FROM `post` AS p;
     END IF;
 END
 ;;
@@ -580,10 +667,10 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_USER_BY_ID`(IN `_id` int)
 BEGIN
     SELECT u.*, g.`name` AS `group` 
-		FROM `user` AS u
-		JOIN `group` AS g ON g.`id` = u.`group_id`
-		WHERE u.`id` = _id
-		LIMIT 0, 1;
+    FROM `user` AS u
+    JOIN `group` AS g ON g.`id` = u.`group_id`
+    WHERE u.`id` = _id
+    LIMIT 0, 1;
 END
 ;;
 DELIMITER ;
@@ -613,9 +700,9 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_PASSWORD`(IN `_email` varchar(64), IN `_password` varchar(32))
 BEGIN
     UPDATE `user` 
-		SET `password` = _password
-		WHERE `email` = _email
-		LIMIT 1;
+    SET `password` = _password
+    WHERE `email` = _email
+    LIMIT 1;
 END
 ;;
 DELIMITER ;
@@ -627,10 +714,10 @@ DROP PROCEDURE IF EXISTS `UPDATE_SEF_COUNTER`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `UPDATE_SEF_COUNTER`(IN `_request` varchar(255),IN `_link` varchar(255))
 BEGIN
-	UPDATE `_sef_alias`
-	SET `viewed` = `viewed` + 1
-	WHERE `request` = _request
-		 OR `link` = _link;
+    UPDATE `_sef_alias`
+    SET `viewed` = `viewed` + 1
+    WHERE `request` = _request
+       OR `link` = _link;
 END
 ;;
 DELIMITER ;
@@ -654,13 +741,56 @@ BEGIN
         SET `type` = _type, `name` = _name, `description` = _description, `size` = _size
         WHERE `id` = __id;
 
-        SELECT __id AS record_id;
+        SELECT __id;
     ELSE
         INSERT INTO `files` (`type`, `name`, `description`, `source`, `size`, `md5`)
-				VALUES (_type, _name, _description, _source, _size, _md5);
+        VALUES (_type, _name, _description, _source, _size, _md5);
 
-		    SELECT LAST_INSERT_ID() AS record_id;
+        SELECT LAST_INSERT_ID();
     END IF;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `UPSERT_POST`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `UPSERT_POST`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPSERT_POST`(IN `_id` int,IN `_name` varchar(255), IN `_teaser` varchar(255), IN `_description` text, IN `_metakeys` varchar(255), IN `_metadesc` varchar(255), IN `_is_music` int, IN `_relations` varchar(255), IN `_catnum` varchar(255),  IN `_genre` varchar(255),  IN `_quality` varchar(255),  IN `_length` varchar(255), IN `_tracklist` varchar(255),  IN `_attachments` varchar(255))
+BEGIN
+    DECLARE _post_id INT;
+    IF (_id > 0) THEN
+        SET _post_id = _id;
+    END IF;
+
+    # Remove old tags, files and relations
+    DELETE FROM `post_tags` WHERE `post_id` = _post_id;
+    DELETE FROM `post_files` WHERE `post_id` = _post_id;
+    DELETE FROM `post_relations` WHERE `original_id` = _post_id;
+
+    # Upsert post data
+    IF (_post_id > 0) THEN
+        UPDATE `post`
+        SET `name` = _name, `teaser` = _teaser, `description` = _description, `metadesc` = _metadesc,
+            `is_music` = _is_music, `catnum`  = _catnum, `genre` = _genre, `quality` = _quality,
+            `length` = _length, `tracklist` = _tracklist
+        WHERE `id` = _post_id;
+    ELSE
+        INSERT INTO `post` (`name`, `teaser`, `description`, `metadesc`, `is_music`,
+             `catnum`, `genre`, `quality`, `length`, `tracklist`)
+        VALUES (_name, _teaser, _description, _metadesc, _is_music, _catnum, _genre, _quality, _length, _tracklist);
+
+        SELECT LAST_INSERT_ID() INTO _post_id;
+    END IF;
+
+    # Create tags, files and relations
+    CALL CREATE_TAGS_RELATIONS(_post_id, _metakeys);
+    CALL CREATE_FILE_RELATIONS(_post_id, _attachments);
+    CALL CREATE_POST_RELATIONS(_post_id, _relations);
+
+    # Return post IDENTIFIED
+    SELECT _post_id;
 END
 ;;
 DELIMITER ;
@@ -681,6 +811,62 @@ END
 DELIMITER ;
 
 -- ----------------------------
+-- Procedure structure for `UPSERT_TAGS`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `UPSERT_TAGS`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPSERT_TAGS`(IN `_tags` varchar(255))
+BEGIN
+    DECLARE _index INT DEFAULT 0;
+    DECLARE _current_id INT DEFAULT 0;
+    DECLARE _previous_id INT DEFAULT 0;
+    DECLARE _current_value VARCHAR(255);
+
+    # Result set
+    CREATE TEMPORARY TABLE IF NOT EXISTS `result_set` (
+        `id` int NOT NULL,
+        `name` varchar(32) NOT NULL
+    ) ENGINE = MEMORY;
+    TRUNCATE TABLE `result_set`;
+
+    tags_loop: LOOP
+        SET _index = _index + 1;
+        SET _current_value = SPLIT_STR(_tags, ",", _index);
+
+        IF _current_value = '' THEN
+           LEAVE tags_loop;
+        END IF;
+
+        # Do existing tag
+        SELECT `id`
+        INTO _current_id
+        FROM `tags`
+        WHERE `name` = _current_value;
+
+        # If not exists
+        IF (_current_id = _previous_id) THEN
+            INSERT INTO `tags` (`name`)
+            VALUES (_current_value);
+             
+            SELECT LAST_INSERT_ID()
+            INTO _current_id;
+        END IF;
+
+        # Add to result set
+        INSERT INTO `result_set` (`id`, `name`)
+        VALUES (_current_id, _current_value);
+
+        SET _previous_id = _current_id;
+    END LOOP tags_loop;
+
+    # Retusr result set
+    SELECT *
+    FROM `result_set`;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
 -- Procedure structure for `UPSERT_USER`
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `UPSERT_USER`;
@@ -695,10 +881,25 @@ BEGIN
         SELECT __id AS record_id;
     ELSE
         INSERT INTO `user` (`username`, `email`, `password`)
-				VALUES (_username, _email, _password);
+        VALUES (_username, _email, _password);
 
-		    SELECT LAST_INSERT_ID() AS record_id;
+        SELECT LAST_INSERT_ID() AS record_id;
     END IF;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Function structure for `SPLIT_STR`
+-- ----------------------------
+DROP FUNCTION IF EXISTS `SPLIT_STR`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` FUNCTION `SPLIT_STR`(`_source` varchar(255),`_delimiter` varchar(1),`_position` int) RETURNS varchar(255) CHARSET utf8
+BEGIN
+    RETURN REPLACE (
+        SUBSTRING(SUBSTRING_INDEX(_source, _delimiter, _position),
+        LENGTH(SUBSTRING_INDEX(_source, _delimiter, _position - 1)) + 1),
+       _delimiter, '');
 END
 ;;
 DELIMITER ;
