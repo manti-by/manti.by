@@ -132,9 +132,9 @@
             if ($this->getLastErrorNum() > 0) {
                 return $this->_throw($this->getError(), ERROR);
             } else {
-                if ($this->mysqli->next_result()) {
-                    $this->result = $this->mysqli->affected_rows ? $this->mysqli->affected_rows : 1;
+                while ($this->mysqli->next_result()) {
                     $this->mysqli->store_result();
+                    $this->result = $this->mysqli->affected_rows ? $this->mysqli->affected_rows : 1;
                 }
                 return $this->result;
             }
