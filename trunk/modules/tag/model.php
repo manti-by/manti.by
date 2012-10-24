@@ -10,21 +10,6 @@
      * @since 0.3RC2
      */
     class TagModel extends Model {
-        
-        public function getPosts($limit = 10){
-            $this->database->query("CALL GET_POSTS($limit)");
-            return $this->database->getObjectsArray();
-        }
-        
-        public function getPostsByTags($tags, $limit = 0){
-            if (empty($tags)) {
-                return $this->getPosts();
-            }
-            
-            $tags = implode(',', $tags);
-            $this->database->query("CALL GET_POSTS_BY_TAGS('$tags', $limit)");
-            return $this->database->getObjectsArray();
-        }
 
         /**
          * Upsert tags and return its ids
@@ -40,5 +25,36 @@
                 }
             }
             return $return;
+        }
+
+        /**
+         * Get tags array by IDs string
+         * @param string|array $ids
+         * @return bool|array $tags
+         */
+        public function getTagsByIds($ids) {
+            // Check if array
+            if (is_array($ids)) {
+                $ids = implode(',', $ids);
+            }
+
+            // Return result
+            $result = false;
+            if (!empty($ids)) {
+                $this->database->query("CALL GET_TAGS_BY_IDS('". $ids ."');");
+                $result =  $this->database->getPairs('id', 'name');
+            }
+
+            return is_array($result) ? $result : array();
+        }
+
+        /**
+         * Tag aurocomlete data-provider
+         * @param string $query
+         * @return bool false
+         */
+        public function autocomplete($query = null) {
+            $this->database->query("CALL SEARCH_TAGS('%". $query ."%');");
+            return $this->database->getPairs('id', 'name');
         }
     }
