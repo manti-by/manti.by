@@ -22,10 +22,10 @@
             // Get category title
             if ($tags) {
                 $options['title'] = 'Search by tags: ' . $tags;
-                $options['data'] = $this->model->getPostsByTags(explode(',', $tags));
+                $options['data'] = Model::getModel('blog')->getPostsByTags($tags);
             } else {
                 $options['title'] = T('No search results found');
-                $options['data'] = $this->model->getPosts();
+                $options['data'] = Model::getModel('blog')->getPosts();
             }
             
             // get category items and render it

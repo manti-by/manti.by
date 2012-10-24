@@ -60,9 +60,14 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 .warning { background: #FFA; border-color: #990; }
 .message { background: #AFA; border-color: #090; }
 
-.form_error { display: none; color: red; font-size: 11px; padding-left: 5px; position: absolute; width: 250px;
+.error-message { min-height: 36px; line-height: 36px; color: red; padding-left: 36px;
+    background: url('../images/icon-error-32x32.png') no-repeat center left; }
+.success-message { min-height: 36px; line-height: 36px; padding-left: 36px;
+    background: url('../images/icon-success-32x32.png') no-repeat center left; }
+
+.form-error { display: none; color: red; font-size: 11px; padding-left: 5px; position: absolute; width: 250px;
     overflow: visible; }
-.form_notice { margin-left: 130px; display: block; }
+.form-notice { margin-left: 130px; display: block; }
 
 .hide_this { float: right; cursor: pointer; font-size: 10px; margin: 0; padding: 3px;
     color: #b40202; border: 1px solid #AAA; background: white; }
@@ -112,7 +117,7 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 #popup { display: none; position: fixed; top: 250px; left: 50%; min-width: 400px;
     margin-left: -200px; padding: 15px; box-shadow: 3px 3px 3px #999;
     background: url(../images/black-bg-75.png); z-index: 1000; }
-#popup .content { padding: 15px; border: 1px solid #CCC; background: #FFF; min-height: 150px; }
+#popup .content { padding: 15px; border: 1px solid #CCC; background: #FFF; font-size: 14px; }
 
 .popup { position: absolute;  min-width: 400px; padding: 15px; box-shadow: 3px 3px 3px #999;
     background: url(../images/black-bg-75.png); z-index: 1000; }
@@ -133,3 +138,10 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 .tag ul li { display: inline-block; list-style: none; margin: 2px; padding: 2px 4px; border: 1px solid #CCC;
     background: #FFC; }
 .tag ul li .tag-del { margin: 0 0 0 3px; padding: 0 2px; }
+
+.autocomplete-result { position: absolute; width: 120px; border: 1px solid #CCC;
+    background: white; box-shadow: 3px 3px 3px #999; z-index: 1000; }
+.autocomplete-result ul { display: block; font-size: 14px; }
+.autocomplete-result ul li { display: block; margin: 0; padding: 5px; border: none; border-bottom: 1px solid #CCC;
+    background: white; cursor: pointer; }
+.autocomplete-result ul li:hover { color: #ff721d; }
