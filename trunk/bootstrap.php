@@ -33,5 +33,5 @@
     define('MESSAGE', 8);
 
     // system classes
-    require_once LIB_PATH . DS . '_function.php';
     require_once LIB_PATH . DS . '_autoload.php';
+    require_once LIB_PATH . DS . '_function.php';
