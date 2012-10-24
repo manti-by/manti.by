@@ -42,4 +42,13 @@
             }
             return self::$models[$name];
         }
+
+        /**
+         * Parent aurocomlete data-provider
+         * @param string $query
+         * @return bool false
+         */
+        public function autocomplete($query = null) {
+            return false;
+        }
     }

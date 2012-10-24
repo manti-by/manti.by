@@ -17,6 +17,16 @@
         protected static $_name;
 
         /**
+         * @var Model $model
+         */
+        public $model;
+
+        /**
+         * @var View $view
+         */
+        public $view;
+
+        /**
          * Class constructor which loads MVC structure
          */
         public function  __construct() {
@@ -110,6 +120,23 @@
             } else {
                 $options['access'] = 'granted';
             }
+            return $options;
+        }
+
+        public function autocompleteAction($options) {
+            $options['output'] = 'json';
+
+            // Get query
+            $query = System::getInstance()->getCmd('q');
+
+            // Get category title
+            if ($query) {
+                $data = toJSNumArray($this->model->autocomplete($query));
+                $options['data'] = array('result' => 'success', 'data' => $data);
+            } else {
+                $options['data'] = array('result' => 'error' , 'error' => T('Empty query string'));
+            }
+
             return $options;
         }
     }
