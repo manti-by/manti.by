@@ -14,7 +14,8 @@
          */
         public function render() {
             if ($html = parent::render()) {
-                $this->_data = Model::getModel('blog')->getRelations($this->_options['reference_id']);
+                $this->_data  = Model::getModel('blog')->getPosts();
+                $this->_value = Model::getModel('blog')->getPostRelationsById($this->_options['reference_id']);
                 if ($this->_data) {
                     ob_start();
                     ?>
@@ -40,7 +41,7 @@
                     </script>
 
                     <div class="<?php echo $this->_options['class']; ?> relations">
-                        <input type="hidden" name="<?php echo $this->_options['name']; ?>" id="<?php echo $this->_options['id']; ?>" value="" />
+                        <input type="hidden" name="<?php echo $this->_options['name']; ?>" id="<?php echo $this->_options['id']; ?>" value="<?php echo $this->getValue(); ?>" />
                         <div id="<?php echo $this->_options['id']; ?>-notice">
                             <span class="bold"><?php echo count($this->_value); ?></span>/<?php echo count($this->_data); ?> <?php echo T('items'); ?>
                             <input type="button" name="<?php echo $this->_options['name']; ?>-edit" id="<?php echo $this->_options['id']; ?>-edit" class="rel-edit" value="<?php echo T('Edit'); ?>" />
@@ -49,10 +50,10 @@
                             <div class="hide_this">[X] <?php echo T('Close'); ?></div>
                             <div class="content">
                                 <ul>
-                                    <?php foreach ($this->_data as $id => $label) : ?>
+                                    <?php foreach ($this->_data as $item) : ?>
                                     <li>
-                                        <input type="checkbox" name="<?php echo $this->_options['name']; ?>-items" class="<?php echo $this->_options['class']; ?>" value="<?php echo $id; ?>" <?php if (in_array($id, $this->_selected)) echo 'checked="checked"'; ?>/>
-                                        <?php echo $label; ?>
+                                        <input type="checkbox" name="<?php echo $this->_options['name']; ?>-items" class="<?php echo $this->_options['class']; ?>" value="<?php echo $item->id; ?>" <?php if (in_array($item->id, $this->_value)) echo 'checked="checked"'; ?>/>
+                                        <?php echo $item->name; ?>
                                     </li>
                                     <?php endforeach; ?>
                                 </ul>

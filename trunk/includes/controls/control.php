@@ -8,12 +8,18 @@
      */
     class Control extends Application {
 
+        const TYPE_ARRAY = 0;
+        const TYPE_JSON  = 1;
+
         protected $_value = array();
+        protected $_value_type = self::TYPE_ARRAY;
         protected $_options = array('id' => '', 'class' => '', 'name' => '');
+
+        protected $_main_field = 'name';
 
         /**
          * Class constructor
-         * @param mixed $data (optional)
+         * @param mixed $value (optional)
          * @param mixed $options (optional)
          */
         public function __construct($value = null, $options = null) {
@@ -40,13 +46,20 @@
             }
 
             // Set values
+            $json = json_decode($value);
+            $exploded = explode(',', $value);
             if (is_array($value)) {
                 $this->_value = $value;
+            } elseif ($json) {
+                $this->_value = $json;
+                $this->_value_type = self::TYPE_JSON;
+            } elseif (is_array($exploded) && count($exploded) > 1) {
+                $this->_value = $exploded;
             } else {
                 $this->_value = array($value);
             }
 
-            return $this->_value = array_unique($this->_value);
+            return $this->_value = $this->_value;
         }
 
         /**
@@ -61,21 +74,41 @@
             }
 
             // Append values
+            $exploded = explode(',', $value);
+            $json = json_decode($value);
             if (is_array($value)) {
                 $this->_value = $this->_value + $value;
+            } elseif (is_array($exploded) && count($exploded) > 1) {
+                $this->_value = $this->_value + $exploded;
+            } elseif ($json) {
+                $this->_value = $this->_value + $json;
+                $this->_value_type = self::TYPE_JSON;
             } else {
                 $this->_value = $this->_value + array($value);
             }
 
-            return $this->_value = array_unique($this->_value);
+            return $this->_value = $this->_value;
         }
 
         /**
          * Get data
-         * @return array $value
+         * @param string $main_field OPTIONAL
+         * @return string $value
          */
-        public function getValue() {
-            return $this->_value;
+        public function getValue($main_field = null) {
+            // Compile value
+            $result = '';
+            foreach ($this->_value as $value) {
+                if ($this->_value_type == self::TYPE_JSON) {
+                    $main_field = empty($main_field) ? $this->_main_field : $main_field;
+                    $temp = $value->$main_field;
+                } else {
+                    $temp = $value;
+                }
+                $result .= empty($result) ? $temp : ',' . $temp;
+            }
+
+            return $result;
         }
 
         /**
@@ -134,6 +167,6 @@
             }
 
             // Render markup and return
-            return '<input type="text" name="' . $this->_options['name'] . '" id="' . $this->_options['id'] . '" class="' . $this->_options['class'] . '" value="' . implode(',', $this->_value) . '" />';
+            return '<input type="text" name="' . $this->_options['name'] . '" id="' . $this->_options['id'] . '" class="' . $this->_options['class'] . '" value="' . $this->getValue() . '" />';
         }
     }

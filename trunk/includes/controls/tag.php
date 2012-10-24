@@ -5,6 +5,7 @@
      * @subpackage Library Tags
      * @author Alexander Chaika
      * @since 0.3RC2
+     * @todo Fix tags set and delete actions
      */
     class Tag extends Control {
 
@@ -14,7 +15,8 @@
          */
         public function render() {
             // Check parent errors
-            if (parent::render()) {
+            if ($html = parent::render()) {
+                $this->_data = Model::getModel('tag')->getTagsByIds($this->getValue('id'));
                 ob_start();
                 ?>
                     <div class="tag">
@@ -59,8 +61,11 @@
                                         return false;
                                     }
 
-                                    // Add new tag
+                                    // Add new tag and remove empty
                                     tags.push(val);
+                                    for (var i = 0; i < tags.length; i++) {
+                                        if (tags[i] == '') tags.splice(i, 1);
+                                    }
                                     $('#' + tag_id).val(tags.join(','));
 
                                     // Create new control for this tag
@@ -78,17 +83,18 @@
                                 $('.tag-wrap').click(function() {
                                     $(this).children('.tag-input').focus();
                                 });
+
+                                $('#' + tag_id + '-input').keypress(function(event) {
+                                    if (event.which == 13) $('#' + tag_id + '-add').click();
+                                });
                             });
                         </script>
 
-                        <?php
-                            $value = !empty($this->_value) && count($this->_value) > 0 ? implode(',', $this->_value) : '';
-                            $i = 1;
-                        ?>
-                        <input type="hidden" id="<?php echo $this->_options['id']; ?>" name="<?php echo $this->_options['name']; ?>" value="<?php echo $value; ?>" />
+                        <?php $i = 1; ?>
+                        <input type="hidden" id="<?php echo $this->_options['id']; ?>" name="<?php echo $this->_options['name']; ?>" value="<?php echo $this->getValue(); ?>" />
                         <div class="tag-wrap">
                             <ul id="<?php echo $this->_options['id']; ?>-control" class="<?php echo $this->_options['class']; ?>-control">
-                                <?php foreach ($this->_value as $tag) : ?>
+                                <?php foreach ($this->_data as $tag) : ?>
                                     <li id="<?php echo $this->_options['id']; ?>-item-<?php echo $i; ?>" class="<?php echo $this->_options['class']; ?>-item" rel="<?php echo $tag; ?>">
                                         <?php echo $tag; ?>
                                         <input type="button" name="<?php echo $this->_options['name']; ?>-del-<?php echo $i; ?>" id="<?php echo $this->_options['id']; ?>-del-<?php echo $i; ?>" rel="<?php echo $this->_options['id']; ?>-item-<?php echo $i; ?>" class="<?php echo $this->_options['class']; ?>-del tag-del" value="X" />
@@ -96,7 +102,7 @@
                                     <?php $i++; ?>
                                 <?php endforeach; ?>
                             </ul>
-                            <input type="text" name="<?php echo $this->_options['name']; ?>-input" id="<?php echo $this->_options['id']; ?>-input" class="tag-input" value="" />
+                            <input type="text" name="<?php echo $this->_options['name']; ?>-input" id="<?php echo $this->_options['id']; ?>-input" class="tag-input autocomplete" src="<?php echo Sef::getSef('index.php?module=tag&action=autocomplete'); ?>" value="" />
                         </div>
                         <input type="button" name="<?php echo $this->_options['name']; ?>-add" id="<?php echo $this->_options['id']; ?>-add" class="tag-add" value="Add" />
                     </div>
