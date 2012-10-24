@@ -17,15 +17,16 @@
      */
     function getErrorStringFromInt($number) {
         switch ($number) {
-            case 2:
+            case WARNING:
                 return 'Warning';
                 break;
-            case 6:
+            case NOTICE:
                 return 'Notice';
                 break;
-            case 8:
+            case MESSAGE:
                 return 'Message';
                 break;
+            case ERROR:
             default:
                 return 'Error';
                 break;
@@ -55,16 +56,20 @@
      * @param string $text text to translate
      * @return string $text translated text
      */
-    function T($text){
+    function T($text) {
         $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'en');
+        $references = Cache::get('translations_' . $language);
 
         // Check language existance
-        $lang_file = ROOT_PATH . DS . 'language' . DS . $language . '.ini';
-        if (file_exists($lang_file)) {
-            $references = parse_ini_file($lang_file);
-        } else {
-            $lang_file = ROOT_PATH . DS . 'language' . DS . 'en.ini';
-            $references = parse_ini_file($lang_file);
+        if (!is_array($references)) {
+            $lang_file = ROOT_PATH . DS . 'language' . DS . $language . '.ini';
+            if (file_exists($lang_file)) {
+                $references = parse_ini_file($lang_file);
+            } else {
+                $lang_file = ROOT_PATH . DS . 'language' . DS . 'en.ini';
+                $references = parse_ini_file($lang_file);
+            }
+            Cache::set('translations_' . $language, $references, Cache::TYPE_MEMORY);
         }
 
         // Remove spaces and other characters
@@ -76,20 +81,13 @@
             $key = substr($key, 0, 16) . '-' . strlen($key);
         }
 
-        // Check for token
-        if (array_key_exists($key, $references)) {
-            return $references[$key];
-        } else {
-            // Write key to ini file
-            if (strlen($key) > 0 && strlen($text) > 0) {
-                $lang_file = dirname(dirname(__FILE__)) . DS . 'language' . DS . 'en.ini';
-                $handler = fopen($lang_file, 'a');
-                fwrite($handler, $key . ' = "' . $text . '"' . NL);
-                fclose($handler);
-            }
-
-            return $text;
+        // Check for token and set to cache
+        if (!array_key_exists($key, $references)) {
+            $references[$key] = $text;
+            Cache::set('translations_' . $language, $references, Cache::TYPE_MEMORY);
         }
+
+        return $references[$key];
     }
 
     /**
@@ -101,4 +99,20 @@
         $result = explode(',', $string);
         $result = array_diff($result, array('', null));
         return implode(',', $result);
+    }
+
+    /**
+     * Prepare PHP array to JSON array
+     * @param array $array
+     * @return array $result
+     */
+    function toJSNumArray($array) {
+        if (is_array($array)) {
+            $result = array();
+            foreach ($array as $item) {
+                $result[] = $item;
+            }
+            return $result;
+        }
+        return $array;
     }
