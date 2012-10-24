@@ -11,18 +11,38 @@
      */
     class BlogController extends Controller {
 
+        /**
+         * @var BlogModel $model
+         */
+        public $model;
+
+        /**
+         * @var BlogView $view
+         */
+        public $view;
+
+        /**
+         * Default action
+         * @param array $options
+         * @return array $result
+         */
         public function indexAction($options) {
             return $this->listAction($options);
         }
 
+        /**
+         * List blog posts with tags
+         * @param array $options
+         * @return array $result
+         */
         public function listAction($options) {
             // Get category ID
-            $tags = System::getInstance()->getCmd('id');
+            $tags = System::getInstance()->getCmd('tags');
             
             // Get category title
             if ($tags) {
                 $options['data'] = $this->model->getPostsByTags($tags);
-                $options['title'] = 'Search by tags: ' . implode(', ', $tags);
+                $options['title'] = 'Search by tags: ' . $tags;
             } else {
                 $options['data'] = $this->model->getPosts();
                 $options['title'] = Application::$config['site_title'];
@@ -66,7 +86,7 @@
             
             // Render edit form
             $options['title'] = 'Edit post';
-            $options['body'] = $this->view->getContents('blog', 'edit', $options['data']);
+            $options['body'] = $this->view->getContents('blog', 'edit', $options);
             
             return $options;
         }

@@ -23,11 +23,11 @@
         public function getPost($id){
             // Check empty value
             if (empty($id)) {
-                return false;
+                return $this->_throw(T('Post ID could not be empty'));
             }
             
             $this->database->query("CALL GET_POST_BY_ID($id);");
-            return $this->database->getObjectsArray();
+            return $this->database->getObject();
         }
         
         public function getPosts($limit = 10){
@@ -40,15 +40,18 @@
                 return $this->getPosts();
             }
 
-            $tags = implode(',', $tags);
             $this->database->query("CALL GET_POSTS_BY_TAGS('$tags', $limit);");
             return $this->database->getObjectsArray();
         }
 
-        public function getRelations($id){
+        public function getPostRelationsById($id){
+            // Get existing relations
             $id = (int)$id;
-            $this->database->query("CALL GET_POST_RELATIONS($id);");
-            return $this->database->getPairs('id', 'name');
+            if ($id > 0) {
+                $this->database->query("CALL GET_POST_RELATIONS($id);");
+                if (is_array($result = $this->database->getPairs('id', 'name'))) return $result;
+            }
+            return array();
         }
 
         public function savePost($options) {
