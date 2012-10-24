@@ -28,7 +28,7 @@
          */
         public static function getInstance() {
             if (is_null(self::$instance)) {
-                self::$instance = new Database;
+                self::$instance = new Application;
             }
             return self::$instance;
         }
