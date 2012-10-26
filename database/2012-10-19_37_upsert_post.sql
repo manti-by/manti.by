@@ -21,8 +21,8 @@ BEGIN
         WHERE `id` = _post_id;
     ELSE
         INSERT INTO `post` (`name`, `teaser`, `description`, `metadesc`, `is_music`,
-             `catnum`, `genre`, `quality`, `length`, `tracklist`)
-        VALUES (_name, _teaser, _description, _metadesc, _is_music, _catnum, _genre, _quality, _length, _tracklist);
+             `catnum`, `genre`, `quality`, `length`, `tracklist`, `created`)
+        VALUES (_name, _teaser, _description, _metadesc, _is_music, _catnum, _genre, _quality, _length, _tracklist, NOW());
 
         SELECT LAST_INSERT_ID() INTO _post_id;
     END IF;
