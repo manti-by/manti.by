@@ -5,7 +5,6 @@
      * @subpackage Library Tags
      * @author Alexander Chaika
      * @since 0.3RC2
-     * @todo Fix tags set and delete actions
      */
     class Tag extends Control {
 
@@ -15,11 +14,12 @@
          */
         public function render() {
             // Check parent errors
-            if ($html = parent::render()) {
+            $html = parent::render();
+            if (!empty($html)) {
                 $this->_data = Model::getModel('tag')->getTagsByIds($this->getValue('id'));
                 ob_start();
                 ?>
-                    <div class="tag">
+                    <div class="tag-control">
                         <script type="text/javascript">
                             $(document).ready(function() {
                                 var tag_id      = '<?php echo $this->_options['id']; ?>';
@@ -114,5 +114,25 @@
             } else {
                 return false;
             }
+        }
+
+        /**
+         * Return html markup for json tags data
+         * @static
+         * @param string $json
+         * @return bool|string
+         */
+        public static function getHtml($json) {
+            $result = '';
+            $tags = json_decode($json);
+            if (is_array($tags)) {
+                foreach ($tags as $tag) {
+                    $result .= '<a href="' . Sef::getSef('index.php?module=tag&action=search&id=' . $tag->id) . '" class="tag" title="' . $tag->name . '">' . $tag->name . '</a>';
+                }
+            } else {
+                return self::getInstance()->_throw(T('Incorect JSON data for tags'), MESSAGE);
+            }
+
+            return $result;
         }
     }
