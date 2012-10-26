@@ -40,6 +40,8 @@ thumb_height = 90
 [blog settings]
 teaser_length = 250
 metadesc_length = 250
+cover_width = 350
+cover_height = 350
 
 [database credentials]
 db_path = "127.0.0.1"
