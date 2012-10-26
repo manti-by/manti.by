@@ -11,9 +11,25 @@
      * @since 0.1
      */
     class Database extends Application {
+
+        /**
+         * @var MySQLi_result|bool $res
+         */
         private $res;
+
+        /**
+         * @var MySQLi|bool $mysqli
+         */
         private $mysqli;
+
+        /**
+         * @var string $db_prefix
+         */
         private $db_prefix;
+
+        /**
+         * @var string $query
+         */
         private $query;
 
         protected static $instance = null;
@@ -72,8 +88,8 @@
             }
 
             // Set encoding
-            if (!empty($this->db_encoding)) {
-                $this->mysqli->query($this->cid, "SET NAMES '" . Application::$config['db_encoding'] . "'");
+            if (!empty(Application::$config['db_encoding'])) {
+                $this->mysqli->query("SET NAMES '" . Application::$config['db_encoding'] . "'");
             }
 
             return $this->mysqli;
@@ -141,53 +157,6 @@
         }
 
         /**
-         * Execute last query
-         * @return bool $state
-         */
-        public function exec() {
-            if (!empty($this->query)) {
-                return $this->query($this->query);
-            } else {
-                return $this->_throw(T('DB empty query'));
-            }
-        }
-
-        /**
-         * Set query
-         * @param string $query optional query to execute
-         * @return bool $state
-         */
-        public function setQuery($query = null) {
-            if (!empty($query)) {
-                $this->query = $query;
-                return $this->_clean();
-            } else {
-                return $this->_throw(T('DB empty query'));
-            }
-        }
-
-        /**
-         * Get last query
-         * @return string|bool $query or false
-         */
-        public function getQuery() {
-            if (!empty($this->query)) {
-                return $this->query;
-            } else {
-                return $this->_throw(T('DB empty query'));
-            }
-        }
-
-        /**
-         * Print last query
-         */
-        public function printQuery() {
-            $query = $this->getQuery();
-            $query = (empty($query) ? T('No queries executed') : $this->replacePrefix($query));
-            echo '<pre>' . $query . '</pre>';
-        }
-
-        /**
          * Get first field value of result
          * @return string|bool $result
          */
@@ -245,15 +214,17 @@
             }
 
             // Return objects
+            $result = array();
+            /** @noinspection PhpAssignmentInConditionInspection */
             while($obj = $this->res->fetch_object()) {
                 if (!$obj || empty($obj)) break;
-                $arr[] = $obj;
+                $result[] = $obj;
             }
 
             // Check CALL result
             $this->res->free_result();
 
-            return $arr;
+            return $result;
         }
 
         /**
@@ -267,15 +238,17 @@
             }
 
             // Return array
+            $result = array();
+            /** @noinspection PhpAssignmentInConditionInspection */
             while($row = $this->res->fetch_array(MYSQLI_NUM)) {
                 if (!$row || empty($row)) break;
-                $arr[] = $row[0];
+                $result[] = $row[0];
             }
 
             // Check CALL result
             $this->res->free_result();
 
-            return $arr;
+            return $result;
         }
 
         /**
@@ -291,6 +264,8 @@
             }
 
             // Return pairs
+            $result = array();
+            /** @noinspection PhpAssignmentInConditionInspection */
             while($obj = $this->res->fetch_object()) {
                 if (!$obj || empty($obj)) break;
 
@@ -298,13 +273,13 @@
                     return $this->_throw(T('Incorrect DB index'));
                 }
 
-                $arr[(int)$obj->$index] = $obj->$field;
+                $result[(int)$obj->$index] = $obj->$field;
             }
 
             // Check CALL result
             $this->res->free_result();
 
-            return $arr;
+            return $result;
         }
 
         /**
