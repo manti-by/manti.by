@@ -30,7 +30,8 @@
          * @return bool|string
          */
         public function render() {
-            if ($html = parent::render()) {
+            $html = parent::render();
+            if (!empty($html)) {
                 $this->_data = Model::getModel('file')->getApproved($this->_options['type']);
                 if ($this->_data) {
                     ob_start();
@@ -56,7 +57,7 @@
                             });
                         </script>
 
-                        <div class="<?php echo $this->_options['class']; ?> files">
+                        <div class="<?php echo $this->_options['class']; ?> file-control">
                             <input type="hidden" name="<?php echo $this->_options['name']; ?>" id="<?php echo $this->_options['id']; ?>" value="<?php echo $this->getValue(); ?>" />
                             <div id="<?php echo $this->_options['id']; ?>-notice">
                                 <span class="bold"><?php echo count($this->_value); ?></span>/<?php echo count($this->_data); ?> <?php echo T('items'); ?>
@@ -87,5 +88,37 @@
             } else {
                 return false;
             }
+        }
+
+        /**
+         * Return html markup for json tags data
+         * @static
+         * @param string $json
+         * @param string $type OPTIONAL
+         * @return bool|string
+         */
+        public static function getHtml($json, $type = null) {
+            $result = '';
+            $files = json_decode($json);
+            if (is_array($files)) {
+                foreach ($files as $file) {
+                    switch ($type) {
+                        case FileEntity::TYPE_PREVIEW:
+                            $result .= '<audio controls><source src="' . Application::$config['http_host'] . substr($file->source, 1) . '" type="audio/mpeg;"></audio>';
+                            break;
+                        case FileEntity::TYPE_COVERS:
+                            $result .= '<img src="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="cover" />';
+                            break;
+                        case FileEntity::TYPE_RELEASE:
+                        default:
+                            $result .= '<a href="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="release">' . T('Download') . '</a>';
+                            break;
+                    }
+                }
+            } else {
+                return self::getInstance()->_throw(T('Incorect JSON data for tags'), MESSAGE);
+            }
+
+            return $result;
         }
     }
