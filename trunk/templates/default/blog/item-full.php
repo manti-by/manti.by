@@ -2,18 +2,19 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Blog post template
-     * @name $post-item
+     * Full blog post template
      * @author Alexander Chaika
      * @package M2 Micro Framework
      * @subpackage Template
      * @since 0.1
      */
 
+    $options['context'] = 'full';
     $user = UserEntity::getInstance();
 ?>
-<div class="post-item">
-    <h2>
+<div class="post-item-full">
+
+    <h1>
         <?php echo $options['data']->name; ?>
 
         <?php if ($user->getGroup() == 'Root') : ?>
@@ -22,11 +23,26 @@
                 <a href="<?php echo Sef::getSef('index.php?module=blog&action=delete&id=' . $options['data']->id); ?>"><?php echo T('Delete'); ?></a>
             </div>
         <?php endif; ?>
-    </h2>
+    </h1>
 
-    <div class="teaser">
-        <?php echo nl2br($options['data']->teaser); ?>
+    <div class="description">
+        <?php echo nl2br($options['data']->description); ?>
     </div>
 
     <?php echo $this->getContents('blog', 'music-block', $options); ?>
+
+    <?php if ($options['data']->tracklist) : ?>
+        <div class="tracklist">
+            <h2><?php echo T('Tracklist'); ?></h2>
+            <?php echo nl2br($options['data']->tracklist); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if (json_decode($options['data']->relations)) : ?>
+    <div class="tracklist">
+        <h2><?php echo T('Similar posts'); ?></h2>
+        <?php echo $options['data']->relations; ?>
+    </div>
+    <?php endif; ?>
+
 </div>

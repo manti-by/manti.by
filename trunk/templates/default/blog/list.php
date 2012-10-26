@@ -3,6 +3,7 @@
 
     /**
      * Blog category template
+     * @name $blog-list
      * @package M2 Micro Framework
      * @subpackage Template
      * @author Alexander Chaika
