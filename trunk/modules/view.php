@@ -112,7 +112,18 @@
          */
         public function wrapPage($options) {
             // get form contents
-            return $this->getContents(null, 'index', $options, false);
+            return $this->getContents(null, 'index', $options);
+        }
+
+        /**
+         * Add sidebar to Page
+         * @param array $options
+         * @return string $html
+         */
+        public function wrapSidebar($options) {
+            // Get sidebar wrapper with contents
+            $options['body'] = $this->getContents(null, 'sidebar', $options);
+            return $options;
         }
 
         /**
@@ -166,9 +177,8 @@
 
         /**
          * Offline render action
-         * @param array $options OPTIONAL
          */
-        public function offline($options = null) {
+        public function offline() {
             $message = $this->getLastFromStack();
             echo '<code>['.getErrorStringFromInt($message['level']).']'.$message['message'].'</code>';
             echo '<code>['.var_dump(debug_backtrace()).'</code>';
