@@ -85,11 +85,15 @@
                 if (empty(Application::$config['http_host'])) {
                     Application::$config['http_host']  = 'http://' . $_SERVER['HTTP_HOST'];
                 }
-
                 if (empty(Application::$config['doc_root'])) {
                     Application::$config['doc_root']   = ROOT_PATH;
                 }
 
+                // Check debug token
+                $debug = System::getInstance()->getCmd('debug');
+                if (!empty($debug)) {
+                    Application::$config['show_debug_panel'] = true;
+                }
                 return true;
             } else {
                 return false;
