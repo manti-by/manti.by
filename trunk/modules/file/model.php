@@ -22,9 +22,9 @@
 
             // Create path mapping
             $this->_map = array(
-                'preview'   => realpath(Application::$config['preview_path']),
-                'release'   => realpath(Application::$config['release_path']),
-                'covers'    => realpath(Application::$config['covers_path'])
+                FileEntity::TYPE_PREVIEW   => realpath(Application::$config['preview_path']),
+                FileEntity::TYPE_RELEASE   => realpath(Application::$config['release_path']),
+                FileEntity::TYPE_COVERS    => realpath(Application::$config['covers_path'])
             );
         }
 
@@ -164,7 +164,9 @@
             $iterator = new RecursiveDirectoryIterator($directory);
             foreach ($iterator as $path) {
                 // Remove root path from file link
+                /** @noinspection PhpUndefinedMethodInspection */
                 $current = $path->__toString();
+
                 $current = str_ireplace(ROOT_PATH, '.', $current);
                 $pathinfo = pathinfo($current);
 
