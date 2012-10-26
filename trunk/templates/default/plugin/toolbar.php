@@ -14,14 +14,12 @@
 ?>
 <div id="toolbar" class="fr">
     <?php if ($user->isLoggined()) : ?>
-        <div class="welcome">
-            <?php echo T('Hi') . ' ' . $user->getUsername(); ?>!
-        </div>
-        <a href="<?php echo Sef::getSef('index.php?module=user'); ?>"><?php echo T('Dashboard'); ?></a> |
-        <a href="<?php echo Sef::getSef('index.php?module=file'); ?>"><?php echo T('Files'); ?></a> |
-        <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Logout'); ?></a>
+        <?php echo T('Hi') . ' ' . $user->getUsername(); ?>!
+        <a href="<?php echo Sef::getSef('index.php?module=blog&action=edit');?>"><?php echo T('New Post'); ?></a> |
+        <a href="<?php echo Sef::getSef('index.php?module=file'); ?>"><?php echo T('View Files'); ?></a> |
+        <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Sign Out'); ?></a>
     <?php else : ?>
-        <a href="<?php echo Sef::getSef('index.php?module=user&action=loginform'); ?>"><?php echo T('Login'); ?></a> |
-        <a href="<?php echo Sef::getSef('index.php?module=user&action=registerform'); ?>"><?php echo T('Register'); ?></a>
+        <a href="<?php echo Sef::getSef('index.php?module=user&action=loginform'); ?>"><?php echo T('Sign In'); ?></a> |
+        <a href="<?php echo Sef::getSef('index.php?module=user&action=registerform'); ?>"><?php echo T('Sign Up'); ?></a>
     <?php endif; ?>
 </div>
