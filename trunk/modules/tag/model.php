@@ -19,7 +19,8 @@
         public function processTags($tags) {
             $return = array();
             $this->database->query("CALL UPSERT_TAGS('". $tags ."');");
-            if ($result = $this->database->getObjectsArray()) {
+            $result = $this->database->getObjectsArray();
+            if (!empty($result) && is_array($result)) {
                 foreach ($result as $item) {
                     $return[] = $item->id;
                 }
@@ -46,6 +47,30 @@
             }
 
             return is_array($result) ? $result : array();
+        }
+
+        /**
+         * Get tags array by IDs string
+         * @param int $id
+         * @return bool|string $tag
+         */
+        public function getTagNameById($id) {
+            // Check if array
+            if ($id) {
+                $tags = $this->getTagsByIds($id);
+                return is_array($tags) ? current($tags) : false;
+            }
+            return false;
+        }
+
+        /**
+         * Get tags array
+         * @param int $limit OPTIONAL
+         * @return bool|array $tags
+         */
+        public function getTags($limit = 10) {
+            $this->database->query("CALL GET_TAGS($limit);");
+            return $this->database->getPairs('id', 'name');
         }
 
         /**

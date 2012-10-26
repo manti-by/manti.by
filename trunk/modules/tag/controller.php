@@ -11,27 +11,42 @@
      */
     class TagController extends Controller {
 
+        /**
+         * Default Tag module action
+         * @param array $options
+         * @return array $result
+         */
         public function indexAction($options) {
             return $this->searchAction($options);
         }
 
+        /**
+         * Search action
+         * @param array $options
+         * @return array $result
+         */
         public function searchAction($options) {
-            // Get category ID
-            $tags = System::getInstance()->getCmd('tags');
+            // Get tag ID or query
+            $q = System::getInstance()->getCmd('q');
+            $id = System::getInstance()->getCmd('id');
             
-            // Get category title
-            if ($tags) {
-                $options['title'] = 'Search by tags: ' . $tags;
-                $options['data'] = Model::getModel('blog')->getPostsByTags($tags);
+            // Get search results
+            if ($q) {
+                $options['title'] = T('Search results by tags: ') . $q;
+                $options['data'] = Model::getModel('blog')->getPostsByTags($q);
+            } elseif ($id) {
+                $tag_name = $this->model->getTagNameById($id);
+                $options['title'] = $tag_name ? T('Search results for tag #') . $tag_name : T('Search results');
+                $options['data'] = Model::getModel('blog')->getPostsByTagId($id);
             } else {
                 $options['title'] = T('No search results found');
                 $options['data'] = Model::getModel('blog')->getPosts();
             }
             
-            // get category items and render it
+            // Render search results
             $options['module'] = 'blog';
             $options['body'] = $this->view->renderItemsArray($options);
-            
-            return $options;
+
+            return $this->view->wrapSidebar($options);
         }
     }
