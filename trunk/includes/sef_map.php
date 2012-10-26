@@ -15,12 +15,12 @@
             'table'  => 'post',
             'field'  => 'alias',
             'prefix' => '/blog/',
-            'suffix' => $config['sef_suffix']
+            'suffix' => Application::$config['sef_suffix']
         ),
         '/\?module\=blog\&action\=category\&id\=(.*)/' => array(
             'table'  => 'category',
             'field'  => 'alias',
             'prefix' => '/category/',
-            'suffix' => $config['sef_suffix']
+            'suffix' => Application::$config['sef_suffix']
         )
     );
