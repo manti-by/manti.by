@@ -13,7 +13,8 @@
          * @return bool|string
          */
         public function render() {
-            if ($html = parent::render()) {
+            $html = parent::render();
+            if (!empty($html)) {
                 $this->_data  = Model::getModel('blog')->getPosts();
                 $this->_value = Model::getModel('blog')->getPostRelationsById($this->_options['reference_id']);
                 if ($this->_data) {
@@ -40,7 +41,7 @@
                         });
                     </script>
 
-                    <div class="<?php echo $this->_options['class']; ?> relations">
+                    <div class="<?php echo $this->_options['class']; ?> relations-control">
                         <input type="hidden" name="<?php echo $this->_options['name']; ?>" id="<?php echo $this->_options['id']; ?>" value="<?php echo $this->getValue(); ?>" />
                         <div id="<?php echo $this->_options['id']; ?>-notice">
                             <span class="bold"><?php echo count($this->_value); ?></span>/<?php echo count($this->_data); ?> <?php echo T('items'); ?>
@@ -71,5 +72,28 @@
             } else {
                 return false;
             }
+        }
+
+        /**
+         * Return html markup for json data
+         * @static
+         * @param string $json
+         * @return bool|string
+         */
+        public static function getHtml($json) {
+            $result = '';
+            $relations = json_decode($json);
+            if (is_array($relations)) {
+                foreach ($relations as $relation) {
+                    $result .= '<a href="' . Sef::getSef('index.php?module=blog&action=show&id=' . $relation->id) . '" class="relation">';
+                    $result .= '<img src="' . Application::$config['http_host'] . substr($relation->source, 1) . '" class="small-cover" />';
+                    $result .= $relation->name;
+                    $result .= '</a>';
+                }
+            } else {
+                return self::getInstance()->_throw(T('Incorect JSON data for relations'), MESSAGE);
+            }
+
+            return $result;
         }
     }

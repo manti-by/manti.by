@@ -42,10 +42,13 @@ BEGIN
                   AND _f.`type` = 'covers'
             ) AS `covers`,
             (
-                SELECT CONCAT('[', GROUP_CONCAT(CONCAT('{"id":',_p.`id`, ',"name":"', _p.`name`, '"}')), ']')
-                FROM `post_relations` AS _pr 
-                JOIN `post` AS _p ON _p.`id` = _pr.`destination_id` 
+                SELECT CONCAT('[', GROUP_CONCAT(CONCAT('{"id":',_p.`id`, ',"name":"', _p.`name`, '","source":"', _f.`source`, '"}')), ']')
+                FROM `post_relations` AS _pr
+                JOIN `post` AS _p ON _p.`id` = _pr.`destination_id`
+                JOIN `post_files` AS _pf ON _pf.`post_id` = _p.`id`
+                JOIN `files` AS _f ON _f.`id` = _pf.`file_id`
                 WHERE _pr.`original_id` = p.`id`
+                  AND _f.`type` = 'covers'
             ) AS `relations`
             , p.`created`, p.`timestamp`
         FROM `post` AS p
