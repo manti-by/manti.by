@@ -8,18 +8,30 @@
      * @subpackage Modules
      * @author Alexander Chaika
      * @since 0.1
-     * @todo savePost()
      */
     class BlogModel extends Model {
 
+        /**
+         * Available main post params
+         * @var array
+         */
         private $_main_post_params = array(
             'id', 'name', 'teaser', 'description', 'metakeys', 'metadesc', 'is_music'
         );
 
+        /**
+         * Available music post params
+         * @var array
+         */
         private $_music_post_params = array(
             'attachments', 'relations', 'catnum', 'genre', 'quality', 'length', 'tracklist'
         );
 
+        /**
+         * Return post by id
+         * @param int $id
+         * @return bool|object $result
+         */
         public function getPost($id){
             // Check empty value
             if (empty($id)) {
@@ -29,14 +41,30 @@
             $this->database->query("CALL GET_POST_BY_ID($id);");
             return $this->database->getObject();
         }
-        
-        public function getPosts($limit = 10){
-            $this->database->query("CALL GET_POSTS($limit);");
+
+        /**
+         * Return posts array
+         * @param int $limit OPTIONAL
+         * @param int $page OPTIONAL
+         * @return array|bool $result
+         */
+        public function getPosts($limit = null, $page = 1) {
+            $limit = empty($limit) ? Application::$config['posts_per_page'] : $limit;
+            $limitstart = empty($page) ? 0 : $limit * ($page - 1);
+
+            $this->database->query("CALL GET_POSTS($limitstart, $limit);");
             return $this->database->getObjectsArray();
         }
-        
-        public function getPostsByTags($tags, $limit = 0){
+
+        /**
+         * Return posts array by tags
+         * @param string $tags
+         * @param int $limit OPTIONAL
+         * @return array|bool $result
+         */
+        public function getPostsByTags($tags, $limit = 10){
             if (empty($tags)) {
+                $this->_throw(T('There are no posts found by search criteria'), MESSAGE);
                 return $this->getPosts();
             }
 
@@ -44,16 +72,43 @@
             return $this->database->getObjectsArray();
         }
 
+        /**
+         * Return posts by tag id
+         * @param int $tag_id
+         * @param int $limit OPTIONAL
+         * @return array|bool $result
+         */
+        public function getPostsByTagId($tag_id, $limit = 10){
+            if (empty($tag_id)) {
+                $this->_throw(T('There are no posts found by search criteria'), MESSAGE);
+                return $this->getPosts();
+            }
+
+            $this->database->query("CALL GET_POSTS_BY_TAG_ID($tag_id, $limit);");
+            return $this->database->getObjectsArray();
+        }
+
+        /**
+         * Return post relations by post id
+         * @param int $id
+         * @return array|bool $result
+         */
         public function getPostRelationsById($id){
             // Get existing relations
             $id = (int)$id;
             if ($id > 0) {
                 $this->database->query("CALL GET_POST_RELATIONS($id);");
-                if (is_array($result = $this->database->getPairs('id', 'name'))) return $result;
+                $result = $this->database->getPairs('id', 'name');
+                if (is_array($result)) return $result;
             }
             return array();
         }
 
+        /**
+         * Save post to DB
+         * @param array $options
+         * @return int|bool $post_id
+         */
         public function savePost($options) {
             // Process tags
             $options['metakeys'] = cleanCommaString($options['metakeys']);

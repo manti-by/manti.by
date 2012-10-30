@@ -24,7 +24,7 @@
         /**
          * Default action
          * @param array $options
-         * @return array $result
+         * @return array $options
          */
         public function indexAction($options) {
             return $this->listAction($options);
@@ -33,28 +33,58 @@
         /**
          * List blog posts with tags
          * @param array $options
-         * @return array $result
+         * @return array $options
          */
         public function listAction($options) {
-            // Get category ID
-            $tags = System::getInstance()->getCmd('tags');
-            
-            // Get category title
-            if ($tags) {
-                $options['data'] = $this->model->getPostsByTags($tags);
-                $options['title'] = 'Search by tags: ' . $tags;
+            // Get filter tags and display page
+            $options['tags'] = System::getInstance()->getCmd('tags');
+            $options['page'] = System::getInstance()->getCmd('page', 1);
+
+            // Get posts
+            if ($options['tags']) {
+                $options['data'] = $this->model->getPostsByTags($options['tags']);
+                $options['title'] = 'Search by tags: ' . $options['tags'];
             } else {
-                $options['data'] = $this->model->getPosts();
+                $options['data'] = $this->model->getPosts(Application::$config['posts_per_page'], $options['page']);
                 $options['title'] = Application::$config['site_title'];
             }
             
-            // get category items and render it
+            // Get items and render it
             $options['module'] = 'blog';
             $options['body'] = $this->view->renderItemsArray($options);
-            
+
+            return $this->view->wrapSidebar($options);
+        }
+
+        /**
+         * List blog posts with tags
+         * @param array $options
+         * @return array $options
+         * @todo Test it with 10-20 posts
+         */
+        public function nextAction($options) {
+            // Get page and its contents
+            $options['page'] = System::getInstance()->getCmd('page', 1);
+            $options['data'] = $this->model->getPosts(Application::$config['posts_per_page'], $options['page']);
+
+            // Get items and render it
+            if ($options['data']) {
+                $options['output'] = View::OUTPUT_TYPE_HTML;
+                $options['module'] = 'blog';
+                $options['body']   = $this->view->renderItemsArray($options);
+            } else {
+                $options['output'] = View::OUTPUT_TYPE_RAW;
+                $options['data'] = null;
+            }
+
             return $options;
         }
 
+        /**
+         * Show blog post by id
+         * @param array $options
+         * @return array|bool $options
+         */
         public function showAction($options) {
             // Get item ID
             $post_id = System::getInstance()->getCmd('id');
@@ -68,11 +98,16 @@
             }
             
             // Render blog item
-            $options['body'] = $this->view->getContents('blog', 'item', $options);
-            
-            return $options;
+            $options['body'] = $this->view->getContents('blog', 'item-full', $options);
+
+            return $this->view->wrapSidebar($options);
         }
 
+        /**
+         * Edit|Create blog post form
+         * @param array $options
+         * @return array|bool $options
+         */
         public function editAction($options) {
             // Get item ID
             $options['id'] = System::getInstance()->getCmd('id');
@@ -91,10 +126,15 @@
             return $options;
         }
 
+        /**
+         * Save blog post to DB
+         * @param array $options
+         * @return array|bool $options
+         */
         public function saveAction($options) {
             $system = System::getInstance();
 
-            $options['output'] = 'json';
+            $options['output'] = View::OUTPUT_TYPE_JSON;
             $options['id'] = $system->getCmd('id', 0);
 
             $options['name'] = $system->getCmd('name', '');
@@ -137,7 +177,8 @@
             }
 
             // Save result
-            if ($options['result'] = $this->model->savePost($options)) {
+            $options['result'] = $this->model->savePost($options);
+            if (!empty($options['result'])) {
                 $options['data'] = array('result' => 'success', 'id' => $options['result'], 'options' => $options);
             } else {
                 $error =  $this->getLastFromStack();
