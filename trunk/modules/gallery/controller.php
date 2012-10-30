@@ -11,10 +11,20 @@
      */
     class GalleryController extends Controller {
 
+        /**
+         * Default gallery action
+         * @param array $options
+         * @return array $result
+         */
         public function indexAction($options) {
             return $this->listAction($options);
         }
 
+        /**
+         * List gallery action
+         * @param array $options
+         * @return array $result
+         */
         public function listAction($options) {
             // Get category ID
             $tags = System::getInstance()->getCmd('id');

@@ -32,7 +32,7 @@
         /**
          * Default getModel method
          * @param string $name
-         * @return object $model
+         * @return Model|BlogModel|FileModel|GalleryModel|TagModel|UserModel $model
          */
         public static function getModel($name = null) {
             // Check existing object pool
@@ -41,14 +41,5 @@
                 self::$models[$name] = new $model_name();
             }
             return self::$models[$name];
-        }
-
-        /**
-         * Parent aurocomlete data-provider
-         * @param string $query
-         * @return bool false
-         */
-        public function autocomplete($query = null) {
-            return false;
         }
     }

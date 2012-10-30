@@ -11,10 +11,20 @@
      */
     class UserController extends Controller {
 
+        /**
+         * Default user module action
+         * @param array $options
+         * @return array $result
+         */
         public function indexAction($options) {
             return $this->dashboardAction($options);
         }
 
+        /**
+         * Show user dashboard
+         * @param array $options
+         * @return array $result
+         */
         public function dashboardAction($options) {
             // Check login state
             if (!$this->model->isLoggined()) {
@@ -28,11 +38,16 @@
             return $options;
         }
 
+        /**
+         * Login form page
+         * @param array $options
+         * @return array $result
+         */
         public function loginformAction($options) {
             // Check login state
             if ($this->model->isLoggined()) {
                 $this->_throw(T('You already logined'));
-                return $this->logoutformAction($options);
+                return $this->dashboardAction($options);
             }
             
             // Get login form
@@ -41,11 +56,16 @@
             return $options;
         }
 
+        /**
+         * Sign In action
+         * @param array $options
+         * @return array $result
+         */
         public function loginAction($options) {
             // Check login state
             if ($this->model->isLoggined()) {
                 $this->_throw(T('You already logined'));
-                return $this->logoutformAction($options);
+                return $this->dashboardAction($options);
             }
             
             // Get credentials
@@ -70,6 +90,11 @@
             return $this->loadModule('front')->indexAction($options);
         }
 
+        /**
+         * Sign Out action
+         * @param array $options
+         * @return array $result
+         */
         public function logoutAction($options) {
             // Check login state
             if (!$this->model->isLoggined()) {
@@ -78,15 +103,20 @@
             }
             
             // Get login form
-            if ($this->model->logout($options)) {
+            if ($this->model->logout()) {
                 $this->_clean(T('You succesfully leave closed areas'));
                 return $this->loginformAction($options);
             } else {
                 $this->_throw(T('Could not delete your user session'), ERROR);
-                return $this->logouformAction($options);
+                return $this->dashboardAction($options);
             }
         }
 
+        /**
+         * Forgot password page
+         * @param array $options
+         * @return array $result
+         */
         public function forgotformAction($options) {
             // Get login form
             $options['title'] = 'Forgot password page';
@@ -94,6 +124,11 @@
             return $options;
         }
 
+        /**
+         * Forgot action
+         * @param array $options
+         * @return array $result
+         */
         public function forgotAction($options) {
             // Get email
             $options['email'] = System::getInstance()->getCmd('email', $options['email']);
@@ -123,11 +158,16 @@
             }
         }
 
+        /**
+         * Sign Up page
+         * @param array $options
+         * @return array $result
+         */
         public function registerformAction($options) {
             // Check login state
             if ($this->model->isLoggined()) {
                 $this->_throw(T('You already logined'));
-                return $this->logoutformAction($options);
+                return $this->dashboardAction($options);
             }
             
             // Get login form
@@ -136,11 +176,16 @@
             return $options;
         }
 
+        /**
+         * Sign Up action
+         * @param array $options
+         * @return array $result
+         */
         public function registerAction($options) {
             // Check login state
             if ($this->model->isLoggined()) {
                 $this->_throw(T('You already logined'));
-                return $this->logoutformAction($options);
+                return $this->dashboardAction($options);
             }
             
             // Get credentials
@@ -174,6 +219,6 @@
             }
             
             // Redirect to blog
-            return $this->logoutformAction($options);
+            return $this->dashboardAction($options);
         }
     }

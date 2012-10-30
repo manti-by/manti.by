@@ -46,7 +46,8 @@
 
             // Get request string, delete question symbol and inject request data
             $request = substr(self::getReal($_SERVER['REQUEST_URI']), 1);
-            if ($result = strstr($request, "?")) {
+            $result = strstr($request, "?");
+            if (!empty($result)) {
                 parse_str($result, $_REQUEST);
             }
         }
@@ -69,7 +70,8 @@
             // Try to get real link
             $database = Database::getInstance();
             $database->query("CALL GET_SEF('".$database->escape($link)."');");
-            if ($request = $database->getObject()) {
+            $request = $database->getObject();
+            if (!empty($request) && is_object($request)) {
                 $request = $request->request;
             } else {
                 $request = $link;

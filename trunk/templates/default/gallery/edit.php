@@ -3,6 +3,7 @@
 
     /**
      * Gallery edit form
+     * @name $gallery-edit
      * @package M2 Micro Framework
      * @subpackage Template
      * @author Alexander Chaika

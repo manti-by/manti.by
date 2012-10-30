@@ -9,7 +9,6 @@
      * @subpackage Library
      * @author Alexander Chaika
      * @since 0.2RC2
-     * @todo TEST IT!!!
      */
     
     class UserEntity extends Entity {
@@ -32,7 +31,7 @@
         
         /**
           * GetInstance class method
-          * @return object $instance
+          * @return UserEntity $instance
           */
         public static function getInstance() {
             if (is_null(self::$instance)) {
@@ -61,7 +60,8 @@
             // Check email & pass
             if (isset($options['email']) && isset($options['password'])) {
                 $this->database->query("CALL CHECK_LOGIN('".$options['email']."','".md5(Application::$config['secret'].$options['password'])."');");
-                if ($result = $this->database->getField()) {
+                $result = $this->database->getField();
+                if (!empty($result)) {
                     return $result;
                 }
             }
@@ -69,7 +69,8 @@
             // Check cookie
             if (isset($options['cookie'])) {
                 $this->database->query("CALL CHECK_COOKIE('".Application::$config['secret']."','".$options['cookie']."');");
-                if ($result = $this->database->getField()) {
+                $result = $this->database->getField();
+                if (!empty($result)) {
                     return $result;
                 }
             }
@@ -77,7 +78,8 @@
             // Check username
             if (isset($options['username'])) {
                 $this->database->query("CALL CHECK_USERNAME('".$options['username']."');");
-                if ($result = $this->database->getField()) {
+                $result = $this->database->getField();
+                if (!empty($result)) {
                     return $result;
                 }
             }
@@ -98,7 +100,7 @@
         /**
          * Load user data to self object by id
          * @param int $id user ID
-         * @return object $data or false if not exist
+         * @return UserEntity|bool $this or false
          */
         public function load($id) {
             // Check id
@@ -108,7 +110,8 @@
             
             // Get items
             $this->database->query("CALL GET_USER_BY_ID($id);");
-            if ($result = $this->database->getObject()) {
+            $result = $this->database->getObject();
+            if (!empty($result) && is_object($result)) {
                 // Add data to object
                 $this->id = $result->id;
                 $this->username = $result->username;
@@ -127,7 +130,7 @@
          * Setup user session by id
          * @param int $id user ID
          * @param bool $remember (optional) save session
-         * @return object $this or false if not exist
+         * @return UserEntity|bool $this or false
          */
         public function setupSession($id, $remember = true) {
             // Check user id
@@ -154,7 +157,7 @@
         
         /**
          * Check user session and try to setup it
-         * @return bool $result
+         * @return UserEntity|bool $this or false
          */
         public function checkSession() {
             // Check local data
@@ -192,7 +195,7 @@
         
         /**
          * Clear user session data
-         * @return bool $result
+         * @return UserEntity|bool $this or false
          */
         public function isLoggined() {
             // Get cookie uid
@@ -253,6 +256,7 @@
         
         /**
          * Get user IP
+         * @static
          * @return string $ip
          */
         public static function getIp() {
@@ -267,7 +271,8 @@
 
         /**
          * Get user browser
-         * @return string $user_agent
+         * @static
+         * @return string|bool $user_agent
          */
         public static function getUserAgent() {
             return (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : false);
@@ -275,7 +280,8 @@
 
         /**
          * Get referer
-         * @return string $referer
+         * @static
+         * @return string|bool $referer
          */
         public static function getReferer() {
             return (isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : false);

@@ -13,6 +13,7 @@
 
         protected $_value = array();
         protected $_value_type = self::TYPE_ARRAY;
+        protected $_data = array();
         protected $_options = array('id' => '', 'class' => '', 'name' => '');
 
         protected $_main_field = 'name';
@@ -36,7 +37,7 @@
 
         /**
          * Set data set
-         * @param $value for set
+         * @param mixed $value for set
          * @return array|bool $tags
          */
         public function setValue($value) {
@@ -59,12 +60,12 @@
                 $this->_value = array($value);
             }
 
-            return $this->_value = $this->_value;
+            return $this->_value;
         }
 
         /**
          * Append data to existing value set
-         * @param $value to append
+         * @param mixed $value to append
          * @return array|bool $data
          */
         public function appendValue($value) {
@@ -87,7 +88,7 @@
                 $this->_value = $this->_value + array($value);
             }
 
-            return $this->_value = $this->_value;
+            return $this->_value;
         }
 
         /**
@@ -113,7 +114,7 @@
 
         /**
          * Set options
-         * @param $options for set
+         * @param array $options for set
          * @return array $options
          */
         public function setOptions($options) {

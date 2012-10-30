@@ -11,6 +11,11 @@
      */
     class FrontController extends Controller {
 
+        /**
+         * Default site action
+         * @param array $options
+         * @return array $result
+         */
         public function indexAction($options) {
             // Get frontpage contents items
             $options['title'] = 'Default Frontpage of M2 Micro Framework';

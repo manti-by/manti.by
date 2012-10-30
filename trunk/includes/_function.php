@@ -103,8 +103,8 @@
 
     /**
      * Prepare PHP array to JSON array
-     * @param array $array
-     * @return array $result
+     * @param mixed $array
+     * @return mixed $result
      */
     function toJSNumArray($array) {
         if (is_array($array)) {

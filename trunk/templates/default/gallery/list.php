@@ -3,6 +3,7 @@
 
     /**
      * Gallery list template
+     * @name $gallery-list
      * @package M2 Micro Framework
      * @subpackage Template
      * @author Alexander Chaika

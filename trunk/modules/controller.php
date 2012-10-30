@@ -41,8 +41,8 @@
 
         /**
          * Overide non exist methods calls
-         * @param $name method name
-         * @param $args method args
+         * @param string $name method name
+         * @param string $args method args
          * @return array $options
          */
         public function __call($name, $args) {
@@ -85,7 +85,7 @@
         /**
          * Method which load modules
          * @param string $module module name
-         * @return object|bool $module
+         * @return BlogController|FileController|FrontController|GalleryController|TagController|UserController|bool $module
          */
         protected function loadModule($module) {
             // Check module name
@@ -123,6 +123,11 @@
             return $options;
         }
 
+        /**
+         * Return JSON search results for query
+         * @param array $options
+         * @return array result
+         */
         public function autocompleteAction($options) {
             $options['output'] = 'json';
 

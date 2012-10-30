@@ -22,15 +22,29 @@
             // Construct parent class
             parent::__construct();
         }
-        
+
+        /**
+         * Check if user loggined
+         * @return bool|UserEntity $result
+         */
         public function isLoggined() {
             return $this->entity->isLoggined();
         }
-        
+
+        /**
+         * Check email existance
+         * @param string $email
+         * @return bool
+         */
         public function checkEmail($email) {
             return $this->entity->checkEmail($email);
         }
-        
+
+        /**
+         * Create new user
+         * @param array $options
+         * @return bool|UserEntity $result
+         */
         public function create($options) {
             // Try create user
             $user_id = $this->entity->create($options);
@@ -41,7 +55,12 @@
             }
             return false;
         }
-        
+
+        /**
+         * Try to login current user
+         * @param array $options
+         * @return bool|UserEntity $result
+         */
         public function login($options) {
             // Check user
             $user_id = $this->entity->getId($options);
@@ -52,12 +71,21 @@
             }
             return false;            
         }
-        
-        public function logout($options) {
+
+        /**
+         * Logout current user
+         * @return bool $result
+         */
+        public function logout() {
             // Simply clear user session
             return $this->entity->clearSession();
         }
-        
+
+        /**
+         * Create new user pass by email
+         * @param string $email
+         * @return bool $result
+         */
         public function createNewPassword($email) {
             // Generate and set new password
             $password = substr(md5(Application::$config['secret'] . time()), 0, Application::$config['new_pass_length']);

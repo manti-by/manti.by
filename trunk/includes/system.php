@@ -54,11 +54,12 @@
             if (isset($_FILES[$param]) && !empty($_FILES[$param])) {
                 if (count($_FILES[$param]['tmp_name']) > 0) {
                     $default = array();
-                    while (list($key, $value) = each($_FILES[$param]["name"])) {
+                    /** @noinspection PhpAssignmentInConditionInspection */
+                    while (list($key, $filename) = each($_FILES[$param]["name"])) {
                         if ($_FILES[$param]["error"][$key] > 0) {
-                            $this->_throw(T('Error transfer file').' [' . $_FILES[$param]["name"][$key] . ']!') ;
+                            $this->_throw(T('Error transfer file').' [' . $filename . ']!') ;
                         } else {
-                            $file_parts  = pathinfo($_FILES[$param]['name'][$key]);
+                            $file_parts  = pathinfo($filename);
                             $allowed_ext = explode(',', Application::$config['allowed_file_extentions']);
 
                             // check file extension
@@ -73,12 +74,12 @@
 
                                 // move file to storage
                                 if (!move_uploaded_file($temp_file, $target_file)) {
-                                    $this->_throw(T('File upload failed').' ['.$_FILES[$param]["name"][$key].']. '.T('Check permissions for writing'));
+                                    $this->_throw(T('File upload failed').' ['.$filename.']. '.T('Check permissions for writing'));
                                 } else {
-                                    $default[$_FILES[$param]["name"][$key]] = $target_name;
+                                    $default[$filename] = $target_name;
                                 }
                             } else {
-                                $this->_throw(T('Invalid file type').' ['.$_FILES[$param]['name'][$key].']!');
+                                $this->_throw(T('Invalid file type').' ['.$filename.']!');
                             }
                         }
                     }
@@ -360,7 +361,7 @@
          */
         public static function humanReadableFilesize($bytes, $decimals = 2) {
             $sizes = 'BKMGTP';
-            $factor = floor((strlen($bytes) - 1) / 3);
-            return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sizes[$factor];
+            $factor = (int)floor((strlen($bytes) - 1) / 3);
+            return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . $sizes[$factor];
         }
     }

@@ -10,8 +10,16 @@
 
     class Autoload {
 
+        /**
+         * @var string|bool $_lastLoadedFilename
+         */
         private static $_lastLoadedFilename;
 
+        /**
+         * Default application autoload funtion
+         * @static
+         * @param string $className
+         */
         public static function load($className) {
             if (preg_match('/(Controller|Model|View|Entity)/i', $className, $matches)) {
                 $module_name = strtolower(substr($className, 0, strlen($className) - strlen(stristr($className, $matches[0]))));
