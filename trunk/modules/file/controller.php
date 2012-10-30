@@ -8,14 +8,23 @@
      * @subpackage Modules
      * @author Alexander Chaika
      * @since 0.3RC2
-     * @todo Implement file adding
      */
     class FileController extends Controller {
 
+        /**
+         * Default File module action
+         * @param array $options
+         * @return array $result
+         */
         public function indexAction($options) {
             return $this->listAction($options);
         }
 
+        /**
+         * Show files list
+         * @param array $options
+         * @return array $result
+         */
         public function listAction($options) {
             // Get all files list
             $options['title'] = 'File list';
@@ -25,14 +34,20 @@
             return $options;
         }
 
+        /**
+         * Add file to DB action
+         * @param array $options
+         * @return array $result
+         */
         public function addAction($options) {
             // Set params
-            $options['output'] = 'json';
+            $options['output'] = View::OUTPUT_TYPE_JSON;
             $options['source'] = System::getInstance()->getCmd('source');
             $options['name'] = System::getInstance()->getCmd('name');
             $options['description'] = System::getInstance()->getCmd('description');
 
-            if ($id = $this->model->add($options)) {
+            $id = $this->model->add($options);
+            if ($id > 0) {
                 $options['data'] = array('result' => 'success', 'id' => $id);
             } else {
                 $error = $this->getLastFromStack();
@@ -42,11 +57,21 @@
             return $options;
         }
 
+        /**
+         * Remove file from DB action
+         * @param array $options
+         * @return array $result
+         */
         public function removeAction($options) {
             // Set params
-            $options['output'] = 'json';
+            $options['output'] = View::OUTPUT_TYPE_JSON;
 
-            if ($source = $this->model->remove(System::getInstance()->getCmd('id'))) {
+            // Get file id and try to remove file
+            $id = System::getInstance()->getCmd('id');
+            $source = $this->model->remove($id);
+
+            // Compile result
+            if (!empty($source)) {
                 $options['data'] = array('result' => 'success', 'source' => $source);
             } else {
                 $error = $this->getLastFromStack();
@@ -56,9 +81,14 @@
             return $options;
         }
 
+        /**
+         * Remove file from FS action
+         * @param array $options
+         * @return array $result
+         */
         public function deleteAction($options) {
             // Set params
-            $options['output'] = 'json';
+            $options['output'] = View::OUTPUT_TYPE_JSON;
 
             if ($this->model->delete(System::getInstance()->getCmd('source'))) {
                 $options['data'] = array('result' => 'success');

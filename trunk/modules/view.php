@@ -11,6 +11,12 @@
      */
     class View extends Application {
 
+        const OUTPUT_TYPE_DEFAULT   = 'page';
+        const OUTPUT_TYPE_HTML      = 'html';
+        const OUTPUT_TYPE_JSON      = 'json';
+        const OUTPUT_TYPE_RAW       = 'raw';
+        const OUTPUT_TYPE_LOG       = 'log';
+
         /**
          * Default getView method
          * @param string $name
@@ -35,6 +41,7 @@
             // route output
             switch ($options['output']) {
                 default:
+                case self::OUTPUT_TYPE_DEFAULT:
                     // Set headers
                     header('HTTP/1.1 200 OK');
                     header('Content-Type: text/html; charset=UTF-8');
@@ -45,7 +52,7 @@
 
                     echo $this->wrapPage($options);
                     break;
-                case 'html':
+                case self::OUTPUT_TYPE_HTML:
                     // Set headers
                     header('HTTP/1.1 200 OK');
                     header('Content-Type: text/html; charset=UTF-8');
@@ -57,7 +64,7 @@
                     // output html data
                     echo $options['body'];
                     break;
-                case 'json':
+                case self::OUTPUT_TYPE_JSON:
                     // set headers
                     header('HTTP/1.1 200 OK');
                     header('Content-type: application/json');
@@ -65,11 +72,11 @@
                     // output json data
                     echo json_encode($options['data']);
                     break;
-                case 'raw':
+                case self::OUTPUT_TYPE_RAW:
                     // output raw data
                     echo $options['data'];
                     break;
-                case 'log':
+                case self::OUTPUT_TYPE_LOG:
                     // Add log record
                     $this->saveToLog($options['data']);
                     break;
@@ -118,7 +125,7 @@
         /**
          * Add sidebar to Page
          * @param array $options
-         * @return string $html
+         * @return array $options
          */
         public function wrapSidebar($options) {
             // Get sidebar wrapper with contents
