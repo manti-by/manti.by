@@ -10,6 +10,7 @@
      * @since 0.1
      */
 ?>
+<!DOCTYPE html>
 <html>
     <head>
         <title><?php echo strip_tags($options['title']); ?></title>
