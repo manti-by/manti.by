@@ -15,7 +15,7 @@
 
     $user = UserEntity::getInstance();
 ?>
-<?php if ($user->getGroup() == 'Root' || Application::$config['show_debug_panel']) : ?>
+<?php if ($user->getGroup() == 'Root' && Application::$config['show_debug_panel']) : ?>
     <div id="debug" class="wrapper">
         <h2>Debug info</h2>
 
