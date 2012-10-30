@@ -10,7 +10,30 @@
      * @since 0.1
      */
 ?>
-<h1><?php echo $options['title']; ?></h1>
-<div id="category">
+<?php if ($options['title']) : ?>
+    <h1><?php echo $options['tile']; ?></h1>
+<?php endif; ?>
+
+<div id="content">
     <?php echo $options['data']; ?>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        var page = <?php echo $options['page']; ?>;
+        $(window).scroll(function() {
+            if ($('#footer').offset().top < $(window).scrollTop() + $(window).height() && page > 0) {
+                $.fn.loaderShow();
+                page++;
+                $.get('<?php echo Sef::getSef('index.php?module=blog&action=next'); ?>' + '&page=' + page, function(responce) {
+                    if (responce != '') {
+                        $('#content').append(responce);
+                    } else {
+                        page = 0;
+                    }
+                    $.fn.loaderHide();
+                });
+            }
+        });
+    });
+</script>

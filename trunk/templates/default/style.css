@@ -15,5 +15,22 @@ ul#topmenu { margin: 5px 0; padding: 0; }
 
 #file-table a { display: inline-block; min-width: 40px; }
 
-.files ul { margin: 0; padding: 10px; }
-.files li { list-style: none; margin: 0; padding: 0; }
+.post-item { font-size: 14px; line-height: 22px; }
+.post-item .teaser { padding-bottom: 15px; }
+.post-item .cover { width: 350px; height: 350px; }
+.post-item .covers { padding: 0 15px 15px 0; }
+
+.post-item-full { font-size: 14px; line-height: 22px; }
+.post-item-full .description { padding-bottom: 15px; }
+.post-item-full .cover { width: 350px; height: 350px; }
+.post-item-full .covers { padding: 0 15px 15px 0; }
+
+.main-sidebar { float: left; width: 720px; }
+.right-sidebar { float: right; width: 220px; }
+.right-sidebar li { list-style: none; padding: 5px 15px; }
+.right-sidebar h3, .right-sidebar a { color: #666; }
+
+.admin-buttons a { font-size: 12px; }
+
+.relation { float: left; margin: 0 15px 15px 0; text-align: center; }
+.relation .small-cover { display: block; width: 150px; height: 150px; margin-bottom: 10px; }

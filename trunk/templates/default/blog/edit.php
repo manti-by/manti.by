@@ -3,6 +3,7 @@
 
     /**
      * Blog edit form
+     * @name $edit-post
      * @package M2 Micro Framework
      * @subpackage Template
      * @author Alexander Chaika
