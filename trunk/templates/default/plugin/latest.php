@@ -10,11 +10,11 @@
      * @since 0.3RC3
      */
 
-    $posts = Model::getModel('blog')->getPosts();
+    $posts = Model::getModel('blog')->getPosts(10);
 ?>
 <ul class="sidebar">
     <h3><?php echo T('Latest Posts'); ?></h3>
-    <?php foreach($posts as $id => $value) : ?>
-        <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $id); ?>" title="<?php echo $value; ?>"><?php echo $value; ?></a></li>
+    <?php foreach($posts as $post) : ?>
+        <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $post->id); ?>" title="<?php echo $post->name; ?>"><?php echo $post->name; ?></a></li>
     <?php endforeach; ?>
 </ul>
