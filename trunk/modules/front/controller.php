@@ -18,9 +18,9 @@
          */
         public function indexAction($options) {
             // Get frontpage contents items
-            $options['title'] = 'Default Frontpage of M2 Micro Framework';
-            $options['body']  = '<h1>Front page of M2 Micro Framework</h1>';
-
+            $options['title'] = Application::$config['site_title_' . Application::$config['language']];
+            $options['data'] = $this->model->getFrontpageItems();
+            $options['body'] = $this->view->getContents('blog', 'front', $options);
             return $options;
         }
     }
