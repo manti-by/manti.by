@@ -198,7 +198,6 @@
          * @return array|null $options
          */
         public function _404($options = null) {
-            $options['title'] = 'Page Not Found';
             $options['body'] = $this->getContents('plugin', '404', $options);
             return $options;
         }
