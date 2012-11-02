@@ -14,7 +14,7 @@
     <?php echo $options['body']; ?>
 </div>
 <div class="right-sidebar">
-    <?php echo $this->getContents('plugin', 'sidebar'); ?>
+    <?php echo $this->getContents('plugin', 'tags'); ?>
     <?php echo $this->getContents('plugin', 'latest'); ?>
 </div>
 <div class="cls"></div>
