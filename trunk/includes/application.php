@@ -8,6 +8,7 @@
      * @subpackage Library
      * @author Alexander Chaika
      * @since 0.1
+     * @todo Check language switch
      */
     class Application {
 
@@ -87,6 +88,16 @@
                 }
                 if (empty(Application::$config['doc_root'])) {
                     Application::$config['doc_root']   = ROOT_PATH;
+                }
+
+                // Check cookie language
+                if (empty($_COOKIE['language'])) {
+                    Application::$config['language'] = $_COOKIE['language'];
+                }
+
+                // Define helper options
+                if (empty(Application::$config['template_image_url_path'])) {
+                    Application::$config['template_image_url_path'] = Application::$config['http_host'] . '/templates/' . Application::$config['template'] . '/images/';
                 }
 
                 // Check debug token
