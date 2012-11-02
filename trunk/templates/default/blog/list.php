@@ -10,13 +10,11 @@
      * @since 0.1
      */
 ?>
-<?php if ($options['title']) : ?>
+<?php if (!empty($options['title'])) : ?>
     <h1><?php echo $options['tile']; ?></h1>
 <?php endif; ?>
 
-<div id="content">
-    <?php echo $options['data']; ?>
-</div>
+<?php echo $options['data']; ?>
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -27,7 +25,7 @@
                 page++;
                 $.get('<?php echo Sef::getSef('index.php?module=blog&action=next'); ?>' + '&page=' + page, function(responce) {
                     if (responce != '') {
-                        $('#content').append(responce);
+                        $('#content .main-sidebar').append(responce);
                     } else {
                         page = 0;
                     }
