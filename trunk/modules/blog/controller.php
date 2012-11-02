@@ -43,10 +43,10 @@
             // Get posts
             if ($options['tags']) {
                 $options['data'] = $this->model->getPostsByTags($options['tags']);
-                $options['title'] = 'Search by tags: ' . $options['tags'];
+                $options['title'] = T('Search by tags') . ': ' . $options['tags'];
             } else {
                 $options['data'] = $this->model->getPosts(Application::$config['posts_per_page'], $options['page']);
-                $options['title'] = Application::$config['site_title'];
+                $options['title'] = Application::$config['site_title_' . Application::$config['language']];
             }
             
             // Get items and render it

@@ -93,7 +93,7 @@
             
             // Send message if success
             if ($result) {
-                $title = T('Your new password on ') . Application::$config['site_title'];
+                $title = T('Your new password on ') . Application::$config['site_title_' . Application::$config['language']];
                 $message = T('Your new password is ') . $password;
                 return System::getInstance()->mail($email, $title, $message);
             } else {

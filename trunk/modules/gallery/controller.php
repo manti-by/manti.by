@@ -35,7 +35,7 @@
                 $options['title'] = 'Search by tags: ' . implode(', ', $tags);
             } else {
                 $options['data'] = $this->model->getGallery();
-                $options['title'] = Application::$config['site_title'];
+                $options['title'] = Application::$config['site_title_' . Application::$config['language']];
             }
 
             // get category items and render it

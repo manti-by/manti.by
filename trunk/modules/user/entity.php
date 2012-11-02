@@ -103,12 +103,8 @@
          * @return UserEntity|bool $this or false
          */
         public function load($id) {
-            // Check id
-            if (empty($id)) {
-                return $this->_throw('User id could not be empty');
-            }
-            
             // Get items
+            $id = (int)$id;
             $this->database->query("CALL GET_USER_BY_ID($id);");
             $result = $this->database->getObject();
             if (!empty($result) && is_object($result)) {

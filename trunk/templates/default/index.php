@@ -24,18 +24,23 @@
         <?php echo $this->getContents('plugin', 'loader'); ?>
         <?php echo $this->getContents('plugin', 'messages'); ?>
 
-        <div id="header" class="wrapper">
-            <?php echo $this->getContents('plugin', 'topmenu'); ?>
-            <?php echo $this->getContents('plugin', 'toolbar'); ?>
-            <div class="cls"></div>
+        <div id="header">
+            <div class="wrapper">
+                <?php echo $this->getContents('partial', 'topmenu'); ?>
+                <?php echo $this->getContents('partial', 'toolbar'); ?>
+                <div class="cls"></div>
+            </div>
         </div>
 
         <div id="content" class="wrapper">
             <?php echo $options['body']; ?>
         </div>
 
-        <div id="footer" class="wrapper">
-            marco_manti&copy; 2006 - <?php echo date('Y'); ?>
+
+        <div id="footer">
+            <div class="wrapper">
+                <?php echo $this->getContents('partial', 'footer'); ?>
+            </div>
         </div>
 
         <?php echo $this->getContents('plugin', 'debug'); ?>

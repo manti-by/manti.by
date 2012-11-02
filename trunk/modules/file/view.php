@@ -19,11 +19,14 @@
         public function printFileArray($array) {
             // Print head
             $result  = '<table id="file-table" cellpadding="5" cellspacing="0" width="100%">';
+            $result .= '<thead>';
             $result .= '<tr>';
             $result .= '<th>' . T('Filename') . '</th>';
             $result .= '<th>' . T('Filesize') . '</th>';
-            $result .= '<th width="80">' . T('Actions') . '</th>';
+            $result .= '<th width="120">' . T('Actions') . '</th>';
             $result .= '</tr>';
+            $result .= '<thead>';
+            $result .= '<tbody>';
 
             // Print body
             $i = 0;
@@ -68,6 +71,7 @@
                 }
                 $i++;
             }
+            $result .= '</tbody>';
             $result .= '</table>';
 
             return $result;
