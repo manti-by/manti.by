@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PDepend>
+  <Packages>
+    <Package name="M2\Library">
+      <Stats>
+        <TotalClasses>11</TotalClasses>
+        <ConcreteClasses>11</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>1</Ca>
+        <Ce>3</Ce>
+        <A>0</A>
+        <I>0.75</I>
+        <D>0.25</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\includes\_autoload.php">Autoload</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\includes\application.php">Application</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\includes\cache.php">Cache</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\includes\controls\control.php">Control</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\includes\controls\file.php">File</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\includes\controls\relations.php">Relations</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\includes\controls\tag.php">Tag</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\includes\database.php">Database</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\includes\sef.php">Sef</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\includes\system.php">System</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\user\entity.php">UserEntity</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package>+core</Package>
+        <Package>+mysqli</Package>
+        <Package>M2\Modules</Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>M2\Modules</Package>
+      </UsedBy>
+    </Package>
+    <Package name="M2\Modules">
+      <Stats>
+        <TotalClasses>23</TotalClasses>
+        <ConcreteClasses>23</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>1</Ca>
+        <Ce>2</Ce>
+        <A>0</A>
+        <I>0.66666666666667</I>
+        <D>0.33333333333333</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\blog\controller.php">BlogController</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\blog\model.php">BlogModel</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\blog\view.php">BlogView</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\controller.php">Controller</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\entity.php">Entity</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\file\controller.php">FileController</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\file\entity.php">FileEntity</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\file\model.php">FileModel</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\file\view.php">FileView</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\front\controller.php">FrontController</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\front\model.php">FrontModel</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\front\view.php">FrontView</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\gallery\controller.php">GalleryController</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\gallery\model.php">GalleryModel</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\gallery\view.php">GalleryView</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\model.php">Model</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\tag\controller.php">TagController</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\tag\model.php">TagModel</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\tag\view.php">TagView</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\user\controller.php">UserController</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\user\model.php">UserModel</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\user\view.php">UserView</Class>
+        <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\view.php">View</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package>+spl</Package>
+        <Package>M2\Library</Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>M2\Library</Package>
+      </UsedBy>
+    </Package>
+  </Packages>
+  <Cycles>
+    <Package Name="M2\Library">
+      <Package>M2\Library</Package>
+      <Package>M2\Modules</Package>
+      <Package>M2\Library</Package>
+    </Package>
+    <Package Name="M2\Modules">
+      <Package>M2\Modules</Package>
+      <Package>M2\Library</Package>
+      <Package>M2\Modules</Package>
+    </Package>
+  </Cycles>
+</PDepend>

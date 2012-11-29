@@ -91,7 +91,7 @@
                 }
 
                 // Check cookie language
-                if (empty($_COOKIE['language'])) {
+                if (!empty($_COOKIE['language'])) {
                     Application::$config['language'] = $_COOKIE['language'];
                 }
 
