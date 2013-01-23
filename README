@@ -1,6 +1,67 @@
 M2 micro framework by Alexander Chaika (marco.manti@gmail.com).
 
 Source link: https://github.com/marco-manti/M2_micro/
+
 Current version: 0.3RC3
 
-Requirements: PHP 5.3+, MySQL 5.0+, MySQLi PHP driver.
+Requirements: 
+
+    PHP 5.3+, MySQL 5.0+, MySQLi PHP driver.
+
+
+Installation at Ubuntu: 
+
+1. Create directory "source": 
+    $ mkdir source
+
+2. Clone source code from github: 
+    $ git clone https://github.com/marco-manti/M2_micro.git ./source
+
+3. Create config file from sample and edit it:
+    $ cp ./source/trunk/includes/config.ini.sample ./source/trunk/includes/config.ini
+
+4. Create "log" and "tmp" directories and set privilegies:
+    $ mkdir log tmp
+    $ chmod 777 log tmp
+
+5. Create new apache2 host:
+    $ sudo gedit /etc/apache2/sites-available/m2.local
+
+6. And put these:
+
+    <VirtualHost 127.0.0.1:80>
+      DocumentRoot "/home/user/Projects/manti/m2_micro/source/trunk"
+      ServerName "m2.local"
+      ServerAlias "*.m2.local"
+
+      ErrorLog "/home/user/Projects/manti/m2_micro/log/apache_error.log"
+      CustomLog "/home/user/Projects/manti/log/apache_access.log" combined
+
+      php_value error_log "/home/user/Projects/manti/m2_micro/log/php_error.log"
+      php_value session.save_path "/home/user/Projects/manti/m2_micro/tmp"
+      php_value upload_tmp_dir "/home/user/Projects/manti/m2_micro/tmp"
+    </VirtualHost>
+    
+7. Create symlink for host:
+    $ ln -s /etc/apache2/sites-available/m2.local /etc/apache2/sites-enabled/m2.local
+    
+    
+8. Deploy database
+
+    8.1. You can use already compiled DB from file ./source/database/database.sql.
+    
+    8.2. Or you can create "clean" database from migrations in ./source/database/. 
+         For this you need use "Database migration tool" from next package
+         https://github.com/marco-manti/M2_Tools.
+    
+9. Create HOSTS record:
+    $ sudo gedit /etc/hosts
+
+    and add lines bellow
+    
+    127.0.0.1   m2.local
+    127.0.0.1   www.m2.local
+    
+
+10. Restart apache2 and enjoy! Open your browser and go to http://m2.local. 
+
