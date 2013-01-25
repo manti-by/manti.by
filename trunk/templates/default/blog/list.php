@@ -15,23 +15,3 @@
 <?php endif; ?>
 
 <?php echo $options['data']; ?>
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        var page = <?php echo $options['page']; ?>;
-        $(window).scroll(function() {
-            if ($('#footer').offset().top < $(window).scrollTop() + $(window).height() && page > 0) {
-                $.fn.loaderShow();
-                page++;
-                $.get('<?php echo Sef::getSef('index.php?module=blog&action=next'); ?>' + '&page=' + page, function(responce) {
-                    if (responce != '') {
-                        $('#content .main-sidebar').append(responce);
-                    } else {
-                        page = 0;
-                    }
-                    $.fn.loaderHide();
-                });
-            }
-        });
-    });
-</script>

@@ -53,6 +53,9 @@
             $options['module'] = 'blog';
             $options['body'] = $this->view->renderItemsArray($options);
 
+            // Add ajax loader
+            $options['body'] .= $this->view->getContents('blog', 'ajax-load', $options);
+
             return $this->view->wrapSidebar($options);
         }
 
