@@ -69,7 +69,7 @@
                 $lang_file = ROOT_PATH . DS . 'language' . DS . 'en.ini';
                 $references = parse_ini_file($lang_file);
             }
-            Cache::set('translations_' . $language, $references, Cache::TYPE_MEMORY);
+            Cache::set('translations_' . $language, $references);
         }
 
         // Remove spaces and other characters
@@ -84,7 +84,7 @@
         // Check for token and set to cache
         if (!array_key_exists($key, $references)) {
             $references[$key] = $text;
-            Cache::set('translations_' . $language, $references, Cache::TYPE_MEMORY);
+            Cache::set('translations_' . $language, $references);
         }
 
         return $references[$key];

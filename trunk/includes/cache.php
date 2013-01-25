@@ -12,6 +12,7 @@
     class Cache extends Application {
 
         const TYPE_DEFAULT = 1;
+
         const TYPE_SESSION = 1;
         const TYPE_MEMORY  = 2;
 
@@ -137,7 +138,7 @@
          * @param string $storage (OPTIONAL)
          * @static
          */
-        public static function get($key, $storage = 'session') {
+        public static function get($key, $storage = Cache::TYPE_DEFAULT) {
             return self::getInstance()->getData($key, $storage);
         }
     }
