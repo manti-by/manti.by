@@ -49,6 +49,9 @@
             $result = substr(strstr($request, "?"), 1);
             if (!empty($result)) {
                 parse_str($result, $_REQUEST);
+
+                // Add POST params to request
+                $_REQUEST = array_merge($_REQUEST, $_POST);
             }
         }
 
