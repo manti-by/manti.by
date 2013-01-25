@@ -134,8 +134,8 @@
         /**
          * Get item from cache
          * @param string $key
+         * @param int $storage (OPTIONAL)
          * @return mixed $value
-         * @param string $storage (OPTIONAL)
          * @static
          */
         public static function get($key, $storage = Cache::TYPE_DEFAULT) {

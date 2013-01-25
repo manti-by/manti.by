@@ -68,9 +68,9 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; text-transform: uppercase; }
 #footer .wrapper { background: #EEE; }
 
 #footer .left-column { float: left; width: 330px; margin-right: 40px; }
-#footer .other-column { float: left; width: 120px; margin-right: 40px; }
-#footer .info-column { float: left; width: 120px; margin-right: 40px; }
-#footer .follow-me-column { float: right; width: 175px; }
+#footer .other-column { float: left; width: 160px; margin-right: 40px; }
+#footer .info-column { float: left; width: 180px; margin-right: 40px; }
+#footer .follow-me-column { float: right; width: 160px; }
 
 #page-404 { width: 800px; margin: 40px auto; padding: 0; background: #EEE; color: black; }
 #page-404 .left-column { float: left; width: 160px; margin-right: 40px; padding: 80px 40px; text-align: center;
