@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">160</span></a></li>
+                <span class="label label-info">146</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -60,14 +60,15 @@
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
 <li class="method public "><a href="#method___construct" title="__construct :: Model class constructor with DB init"><span class="description">Model class constructor with DB init</span><pre>__construct()</pre></a></li>
+<li class="method public inherited"><a href="#method__clean" title="_clean :: Clean errors stack and add message to messages stack"><span class="description">Clean errors stack and add message to messages stack</span><pre>_clean()</pre></a></li>
+<li class="method public inherited"><a href="#method__throw" title="_throw :: Throw error and add message to error stack"><span class="description">Throw error and add message to error stack</span><pre>_throw()</pre></a></li>
 <li class="method public inherited"><a href="#method_addToStack" title="addToStack :: Put message to error stack"><span class="description">Put message to error stack</span><pre>addToStack()</pre></a></li>
-<li class="method public "><a href="#method_checkEmail" title="checkEmail :: "><span class="description">checkEmail()
-        </span><pre>checkEmail()</pre></a></li>
+<li class="method public "><a href="#method_checkEmail" title="checkEmail :: Check email existance"><span class="description">Check email existance</span><pre>checkEmail()</pre></a></li>
 <li class="method public inherited"><a href="#method_clean" title="clean :: Clean all stacks"><span class="description">Clean all stacks</span><pre>clean()</pre></a></li>
-<li class="method public "><a href="#method_create" title="create :: "><span class="description">create()
-        </span><pre>create()</pre></a></li>
-<li class="method public "><a href="#method_createNewPassword" title="createNewPassword :: "><span class="description">createNewPassword()
-        </span><pre>createNewPassword()</pre></a></li>
+<li class="method public "><a href="#method_create" title="create :: Create new user"><span class="description">Create new user</span><pre>create()</pre></a></li>
+<li class="method public "><a href="#method_createNewPassword" title="createNewPassword :: Create new user pass by email"><span class="description">Create new user pass by email</span><pre>createNewPassword()</pre></a></li>
+<li class="method public inherited"><a href="#method_flushTranslations" title="flushTranslations :: Close application"><span class="description">Close application</span><pre>flushTranslations()</pre></a></li>
+<li class="method public inherited"><a href="#method_getInstance" title="getInstance :: GetInstance class method"><span class="description">GetInstance class method</span><pre>getInstance()</pre></a></li>
 <li class="method public inherited"><a href="#method_getLastFromStack" title="getLastFromStack :: Get last message from stack"><span class="description">Get last message from stack</span><pre>getLastFromStack()</pre></a></li>
 <li class="method public inherited"><a href="#method_getMessage" title="getMessage :: Get last error message"><span class="description">Get last error message</span><pre>getMessage()</pre></a></li>
 <li class="method public inherited"><a href="#method_getModel" title="getModel :: Default getModel method"><span class="description">Default getModel method</span><pre>getModel()</pre></a></li>
@@ -83,23 +84,14 @@ Save stats into DB"><span class="description">Init application
 Get parse current route
 Get global user params
 Save stats into DB</span><pre>init()</pre></a></li>
-<li class="method public "><a href="#method_isLoggined" title="isLoggined :: "><span class="description">isLoggined()
-        </span><pre>isLoggined()</pre></a></li>
+<li class="method public "><a href="#method_isLoggined" title="isLoggined :: Check if user loggined"><span class="description">Check if user loggined</span><pre>isLoggined()</pre></a></li>
 <li class="method public inherited"><a href="#method_isMessagePresent" title="isMessagePresent :: Check error stack"><span class="description">Check error stack</span><pre>isMessagePresent()</pre></a></li>
 <li class="method public inherited"><a href="#method_logSQL" title="logSQL :: Put SQL query to query queue"><span class="description">Put SQL query to query queue</span><pre>logSQL()</pre></a></li>
-<li class="method public "><a href="#method_login" title="login :: "><span class="description">login()
-        </span><pre>login()</pre></a></li>
-<li class="method public "><a href="#method_logout" title="logout :: "><span class="description">logout()
-        </span><pre>logout()</pre></a></li>
+<li class="method public "><a href="#method_login" title="login :: Try to login current user"><span class="description">Try to login current user</span><pre>login()</pre></a></li>
+<li class="method public "><a href="#method_logout" title="logout :: Logout current user"><span class="description">Logout current user</span><pre>logout()</pre></a></li>
 <li class="method public inherited"><a href="#method_parseConfig" title="parseConfig :: Parse config from Application INI file"><span class="description">Parse config from Application INI file</span><pre>parseConfig()</pre></a></li>
 <li class="method public inherited"><a href="#method_saveToLog" title="saveToLog :: Put into log file current message"><span class="description">Put into log file current message</span><pre>saveToLog()</pre></a></li>
 <li class="method public inherited"><a href="#method_shutdown" title="shutdown :: Close application"><span class="description">Close application</span><pre>shutdown()</pre></a></li>
-</ul>
-</li>
-<li class="nav-header protected">» Protected
-                    <ul>
-<li class="method protected inherited"><a href="#method__clean" title="_clean :: Clean errors stack and add message to messages stack"><span class="description">Clean errors stack and add message to messages stack</span><pre>_clean()</pre></a></li>
-<li class="method protected inherited"><a href="#method__throw" title="_throw :: Throw error and add message to error stack"><span class="description">Throw error and add message to error stack</span><pre>_throw()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
@@ -166,6 +158,60 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
+<a id="method__clean"></a><div class="element clickable method public method__clean" data-toggle="collapse" data-target=".method__clean .collapse">
+<h2>Clean errors stack and add message to messages stack</h2>
+<pre>_clean(string $message) : bool</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::_clean()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::_clean()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>OPTIONAL message to show (default null)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>TRUE</div>
+</div></div>
+</div>
+<a id="method__throw"></a><div class="element clickable method public method__throw" data-toggle="collapse" data-target=".method__throw .collapse">
+<h2>Throw error and add message to error stack</h2>
+<pre>_throw(string $message, int $level) : bool</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::_throw()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::_throw()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>error message</p></div>
+<div class="subelement argument">
+<h4>$level</h4>
+<code>int</code><p>OPTIONAL error number</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>FALSE</div>
+</div></div>
+</div>
 <a id="method_addToStack"></a><div class="element clickable method public method_addToStack" data-toggle="collapse" data-target=".method_addToStack .collapse">
 <h2>Put message to error stack</h2>
 <pre>addToStack(string $message, int $level) : int</pre>
@@ -196,14 +242,18 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div></div>
 </div>
 <a id="method_checkEmail"></a><div class="element clickable method public method_checkEmail" data-toggle="collapse" data-target=".method_checkEmail .collapse">
-<h2>checkEmail()
-        </h2>
-<pre>checkEmail($email) </pre>
+<h2>Check email existance</h2>
+<pre>checkEmail(string $email) : bool</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$email</h4></div>
+<div class="subelement argument">
+<h4>$email</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>bool</code></div>
 </div></div>
 </div>
 <a id="method_clean"></a><div class="element clickable method public method_clean" data-toggle="collapse" data-target=".method_clean .collapse">
@@ -227,25 +277,78 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div></div>
 </div>
 <a id="method_create"></a><div class="element clickable method public method_create" data-toggle="collapse" data-target=".method_create .collapse">
-<h2>create()
-        </h2>
-<pre>create($options) </pre>
+<h2>Create new user</h2>
+<pre>create(array $options) : bool | <a href="../classes/UserEntity.html">\UserEntity</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$options</h4></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code><code><a href="../classes/UserEntity.html">\UserEntity</a></code>$result</div>
 </div></div>
 </div>
 <a id="method_createNewPassword"></a><div class="element clickable method public method_createNewPassword" data-toggle="collapse" data-target=".method_createNewPassword .collapse">
-<h2>createNewPassword()
-        </h2>
-<pre>createNewPassword($email) </pre>
+<h2>Create new user pass by email</h2>
+<pre>createNewPassword(string $email) : bool</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$email</h4></div>
+<div class="subelement argument">
+<h4>$email</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>$result</div>
+</div></div>
+</div>
+<a id="method_flushTranslations"></a><div class="element clickable method public method_flushTranslations" data-toggle="collapse" data-target=".method_flushTranslations .collapse">
+<h2>Close application</h2>
+<pre>flushTranslations() </pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::flushTranslations()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::flushTranslations()</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="method_getInstance"></a><div class="element clickable method public method_getInstance" data-toggle="collapse" data-target=".method_getInstance .collapse">
+<h2>GetInstance class method</h2>
+<pre>getInstance() : <a href="../classes/Application.html">\Application</a></pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::getInstance()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::getInstance()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Application.html">\Application</a></code>$instance</div>
 </div></div>
 </div>
 <a id="method_getLastFromStack"></a><div class="element clickable method public method_getLastFromStack" data-toggle="collapse" data-target=".method_getLastFromStack .collapse">
@@ -292,7 +395,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div>
 <a id="method_getModel"></a><div class="element clickable method public method_getModel" data-toggle="collapse" data-target=".method_getModel .collapse">
 <h2>Default getModel method</h2>
-<pre>getModel(string $name) : object</pre>
+<pre>getModel(string $name) : <a href="../classes/Model.html">\Model</a> | <a href="../classes/BlogModel.html">\BlogModel</a> | <a href="../classes/FileModel.html">\FileModel</a> | <a href="../classes/FrontModel.html">\FrontModel</a> | <a href="../classes/GalleryModel.html">\GalleryModel</a> | <a href="../classes/TagModel.html">\TagModel</a> | <a href="../classes/UserModel.html">\UserModel</a></pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -309,7 +412,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>object</code>$model</div>
+<code><a href="../classes/Model.html">\Model</a></code><code><a href="../classes/BlogModel.html">\BlogModel</a></code><code><a href="../classes/FileModel.html">\FileModel</a></code><code><a href="../classes/FrontModel.html">\FrontModel</a></code><code><a href="../classes/GalleryModel.html">\GalleryModel</a></code><code><a href="../classes/TagModel.html">\TagModel</a></code><code><a href="../classes/UserModel.html">\UserModel</a></code>$model</div>
 </div></div>
 </div>
 <a id="method_getResult"></a><div class="element clickable method public method_getResult" data-toggle="collapse" data-target=".method_getResult .collapse">
@@ -400,11 +503,15 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="method_isLoggined"></a><div class="element clickable method public method_isLoggined" data-toggle="collapse" data-target=".method_isLoggined .collapse">
-<h2>isLoggined()
-        </h2>
-<pre>isLoggined() </pre>
+<h2>Check if user loggined</h2>
+<pre>isLoggined() : bool | <a href="../classes/UserEntity.html">\UserEntity</a></pre>
 <div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code><code><a href="../classes/UserEntity.html">\UserEntity</a></code>$result</div>
+</div></div>
 </div>
 <a id="method_isMessagePresent"></a><div class="element clickable method public method_isMessagePresent" data-toggle="collapse" data-target=".method_isMessagePresent .collapse">
 <h2>Check error stack</h2>
@@ -453,25 +560,30 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="method_login"></a><div class="element clickable method public method_login" data-toggle="collapse" data-target=".method_login .collapse">
-<h2>login()
-        </h2>
-<pre>login($options) </pre>
+<h2>Try to login current user</h2>
+<pre>login(array $options) : bool | <a href="../classes/UserEntity.html">\UserEntity</a></pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$options</h4></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code><code><a href="../classes/UserEntity.html">\UserEntity</a></code>$result</div>
 </div></div>
 </div>
 <a id="method_logout"></a><div class="element clickable method public method_logout" data-toggle="collapse" data-target=".method_logout .collapse">
-<h2>logout()
-        </h2>
-<pre>logout($options) </pre>
+<h2>Logout current user</h2>
+<pre>logout() : bool</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument"><h4>$options</h4></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>$result</div>
 </div></div>
 </div>
 <a id="method_parseConfig"></a><div class="element clickable method public method_parseConfig" data-toggle="collapse" data-target=".method_parseConfig .collapse">
@@ -540,60 +652,6 @@ Save stats into DB</h2>
 <td>\Model::shutdown()</td>
 </tr>
 </table>
-</div></div>
-</div>
-<a id="method__clean"></a><div class="element clickable method protected method__clean" data-toggle="collapse" data-target=".method__clean .collapse">
-<h2>Clean errors stack and add message to messages stack</h2>
-<pre>_clean(string $message) : bool</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Application::_clean()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Model::_clean()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$message</h4>
-<code>string</code><p>OPTIONAL message to show (default null)</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code>TRUE</div>
-</div></div>
-</div>
-<a id="method__throw"></a><div class="element clickable method protected method__throw" data-toggle="collapse" data-target=".method__throw .collapse">
-<h2>Throw error and add message to error stack</h2>
-<pre>_throw(string $message, int $level) : bool</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Application::_throw()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Model::_throw()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$message</h4>
-<code>string</code><p>error message</p></div>
-<div class="subelement argument">
-<h4>$level</h4>
-<code>int</code><p>OPTIONAL error number</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code>FALSE</div>
 </div></div>
 </div>
 <h3>
@@ -731,7 +789,7 @@ Save stats into DB</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-10-09T18:26:28+03:00.<br></footer></div>
+            generated on 2013-01-25T16:29:23+03:00.<br></footer></div>
 </div>
 </body>
 </html>

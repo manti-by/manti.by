@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">160</span></a></li>
+                <span class="label label-info">146</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -60,8 +60,13 @@
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
 <li class="method public inherited"><a href="#method___construct" title="__construct :: Model class constructor with DB init"><span class="description">Model class constructor with DB init</span><pre>__construct()</pre></a></li>
+<li class="method public inherited"><a href="#method__clean" title="_clean :: Clean errors stack and add message to messages stack"><span class="description">Clean errors stack and add message to messages stack</span><pre>_clean()</pre></a></li>
+<li class="method public inherited"><a href="#method__throw" title="_throw :: Throw error and add message to error stack"><span class="description">Throw error and add message to error stack</span><pre>_throw()</pre></a></li>
 <li class="method public inherited"><a href="#method_addToStack" title="addToStack :: Put message to error stack"><span class="description">Put message to error stack</span><pre>addToStack()</pre></a></li>
 <li class="method public inherited"><a href="#method_clean" title="clean :: Clean all stacks"><span class="description">Clean all stacks</span><pre>clean()</pre></a></li>
+<li class="method public inherited"><a href="#method_flushTranslations" title="flushTranslations :: Close application"><span class="description">Close application</span><pre>flushTranslations()</pre></a></li>
+<li class="method public "><a href="#method_getFrontpageItems" title="getFrontpageItems :: Get frontpage items array"><span class="description">Get frontpage items array</span><pre>getFrontpageItems()</pre></a></li>
+<li class="method public inherited"><a href="#method_getInstance" title="getInstance :: GetInstance class method"><span class="description">GetInstance class method</span><pre>getInstance()</pre></a></li>
 <li class="method public inherited"><a href="#method_getLastFromStack" title="getLastFromStack :: Get last message from stack"><span class="description">Get last message from stack</span><pre>getLastFromStack()</pre></a></li>
 <li class="method public inherited"><a href="#method_getMessage" title="getMessage :: Get last error message"><span class="description">Get last error message</span><pre>getMessage()</pre></a></li>
 <li class="method public inherited"><a href="#method_getModel" title="getModel :: Default getModel method"><span class="description">Default getModel method</span><pre>getModel()</pre></a></li>
@@ -84,12 +89,6 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="method public inherited"><a href="#method_shutdown" title="shutdown :: Close application"><span class="description">Close application</span><pre>shutdown()</pre></a></li>
 </ul>
 </li>
-<li class="nav-header protected">» Protected
-                    <ul>
-<li class="method protected inherited"><a href="#method__clean" title="_clean :: Clean errors stack and add message to messages stack"><span class="description">Clean errors stack and add message to messages stack</span><pre>_clean()</pre></a></li>
-<li class="method protected inherited"><a href="#method__throw" title="_throw :: Throw error and add message to error stack"><span class="description">Throw error and add message to error stack</span><pre>_throw()</pre></a></li>
-</ul>
-</li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
                     <ul><li class="property public inherited"><a href="#property_config" title="$config :: "><span class="description">$config</span><pre>$config</pre></a></li></ul>
@@ -104,6 +103,10 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="property protected inherited"><a href="#property_result" title="$result :: "><span class="description">$result</span><pre>$result</pre></a></li>
 <li class="property protected inherited"><a href="#property_user" title="$user :: "><span class="description">$user</span><pre>$user</pre></a></li>
 </ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul><li class="constant  "><a href="#constant_FEATURED_TAG_NAME" title="FEATURED_TAG_NAME :: "><span class="description">FEATURED_TAG_NAME</span><pre>FEATURED_TAG_NAME</pre></a></li></ul>
 </li>
 </ul>
 </div>
@@ -157,6 +160,60 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </tr></table>
 </div></div>
 </div>
+<a id="method__clean"></a><div class="element clickable method public method__clean" data-toggle="collapse" data-target=".method__clean .collapse">
+<h2>Clean errors stack and add message to messages stack</h2>
+<pre>_clean(string $message) : bool</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::_clean()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::_clean()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>OPTIONAL message to show (default null)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>TRUE</div>
+</div></div>
+</div>
+<a id="method__throw"></a><div class="element clickable method public method__throw" data-toggle="collapse" data-target=".method__throw .collapse">
+<h2>Throw error and add message to error stack</h2>
+<pre>_throw(string $message, int $level) : bool</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::_throw()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::_throw()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>error message</p></div>
+<div class="subelement argument">
+<h4>$level</h4>
+<code>int</code><p>OPTIONAL error number</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>FALSE</div>
+</div></div>
+</div>
 <a id="method_addToStack"></a><div class="element clickable method public method_addToStack" data-toggle="collapse" data-target=".method_addToStack .collapse">
 <h2>Put message to error stack</h2>
 <pre>addToStack(string $message, int $level) : int</pre>
@@ -206,6 +263,60 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </table>
 </div></div>
 </div>
+<a id="method_flushTranslations"></a><div class="element clickable method public method_flushTranslations" data-toggle="collapse" data-target=".method_flushTranslations .collapse">
+<h2>Close application</h2>
+<pre>flushTranslations() </pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::flushTranslations()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::flushTranslations()</td>
+</tr>
+</table>
+</div></div>
+</div>
+<a id="method_getFrontpageItems"></a><div class="element clickable method public method_getFrontpageItems" data-toggle="collapse" data-target=".method_getFrontpageItems .collapse">
+<h2>Get frontpage items array</h2>
+<pre>getFrontpageItems() : array | bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>bool</code>$result</div>
+</div></div>
+</div>
+<a id="method_getInstance"></a><div class="element clickable method public method_getInstance" data-toggle="collapse" data-target=".method_getInstance .collapse">
+<h2>GetInstance class method</h2>
+<pre>getInstance() : <a href="../classes/Application.html">\Application</a></pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::getInstance()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::getInstance()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Application.html">\Application</a></code>$instance</div>
+</div></div>
+</div>
 <a id="method_getLastFromStack"></a><div class="element clickable method public method_getLastFromStack" data-toggle="collapse" data-target=".method_getLastFromStack .collapse">
 <h2>Get last message from stack</h2>
 <pre>getLastFromStack() : string</pre>
@@ -250,7 +361,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div>
 <a id="method_getModel"></a><div class="element clickable method public method_getModel" data-toggle="collapse" data-target=".method_getModel .collapse">
 <h2>Default getModel method</h2>
-<pre>getModel(string $name) : object</pre>
+<pre>getModel(string $name) : <a href="../classes/Model.html">\Model</a> | <a href="../classes/BlogModel.html">\BlogModel</a> | <a href="../classes/FileModel.html">\FileModel</a> | <a href="../classes/FrontModel.html">\FrontModel</a> | <a href="../classes/GalleryModel.html">\GalleryModel</a> | <a href="../classes/TagModel.html">\TagModel</a> | <a href="../classes/UserModel.html">\UserModel</a></pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -267,7 +378,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>object</code>$model</div>
+<code><a href="../classes/Model.html">\Model</a></code><code><a href="../classes/BlogModel.html">\BlogModel</a></code><code><a href="../classes/FileModel.html">\FileModel</a></code><code><a href="../classes/FrontModel.html">\FrontModel</a></code><code><a href="../classes/GalleryModel.html">\GalleryModel</a></code><code><a href="../classes/TagModel.html">\TagModel</a></code><code><a href="../classes/UserModel.html">\UserModel</a></code>$model</div>
 </div></div>
 </div>
 <a id="method_getResult"></a><div class="element clickable method public method_getResult" data-toggle="collapse" data-target=".method_getResult .collapse">
@@ -471,60 +582,6 @@ Save stats into DB</h2>
 </table>
 </div></div>
 </div>
-<a id="method__clean"></a><div class="element clickable method protected method__clean" data-toggle="collapse" data-target=".method__clean .collapse">
-<h2>Clean errors stack and add message to messages stack</h2>
-<pre>_clean(string $message) : bool</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Application::_clean()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Model::_clean()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$message</h4>
-<code>string</code><p>OPTIONAL message to show (default null)</p>
-</div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code>TRUE</div>
-</div></div>
-</div>
-<a id="method__throw"></a><div class="element clickable method protected method__throw" data-toggle="collapse" data-target=".method__throw .collapse">
-<h2>Throw error and add message to error stack</h2>
-<pre>_throw(string $message, int $level) : bool</pre>
-<div class="labels"><span class="label">Inherited</span></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
-<th>inherited_from</th>
-<td>\Application::_throw()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\Model::_throw()</td>
-</tr>
-</table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$message</h4>
-<code>string</code><p>error message</p></div>
-<div class="subelement argument">
-<h4>$level</h4>
-<code>int</code><p>OPTIONAL error number</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code>FALSE</div>
-</div></div>
-</div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
 <a id="property_config"> </a><div class="element clickable property public property_config" data-toggle="collapse" data-target=".property_config .collapse">
@@ -647,6 +704,20 @@ Save stats into DB</h2>
 </tr></table>
 </div></div>
 </div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_FEATURED_TAG_NAME"> </a><div class="element clickable constant  constant_FEATURED_TAG_NAME" data-toggle="collapse" data-target=".constant_FEATURED_TAG_NAME .collapse">
+<h2>FEATURED_TAG_NAME</h2>
+<pre>FEATURED_TAG_NAME </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>const</th>
+<td>Featured tag name</td>
+</tr></table>
+</div></div>
+</div>
 </div>
 </div>
 </div>
@@ -654,7 +725,7 @@ Save stats into DB</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-10-09T18:26:28+03:00.<br></footer></div>
+            generated on 2013-01-25T16:29:23+03:00.<br></footer></div>
 </div>
 </body>
 </html>

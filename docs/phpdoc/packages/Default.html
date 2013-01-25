@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">160</span></a></li>
+                <span class="label label-info">146</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -64,8 +64,10 @@
 <li class="nav-header">
 <i class="icon-custom icon-function"></i> Functions</li>
 <li class="function  "><a href="#function_T" title="T :: Function for translate tokens from dictionaries"><span class="description">Function for translate tokens from dictionaries</span><pre>T</pre></a></li>
+<li class="function  "><a href="#function_cleanCommaString" title="cleanCommaString :: Remove from comma separated string array empty values"><span class="description">Remove from comma separated string array empty values</span><pre>cleanCommaString</pre></a></li>
 <li class="function  "><a href="#function_getDefaultModule" title="getDefaultModule :: Return first applicable module"><span class="description">Return first applicable module</span><pre>getDefaultModule</pre></a></li>
 <li class="function  "><a href="#function_getErrorStringFromInt" title="getErrorStringFromInt :: Return human representation of error level"><span class="description">Return human representation of error level</span><pre>getErrorStringFromInt</pre></a></li>
+<li class="function  "><a href="#function_toJSNumArray" title="toJSNumArray :: Prepare PHP array to JSON array"><span class="description">Prepare PHP array to JSON array</span><pre>toJSNumArray</pre></a></li>
 </ul>
 </div>
 <div class="span8 package-contents">
@@ -88,6 +90,22 @@
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code>$text translated text</div>
+</div></div>
+</div>
+<a id="function_cleanCommaString"></a><div class="element clickable function  function_cleanCommaString" data-toggle="collapse" data-target=".function_cleanCommaString .collapse">
+<h2>Remove from comma separated string array empty values</h2>
+<pre>cleanCommaString(string $string) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>$result</div>
 </div></div>
 </div>
 <a id="function_getDefaultModule"></a><div class="element clickable function  function_getDefaultModule" data-toggle="collapse" data-target=".function_getDefaultModule .collapse">
@@ -116,13 +134,29 @@
 <code>string</code>$display_name</div>
 </div></div>
 </div>
+<a id="function_toJSNumArray"></a><div class="element clickable function  function_toJSNumArray" data-toggle="collapse" data-target=".function_toJSNumArray .collapse">
+<h2>Prepare PHP array to JSON array</h2>
+<pre>toJSNumArray(mixed $array) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$array</h4>
+<code>mixed</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>$result</div>
+</div></div>
+</div>
 </div>
 </div>
 </div>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-10-09T18:26:28+03:00.<br></footer></div>
+            generated on 2013-01-25T16:29:22+03:00.<br></footer></div>
 </div>
 </body>
 </html>

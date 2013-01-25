@@ -2,7 +2,7 @@ M2 micro framework by Alexander Chaika (marco.manti@gmail.com).
 
 Source link: https://github.com/marco-manti/M2_micro/
 
-Current version: 0.3RC3
+Current version: 0.3RC4
 
 Requirements: 
 
@@ -40,6 +40,9 @@ Installation at Ubuntu:
       php_value error_log "/home/user/Projects/manti/m2_micro/log/php_error.log"
       php_value session.save_path "/home/user/Projects/manti/m2_micro/tmp"
       php_value upload_tmp_dir "/home/user/Projects/manti/m2_micro/tmp"
+
+      Alias "/help" "/home/user/Projects/manti/m2_micro/source/docs/phpdoc"
+      Alias "/stat" "/home/user/Projects/manti/m2_micro/source/docs/pdepend"
     </VirtualHost>
     
 7. Create symlink for host:

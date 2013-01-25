@@ -32,7 +32,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">160</span></a></li>
+                <span class="label label-info">146</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -60,9 +60,13 @@
 <i class="icon-custom icon-method"></i> Methods
                     <ul>
 <li class="method public inherited"><a href="#method__404" title="_404 :: 404 Page"><span class="description">404 Page</span><pre>_404()</pre></a></li>
+<li class="method public inherited"><a href="#method__clean" title="_clean :: Clean errors stack and add message to messages stack"><span class="description">Clean errors stack and add message to messages stack</span><pre>_clean()</pre></a></li>
+<li class="method public inherited"><a href="#method__throw" title="_throw :: Throw error and add message to error stack"><span class="description">Throw error and add message to error stack</span><pre>_throw()</pre></a></li>
 <li class="method public inherited"><a href="#method_addToStack" title="addToStack :: Put message to error stack"><span class="description">Put message to error stack</span><pre>addToStack()</pre></a></li>
 <li class="method public inherited"><a href="#method_clean" title="clean :: Clean all stacks"><span class="description">Clean all stacks</span><pre>clean()</pre></a></li>
+<li class="method public inherited"><a href="#method_flushTranslations" title="flushTranslations :: Close application"><span class="description">Close application</span><pre>flushTranslations()</pre></a></li>
 <li class="method public inherited"><a href="#method_getContents" title="getContents :: Get HTML contents for TYPE/NAME entity"><span class="description">Get HTML contents for TYPE/NAME entity</span><pre>getContents()</pre></a></li>
+<li class="method public inherited"><a href="#method_getInstance" title="getInstance :: GetInstance class method"><span class="description">GetInstance class method</span><pre>getInstance()</pre></a></li>
 <li class="method public inherited"><a href="#method_getLastFromStack" title="getLastFromStack :: Get last message from stack"><span class="description">Get last message from stack</span><pre>getLastFromStack()</pre></a></li>
 <li class="method public inherited"><a href="#method_getMessage" title="getMessage :: Get last error message"><span class="description">Get last error message</span><pre>getMessage()</pre></a></li>
 <li class="method public inherited"><a href="#method_getResult" title="getResult :: Get last result number
@@ -87,13 +91,11 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="method public inherited"><a href="#method_saveToLog" title="saveToLog :: Put into log file current message"><span class="description">Put into log file current message</span><pre>saveToLog()</pre></a></li>
 <li class="method public inherited"><a href="#method_shutdown" title="shutdown :: Close application"><span class="description">Close application</span><pre>shutdown()</pre></a></li>
 <li class="method public inherited"><a href="#method_wrapPage" title="wrapPage :: Wrap HTML data to Page"><span class="description">Wrap HTML data to Page</span><pre>wrapPage()</pre></a></li>
+<li class="method public inherited"><a href="#method_wrapSidebar" title="wrapSidebar :: Add sidebar to Page"><span class="description">Add sidebar to Page</span><pre>wrapSidebar()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header protected">» Protected
-                    <ul>
-<li class="method protected inherited"><a href="#method__clean" title="_clean :: Clean errors stack and add message to messages stack"><span class="description">Clean errors stack and add message to messages stack</span><pre>_clean()</pre></a></li>
-<li class="method protected inherited"><a href="#method__throw" title="_throw :: Throw error and add message to error stack"><span class="description">Throw error and add message to error stack</span><pre>_throw()</pre></a></li>
-</ul>
+                    <ul><li class="method protected inherited"><a href="#method___construct" title="__construct :: Singleton protection"><span class="description">Singleton protection</span><pre>__construct()</pre></a></li></ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
@@ -104,6 +106,16 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="property protected inherited"><a href="#property_instance" title="$instance :: "><span class="description">$instance</span><pre>$instance</pre></a></li>
 <li class="property protected inherited"><a href="#property_message" title="$message :: "><span class="description">$message</span><pre>$message</pre></a></li>
 <li class="property protected inherited"><a href="#property_result" title="$result :: "><span class="description">$result</span><pre>$result</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  inherited"><a href="#constant_OUTPUT_TYPE_DEFAULT" title="OUTPUT_TYPE_DEFAULT :: "><span class="description">OUTPUT_TYPE_DEFAULT</span><pre>OUTPUT_TYPE_DEFAULT</pre></a></li>
+<li class="constant  inherited"><a href="#constant_OUTPUT_TYPE_HTML" title="OUTPUT_TYPE_HTML :: "><span class="description">OUTPUT_TYPE_HTML</span><pre>OUTPUT_TYPE_HTML</pre></a></li>
+<li class="constant  inherited"><a href="#constant_OUTPUT_TYPE_JSON" title="OUTPUT_TYPE_JSON :: "><span class="description">OUTPUT_TYPE_JSON</span><pre>OUTPUT_TYPE_JSON</pre></a></li>
+<li class="constant  inherited"><a href="#constant_OUTPUT_TYPE_LOG" title="OUTPUT_TYPE_LOG :: "><span class="description">OUTPUT_TYPE_LOG</span><pre>OUTPUT_TYPE_LOG</pre></a></li>
+<li class="constant  inherited"><a href="#constant_OUTPUT_TYPE_RAW" title="OUTPUT_TYPE_RAW :: "><span class="description">OUTPUT_TYPE_RAW</span><pre>OUTPUT_TYPE_RAW</pre></a></li>
 </ul>
 </li>
 </ul>
@@ -169,6 +181,60 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <code>array</code><code>null</code>$options</div>
 </div></div>
 </div>
+<a id="method__clean"></a><div class="element clickable method public method__clean" data-toggle="collapse" data-target=".method__clean .collapse">
+<h2>Clean errors stack and add message to messages stack</h2>
+<pre>_clean(string $message) : bool</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::_clean()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\View::_clean()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>OPTIONAL message to show (default null)</p>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>TRUE</div>
+</div></div>
+</div>
+<a id="method__throw"></a><div class="element clickable method public method__throw" data-toggle="collapse" data-target=".method__throw .collapse">
+<h2>Throw error and add message to error stack</h2>
+<pre>_throw(string $message, int $level) : bool</pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::_throw()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\View::_throw()</td>
+</tr>
+</table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code><p>error message</p></div>
+<div class="subelement argument">
+<h4>$level</h4>
+<code>int</code><p>OPTIONAL error number</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code>FALSE</div>
+</div></div>
+</div>
 <a id="method_addToStack"></a><div class="element clickable method public method_addToStack" data-toggle="collapse" data-target=".method_addToStack .collapse">
 <h2>Put message to error stack</h2>
 <pre>addToStack(string $message, int $level) : int</pre>
@@ -218,6 +284,26 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </table>
 </div></div>
 </div>
+<a id="method_flushTranslations"></a><div class="element clickable method public method_flushTranslations" data-toggle="collapse" data-target=".method_flushTranslations .collapse">
+<h2>Close application</h2>
+<pre>flushTranslations() </pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::flushTranslations()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\View::flushTranslations()</td>
+</tr>
+</table>
+</div></div>
+</div>
 <a id="method_getContents"></a><div class="element clickable method public method_getContents" data-toggle="collapse" data-target=".method_getContents .collapse">
 <h2>Get HTML contents for TYPE/NAME entity</h2>
 <pre>getContents(string $type, string $name, array $options) : string</pre>
@@ -244,6 +330,29 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>string</code>$html</div>
+</div></div>
+</div>
+<a id="method_getInstance"></a><div class="element clickable method public method_getInstance" data-toggle="collapse" data-target=".method_getInstance .collapse">
+<h2>GetInstance class method</h2>
+<pre>getInstance() : <a href="../classes/Application.html">\Application</a></pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::getInstance()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\View::getInstance()</td>
+</tr>
+</table>
+<h3>Returns</h3>
+<div class="subelement response">
+<code><a href="../classes/Application.html">\Application</a></code>$instance</div>
 </div></div>
 </div>
 <a id="method_getLastFromStack"></a><div class="element clickable method public method_getLastFromStack" data-toggle="collapse" data-target=".method_getLastFromStack .collapse">
@@ -445,7 +554,7 @@ Save stats into DB</h2>
 </div>
 <a id="method_offline"></a><div class="element clickable method public method_offline" data-toggle="collapse" data-target=".method_offline .collapse">
 <h2>Offline render action</h2>
-<pre>offline(array $options) </pre>
+<pre>offline() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -453,10 +562,6 @@ Save stats into DB</h2>
 <th>inherited_from</th>
 <td>\View::offline()</td>
 </tr></table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$options</h4>
-<code>array</code><p>OPTIONAL</p></div>
 </div></div>
 </div>
 <a id="method_parseConfig"></a><div class="element clickable method public method_parseConfig" data-toggle="collapse" data-target=".method_parseConfig .collapse">
@@ -584,58 +689,42 @@ Save stats into DB</h2>
 <code>string</code>$html</div>
 </div></div>
 </div>
-<a id="method__clean"></a><div class="element clickable method protected method__clean" data-toggle="collapse" data-target=".method__clean .collapse">
-<h2>Clean errors stack and add message to messages stack</h2>
-<pre>_clean(string $message) : bool</pre>
+<a id="method_wrapSidebar"></a><div class="element clickable method public method_wrapSidebar" data-toggle="collapse" data-target=".method_wrapSidebar .collapse">
+<h2>Add sidebar to Page</h2>
+<pre>wrapSidebar(array $options) : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered">
-<tr>
+<table class="table table-bordered"><tr>
 <th>inherited_from</th>
-<td>\Application::_clean()</td>
-</tr>
-<tr>
-<th>inherited_from</th>
-<td>\View::_clean()</td>
-</tr>
-</table>
+<td>\View::wrapSidebar()</td>
+</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
-<h4>$message</h4>
-<code>string</code><p>OPTIONAL message to show (default null)</p>
+<h4>$options</h4>
+<code>array</code>
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>bool</code>TRUE</div>
+<code>array</code>$options</div>
 </div></div>
 </div>
-<a id="method__throw"></a><div class="element clickable method protected method__throw" data-toggle="collapse" data-target=".method__throw .collapse">
-<h2>Throw error and add message to error stack</h2>
-<pre>_throw(string $message, int $level) : bool</pre>
+<a id="method___construct"></a><div class="element clickable method protected method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
+<h2>Singleton protection</h2>
+<pre>__construct() </pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>inherited_from</th>
-<td>\Application::_throw()</td>
+<td>\Application::__construct()</td>
 </tr>
 <tr>
 <th>inherited_from</th>
-<td>\View::_throw()</td>
+<td>\View::__construct()</td>
 </tr>
 </table>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$message</h4>
-<code>string</code><p>error message</p></div>
-<div class="subelement argument">
-<h4>$level</h4>
-<code>int</code><p>OPTIONAL error number</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code>FALSE</div>
 </div></div>
 </div>
 <h3>
@@ -712,6 +801,68 @@ Save stats into DB</h2>
 </table>
 </div></div>
 </div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_OUTPUT_TYPE_DEFAULT"> </a><div class="element clickable constant  constant_OUTPUT_TYPE_DEFAULT" data-toggle="collapse" data-target=".constant_OUTPUT_TYPE_DEFAULT .collapse">
+<h2>OUTPUT_TYPE_DEFAULT</h2>
+<pre>OUTPUT_TYPE_DEFAULT </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\View::OUTPUT_TYPE_DEFAULT</td>
+</tr></table>
+</div></div>
+</div>
+<a id="constant_OUTPUT_TYPE_HTML"> </a><div class="element clickable constant  constant_OUTPUT_TYPE_HTML" data-toggle="collapse" data-target=".constant_OUTPUT_TYPE_HTML .collapse">
+<h2>OUTPUT_TYPE_HTML</h2>
+<pre>OUTPUT_TYPE_HTML </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\View::OUTPUT_TYPE_HTML</td>
+</tr></table>
+</div></div>
+</div>
+<a id="constant_OUTPUT_TYPE_JSON"> </a><div class="element clickable constant  constant_OUTPUT_TYPE_JSON" data-toggle="collapse" data-target=".constant_OUTPUT_TYPE_JSON .collapse">
+<h2>OUTPUT_TYPE_JSON</h2>
+<pre>OUTPUT_TYPE_JSON </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\View::OUTPUT_TYPE_JSON</td>
+</tr></table>
+</div></div>
+</div>
+<a id="constant_OUTPUT_TYPE_LOG"> </a><div class="element clickable constant  constant_OUTPUT_TYPE_LOG" data-toggle="collapse" data-target=".constant_OUTPUT_TYPE_LOG .collapse">
+<h2>OUTPUT_TYPE_LOG</h2>
+<pre>OUTPUT_TYPE_LOG </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\View::OUTPUT_TYPE_LOG</td>
+</tr></table>
+</div></div>
+</div>
+<a id="constant_OUTPUT_TYPE_RAW"> </a><div class="element clickable constant  constant_OUTPUT_TYPE_RAW" data-toggle="collapse" data-target=".constant_OUTPUT_TYPE_RAW .collapse">
+<h2>OUTPUT_TYPE_RAW</h2>
+<pre>OUTPUT_TYPE_RAW </pre>
+<div class="labels"><span class="label">Inherited</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\View::OUTPUT_TYPE_RAW</td>
+</tr></table>
+</div></div>
+</div>
 </div>
 </div>
 </div>
@@ -719,7 +870,7 @@ Save stats into DB</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2012-10-09T18:26:28+03:00.<br></footer></div>
+            generated on 2013-01-25T16:29:23+03:00.<br></footer></div>
 </div>
 </body>
 </html>
