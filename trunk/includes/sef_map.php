@@ -14,13 +14,25 @@
         '/\?module\=blog\&action\=show\&id\=(.*)/' => array(
             'table'  => 'post',
             'field'  => 'alias',
-            'prefix' => '/blog/',
+            'prefix' => 'blog/',
             'suffix' => Application::$config['sef_suffix']
         ),
-        '/\?module\=blog\&action\=category\&id\=(.*)/' => array(
-            'table'  => 'category',
+        '/\?module\=gallery\&action\=show\&id\=(.*)/' => array(
+            'table'  => 'gallery',
             'field'  => 'alias',
-            'prefix' => '/category/',
+            'prefix' => 'gallery/',
+            'suffix' => Application::$config['sef_suffix']
+        ),
+        '/\?module\=tag\&action\=search\&id\=(.*)/' => array(
+            'table'  => 'tags',
+            'field'  => 'alias',
+            'prefix' => 'tag/',
+            'suffix' => Application::$config['sef_suffix']
+        ),
+        '/\?module\=tag\&action\=search\&q\=(.*)/' => array(
+            'table'  => 'tags',
+            'field'  => 'name',
+            'prefix' => 'tag/',
             'suffix' => Application::$config['sef_suffix']
         )
     );
