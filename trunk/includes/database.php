@@ -138,7 +138,7 @@
          * if success return number of affected rows or false
          * !write the names of all tables without the prefix, but like #__
          * @param string $query query to execute
-         * @return int $state count of affected rows
+         * @return bool $state
          */
         public function query($query) {
             // Execute
@@ -153,9 +153,9 @@
             } else {
                 while ($this->mysqli->next_result()) {
                     $this->mysqli->store_result();
-                    $this->result = $this->mysqli->affected_rows ? $this->mysqli->affected_rows : 1;
+                    $this->result = 1;
                 }
-                return $this->result;
+                return true;
             }
         }
 
@@ -314,7 +314,7 @@
          * @return int $id
          */
         public function getLastInsertId() {
-            return (int)$this->mysqli->insert_id;
+            return (int)($this->mysqli->insert_id ? $this->mysqli->insert_id : $this->getField());
         }
 
         /**
