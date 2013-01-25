@@ -217,7 +217,7 @@
         public function checkEmail($email) {
             // Get items
             $this->database->query("CALL CHECK_EMAIL('".$email."');");
-            return ($this->database->checkResult() ? true : false);
+            return ($this->database->getField() ? true : false);
         }
         
         /**
