@@ -101,7 +101,7 @@
             </a>
         </li>
         <li>
-            <a href="http://www.www.mixcloud.com/marcomantiby">
+            <a href="http://www.mixcloud.com/marcomantiby">
                 <img src="<?php echo Application::$config['template_image_url_path']; ?>mixcloud.png" alt="Mixcloud" width="117" height="22" />
             </a>
         </li>
