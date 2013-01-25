@@ -8,7 +8,6 @@
      * @subpackage Library
      * @author Alexander Chaika
      * @since 0.2RC1
-     * @todo TEST IT!!!
      */
     class Sef extends Application {
         private $storage;
@@ -18,8 +17,10 @@
          * Singleton protection
          */
         protected function __construct() {
-            // Try connect to DB
-            $this->storage = array();
+            // Init sef aliases storage
+            if (!Cache::get('sef')) {
+                Cache::set('sef', array());
+            }
         }
 
         /**
@@ -187,7 +188,7 @@
          */
         private static function checkStorage($link) {
             // Get storage data
-            $data = self::getInstance()->getStorageData();
+            $data = Cache::get('sef');
 
             // Check both array sides
             if (isset($data[$link])) {
@@ -222,13 +223,11 @@
          * @return bool $state
          */
         private function addToStorageData($request, $link) {
-            try {
-                $this->storage[$request] = $link;
-            } catch (Exception $e) {
-                return $this->_throw($e->getMessage());
-            }
+            // Append new link to storage
+            $storage = Cache::get('sef');
+            $storage[$request] = $link;
 
-            return true;
+            return Cache::set('sef', $storage);
         }
 
         /**
@@ -244,7 +243,7 @@
          * @return array $storage
          */
         private function getStorageData() {
-            return $this->storage;
+            return Cache::get('sef');
         }
 
         /**
