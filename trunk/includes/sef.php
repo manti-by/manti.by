@@ -68,7 +68,7 @@
             if (self::checkStorage($link)) {
                 $storage = self::getStorage();
                 $flip = array_flip($storage);
-                return $flip[$link];
+                return Application::$config['http_host'] . '/' . $flip[$link];
             }
 
             // Try to get real link
@@ -98,7 +98,7 @@
             // Check memory, if exist, get array value by value (flip)
             if (self::checkStorage($request)) {
                 $storage = self::getStorage();
-                return $storage[$request];
+                return Application::$config['http_host'] . '/' . $storage[$request];
             }
 
             // Try to get real link
