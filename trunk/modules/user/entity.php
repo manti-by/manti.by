@@ -17,6 +17,8 @@
         private $email;
         private $password;
         private $group;
+
+        private $is_loaded = false;
             
         protected static $instance = null;
 
@@ -114,6 +116,9 @@
                 $this->email = $result->email;
                 $this->password = $result->password;
                 $this->group = $result->group;
+
+                // Set load state
+                $this->is_loaded = true;
                 
                 // Return data
                 return $result;
@@ -157,14 +162,8 @@
          */
         public function checkSession() {
             // Check local data
-            if (empty($this->id) ||
-                empty($this->username) ||
-                empty($this->email) ||
-                empty($this->password) ||
-                empty($this->group) ||
-                empty($_SESSION['user_id'])) {
-                    // try to load
-                    return $this->load($_SESSION['user_id']);
+            if (!$this->is_loaded) {
+                return $this->load($_SESSION['user_id']);
             }
 
             return true;
@@ -185,6 +184,7 @@
             $this->email = null;
             $this->password = null;
             $this->group = null;
+            $this->is_loaded = false;
                 
             return true;
         }
