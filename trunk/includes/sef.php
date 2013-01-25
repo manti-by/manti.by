@@ -45,8 +45,8 @@
             $database->query("CALL UPDATE_SEF_COUNTER('".$database->escape($_SERVER['REQUEST_URI'])."','".$database->escape($_SERVER['REQUEST_URI'])."');");
 
             // Get request string, delete question symbol and inject request data
-            $request = substr(self::getReal($_SERVER['REQUEST_URI']), 1);
-            $result = strstr($request, "?");
+            $request = self::getReal(substr($_SERVER['REQUEST_URI'], 1));
+            $result = substr(strstr($request, "?"), 1);
             if (!empty($result)) {
                 parse_str($result, $_REQUEST);
             }
@@ -64,7 +64,8 @@
             // Check memory, if exist, get array value by key
             if (self::checkStorage($link)) {
                 $storage = self::getStorage();
-                return $storage[$link];
+                $flip = array_flip($storage);
+                return $flip[$link];
             }
 
             // Try to get real link
@@ -79,7 +80,7 @@
 
             // Add to mem storage
             self::addToStorage($request, $link);
-            return $request;
+            return Application::$config['http_host'] . '/' . $request;
         }
 
         /**
@@ -94,14 +95,13 @@
             // Check memory, if exist, get array value by value (flip)
             if (self::checkStorage($request)) {
                 $storage = self::getStorage();
-                $flip = array_flip($storage);
-                return $flip[$request];
+                return $storage[$request];
             }
 
             // Try to get real link
             $database = Database::getInstance();
             $database->query("CALL GET_SEF('".$database->escape($request)."');");
-            if (!$link = $database->getObject()) {
+            if ($link = $database->getObject()) {
                 $link = $link->link;
             } else {
                 $link = self::createLink($request);
@@ -109,7 +109,7 @@
 
             // Replace ampersands and add to mem storage
             self::addToStorage($request, $link);
-            return str_replace('&', '&amp;', $link);
+            return Application::$config['http_host'] . '/' . str_replace('&', '&amp;', $link);
         }
 
         /**
@@ -129,30 +129,52 @@
                 preg_match($pattern, $request, $matches);
                 if ($matches) {
                     // If pattern found, get table and alias fields
-                    $database = Database::getInstance();
-                    $database->query("CALL GET_SEF_MAP_ALIAS('".$source['field']."','".$source['table']."',".(int)$matches[1].");");
+                    Database::getInstance()->query("CALL GET_SEF_MAP_ALIAS('".$source['field']."','".$source['table']."',".(int)$matches[1].");");
 
-                    // I dont understand, why it's happened
-                    // but it's very strange... and we generate "date" for this
-                    if (!$alias = $database->getField()) {
-                        $alias = date('Y-m-d_H-i-s');
-                    }
-
-                    // Insert new route to redirection
-                    $link = $source['prefix'] . $alias . $source['suffix'];
-                    $database->query("CALL UPSERT_SEF('".$database->escape($request)."','".$database->escape($link)."');");
-
-                    // Add to aliases cache
-                    self::addToStorage($request, $link);
-
-                    if ($database->getResult() > 0) {
-                        return $link;
-                    } else {
-                        return $request;
+                    // Get alias and stop search
+                    if ($alias = Database::getInstance()->getField()) {
+                        $link = $source['prefix'] . $alias . $source['suffix'];
+                        break;
                     }
                 }
             }
-            return $request;
+
+            // If link not found by alias
+            if (empty($link)) {
+                // Explode request params
+                $params = strchr($request, '?') ? substr(strstr($request, '?'), 1) : $request;
+                parse_str($params, $source);
+
+                // Add default route parts
+                $source_link  = isset($source['module']) && !empty($source['module']) ? $source['module'] . '/' : 'front/';
+                $source_link .= isset($source['action']) && !empty($source['action']) ? $source['action'] . '/' : 'index/';
+
+                // Additional request params
+                foreach ($source as $key => $value) {
+                    if (!in_array($key, array('module', 'action', ''))) {
+                        $source_link .= $key . '/' . $value . '/';
+                    }
+                }
+
+                // Remove last slash and add sef suffix
+                $source_link = substr($source_link, -1) == '/' ? substr($source_link, 0, strlen($source_link) - 1) : $source_link;
+                $link = $source_link . Application::$config['sef_suffix'];
+            }
+
+            // Sanitize link
+            $link = self::getInstance()->sanitizeLink($link);
+
+            // Insert new route to redirection
+            Database::getInstance()->query("CALL UPSERT_SEF('".Database::getInstance()->escape($request)."','".Database::getInstance()->escape($link)."');");
+
+            // Add to aliases cache
+            self::addToStorage($request, $link);
+
+            if (Database::getInstance()->getField() > 0) {
+                return $link;
+            } else {
+                return $request;
+            }
         }
 
         /**
@@ -220,5 +242,14 @@
          */
         private function getStorageData() {
             return $this->storage;
+        }
+
+        /**
+         * Remove from link spaces and non latin lettes
+         * @param string $link link to sanitize
+         * @return string $link
+         */
+        private function sanitizeLink($link) {
+            return $link;
         }
     }
