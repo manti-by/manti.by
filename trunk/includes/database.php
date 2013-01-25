@@ -83,13 +83,16 @@
                 Application::$config['db_base']
             );
 
-            if (!$this->mysqli) {
-                return $this->_throw($this->getError(), ERROR);
+            if (!$this->mysqli || !empty($this->mysqli->error) || !empty($this->mysqli->connect_error)) {
+                $error = !empty($this->mysqli->error) ? $this->mysqli->error : $this->mysqli->connect_error;
+                return $this->_throw(T($error), ERROR);
             }
 
             // Set encoding
             if (!empty(Application::$config['db_encoding'])) {
-                $this->mysqli->query("SET NAMES '" . Application::$config['db_encoding'] . "'");
+                if (!$this->mysqli->query("SET NAMES '" . Application::$config['db_encoding'] . "'")) {
+                    return $this->_throw(T($this->mysqli->error), ERROR);
+                }
             }
 
             return $this->mysqli;

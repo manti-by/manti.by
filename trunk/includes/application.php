@@ -41,9 +41,12 @@
          * Save stats into DB
          */
         public static function init() {
+            ob_start();
+
             // Parse application config
+            $error = false;
             if (!self::parseConfig()) {
-                die('Configuration error');
+                $error = T('Configuration error');
             }
 
             // Init sef to parse request string
@@ -58,14 +61,24 @@
             // Get user metrics
             $ip      = substr(UserEntity::getIp(), 0, 50);
             $browser = substr(UserEntity::getUserAgent(), 0, 255);
-            $referer = substr(UserEntity::getReferer(), 0, 500);
+            $referrer = substr(UserEntity::getReferer(), 0, 500);
 
             // Save request log into db
             $query = "INSERT DELAYED INTO `#___log`
                     (`module`, `action`, `task`, `refid`, `ip`, `browser`, `referer`, `sessionid`)
-                    VALUES ('$module', '$action', '$task', '$id', '$ip', '$browser', '$referer', '".session_id()."')";
+                    VALUES ('$module', '$action', '$task', '$id', '$ip', '$browser', '$referrer', '".session_id()."')";
 
-            Database::getInstance()->query($query);
+            $database = Database::getInstance();
+            if (!$database->query($query)) {
+                $message = self::getInstance()->getLastFromStack();
+                $error = T('Database connection error: ') . $message['message'];
+            }
+
+            // Clean output buffer, show error message and die
+            ob_end_clean();
+            if (!empty($error)) {
+                die($error);
+            }
         }
 
         /**
@@ -167,7 +180,7 @@
             $this->result = 0;
 
             // Log error
-            if ($level >= self::$config['log_write_level']) {
+            if ($level <= self::$config['log_write_level']) {
                 $this->saveToLog();
             }
 
