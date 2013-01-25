@@ -68,9 +68,8 @@
                     (`module`, `action`, `task`, `refid`, `ip`, `browser`, `referer`, `sessionid`)
                     VALUES ('$module', '$action', '$task', '$id', '$ip', '$browser', '$referrer', '".session_id()."')";
 
-            $database = Database::getInstance();
-            if (!$database->query($query)) {
-                $message = self::getInstance()->getLastFromStack();
+            Database::getInstance()->query($query);
+            if ($message = self::getInstance()->getLastFromStack()) {
                 $error = T('Database connection error: ') . $message['message'];
             }
 
