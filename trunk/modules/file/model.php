@@ -99,7 +99,7 @@
             if (file_exists($file)) {
                 // Get type - parent file folder
                 $pathinfo = pathinfo($file);
-                $type = end(explode(DS, realpath($pathinfo['dirname'])));
+                $type = isset($options['type']) && !empty($options['type']) ? $options['type'] : end(explode(DS, realpath($pathinfo['dirname'])));
 
                 // Get file info
                 $file_source = fopen($file, "r");
@@ -157,9 +157,10 @@
         /**
          * Recursive read directory and return array of allowed files
          * @param string $directory
+         * @param bool $allow_dir_list
          * @return array|bool $result
          */
-        private function getDirList($directory) {
+        public function getDirList($directory, $allow_dir_list = false) {
             $result = array();
             $iterator = new RecursiveDirectoryIterator($directory);
             foreach ($iterator as $path) {
@@ -171,14 +172,18 @@
                 $pathinfo = pathinfo($current);
 
                 // Check available extension
-                if (in_array($pathinfo['extension'], explode(',', Application::$config['allowed_file_extensions']))) {
+                if (in_array(strtolower($pathinfo['extension']), explode(',', Application::$config['allowed_file_extensions'])) || $allow_dir_list) {
                     // Convert to unix routes
                     $source = str_replace(DS , '/', $current);
                     $source = str_replace('//' , '/', $source);
 
                     // Add file info
-                    $file = fopen($current, "r");
-                    $result[$source] = $pathinfo + fstat($file);
+                    if (!$allow_dir_list) {
+                        $file = fopen($current, "r");
+                        $result[$source] = $pathinfo + fstat($file);
+                    } else {
+                        $result[$source] = $pathinfo;
+                    }
                 }
             }
 

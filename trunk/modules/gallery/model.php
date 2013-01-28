@@ -27,7 +27,7 @@
         public function __construct() {
             parent::__construct();
 
-            $this->file_path = realpath(ROOT_PATH . Application::$config['gallery_path']);
+            $this->file_path = realpath(ROOT_PATH . Application::$config['gallery_path'] . DS . 'originals');
             $this->link_path = Application::$config['http_host'] . Application::$config['gallery_path'];
         }
 
@@ -55,5 +55,47 @@
         public function getGallery($limit = 10) {
             $this->database->query("CALL GET_GALLERY($limit)");
             return $this->database->getObjectsArray();
+        }
+
+        /**
+         * Update gallery entrues from FS to DB
+         * @return array list of all new images from gallery path
+         */
+        public function updateFSlist() {
+            $file_list = array();
+
+            // Get all gallery images
+            clearstatcache();
+            $fileModel = Model::getModel('file');
+            $galleries = $fileModel->getDirList($this->file_path, true);
+            foreach ($galleries as $path => $data) {
+                foreach ($fileModel->getDirList($path) as $filename => $fileinfo) {
+                    $file_list[$filename] = 'Readed from FS';
+                }
+            }
+
+            // Check DB
+            $this->database->query("CALL GET_FILES('gallery', 0);");
+            if ($this->database->checkResult()) {
+                $db_files = $this->database->getPairs('id', 'source');
+            }
+
+            // Check in DB
+            if (count($file_list)) {
+                foreach ($file_list as $source => $status) {
+                    if (in_array($source, $db_files)) {
+                        unset($file_list[$source]);
+                    } else {
+                        if ($fileModel->add(array('source'=> $source, 'type'  => 'gallery',))) {
+                            $file_list[$source] = 'Stored in DB';
+                        } else {
+                            $message = $this->getLastFromStack();
+                            $file_list[$source] = $message['message'];
+                        }
+                    }
+                }
+            }
+
+            return $file_list;
         }
     }
