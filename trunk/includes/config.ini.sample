@@ -43,6 +43,7 @@ covers_path = "./content/covers"
 
 [gallery settings]
 gallery_path = "./content/gallery"
+preview_count = 10
 thumb_width = 90
 thumb_height = 90
 
