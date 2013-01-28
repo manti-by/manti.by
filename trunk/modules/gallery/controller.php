@@ -38,9 +38,24 @@
                 $options['title'] = Application::$config['site_title_' . Application::$config['language']];
             }
 
-            // get category items and render it
+            // Get category items and render it
             $options['module'] = 'gallery';
             $options['body'] = $this->view->renderItemsArray($options);
+
+            return $options;
+        }
+
+        /**
+         * Runs updates in gallery
+         */
+        public function updateAction() {
+            // Run actions and get stats
+            $parsed = $this->model->updateFSList();
+            $resized = $this->model->rebuildThumbnails();
+
+            // Compile response
+            $options['title'] = 'Gallery updates';
+            $options['body']  = '<p>' . count($parsed) . ' ' . T('was parsed') . '</p><p>' . count($resized) . ' ' . T('was resuzed') . '</p>';
 
             return $options;
         }
