@@ -69,6 +69,12 @@
             $fileModel = Model::getModel('file');
             $galleries = $fileModel->getDirList($this->file_path . DS . 'originals', true);
             foreach ($galleries as $path => $data) {
+                // Create gallery DB entry
+                $dir_name = substr(strrchr($path, '/'), 1);
+                $dir_name = $this->database->escape($dir_name);
+                $this->database->query("CALL UPSERT_GALLERY(0, '" . $this->database->escape($path) . "', '" . ucfirst($dir_name) . "',  '" . strtolower($dir_name) . "', '', '');");
+
+                // Parse files from directory
                 foreach ($fileModel->getDirList($path) as $filename => $fileinfo) {
                     $file_list[$filename] = 'Readed from FS';
                 }
@@ -99,6 +105,10 @@
             return $file_list;
         }
 
+        /**
+         * Batch resize for gallery originals
+         * @return array list of all resized images
+         */
         public function rebuildThumbnails() {
             $resized = array();
 
