@@ -55,7 +55,7 @@
 
             // Compile response
             $options['title'] = 'Gallery updates';
-            $options['body']  = '<p>' . count($parsed) . ' ' . T('was parsed') . '</p><p>' . count($resized) . ' ' . T('was resuzed') . '</p>';
+            $options['body']  = '<p>' . count($parsed) . ' ' . T('was parsed') . '</p><p>' . count($resized) . ' ' . T('was resized') . '</p>';
 
             return $options;
         }
