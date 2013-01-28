@@ -11,13 +11,15 @@
       */
     class Cache extends Application {
 
-        const TYPE_DEFAULT = 1;
+        const TYPE_DEFAULT  = 3;
 
-        const TYPE_SESSION = 1;
-        const TYPE_MEMORY  = 2;
+        const TYPE_SESSION  = 1;
+        const TYPE_MEMORY   = 2;
+        const TYPE_MEMCACHE = 3;
 
         private $_data = array();
         protected static $instance = null;
+        protected static $memcache = null;
 
         /**
          * GetInstance class method
@@ -28,6 +30,25 @@
                 self::$instance = new Cache;
             }
             return self::$instance;
+        }
+
+        /**
+         * Get memcache objects
+         * @return Cache $instance
+         */
+        public static function getMemcache() {
+            if (is_null(self::$memcache)) {
+                try {
+                    self::$memcache = new Memcache;
+                    self::$memcache->pconnect(
+                        Application::$config['memcache_host'],
+                        Application::$config['memcache_port']
+                    );
+                } catch (Exception $e) {
+                    return self::getInstance()->_throw(T('Could not connect to memcache: ') . $e->getMessage());
+                }
+            }
+            return self::$memcache;
         }
 
         /**
@@ -44,6 +65,13 @@
                     break;
                 case Cache::TYPE_MEMORY :
                     $this->_data[$key] = $value;
+                    break;
+                case Cache::TYPE_MEMCACHE :
+                    if ($memcache = self::getMemcache()) {
+                        return $memcache->set($key, $value) ? $value : false;
+                    } else {
+                        return false;
+                    }
                     break;
             }
 
@@ -79,6 +107,19 @@
                         return $this->_data[$key];
                     }
                     break;
+                case Cache::TYPE_MEMCACHE :
+                    if ($memcache = self::getMemcache()) {
+                        $data = $memcache->get($key);
+                        if (is_array($data)) {
+                            $data[] = $value;
+                        } else {
+                            $data .= $value;
+                        }
+                        return $memcache->set($key, $data);
+                    } else {
+                        return false;
+                    }
+                    break;
             }
 
             return $value;
@@ -100,6 +141,13 @@
                 case Cache::TYPE_MEMORY :
                     if (isset($this->_data[$key])) {
                         return $this->_data[$key];
+                    }
+                    break;
+                case Cache::TYPE_MEMCACHE :
+                    if ($memcache = self::getMemcache()) {
+                        return $memcache->get($key);
+                    } else {
+                        return false;
                     }
                     break;
             }
