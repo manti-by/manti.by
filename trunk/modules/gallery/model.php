@@ -53,8 +53,25 @@
          * @return array|bool
          */
         public function getGallery($limit = 10) {
+            // Get galleries list
             $this->database->query("CALL GET_GALLERY($limit)");
-            return $this->database->getObjectsArray();
+            $galleries = $this->database->getObjectsArray();
+
+            // Append originals and thumbnails
+            foreach ($galleries as $gallery) {
+                $this->database->query("CALL GET_GALLERY_ITEMS('" . $this->database->escape($gallery->path) . "')");
+                $gallery->originals = $this->database->getObjectsArray();
+
+                // Add originals and thumbnails links
+                if (count($gallery->originals)) {
+                    foreach($gallery->originals as $original) {
+                        $original->link = Application::$config['http_host'] . substr($original->source, 1);
+                        $original->thumbnail = Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1);
+                    }
+                }
+            }
+
+            return $galleries;
         }
 
         /**
