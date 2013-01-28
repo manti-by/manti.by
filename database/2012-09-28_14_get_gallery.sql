@@ -2,7 +2,7 @@ DROP PROCEDURE IF EXISTS `GET_GALLERY`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_GALLERY`(IN `_limit` int)
 BEGIN
-    SELECT g.`id`, g.`path`, g.`name`, g.`description`, g.`timestamp`,
+    SELECT g.`id`, g.`path`, g.`name`, g.`alias`, g.`description`, g.`metadesc`, g.`timestamp`,
         (
             SELECT GROUP_CONCAT(CONCAT_WS(':', _t.`id`, _t.`name`))
             FROM `gallery_tags` AS _gt

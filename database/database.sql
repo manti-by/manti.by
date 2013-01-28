@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : localhost
-Source Server Version : 50525
-Source Host           : localhost:3336
-Source Database       : niiar
-
-Target Server Type    : MYSQL
-Target Server Version : 50525
-File Encoding         : 65001
-
-Date: 2012-10-26 14:40:46
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -29,7 +14,7 @@ CREATE TABLE `files` (
   `md5` varchar(32) DEFAULT NULL,
   `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of files
@@ -41,12 +26,15 @@ CREATE TABLE `files` (
 DROP TABLE IF EXISTS `gallery`;
 CREATE TABLE `gallery` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `path` varchar(50) NOT NULL,
+  `path` varchar(255) NOT NULL,
   `name` varchar(50) NOT NULL,
+  `alias` varchar(64) DEFAULT NULL,
   `description` text NOT NULL,
   `metadesc` varchar(255) DEFAULT NULL,
   `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_gallery_path` (`path`) USING BTREE,
+  UNIQUE KEY `uk_gallery_alias` (`alias`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -81,7 +69,7 @@ CREATE TABLE `group` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10001 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of group
@@ -98,6 +86,7 @@ DROP TABLE IF EXISTS `post`;
 CREATE TABLE `post` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
+  `alias` varchar(64) DEFAULT NULL,
   `teaser` varchar(512) DEFAULT NULL,
   `description` text NOT NULL,
   `metadesc` varchar(255) DEFAULT NULL,
@@ -109,8 +98,9 @@ CREATE TABLE `post` (
   `tracklist` text,
   `created` datetime DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_post_alias` (`alias`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of post
@@ -129,7 +119,7 @@ CREATE TABLE `post_files` (
   KEY `fk_post_files_file_id` (`file_id`),
   CONSTRAINT `fk_post_files_file_id` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_post_files_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of post_files
@@ -148,7 +138,7 @@ CREATE TABLE `post_relations` (
   KEY `fk_post_relations_destination_id` (`destination_id`),
   CONSTRAINT `fk_post_relations_destination_id` FOREIGN KEY (`destination_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_post_relations_original_id` FOREIGN KEY (`original_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of post_relations
@@ -168,7 +158,7 @@ CREATE TABLE `post_tags` (
   KEY `fk_post_tags_tag_id` (`tag_id`),
   CONSTRAINT `fk_post_tags_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `fk_post_tags_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of post_tags
@@ -181,8 +171,12 @@ DROP TABLE IF EXISTS `tags`;
 CREATE TABLE `tags` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `alias` varchar(64) DEFAULT NULL,
+  `created` datetime DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_tags_alias` (`alias`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of tags
@@ -194,7 +188,7 @@ CREATE TABLE `tags` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `group_id` int(11) unsigned NOT NULL DEFAULT '4',
+  `group_id` int(11) unsigned DEFAULT '10000',
   `username` varchar(64) DEFAULT NULL,
   `email` varchar(64) NOT NULL,
   `password` varchar(32) NOT NULL,
@@ -208,7 +202,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', '1', 'Admin', 'marco.manti@gmail.com', '29dcc7d516b248c7fceb80cbafa71baa', '2012-10-10 19:54:32');
+INSERT INTO `user` VALUES ('1', '1', 'Admin', 'marco.manti@gmail.com', 'fbf2e79ab28097b5464e8a91ef511260', '2013-01-25 13:02:15');
 
 -- ----------------------------
 -- Table structure for `_log`
@@ -228,7 +222,7 @@ CREATE TABLE `_log` (
   PRIMARY KEY (`id`),
   KEY `ik_browser` (`browser`) USING BTREE,
   KEY `ik_module` (`module`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=169 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of _log
@@ -297,10 +291,13 @@ BEGIN
                   AND _f.`type` = 'covers'
             ) AS `covers`,
             (
-                SELECT CONCAT('[', GROUP_CONCAT(CONCAT('{"id":',_p.`id`, ',"name":"', _p.`name`, '"}')), ']')
+                SELECT CONCAT('[', GROUP_CONCAT(CONCAT('{"id":',_p.`id`, ',"name":"', _p.`name`, '","source":"', _f.`source`, '"}')), ']')
                 FROM `post_relations` AS _pr 
-                JOIN `post` AS _p ON _p.`id` = _pr.`destination_id` 
+                JOIN `post` AS _p ON _p.`id` = _pr.`destination_id`
+                JOIN `post_files` AS _pf ON _pf.`post_id` = _p.`id`
+                JOIN `files` AS _f ON _f.`id` = _pf.`file_id`  
                 WHERE _pr.`original_id` = p.`id`
+                  AND _f.`type` = 'covers'
             ) AS `relations`
             , p.`created`, p.`timestamp`
         FROM `post` AS p
@@ -459,14 +456,25 @@ DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_FILES`(IN `_type` varchar(32), IN `_limit` int)
 BEGIN
     IF (_type <> '') THEN
-        SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
-        FROM `files`
-        WHERE `type` = _type
-        LIMIT _limit;
+        IF (_limit > 0) THEN
+            SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
+            FROM `files`
+            WHERE `type` = _type
+            LIMIT _limit;
+        ELSE
+            SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
+            FROM `files`
+            WHERE `type` = _type;
+        END IF;
     ELSE
-        SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
-        FROM `files`
-        LIMIT _limit;
+        IF (_limit > 0) THEN
+            SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
+            FROM `files`
+            LIMIT _limit;
+        ELSE
+            SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`
+            FROM `files`;
+        END IF;
     END IF;
 END
 ;;
@@ -479,7 +487,7 @@ DROP PROCEDURE IF EXISTS `GET_GALLERY`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_GALLERY`(IN `_limit` int)
 BEGIN
-    SELECT g.`id`, g.`path`, g.`name`, g.`description`, g.`timestamp`,
+    SELECT g.`id`, g.`path`, g.`name`, g.`alias`, g.`description`, g.`metadesc`, g.`timestamp`,
         (
             SELECT GROUP_CONCAT(CONCAT_WS(':', _t.`id`, _t.`name`))
             FROM `gallery_tags` AS _gt
@@ -563,18 +571,32 @@ END
 DELIMITER ;
 
 -- ----------------------------
+-- Procedure structure for `GET_GALLERY_ITEMS`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `GET_GALLERY_ITEMS`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_GALLERY_ITEMS`(IN `_path` varchar(255))
+BEGIN
+    SELECT *
+    FROM `files`
+    WHERE `source` LIKE CONCAT('%', _path, '%');
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
 -- Procedure structure for `GET_POSTS`
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `GET_POSTS`;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_POSTS`(IN `_limit` int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_POSTS`(IN `_limitstart` int,IN `_limit` int)
 BEGIN
     CALL ALL_POSTS();
 
     SELECT p.*
     FROM `all_posts` AS p
     ORDER BY p.`created` DESC
-    LIMIT _limit;
+    LIMIT _limitstart, _limit;
 END
 ;;
 DELIMITER ;
@@ -670,9 +692,11 @@ DROP PROCEDURE IF EXISTS `GET_SEF_MAP_ALIAS`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_SEF_MAP_ALIAS`(IN `_field` varchar(255), IN `_table` varchar(255), IN `_id` int)
 BEGIN
-    SELECT _field 
-    FROM _table
-    WHERE `id` = _id;
+    SET @_query = CONCAT('SELECT `', _field, '` FROM `', _table, '` WHERE `id` = ?');
+    PREPARE stmt FROM @_query;
+    SET @_identifier = _id;
+    EXECUTE stmt USING @_identifier;
+    DEALLOCATE PREPARE stmt;
 END
 ;;
 DELIMITER ;
@@ -684,8 +708,11 @@ DROP PROCEDURE IF EXISTS `GET_TAGS`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_TAGS`(IN `_limit` int)
 BEGIN
-    SELECT * 
-    FROM `tags`
+    SELECT t.`id`, t.`name`, COUNT(pt.`id`) AS `count`
+    FROM `tags` AS t
+    JOIN `post_tags` AS pt ON pt.`tag_id` = t.`id`
+    GROUP BY t.`name`
+    ORDER BY `count` DESC
     LIMIT _limit;
 END
 ;;
@@ -813,6 +840,29 @@ END
 DELIMITER ;
 
 -- ----------------------------
+-- Procedure structure for `UPSERT_GALLERY`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `UPSERT_GALLERY`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `UPSERT_GALLERY`(IN `_id` int(10), IN `_path` varchar(255), IN `_name` varchar(255), IN `_alias` varchar(64), IN `_description` text, IN `_metadesc` varchar(255))
+BEGIN
+    IF (_id > 0) THEN
+        UPDATE `gallery`
+        SET `path` = _path, `name` = _name, `alias` = _alias, `description` = _description, `metadesc` = _metadesc
+        WHERE `id` = _id;
+
+        SELECT _id AS `result`;
+    ELSE
+        INSERT INTO `gallery` (`path`, `name`, `alias`, `description`, `metadesc`)
+        VALUES (_path, _name, _alias, _description, _metadesc);
+
+        SELECT LAST_INSERT_ID() AS `result`;
+    END IF;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
 -- Procedure structure for `UPSERT_LOG`
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `UPSERT_LOG`;
@@ -853,7 +903,7 @@ BEGIN
         WHERE `id` = _post_id;
     ELSE
         INSERT INTO `post` (`name`, `teaser`, `description`, `metadesc`, `is_music`,
-            `catnum`, `genre`, `quality`, `length`, `tracklist`, `created`)
+             `catnum`, `genre`, `quality`, `length`, `tracklist`, `created`)
         VALUES (_name, _teaser, _description, _metadesc, _is_music, _catnum, _genre, _quality, _length, _tracklist, NOW());
 
         SELECT LAST_INSERT_ID() INTO _post_id;
