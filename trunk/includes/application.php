@@ -52,6 +52,17 @@
             // Init sef to parse request string
             Sef::init();
 
+            // Clean output buffer, show error message and die
+            ob_end_clean();
+            if (!empty($error)) {
+                die($error);
+            }
+        }
+
+        /**
+         * Save to log input parameters
+         */
+        private static function saveLogData() {
             // Get system metrics
             $module = substr(System::getInstance()->getCmd('module'), 0, 50);
             $action = substr(System::getInstance()->getCmd('action'), 0, 50);
@@ -64,20 +75,11 @@
             $referrer = substr(UserEntity::getReferer(), 0, 500);
 
             // Save request log into db
-            $query = "INSERT DELAYED INTO `#___log`
+            $query = "INSERT INTO `#___log`
                     (`module`, `action`, `task`, `refid`, `ip`, `browser`, `referer`, `sessionid`)
                     VALUES ('$module', '$action', '$task', '$id', '$ip', '$browser', '$referrer', '".session_id()."')";
 
             Database::getInstance()->query($query);
-            if ($message = self::getInstance()->getLastFromStack()) {
-                $error = T('Database connection error: ') . $message['message'];
-            }
-
-            // Clean output buffer, show error message and die
-            ob_end_clean();
-            if (!empty($error)) {
-                die($error);
-            }
         }
 
         /**
@@ -136,8 +138,13 @@
          * Close application
          */
         public static function shutdown() {
-            Database::getInstance()->close();
+            // Save to DB input data
+            // and flush translation tokens into files
+            self::saveLogData();
             self::flushTranslations();
+
+            // Close DB connection and clean stacks
+            Database::getInstance()->close();
             self::clean();
             die;
         }
