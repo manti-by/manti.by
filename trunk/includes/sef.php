@@ -150,8 +150,8 @@
                 parse_str($params, $source);
 
                 // Add default route parts
-                $source_link  = isset($source['module']) && !empty($source['module']) ? $source['module'] . '/' : 'front/';
-                $source_link .= isset($source['action']) && !empty($source['action']) ? $source['action'] . '/' : 'index/';
+                $source_link  = isset($source['module']) && !empty($source['module']) ? $source['module'] . '/' : '';
+                $source_link .= isset($source['action']) && !empty($source['action']) ? $source['action'] . '/' : '';
 
                 // Additional request params
                 foreach ($source as $key => $value) {
