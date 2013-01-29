@@ -114,8 +114,8 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 .wrapper { width: 960px; margin: 0 auto; padding: 10px;
     background: white; border: 1px solid #CCC; }
 
-#popup { display: none; position: fixed; top: 250px; left: 50%; min-width: 400px;
-    margin-left: -200px; padding: 15px; box-shadow: 3px 3px 3px #999;
+#popup { display: none; position: fixed; min-width: 400px;
+    padding: 15px; box-shadow: 3px 3px 3px #999;
     background: url(../images/black-bg-75.png); z-index: 1000; }
 #popup .content { padding: 15px; border: 1px solid #CCC; background: #FFF; font-size: 14px; }
 

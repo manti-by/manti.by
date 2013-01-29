@@ -13,13 +13,51 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $.fn.popupShow = function(data) {
+            // Check size
+            var margin_offset = 120;
+            var popup_offset = 40;
+
+            var new_width  = data.get(0).width;
+            var new_height = data.get(0).height;
+
+            var ratio = new_width / new_height;
+
+            // Check width
+            if (data.get(0).width + margin_offset > window.innerWidth) {
+                new_width  = window.innerWidth - margin_offset;
+                new_height = new_width * ratio;
+            }
+
+            // Check height
+            if (data.get(0).height + margin_offset > window.innerHeight) {
+                new_height = window.innerHeight - margin_offset;
+                new_width  = new_height * ratio;
+            }
+
+            data.width(new_width).height(new_height);
+
+            // Center popup block
+            var width_offset = (window.innerWidth - new_width) / 2 - popup_offset;
+            var height_offset = (window.innerHeight - new_height) / 2 - popup_offset;
+
+            $('#popup').css('left', width_offset + 'px')
+                    .css('top', height_offset + 'px');
+
+            // Add content and show
             $('#popup .content').html(data);
             $('#popup').show();
+
+            $(document).bind('click', function() {
+                $.fn.popupHide();
+            });
         }
 
         $.fn.popupHide = function() {
+            // Get contents and clear block
             var content = $('#popup .content').html();
             $('#popup .content').html('');
+
+            // Hide block and return previous content
             $('#popup').hide();
             return content;
         }
