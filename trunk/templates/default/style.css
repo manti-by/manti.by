@@ -76,3 +76,8 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; text-transform: uppercase; }
 #page-404 .left-column { float: left; width: 160px; margin-right: 40px; padding: 80px 40px; text-align: center;
     font-size: 80px; border-right: 3px solid white; color: white; background: black;  }
 #page-404 .right-column { padding: 100px 40px; font-size: 16px;  }
+
+#gallery .thumbnail { display: inline-block; margin: 0 10px 10px 0; padding: 10px; border: 1px solid #CCC; }
+#gallery .thumbnail:hover { background: #EEE; }
+#gallery .path { margin: 10px 0 20px 0; }
+#gallery .path a { font-size: 18px;  }

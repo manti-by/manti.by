@@ -21,7 +21,7 @@
         <?php foreach ($options['data']->originals as $original) : ?>
             <?php
                 // Check preview count
-                if ($count > Application::$config['preview_count']) break;
+                if ($count >= Application::$config['preview_count']) break;
                 else $count++;
             ?>
 
