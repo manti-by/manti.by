@@ -7,6 +7,7 @@
      * @subpackage Template
      * @author Alexander Chaika
      * @since 0.3RC3
+     * @todo fix popup block cloning
      */
 ?>
 <h1><?php echo T('Filesystem file list'); ?></h1>
@@ -16,7 +17,9 @@
             $('#add-file-form #file-source').val($(this).attr('rel'));
             $('#add-file-form #file-source-label').html($(this).attr('rel'));
             $('#add-file-form #rel-id').val($(this).attr('rel_id'));
-            $.fn.popupShow($('#add-file-form').html());
+
+            var popup_block = $($('#add-file-form').html());
+            $.fn.popupShow(popup_block);
         });
 
         $('#popup #file-save').live('click', function() {
@@ -43,7 +46,8 @@
                             '<a href="#remove" class="file-remove" rel_id="' + rel_id + '" rel="' + response.id + '"><?php echo T('Remove'); ?></a>'
                         );
                     } else {
-                        $.fn.popupShow(response.error);
+                        var popup_block = $(response.error);
+                        $.fn.popupShow(popup_block);
                     }
                 }
             )
@@ -72,7 +76,8 @@
                             '<a href="#add" class="file-add green" rel_id="' + rel_id + '" rel="' + response.source + '"><?php echo T('Add'); ?></a>'
                         );
                     } else {
-                        $.fn.popupShow(response.error);
+                        var popup_block = $(response.error);
+                        $.fn.popupShow(popup_block);
                     }
                 }
             )
@@ -82,7 +87,9 @@
             $('#delete-file-form #file-source').val($(this).attr('rel'));
             $('#delete-file-form #file-source-label').html($(this).attr('rel'));
             $('#delete-file-form #rel-id').val($(this).attr('rel_id'));
-            $.fn.popupShow($('#delete-file-form').html());
+
+            var popup_block = $($('#delete-file-form').html()).clone();
+            $.fn.popupShow(popup_block);
         });
 
         $('#popup #file-delete-yes').live('click', function() {
@@ -100,7 +107,8 @@
                         $.fn.popupShow('<?php echo T('File deleted from FS'); ?>');
                         $('#' + rel_id).remove();
                     } else {
-                        $.fn.popupShow(response.error);
+                        var popup_block = $(response.error);
+                        $.fn.popupShow(popup_block);
                     }
                 }
             )
