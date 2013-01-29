@@ -34,20 +34,24 @@
 
         /**
          * Get memcache objects
+         * @throws Exception
          * @return Cache $instance
          */
         public static function getMemcache() {
+            ob_start();
             if (is_null(self::$memcache)) {
                 try {
                     self::$memcache = new Memcache;
-                    self::$memcache->pconnect(
-                        Application::$config['memcache_host'],
-                        Application::$config['memcache_port']
-                    );
+                    if (!self::$memcache->pconnect(Application::$config['memcache_host'], Application::$config['memcache_port'])) {
+                        throw new Exception('Please check connection properties');
+                    }
                 } catch (Exception $e) {
-                    return self::getInstance()->_throw(T('Could not connect to memcache: ') . $e->getMessage());
+                    ob_end_clean();
+                    return self::getInstance()->_throw(T('Could not connect to memcache: ') . $e->getMessage(), ERROR);
                 }
             }
+
+            ob_end_clean();
             return self::$memcache;
         }
 
