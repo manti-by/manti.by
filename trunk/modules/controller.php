@@ -54,21 +54,21 @@
          * and render output result
          */
         public function dispatch() {
-            // we have startup errors
+            // We have startup errors
             if ($this->isMessagePresent()) {
-                $this->view->offline();
-            }
-
-            // load module
-            $module = $this->loadModule(System::getInstance()->getCmd('module'));
-            if ($module) {
-                $result = $module->route();
+                $result = $this->view->offline();
             } else {
-                $result = $this->view->_404();
+                // Load module
+                $module = $this->loadModule(System::getInstance()->getCmd('module'));
+                if ($module) {
+                    $result = $module->route();
+                } else {
+                    $result = $this->view->_404();
+                }
             }
 
-            // render page
-            $this->view->render($result);
+            // Render page
+            return $this->view->render($result);
         }
 
         /**

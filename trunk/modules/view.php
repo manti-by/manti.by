@@ -184,12 +184,13 @@
 
         /**
          * Offline render action
+         * @param array $options OPTIONAL
+         * @return array|null $options
          */
-        public function offline() {
-            $message = $this->getLastFromStack();
-            echo '<code>['.getErrorStringFromInt($message['level']).']'.$message['message'].'</code>';
-            echo '<code>['.var_dump(debug_backtrace()).'</code>';
-            return;
+        public function offline($options = null) {
+            $options['data'] = $this->getLastFromStack();
+            $options['body'] = $this->getContents('partial', 'offline', $options);
+            return $options;
         }
 
         /**
@@ -198,7 +199,7 @@
          * @return array|null $options
          */
         public function _404($options = null) {
-            $options['body'] = $this->getContents('plugin', '404', $options);
+            $options['body'] = $this->getContents('partial', '404', $options);
             return $options;
         }
     }
