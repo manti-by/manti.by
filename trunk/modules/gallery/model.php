@@ -27,7 +27,7 @@
         public function __construct() {
             parent::__construct();
 
-            $this->file_path = realpath(ROOT_PATH . Application::$config['gallery_path']);
+            $this->file_path = realpath(ROOT_PATH . DS . Application::$config['gallery_path']);
             $this->link_path = Application::$config['http_host'] . Application::$config['gallery_path'];
         }
 
@@ -44,7 +44,23 @@
 
             $tags = implode(',', $tags);
             $this->database->query("CALL GET_GALLERY_BY_TAGS('$tags', $limit)");
-            return $this->database->getObjectsArray();
+            $galleries = $this->database->getObjectsArray();
+
+            // Append originals and thumbnails
+            foreach ($galleries as $gallery) {
+                $this->database->query("CALL GET_GALLERY_ITEMS('" . $this->database->escape($gallery->path) . "')");
+                $gallery->originals = $this->database->getObjectsArray();
+
+                // Add originals and thumbnails links
+                if (count($gallery->originals)) {
+                    foreach($gallery->originals as $original) {
+                        $original->link = Application::$config['http_host'] . substr($original->source, 1);
+                        $original->thumbnail = Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1);
+                    }
+                }
+            }
+
+            return $galleries;
         }
 
         /**
@@ -93,7 +109,9 @@
 
                 // Parse files from directory
                 foreach ($fileModel->getDirList($path) as $filename => $fileinfo) {
-                    $file_list[$filename] = 'Readed from FS';
+                    if (realpath(ROOT_PATH . DS . $filename)) {
+                        $file_list[$filename] = 'Readed from FS';
+                    }
                 }
             }
 
@@ -136,7 +154,7 @@
             }
 
             // Rebuild thumbnails
-            foreach($db_files as $id => $source) {
+            foreach($db_files as $source) {
                 // Generate thumbnail pathes
                 $pathinfo = pathinfo($source);
                 $thumbpath = $this->file_path . DS . 'thumbnails' . strrchr($pathinfo['dirname'], '/');

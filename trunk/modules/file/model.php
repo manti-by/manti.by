@@ -95,14 +95,13 @@
          * @return int|bool $insert_id
          */
         public function add($options) {
-            $file = ROOT_PATH . $options['source'];
-            if (file_exists($file)) {
+            if (file_exists(ROOT_PATH . DS . $options['source'])) {
                 // Get type - parent file folder
-                $pathinfo = pathinfo($file);
+                $pathinfo = pathinfo(ROOT_PATH . DS . $options['source']);
                 $type = isset($options['type']) && !empty($options['type']) ? $options['type'] : end(explode(DS, realpath($pathinfo['dirname'])));
 
                 // Get file info
-                $file_source = fopen($file, "r");
+                $file_source = fopen(ROOT_PATH . DS . $options['source'], "r");
                 $fstat = fstat($file_source);
 
                 // Convert to unix routes
@@ -110,7 +109,7 @@
                 $source = str_replace('//' , '/', $source);
 
                 // Create or update file
-                $this->database->query("CALL UPSERT_FILE('".$type."', '".$options['name']."','".$options['description']."','".$source."',".$fstat['size'].",'".md5_file($file)."');");
+                $this->database->query("CALL UPSERT_FILE('".$type."', '".$options['name']."','".$options['description']."','".$source."',".$fstat['size'].",'".md5_file($options['source'])."');");
                 return $this->database->getField();
             } else {
                 return $this->_throw(T('File does not exist'), ERROR);
@@ -142,7 +141,7 @@
             $this->database->query("CALL REMOVE_FILE('".$source."');");
 
             // Remove file from FS
-            $file = ROOT_PATH . $source;
+            $file = ROOT_PATH . DS . $source;
             if (file_exists($file)) {
                 if (unlink($file)) {
                     return true;
@@ -161,33 +160,38 @@
          * @return array|bool $result
          */
         public function getDirList($directory, $allow_dir_list = false) {
-            $result = array();
-            $iterator = new RecursiveDirectoryIterator($directory);
-            foreach ($iterator as $path) {
-                // Remove root path from file link
-                /** @noinspection PhpUndefinedMethodInspection */
-                $current = $path->__toString();
+            try {
+                $result = array();
+                $iterator = new RecursiveDirectoryIterator($directory);
+                foreach ($iterator as $path) {
+                    // Remove pointers to current and previous
+                    // directories in unix systems
+                    if (substr($path, -1) != '.') {
+                        // Remove root path from file link
+                        /** @noinspection PhpUndefinedMethodInspection */
+                        $current = str_ireplace(ROOT_PATH, '.', $path->__toString());
+                        $pathinfo = pathinfo($current);
 
-                $current = str_ireplace(ROOT_PATH, '.', $current);
-                $pathinfo = pathinfo($current);
+                        // Check available extension
+                        if ((isset($pathinfo['extension']) && in_array(strtolower($pathinfo['extension']), explode(',', Application::$config['allowed_file_extensions']))) || $allow_dir_list) {
+                            // Convert to unix routes
+                            $source = str_replace(DS , '/', $current);
+                            $source = str_replace('//' , '/', $source);
 
-                // Check available extension
-                if (in_array(strtolower($pathinfo['extension']), explode(',', Application::$config['allowed_file_extensions'])) || $allow_dir_list) {
-                    // Convert to unix routes
-                    $source = str_replace(DS , '/', $current);
-                    $source = str_replace('//' , '/', $source);
-
-                    // Add file info
-                    if (!$allow_dir_list) {
-                        $file = fopen($current, "r");
-                        $result[$source] = $pathinfo + fstat($file);
-                    } else {
-                        $result[$source] = $pathinfo;
+                            // Add file info
+                            if (!$allow_dir_list) {
+                                $file = fopen($current, "r");
+                                $result[$source] = $pathinfo + fstat($file);
+                            } else {
+                                $result[$source] = $pathinfo;
+                            }
+                        }
                     }
                 }
+                return $result;
+            } catch (Exception $e) {
+                return $this->_throw(T('Error while trying read directory') . ' "' . $directory . '" : ' . $e->getMessage(), ERROR);
             }
-
-            return $result;
         }
 
         /**
