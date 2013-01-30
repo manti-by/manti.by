@@ -11,7 +11,7 @@
      */
 ?>
 <?php if (!empty($options['title'])) : ?>
-    <h1><?php echo $options['tile']; ?></h1>
+    <h1><?php echo $options['title']; ?></h1>
 <?php endif; ?>
 
 <?php echo $options['data']; ?>
