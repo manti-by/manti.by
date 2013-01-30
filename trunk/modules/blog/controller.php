@@ -50,13 +50,17 @@
             }
             
             // Get items and render it
-            $options['module'] = 'blog';
-            $options['body'] = $this->view->renderItemsArray($options);
+            if (!empty($options['data'])) {
+                $options['module'] = 'blog';
+                $options['body'] = $this->view->renderItemsArray($options);
 
-            // Add ajax loader
-            $options['body'] .= $this->view->getContents('blog', 'ajax-load', $options);
+                // Add ajax loader
+                $options['body'] .= $this->view->getContents('blog', 'ajax-load', $options);
 
-            return $this->view->wrapSidebar($options);
+                return $this->view->wrapSidebar($options);
+            } else {
+                return $this->view->_404($options);
+            }
         }
 
         /**
@@ -90,20 +94,24 @@
          */
         public function showAction($options) {
             // Get item ID
-            $post_id = System::getInstance()->getCmd('id');
+            $options['id'] = System::getInstance()->getCmd('id');
             
             // Get item title and data
-            if ($post_id) {
-                $options['data'] = $this->model->getPost($post_id);
+            if ($options['id']) {
+                $options['data'] = $this->model->getPost($options['id']);
                 $options['title'] = $options['data']->name;
             } else {
                 return $this->view->_404($options);
             }
             
             // Render blog item
-            $options['body'] = $this->view->getContents('blog', 'item-full', $options);
+            if (!empty($options['data'])) {
+                $options['body'] = $this->view->getContents('blog', 'item-full', $options);
 
-            return $this->view->wrapSidebar($options);
+                return $this->view->wrapSidebar($options);
+            } else {
+                return $this->view->_404($options);
+            }
         }
 
         /**
@@ -123,10 +131,14 @@
             }
             
             // Render edit form
-            $options['title'] = 'Edit post';
-            $options['body'] = $this->view->getContents('blog', 'edit', $options);
-            
-            return $options;
+            if (!empty($options['data'])) {
+                $options['title'] = 'Edit post';
+                $options['body'] = $this->view->getContents('blog', 'edit', $options);
+
+                return $options;
+            } else {
+                return $this->view->_404($options);
+            }
         }
 
         /**
