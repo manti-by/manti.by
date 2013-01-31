@@ -70,7 +70,7 @@
             
             // Check cookie
             if (isset($options['cookie'])) {
-                $this->database->query("CALL CHECK_COOKIE('".Application::$config['secret']."','".$options['cookie']."');");
+                $this->database->query("CALL CHECK_COOKIE('".$options['cookie']."', '".Application::$config['secret']."');");
                 $result = $this->database->getField();
                 if (!empty($result)) {
                     return $result;
@@ -195,7 +195,7 @@
          */
         public function isLoggined() {
             // Get cookie uid
-            if (isset($_COOKIE['token']) && $user_id = $this->getId(array('cookie' => $_COOKIE['token']))) {
+            if (isset($_COOKIE['token']) && $user_id = $this->getId(array('cookie' => utf8_encode($_COOKIE['token'])))) {
                 if (!isset($_SESSION['user_id'])) $_SESSION['user_id'] = $user_id;
                 return true;
             }

@@ -4,7 +4,7 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `CHECK_COOKIE`(IN `_cookie` varchar(
 BEGIN
     SELECT `id` 
     FROM `user` 
-    WHERE MD5(CONCAT(_secret, `email`)) = _cookie
+    WHERE _cookie = MD5(CONCAT(_secret, `email`))
     LIMIT 0, 1;
 END
 ;;
