@@ -39,7 +39,7 @@
             </div>
         <?php endif; ?>
 
-        <?php if (json_decode($options['data']->covers)) : ?>
+        <?php if ($options['data']->quality) : ?>
             <div class="quality">
                 <span class="bold"><?php echo T('Quality'); ?></span> :
                 <?php echo $options['data']->quality; ?>
@@ -68,7 +68,7 @@
 
         <?php if ($options['context'] != 'full') : ?>
             <div class="fulllink">
-                <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>"><?php echo T('View full post'); ?></span></a>
+                <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>"><?php echo T('View full post'); ?></a>
             </div>
         <?php endif; ?>
 
