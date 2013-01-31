@@ -99,4 +99,48 @@
 
             return $options;
         }
+
+        /**
+         * Return add file form
+         * @param array $options
+         * @return array $result
+         */
+        public function getAddFormAction($options) {
+            // Set params
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+
+            $options['data']['source'] = System::getInstance()->getCmd('source');
+            $options['data']['rel_id'] = System::getInstance()->getCmd('rel_id');
+
+            if ($form = $this->view->getContents('file', 'add-file-form', $options)) {
+                $options['data'] = array('result' => 'success', 'data' => $form);
+            } else {
+                $error = $this->getLastFromStack();
+                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+            }
+
+            return $options;
+        }
+
+        /**
+         * Return delete file form
+         * @param array $options
+         * @return array $result
+         */
+        public function getDeleteFormAction($options) {
+            // Set params
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+
+            $options['data']['source'] = System::getInstance()->getCmd('source');
+            $options['data']['rel_id'] = System::getInstance()->getCmd('rel_id');
+
+            if ($form = $this->view->getContents('file', 'delete-file-form', $options)) {
+                $options['data'] = array('result' => 'success', 'data' => $form);
+            } else {
+                $error = $this->getLastFromStack();
+                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+            }
+
+            return $options;
+        }
     }
