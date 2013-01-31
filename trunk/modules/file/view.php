@@ -88,7 +88,7 @@
 
             // Print body
             foreach ($array as $object) {
-                $result .= '<li id="file-' . $object->id . '"><a href="' . str_replace('.', Application::$config['http_host'], $object->source) . '">' . $object->source . '</a> (' . System::humanReadableFilesize($object->size) . ')</li>';
+                $result .= '<li id="file-' . $object->id . '"><a href="' . str_replace('./', Application::$config['http_host'] . '/', $object->source) . '">' . $object->source . '</a> (' . System::humanReadableFilesize($object->size) . ')</li>';
             }
 
             $result .= '</ul>';

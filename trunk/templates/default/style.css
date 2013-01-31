@@ -83,3 +83,18 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; text-transform: uppercase; }
 #gallery .thumbnail:hover { background: #EEE; }
 #gallery .path { margin: 10px 0 20px 0; }
 #gallery .path a { font-size: 18px;  }
+
+#featured { padding-bottom: 15px; }
+#featured #slider { display: inline; list-style: none; padding: 0; }
+#featured .slider-item { display: inline-block; margin: 0 10px 10px 0; width: 100px; height: 350px;
+    overflow: hidden; opacity: 0.7; }
+
+#featured .slider-item .wrap { width: 700px; cursor: pointer; }
+#featured .slider-item.active .wrap { cursor: default; }
+
+#featured .slider-item img { width: 350px; height: 350px; }
+#featured .slider-item .content { display: inline-block; }
+
+#featured .slider-item .content h3,
+#featured .slider-item .content .teaser { padding-left: 10px; }
+#featured .slider-item .content .music-block { padding: 10px 0 0 10px; }

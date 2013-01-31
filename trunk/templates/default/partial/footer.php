@@ -36,7 +36,7 @@
             </a>
         </li>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=file&action=directlinks'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=file'); ?>">
                 <?php echo T('Direct links'); ?>
             </a>
         </li>

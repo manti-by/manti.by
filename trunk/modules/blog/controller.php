@@ -132,12 +132,15 @@
             
             // Render edit form
             if (!empty($options['data'])) {
-                $options['title'] = 'Edit post';
+                $options['title'] = T('Edit post');
                 $options['body'] = $this->view->getContents('blog', 'edit', $options);
 
                 return $options;
             } else {
-                return $this->view->_404($options);
+                $options['title'] = T('Add new post');
+                $options['body'] = $this->view->getContents('blog', 'edit');
+
+                return $options;
             }
         }
 
