@@ -17,19 +17,19 @@
             var margin_offset = 120;
             var popup_offset = 40;
 
-            var new_width  = data.get(0).width;
-            var new_height = data.get(0).height;
+            var new_width  = data.get(0).width > 0 ? data.get(0).width : 600;
+            var new_height = data.get(0).height > 0 ? data.get(0).height : 200;
 
             var ratio = new_width / new_height;
 
             // Check width
-            if (data.get(0).width + margin_offset > window.innerWidth) {
+            if (new_width + margin_offset > window.innerWidth) {
                 new_width  = window.innerWidth - margin_offset;
                 new_height = new_width * ratio;
             }
 
             // Check height
-            if (data.get(0).height + margin_offset > window.innerHeight) {
+            if (new_height + margin_offset > window.innerHeight) {
                 new_height = window.innerHeight - margin_offset;
                 new_width  = new_height * ratio;
             }
