@@ -44,7 +44,7 @@
         }
 
         /**
-         * Get filelist
+         * Get file list
          * @param string $type OPTIONAL file type
          * @param int $limit OPTIONAL
          * @return array|bool $result
@@ -87,6 +87,21 @@
             }
 
             return $result;
+        }
+
+        /**
+         * Get download file list
+         * @param string $type OPTIONAL file type, default FileEntity::TYPE_RELEASE
+         * @param int $limit OPTIONAL
+         * @return array|bool $result
+         */
+        public function getDownloadList($type = FileEntity::TYPE_RELEASE, $limit = 100) {
+            // Check map
+            $type = $this->checkMap($type);
+
+            // Get files from DB
+            $this->database->query("CALL GET_FILES('$type', $limit);");
+            return $this->database->getObjectsArray();
         }
 
         /**

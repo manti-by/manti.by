@@ -12,7 +12,7 @@
     class FileView extends View {
 
         /**
-         * Function for translate tokens from dictionaries
+         * Function for file grid creation
          * @param array $array array to print
          * @return string $text
          */
@@ -73,6 +73,25 @@
             }
             $result .= '</tbody>';
             $result .= '</table>';
+
+            return $result;
+        }
+
+        /**
+         * Function for file download list creation
+         * @param array $array array to print
+         * @return string $text
+         */
+        public function printDownloadList($array) {
+            // Print head
+            $result  = '<ul id="download-list">';
+
+            // Print body
+            foreach ($array as $object) {
+                $result .= '<li id="file-' . $object->id . '"><a href="' . str_replace('.', Application::$config['http_host'], $object->source) . '">' . $object->source . '</a> (' . System::humanReadableFilesize($object->size) . ')</li>';
+            }
+
+            $result .= '</ul>';
 
             return $result;
         }

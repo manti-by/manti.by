@@ -21,15 +21,29 @@
         }
 
         /**
-         * Show files list
+         * Show files list for downloading
          * @param array $options
          * @return array $result
          */
         public function listAction($options) {
             // Get all files list
-            $options['title'] = 'File list';
-            $options['data'] = $this->model->getList();
+            $options['title'] = T('Download file list');
+            $options['data'] = $this->model->getDownloadList();
             $options['body']  = $this->view->getContents('file', 'list', $options);
+
+            return $options;
+        }
+
+        /**
+         * Edit files list
+         * @param array $options
+         * @return array $result
+         */
+        public function editAction($options) {
+            // Get all files list
+            $options['title'] = T('Edit file list');
+            $options['data'] = $this->model->getList();
+            $options['body']  = $this->view->getContents('file', 'edit', $options);
 
             return $options;
         }

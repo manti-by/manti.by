@@ -26,7 +26,7 @@
     <div id="usermenu" class="fl">
         <?php echo T('Hi') . ' ' . $user->getUsername(); ?>!
         <a href="<?php echo Sef::getSef('index.php?module=blog&action=edit');?>"><?php echo T('New Post'); ?></a> |
-        <a href="<?php echo Sef::getSef('index.php?module=file'); ?>"><?php echo T('View Files'); ?></a> |
+        <a href="<?php echo Sef::getSef('index.php?module=file&action=edit'); ?>"><?php echo T('View Files'); ?></a> |
         <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Sign Out'); ?></a>
     </div>
 <?php endif; ?>
