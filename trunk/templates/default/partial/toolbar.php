@@ -21,7 +21,7 @@
         });
     });
 </script>
-<div id="toolbar" class="fr">
+<div id="toolbar">
     <div id="language">
         <?php if (Application::$config['language'] == 'ru') : ?>
             <a href="#switch-to-english" id="switch-language" rel="en">
@@ -39,10 +39,4 @@
         <input type="text" id="query" name="q" value="" placeholder="<?php echo T('Search'); ?>..." />
         <input type="button" id="go" name="go" value=" " />
     </div>
-    <?php if ($user->isLoggined()) : ?>
-        <?php echo T('Hi') . ' ' . $user->getUsername(); ?>!
-        <a href="<?php echo Sef::getSef('index.php?module=blog&action=edit');?>"><?php echo T('New Post'); ?></a> |
-        <a href="<?php echo Sef::getSef('index.php?module=file'); ?>"><?php echo T('View Files'); ?></a> |
-        <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Sign Out'); ?></a>
-    <?php endif; ?>
 </div>

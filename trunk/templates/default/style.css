@@ -14,6 +14,8 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; text-transform: uppercase; }
 #topmenu { margin: 41px 0 5px 50px; padding: 0; }
 #topmenu li { list-style: none; display: inline; padding-right: 30px; font-size: 14px; text-transform: uppercase; }
 
+#usermenu { padding: 10px 0 0 165px; }
+
 #language { margin-bottom: 15px; }
 #language img { position: relative; top: 3px; }
 
