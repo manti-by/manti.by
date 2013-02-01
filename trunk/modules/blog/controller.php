@@ -161,13 +161,15 @@
                 return $options;
             }
 
+            // #43634275 - Prevent flip for teaser and description
+            $options['teaser'] = $system->getCmd('teaser', '');
+
             $options['description'] = $system->getCmd('description', '');
             if (empty($options['description'])) {
                 $options['data'] = array('result' => 'error', 'error' => T('Post description could not be empty'));
                 return $options;
             }
 
-            $options['teaser'] = $system->getCmd('teaser', '');
             if (empty($options['teaser'])) {
                 $options['teaser'] = substr(strip_tags($options['description']), 0, Application::$config['teaser_length']);
             }
