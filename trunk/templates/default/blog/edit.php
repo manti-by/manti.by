@@ -29,9 +29,12 @@
                 $.post('<?php echo Sef::getSef('index.php'); ?>', $('#edit-post-form').serialize(), function (response){
                     $.fn.loaderHide();
                     if (response.result == 'success') {
-                        $.fn.popupShow('<div class="success-message"><?php echo T('Post saved successfully'); ?></div>');
+                        // #43634625 - Fix success onSave popup message while edit post
+                        var popup_block = $('<div class="success-message"><?php echo T('Post saved successfully'); ?></div>');
+                        $.fn.popupShow(popup_block);
                     } else {
-                        $.fn.popupShow('<div class="error-message">' + response.error + '</div>');
+                        var popup_block = $('<div class="error-message">' + response.error + '</div>');
+                        $.fn.popupShow(popup_block);
                     }
                 });
             }
