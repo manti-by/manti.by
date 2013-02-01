@@ -30,15 +30,18 @@ $(document).ready(function() {
         if (query.length > 2) {
             $.post(source, { q : query }, function(response){
                 if (response.result == 'success') {
-                    // Show values
-                    var html = '<div class="autocomplete-result" style="left:' + page_x + '; top: ' + page_y + ';"><ul>';
+                    // #43634465 - Fix autocomplete with empty result set
+                    if (response.data.length > 0) {
+                        // Show values
+                        var html = '<div class="autocomplete-result" style="left:' + page_x + '; top: ' + page_y + ';"><ul>';
 
-                    for (var i = 0; i < response.data.length; i++) {
-                        html += '<li class="autocomplete-result-item" rel="' + $(self).attr('id') + '">' + response.data[i] + '</li>';
+                        for (var i = 0; i < response.data.length; i++) {
+                            html += '<li class="autocomplete-result-item" rel="' + $(self).attr('id') + '">' + response.data[i] + '</li>';
+                        }
+
+                        html += '</ul></div>';
+                        $(self).after(html);
                     }
-
-                    html += '</ul></div>';
-                    $(self).after(html);
                 }
 
                 $('.autocomplete-result-item').bind('click', function() {
