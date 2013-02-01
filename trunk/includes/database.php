@@ -115,9 +115,9 @@
          * @return bool $result
          */
         public function checkResult() {
-            if (($this->result < 1 && $this->getLastErrorNum() != 0) || !$this->res) {
+            if ($this->result < 1 && $this->getLastErrorNum() != 0) {
                 return $this->_throw($this->getError(), ERROR);
-            } elseif ($this->result < 1 && $this->getLastErrorNum() == 0) {
+            } elseif (($this->result < 1 && $this->getLastErrorNum() == 0) || !$this->res) { // #43635349
                 return $this->_throw(T('Empty result'), NOTICE);
             } else {
                 return true;
@@ -152,7 +152,9 @@
                 return $this->_throw($this->getError(), ERROR);
             } else {
                 while ($this->mysqli->next_result()) {
-                    $this->mysqli->store_result();
+                    // #43635349 - Fix multiple saving for new posts
+                    $resource = $this->mysqli->store_result();
+                    $this->res = $resource ? $resource : $this->res;
                     $this->result = 1;
                 }
                 return true;
@@ -170,7 +172,7 @@
             }
 
             // Return first field
-            $this->mysqli->store_result();
+            // #43635349 - Fix multiple saving for new posts
             $row = $this->res->fetch_row();
 
             // Check CALL result

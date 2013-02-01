@@ -29,9 +29,17 @@
                 $.post('<?php echo Sef::getSef('index.php'); ?>', $('#edit-post-form').serialize(), function (response){
                     $.fn.loaderHide();
                     if (response.result == 'success') {
-                        // #43634625 - Fix success onSave popup message while edit post
-                        var popup_block = $('<div class="success-message"><?php echo T('Post saved successfully'); ?></div>');
-                        $.fn.popupShow(popup_block);
+                        // #43635349 - Fix multiple saving for new posts
+                        if (response.id > 0) {
+                            $('#edit-post-form #id').val(response.id);
+
+                            // #43634625 - Fix success onSave popup message while edit post
+                            var popup_block = $('<div class="success-message"><?php echo T('Post saved successfully'); ?></div>');
+                            $.fn.popupShow(popup_block);
+                        } else {
+                            var popup_block = $('<div class="error-message"><?php echo T('Seem to be error was occurred while saving these post, please try later'); ?></div>');
+                            $.fn.popupShow(popup_block);
+                        }
                     } else {
                         var popup_block = $('<div class="error-message">' + response.error + '</div>');
                         $.fn.popupShow(popup_block);
@@ -58,7 +66,7 @@
 <form id="edit-post-form">
     <input type="hidden" name="module" value="blog" />
     <input type="hidden" name="action" value="save" />
-    <input type="hidden" name="id" value="<?php echo $options['data']->id; ?>" />
+    <input type="hidden" name="id" id="id" value="<?php echo $options['data']->id; ?>" />
     <h1><?php echo T('Please enter post details below'); ?></h1>
 
     <fieldset id="general-information">
