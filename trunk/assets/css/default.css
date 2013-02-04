@@ -134,7 +134,7 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 .tag-control .tag-input { position: relative; top: 1px; margin: 3px 0 4px 0; border: none; font-size: 120%;}
 .tag-control .tag-add { padding: 6px 24px; }
 
-.tag-control ul { display: inline-block; margin: 0; padding: 0; }
+.tag-control ul { display: inline; margin: 0; padding: 0; }
 .tag-control ul li { display: inline-block; list-style: none; margin: 2px; padding: 2px 4px; border: 1px solid #CCC;
     background: #FFC; }
 .tag-control ul li .tag-del { margin: 0 0 0 3px; padding: 0 2px; }
