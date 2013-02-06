@@ -95,9 +95,11 @@
          * @static
          * @param string $json
          * @param string $type OPTIONAL
+         * @param bool $multiple OPTIONAL false
          * @return bool|string
+         * @todo Add implementation for multiple items
          */
-        public static function getHtml($json, $type = null) {
+        public static function getHtml($json, $type = null, $multiple = false) {
             $result = '';
             $files = json_decode($json);
             if (is_array($files)) {
@@ -114,6 +116,9 @@
                             $result .= '<a href="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="release">' . T('Download') . '</a>';
                             break;
                     }
+
+                    // Check for multiple sources
+                    if (!$multiple) break;
                 }
             } else {
                 return self::getInstance()->_throw(T('Incorect JSON data for tags'), MESSAGE);
