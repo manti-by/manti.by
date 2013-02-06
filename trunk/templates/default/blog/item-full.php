@@ -46,3 +46,8 @@
     <?php endif; ?>
 
 </div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $.get('<?php echo Sef::getSef('index.php?module=blog&action=track&id=' . $options['data']->id)?>');
+    });
+</script>

@@ -141,4 +141,19 @@
             $this->database->query("CALL UPSERT_POST(". implode(',', $params) .");");
             return $this->database->getField();
         }
+
+        /**
+         * Track post by id
+         * @param int $id
+         * @return bool|object $result
+         */
+        public function trackPost($id){
+            // Check empty value
+            if (empty($id)) {
+                return $this->_throw(T('Post ID could not be empty'));
+            }
+
+            $this->database->query("CALL TRACK_POST_BY_ID($id);");
+            return $this->database->getField();
+        }
     }
