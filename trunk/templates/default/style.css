@@ -96,5 +96,13 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; text-transform: uppercase; }
 #featured .slider-item .content { display: inline-block; }
 
 #featured .slider-item .content h3,
-#featured .slider-item .content .teaser { padding-left: 10px; }
+#featured .slider-item .content .teaser,
+#featured .slider-item .content .fulllink { padding-left: 10px; }
 #featured .slider-item .content .music-block { padding: 10px 0 0 10px; }
+
+#popular { padding: 30px 10px; }
+#popular #rollover { display: inline; list-style: none; padding: 0; }
+#popular .rollover-item { display: inline-block; margin-right: 20px; text-align: center; }
+
+#popular .rollover-item img { width: 150px; height: 150px; }
+#popular .rollover-item h3 { text-transform: none; font-size: 14px; padding: 5px 0; }

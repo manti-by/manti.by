@@ -44,8 +44,8 @@
                 }
             }
 
-            // Get all posts
-            $this->database->query("CALL GET_POSTS_BY_VIEW_COUNT(10);");
+            // Get popular posts with covers
+            $this->database->query("CALL GET_POSTS_BY_VIEW_COUNT(10, 1);");
             $posts = $this->database->getObjectsArray();
             foreach ($posts as $item) {
                 if (!in_array($item->id, $in_use)) {
@@ -55,15 +55,22 @@
 
                 // Break when done
                 if (count($result['popular']) >= Application::$config['popular_count']) {
-                    // Search content items
-                    if (!in_array($item->id, $in_use)) {
-                        $result['content'][] = $item;
-                        $in_use[] = $item->id;
-                    }
+                    break;
+                }
+            }
 
-                    if (count($result['content']) >= Application::$config['content_count']) {
-                        break;
-                    }
+            // Get all posts
+            $this->database->query("CALL GET_POSTS(0, 10);");
+            $posts = $this->database->getObjectsArray();
+            foreach ($posts as $item) {
+                if (!in_array($item->id, $in_use)) {
+                    $result['content'][] = $item;
+                    $in_use[] = $item->id;
+                }
+
+                // Break when done
+                if (count($in_use) >= Application::$config['posts_per_page']) {
+                    break;
                 }
             }
 
