@@ -45,7 +45,7 @@
             }
 
             // Get all posts
-            $this->database->query("CALL GET_POSTS(0, 10);");
+            $this->database->query("CALL GET_POSTS_BY_VIEW_COUNT(10);");
             $posts = $this->database->getObjectsArray();
             foreach ($posts as $item) {
                 if (!in_array($item->id, $in_use)) {
