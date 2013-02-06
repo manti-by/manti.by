@@ -161,6 +161,9 @@
                 return $options;
             }
 
+            $options['alias'] = $system->getCmd('alias', $options['name']);
+            $options['alias'] = Sef::createAlias($options['alias']);
+
             // #43634275 - Prevent flip for teaser and description
             $options['teaser'] = $system->getCmd('teaser', '');
 

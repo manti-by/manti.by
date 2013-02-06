@@ -24,7 +24,7 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; text-transform: uppercase; }
 #search #go {position: relative; bottom: 1px; margin: 0; padding: 0; width: 22px; height: 22px;
     border: 1px solid #b40303; background: #b40303; }
 
-#edit-post-form #name, #edit-post-form #teaser,
+#edit-post-form #name, #edit-post-form #alias, #edit-post-form #teaser,
 #edit-post-form #description, #edit-post-form #metadesc { width: 600px; font-size: 18px; }
 
 #edit-post-form .tag-wrap { width: 523px; }

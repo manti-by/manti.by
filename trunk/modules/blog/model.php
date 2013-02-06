@@ -16,7 +16,7 @@
          * @var array
          */
         private $_main_post_params = array(
-            'id', 'name', 'teaser', 'description', 'metakeys', 'metadesc', 'is_music'
+            'id', 'name', 'alias', 'teaser', 'description', 'metakeys', 'metadesc', 'is_music'
         );
 
         /**
