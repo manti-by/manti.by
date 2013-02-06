@@ -58,7 +58,7 @@
                         </script>
 
                         <div class="<?php echo $this->_options['class']; ?> file-control">
-                            <input type="hidden" name="<?php echo $this->_options['name']; ?>" id="<?php echo $this->_options['id']; ?>" value="<?php echo $this->getValue(); ?>" />
+                            <input type="hidden" name="<?php echo $this->_options['name']; ?>" id="<?php echo $this->_options['id']; ?>" value="<?php echo $this->getValue('id'); ?>" />
                             <div id="<?php echo $this->_options['id']; ?>-notice">
                                 <span class="bold"><?php echo count($this->_value); ?></span>/<?php echo count($this->_data); ?> <?php echo T('items'); ?>
                                 <input type="button" name="<?php echo $this->_options['name']; ?>-edit" id="<?php echo $this->_options['id']; ?>-edit" class="file-edit" value="<?php echo T('Edit'); ?>" />
@@ -69,7 +69,7 @@
                                     <ul>
                                         <?php foreach ($this->_data as $id => $label) : ?>
                                         <li>
-                                            <input type="checkbox" name="<?php echo $this->_options['name']; ?>-items" class="<?php echo $this->_options['class']; ?>" value="<?php echo $id; ?>" <?php if (in_array($id, $this->_value)) echo 'checked="checked"'; ?>/>
+                                            <input type="checkbox" name="<?php echo $this->_options['name']; ?>-items" class="<?php echo $this->_options['class']; ?>" value="<?php echo $id; ?>" <?php if (in_array($id, explode(',', $this->getValue('id')))) echo 'checked="checked"'; ?>/>
                                             <?php echo $label; ?>
                                         </li>
                                         <?php endforeach; ?>
