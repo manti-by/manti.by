@@ -24,6 +24,7 @@ copyright_en = "When using content from this site you must link it to the author
 [sef config]
 sef_enabled = 0
 sef_suffix = "/"
+sef_max_alias_length = 64
 
 [error handlers]
 show_debug_panel = 0

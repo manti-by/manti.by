@@ -47,8 +47,15 @@
             $('#popup .content').html(data);
             $('#popup').show();
 
+            // Bind autohide for document
             $(document).bind('click', function() {
                 $.fn.popupHide();
+            });
+
+            // And prevent click on content
+            $('#popup .content').bind('click', function(e) {
+                e.preventDefault();
+                return false;
             });
         }
 

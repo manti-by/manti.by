@@ -29,4 +29,8 @@
     </div>
 
     <?php echo $this->getContents('blog', 'music-block', $options); ?>
+
+    <div class="fulllink">
+        <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>"><?php echo T('View full post'); ?></a>
+    </div>
 </div>

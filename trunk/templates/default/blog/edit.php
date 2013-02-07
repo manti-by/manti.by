@@ -22,8 +22,8 @@
             
             // Check required fields
             if ($('#name').val() == '') {
-                $('#username').css('border-color', 'red');
-                $('#username').next('.form_error').html('<?php echo T('Please enter post title'); ?>').show();
+                $('#name').css('border-color', 'red');
+                $('#name').next('.form_error').html('<?php echo T('Please enter post title'); ?>').show();
             } else {
                 $.fn.loaderShow();
                 $.post('<?php echo Sef::getSef('index.php'); ?>', $('#edit-post-form').serialize(), function (response){
@@ -74,6 +74,11 @@
         <p>
             <label for="name"><?php echo T('Title'); ?></label>
             <input type="text" name="name" id="name" value="<?php echo $options['data']->name; ?>" />
+            <span class="form_error"></span>
+        </p>
+        <p>
+            <label for="alias"><?php echo T('Alias'); ?></label>
+            <input type="text" name="alias" id="alias" value="<?php echo $options['data']->alias; ?>" />
             <span class="form_error"></span>
         </p>
         <p>

@@ -34,6 +34,9 @@
                                     $item->covers = null;
                                     echo $this->getContents('blog', 'music-block', array('data' => $item));
                                 ?>
+                                <div class="fulllink">
+                                    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>"><?php echo T('View full post'); ?></a>
+                                </div>
                             </div>
                             <?php $active = (++$count == 2 ? true : false); ?>
                         </div>
