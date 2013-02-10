@@ -10,7 +10,30 @@
      * @since 0.2RC1
      */
     class Sef extends Application {
-        private $storage;
+        // Character replace table
+        public static $character_replace_table = array(
+            'А'=>'A', 'Б'=>'B', 'В'=>'V', 'Г'=>'G',
+            'Д'=>'D', 'Е'=>'E', 'Ж'=>'J', 'З'=>'Z',
+            'И'=>'I', 'Й'=>'Y', 'К'=>'K', 'Л'=>'L',
+            'М'=>'M', 'Н'=>'N', 'О'=>'O', 'П'=>'P',
+            'Р'=>'R', 'С'=>'S', 'Т'=>'T', 'У'=>'U',
+            'Ф'=>'F', 'Х'=>'H', 'Ц'=>'TS', 'Ч'=>'CH',
+            'Ш'=>'SH', 'Щ'=>'SCH', 'Ъ'=>'', 'Ы'=>'YI',
+            'Ь'=>'', 'Э'=>'E', 'Ю'=>'YU', 'Я'=>'YA',
+            'а'=>'a', 'б'=>'b', 'в'=>'v', 'г'=>'g',
+            'д'=>'d', 'е'=>'e', 'ж'=>'j', 'з'=>'z',
+            'и'=>'i', 'й'=>'y', 'к'=>'k', 'л'=>'l',
+            'м'=>'m', 'н'=>'n', 'о'=>'o', 'п'=>'p',
+            'р'=>'r', 'с'=>'s', 'т'=>'t', 'у'=>'u',
+            'ф'=>'f', 'х'=>'h', 'ц'=>'ts', 'ч'=>'ch',
+            'ш'=>'sh', 'щ'=>'sch', 'ъ'=>'', 'ы'=>'yi',
+            'ь'=>'', 'э'=>'e', 'ю'=>'yu', 'я'=>'ya',
+            ' '=>'-', '.'=>'-', '?'=>'-', '/'=>'-',
+            '\\'=>'-', '*'=>'-', ':'=>'-', '*'=>'-',
+            '\''=>'-','<'=>'-', '>'=>'-','|'=>'-'
+        );
+
+        // Self instance
         protected static $instance = null;
 
         /**
@@ -252,6 +275,22 @@
          * @return string $link
          */
         private function sanitizeLink($link) {
-            return $link;
+            return self::createAlias($link);
+        }
+
+        /**
+         * Create alias from input string
+         * @param string $string
+         * @return string $string
+         */
+        public static function createAlias($string) {
+            // Convert to lowercase and replace illegal characters
+            $string = strtr(strtolower($string), self::$character_replace_table);
+
+            // Remove duplicates
+            $string = preg_replace("/-+/","-", $string);
+
+            // Trim length and return
+            return substr($string, 0, Application::$config['sef_max_alias_length']);
         }
     }

@@ -50,7 +50,7 @@ BEGIN
                 WHERE _pr.`original_id` = p.`id`
                   AND _f.`type` = 'covers'
             ) AS `relations`
-            , p.`created`, p.`timestamp`
+            , p.`created`, p.`viewed`, p.`timestamp`
         FROM `post` AS p
     );
 END

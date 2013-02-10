@@ -22,16 +22,27 @@
             
             // Check required fields
             if ($('#name').val() == '') {
-                $('#username').css('border-color', 'red');
-                $('#username').next('.form_error').html('<?php echo T('Please enter post title'); ?>').show();
+                $('#name').css('border-color', 'red');
+                $('#name').next('.form_error').html('<?php echo T('Please enter post title'); ?>').show();
             } else {
                 $.fn.loaderShow();
                 $.post('<?php echo Sef::getSef('index.php'); ?>', $('#edit-post-form').serialize(), function (response){
                     $.fn.loaderHide();
                     if (response.result == 'success') {
-                        $.fn.popupShow('<div class="success-message"><?php echo T('Post saved successfully'); ?></div>');
+                        // #43635349 - Fix multiple saving for new posts
+                        if (response.id > 0) {
+                            $('#edit-post-form #id').val(response.id);
+
+                            // #43634625 - Fix success onSave popup message while edit post
+                            var popup_block = $('<div class="success-message"><?php echo T('Post saved successfully'); ?></div>');
+                            $.fn.popupShow(popup_block);
+                        } else {
+                            var popup_block = $('<div class="error-message"><?php echo T('Seem to be error was occurred while saving these post, please try later'); ?></div>');
+                            $.fn.popupShow(popup_block);
+                        }
                     } else {
-                        $.fn.popupShow('<div class="error-message">' + response.error + '</div>');
+                        var popup_block = $('<div class="error-message">' + response.error + '</div>');
+                        $.fn.popupShow(popup_block);
                     }
                 });
             }
@@ -55,7 +66,7 @@
 <form id="edit-post-form">
     <input type="hidden" name="module" value="blog" />
     <input type="hidden" name="action" value="save" />
-    <input type="hidden" name="id" value="<?php echo $options['data']->id; ?>" />
+    <input type="hidden" name="id" id="id" value="<?php echo $options['data']->id; ?>" />
     <h1><?php echo T('Please enter post details below'); ?></h1>
 
     <fieldset id="general-information">
@@ -63,6 +74,11 @@
         <p>
             <label for="name"><?php echo T('Title'); ?></label>
             <input type="text" name="name" id="name" value="<?php echo $options['data']->name; ?>" />
+            <span class="form_error"></span>
+        </p>
+        <p>
+            <label for="alias"><?php echo T('Alias'); ?></label>
+            <input type="text" name="alias" id="alias" value="<?php echo $options['data']->alias; ?>" />
             <span class="form_error"></span>
         </p>
         <p>

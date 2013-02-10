@@ -61,6 +61,9 @@
                                         return false;
                                     }
 
+                                    // #43634517 - Fix autocomplete add action
+                                    $('#' + tag_id + '-input').val('');
+
                                     // Add new tag and remove empty
                                     tags.push(val);
                                     for (var i = 0; i < tags.length; i++) {

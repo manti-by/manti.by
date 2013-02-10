@@ -14,5 +14,25 @@
     $user = UserEntity::getInstance();
 ?>
 <div id="popular">
-    Count items <?php echo count($options['data']); ?>
+    <?php if (count($options['data'])) : ?>
+        <ul id="rollover">
+            <?php foreach ($options['data'] as $item) : ?>
+                <li class="rollover-item">
+                    <?php if (json_decode($item->covers)) : ?>
+                        <div class="cover">
+                            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>">
+                                <?php echo File::getHtml($item->covers, FileEntity::TYPE_COVERS); ?>
+                            </a>
+                        </div>
+                    <?php endif; ?>
+                    <div class="content">
+                        <h3><?php echo $item->name; ?></h3>
+                        <div class="fulllink">
+                            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>"><?php echo T('View full post'); ?></a>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
 </div>

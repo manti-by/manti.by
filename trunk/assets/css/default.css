@@ -61,9 +61,9 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 .message { background: #AFA; border-color: #090; }
 
 .error-message { min-height: 36px; line-height: 36px; color: red; padding-left: 36px;
-    background: url('../images/icon-error-32x32.png') no-repeat center left; }
+    background: url('../images/icon-error-32x32.png') no-repeat top left; }
 .success-message { min-height: 36px; line-height: 36px; padding-left: 36px;
-    background: url('../images/icon-success-32x32.png') no-repeat center left; }
+    background: url('../images/icon-success-32x32.png') no-repeat top left; }
 
 .form-error { display: none; color: red; font-size: 11px; padding-left: 5px; position: absolute; width: 250px;
     overflow: visible; }
@@ -134,7 +134,7 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 .tag-control .tag-input { position: relative; top: 1px; margin: 3px 0 4px 0; border: none; font-size: 120%;}
 .tag-control .tag-add { padding: 6px 24px; }
 
-.tag-control ul { display: inline-block; margin: 0; padding: 0; }
+.tag-control ul { display: inline; margin: 0; padding: 0; }
 .tag-control ul li { display: inline-block; list-style: none; margin: 2px; padding: 2px 4px; border: 1px solid #CCC;
     background: #FFC; }
 .tag-control ul li .tag-del { margin: 0 0 0 3px; padding: 0 2px; }

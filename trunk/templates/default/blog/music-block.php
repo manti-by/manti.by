@@ -66,12 +66,6 @@
             </div>
         <?php endif; ?>
 
-        <?php if ($options['context'] != 'full') : ?>
-            <div class="fulllink">
-                <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>"><?php echo T('View full post'); ?></a>
-            </div>
-        <?php endif; ?>
-
         <div class="cls"></div>
     </div>
 <?php endif; ?>
