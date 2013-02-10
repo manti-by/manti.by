@@ -221,4 +221,19 @@
             }
             return $type;
         }
+
+        /**
+         * Track file by id
+         * @param int $id
+         * @return bool|object $result
+         */
+        public function trackFileById($id){
+            // Check empty value
+            if (empty($id)) {
+                return $this->_throw(T('File ID could not be empty'));
+            }
+
+            $this->database->query("CALL TRACK_FILE_BY_ID($id);");
+            return $this->database->getField();
+        }
     }

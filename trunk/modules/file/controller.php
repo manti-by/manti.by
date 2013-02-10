@@ -157,4 +157,24 @@
 
             return $options;
         }
+
+        /**
+         * Track action for file item
+         * @param array $options
+         * @return array|bool $options
+         */
+        public function trackAction($options) {
+            // Set output and get item ID
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+            $options['id'] = System::getInstance()->getCmd('id');
+
+            if ($count = $this->model->trackFileById($options['id'])) {
+                $options['data'] = array('result' => 'success', 'count' => $count);
+            } else {
+                $error = $this->getLastFromStack();
+                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+            }
+
+            return $options;
+        }
     }
