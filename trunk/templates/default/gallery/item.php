@@ -25,7 +25,7 @@
                 else $count++;
             ?>
 
-            <a href="<?php echo $original->link; ?>" class="thumbnail">
+            <a href="<?php echo $original->link; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
                 <img src="<?php echo $original->thumbnail; ?>" />
             </a>
         <?php endforeach; ?>

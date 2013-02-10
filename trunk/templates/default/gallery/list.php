@@ -22,12 +22,12 @@
             // Show loader and get original link
             $.fn.loaderShow();
             var original = $(this).attr('href');
-            console.debug(original);
+            var rel_id = $(this).attr('rel');
 
             // Ping view counter
             $.post(
-                '<?php echo Sef::getSef('index.php?module=gallery&action=ping'); ?>',
-                { image : original }
+                '<?php echo Sef::getSef('index.php?module=file&action=track'); ?>',
+                { id : rel_id }
             );
 
             // Preload image and show
