@@ -148,7 +148,7 @@
             $resized = array();
 
             // Get all registered images
-            $this->database->query("CALL GET_FILES('gallery', 0);");
+            $this->database->query("CALL GET_FILES('gallery', 1000);");
             if ($this->database->checkResult()) {
                 $db_files = $this->database->getPairs('id', 'source');
             }
