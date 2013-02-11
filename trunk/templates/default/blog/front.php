@@ -22,9 +22,8 @@
 
     <div class="main-sidebar">
         <?php
-            $options['module'] = 'blog';
-            $data = array('data' => $options['data']['content'], 'context' => 'preview');
-            echo $this->renderItemsArray($options);
+            $data = array('module' => 'blog', 'data' => $options['data']['content'], 'context' => 'preview');
+            echo $this->renderItemsArray($data);
         ?>
     </div>
 
