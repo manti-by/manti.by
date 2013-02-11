@@ -222,7 +222,7 @@
             $options['id'] = System::getInstance()->getCmd('id');
 
             if ($this->model->deletePost($options['id'])) {
-                $options['data'] = array('result' => 'success');
+                $options['data'] = array('result' => 'success', 'message' => T('Post deleted successfully'));
             } else {
                 $error = $this->getLastFromStack();
                 $options['data'] = array('result' => 'error', 'error' => $error['message']);

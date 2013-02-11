@@ -20,6 +20,7 @@
         <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/default.js"></script>
     </head>
     <body>
+        <?php echo $this->getContents('plugin', 'ajax'); ?>
         <?php echo $this->getContents('plugin', 'popup'); ?>
         <?php echo $this->getContents('plugin', 'loader'); ?>
         <?php echo $this->getContents('plugin', 'messages'); ?>

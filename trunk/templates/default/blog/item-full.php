@@ -20,7 +20,7 @@
         <?php if ($user->getGroup() == 'Root') : ?>
             <div class="fr admin-buttons">
                 <a href="<?php echo Sef::getSef('index.php?module=blog&action=edit&id=' . $options['data']->id); ?>"><?php echo T('Edit'); ?></a>
-                <a href="<?php echo Sef::getSef('index.php?module=blog&action=delete&id=' . $options['data']->id); ?>"><?php echo T('Delete'); ?></a>
+                <a href="<?php echo Sef::getSef('index.php?module=blog&action=delete&id=' . $options['data']->id); ?>" class="ajax" callback="$(self).closest('.post-item-full').remove();"><?php echo T('Delete'); ?></a>
             </div>
         <?php endif; ?>
     </h1>
