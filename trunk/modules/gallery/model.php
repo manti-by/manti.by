@@ -37,7 +37,7 @@
          * @param int $limit
          * @return array|bool
          */
-        public function getGalleryByTags($tags, $limit = 0) {
+        public function getGalleryByTags($tags, $limit = 100) {
             if (empty($tags)) {
                 return $this->getGallery();
             }
@@ -46,21 +46,7 @@
             $this->database->query("CALL GET_GALLERY_BY_TAGS('$tags', $limit)");
             $galleries = $this->database->getObjectsArray();
 
-            // Append originals and thumbnails
-            foreach ($galleries as $gallery) {
-                $this->database->query("CALL GET_GALLERY_ITEMS('" . $this->database->escape($gallery->path) . "')");
-                $gallery->originals = $this->database->getObjectsArray();
-
-                // Add originals and thumbnails links
-                if (count($gallery->originals)) {
-                    foreach($gallery->originals as $original) {
-                        $original->link = Application::$config['http_host'] . substr($original->source, 1);
-                        $original->thumbnail = Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1);
-                    }
-                }
-            }
-
-            return $galleries;
+            return $this->appendGalleriesImages($galleries);
         }
 
         /**
@@ -68,11 +54,38 @@
          * @param int $limit
          * @return array|bool
          */
-        public function getGallery($limit = 10) {
+        public function getGallery($limit = 100) {
             // Get galleries list
             $this->database->query("CALL GET_GALLERY($limit)");
             $galleries = $this->database->getObjectsArray();
 
+            return $this->appendGalleriesImages($galleries);
+        }
+
+        /**
+         * Get gallery by id
+         * @param int $id
+         * @return object
+         */
+        public function getGalleryById($id) {
+            // Check empty value
+            if (empty($id)) {
+                return $this->_throw(T('Gallery ID could not be empty'));
+            }
+
+            // Get galleries list
+            $this->database->query("CALL GET_GALLERY_BY_ID($id)");
+            $galleries = $this->database->getObjectsArray();
+
+            return reset($this->appendGalleriesImages($galleries));
+        }
+
+        /**
+         * Append galleries images
+         * @param array $galleries objects
+         * @return array $galleries objects
+         */
+        private function appendGalleriesImages($galleries) {
             // Append originals and thumbnails
             foreach ($galleries as $gallery) {
                 $this->database->query("CALL GET_GALLERY_ITEMS('" . $this->database->escape($gallery->path) . "')");
@@ -95,7 +108,7 @@
          * @return array list of all new images from gallery path
          */
         public function updateFSlist() {
-            $file_list = array();
+            $file_list = $db_files = array();
 
             // Get all gallery images
             clearstatcache();
@@ -145,7 +158,7 @@
          * @return array list of all resized images
          */
         public function rebuildThumbnails() {
-            $resized = array();
+            $resized = $db_files = array();
 
             // Get all registered images
             $this->database->query("CALL GET_FILES('gallery', 1000);");

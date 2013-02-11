@@ -59,4 +59,30 @@
 
             return $options;
         }
+
+        /**
+         * Show gallery by id
+         * @param array $options
+         * @return array|bool $options
+         */
+        public function showAction($options) {
+            // Get item ID
+            $options['id'] = System::getInstance()->getCmd('id');
+
+            // Get item title and data
+            if ($options['id']) {
+                $options['data'] = $this->model->getGalleryById($options['id']);
+                $options['title'] = $options['data']->name;
+            } else {
+                return $this->view->_404($options);
+            }
+
+            // Render blog item
+            if (!empty($options['data'])) {
+                $options['body'] = $this->view->getContents('gallery', 'full', $options);
+                return $this->view->wrapSidebar($options);
+            } else {
+                return $this->view->_404($options);
+            }
+        }
     }
