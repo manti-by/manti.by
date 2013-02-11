@@ -191,4 +191,21 @@
 
             return $resized;
         }
+
+
+
+        /**
+         * Track gallery by id
+         * @param int $id
+         * @return bool|object $result
+         */
+        public function trackGallery($id){
+            // Check empty value
+            if (empty($id)) {
+                return $this->_throw(T('Gallery ID could not be empty'));
+            }
+
+            $this->database->query("CALL TRACK_GALLERY_BY_ID($id);");
+            return $this->database->getField();
+        }
     }

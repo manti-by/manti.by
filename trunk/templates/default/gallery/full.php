@@ -25,7 +25,14 @@
     </div>
 </div>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
+        // Tracker for gallery
+        $.post(
+            '<?php echo Sef::getSef('index.php?module=gallery&action=track'); ?>',
+            { id : <?php echo $options['data']->id; ?> }
+        );
+
+        // Add popup wrapper for images
         $('.thumbnail').click(function(e){
             e.preventDefault();
 
