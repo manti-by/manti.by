@@ -13,13 +13,6 @@
 
     ini_set('error_reporting', 'E_ALL & ~E_NOTICE & ~E_DEPRECATED');
 
-    // DB connection config
-    define('DB_USER', 'root');
-    define('DB_PASS', 'Dalt0nik');
-    define('DB_HOST', 'localhost:3336');
-    define('DB_BASE', 'manti_by');
-    define('DB_TABLE', 'db_migration');
-
     // File options and scripts path
     define('DS', DIRECTORY_SEPARATOR);
     define('FILE_PATH', dirname(__DIR__) . DS . 'database');
@@ -27,6 +20,11 @@
     // Migration files pattern
     define('FILE_PATTERN', '/^\d{4}\-\d{2}\-\d{2}\_\d+[a-zA-Z0-9\_\-]*\.(sql)$/i');
     define('PROC_PATTERN', '/DELIMITER\s[\S]{2}(.*)[\S]{2}(\s*)DELIMITER\s;/is');
+
+    // Parse application config and set migration table
+    define('DB_TABLE', 'db_migration');
+    $ini_file = dirname(__DIR__) . DS . 'trunk' . DS . 'includes' . DS . 'config.ini';
+    $config = parse_ini_file($ini_file);
 
     // Intro text
     echo  str_repeat('-', 80) . EL
@@ -36,15 +34,20 @@
         . str_repeat('-', 80) . EL;
 
     // Connect to DB
-    $cid = mysql_pconnect(DB_HOST, DB_USER, DB_PASS);
+    $cid = mysql_pconnect($config['db_path'] . ':' . $config['db_port'], $config['db_user'], $config['db_pass']);
     if (empty($cid)) close('ERROR: Could not connect to DB.');
 
     // Get DB
-    $result = mysql_select_db(DB_BASE, $cid);
+    $result = mysql_select_db($config['db_base'], $cid);
     if (!$result) {
-        $result = mysql_query("CREATE DATABASE `" . DB_BASE . "`;", $cid);
+        $result = mysql_query("CREATE DATABASE `" . $config['db_base'] . "`;", $cid);
         if (!$result) {
             close('ERROR: Could not create DB.');
+        } else {
+            $result = mysql_select_db($config['db_base'], $cid);
+            if (!$result) {
+                close('ERROR: ' . mysql_error() . '.');
+            }
         }
     }
 
@@ -80,6 +83,7 @@
     }
 
     // Get migration list
+    $migration_list = array();
     if (is_dir(FILE_PATH)) {
         $dir = dir(FILE_PATH);
         while (false !== ($item = $dir->read())) {
@@ -160,6 +164,14 @@
             }
         }
     }
+
+    // Run cli mysql dumper
+    $command  = 'mysqldump -f -R -u ' . $config['db_user'];
+    $command .= ' -p' . $config['db_pass'];
+    $command .= ' ' . $config['db_base'] . ' > ' . FILE_PATH . DS . 'database.sql';
+    
+    message('Try to run mysql cli dump tool.');
+    system($command);
 
     close('Migration completed. Current version ' . $version . '.');
     
