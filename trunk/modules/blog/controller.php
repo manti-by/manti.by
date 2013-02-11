@@ -212,6 +212,26 @@
         }
 
         /**
+         * Delete action for blog post
+         * @param array $options
+         * @return array|bool $options
+         */
+        public function deleteAction($options) {
+            // Set output and get item ID
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+            $options['id'] = System::getInstance()->getCmd('id');
+
+            if ($this->model->deletePost($options['id'])) {
+                $options['data'] = array('result' => 'success');
+            } else {
+                $error = $this->getLastFromStack();
+                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+            }
+
+            return $options;
+        }
+
+        /**
          * Track action for blog post
          * @param array $options
          * @return array|bool $options

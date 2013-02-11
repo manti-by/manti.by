@@ -143,6 +143,20 @@
         }
 
         /**
+         * Delete post by id
+         * @param int $id
+         * @return bool|object $result
+         */
+        public function deletePost($id){
+            // Check empty value
+            if (empty($id)) {
+                return $this->_throw(T('Post ID could not be empty'));
+            }
+
+            return $this->database->query("CALL DELETE_POST_BY_ID($id);");
+        }
+
+        /**
          * Track post by id
          * @param int $id
          * @return bool|object $result
