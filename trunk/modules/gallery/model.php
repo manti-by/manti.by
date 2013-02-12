@@ -88,7 +88,7 @@
         private function appendGalleriesImages($galleries) {
             // Append originals and thumbnails
             foreach ($galleries as $gallery) {
-                $this->database->query("CALL GET_GALLERY_ITEMS('" . $this->database->escape($gallery->path) . "')");
+                $this->database->query("CALL GET_GALLERY_ITEMS_BY_ID(" . $gallery->id. ")");
                 $gallery->originals = $this->database->getObjectsArray();
 
                 // Add originals and thumbnails links
@@ -104,11 +104,17 @@
         }
 
         /**
-         * Update gallery entrues from FS to DB
+         * Update gallery entries from FS to DB
          * @return array list of all new images from gallery path
          */
         public function updateFSlist() {
             $file_list = $db_files = array();
+
+            // Get already stored files from DB
+            $this->database->query("CALL GET_FILES('gallery', 0);");
+            if ($this->database->checkResult()) {
+                $db_files = $this->database->getPairs('id', 'source');
+            }
 
             // Get all gallery images
             clearstatcache();
@@ -119,32 +125,37 @@
                 $dir_name = substr(strrchr($path, '/'), 1);
                 $dir_name = $this->database->escape($dir_name);
                 $this->database->query("CALL UPSERT_GALLERY(0, '" . $this->database->escape($path) . "', '" . ucfirst($dir_name) . "',  '" . strtolower($dir_name) . "', '', '');");
+                $gallery_id = $this->database->getField();
 
                 // Parse files from directory
-                foreach ($fileModel->getDirList($path) as $filename => $fileinfo) {
-                    if (realpath(ROOT_PATH . DS . $filename)) {
-                        $file_list[$filename] = 'Readed from FS';
-                    }
-                }
-            }
-
-            // Check DB
-            $this->database->query("CALL GET_FILES('gallery', 0);");
-            if ($this->database->checkResult()) {
-                $db_files = $this->database->getPairs('id', 'source');
-            }
-
-            // Check in DB
-            if (count($file_list)) {
-                foreach ($file_list as $source => $status) {
-                    if (in_array($source, $db_files)) {
-                        unset($file_list[$source]);
-                    } else {
-                        if ($fileModel->add(array('source'=> $source, 'type'  => 'gallery',))) {
-                            $file_list[$source] = 'Stored in DB';
-                        } else {
-                            $message = $this->getLastFromStack();
-                            $file_list[$source] = $message['message'];
+                foreach ($fileModel->getDirList($path) as $source => $fileinfo) {
+                    // If file exists
+                    if (realpath(ROOT_PATH . DS . $source)) {
+                        // And not already stored in DB
+                        if (!in_array($source, $db_files)) {
+                            // Add record to files table
+                            if ($file_id = $fileModel->add(array('source'=> $source, 'type' => 'gallery',))) {
+                                // And add linkage to gallery
+                                $this->database->query("CALL UPSERT_GALLERY_FILES(" . $gallery_id . ", " . $file_id . ");");
+                                if ($this->database->getField()) {
+                                    $file_list[] = array(
+                                        'source' => $source,
+                                        'status' => T('Stored in DB')
+                                    );
+                                } else {
+                                    $message = $this->getLastFromStack();
+                                    $file_list[] = array(
+                                        'source' => $source,
+                                        'status' => $message['message']
+                                    );
+                                }
+                            } else {
+                                $message = $this->getLastFromStack();
+                                $file_list[] = array(
+                                    'source' => $source,
+                                    'status' => $message['message']
+                                );
+                            }
                         }
                     }
                 }
@@ -176,7 +187,14 @@
                 // Check directory path and try to create it
                 if (!file_exists($thumbpath)) {
                     if (!mkdir($thumbpath)) {
-                        $this->_throw(T('Could not create thumbnail directory'));
+                        $message = T('Could not create thumbnail directory');
+                        $this->_throw($message);
+
+                        $resized[] = array(
+                            'source' => $thumbpath,
+                            'status' => $message
+                        );
+
                         continue;
                     }
                 }
@@ -184,7 +202,16 @@
                 // Check thumbnail and try to create it
                 if (!file_exists($thumbname)) {
                     if (System::getInstance()->resize($source, $thumbname, Application::$config['thumb_width'], Application::$config['thumb_height'])) {
-                        $resized[] = $thumbpath;
+                        $resized[] = array(
+                            'source' => $source,
+                            'status' => T('Successfully resized')
+                        );
+                    } else {
+                        $message = $this->getLastFromStack();
+                        $resized[] = array(
+                            'source' => $source,
+                            'status' => $message['message']
+                        );
                     }
                 }
             }

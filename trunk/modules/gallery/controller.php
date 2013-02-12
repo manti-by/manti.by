@@ -49,13 +49,13 @@
          * Runs updates in gallery
          */
         public function updateAction() {
-            // Run actions and get stats
-            $parsed = $this->model->updateFSList();
-            $resized = $this->model->rebuildThumbnails();
+            $options['output'] = View::OUTPUT_TYPE_JSON;
 
-            // Compile response
-            $options['title'] = 'Gallery updates';
-            $options['body']  = '<p>' . count($parsed) . ' ' . T('was parsed') . '</p><p>' . count($resized) . ' ' . T('was resized') . '</p>';
+            // Run actions and compile response
+            $options['data'] = array(
+                'parsed'    => $this->model->updateFSList(),
+                'resized'   => $this->model->rebuildThumbnails()
+            );
 
             return $options;
         }
