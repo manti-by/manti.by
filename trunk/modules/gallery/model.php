@@ -219,8 +219,6 @@
             return $resized;
         }
 
-
-
         /**
          * Track gallery by id
          * @param int $id
@@ -234,5 +232,35 @@
 
             $this->database->query("CALL TRACK_GALLERY_BY_ID($id);");
             return $this->database->getField();
+        }
+
+        /**
+         * Return next image by id
+         * @param int $id
+         * @return bool|object $result
+         */
+        public function nextImage($id){
+            // Check empty value
+            if (empty($id)) {
+                return $this->_throw(T('Image ID could not be empty'));
+            }
+
+            $this->database->query("CALL GET_NEXT_IMAGE_BY_ID($id);");
+            return $this->database->getObject();
+        }
+
+        /**
+         * Return prev image by id
+         * @param int $id
+         * @return bool|object $result
+         */
+        public function prevImage($id){
+            // Check empty value
+            if (empty($id)) {
+                return $this->_throw(T('Image ID could not be empty'));
+            }
+
+            $this->database->query("CALL GET_PREV_IMAGE_BY_ID($id);");
+            return $this->database->getObject();
         }
     }

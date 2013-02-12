@@ -105,4 +105,44 @@
 
             return $options;
         }
+
+        /**
+         * Return next image by ID
+         * @param array $options
+         * @return array|bool $options
+         */
+        public function nextAction($options) {
+            // Set output and get item ID
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+            $options['id'] = System::getInstance()->getCmd('id');
+
+            if ($result = $this->model->nextImage($options['id'])) {
+                $options['data'] = array('result' => 'success', 'id' => $result->id, 'original' => $result->source);
+            } else {
+                $error = $this->getLastFromStack();
+                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+            }
+
+            return $options;
+        }
+
+        /**
+         * Return previous image by ID
+         * @param array $options
+         * @return array|bool $options
+         */
+        public function prevAction($options) {
+            // Set output and get item ID
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+            $options['id'] = System::getInstance()->getCmd('id');
+
+            if ($result = $this->model->prevImage($options['id'])) {
+                $options['data'] = array('result' => 'success', 'id' => $result->id, 'original' => $result->source);
+            } else {
+                $error = $this->getLastFromStack();
+                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+            }
+
+            return $options;
+        }
     }

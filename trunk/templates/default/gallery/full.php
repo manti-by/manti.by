@@ -31,29 +31,7 @@
             '<?php echo Sef::getSef('index.php?module=gallery&action=track'); ?>',
             { id : <?php echo $options['data']->id; ?> }
         );
-
-        // Add popup wrapper for images
-        $('.thumbnail').click(function(e){
-            e.preventDefault();
-
-            // Show loader and get original link
-            $.fn.loaderShow();
-            var original = $(this).attr('href');
-            var rel_id = $(this).attr('rel');
-
-            // Ping view counter
-            $.post(
-                '<?php echo Sef::getSef('index.php?module=file&action=track'); ?>',
-                { id : rel_id }
-            );
-
-            // Preload image and show
-            var image_block = $('<img src="' + original + '" />').load(function() {
-                $.fn.loaderHide();
-                $.fn.popupShow(image_block);
-            });
-
-            return false;
-        });
     });
 </script>
+
+<?php echo $this->getContents('gallery', 'ajax'); ?>
