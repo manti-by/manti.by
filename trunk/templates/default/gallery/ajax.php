@@ -8,7 +8,6 @@
      * @subpackage Template
      * @author Alexander Chaika
      * @since 0.3RC4
-     * @todo fix click for next/prev actions
      */
 ?>
 <script type="text/javascript">
