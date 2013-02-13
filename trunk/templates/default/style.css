@@ -106,3 +106,8 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; text-transform: uppercase; }
 
 #popular .rollover-item img { width: 150px; height: 150px; }
 #popular .rollover-item h3 { text-transform: none; font-size: 14px; padding: 5px 0; }
+
+.image-wrapper img { width: 100%; }
+.original, .next, .prev { cursor: pointer; }
+.next, .prev { position: absolute; width: 50px; height: 50px; background: black; top: 50%; }
+.next { right: 0; }
