@@ -21,6 +21,9 @@
     define('FILE_PATTERN', '/^\d{4}\-\d{2}\-\d{2}\_\d+[a-zA-Z0-9\_\-]*\.(sql)$/i');
     define('PROC_PATTERN', '/DELIMITER\s[\S]{2}(.*)[\S]{2}(\s*)DELIMITER\s;/is');
 
+    // Check current task
+    $task = isset($argv[1]) ? $argv[1] : 'migrate';
+
     // Parse application config and set migration table
     define('DB_TABLE', 'db_migration');
     $ini_file = dirname(__DIR__) . DS . 'trunk' . DS . 'includes' . DS . 'config.ini';
@@ -77,6 +80,27 @@
             
             if (!$result) close('ERROR: ' . mysql_error() . '.');
             else message('Tool installed succefully.');
+        } else {
+            close('ERROR: ' . mysql_error() . '.');
+        }
+    }
+
+    // Rollback action
+    if ($task == '--rollback' || $task == '-r') {
+        // Get rollback depth
+        message('Start rollback action.');
+        $limit = isset($argv[2]) ? (int) $argv[2] : 1;
+
+        // Delete latest migrations
+        $result = mysql_query("DELETE FROM `" . DB_TABLE . "` ORDER BY `id` DESC LIMIT " . $limit . ";", $cid);
+        if ($result) {
+            $result = mysql_query("SELECT `version` FROM `" . DB_TABLE . "` ORDER BY `id` DESC;", $cid);
+            if ($result) {
+                $current_version = reset(mysql_fetch_row($result));
+                close('Rollback action complete. Current DB version ' . $current_version . '.');
+            } else {
+                close('ERROR: ' . mysql_error() . '.');
+            }
         } else {
             close('ERROR: ' . mysql_error() . '.');
         }
