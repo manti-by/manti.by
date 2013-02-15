@@ -41,17 +41,21 @@
     if (empty($cid)) close('ERROR: Could not connect to DB.');
 
     // Get DB
-    $result = mysql_select_db($config['db_base'], $cid);
-    if (!$result) {
-        $result = mysql_query("CREATE DATABASE `" . $config['db_base'] . "`;", $cid);
-        if (!$result) {
-            close('ERROR: Could not create DB.');
-        } else {
-            $result = mysql_select_db($config['db_base'], $cid);
-            if (!$result) {
-                close('ERROR: ' . mysql_error() . '.');
-            }
-        }
+    select_db($cid, $config);
+
+    // Rollback action
+    if (in_array('--rollback', $argv) || in_array('-r', $argv)) {
+        rollback_action($cid);
+    }
+
+    // Remigrate action
+    if (in_array('--remigrate', $argv) || in_array('-c', $argv)) {
+        $current_version = 0;
+        remigrate_action($cid, $config);
+
+        // Create db and migration table
+        select_db($cid, $config);
+        create_migration_table($cid);
     }
 
     // Check current DB version
@@ -63,47 +67,7 @@
         $current_version = 0;
         message('NOTICE: Tool not installed. Try to create migration table.');
 
-        // Try to create version table
-        $result = mysql_query("
-            CREATE TABLE `" . DB_TABLE . "` (
-                `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-                `version` int(10) unsigned NOT NULL DEFAULT 0,
-                `comment` varchar(32) DEFAULT NULL,
-                `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                PRIMARY KEY (`id`)
-            ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;", $cid);
-
-        // Set initial value
-        if ($result) {
-            message('Migration table created successfully.');
-            $result = mysql_query("INSERT INTO `" . DB_TABLE . "` (`version`) VALUES (0);", $cid);
-            
-            if (!$result) close('ERROR: ' . mysql_error() . '.');
-            else message('Tool installed succefully.');
-        } else {
-            close('ERROR: ' . mysql_error() . '.');
-        }
-    }
-
-    // Rollback action
-    if ($task == '--rollback' || $task == '-r') {
-        // Get rollback depth
-        message('Start rollback action.');
-        $limit = isset($argv[2]) ? (int) $argv[2] : 1;
-
-        // Delete latest migrations
-        $result = mysql_query("DELETE FROM `" . DB_TABLE . "` ORDER BY `id` DESC LIMIT " . $limit . ";", $cid);
-        if ($result) {
-            $result = mysql_query("SELECT `version` FROM `" . DB_TABLE . "` ORDER BY `id` DESC;", $cid);
-            if ($result) {
-                $current_version = reset(mysql_fetch_row($result));
-                close('Rollback action complete. Current DB version ' . $current_version . '.');
-            } else {
-                close('ERROR: ' . mysql_error() . '.');
-            }
-        } else {
-            close('ERROR: ' . mysql_error() . '.');
-        }
+        create_migration_table($cid);
     }
 
     // Get migration list
@@ -189,13 +153,9 @@
         }
     }
 
-    // Run cli mysql dumper
-    $command  = 'mysqldump -f -R -u ' . $config['db_user'];
-    $command .= ' -p' . $config['db_pass'];
-    $command .= ' ' . $config['db_base'] . ' > ' . FILE_PATH . DS . 'database.sql';
-    
-    message('Try to run mysql cli dump tool.');
-    system($command);
+    if (!in_array('-w', $argv) && !in_array('--without-dump', $argv)) {
+        dump_action($config);
+    }
 
     close('Migration completed. Current version ' . $version . '.');
     
@@ -208,4 +168,100 @@
     // Message function
     function message($message) {
         echo $message . EL;
+    }
+
+    // Rollback action
+    function rollback_action($cid) {
+        // Get rollback depth
+        message('Start rollback action.');
+        $limit = isset($argv[2]) ? (int) $argv[2] : 1;
+
+        // Delete latest migrations
+        $result = mysql_query("DELETE FROM `" . DB_TABLE . "` ORDER BY `id` DESC LIMIT " . $limit . ";", $cid);
+        if ($result) {
+            $result = mysql_query("SELECT `version` FROM `" . DB_TABLE . "` ORDER BY `id` DESC;", $cid);
+            if ($result) {
+                $current_version = reset(mysql_fetch_row($result));
+                close('Rollback action complete. Current DB version ' . $current_version . '.');
+            } else {
+                close('ERROR: ' . mysql_error() . '.');
+            }
+        } else {
+            close('ERROR: ' . mysql_error() . '.');
+        }
+    }
+
+    // Remigrate action
+    function remigrate_action($cid, $config) {
+        // Get rollback depth
+        message('Start remigrate action.');
+        if (php_sapi_name() == 'cli') {
+            message('This action will destroy your current DB. Are you sure to do this? [y/N]');
+
+            $confirmation = trim(fgets(STDIN));
+            if ($confirmation !== 'y' && $confirmation !== 'Y') {
+                close('Action cancelled.');
+            }
+        }
+
+        // Dump current DB
+        dump_action($config, 'backup_' . date('Ymdhi'));
+        message('DB backup saved to migration directory');
+
+        // Delete current DB
+        $result = mysql_query("DROP DATABASE `" . $config['db_base'] . "`;", $cid);
+        if (!$result) {
+            close('ERROR: ' . mysql_error() . '.');
+        }
+    }
+
+    // Dump action
+    function dump_action($config, $filename = 'database') {
+        // Run cli mysql dumper
+        $command  = 'mysqldump -f -R -u ' . $config['db_user'];
+        $command .= ' -p' . $config['db_pass'];
+        $command .= ' ' . $config['db_base'] . ' > ' . FILE_PATH . DS . $filename .'.sql';
+
+        message('Try to run mysql cli dump tool.');
+        system($command);
+    }
+
+    // Select or create DB
+    function select_db($cid, $config) {
+        $result = mysql_select_db($config['db_base'], $cid);
+        if (!$result) {
+            $result = mysql_query("CREATE DATABASE `" . $config['db_base'] . "`;", $cid);
+            if (!$result) {
+                close('ERROR: Could not create DB.');
+            } else {
+                $result = mysql_select_db($config['db_base'], $cid);
+                if (!$result) {
+                    close('ERROR: ' . mysql_error() . '.');
+                }
+            }
+        }
+    }
+
+    // Create migration table
+    function create_migration_table($cid) {
+        // Try to create version table
+        $result = mysql_query("
+            CREATE TABLE `" . DB_TABLE . "` (
+                `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+                `version` int(10) unsigned NOT NULL DEFAULT 0,
+                `comment` varchar(32) DEFAULT NULL,
+                `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                PRIMARY KEY (`id`)
+            ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;", $cid);
+
+        // Set initial value
+        if ($result) {
+            message('Migration table created successfully.');
+            $result = mysql_query("INSERT INTO `" . DB_TABLE . "` (`version`) VALUES (0);", $cid);
+
+            if (!$result) close('ERROR: ' . mysql_error() . '.');
+            else message('Tool installed successfully.');
+        } else {
+            close('ERROR: ' . mysql_error() . '.');
+        }
     }
