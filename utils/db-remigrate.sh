@@ -1,2 +1,2 @@
 #!/bin/sh
-php -f dbm.php -- -c
+php -f dbm.php -- -r

@@ -13,6 +13,11 @@
 
     ini_set('error_reporting', 'E_ALL & ~E_NOTICE & ~E_DEPRECATED');
 
+    // Rollback action
+    if (in_array('--help', $argv) || in_array('-h', $argv)) {
+        help_action();
+    }
+
     // File options and scripts path
     define('DS', DIRECTORY_SEPARATOR);
     define('FILE_PATH', dirname(__DIR__) . DS . 'database');
@@ -29,13 +34,6 @@
     $ini_file = dirname(__DIR__) . DS . 'trunk' . DS . 'includes' . DS . 'config.ini';
     $config = parse_ini_file($ini_file);
 
-    // Intro text
-    echo  str_repeat('-', 80) . EL
-        . '  MySQL DB migration tool for web applications. Version 0.2.6 beta. ' . EL
-        . '  Provides simple versioning mechanism for uploading MySQL migration scripts.' . EL
-        . '  Author: Alexander Chaika <marco.manti@gmail.com>.' . EL
-        . str_repeat('-', 80) . EL;
-
     // Connect to DB
     $cid = mysql_pconnect($config['db_path'] . ':' . $config['db_port'], $config['db_user'], $config['db_pass']);
     if (empty($cid)) close('ERROR: Could not connect to DB.');
@@ -44,12 +42,12 @@
     select_db($cid, $config);
 
     // Rollback action
-    if (in_array('--rollback', $argv) || in_array('-r', $argv)) {
-        rollback_action($cid);
+    if (in_array('--delete', $argv) || in_array('-d', $argv)) {
+        delete_action($cid, $argv);
     }
 
     // Remigrate action
-    if (in_array('--remigrate', $argv) || in_array('-c', $argv)) {
+    if (in_array('--remigrate', $argv) || in_array('-r', $argv)) {
         $current_version = 0;
         remigrate_action($cid, $config);
 
@@ -171,12 +169,14 @@
     }
 
     // Rollback action
-    function rollback_action($cid) {
+    function delete_action($cid, $argv) {
         // Get rollback depth
-        message('Start rollback action.');
-        $limit = isset($argv[2]) ? (int) $argv[2] : 1;
+        $key = in_array('-d', $argv) ? array_search('-d', $argv) : false;
+        $key = $key ? $key : (in_array('--delete', $argv) ? array_search('--delete', $argv) : false);
+        $limit = $key && (int)$argv[$key + 1] > 0 ? (int)$argv[$key + 1] : 1;
 
         // Delete latest migrations
+        message('Start rollback action. Depth ' . $limit . '.');
         $result = mysql_query("DELETE FROM `" . DB_TABLE . "` ORDER BY `id` DESC LIMIT " . $limit . ";", $cid);
         if ($result) {
             $result = mysql_query("SELECT `version` FROM `" . DB_TABLE . "` ORDER BY `id` DESC;", $cid);
@@ -264,4 +264,19 @@
         } else {
             close('ERROR: ' . mysql_error() . '.');
         }
+    }
+
+    function help_action() {
+        echo str_repeat('-', 80) . EL
+            . '  MySQL DB migration tool for web applications. Version 0.3.1 beta. ' . EL
+            . '  Provides simple versioning mechanism for uploading MySQL migration scripts.' . EL
+            . '  Author: Alexander Chaika <marco.manti@gmail.com>.' . EL
+            . EL
+            . '  Usage: php -f dbm.php -- [OPTIONS]' . EL
+            . '      [-r, --remigrate]       Drop DB and migrate to latest migration' . EL
+            . '      [-h, --help]            Display this help ' . EL
+            . '      [-d, --delete]          Delete latest [N] migration records' . EL
+            . '      [-w, --without-dump]    Run migration without dumping DB to file' . EL
+            . str_repeat('-', 80) . EL;
+        die;
     }
