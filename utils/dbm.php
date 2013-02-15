@@ -1,11 +1,11 @@
 <?php
     /**
      * CLI database migration tool for web applications.
-     * Provides simple versioning mechanism for uploading MySQL migration scripts in DB.
+     * Provides simple versioned mechanism for uploading MySQL migration scripts in DB.
      * @author Alexander Chaika <marco.manti@gmail.com>
      * @package M2 Micro Framework
      * @subpackage Tools
-     * @version 0.2.6 beta
+     * @version 0.3.1 beta
      */
 
     if (php_sapi_name() == 'cli') define('EL', PHP_EOL);
