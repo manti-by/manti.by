@@ -249,7 +249,7 @@
             CREATE TABLE `" . DB_TABLE . "` (
                 `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
                 `version` int(10) unsigned NOT NULL DEFAULT 0,
-                `comment` varchar(32) DEFAULT NULL,
+                `comment` varchar(255) DEFAULT NULL,
                 `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 PRIMARY KEY (`id`)
             ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;", $cid);
