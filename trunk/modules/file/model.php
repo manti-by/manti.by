@@ -8,6 +8,7 @@
      * @subpackage Modules
      * @author Alexander Chaika
      * @since 0.3RC2
+     * @todo add multiple types in GET_FILES(...)
      */
     class FileModel extends Model {
 
@@ -49,7 +50,7 @@
          * @param int $limit OPTIONAL
          * @return array|bool $result
          */
-        public function getList($type = null, $limit = 100) {
+        public function getList($type = null, $limit = 10000) {
             // Check map
             $type = $this->checkMap($type);
 
@@ -95,7 +96,7 @@
          * @param int $limit OPTIONAL
          * @return array|bool $result
          */
-        public function getDownloadList($type = FileEntity::TYPE_RELEASE, $limit = 100) {
+        public function getDownloadList($type = FileEntity::TYPE_RELEASE, $limit = 10000) {
             // Check map
             $type = $this->checkMap($type);
 
