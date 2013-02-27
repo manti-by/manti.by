@@ -46,15 +46,34 @@
         }
 
         /**
-         * Runs updates in gallery
+         * Runs updates for files in gallery
          */
-        public function updateAction() {
+        public function updateFilesAction() {
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
             // Run actions and compile response
             $options['data'] = array(
-                'parsed'    => $this->model->updateFSList(),
-                'resized'   => $this->model->rebuildThumbnails()
+                'result' => 'success',
+                'message' => $this->view->wrapFileList(
+                    $this->model->updateFSList()
+                )
+            );
+
+            return $options;
+        }
+
+        /**
+         * Rebuild thumbnails for images in gallery
+         */
+        public function rebuildThumbnailsAction() {
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+
+            // Run actions and compile response
+            $options['data'] = array(
+                'result'  => 'success',
+                'message' => $this->view->wrapFileList(
+                    $this->model->rebuildThumbnails()
+                )
             );
 
             return $options;

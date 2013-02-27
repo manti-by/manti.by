@@ -143,11 +143,12 @@
                                         'status' => T('Stored in DB')
                                     );
                                 } else {
-                                    $message = $this->getLastFromStack();
+                                    // @todo Add error handler for file dublicates
+                                    /*$message = $this->getLastFromStack();
                                     $file_list[] = array(
                                         'source' => $source,
                                         'status' => $message['message']
-                                    );
+                                    );*/
                                 }
                             } else {
                                 $message = $this->getLastFromStack();
@@ -199,20 +200,23 @@
                     }
                 }
 
-                // Check thumbnail and try to create it
-                if (!file_exists($thumbname)) {
-                    if (System::getInstance()->resize($source, $thumbname, Application::$config['thumb_width'], Application::$config['thumb_height'], System::RESIZE_WITH_CROP)) {
-                        $resized[] = array(
-                            'source' => $source,
-                            'status' => T('Successfully resized')
-                        );
-                    } else {
-                        $message = $this->getLastFromStack();
-                        $resized[] = array(
-                            'source' => $source,
-                            'status' => $message['message']
-                        );
-                    }
+                // Remove old thumbnail
+                if (file_exists($thumbname)) {
+                    unlink($thumbname);
+                }
+
+                // And try to create new
+                if (System::getInstance()->resize($source, $thumbname, Application::$config['thumb_width'], Application::$config['thumb_height'], System::RESIZE_WITH_CROP)) {
+                    $resized[] = array(
+                        'source' => $source,
+                        'status' => T('Successfully resized')
+                    );
+                } else {
+                    $message = $this->getLastFromStack();
+                    $resized[] = array(
+                        'source' => $source,
+                        'status' => $message['message']
+                    );
                 }
             }
 

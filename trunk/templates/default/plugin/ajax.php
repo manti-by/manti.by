@@ -28,11 +28,10 @@
                             $.fn.loaderHide();
                             if (response.result == 'success') {
                                 if (callback != '') eval(callback);
-                                var popup_block = $('<div class="success-message">' + response.message + '</div>');
+                                $.fn.popupShow('<div class="success-message">' + response.message + '</div>');
                             } else {
-                                var popup_block = $('<div class="error-message">' + response.error + '</div>');
+                                $.fn.popupShow('<div class="error-message">' + response.error + '</div>');
                             }
-                            $.fn.popupShow(popup_block);
                         });
                     }
 
