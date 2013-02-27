@@ -30,28 +30,43 @@
             var image_block = $('<img src="' + original + '" class="original" rel="' + rel_id + '" />');
 
             // Wait while loading and bind click
-            image_block.load(buildImageBlock(image_block, rel_id)).bind('click', nextImage);
+            image_block.load(function() {
+                // Build image block
+                buildImageBlock(this, rel_id);
+
+                // Bind next click
+                $(this).bind('click', nextImage);
+            });
 
             return false;
+        });
+
+        $(document).bind('click', function() {
+            $('#image-wrapper').remove();
         });
 
         buildImage = function(response) {
             if (response.result == 'success') {
                 // Create image block
-                var image_block = $('<img src="' + response.original + '" class="original" rel="' + response.id + '" />');
+                var image_block = $('<img src="' + response.original + '" class="original resizible" rel="' + response.id + '" />');
 
                 // Wait while loading and bind click and track
-                image_block.load(buildImageBlock(image_block, response.id)).load(function(){
+                image_block.load(function() {
+                    // Build block
+                    buildImageBlock(this, response.id);
+
+                    // Bind next click
+                    $(this).bind('click', nextImage);
+
                     // Ping view counter
                     $.post(
                         '<?php echo Sef::getSef('index.php?module=file&action=track'); ?>',
                         { id : response.id }
                     );
-                }).bind('click', nextImage);
+                });
             } else {
                 if (response.error) {
-                    var popup_block = $(response.error);
-                    $.fn.popupShow(popup_block);
+                    $.fn.popupShow(response.error);
                 } else {
                     $.fn.loaderHide();
                 }
@@ -59,14 +74,20 @@
         }
 
         buildImageBlock = function(image_block, rel_id) {
+            // Remove old image
+            $('#image-wrapper').remove();
+
             // Popup blocks
+            var close_pointer = $('<div class="close"></div>').bind('click', $('#image-wrapper').remove());
             var next_pointer = $('<div class="next" rel="' + rel_id + '"></div>').bind('click', nextImage);
             var prev_pointer = $('<div class="prev" rel="' + rel_id + '"></div>').bind('click', prevImage);
-            var wrapper = $('<div class="image-wrapper"></div>');
+            var wrapper = $('<div id="image-wrapper"></div>');
 
-            // Build block wrapper and show
-            wrapper.append(prev_pointer).append(image_block).append(next_pointer);
-            $.fn.popupShow(wrapper);
+            // Build block wrapper and append to contents
+            wrapper.append(close_pointer).append(prev_pointer).append(image_block).append(next_pointer);
+            $('#content').append(wrapper);
+
+            // Hide loader
             $.fn.loaderHide();
         }
 
