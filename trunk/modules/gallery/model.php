@@ -201,7 +201,7 @@
 
                 // Check thumbnail and try to create it
                 if (!file_exists($thumbname)) {
-                    if (System::getInstance()->resize($source, $thumbname, Application::$config['thumb_width'], Application::$config['thumb_height'])) {
+                    if (System::getInstance()->resize($source, $thumbname, Application::$config['thumb_width'], Application::$config['thumb_height'], System::RESIZE_WITH_CROP)) {
                         $resized[] = array(
                             'source' => $source,
                             'status' => T('Successfully resized')
