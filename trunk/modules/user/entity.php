@@ -233,6 +233,15 @@
         }
 
         /**
+         * Get user email
+         * @return string $username
+         */
+        public function getEmail() {
+            $this->checkSession();
+            return $this->email;
+        }
+
+        /**
          * Get username
          * @return string $username
          */

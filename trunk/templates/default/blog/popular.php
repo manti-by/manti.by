@@ -8,7 +8,6 @@
      * @package M2 Micro Framework
      * @subpackage Template
      * @since 0.3RC
-     * @todo Create popular list
      */
 
     $user = UserEntity::getInstance();
@@ -34,5 +33,7 @@
                 </li>
             <?php endforeach; ?>
         </ul>
+    <?php else : ?>
+        <?php echo T('There are no contents found'); ?>
     <?php endif; ?>
 </div>

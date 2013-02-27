@@ -44,6 +44,8 @@
                 <?php endif; ?>
             <?php endforeach; ?>
         </ul>
+    <?php else : ?>
+        <?php echo T('There are no contents found'); ?>
     <?php endif; ?>
 </div>
 <script type="text/javascript">

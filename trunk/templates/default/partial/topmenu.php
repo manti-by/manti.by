@@ -11,7 +11,17 @@
      */
 
     $user = UserEntity::getInstance();
+    $username = $user->getUsername();
+    $salutation = !empty($username) ? $username : $user->getEmail();
 ?>
+<?php if ($user->isLoggined()) : ?>
+<div id="usermenu">
+    <?php echo T('Hi') . ' ' . $salutation; ?>!
+    <a href="<?php echo Sef::getSef('index.php?module=user&action=dashboard');?>"><?php echo T('Dashboard'); ?></a> |
+    <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Sign Out'); ?></a>
+</div>
+<?php endif; ?>
+
 <a href="<?php echo Application::$config['http_host']; ?>" class="fl">
     <img src="<?php echo Application::$config['template_image_url_path']; ?>logo.png" alt="Manti Logo" width="114" height="56" />
 </a>
@@ -22,11 +32,3 @@
     <li><a href="<?php echo Sef::getSef('index.php?module=file'); ?>"><?php echo T('Download'); ?></a></li>
     <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=4'); ?>"><?php echo T('About'); ?></a></li>
 </ul>
-<?php if ($user->isLoggined()) : ?>
-    <div id="usermenu" class="fl">
-        <?php echo T('Hi') . ' ' . $user->getUsername(); ?>!
-        <a href="<?php echo Sef::getSef('index.php?module=blog&action=edit');?>"><?php echo T('New Post'); ?></a> |
-        <a href="<?php echo Sef::getSef('index.php?module=file&action=edit'); ?>"><?php echo T('View Files'); ?></a> |
-        <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Sign Out'); ?></a>
-    </div>
-<?php endif; ?>
