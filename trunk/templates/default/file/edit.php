@@ -23,11 +23,10 @@
                 function(response) {
                     $.fn.loaderHide();
                     if (response.result == 'success') {
-                        var popup_block = $(response.data);
+                        $.fn.popupShow(response.data);
                     } else {
-                        var popup_block = $(response.error);
+                        $.fn.popupShow(response.error);
                     }
-                    $.fn.popupShow(popup_block);
             });
         });
 
@@ -42,11 +41,10 @@
                     function(response) {
                         $.fn.loaderHide();
                         if (response.result == 'success') {
-                            var popup_block = $(response.data);
+                            $.fn.popupShow(response.data);
                         } else {
-                            var popup_block = $(response.error);
+                            $.fn.popupShow(response.error);
                         }
-                        $.fn.popupShow(popup_block);
                     });
         });
 
@@ -61,7 +59,7 @@
                 function(response) {
                     $.fn.loaderHide();
                     if (response.result == 'success') {
-                        var popup_block = $('<?php echo T('File removed from DB'); ?>');
+                        $.fn.popupShow('<?php echo T('File removed from DB'); ?>');
 
                         $('#' + rel_id + ' .file-name').removeClass('green');
                         $('#' + rel_id + ' .file-actions a.file-remove').remove();
@@ -69,9 +67,8 @@
                             '<a href="#add" class="file-add green" rel_id="' + rel_id + '" rel="' + response.source + '"><?php echo T('Add'); ?></a>'
                         );
                     } else {
-                        var popup_block = $(response.error);
+                        $.fn.popupShow(response.error);
                     }
-                    $.fn.popupShow(popup_block);
                 }
             )
         });

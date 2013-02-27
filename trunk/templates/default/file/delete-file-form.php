@@ -37,12 +37,11 @@
                 function(response) {
                     $.fn.loaderHide();
                     if (response.result == 'success') {
-                        var popup_block = $('<?php echo T('File deleted from FS'); ?>');
+                        $.fn.popupShow('<?php echo T('File deleted from FS'); ?>');
                         $('#' + rel_id).remove();
                     } else {
-                        var popup_block = $(response.error);
+                        $.fn.popupShow(response.error);
                     }
-                    $.fn.popupShow(popup_block);
                 }
             )
         });
