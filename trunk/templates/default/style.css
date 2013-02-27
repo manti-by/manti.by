@@ -1,7 +1,7 @@
 a { color: #b40303; text-decoration: none; }
 a:hover, a:active { text-decoration: underline; }
 
-h1, h2, h3, h4, h5, h6 { border-bottom: none; text-transform: uppercase; }
+h1, h2, h3, h4, h5, h6 { border-bottom: none; }
 
 .wrapper { border: none; }
 
@@ -36,12 +36,12 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; text-transform: uppercase; }
 
 .post-item { margin-bottom: 40px; font-size: 14px; line-height: 22px;}
 .post-item .teaser { padding-bottom: 15px; }
-.post-item .cover { width: 350px; height: 350px; }
+.post-item .cover { width: 350px; height: 350px; border: 1px solid #CCC; }
 .post-item .covers { padding: 0 15px 15px 0; }
 
 .post-item-full { font-size: 14px; line-height: 22px; }
 .post-item-full .description { padding-bottom: 15px; }
-.post-item-full .cover { width: 350px; height: 350px; }
+.post-item-full .cover { width: 350px; height: 350px; border: 1px solid #CCC; }
 .post-item-full .covers { padding: 0 15px 15px 0; }
 
 .main-sidebar { float: left; width: 700px; }
@@ -53,6 +53,7 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; text-transform: uppercase; }
 
 .relation { float: left; margin: 0 15px 15px 0; text-align: center; }
 .relation .small-cover { display: block; width: 150px; height: 150px; margin-bottom: 10px; }
+.small-cover { border: 1px solid #CCC !important; }
 
 #popular, #featured { border-bottom: 1px solid #CCC; }
 
@@ -104,7 +105,7 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; text-transform: uppercase; }
 #popular #rollover { display: inline; list-style: none; padding: 0; }
 #popular .rollover-item { display: inline-block; margin-right: 20px; text-align: center; }
 
-#popular .rollover-item img { width: 150px; height: 150px; }
+#popular .rollover-item img { width: 150px; height: 150px; border: 1px solid #CCC !important; }
 #popular .rollover-item h3 { text-transform: none; font-size: 14px; padding: 5px 0; }
 
 #image-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 500;
