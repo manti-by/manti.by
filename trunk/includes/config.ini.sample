@@ -44,9 +44,9 @@ covers_path = "./content/covers"
 
 [gallery settings]
 gallery_path = "./content/gallery"
-preview_count = 10
-thumb_width = 90
-thumb_height = 90
+preview_count = 12
+thumb_width = 100
+thumb_height = 100
 
 [blog settings]
 teaser_length = 250
