@@ -43,11 +43,15 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; }
 .post-item-full .description { padding-bottom: 15px; }
 .post-item-full .cover { width: 350px; height: 350px; border: 1px solid #CCC; }
 .post-item-full .covers { padding: 0 15px 15px 0; }
+.post-item-full .relations { margin-top: 20px; }
 
 .main-sidebar { float: left; width: 700px; }
 .right-sidebar { float: right; width: 240px; }
-.right-sidebar li { list-style: none; padding: 5px 15px; }
-.right-sidebar h3, .right-sidebar a { color: #666; }
+.right-sidebar li { list-style: none; padding: 8px 18px; }
+.right-sidebar h3 { color: #555; padding-bottom: 8px; }
+.right-sidebar a { color: #666; }
+.right-sidebar .sidebar { margin-top: 0; margin-bottom: 10px; }
+.right-sidebar .tag-counter { color: #999; }
 
 .admin-buttons a { font-size: 12px; }
 

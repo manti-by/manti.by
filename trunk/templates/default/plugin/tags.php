@@ -14,7 +14,7 @@
 ?>
 <ul class="sidebar">
     <h3><?php echo T('Popular Categories'); ?></h3>
-    <?php foreach($tags as $id => $value) : ?>
-        <li><a href="<?php echo Sef::getSef('index.php?module=tag&action=search&id=' . $id); ?>" title="<?php echo $value; ?>"><?php echo $value; ?></a></li>
+    <?php foreach($tags as $item) : ?>
+        <li><a href="<?php echo Sef::getSef('index.php?module=tag&action=search&id=' . $item->id); ?>" title="<?php echo $item->name; ?>"><?php echo $item->name . ' <span class="tag-counter">(' . $item->count . ')</span>'; ?></a></li>
     <?php endforeach; ?>
 </ul>

@@ -70,7 +70,7 @@
          */
         public function getTags($limit = 10) {
             $this->database->query("CALL GET_TAGS($limit);");
-            return $this->database->getPairs('id', 'name');
+            return $this->database->getObjectsArray();
         }
 
         /**

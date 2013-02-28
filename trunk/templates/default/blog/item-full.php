@@ -39,7 +39,7 @@
     <?php endif; ?>
 
     <?php if (json_decode($options['data']->relations)) : ?>
-        <div class="tracklist">
+        <div class="relations">
             <h2><?php echo T('Similar posts'); ?></h2>
             <?php echo Relations::getHtml($options['data']->relations); ?>
         </div>
