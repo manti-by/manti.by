@@ -60,7 +60,7 @@
             }
 
             // Get all posts
-            $this->database->query("CALL GET_POSTS(0, 10);");
+            $this->database->query("CALL GET_POSTS(0, 100);");
             $posts = $this->database->getObjectsArray();
             foreach ($posts as $item) {
                 if (!in_array($item->id, $in_use)) {
@@ -69,7 +69,8 @@
                 }
 
                 // Break when done
-                if (count($in_use) >= Application::$config['posts_per_page']) {
+                $frontpage_count = count($in_use) - Application::$config['popular_count'] - Application::$config['featured_count'];
+                if ($frontpage_count >= Application::$config['frontpage_count']) {
                     break;
                 }
             }
