@@ -174,15 +174,17 @@
             }
 
             if (empty($options['teaser'])) {
-                $options['teaser'] = substr(strip_tags($options['description']), 0, Application::$config['teaser_length']);
+                $options['teaser'] = strip_tags($options['description']);
             }
+            $options['teaser'] = substr($options['teaser'], 0, Application::$config['teaser_length']);
 
             $options['metakeys'] = $system->getCmd('metakeys', '');
 
             $options['metadesc'] = $system->getCmd('metadesc', '');
             if (empty($options['metadesc'])) {
-                $options['metadesc'] = substr(strip_tags($options['description']), 0, Application::$config['metadesc_length']);
+                $options['metadesc'] = strip_tags($options['description']);
             }
+            $options['metadesc'] = substr($options['metadesc'], 0, Application::$config['metadesc_length']);
 
             $options['is_music'] = $system->getCmd('is_music', 0);
 
