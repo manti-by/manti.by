@@ -43,7 +43,7 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; }
 .post-item-full .description { padding-bottom: 15px; }
 .post-item-full .cover { width: 350px; height: 350px; border: 1px solid #CCC; }
 .post-item-full .covers { padding: 0 15px 15px 0; }
-.post-item-full .relations { margin-top: 20px; }
+.post-item-full .relations { margin: 20px 0 40px 0; }
 
 .main-sidebar { float: left; width: 700px; }
 .right-sidebar { float: right; width: 240px; }
@@ -107,10 +107,10 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; }
 
 #popular { padding: 30px 10px; }
 #popular #rollover { display: inline; list-style: none; padding: 0; }
-#popular .rollover-item { display: inline-block; margin-right: 20px; text-align: center; }
+#popular .rollover-item { display: inline-block; margin-right: 20px; width: 165px; text-align: center; }
 
 #popular .rollover-item img { width: 150px; height: 150px; border: 1px solid #CCC !important; }
-#popular .rollover-item h3 { text-transform: none; font-size: 14px; padding: 5px 0; }
+#popular .rollover-item h3 { height: 30px; text-transform: none; font-size: 14px; padding: 5px 0; }
 
 #image-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 500;
     text-align: center; vertical-align: middle; background: #000; }
