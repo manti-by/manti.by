@@ -15,7 +15,7 @@
         public function render() {
             $html = parent::render();
             if (!empty($html)) {
-                $this->_data  = Model::getModel('blog')->getPosts();
+                $this->_data  = Model::getModel('blog')->getPosts(100, 1);
                 $this->_value = Model::getModel('blog')->getPostRelationsById($this->_options['reference_id']);
                 if ($this->_data) {
                     ob_start();
