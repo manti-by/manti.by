@@ -70,7 +70,7 @@
     <h3><?php echo T('Who am I'); ?></h3>
     <ul>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=1'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>">
                 <?php echo T('For club promouters'); ?>
             </a>
         </li>
@@ -80,7 +80,7 @@
             </a>
         </li>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=3'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=16'); ?>">
                 <?php echo T('Rules and Copyrights'); ?>
             </a>
         </li>
