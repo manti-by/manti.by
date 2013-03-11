@@ -27,7 +27,7 @@ Installation at Ubuntu:
 5. Create new apache2 host:
     $ sudo gedit /etc/apache2/sites-available/m2.local
 
-6. And put these:
+6. And put this:
 
     <VirtualHost 127.0.0.1:80>
       DocumentRoot "/home/user/Projects/manti/m2_micro/source/trunk"
@@ -54,8 +54,9 @@ Installation at Ubuntu:
     8.1. You can use already compiled DB from file ./source/database/database.sql.
     
     8.2. Or you can create "clean" database from migrations in ./source/database/. 
-         For this you need use "Database migration tool" from next package
-         https://github.com/marco-manti/M2_Tools.
+         For this you need use "Database migration tool", you can find it in ./source/utils
+         directory, to run it simply call:
+         $ db-migrate.sh    # or from windows > db-migrate.bat
     
 9. Create HOSTS record:
     $ sudo gedit /etc/hosts
@@ -65,6 +66,8 @@ Installation at Ubuntu:
     127.0.0.1   m2.local
     127.0.0.1   www.m2.local
     
+10. Also in latest version uses Memecache server to speed up some operations. You can choose default
+    cache type in ./source/trunk/includes/cache.php:51.
 
-10. Restart apache2 and enjoy! Open your browser and go to http://m2.local. 
+11. Restart apache2 and enjoy! Open your browser and go to http://m2.local.
 
