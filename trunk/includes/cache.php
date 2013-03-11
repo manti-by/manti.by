@@ -99,7 +99,7 @@
          * @param int $storage (OPTIONAL)
          * @return mixed $value
          */
-        public function setData($key, $value, $storage) {
+        public function setData($key, $value, $storage = Cache::TYPE_DEFAULT) {
             switch ($storage) {
                 case Cache::TYPE_SESSION:
                     $_SESSION[$key] = $value;
@@ -126,7 +126,7 @@
          * @param int $storage (OPTIONAL)
          * @return mixed $value
          */
-        public function appendData($key, $value, $storage) {
+        public function appendData($key, $value, $storage = Cache::TYPE_DEFAULT) {
             switch ($storage) {
                 case Cache::TYPE_SESSION:
                     if (isset($_SESSION[$key])) {
@@ -172,7 +172,7 @@
          * @param int $storage (OPTIONAL)
          * @return mixed|null $value
          */
-        public function getData($key, $storage) {
+        public function getData($key, $storage = Cache::TYPE_DEFAULT) {
             switch ($storage) {
                 case Cache::TYPE_SESSION:
                     if (isset($_SESSION[$key])) {
