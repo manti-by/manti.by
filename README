@@ -66,8 +66,8 @@ Installation at Ubuntu:
     127.0.0.1   m2.local
     127.0.0.1   www.m2.local
     
-10. Also in latest version uses Memecache server to speed up some operations. You can choose default
-    cache type in ./source/trunk/includes/cache.php:51.
+10. Also in latest version uses Memcache server to speed up some operations. You can choose
+    default cache type in ./source/trunk/includes/cache.php:51.
 
 11. Restart apache2 and enjoy! Open your browser and go to http://m2.local.
 
