@@ -1,15 +1,13 @@
 <?php
-    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
-
     /**
      * M2 Micro Framework - a micro PHP 5 framework
      *
      * @author      Alexander Chaika <marco.manti@gmail.com>
      * @copyright   2012 Alexander Chaika
      * @link        https://github.com/marco-manti/M2_micro
-     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      * @version     0.3
      * @package     M2 Micro Framework
+     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      *
      * NEW BSD LICENSE
      *
@@ -37,6 +35,8 @@
      * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
+
+    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
      * File View Class

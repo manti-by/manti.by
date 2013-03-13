@@ -20,7 +20,6 @@
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
-<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/M2%20Micro%20Framework.html"><i class="icon-folder-open"></i> M2 Micro Framework</a></li>
 </ul>
 </li>
@@ -32,7 +31,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">146</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -86,7 +85,8 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="method public inherited"><a href="#method_logSQL" title="logSQL :: Put SQL query to query queue"><span class="description">Put SQL query to query queue</span><pre>logSQL()</pre></a></li>
 <li class="method public inherited"><a href="#method_offline" title="offline :: Offline render action"><span class="description">Offline render action</span><pre>offline()</pre></a></li>
 <li class="method public inherited"><a href="#method_parseConfig" title="parseConfig :: Parse config from Application INI file"><span class="description">Parse config from Application INI file</span><pre>parseConfig()</pre></a></li>
-<li class="method public "><a href="#method_printFileArray" title="printFileArray :: Function for translate tokens from dictionaries"><span class="description">Function for translate tokens from dictionaries</span><pre>printFileArray()</pre></a></li>
+<li class="method public "><a href="#method_printDownloadList" title="printDownloadList :: Function for file download list creation"><span class="description">Function for file download list creation</span><pre>printDownloadList()</pre></a></li>
+<li class="method public "><a href="#method_printFileArray" title="printFileArray :: Function for file grid creation"><span class="description">Function for file grid creation</span><pre>printFileArray()</pre></a></li>
 <li class="method public inherited"><a href="#method_render" title="render :: Render action"><span class="description">Render action</span><pre>render()</pre></a></li>
 <li class="method public inherited"><a href="#method_renderItemsArray" title="renderItemsArray :: Render items array"><span class="description">Render items array</span><pre>renderItemsArray()</pre></a></li>
 <li class="method public inherited"><a href="#method_saveToLog" title="saveToLog :: Put into log file current message"><span class="description">Put into log file current message</span><pre>saveToLog()</pre></a></li>
@@ -98,15 +98,18 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="nav-header protected">» Protected
                     <ul><li class="method protected inherited"><a href="#method___construct" title="__construct :: Singleton protection"><span class="description">Singleton protection</span><pre>__construct()</pre></a></li></ul>
 </li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private inherited"><a href="#method_saveLogData" title="saveLogData :: Save to log input parameters"><span class="description">Save to log input parameters</span><pre>saveLogData()</pre></a></li></ul>
+</li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
-                    <ul><li class="property public inherited"><a href="#property_config" title="$config :: "><span class="description">$config</span><pre>$config</pre></a></li></ul>
+                    <ul><li class="property public inherited"><a href="#property_config" title="$config :: "><span class="description">&lt;p&gt;app configuration&lt;/p&gt;</span><pre>$config</pre></a></li></ul>
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
-<li class="property protected inherited"><a href="#property_instance" title="$instance :: "><span class="description">$instance</span><pre>$instance</pre></a></li>
-<li class="property protected inherited"><a href="#property_message" title="$message :: "><span class="description">$message</span><pre>$message</pre></a></li>
-<li class="property protected inherited"><a href="#property_result" title="$result :: "><span class="description">$result</span><pre>$result</pre></a></li>
+<li class="property protected inherited"><a href="#property_instance" title="$instance :: "><span class="description">&lt;p&gt;self pointer&lt;/p&gt;</span><pre>$instance</pre></a></li>
+<li class="property protected inherited"><a href="#property_message" title="$message :: "><span class="description">&lt;p&gt;latest message from stack&lt;/p&gt;</span><pre>$message</pre></a></li>
+<li class="property protected inherited"><a href="#property_result" title="$result :: "><span class="description">&lt;p&gt;of the latest operation&lt;/p&gt;</span><pre>$result</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
@@ -551,7 +554,7 @@ Save stats into DB</h2>
 </div>
 <a id="method_offline"></a><div class="element clickable method public method_offline" data-toggle="collapse" data-target=".method_offline .collapse">
 <h2>Offline render action</h2>
-<pre>offline() </pre>
+<pre>offline(array $options) : array | null</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -559,6 +562,13 @@ Save stats into DB</h2>
 <th>inherited_from</th>
 <td>\View::offline()</td>
 </tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>OPTIONAL</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>null</code>$options</div>
 </div></div>
 </div>
 <a id="method_parseConfig"></a><div class="element clickable method public method_parseConfig" data-toggle="collapse" data-target=".method_parseConfig .collapse">
@@ -584,8 +594,23 @@ Save stats into DB</h2>
 <code>bool</code>$state</div>
 </div></div>
 </div>
+<a id="method_printDownloadList"></a><div class="element clickable method public method_printDownloadList" data-toggle="collapse" data-target=".method_printDownloadList .collapse">
+<h2>Function for file download list creation</h2>
+<pre>printDownloadList(array $array) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$array</h4>
+<code>array</code><p>array to print</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>$text</div>
+</div></div>
+</div>
 <a id="method_printFileArray"></a><div class="element clickable method public method_printFileArray" data-toggle="collapse" data-target=".method_printFileArray .collapse">
-<h2>Function for translate tokens from dictionaries</h2>
+<h2>Function for file grid creation</h2>
 <pre>printFileArray(array $array) : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
@@ -739,11 +764,31 @@ Save stats into DB</h2>
 </table>
 </div></div>
 </div>
+<a id="method_saveLogData"></a><div class="element clickable method private method_saveLogData" data-toggle="collapse" data-target=".method_saveLogData .collapse">
+<h2>Save to log input parameters</h2>
+<pre>saveLogData() </pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::saveLogData()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\View::saveLogData()</td>
+</tr>
+</table>
+</div></div>
+</div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
 <a id="property_config"> </a><div class="element clickable property public property_config" data-toggle="collapse" data-target=".property_config .collapse">
-<h2>$config</h2>
-<pre>$config </pre>
+<h2>&lt;p&gt;app configuration&lt;/p&gt;</h2>
+<pre>$config : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -760,8 +805,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_instance"> </a><div class="element clickable property protected property_instance" data-toggle="collapse" data-target=".property_instance .collapse">
-<h2>$instance</h2>
-<pre>$instance </pre>
+<h2>&lt;p&gt;self pointer&lt;/p&gt;</h2>
+<pre>$instance : object</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -778,8 +823,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_message"> </a><div class="element clickable property protected property_message" data-toggle="collapse" data-target=".property_message .collapse">
-<h2>$message</h2>
-<pre>$message </pre>
+<h2>&lt;p&gt;latest message from stack&lt;/p&gt;</h2>
+<pre>$message : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -796,8 +841,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_result"> </a><div class="element clickable property protected property_result" data-toggle="collapse" data-target=".property_result .collapse">
-<h2>$result</h2>
-<pre>$result </pre>
+<h2>&lt;p&gt;of the latest operation&lt;/p&gt;</h2>
+<pre>$result : int</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -882,7 +927,7 @@ Save stats into DB</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2013-01-25T16:29:23+03:00.<br></footer></div>
+            generated on 2013-03-13T14:59:54+03:00.<br></footer></div>
 </div>
 </body>
 </html>

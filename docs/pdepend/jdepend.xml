@@ -7,10 +7,10 @@
         <ConcreteClasses>11</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>1</Ca>
-        <Ce>3</Ce>
+        <Ce>4</Ce>
         <A>0</A>
-        <I>0.75</I>
-        <D>0.25</D>
+        <I>0.8</I>
+        <D>0.2</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\includes\_autoload.php">Autoload</Class>
@@ -28,6 +28,7 @@
       <AbstractClasses/>
       <DependsUpon>
         <Package>+core</Package>
+        <Package>+memcache</Package>
         <Package>+mysqli</Package>
         <Package>M2\Modules</Package>
       </DependsUpon>
@@ -41,10 +42,10 @@
         <ConcreteClasses>23</ConcreteClasses>
         <AbstractClasses>0</AbstractClasses>
         <Ca>1</Ca>
-        <Ce>2</Ce>
+        <Ce>3</Ce>
         <A>0</A>
-        <I>0.66666666666667</I>
-        <D>0.33333333333333</D>
+        <I>0.75</I>
+        <D>0.25</D>
       </Stats>
       <ConcreteClasses>
         <Class sourceFile="D:\Projects\cms\m2_micro\source\trunk\modules\blog\controller.php">BlogController</Class>
@@ -73,6 +74,7 @@
       </ConcreteClasses>
       <AbstractClasses/>
       <DependsUpon>
+        <Package>+core</Package>
         <Package>+spl</Package>
         <Package>M2\Library</Package>
       </DependsUpon>

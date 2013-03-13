@@ -1,15 +1,13 @@
 <?php
-    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
-
     /**
      * M2 Micro Framework - a micro PHP 5 framework
      *
      * @author      Alexander Chaika <marco.manti@gmail.com>
      * @copyright   2012 Alexander Chaika
      * @link        https://github.com/marco-manti/M2_micro
-     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      * @version     0.3
      * @package     M2 Micro Framework
+     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      *
      * NEW BSD LICENSE
      *
@@ -38,6 +36,8 @@
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
+    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
+
     /**
      * Blog Controller class
      * @name $blogController
@@ -47,16 +47,6 @@
      * @since 0.1
      */
     class BlogController extends Controller {
-
-        /**
-         * @var BlogModel $model
-         */
-        public $model;
-
-        /**
-         * @var BlogView $view
-         */
-        public $view;
 
         /**
          * Default action
@@ -104,7 +94,6 @@
          * List blog posts with tags
          * @param array $options
          * @return array $options
-         * @todo Test it with 10-20 posts
          */
         public function nextAction($options) {
             // Get page and its contents

@@ -1,15 +1,13 @@
 <?php
-    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
-
     /**
      * M2 Micro Framework - a micro PHP 5 framework
      *
      * @author      Alexander Chaika <marco.manti@gmail.com>
      * @copyright   2012 Alexander Chaika
      * @link        https://github.com/marco-manti/M2_micro
-     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      * @version     0.3
      * @package     M2 Micro Framework
+     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      *
      * NEW BSD LICENSE
      *
@@ -38,6 +36,8 @@
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
+    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
+
     /**
      * Class for database operations (Uses MySQLi extention)
      * NOTICE: This class implemented as Singleton
@@ -50,25 +50,28 @@
     class Database extends Application {
 
         /**
-         * @var MySQLi_result|bool $res
+         * @var MySQLi_result|bool $res mysql resource pointer
          */
         private $res;
 
         /**
-         * @var MySQLi|bool $mysqli
+         * @var MySQLi|bool $mysqli mysql object
          */
         private $mysqli;
 
         /**
-         * @var string $db_prefix
+         * @var string $db_prefix tables prefix
          */
         private $db_prefix;
 
         /**
-         * @var string $query
+         * @var string $query latest query
          */
         private $query;
 
+        /**
+         * @var object $instance self pointer
+         */
         protected static $instance = null;
 
         /**
