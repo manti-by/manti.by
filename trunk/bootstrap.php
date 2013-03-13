@@ -5,9 +5,9 @@
      * @author      Alexander Chaika <marco.manti@gmail.com>
      * @copyright   2012 Alexander Chaika
      * @link        https://github.com/marco-manti/M2_micro
-     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      * @version     0.3
      * @package     M2 Micro Framework
+     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      *
      * NEW BSD LICENSE
      *
@@ -36,10 +36,12 @@
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
+    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
+
     /**
      * Bootstrap base engine classes
      * @package M2 Micro Framework
-     * @subpackage Main
+     * @subpackage Modules
      * @author Alexander Chaika
      * @since 0.1
      */
@@ -53,9 +55,6 @@
     // set working mode
     date_default_timezone_set('Europe/Minsk');
     ini_set('display_errors', 1);
-
-    // Simple ACL hook
-    define('M2_MICRO', 1);
 
     // define globals
     define('NL', chr(13).chr(10));

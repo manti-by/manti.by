@@ -1,15 +1,13 @@
 <?php
-    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
-
     /**
      * M2 Micro Framework - a micro PHP 5 framework
      *
      * @author      Alexander Chaika <marco.manti@gmail.com>
      * @copyright   2012 Alexander Chaika
      * @link        https://github.com/marco-manti/M2_micro
-     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      * @version     0.3
      * @package     M2 Micro Framework
+     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      *
      * NEW BSD LICENSE
      *
@@ -38,6 +36,8 @@
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
+    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
+
     /**
      * Base inherited application class
      * @name $application
@@ -45,14 +45,27 @@
      * @subpackage Library
      * @author Alexander Chaika
      * @since 0.1
-     * @todo Check language switch
      */
     class Application {
 
+        /**
+         * @var array $config app configuration
+         */
         public static $config = array();
+
+        /**
+         * @var object $instance self pointer
+         */
         protected static $instance = null;
 
+        /**
+         * @var array $message latest message from stack
+         */
         protected $message = null;
+
+        /**
+         * @var int $result of the latest operation
+         */
         protected $result = 0;
 
         /**

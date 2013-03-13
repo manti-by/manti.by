@@ -1,15 +1,13 @@
 <?php
-    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
-
     /**
      * M2 Micro Framework - a micro PHP 5 framework
      *
      * @author      Alexander Chaika <marco.manti@gmail.com>
      * @copyright   2012 Alexander Chaika
      * @link        https://github.com/marco-manti/M2_micro
-     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      * @version     0.3
      * @package     M2 Micro Framework
+     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      *
      * NEW BSD LICENSE
      *
@@ -38,25 +36,53 @@
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
+    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
+
     /**
      * Entity class for user operations
      * NOTICE: This class implemented as Singleton
      * @name $database
      * @package M2 Micro Framework
-     * @subpackage Library
+     * @subpackage Modules
      * @author Alexander Chaika
      * @since 0.2RC2
      */
     
     class UserEntity extends Entity {
+
+        /**
+         * @var int $id user ID
+         */
         private $id;
+
+        /**
+         * @var string $username user name
+         */
         private $username;
+
+        /**
+         * @var string $email user email
+         */
         private $email;
+
+        /**
+         * @var string $password pass hash
+         */
         private $password;
+
+        /**
+         * @var string $group user group name
+         */
         private $group;
 
+        /**
+         * @var bool $is_loaded is user profile loaded
+         */
         private $is_loaded = false;
-            
+
+        /**
+         * @var object $instance self pointer
+         */
         protected static $instance = null;
 
         /**
@@ -92,7 +118,7 @@
         
         /**
          * Get user id by email and pass or cookie token
-         * @param array $options[email+password || cookie] OPTIONAL
+         * @param array $options OPTIONAL user credentials
          * @return int $user_id or 0 if not exist
          */
         public function getId($options = null) {

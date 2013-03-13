@@ -20,7 +20,6 @@
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
-<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/M2%20Micro%20Framework.html"><i class="icon-folder-open"></i> M2 Micro Framework</a></li>
 </ul>
 </li>
@@ -32,7 +31,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">146</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -94,20 +93,23 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="method public inherited"><a href="#method_shutdown" title="shutdown :: Close application"><span class="description">Close application</span><pre>shutdown()</pre></a></li>
 </ul>
 </li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private inherited"><a href="#method_saveLogData" title="saveLogData :: Save to log input parameters"><span class="description">Save to log input parameters</span><pre>saveLogData()</pre></a></li></ul>
+</li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
-                    <ul><li class="property public inherited"><a href="#property_config" title="$config :: "><span class="description">$config</span><pre>$config</pre></a></li></ul>
+                    <ul><li class="property public inherited"><a href="#property_config" title="$config :: "><span class="description">&lt;p&gt;app configuration&lt;/p&gt;</span><pre>$config</pre></a></li></ul>
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
-<li class="property protected inherited"><a href="#property__data" title="$_data :: "><span class="description">$_data</span><pre>$_data</pre></a></li>
-<li class="property protected inherited"><a href="#property__main_field" title="$_main_field :: "><span class="description">$_main_field</span><pre>$_main_field</pre></a></li>
-<li class="property protected inherited"><a href="#property__options" title="$_options :: "><span class="description">$_options</span><pre>$_options</pre></a></li>
-<li class="property protected inherited"><a href="#property__value" title="$_value :: "><span class="description">$_value</span><pre>$_value</pre></a></li>
-<li class="property protected inherited"><a href="#property__value_type" title="$_value_type :: "><span class="description">$_value_type</span><pre>$_value_type</pre></a></li>
-<li class="property protected inherited"><a href="#property_instance" title="$instance :: "><span class="description">$instance</span><pre>$instance</pre></a></li>
-<li class="property protected inherited"><a href="#property_message" title="$message :: "><span class="description">$message</span><pre>$message</pre></a></li>
-<li class="property protected inherited"><a href="#property_result" title="$result :: "><span class="description">$result</span><pre>$result</pre></a></li>
+<li class="property protected inherited"><a href="#property__data" title="$_data :: "><span class="description">&lt;p&gt;list of elements&lt;/p&gt;</span><pre>$_data</pre></a></li>
+<li class="property protected inherited"><a href="#property__main_field" title="$_main_field :: "><span class="description">&lt;p&gt;field for&lt;/p&gt;</span><pre>$_main_field</pre></a></li>
+<li class="property protected inherited"><a href="#property__options" title="$_options :: "><span class="description">&lt;p&gt;control elements&lt;/p&gt;</span><pre>$_options</pre></a></li>
+<li class="property protected inherited"><a href="#property__value" title="$_value :: "><span class="description">&lt;p&gt;self value&lt;/p&gt;</span><pre>$_value</pre></a></li>
+<li class="property protected inherited"><a href="#property__value_type" title="$_value_type :: "><span class="description">&lt;p&gt;type of value&lt;/p&gt;</span><pre>$_value_type</pre></a></li>
+<li class="property protected inherited"><a href="#property_instance" title="$instance :: "><span class="description">&lt;p&gt;self pointer&lt;/p&gt;</span><pre>$instance</pre></a></li>
+<li class="property protected inherited"><a href="#property_message" title="$message :: "><span class="description">&lt;p&gt;latest message from stack&lt;/p&gt;</span><pre>$message</pre></a></li>
+<li class="property protected inherited"><a href="#property_result" title="$result :: "><span class="description">&lt;p&gt;of the latest operation&lt;/p&gt;</span><pre>$result</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
@@ -136,11 +138,11 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <table class="table table-bordered">
 <tr>
 <th>package</th>
-<td><a href="../packages/M2%20Micro%20Framework.Library%20Tags.html">M2 Micro Framework</a></td>
+<td><a href="../packages/M2%20Micro%20Framework.Controls.html">M2 Micro Framework</a></td>
 </tr>
 <tr>
 <th>subpackage</th>
-<td>Library Tags</td>
+<td>Controls</td>
 </tr>
 <tr>
 <th>author</th>
@@ -687,11 +689,31 @@ Save stats into DB</h2>
 </table>
 </div></div>
 </div>
+<a id="method_saveLogData"></a><div class="element clickable method private method_saveLogData" data-toggle="collapse" data-target=".method_saveLogData .collapse">
+<h2>Save to log input parameters</h2>
+<pre>saveLogData() </pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::saveLogData()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Control::saveLogData()</td>
+</tr>
+</table>
+</div></div>
+</div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
 <a id="property_config"> </a><div class="element clickable property public property_config" data-toggle="collapse" data-target=".property_config .collapse">
-<h2>$config</h2>
-<pre>$config </pre>
+<h2>&lt;p&gt;app configuration&lt;/p&gt;</h2>
+<pre>$config : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -708,8 +730,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property__data"> </a><div class="element clickable property protected property__data" data-toggle="collapse" data-target=".property__data .collapse">
-<h2>$_data</h2>
-<pre>$_data </pre>
+<h2>&lt;p&gt;list of elements&lt;/p&gt;</h2>
+<pre>$_data : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -720,8 +742,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property__main_field"> </a><div class="element clickable property protected property__main_field" data-toggle="collapse" data-target=".property__main_field .collapse">
-<h2>$_main_field</h2>
-<pre>$_main_field </pre>
+<h2>&lt;p&gt;field for&lt;/p&gt;</h2>
+<pre>$_main_field : string</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -732,8 +754,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property__options"> </a><div class="element clickable property protected property__options" data-toggle="collapse" data-target=".property__options .collapse">
-<h2>$_options</h2>
-<pre>$_options </pre>
+<h2>&lt;p&gt;control elements&lt;/p&gt;</h2>
+<pre>$_options : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -744,8 +766,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property__value"> </a><div class="element clickable property protected property__value" data-toggle="collapse" data-target=".property__value .collapse">
-<h2>$_value</h2>
-<pre>$_value </pre>
+<h2>&lt;p&gt;self value&lt;/p&gt;</h2>
+<pre>$_value : mixed</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -756,8 +778,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property__value_type"> </a><div class="element clickable property protected property__value_type" data-toggle="collapse" data-target=".property__value_type .collapse">
-<h2>$_value_type</h2>
-<pre>$_value_type </pre>
+<h2>&lt;p&gt;type of value&lt;/p&gt;</h2>
+<pre>$_value_type : int</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -768,8 +790,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_instance"> </a><div class="element clickable property protected property_instance" data-toggle="collapse" data-target=".property_instance .collapse">
-<h2>$instance</h2>
-<pre>$instance </pre>
+<h2>&lt;p&gt;self pointer&lt;/p&gt;</h2>
+<pre>$instance : object</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -786,8 +808,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_message"> </a><div class="element clickable property protected property_message" data-toggle="collapse" data-target=".property_message .collapse">
-<h2>$message</h2>
-<pre>$message </pre>
+<h2>&lt;p&gt;latest message from stack&lt;/p&gt;</h2>
+<pre>$message : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -804,8 +826,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_result"> </a><div class="element clickable property protected property_result" data-toggle="collapse" data-target=".property_result .collapse">
-<h2>$result</h2>
-<pre>$result </pre>
+<h2>&lt;p&gt;of the latest operation&lt;/p&gt;</h2>
+<pre>$result : int</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -854,7 +876,7 @@ Save stats into DB</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2013-01-25T16:29:22+03:00.<br></footer></div>
+            generated on 2013-03-13T14:59:53+03:00.<br></footer></div>
 </div>
 </body>
 </html>
