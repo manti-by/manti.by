@@ -20,7 +20,6 @@
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
-<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/M2%20Micro%20Framework.html"><i class="icon-folder-open"></i> M2 Micro Framework</a></li>
 </ul>
 </li>
@@ -32,7 +31,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">146</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -68,6 +67,7 @@
 <li class="method public "><a href="#method_clearSession" title="clearSession :: Clear user session data"><span class="description">Clear user session data</span><pre>clearSession()</pre></a></li>
 <li class="method public "><a href="#method_create" title="create :: Create user by email and pass"><span class="description">Create user by email and pass</span><pre>create()</pre></a></li>
 <li class="method public inherited"><a href="#method_flushTranslations" title="flushTranslations :: Close application"><span class="description">Close application</span><pre>flushTranslations()</pre></a></li>
+<li class="method public "><a href="#method_getEmail" title="getEmail :: Get user email"><span class="description">Get user email</span><pre>getEmail()</pre></a></li>
 <li class="method public "><a href="#method_getGroup" title="getGroup :: Get user group"><span class="description">Get user group</span><pre>getGroup()</pre></a></li>
 <li class="method public "><a href="#method_getId" title="getId :: Get user id by email and pass or cookie token"><span class="description">Get user id by email and pass or cookie token</span><pre>getId()</pre></a></li>
 <li class="method public "><a href="#method_getInstance" title="getInstance :: GetInstance class method"><span class="description">GetInstance class method</span><pre>getInstance()</pre></a></li>
@@ -103,25 +103,28 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="nav-header protected">» Protected
                     <ul><li class="method protected "><a href="#method___construct" title="__construct :: Singleton protection"><span class="description">Singleton protection</span><pre>__construct()</pre></a></li></ul>
 </li>
+<li class="nav-header private">» Private
+                    <ul><li class="method private inherited"><a href="#method_saveLogData" title="saveLogData :: Save to log input parameters"><span class="description">Save to log input parameters</span><pre>saveLogData()</pre></a></li></ul>
+</li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
-                    <ul><li class="property public inherited"><a href="#property_config" title="$config :: "><span class="description">$config</span><pre>$config</pre></a></li></ul>
+                    <ul><li class="property public inherited"><a href="#property_config" title="$config :: "><span class="description">&lt;p&gt;app configuration&lt;/p&gt;</span><pre>$config</pre></a></li></ul>
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
-<li class="property protected "><a href="#property_instance" title="$instance :: "><span class="description">$instance</span><pre>$instance</pre></a></li>
-<li class="property protected inherited"><a href="#property_message" title="$message :: "><span class="description">$message</span><pre>$message</pre></a></li>
-<li class="property protected inherited"><a href="#property_result" title="$result :: "><span class="description">$result</span><pre>$result</pre></a></li>
+<li class="property protected "><a href="#property_instance" title="$instance :: "><span class="description">&lt;p&gt;self pointer&lt;/p&gt;</span><pre>$instance</pre></a></li>
+<li class="property protected inherited"><a href="#property_message" title="$message :: "><span class="description">&lt;p&gt;latest message from stack&lt;/p&gt;</span><pre>$message</pre></a></li>
+<li class="property protected inherited"><a href="#property_result" title="$result :: "><span class="description">&lt;p&gt;of the latest operation&lt;/p&gt;</span><pre>$result</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
                     <ul>
-<li class="property private "><a href="#property_email" title="$email :: "><span class="description">$email</span><pre>$email</pre></a></li>
-<li class="property private "><a href="#property_group" title="$group :: "><span class="description">$group</span><pre>$group</pre></a></li>
-<li class="property private "><a href="#property_id" title="$id :: "><span class="description">$id</span><pre>$id</pre></a></li>
-<li class="property private "><a href="#property_is_loaded" title="$is_loaded :: "><span class="description">$is_loaded</span><pre>$is_loaded</pre></a></li>
-<li class="property private "><a href="#property_password" title="$password :: "><span class="description">$password</span><pre>$password</pre></a></li>
-<li class="property private "><a href="#property_username" title="$username :: "><span class="description">$username</span><pre>$username</pre></a></li>
+<li class="property private "><a href="#property_email" title="$email :: "><span class="description">&lt;p&gt;user email&lt;/p&gt;</span><pre>$email</pre></a></li>
+<li class="property private "><a href="#property_group" title="$group :: "><span class="description">&lt;p&gt;user group name&lt;/p&gt;</span><pre>$group</pre></a></li>
+<li class="property private "><a href="#property_id" title="$id :: "><span class="description">&lt;p&gt;user ID&lt;/p&gt;</span><pre>$id</pre></a></li>
+<li class="property private "><a href="#property_is_loaded" title="$is_loaded :: "><span class="description">&lt;p&gt;is user profile loaded&lt;/p&gt;</span><pre>$is_loaded</pre></a></li>
+<li class="property private "><a href="#property_password" title="$password :: "><span class="description">&lt;p&gt;pass hash&lt;/p&gt;</span><pre>$password</pre></a></li>
+<li class="property private "><a href="#property_username" title="$username :: "><span class="description">&lt;p&gt;user name&lt;/p&gt;</span><pre>$username</pre></a></li>
 </ul>
 </li>
 </ul>
@@ -148,11 +151,11 @@ NOTICE: This class implemented as Singleton</p>
 </tr>
 <tr>
 <th>package</th>
-<td><a href="../packages/M2%20Micro%20Framework.Library.html">M2 Micro Framework</a></td>
+<td><a href="../packages/M2%20Micro%20Framework.Modules.html">M2 Micro Framework</a></td>
 </tr>
 <tr>
 <th>subpackage</th>
-<td>Library</td>
+<td>Modules</td>
 </tr>
 <tr>
 <th>author</th>
@@ -342,6 +345,17 @@ NOTICE: This class implemented as Singleton</p>
 </table>
 </div></div>
 </div>
+<a id="method_getEmail"></a><div class="element clickable method public method_getEmail" data-toggle="collapse" data-target=".method_getEmail .collapse">
+<h2>Get user email</h2>
+<pre>getEmail() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>$username</div>
+</div></div>
+</div>
 <a id="method_getGroup"></a><div class="element clickable method public method_getGroup" data-toggle="collapse" data-target=".method_getGroup .collapse">
 <h2>Get user group</h2>
 <pre>getGroup() : string</pre>
@@ -355,12 +369,14 @@ NOTICE: This class implemented as Singleton</p>
 </div>
 <a id="method_getId"></a><div class="element clickable method public method_getId" data-toggle="collapse" data-target=".method_getId .collapse">
 <h2>Get user id by email and pass or cookie token</h2>
-<pre>getId($options) : int</pre>
+<pre>getId(array $options) : int</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
 <h3>Parameters</h3>
-<div class="subelement argument"><h4>$options</h4></div>
+<div class="subelement argument">
+<h4>$options</h4>
+<code>array</code><p>OPTIONAL user credentials</p></div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>int</code>$user_id or 0 if not exist</div>
@@ -753,11 +769,31 @@ Save stats into DB</h2>
 <code>int</code><p>user ID for load</p></div>
 </div></div>
 </div>
+<a id="method_saveLogData"></a><div class="element clickable method private method_saveLogData" data-toggle="collapse" data-target=".method_saveLogData .collapse">
+<h2>Save to log input parameters</h2>
+<pre>saveLogData() </pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::saveLogData()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Entity::saveLogData()</td>
+</tr>
+</table>
+</div></div>
+</div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
 <a id="property_config"> </a><div class="element clickable property public property_config" data-toggle="collapse" data-target=".property_config .collapse">
-<h2>$config</h2>
-<pre>$config </pre>
+<h2>&lt;p&gt;app configuration&lt;/p&gt;</h2>
+<pre>$config : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -774,14 +810,14 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_instance"> </a><div class="element clickable property protected property_instance" data-toggle="collapse" data-target=".property_instance .collapse">
-<h2>$instance</h2>
-<pre>$instance </pre>
+<h2>&lt;p&gt;self pointer&lt;/p&gt;</h2>
+<pre>$instance : object</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_message"> </a><div class="element clickable property protected property_message" data-toggle="collapse" data-target=".property_message .collapse">
-<h2>$message</h2>
-<pre>$message </pre>
+<h2>&lt;p&gt;latest message from stack&lt;/p&gt;</h2>
+<pre>$message : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -798,8 +834,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_result"> </a><div class="element clickable property protected property_result" data-toggle="collapse" data-target=".property_result .collapse">
-<h2>$result</h2>
-<pre>$result </pre>
+<h2>&lt;p&gt;of the latest operation&lt;/p&gt;</h2>
+<pre>$result : int</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -816,38 +852,38 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_email"> </a><div class="element clickable property private property_email" data-toggle="collapse" data-target=".property_email .collapse">
-<h2>$email</h2>
-<pre>$email </pre>
+<h2>&lt;p&gt;user email&lt;/p&gt;</h2>
+<pre>$email : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_group"> </a><div class="element clickable property private property_group" data-toggle="collapse" data-target=".property_group .collapse">
-<h2>$group</h2>
-<pre>$group </pre>
+<h2>&lt;p&gt;user group name&lt;/p&gt;</h2>
+<pre>$group : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_id"> </a><div class="element clickable property private property_id" data-toggle="collapse" data-target=".property_id .collapse">
-<h2>$id</h2>
-<pre>$id </pre>
+<h2>&lt;p&gt;user ID&lt;/p&gt;</h2>
+<pre>$id : int</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_is_loaded"> </a><div class="element clickable property private property_is_loaded" data-toggle="collapse" data-target=".property_is_loaded .collapse">
-<h2>$is_loaded</h2>
-<pre>$is_loaded </pre>
+<h2>&lt;p&gt;is user profile loaded&lt;/p&gt;</h2>
+<pre>$is_loaded : bool</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_password"> </a><div class="element clickable property private property_password" data-toggle="collapse" data-target=".property_password .collapse">
-<h2>$password</h2>
-<pre>$password </pre>
+<h2>&lt;p&gt;pass hash&lt;/p&gt;</h2>
+<pre>$password : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_username"> </a><div class="element clickable property private property_username" data-toggle="collapse" data-target=".property_username .collapse">
-<h2>$username</h2>
-<pre>$username </pre>
+<h2>&lt;p&gt;user name&lt;/p&gt;</h2>
+<pre>$username : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
@@ -858,7 +894,7 @@ Save stats into DB</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2013-01-25T16:29:23+03:00.<br></footer></div>
+            generated on 2013-03-13T14:59:54+03:00.<br></footer></div>
 </div>
 </body>
 </html>

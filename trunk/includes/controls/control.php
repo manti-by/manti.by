@@ -1,15 +1,13 @@
 <?php
-    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
-
     /**
      * M2 Micro Framework - a micro PHP 5 framework
      *
      * @author      Alexander Chaika <marco.manti@gmail.com>
      * @copyright   2012 Alexander Chaika
      * @link        https://github.com/marco-manti/M2_micro
-     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      * @version     0.3
      * @package     M2 Micro Framework
+     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      *
      * NEW BSD LICENSE
      *
@@ -38,10 +36,12 @@
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
+    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
+
     /**
      * Control helper class
      * @package M2 Micro Framework
-     * @subpackage Library Tags
+     * @subpackage Controls
      * @author Alexander Chaika
      * @since 0.3RC2
      */
@@ -50,11 +50,29 @@
         const TYPE_ARRAY = 0;
         const TYPE_JSON  = 1;
 
+        /**
+         * @var mixed $value self value
+         */
         protected $_value = array();
+
+        /**
+         * @var int $_value_type type of value
+         */
         protected $_value_type = self::TYPE_ARRAY;
+
+        /**
+         * @var array $data list of elements
+         */
         protected $_data = array();
+
+        /**
+         * @var array $_options control elements
+         */
         protected $_options = array('id' => '', 'class' => '', 'name' => '');
 
+        /**
+         * @var string $_main_field field for
+         */
         protected $_main_field = 'name';
 
         /**

@@ -1,15 +1,13 @@
 <?php
-    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
-
     /**
      * M2 Micro Framework - a micro PHP 5 framework
      *
      * @author      Alexander Chaika <marco.manti@gmail.com>
      * @copyright   2012 Alexander Chaika
      * @link        https://github.com/marco-manti/M2_micro
-     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      * @version     0.3
      * @package     M2 Micro Framework
+     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      *
      * NEW BSD LICENSE
      *
@@ -38,6 +36,8 @@
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
+    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
+
     /**
      * Blog Model class
      * @name $blogModel
@@ -49,16 +49,14 @@
     class BlogModel extends Model {
 
         /**
-         * Available main post params
-         * @var array
+         * @var array $_main_post_params available main post params
          */
         private $_main_post_params = array(
             'id', 'name', 'alias', 'teaser', 'description', 'metakeys', 'metadesc', 'is_music'
         );
 
         /**
-         * Available music post params
-         * @var array
+         * @var array $_music_post_params available music post params
          */
         private $_music_post_params = array(
             'attachments', 'relations', 'catnum', 'genre', 'quality', 'length', 'tracklist'

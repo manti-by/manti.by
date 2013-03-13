@@ -20,7 +20,6 @@
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
-<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/M2%20Micro%20Framework.html"><i class="icon-folder-open"></i> M2 Micro Framework</a></li>
 </ul>
 </li>
@@ -32,7 +31,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">146</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -66,6 +65,7 @@
 <li class="method public inherited"><a href="#method_clean" title="clean :: Clean all stacks"><span class="description">Clean all stacks</span><pre>clean()</pre></a></li>
 <li class="method public inherited"><a href="#method_flushTranslations" title="flushTranslations :: Close application"><span class="description">Close application</span><pre>flushTranslations()</pre></a></li>
 <li class="method public "><a href="#method_getGallery" title="getGallery :: Get gallery list"><span class="description">Get gallery list</span><pre>getGallery()</pre></a></li>
+<li class="method public "><a href="#method_getGalleryById" title="getGalleryById :: Get gallery by id"><span class="description">Get gallery by id</span><pre>getGalleryById()</pre></a></li>
 <li class="method public "><a href="#method_getGalleryByTags" title="getGalleryByTags :: Return gallery array by tags"><span class="description">Return gallery array by tags</span><pre>getGalleryByTags()</pre></a></li>
 <li class="method public inherited"><a href="#method_getInstance" title="getInstance :: GetInstance class method"><span class="description">GetInstance class method</span><pre>getInstance()</pre></a></li>
 <li class="method public inherited"><a href="#method_getLastFromStack" title="getLastFromStack :: Get last message from stack"><span class="description">Get last message from stack</span><pre>getLastFromStack()</pre></a></li>
@@ -85,30 +85,41 @@ Get global user params
 Save stats into DB</span><pre>init()</pre></a></li>
 <li class="method public inherited"><a href="#method_isMessagePresent" title="isMessagePresent :: Check error stack"><span class="description">Check error stack</span><pre>isMessagePresent()</pre></a></li>
 <li class="method public inherited"><a href="#method_logSQL" title="logSQL :: Put SQL query to query queue"><span class="description">Put SQL query to query queue</span><pre>logSQL()</pre></a></li>
+<li class="method public "><a href="#method_nextImage" title="nextImage :: Return next image by id"><span class="description">Return next image by id</span><pre>nextImage()</pre></a></li>
 <li class="method public inherited"><a href="#method_parseConfig" title="parseConfig :: Parse config from Application INI file"><span class="description">Parse config from Application INI file</span><pre>parseConfig()</pre></a></li>
+<li class="method public "><a href="#method_prevImage" title="prevImage :: Return prev image by id"><span class="description">Return prev image by id</span><pre>prevImage()</pre></a></li>
+<li class="method public "><a href="#method_rebuildThumbnails" title="rebuildThumbnails :: Batch resize for gallery originals"><span class="description">Batch resize for gallery originals</span><pre>rebuildThumbnails()</pre></a></li>
 <li class="method public inherited"><a href="#method_saveToLog" title="saveToLog :: Put into log file current message"><span class="description">Put into log file current message</span><pre>saveToLog()</pre></a></li>
 <li class="method public inherited"><a href="#method_shutdown" title="shutdown :: Close application"><span class="description">Close application</span><pre>shutdown()</pre></a></li>
-</ul>
-</li>
-<li class="nav-header">
-<i class="icon-custom icon-property"></i> Properties
-                    <ul><li class="property public inherited"><a href="#property_config" title="$config :: "><span class="description">$config</span><pre>$config</pre></a></li></ul>
-</li>
-<li class="nav-header protected">» Protected
-                    <ul>
-<li class="property protected inherited"><a href="#property_cid" title="$cid :: "><span class="description">$cid</span><pre>$cid</pre></a></li>
-<li class="property protected inherited"><a href="#property_database" title="$database :: "><span class="description">$database</span><pre>$database</pre></a></li>
-<li class="property protected inherited"><a href="#property_instance" title="$instance :: "><span class="description">$instance</span><pre>$instance</pre></a></li>
-<li class="property protected inherited"><a href="#property_message" title="$message :: "><span class="description">$message</span><pre>$message</pre></a></li>
-<li class="property protected inherited"><a href="#property_models" title="$models :: "><span class="description">$models</span><pre>$models</pre></a></li>
-<li class="property protected inherited"><a href="#property_result" title="$result :: "><span class="description">$result</span><pre>$result</pre></a></li>
-<li class="property protected inherited"><a href="#property_user" title="$user :: "><span class="description">$user</span><pre>$user</pre></a></li>
+<li class="method public "><a href="#method_trackGallery" title="trackGallery :: Track gallery by id"><span class="description">Track gallery by id</span><pre>trackGallery()</pre></a></li>
+<li class="method public "><a href="#method_updateFSlist" title="updateFSlist :: Update gallery entries from FS to DB"><span class="description">Update gallery entries from FS to DB</span><pre>updateFSlist()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
                     <ul>
-<li class="property private "><a href="#property_file_path" title="$file_path :: "><span class="description">$file_path</span><pre>$file_path</pre></a></li>
-<li class="property private "><a href="#property_link_path" title="$link_path :: "><span class="description">$link_path</span><pre>$link_path</pre></a></li>
+<li class="method private "><a href="#method_appendGalleriesImages" title="appendGalleriesImages :: Append galleries images"><span class="description">Append galleries images</span><pre>appendGalleriesImages()</pre></a></li>
+<li class="method private inherited"><a href="#method_saveLogData" title="saveLogData :: Save to log input parameters"><span class="description">Save to log input parameters</span><pre>saveLogData()</pre></a></li>
+</ul>
+</li>
+<li class="nav-header">
+<i class="icon-custom icon-property"></i> Properties
+                    <ul><li class="property public inherited"><a href="#property_config" title="$config :: "><span class="description">&lt;p&gt;app configuration&lt;/p&gt;</span><pre>$config</pre></a></li></ul>
+</li>
+<li class="nav-header protected">» Protected
+                    <ul>
+<li class="property protected inherited"><a href="#property_cid" title="$cid :: "><span class="description">&lt;p&gt;db connection id&lt;/p&gt;</span><pre>$cid</pre></a></li>
+<li class="property protected inherited"><a href="#property_database" title="$database :: "><span class="description">&lt;p&gt;db object pointer&lt;/p&gt;</span><pre>$database</pre></a></li>
+<li class="property protected inherited"><a href="#property_instance" title="$instance :: "><span class="description">&lt;p&gt;self pointer&lt;/p&gt;</span><pre>$instance</pre></a></li>
+<li class="property protected inherited"><a href="#property_message" title="$message :: "><span class="description">&lt;p&gt;latest message from stack&lt;/p&gt;</span><pre>$message</pre></a></li>
+<li class="property protected inherited"><a href="#property_models" title="$models :: "><span class="description">&lt;p&gt;cache of called models&lt;/p&gt;</span><pre>$models</pre></a></li>
+<li class="property protected inherited"><a href="#property_result" title="$result :: "><span class="description">&lt;p&gt;of the latest operation&lt;/p&gt;</span><pre>$result</pre></a></li>
+<li class="property protected inherited"><a href="#property_user" title="$user :: "><span class="description">&lt;p&gt;object pointer&lt;/p&gt;</span><pre>$user</pre></a></li>
+</ul>
+</li>
+<li class="nav-header private">» Private
+                    <ul>
+<li class="property private "><a href="#property_file_path" title="$file_path :: "><span class="description">&lt;p&gt;local file path to gallery&lt;/p&gt;</span><pre>$file_path</pre></a></li>
+<li class="property private "><a href="#property_link_path" title="$link_path :: "><span class="description">&lt;p&gt;web path to gallery&lt;/p&gt;</span><pre>$link_path</pre></a></li>
 </ul>
 </li>
 </ul>
@@ -295,6 +306,21 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <div class="subelement response">
 <code>array</code><code>bool</code>
 </div>
+</div></div>
+</div>
+<a id="method_getGalleryById"></a><div class="element clickable method public method_getGalleryById" data-toggle="collapse" data-target=".method_getGalleryById .collapse">
+<h2>Get gallery by id</h2>
+<pre>getGalleryById(int $id) : object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response"><code>object</code></div>
 </div></div>
 </div>
 <a id="method_getGalleryByTags"></a><div class="element clickable method public method_getGalleryByTags" data-toggle="collapse" data-target=".method_getGalleryByTags .collapse">
@@ -538,6 +564,22 @@ Save stats into DB</h2>
 <code>bool</code>$result</div>
 </div></div>
 </div>
+<a id="method_nextImage"></a><div class="element clickable method public method_nextImage" data-toggle="collapse" data-target=".method_nextImage .collapse">
+<h2>Return next image by id</h2>
+<pre>nextImage(int $id) : bool | object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code><code>object</code>$result</div>
+</div></div>
+</div>
 <a id="method_parseConfig"></a><div class="element clickable method public method_parseConfig" data-toggle="collapse" data-target=".method_parseConfig .collapse">
 <h2>Parse config from Application INI file</h2>
 <pre>parseConfig() : bool</pre>
@@ -559,6 +601,33 @@ Save stats into DB</h2>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>bool</code>$state</div>
+</div></div>
+</div>
+<a id="method_prevImage"></a><div class="element clickable method public method_prevImage" data-toggle="collapse" data-target=".method_prevImage .collapse">
+<h2>Return prev image by id</h2>
+<pre>prevImage(int $id) : bool | object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code><code>object</code>$result</div>
+</div></div>
+</div>
+<a id="method_rebuildThumbnails"></a><div class="element clickable method public method_rebuildThumbnails" data-toggle="collapse" data-target=".method_rebuildThumbnails .collapse">
+<h2>Batch resize for gallery originals</h2>
+<pre>rebuildThumbnails() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of all resized images</div>
 </div></div>
 </div>
 <a id="method_saveToLog"></a><div class="element clickable method public method_saveToLog" data-toggle="collapse" data-target=".method_saveToLog .collapse">
@@ -606,11 +675,73 @@ Save stats into DB</h2>
 </table>
 </div></div>
 </div>
+<a id="method_trackGallery"></a><div class="element clickable method public method_trackGallery" data-toggle="collapse" data-target=".method_trackGallery .collapse">
+<h2>Track gallery by id</h2>
+<pre>trackGallery(int $id) : bool | object</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$id</h4>
+<code>int</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code><code>object</code>$result</div>
+</div></div>
+</div>
+<a id="method_updateFSlist"></a><div class="element clickable method public method_updateFSlist" data-toggle="collapse" data-target=".method_updateFSlist .collapse">
+<h2>Update gallery entries from FS to DB</h2>
+<pre>updateFSlist() : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>list of all new images from gallery path</div>
+</div></div>
+</div>
+<a id="method_appendGalleriesImages"></a><div class="element clickable method private method_appendGalleriesImages" data-toggle="collapse" data-target=".method_appendGalleriesImages .collapse">
+<h2>Append galleries images</h2>
+<pre>appendGalleriesImages(array $galleries) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$galleries</h4>
+<code>array</code><p>objects</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>$galleries objects</div>
+</div></div>
+</div>
+<a id="method_saveLogData"></a><div class="element clickable method private method_saveLogData" data-toggle="collapse" data-target=".method_saveLogData .collapse">
+<h2>Save to log input parameters</h2>
+<pre>saveLogData() </pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>inherited_from</th>
+<td>\Application::saveLogData()</td>
+</tr>
+<tr>
+<th>inherited_from</th>
+<td>\Model::saveLogData()</td>
+</tr>
+</table>
+</div></div>
+</div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
 <a id="property_config"> </a><div class="element clickable property public property_config" data-toggle="collapse" data-target=".property_config .collapse">
-<h2>$config</h2>
-<pre>$config </pre>
+<h2>&lt;p&gt;app configuration&lt;/p&gt;</h2>
+<pre>$config : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -627,8 +758,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_cid"> </a><div class="element clickable property protected property_cid" data-toggle="collapse" data-target=".property_cid .collapse">
-<h2>$cid</h2>
-<pre>$cid </pre>
+<h2>&lt;p&gt;db connection id&lt;/p&gt;</h2>
+<pre>$cid : resource</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -639,8 +770,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_database"> </a><div class="element clickable property protected property_database" data-toggle="collapse" data-target=".property_database .collapse">
-<h2>$database</h2>
-<pre>$database </pre>
+<h2>&lt;p&gt;db object pointer&lt;/p&gt;</h2>
+<pre>$database : <a href="../classes/Database.html">\Database</a></pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -651,8 +782,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_instance"> </a><div class="element clickable property protected property_instance" data-toggle="collapse" data-target=".property_instance .collapse">
-<h2>$instance</h2>
-<pre>$instance </pre>
+<h2>&lt;p&gt;self pointer&lt;/p&gt;</h2>
+<pre>$instance : object</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -669,8 +800,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_message"> </a><div class="element clickable property protected property_message" data-toggle="collapse" data-target=".property_message .collapse">
-<h2>$message</h2>
-<pre>$message </pre>
+<h2>&lt;p&gt;latest message from stack&lt;/p&gt;</h2>
+<pre>$message : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -687,8 +818,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_models"> </a><div class="element clickable property protected property_models" data-toggle="collapse" data-target=".property_models .collapse">
-<h2>$models</h2>
-<pre>$models </pre>
+<h2>&lt;p&gt;cache of called models&lt;/p&gt;</h2>
+<pre>$models : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -699,8 +830,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_result"> </a><div class="element clickable property protected property_result" data-toggle="collapse" data-target=".property_result .collapse">
-<h2>$result</h2>
-<pre>$result </pre>
+<h2>&lt;p&gt;of the latest operation&lt;/p&gt;</h2>
+<pre>$result : int</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -717,8 +848,8 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_user"> </a><div class="element clickable property protected property_user" data-toggle="collapse" data-target=".property_user .collapse">
-<h2>$user</h2>
-<pre>$user </pre>
+<h2>&lt;p&gt;object pointer&lt;/p&gt;</h2>
+<pre>$user : \User</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -729,13 +860,13 @@ Save stats into DB</h2>
 </div></div>
 </div>
 <a id="property_file_path"> </a><div class="element clickable property private property_file_path" data-toggle="collapse" data-target=".property_file_path .collapse">
-<h2>$file_path</h2>
+<h2>&lt;p&gt;local file path to gallery&lt;/p&gt;</h2>
 <pre>$file_path : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_link_path"> </a><div class="element clickable property private property_link_path" data-toggle="collapse" data-target=".property_link_path .collapse">
-<h2>$link_path</h2>
+<h2>&lt;p&gt;web path to gallery&lt;/p&gt;</h2>
 <pre>$link_path : string</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
@@ -747,7 +878,7 @@ Save stats into DB</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2013-01-25T16:29:23+03:00.<br></footer></div>
+            generated on 2013-03-13T14:59:54+03:00.<br></footer></div>
 </div>
 </body>
 </html>

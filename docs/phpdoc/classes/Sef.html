@@ -20,7 +20,6 @@
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
-<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/M2%20Micro%20Framework.html"><i class="icon-folder-open"></i> M2 Micro Framework</a></li>
 </ul>
 </li>
@@ -32,7 +31,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">146</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -63,6 +62,7 @@
 <li class="method public inherited"><a href="#method__throw" title="_throw :: Throw error and add message to error stack"><span class="description">Throw error and add message to error stack</span><pre>_throw()</pre></a></li>
 <li class="method public inherited"><a href="#method_addToStack" title="addToStack :: Put message to error stack"><span class="description">Put message to error stack</span><pre>addToStack()</pre></a></li>
 <li class="method public inherited"><a href="#method_clean" title="clean :: Clean all stacks"><span class="description">Clean all stacks</span><pre>clean()</pre></a></li>
+<li class="method public "><a href="#method_createAlias" title="createAlias :: Create alias from input string"><span class="description">Create alias from input string</span><pre>createAlias()</pre></a></li>
 <li class="method public inherited"><a href="#method_flushTranslations" title="flushTranslations :: Close application"><span class="description">Close application</span><pre>flushTranslations()</pre></a></li>
 <li class="method public "><a href="#method_getInstance" title="getInstance :: GetInstance class method"><span class="description">GetInstance class method</span><pre>getInstance()</pre></a></li>
 <li class="method public inherited"><a href="#method_getLastFromStack" title="getLastFromStack :: Get last message from stack"><span class="description">Get last message from stack</span><pre>getLastFromStack()</pre></a></li>
@@ -94,21 +94,22 @@ if $count &lt; 0, we have error</span><pre>getResult()</pre></a></li>
 <li class="method private "><a href="#method_getStorage" title="getStorage :: STATIC: Get storage array of request-link pairs"><span class="description">STATIC: Get storage array of request-link pairs</span><pre>getStorage()</pre></a></li>
 <li class="method private "><a href="#method_getStorageData" title="getStorageData :: Get storage array of request-link pairs"><span class="description">Get storage array of request-link pairs</span><pre>getStorageData()</pre></a></li>
 <li class="method private "><a href="#method_sanitizeLink" title="sanitizeLink :: Remove from link spaces and non latin lettes"><span class="description">Remove from link spaces and non latin lettes</span><pre>sanitizeLink()</pre></a></li>
+<li class="method private inherited"><a href="#method_saveLogData" title="saveLogData :: Save to log input parameters"><span class="description">Save to log input parameters</span><pre>saveLogData()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
-                    <ul><li class="property public inherited"><a href="#property_config" title="$config :: "><span class="description">$config</span><pre>$config</pre></a></li></ul>
+                    <ul>
+<li class="property public "><a href="#property_character_replace_table" title="$character_replace_table :: "><span class="description">&lt;p&gt;replace table for strict symbols&lt;/p&gt;</span><pre>$character_replace_table</pre></a></li>
+<li class="property public inherited"><a href="#property_config" title="$config :: "><span class="description">&lt;p&gt;app configuration&lt;/p&gt;</span><pre>$config</pre></a></li>
+</ul>
 </li>
 <li class="nav-header protected">» Protected
                     <ul>
-<li class="property protected "><a href="#property_instance" title="$instance :: "><span class="description">$instance</span><pre>$instance</pre></a></li>
-<li class="property protected inherited"><a href="#property_message" title="$message :: "><span class="description">$message</span><pre>$message</pre></a></li>
-<li class="property protected inherited"><a href="#property_result" title="$result :: "><span class="description">$result</span><pre>$result</pre></a></li>
+<li class="property protected "><a href="#property_instance" title="$instance :: "><span class="description">&lt;p&gt;self pointer&lt;/p&gt;</span><pre>$instance</pre></a></li>
+<li class="property protected inherited"><a href="#property_message" title="$message :: "><span class="description">&lt;p&gt;latest message from stack&lt;/p&gt;</span><pre>$message</pre></a></li>
+<li class="property protected inherited"><a href="#property_result" title="$result :: "><span class="description">&lt;p&gt;of the latest operation&lt;/p&gt;</span><pre>$result</pre></a></li>
 </ul>
-</li>
-<li class="nav-header private">» Private
-                    <ul><li class="property private "><a href="#property_storage" title="$storage :: "><span class="description">$storage</span><pre>$storage</pre></a></li></ul>
 </li>
 </ul>
 </div>
@@ -227,6 +228,22 @@ if $count &lt; 0, we have error</span><pre>getResult()</pre></a></li>
 <th>inherited_from</th>
 <td>\Application::clean()</td>
 </tr></table>
+</div></div>
+</div>
+<a id="method_createAlias"></a><div class="element clickable method public method_createAlias" data-toggle="collapse" data-target=".method_createAlias .collapse">
+<h2>Create alias from input string</h2>
+<pre>createAlias(string $string) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>$string</div>
 </div></div>
 </div>
 <a id="method_flushTranslations"></a><div class="element clickable method public method_flushTranslations" data-toggle="collapse" data-target=".method_flushTranslations .collapse">
@@ -567,11 +584,31 @@ if $count &lt; 0, we have error</h2>
 <code>string</code>$link</div>
 </div></div>
 </div>
+<a id="method_saveLogData"></a><div class="element clickable method private method_saveLogData" data-toggle="collapse" data-target=".method_saveLogData .collapse">
+<h2>Save to log input parameters</h2>
+<pre>saveLogData() </pre>
+<div class="labels">
+<span class="label">Inherited</span><span class="label">Static</span>
+</div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered"><tr>
+<th>inherited_from</th>
+<td>\Application::saveLogData()</td>
+</tr></table>
+</div></div>
+</div>
 <h3>
 <i class="icon-custom icon-property"></i> Properties</h3>
+<a id="property_character_replace_table"> </a><div class="element clickable property public property_character_replace_table" data-toggle="collapse" data-target=".property_character_replace_table .collapse">
+<h2>&lt;p&gt;replace table for strict symbols&lt;/p&gt;</h2>
+<pre>$character_replace_table : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
 <a id="property_config"> </a><div class="element clickable property public property_config" data-toggle="collapse" data-target=".property_config .collapse">
-<h2>$config</h2>
-<pre>$config </pre>
+<h2>&lt;p&gt;app configuration&lt;/p&gt;</h2>
+<pre>$config : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -582,14 +619,14 @@ if $count &lt; 0, we have error</h2>
 </div></div>
 </div>
 <a id="property_instance"> </a><div class="element clickable property protected property_instance" data-toggle="collapse" data-target=".property_instance .collapse">
-<h2>$instance</h2>
-<pre>$instance </pre>
+<h2>&lt;p&gt;self pointer&lt;/p&gt;</h2>
+<pre>$instance : object</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 <a id="property_message"> </a><div class="element clickable property protected property_message" data-toggle="collapse" data-target=".property_message .collapse">
-<h2>$message</h2>
-<pre>$message </pre>
+<h2>&lt;p&gt;latest message from stack&lt;/p&gt;</h2>
+<pre>$message : array</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -600,8 +637,8 @@ if $count &lt; 0, we have error</h2>
 </div></div>
 </div>
 <a id="property_result"> </a><div class="element clickable property protected property_result" data-toggle="collapse" data-target=".property_result .collapse">
-<h2>$result</h2>
-<pre>$result </pre>
+<h2>&lt;p&gt;of the latest operation&lt;/p&gt;</h2>
+<pre>$result : int</pre>
 <div class="labels"><span class="label">Inherited</span></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -611,12 +648,6 @@ if $count &lt; 0, we have error</h2>
 </tr></table>
 </div></div>
 </div>
-<a id="property_storage"> </a><div class="element clickable property private property_storage" data-toggle="collapse" data-target=".property_storage .collapse">
-<h2>$storage</h2>
-<pre>$storage </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
 </div>
 </div>
 </div>
@@ -624,7 +655,7 @@ if $count &lt; 0, we have error</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2013-01-25T16:29:23+03:00.<br></footer></div>
+            generated on 2013-03-13T14:59:54+03:00.<br></footer></div>
 </div>
 </body>
 </html>

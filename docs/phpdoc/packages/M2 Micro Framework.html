@@ -20,7 +20,6 @@
 <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
                                     API Documentation <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a>Packages</a></li>
-<li><a href="../packages/Default.html"><i class="icon-folder-open"></i> Default</a></li>
 <li><a href="../packages/M2%20Micro%20Framework.html"><i class="icon-folder-open"></i> M2 Micro Framework</a></li>
 </ul>
 </li>
@@ -32,7 +31,7 @@
 <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
                                     Reports <b class="caret"></b></a><ul class="dropdown-menu">
 <li><a href="../errors.html"><i class="icon-remove-sign"></i> Errors 
-                <span class="label label-info">146</span></a></li>
+                <span class="label label-info">0</span></a></li>
 <li><a href="../markers.html"><i class="icon-map-marker"></i> Markers 
                 <ul><li>todo 
                 <span class="label label-info">2</span>
@@ -59,24 +58,35 @@
 <li class="nav-header">
 <i class="icon-map-marker"></i> Packages</li>
 <li>
-<span class="empty-package"><i class="icon-folder-close"></i>M2 Micro Framework</span><ul class="nav nav-list nav-packages">
+<a href="../packages/M2%20Micro%20Framework.html" title="M2 Micro Framework"><i class="icon-folder-open"></i>M2 Micro Framework</a><ul class="nav nav-list nav-packages">
+<li>
+<a href="../packages/M2%20Micro%20Framework.Controls.html" title="Controls"><i class="icon-folder-open"></i>Controls</a><ul class="nav nav-list nav-packages"></ul>
+</li>
 <li>
 <a href="../packages/M2%20Micro%20Framework.Library.html" title="Library"><i class="icon-folder-open"></i>Library</a><ul class="nav nav-list nav-packages"></ul>
 </li>
 <li>
-<a href="../packages/M2%20Micro%20Framework.Library%20Tags.html" title="Library Tags"><i class="icon-folder-open"></i>Library Tags</a><ul class="nav nav-list nav-packages"></ul>
-</li>
-<li>
-<a href="../packages/M2%20Micro%20Framework.Main.html" title="Main"><i class="icon-folder-open"></i>Main</a><ul class="nav nav-list nav-packages"></ul>
-</li>
-<li>
 <a href="../packages/M2%20Micro%20Framework.Modules.html" title="Modules"><i class="icon-folder-open"></i>Modules</a><ul class="nav nav-list nav-packages"></ul>
-</li>
-<li>
-<a href="../packages/M2%20Micro%20Framework.Tests.html" title="Tests"><i class="icon-folder-open"></i>Tests</a><ul class="nav nav-list nav-packages"></ul>
 </li>
 </ul>
 </li>
+<li class="nav-header">
+<i class="icon-custom icon-function"></i> Functions</li>
+<li class="function  "><a href="#function_T" title="T :: Function for translate tokens from dictionaries"><span class="description">Function for translate tokens from dictionaries</span><pre>T</pre></a></li>
+<li class="function  "><a href="#function_cleanCommaString" title="cleanCommaString :: Remove from comma separated string array empty values"><span class="description">Remove from comma separated string array empty values</span><pre>cleanCommaString</pre></a></li>
+<li class="function  "><a href="#function_getDefaultModule" title="getDefaultModule :: Return first applicable module"><span class="description">Return first applicable module</span><pre>getDefaultModule</pre></a></li>
+<li class="function  "><a href="#function_getErrorStringFromInt" title="getErrorStringFromInt :: Return human representation of error level"><span class="description">Return human representation of error level</span><pre>getErrorStringFromInt</pre></a></li>
+<li class="function  "><a href="#function_toJSNumArray" title="toJSNumArray :: Prepare PHP array to JSON array"><span class="description">Prepare PHP array to JSON array</span><pre>toJSNumArray</pre></a></li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants</li>
+<li class="constant  "><a href="#constant_DS" title="DS :: "><span class="description">DS</span><pre>DS</pre></a></li>
+<li class="constant  "><a href="#constant_ERROR" title="ERROR :: "><span class="description">ERROR</span><pre>ERROR</pre></a></li>
+<li class="constant  "><a href="#constant_LIB_PATH" title="LIB_PATH :: "><span class="description">LIB_PATH</span><pre>LIB_PATH</pre></a></li>
+<li class="constant  "><a href="#constant_MESSAGE" title="MESSAGE :: "><span class="description">MESSAGE</span><pre>MESSAGE</pre></a></li>
+<li class="constant  "><a href="#constant_NL" title="NL :: "><span class="description">NL</span><pre>NL</pre></a></li>
+<li class="constant  "><a href="#constant_NOTICE" title="NOTICE :: "><span class="description">NOTICE</span><pre>NOTICE</pre></a></li>
+<li class="constant  "><a href="#constant_ROOT_PATH" title="ROOT_PATH :: "><span class="description">ROOT_PATH</span><pre>ROOT_PATH</pre></a></li>
+<li class="constant  "><a href="#constant_WARNING" title="WARNING :: "><span class="description">WARNING</span><pre>WARNING</pre></a></li>
 </ul>
 </div>
 <div class="span8 package-contents">
@@ -84,6 +94,169 @@
 <a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li class="active"><a href="../packages/M2%20Micro%20Framework.html">M2 Micro Framework</a></li>
 </li></ul>
 <div class="package-indent">
+<h3>
+<i class="icon-custom icon-function"></i> Functions</h3>
+<a id="function_T"></a><div class="element clickable function  function_T" data-toggle="collapse" data-target=".function_T .collapse">
+<h2>Function for translate tokens from dictionaries</h2>
+<pre>T(string $text) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$text</h4>
+<code>string</code><p>text to translate</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>$text translated text</div>
+</div></div>
+</div>
+<a id="function_cleanCommaString"></a><div class="element clickable function  function_cleanCommaString" data-toggle="collapse" data-target=".function_cleanCommaString .collapse">
+<h2>Remove from comma separated string array empty values</h2>
+<pre>cleanCommaString(string $string) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$string</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>$result</div>
+</div></div>
+</div>
+<a id="function_getDefaultModule"></a><div class="element clickable function  function_getDefaultModule" data-toggle="collapse" data-target=".function_getDefaultModule .collapse">
+<h2>Return first applicable module</h2>
+<pre>getDefaultModule() : bool | string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code><code>string</code>$module_name</div>
+</div></div>
+</div>
+<a id="function_getErrorStringFromInt"></a><div class="element clickable function  function_getErrorStringFromInt" data-toggle="collapse" data-target=".function_getErrorStringFromInt .collapse">
+<h2>Return human representation of error level</h2>
+<pre>getErrorStringFromInt(int $number) : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$number</h4>
+<code>int</code><p>error level</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>$display_name</div>
+</div></div>
+</div>
+<a id="function_toJSNumArray"></a><div class="element clickable function  function_toJSNumArray" data-toggle="collapse" data-target=".function_toJSNumArray .collapse">
+<h2>Prepare PHP array to JSON array</h2>
+<pre>toJSNumArray(mixed $array) : mixed</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$array</h4>
+<code>mixed</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>mixed</code>$result</div>
+</div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_DS"> </a><div class="element clickable constant  constant_DS" data-toggle="collapse" data-target=".constant_DS .collapse">
+<h2>DS</h2>
+<pre>DS </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_ERROR"> </a><div class="element clickable constant  constant_ERROR" data-toggle="collapse" data-target=".constant_ERROR .collapse">
+<h2>ERROR</h2>
+<pre>ERROR </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_LIB_PATH"> </a><div class="element clickable constant  constant_LIB_PATH" data-toggle="collapse" data-target=".constant_LIB_PATH .collapse">
+<h2>LIB_PATH</h2>
+<pre>LIB_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_MESSAGE"> </a><div class="element clickable constant  constant_MESSAGE" data-toggle="collapse" data-target=".constant_MESSAGE .collapse">
+<h2>MESSAGE</h2>
+<pre>MESSAGE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_NL"> </a><div class="element clickable constant  constant_NL" data-toggle="collapse" data-target=".constant_NL .collapse">
+<h2>NL</h2>
+<pre>NL </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_NOTICE"> </a><div class="element clickable constant  constant_NOTICE" data-toggle="collapse" data-target=".constant_NOTICE .collapse">
+<h2>NOTICE</h2>
+<pre>NOTICE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_ROOT_PATH"> </a><div class="element clickable constant  constant_ROOT_PATH" data-toggle="collapse" data-target=".constant_ROOT_PATH .collapse">
+<h2>ROOT_PATH</h2>
+<pre>ROOT_PATH </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_WARNING"> </a><div class="element clickable constant  constant_WARNING" data-toggle="collapse" data-target=".constant_WARNING .collapse">
+<h2>WARNING</h2>
+<pre>WARNING </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<ul class="breadcrumb"><li>
+<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li><a href="../packages/M2%20Micro%20Framework.html">M2 Micro Framework</a></li>
+<li class="active">
+<span class="divider">\</span><a href="../packages/M2%20Micro%20Framework.Controls.html">Controls</a>
+</li>
+</li></ul>
+<div class="package-indent">
+<h3>
+<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
+<div id="Control" class="element ajax clickable class">
+<h1>Control<a href="../classes/Control.html">¶</a>
+</h1>
+<p class="short_description">Control helper class</p>
+<div class="details collapse"></div>
+<a href="../classes/Control.html" class="more">« More »</a>
+</div>
+<div id="File" class="element ajax clickable class">
+<h1>File<a href="../classes/File.html">¶</a>
+</h1>
+<p class="short_description">File control helper</p>
+<div class="details collapse"></div>
+<a href="../classes/File.html" class="more">« More »</a>
+</div>
+<div id="Relations" class="element ajax clickable class">
+<h1>Relations<a href="../classes/Relations.html">¶</a>
+</h1>
+<p class="short_description">Relations control helper</p>
+<div class="details collapse"></div>
+<a href="../classes/Relations.html" class="more">« More »</a>
+</div>
+<div id="Tag" class="element ajax clickable class">
+<h1>Tag<a href="../classes/Tag.html">¶</a>
+</h1>
+<p class="short_description">Tag control helper</p>
+<div class="details collapse"></div>
+<a href="../classes/Tag.html" class="more">« More »</a>
+</div>
+</div>
 <ul class="breadcrumb"><li>
 <a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li><a href="../packages/M2%20Micro%20Framework.html">M2 Micro Framework</a></li>
 <li class="active">
@@ -136,116 +309,6 @@ NOTICE: This class implemented as Singleton</p>
 NOTICE: This class implemented as Singleton</p>
 <div class="details collapse"></div>
 <a href="../classes/System.html" class="more">« More »</a>
-</div>
-<div id="UserEntity" class="element ajax clickable class">
-<h1>UserEntity<a href="../classes/UserEntity.html">¶</a>
-</h1>
-<p class="short_description">Entity class for user operations
-NOTICE: This class implemented as Singleton</p>
-<div class="details collapse"></div>
-<a href="../classes/UserEntity.html" class="more">« More »</a>
-</div>
-</div>
-<ul class="breadcrumb"><li>
-<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li><a href="../packages/M2%20Micro%20Framework.html">M2 Micro Framework</a></li>
-<li class="active">
-<span class="divider">\</span><a href="../packages/M2%20Micro%20Framework.Library%20Tags.html">Library Tags</a>
-</li>
-</li></ul>
-<div class="package-indent">
-<h3>
-<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
-<div id="Control" class="element ajax clickable class">
-<h1>Control<a href="../classes/Control.html">¶</a>
-</h1>
-<p class="short_description">Control helper class</p>
-<div class="details collapse"></div>
-<a href="../classes/Control.html" class="more">« More »</a>
-</div>
-<div id="File" class="element ajax clickable class">
-<h1>File<a href="../classes/File.html">¶</a>
-</h1>
-<p class="short_description">File control helper</p>
-<div class="details collapse"></div>
-<a href="../classes/File.html" class="more">« More »</a>
-</div>
-<div id="Relations" class="element ajax clickable class">
-<h1>Relations<a href="../classes/Relations.html">¶</a>
-</h1>
-<p class="short_description">Relations control helper</p>
-<div class="details collapse"></div>
-<a href="../classes/Relations.html" class="more">« More »</a>
-</div>
-<div id="Tag" class="element ajax clickable class">
-<h1>Tag<a href="../classes/Tag.html">¶</a>
-</h1>
-<p class="short_description">Tag control helper</p>
-<div class="details collapse"></div>
-<a href="../classes/Tag.html" class="more">« More »</a>
-</div>
-</div>
-<ul class="breadcrumb"><li>
-<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li><a href="../packages/M2%20Micro%20Framework.html">M2 Micro Framework</a></li>
-<li class="active">
-<span class="divider">\</span><a href="../packages/M2%20Micro%20Framework.Main.html">Main</a>
-</li>
-</li></ul>
-<div class="package-indent">
-<h3>
-<i class="icon-custom icon-constant"></i> Constants</h3>
-<a id="constant_DS"> </a><div class="element clickable constant  constant_DS" data-toggle="collapse" data-target=".constant_DS .collapse">
-<h2>DS</h2>
-<pre>DS </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_ERROR"> </a><div class="element clickable constant  constant_ERROR" data-toggle="collapse" data-target=".constant_ERROR .collapse">
-<h2>ERROR</h2>
-<pre>ERROR </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_LIB_PATH"> </a><div class="element clickable constant  constant_LIB_PATH" data-toggle="collapse" data-target=".constant_LIB_PATH .collapse">
-<h2>LIB_PATH</h2>
-<pre>LIB_PATH </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_M2_MICRO"> </a><div class="element clickable constant  constant_M2_MICRO" data-toggle="collapse" data-target=".constant_M2_MICRO .collapse">
-<h2>M2_MICRO</h2>
-<pre>M2_MICRO </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_MESSAGE"> </a><div class="element clickable constant  constant_MESSAGE" data-toggle="collapse" data-target=".constant_MESSAGE .collapse">
-<h2>MESSAGE</h2>
-<pre>MESSAGE </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_NL"> </a><div class="element clickable constant  constant_NL" data-toggle="collapse" data-target=".constant_NL .collapse">
-<h2>NL</h2>
-<pre>NL </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_NOTICE"> </a><div class="element clickable constant  constant_NOTICE" data-toggle="collapse" data-target=".constant_NOTICE .collapse">
-<h2>NOTICE</h2>
-<pre>NOTICE </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_ROOT_PATH"> </a><div class="element clickable constant  constant_ROOT_PATH" data-toggle="collapse" data-target=".constant_ROOT_PATH .collapse">
-<h2>ROOT_PATH</h2>
-<pre>ROOT_PATH </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
-</div>
-<a id="constant_WARNING"> </a><div class="element clickable constant  constant_WARNING" data-toggle="collapse" data-target=".constant_WARNING .collapse">
-<h2>WARNING</h2>
-<pre>WARNING </pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 </div>
 <ul class="breadcrumb"><li>
@@ -398,6 +461,14 @@ dispatch first call and render output result</p>
 <div class="details collapse"></div>
 <a href="../classes/UserController.html" class="more">« More »</a>
 </div>
+<div id="UserEntity" class="element ajax clickable class">
+<h1>UserEntity<a href="../classes/UserEntity.html">¶</a>
+</h1>
+<p class="short_description">Entity class for user operations
+NOTICE: This class implemented as Singleton</p>
+<div class="details collapse"></div>
+<a href="../classes/UserEntity.html" class="more">« More »</a>
+</div>
 <div id="UserModel" class="element ajax clickable class">
 <h1>UserModel<a href="../classes/UserModel.html">¶</a>
 </h1>
@@ -408,7 +479,7 @@ dispatch first call and render output result</p>
 <div id="UserView" class="element ajax clickable class">
 <h1>UserView<a href="../classes/UserView.html">¶</a>
 </h1>
-<p class="short_description">View class</p>
+<p class="short_description">User View Class</p>
 <div class="details collapse"></div>
 <a href="../classes/UserView.html" class="more">« More »</a>
 </div>
@@ -419,29 +490,33 @@ dispatch first call and render output result</p>
 <div class="details collapse"></div>
 <a href="../classes/View.html" class="more">« More »</a>
 </div>
-</div>
-<ul class="breadcrumb"><li>
-<a href="../index.html"><i class="icon-folder-open"></i></a><span class="divider">\</span><li><a href="../packages/M2%20Micro%20Framework.html">M2 Micro Framework</a></li>
-<li class="active">
-<span class="divider">\</span><a href="../packages/M2%20Micro%20Framework.Tests.html">Tests</a>
-</li>
-</li></ul>
-<div class="package-indent">
 <h3>
-<i class="icon-custom icon-class"></i> Classes and interfaces</h3>
-<div id="DatabaseTest" class="element ajax clickable class">
-<h1>DatabaseTest<a href="../classes/DatabaseTest.html">¶</a>
-</h1>
-<p class="short_description">Test cases for Database class</p>
-<div class="details collapse"></div>
-<a href="../classes/DatabaseTest.html" class="more">« More »</a>
-</div>
-<div id="UserTest" class="element ajax clickable class">
-<h1>UserTest<a href="../classes/UserTest.html">¶</a>
-</h1>
-<p class="short_description">Test cases for Database class</p>
-<div class="details collapse"></div>
-<a href="../classes/UserTest.html" class="more">« More »</a>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_M2_MICRO"> </a><div class="element clickable constant  constant_M2_MICRO" data-toggle="collapse" data-target=".constant_M2_MICRO .collapse">
+<h2>Front index controller</h2>
+<pre>M2_MICRO </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<table class="table table-bordered">
+<tr>
+<th>package</th>
+<td><a href="../packages/M2%20Micro%20Framework.Modules.html">M2 Micro Framework</a></td>
+</tr>
+<tr>
+<th>subpackage</th>
+<td>Modules</td>
+</tr>
+<tr>
+<th>author</th>
+<td><a href="">Alexander Chaika</a></td>
+</tr>
+<tr>
+<th>since</th>
+<td>0.1</td>
+</tr>
+</table>
+</div></div>
 </div>
 </div>
 </div>
@@ -450,7 +525,7 @@ dispatch first call and render output result</p>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2013-01-25T16:29:22+03:00.<br></footer></div>
+            generated on 2013-03-13T14:59:53+03:00.<br></footer></div>
 </div>
 </body>
 </html>

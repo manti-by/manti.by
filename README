@@ -1,11 +1,19 @@
-M2 micro framework by Alexander Chaika (marco.manti@gmail.com).
+M2 Micro Framework by Alexander Chaika a.k.a. Manti <marco.manti@gmail.com>.
 
-Source link: https://github.com/marco-manti/M2_micro/
+About:
+    This is a framework with simple functionality, such as interactions with
+    database (used MySQLi), sending emails, upload files, resize images and etc.
 
-Current version: 0.3RC4
+    Framework have an MVC structure with modules and have simple object behaviour
+    which will be very simple to understand app logic for each level of developers.
+
+Source link:
+    https://github.com/marco-manti/M2_micro/
+
+Current version:
+    0.3beta
 
 Requirements: 
-
     PHP 5.3+, MySQL 5.0+, MySQLi PHP driver.
 
 
