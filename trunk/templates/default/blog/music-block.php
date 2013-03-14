@@ -89,6 +89,13 @@
             </div>
         <?php endif; ?>
 
+        <?php if (json_decode($options['data']->metakeys)) : ?>
+        <div class="metakeys">
+            <span class="bold"><?php echo T('Post tags'); ?></span> :
+            <?php echo Tag::getHtml($options['data']->metakeys); ?>
+        </div>
+        <?php endif; ?>
+
         <?php if (json_decode($options['data']->release)) : ?>
             <div class="release">
                 <span class="bold"><?php echo T('Download Link'); ?></span> :
@@ -96,11 +103,27 @@
             </div>
         <?php endif; ?>
 
-        <?php if (json_decode($options['data']->metakeys)) : ?>
-            <div class="metakeys">
-                <span class="bold"><?php echo T('Post tags'); ?></span> :
-                <?php echo Tag::getHtml($options['data']->metakeys); ?>
+        <?php if ($options['data']->tracklist && $options['context'] != 'full') : ?>
+            <div class="tracklist">
+                <a href="#show-tracklist" class="show-tracklist"><?php echo T('Show tracklist'); ?></a>
+                <div class="tracklist-block">
+                    <?php echo nl2br($options['data']->tracklist); ?>
+                    <a href="#hide-tracklist" id="hide-tracklist"><?php echo T('Hide tracklist'); ?></a>
+                </div>
             </div>
+            <script type="text/javascript">
+                $(document).ready(function() {
+                    $('.tracklist .show-tracklist').click(function() {
+                        $(this).closest('.teaser, .music-block').slideDown();
+                        $(this).find('.tracklist-block').slideUp();
+                    });
+
+                    $('.tracklist .hide-tracklist').click(function() {
+                        $(this).closest('.teaser, .music-block').slideUp();
+                        $(this).find('.tracklist-block').slideDown();
+                    });
+                });
+            </script>
         <?php endif; ?>
 
         <div class="cls"></div>

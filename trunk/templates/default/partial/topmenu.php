@@ -52,7 +52,7 @@
     $salutation = !empty($username) ? $username : $user->getEmail();
 ?>
 <?php if ($user->isLoggined()) : ?>
-<div id="usermenu">
+<div id="usermenu" class="shadow">
     <?php echo T('Hi') . ' ' . $salutation; ?>!
     <a href="<?php echo Sef::getSef('index.php?module=user&action=dashboard');?>"><?php echo T('Dashboard'); ?></a> |
     <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Sign Out'); ?></a>
@@ -67,5 +67,5 @@
     <li><a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"><?php echo T('Blog'); ?></a></li>
     <li><a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"><?php echo T('Gallery'); ?></a></li>
     <li><a href="<?php echo Sef::getSef('index.php?module=file'); ?>"><?php echo T('Download'); ?></a></li>
-    <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=4'); ?>"><?php echo T('About'); ?></a></li>
+    <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"><?php echo T('About'); ?></a></li>
 </ul>

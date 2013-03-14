@@ -35,6 +35,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+body { color: #333; }
+
 a { color: #b40303; text-decoration: none; }
 a:hover, a:active { text-decoration: underline; }
 
@@ -51,7 +53,7 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; }
 #topmenu { margin: 41px 0 5px 50px; padding: 0; }
 #topmenu li { list-style: none; display: inline; padding-right: 30px; font-size: 14px; text-transform: uppercase; }
 
-#usermenu { position: fixed; top: 0; right: 0; padding: 10px; border: 1px solid #CCC; }
+#usermenu { position: fixed; top: 3px; right: 3px; padding: 10px; border: 1px solid #CCC; background: white; }
 
 #language { margin-bottom: 15px; }
 #language img { position: relative; top: 3px; }
@@ -135,12 +137,25 @@ h1, h2, h3, h4, h5, h6 { border-bottom: none; }
 #featured .slider-item.active .wrap { cursor: default; }
 
 #featured .slider-item img { width: 350px; height: 350px; }
-#featured .slider-item .content { display: inline-block; }
+#featured .slider-item .content { position: relative; display: inline-block; height: 350px; }
 
 #featured .slider-item .content h3,
 #featured .slider-item .content .teaser,
-#featured .slider-item .content .fulllink { padding-left: 10px; }
-#featured .slider-item .content .music-block { padding: 10px 0 0 10px; }
+#featured .slider-item .content .fulllink { padding-left: 15px; }
+
+#featured .slider-item .content h3 { margin-bottom: 10px; font-size: 24px; }
+#featured .slider-item .content .fulllink { position: absolute; bottom: 0; }
+#featured .slider-item .content .music-block { padding: 10px 0 0 15px; }
+
+.music-block .tracklist-block { display: none; }
+
+#featured .slider-item .content .music-block .catnum,
+#featured .slider-item .content .music-block .genre,
+#featured .slider-item .content .music-block .length,
+#featured .slider-item .content .music-block .quality,
+#featured .slider-item .content .music-block .release,
+#featured .slider-item .content .music-block .metakeys { margin-bottom: 5px; }
+#featured .slider-item .content .music-block .preview { margin: 10px 0;}
 
 #popular { padding: 30px 10px; margin-bottom: 30px; }
 #popular #rollover { display: inline; list-style: none; padding: 0; }
