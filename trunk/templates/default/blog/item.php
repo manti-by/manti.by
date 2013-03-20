@@ -50,8 +50,10 @@
     $user = UserEntity::getInstance();
 ?>
 <div class="post-item">
-    <h2>
-        <?php echo $options['data']->name; ?>
+    <h3>
+        <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>">
+            <?php echo $options['data']->name; ?>
+        </a>
 
         <?php if ($user->getGroup() == 'Root') : ?>
             <div class="fr admin-buttons">
@@ -59,7 +61,7 @@
                 <a href="<?php echo Sef::getSef('index.php?module=blog&action=delete&id=' . $options['data']->id); ?>" class="ajax" callback="$(self).closest('.post-item').remove();"><?php echo T('Delete'); ?></a>
             </div>
         <?php endif; ?>
-    </h2>
+    </h3>
 
     <div class="teaser">
         <?php echo nl2br($options['data']->teaser); ?>

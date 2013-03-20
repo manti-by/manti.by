@@ -72,7 +72,7 @@
                 $options['title'] = 'Search by tags: ' . implode(', ', $tags);
             } else {
                 $options['data'] = $this->model->getGallery();
-                $options['title'] = Application::$config['site_title_' . Application::$config['language']];
+                $options['title'] = T('Gallery');
             }
 
             // Get category items and render it

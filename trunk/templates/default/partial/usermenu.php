@@ -39,28 +39,24 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Toolbar plugin
-     * @name $toolbar
+     * User menu plugin
+     * @name $usermenu
      * @package M2 Micro Framework
      * @subpackage Template
      * @author Alexander Chaika
-     * @since 0.1
-     * @todo Add search functionality
+     * @since 0.3RC4
      */
 
     $user = UserEntity::getInstance();
+    $username = $user->getUsername();
+    $salutation = !empty($username) ? $username : $user->getEmail();
 ?>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#switch-language').click(function() {
-            document.cookie = 'language=' + $(this).attr('rel') + '; path=/; expires=Mon, 01-Jan-2030 00:00:00 GMT';
-            location.href = location.href;
-        });
-    });
-</script>
-<div id="toolbar" class="fr">
-    <div id="search">
-        <input type="text" id="query" name="q" value="" placeholder="<?php echo T('Search'); ?>..." />
-        <input type="button" id="go" name="go" value=" " />
+<?php if ($user->isLoggined()) : ?>
+    <div id="usermenu">
+        <div class="wrapper">
+            <?php echo T('Hi') . ' ' . $salutation; ?>!
+            <a href="<?php echo Sef::getSef('index.php?module=user&action=dashboard');?>"><?php echo T('Dashboard'); ?></a> |
+            <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Sign Out'); ?></a>
+        </div>
     </div>
-</div>
+<?php endif; ?>

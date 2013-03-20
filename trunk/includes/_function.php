@@ -85,7 +85,7 @@
      * @return string $text translated text
      */
     function T($text) {
-        $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'en');
+        $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'ru');
         $references = Cache::get('translations_' . $language);
 
         // Check language existance

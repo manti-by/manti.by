@@ -156,7 +156,8 @@
 
                 // Check cookie language
                 if (!empty($_COOKIE['language'])) {
-                    Application::$config['language'] = $_COOKIE['language'];
+                    // #43634771
+                    // Application::$config['language'] = $_COOKIE['language'];
                 }
 
                 // Define helper options

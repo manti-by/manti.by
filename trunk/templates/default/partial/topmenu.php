@@ -46,21 +46,9 @@
      * @author Alexander Chaika
      * @since 0.1
      */
-
-    $user = UserEntity::getInstance();
-    $username = $user->getUsername();
-    $salutation = !empty($username) ? $username : $user->getEmail();
 ?>
-<?php if ($user->isLoggined()) : ?>
-<div id="usermenu" class="shadow">
-    <?php echo T('Hi') . ' ' . $salutation; ?>!
-    <a href="<?php echo Sef::getSef('index.php?module=user&action=dashboard');?>"><?php echo T('Dashboard'); ?></a> |
-    <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Sign Out'); ?></a>
-</div>
-<?php endif; ?>
-
 <a href="<?php echo Application::$config['http_host']; ?>" class="fl">
-    <img src="<?php echo Application::$config['template_image_url_path']; ?>logo.png" alt="Manti Logo" width="114" height="56" />
+    <img src="<?php echo Application::$config['template_image_url_path']; ?>logo.png" alt="Manti Logo" width="114" height="51" />
 </a>
 <ul id="topmenu" class="fl">
     <li><a href="<?php echo Application::$config['http_host']; ?>"><?php echo T('Home'); ?></a></li>

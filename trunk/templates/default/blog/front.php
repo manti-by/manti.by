@@ -57,6 +57,7 @@
         echo $this->getContents('blog', 'popular', $data);
     ?>
 
+    <h2 class="other-blog-posts"><?php echo T('Other blog posts'); ?></h2>
     <div class="main-sidebar">
         <?php
             $data = array('module' => 'blog', 'data' => $options['data']['content'], 'context' => 'preview');
