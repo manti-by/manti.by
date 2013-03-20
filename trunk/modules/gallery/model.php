@@ -304,4 +304,24 @@
             $this->database->query("CALL GET_PREV_IMAGE_BY_ID($id);");
             return $this->database->getObject();
         }
+
+        /**
+         * Return latest gallery images
+         * @param int $limit
+         * @return array|bool
+         */
+        public function getLatestImages($limit = 100) {
+            $this->database->query("CALL GET_LATEST_IMAGES($limit)");
+            return $this->database->getObjectsArray();
+        }
+
+        /**
+         * Return popular gallery images
+         * @param int $limit
+         * @return array|bool
+         */
+        public function getPopularImages($limit = 100) {
+            $this->database->query("CALL GET_POPULAR_IMAGES($limit)");
+            return $this->database->getObjectsArray();
+        }
     }
