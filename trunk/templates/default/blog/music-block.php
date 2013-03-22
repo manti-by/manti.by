@@ -107,21 +107,27 @@
         <?php if ($options['data']->tracklist && $options['context'] != 'full') : ?>
             <div class="tracklist">
                 <a href="#show-tracklist" class="show-tracklist"><?php echo T('Show tracklist'); ?></a>
+                <a href="#hide-tracklist" class="hide-tracklist"><?php echo T('Hide tracklist'); ?></a>
                 <div class="tracklist-block">
                     <?php echo nl2br($options['data']->tracklist); ?>
-                    <a href="#hide-tracklist" id="hide-tracklist"><?php echo T('Hide tracklist'); ?></a>
                 </div>
             </div>
             <script type="text/javascript">
                 $(document).ready(function() {
                     $('.tracklist .show-tracklist').click(function() {
-                        $(this).closest('.teaser, .music-block').slideDown();
-                        $(this).find('.tracklist-block').slideUp();
+                        $(this).closest('.teaser, .music-block').hide();
+                        $(this).next('.tracklist-block').show();
+
+                        $(this).hide();
+                        $(this).next('.hide-tracklist').show();
                     });
 
                     $('.tracklist .hide-tracklist').click(function() {
-                        $(this).closest('.teaser, .music-block').slideUp();
-                        $(this).find('.tracklist-block').slideDown();
+                        $(this).closest('.teaser, .music-block').show();
+                        $(this).next('.tracklist-block').hide();
+
+                        $(this).hide();
+                        $(this).prev('.show-tracklist').show();
                     });
                 });
             </script>

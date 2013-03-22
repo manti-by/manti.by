@@ -67,7 +67,7 @@
             <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Sign Out'); ?></a>
         <?php else : ?>
             <div id="popular-list" class="fl">
-                <h3><?php echo T('Popular'); ?>: </h3>
+                <h3><?php echo T('Popular'); ?></h3>
                 <ul>
                     <?php foreach($popular as $item) : ?>
                         <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>"><?php echo $item->name; ?></a></li>
