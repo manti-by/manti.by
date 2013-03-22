@@ -51,7 +51,9 @@
     <div class="music-block">
         <?php if (json_decode($options['data']->covers)) : ?>
             <div class="covers fl">
-                <?php echo File::getHtml($options['data']->covers, FileEntity::TYPE_COVERS); ?>
+                <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>">
+                    <?php echo File::getHtml($options['data']->covers, FileEntity::TYPE_COVERS); ?>
+                </a>
             </div>
         <?php endif; ?>
 
@@ -98,7 +100,6 @@
 
         <?php if (json_decode($options['data']->release)) : ?>
             <div class="release">
-                <span class="bold"><?php echo T('Download Link'); ?></span> :
                 <?php echo File::getHtml($options['data']->release, FileEntity::TYPE_RELEASE); ?>
             </div>
         <?php endif; ?>

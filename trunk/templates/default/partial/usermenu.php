@@ -50,13 +50,29 @@
     $user = UserEntity::getInstance();
     $username = $user->getUsername();
     $salutation = !empty($username) ? $username : $user->getEmail();
+
+    // Check frontpage data
+    if (empty($options['data'])) {
+        $this->database->query("CALL GET_POSTS_BY_VIEW_COUNT(5, 1);");
+        $options['data'] = $this->database->getObjectsArray();
+    }
 ?>
-<?php if ($user->isLoggined()) : ?>
-    <div id="usermenu">
-        <div class="wrapper">
+<div id="usermenu">
+    <div class="wrapper">
+        <?php if ($user->isLoggined()) : ?>
             <?php echo T('Hi') . ' ' . $salutation; ?>!
             <a href="<?php echo Sef::getSef('index.php?module=user&action=dashboard');?>"><?php echo T('Dashboard'); ?></a> |
             <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Sign Out'); ?></a>
-        </div>
+        <?php else : ?>
+            <div id="popular-list" class="fl">
+                <h3><?php echo T('Popular'); ?>: </h3>
+                <ul>
+                    <?php foreach($options['data'] as $item) : ?>
+                        <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>"><?php echo $item->name; ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <a href="<?php echo Sef::getSef('index.php?module=user&action=loginform'); ?>"><?php echo T('Login'); ?></a>
+        <?php endif; ?>
     </div>
-<?php endif; ?>
+</div>

@@ -59,7 +59,9 @@
                     <li class="slider-item<?php echo $active ? ' active' : ''; ?>">
                         <div class="wrap">
                             <div class="cover l50">
-                                <?php echo File::getHtml($item->covers, FileEntity::TYPE_COVERS); ?>
+                                <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>">
+                                    <?php echo File::getHtml($item->covers, FileEntity::TYPE_COVERS); ?>
+                                </a>
                             </div>
                             <div class="content r50">
                                 <h3><?php echo $item->name; ?></h3>
@@ -89,9 +91,13 @@
     $(document).ready(function() {
         $('.slider-item.active').width(700).css('opacity', 1);
 
-        $('.slider-item:not(.active) .wrap').live('click', function() {
+        $('.slider-item:not(.active) .wrap').live('click', function(e) {
+            e.preventDefault();
+
             $('.slider-item.active').removeClass('active').animate({ width : 100, opacity: 0.7 }, 400);
             $(this).parent('.slider-item').addClass('active').animate({ width: 700, opacity: 1 }, 400);
+
+            return false;
         });
     });
 </script>

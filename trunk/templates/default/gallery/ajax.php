@@ -85,7 +85,7 @@
         buildImage = function(response) {
             if (response.result == 'success') {
                 // Create image block
-                var image_block = $('<img src="' + response.original + '" class="original resizible" rel="' + response.id + '" />');
+                var image_block = $('<img src="' + response.original + '" class="original resizible black-shadow" rel="' + response.id + '" />');
 
                 // Wait while loading and bind click and track
                 image_block.load(function() {

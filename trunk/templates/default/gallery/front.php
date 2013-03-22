@@ -39,39 +39,36 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Frontpage template
-     * @name $frontpage
-     * @author Alexander Chaika
+     * Frontpage gallery block template
+     * @name $front-gallery
      * @package M2 Micro Framework
      * @subpackage Template
-     * @since 0.3RC3
-     * @todo Fix other posts out
+     * @author Alexander Chaika
+     * @since 0.3RC4
      */
+
+    $count = 0;
+    $popular = reset($options['data']['gallery_popular']);
 ?>
-<div id="frontpage">
-    <?php
-        $data = array('data' => $options['data']['featured']);
-        echo $this->getContents('blog', 'featured', $data);
+<div id="gallery">
+    <h2><?php echo T('Latest shots from gallery'); ?></h2>
+    <div class="latest fl">
+        <?php foreach ($options['data']['gallery_latest'] as $original) : ?>
+            <?php
+                // Check preview count
+                if ($count >= Application::$config['front_count']) break;
+                else $count++;
+            ?>
 
-        $data = array('data' => array(
-            'gallery_latest'  => $options['data']['gallery_latest'],
-            'gallery_popular' => $options['data']['gallery_popular']
-        ));
-        echo $this->getContents('gallery', 'front', $data);
-    ?>
-
-    <h2 class="other-blog-posts"><?php echo T('Other blog posts'); ?></h2>
-    <div class="main-sidebar">
-        <?php
-            $data = array('module' => 'blog', 'data' => $options['data']['content'], 'context' => 'preview');
-            echo $this->renderItemsArray($data);
-        ?>
+            <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
+                <img src="<?php echo Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1); ?>" />
+            </a>
+        <?php endforeach; ?>
     </div>
-
-    <div class="right-sidebar">
-        <?php echo $this->getContents('plugin', 'tags'); ?>
-        <?php echo $this->getContents('plugin', 'latest'); ?>
+    <div class="popular fl">
+        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>" rel="<?php echo $popular->id; ?>">
+            <img src="<?php echo  Application::$config['http_host'] . substr($popular->source, 1); ?>" />
+        </a>
     </div>
-
     <div class="cls"></div>
 </div>

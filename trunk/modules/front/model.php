@@ -114,7 +114,7 @@
 
             // Append gallery images
             $result['gallery_latest'] = Model::getModel('gallery')->getLatestImages(6);
-            $result['gallery_popular'] = Model::getModel('gallery')->getLatestImages(6);
+            $result['gallery_popular'] = Model::getModel('gallery')->getPopularImages(6);
 
             return $result;
         }
