@@ -61,7 +61,7 @@
         <?php echo $this->getContents('plugin', 'popup'); ?>
         <?php echo $this->getContents('plugin', 'loader'); ?>
         <?php echo $this->getContents('plugin', 'messages'); ?>
-        <?php echo $this->getContents('partial', 'usermenu', array('data' => $options['data']['popular'])); ?>
+        <?php echo $this->getContents('partial', 'usermenu', array('data' => $options['data'])); ?>
 
         <div id="header">
             <div class="wrapper">

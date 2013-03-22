@@ -52,9 +52,11 @@
     $salutation = !empty($username) ? $username : $user->getEmail();
 
     // Check frontpage data
-    if (empty($options['data'])) {
-        $this->database->query("CALL GET_POSTS_BY_VIEW_COUNT(5, 1);");
-        $options['data'] = $this->database->getObjectsArray();
+    if (is_array($options['data']) && !empty($options['data']['popular'])) {
+        $popular = $options['data']['popular'];
+    } else {
+        Database::getInstance()->query("CALL GET_POSTS_BY_VIEW_COUNT(5, 1);");
+        $popular = Database::getInstance()->getObjectsArray();
     }
 ?>
 <div id="usermenu">
@@ -67,7 +69,7 @@
             <div id="popular-list" class="fl">
                 <h3><?php echo T('Popular'); ?>: </h3>
                 <ul>
-                    <?php foreach($options['data'] as $item) : ?>
+                    <?php foreach($popular as $item) : ?>
                         <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>"><?php echo $item->name; ?></a></li>
                     <?php endforeach; ?>
                 </ul>

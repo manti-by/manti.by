@@ -102,9 +102,11 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 .success-message { min-height: 36px; line-height: 36px; padding-left: 36px;
     background: url('../images/icon-success-32x32.png') no-repeat top left; }
 
-.close { background: url('../images/icon-close-32x32.png') no-repeat center center; }
-.prev { background: url('../images/icon-prev-32x32.png') no-repeat center center; }
-.next { background: url('../images/icon-next-32x32.png') no-repeat center center; }
+.close { background: url('../images/icon-close-48x48.png') no-repeat center center; }
+.prev { background: url('../images/icon-prev-48x48.png') no-repeat center center; }
+.next { background: url('../images/icon-next-48x48.png') no-repeat center center; }
+.close, .prev, .next { opacity: 0.7; }
+.close:hover, .prev:hover, .next:hover { opacity: 1; }
 
 .form-error { display: none; color: red; font-size: 11px; padding-left: 5px; position: absolute; width: 250px;
     overflow: visible; }

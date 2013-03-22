@@ -152,7 +152,7 @@
                 foreach ($files as $file) {
                     switch ($type) {
                         case FileEntity::TYPE_PREVIEW:
-                            $result .= '<audio controls><source src="' . Application::$config['http_host'] . substr($file->source, 1) . '" type="audio/mpeg;"></audio>';
+                            $result .= '<audio controls><source src="' . Application::$config['http_host'] . substr($file->source, 1) . '" type="audio/mpeg;"><span class="red">' . T('Your browser did not supported audio tag') . '</span></audio>';
                             break;
                         case FileEntity::TYPE_COVERS:
                             $result .= '<img src="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="cover" />';
