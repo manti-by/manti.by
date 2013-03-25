@@ -52,7 +52,7 @@
 <div class="post-item">
     <h3>
         <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>">
-            <?php echo $options['data']->name; ?>
+            <?php echo $options['data']->name  . (!empty($options['data']->genre) ? ' /' . $options['data']->genre.  '/' : ''); ?>
         </a>
 
         <?php if ($user->getGroup() == 'Root') : ?>

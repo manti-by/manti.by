@@ -64,7 +64,7 @@
                                 </a>
                             </div>
                             <div class="content r50">
-                                <h3><?php echo $item->name; ?></h3>
+                                <h3><?php echo $item->name . (!empty($item->genre) ? ' /' . $item->genre.  '/' : ''); ?></h3>
                                 <div class="teaser">
                                     <?php echo nl2br($item->teaser); ?>
                                 </div>
