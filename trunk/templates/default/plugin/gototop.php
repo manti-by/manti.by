@@ -39,50 +39,28 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Default template file
-     * @name $template-index
+     * GoToTop  plugin
+     * @name $gototopPlugin
+     * @author Alexander Chaika a.k.a. Manti
      * @package M2 Micro Framework
-     * @subpackage Template
-     * @author Alexander Chaika
-     * @since 0.1
+     * @subpackage Plugin
+     * @since 0.3RC4
      */
+
 ?>
-<!DOCTYPE html>
-<html>
-    <head>
-        <title><?php echo strip_tags($options['title']); ?></title>
-        <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/default.css" />
-        <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/style.css" />
-        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/default.js"></script>
-    </head>
-    <body>
-        <?php echo $this->getContents('plugin', 'gototop'); ?>
-        <?php echo $this->getContents('plugin', 'ajax'); ?>
-        <?php echo $this->getContents('plugin', 'popup'); ?>
-        <?php echo $this->getContents('plugin', 'loader'); ?>
-        <?php echo $this->getContents('plugin', 'messages'); ?>
-        <?php echo $this->getContents('partial', 'usermenu', array('data' => $options['data'])); ?>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > $(window).height()) {
+                $('#gototop').fadeIn(400);
+            } else {
+                $('#gototop').fadeOut(400);
+            }
+        });
 
-        <div id="header">
-            <div class="wrapper">
-                <?php echo $this->getContents('partial', 'topmenu'); ?>
-                <?php echo $this->getContents('partial', 'toolbar'); ?>
-                <div class="cls"></div>
-            </div>
-        </div>
-
-        <div id="content" class="wrapper">
-            <?php echo $options['body']; ?>
-        </div>
-
-
-        <div id="footer">
-            <div class="wrapper">
-                <?php echo $this->getContents('partial', 'footer'); ?>
-            </div>
-        </div>
-
-        <?php echo $this->getContents('plugin', 'debug'); ?>
-    </body>
-</html>
+        $('#gototop').bind('click', function() {
+            $('body').animate({ scrollTop: 0 });
+        });
+    });
+</script>
+<a id="gototop" href="#gototop"></a>
