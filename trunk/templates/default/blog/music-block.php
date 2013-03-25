@@ -112,25 +112,6 @@
                     <?php echo nl2br($options['data']->tracklist); ?>
                 </div>
             </div>
-            <script type="text/javascript">
-                $(document).ready(function() {
-                    $('.tracklist .show-tracklist').click(function() {
-                        $(this).closest('.teaser, .music-block').hide();
-                        $(this).next('.tracklist-block').show();
-
-                        $(this).hide();
-                        $(this).next('.hide-tracklist').show();
-                    });
-
-                    $('.tracklist .hide-tracklist').click(function() {
-                        $(this).closest('.teaser, .music-block').show();
-                        $(this).next('.tracklist-block').hide();
-
-                        $(this).hide();
-                        $(this).prev('.show-tracklist').show();
-                    });
-                });
-            </script>
         <?php endif; ?>
 
         <div class="cls"></div>

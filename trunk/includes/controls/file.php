@@ -159,7 +159,7 @@
                             break;
                         case FileEntity::TYPE_RELEASE:
                         default:
-                            $result .= '<a href="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="release">' . T('Download') . '</a>';
+                            $result .= '<a href="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="release" rel="' . $file->id . '">' . T('Download') . '</a>';
                             break;
                     }
 

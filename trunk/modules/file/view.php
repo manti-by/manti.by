@@ -134,7 +134,7 @@
             // Print body
             foreach ($array as $object) {
                 $result .= '<tr id="file-'.  $object->id .'">';
-                $result .= '<td class="file-name"><a href="' . str_replace('./', Application::$config['http_host'] . '/', $object->source) . '">' . end(explode('/', $object->source)) . '</a></td>';
+                $result .= '<td class="file-name"><a href="' . str_replace('./', Application::$config['http_host'] . '/', $object->source) . '" rel="' . $object->id . '">' . end(explode('/', $object->source)) . '</a></td>';
                 $result .= '<td class="file-size">' . System::humanReadableFilesize($object->size) . '</td>';
                 $result .= '<td class="file-md5">' . $object->md5 . '</td>';
                 $result .= '</tr>';
