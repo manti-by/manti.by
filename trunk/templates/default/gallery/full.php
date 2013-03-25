@@ -55,7 +55,7 @@
     </div>
     <div class="thumbnails">
         <?php foreach ($options['data']->originals as $original) : ?>
-            <a href="<?php echo $original->link; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
+            <a name="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
                 <img src="<?php echo $original->thumbnail; ?>" />
             </a>
         <?php endforeach; ?>

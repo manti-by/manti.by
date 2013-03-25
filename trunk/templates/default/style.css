@@ -213,3 +213,6 @@ h2 { padding-bottom: 3px; border-bottom: 1px solid #CCC; text-transform: upperca
 
 .fulllink { }
 .fulllink a { text-decoration: underline; }
+
+#file-table th { background: #EEE; border-bottom: 1px solid #CCC; }
+#file-table tr:last-child td { border-bottom: none; }

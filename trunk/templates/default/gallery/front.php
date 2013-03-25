@@ -60,13 +60,13 @@
                 else $count++;
             ?>
 
-            <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>#image-<?php echo $original->id; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
                 <img src="<?php echo Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1); ?>" />
             </a>
         <?php endforeach; ?>
     </div>
     <div class="popular fl">
-        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>" rel="<?php echo $popular->id; ?>">
+        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>#image-<?php echo $popular->id; ?>" rel="<?php echo $popular->id; ?>">
             <img src="<?php echo  Application::$config['http_host'] . substr($popular->source, 1); ?>" />
         </a>
     </div>

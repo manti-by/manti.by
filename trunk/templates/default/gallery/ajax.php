@@ -49,6 +49,7 @@
 ?>
 <script type="text/javascript">
     $(document).ready(function(){
+        // Bind click to thumbnails
         $('.thumbnail').bind('click', function(e) {
             e.preventDefault();
 
@@ -153,5 +154,9 @@
 
             return false;
         }
+
+        // Check anchor
+        var anchor = window.location.hash.substring(1);
+        $('a[name=' + anchor + ']').click();
     });
 </script>
