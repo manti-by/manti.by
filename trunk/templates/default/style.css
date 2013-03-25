@@ -43,6 +43,8 @@ a:hover, a:active { text-decoration: underline; color: #7F2828 !important; }
 h1, h3, h4, h5, h6 { border-bottom: none; }
 h2 { padding-bottom: 3px; border-bottom: 1px solid #CCC; text-transform: uppercase; font-size: 14px; font-weight: bold; }
 
+fieldset { margin: 10px 0; }
+
 .wrapper { border: none; }
 
 .red-button { border: 1px solid #CCC; border-radius: 2px; box-shadow: 3px 3px 3px #AAA; color: white;
@@ -132,6 +134,7 @@ h2 { padding-bottom: 3px; border-bottom: 1px solid #CCC; text-transform: upperca
     font-size: 80px; border-right: 3px solid white; color: white; background: black;  }
 #page-404 .right-column { padding: 100px 40px; font-size: 16px;  }
 
+#gallery h2 a { color: inherit; }
 #gallery .thumbnail { display: inline-block; margin: 0; padding: 3px 3px 1px 3px; }
 #gallery .thumbnail:hover { background: #AAA; }
 #gallery .path { margin: 10px 0 20px 0; }
@@ -216,3 +219,6 @@ h2 { padding-bottom: 3px; border-bottom: 1px solid #CCC; text-transform: upperca
 
 #file-table th { background: #EEE; border-bottom: 1px solid #CCC; }
 #file-table tr:last-child td { border-bottom: none; }
+
+#gototop { display: none; position: fixed; left: 5px; top: 40%; width: 50px; height: 50px;
+    background: url('../../assets/images/icon-up-48x48.png') no-repeat center center; }

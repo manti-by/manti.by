@@ -50,7 +50,11 @@
     $count = 0;
 ?>
 <div class="item">
-    <h2><?php echo $options['data']->name; ?></h2>
+    <h2>
+        <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $options['data']->id); ?>">
+            <?php echo $options['data']->name; ?>
+        </a>
+    </h2>
     <div class="description">
         <?php echo $options['data']->description; ?>
     </div>
