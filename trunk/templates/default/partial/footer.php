@@ -80,7 +80,7 @@
         <?php if ($user->isLoggined()) : ?>
             <li>
                 <a href="<?php echo Sef::getSef('index.php?module=user'); ?>">
-                    <?php echo T('Dashboard'); ?>
+                    <?php echo T('User dashboard'); ?>
                 </a>
             </li>
             <li>

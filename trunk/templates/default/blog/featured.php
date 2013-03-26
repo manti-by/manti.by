@@ -64,7 +64,12 @@
                                 </a>
                             </div>
                             <div class="content r50">
-                                <h3><?php echo $item->name . (!empty($item->genre) ? ' /' . $item->genre.  '/' : ''); ?></h3>
+                                <h3>
+                                    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>">
+                                        <?php echo $item->name . (!empty($item->genre) ? ' /' . $item->genre.  '/' : ''); ?>
+                                    </a>
+                                </h3>
+
                                 <div id="teaser-<?php echo $item->id; ?>" class="teaser">
                                     <?php echo nl2br($item->teaser); ?>
                                 </div>

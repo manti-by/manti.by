@@ -158,5 +158,10 @@
         // Check anchor
         var anchor = window.location.hash.substring(1);
         $('a[name=' + anchor + ']').click();
+
+        // Add escape action
+        $(document).bind('keydown', function(e) {
+            if (e.which == 27) $('#image-wrapper').remove();
+        });
     });
 </script>

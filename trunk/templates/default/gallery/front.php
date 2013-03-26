@@ -48,7 +48,7 @@
      */
 
     $count = 0;
-    $popular = reset($options['data']['gallery_popular']);
+    $in_use = array();
 ?>
 <div id="gallery">
     <h2><?php echo T('Latest shots from gallery'); ?></h2>
@@ -58,6 +58,9 @@
                 // Check preview count
                 if ($count >= Application::$config['front_count']) break;
                 else $count++;
+
+                // Add used id
+                $in_use[] = $original->id;
             ?>
 
             <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>#image-<?php echo $original->id; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
@@ -65,9 +68,18 @@
             </a>
         <?php endforeach; ?>
     </div>
+
+    <?php
+        // Skip used popular images
+        $popular_image = reset($options['data']['gallery_popular']);
+        foreach (array_reverse($options['data']['gallery_popular']) as $popular) {
+            if (!in_array($popular->id, $in_use)) $popular_image = $popular;
+        }
+    ?>
+
     <div class="popular fl">
-        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>#image-<?php echo $popular->id; ?>" rel="<?php echo $popular->id; ?>">
-            <img src="<?php echo  Application::$config['http_host'] . substr($popular->source, 1); ?>" />
+        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>#image-<?php echo $popular_image->id; ?>" rel="<?php echo $popular_image->id; ?>">
+            <img src="<?php echo  Application::$config['http_host'] . substr($popular_image->source, 1); ?>" />
         </a>
     </div>
     <div class="cls"></div>
