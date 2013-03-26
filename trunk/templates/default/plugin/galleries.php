@@ -39,40 +39,23 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Frontpage template
-     * @name $frontpage
-     * @author Alexander Chaika
+     * Gallery list plugin
+     * @name $gallery-list-plugin
      * @package M2 Micro Framework
      * @subpackage Template
-     * @since 0.3RC3
-     * @todo Fix other posts out
+     * @author Alexander Chaika
+     * @since 0.3RC4
      */
+
+    $galleries = Model::getModel('gallery')->getGallery(7);
 ?>
-<div id="frontpage">
-    <?php
-        $data = array('data' => $options['data']['featured']);
-        echo $this->getContents('blog', 'featured', $data);
-
-        $data = array('data' => array(
-            'gallery_latest'  => $options['data']['gallery_latest'],
-            'gallery_popular' => $options['data']['gallery_popular']
-        ));
-        echo $this->getContents('gallery', 'front', $data);
-    ?>
-
-    <h2 class="other-blog-posts"><?php echo T('Other blog posts'); ?></h2>
-    <div class="main-sidebar">
-        <?php
-            $data = array('module' => 'blog', 'data' => $options['data']['content'], 'context' => 'preview');
-            echo $this->renderItemsArray($data);
-        ?>
-    </div>
-
-    <div class="right-sidebar">
-        <?php echo $this->getContents('plugin', 'tags'); ?>
-        <?php echo $this->getContents('plugin', 'latest'); ?>
-        <?php echo $this->getContents('plugin', 'galleries'); ?>
-    </div>
-
-    <div class="cls"></div>
-</div>
+<ul class="sidebar">
+    <h3><?php echo T('Photo galleries'); ?></h3>
+    <?php foreach($galleries as $item) : ?>
+        <li>
+            <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $item->id); ?>" title="<?php echo $item->name; ?>">
+                <?php echo $item->name . ' <span class="gallery-counter">(' . count($item->originals) . ' ' . T('photo') . ')</span>'; ?>
+            </a>
+        </li>
+    <?php endforeach; ?>
+</ul>

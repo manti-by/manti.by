@@ -39,15 +39,15 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Sidebar plugin
-     * @name $template-index
+     * Top tags plugin
+     * @name $top-tags-plugin
      * @package M2 Micro Framework
      * @subpackage Template
      * @author Alexander Chaika
      * @since 0.3RC3
      */
 
-    $tags = Model::getModel('tag')->getTags();
+    $tags = Model::getModel('tag')->getTags(7);
 ?>
 <ul class="sidebar">
     <h3><?php echo T('Popular Categories'); ?></h3>

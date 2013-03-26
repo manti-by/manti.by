@@ -71,7 +71,7 @@
         /**
          * Return gallery array by tags
          * @param array $tags
-         * @param int $limit
+         * @param int $limit OPTIONAL
          * @return array|bool
          */
         public function getGalleryByTags($tags, $limit = 100) {
@@ -89,14 +89,16 @@
         /**
          * Get gallery list
          * @param int $limit
+         * @param bool $append_images OPTIONAL
          * @return array|bool
          */
-        public function getGallery($limit = 100) {
+        public function getGallery($limit = 100, $append_images = true) {
             // Get galleries list
             $this->database->query("CALL GET_GALLERY($limit)");
             $galleries = $this->database->getObjectsArray();
 
-            return $this->appendGalleriesImages($galleries);
+            // Check bool param
+            return $append_images ? $this->appendGalleriesImages($galleries) : $galleries;
         }
 
         /**

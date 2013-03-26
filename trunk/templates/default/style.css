@@ -103,7 +103,7 @@ fieldset { margin: 10px 0; }
 .right-sidebar h3 { color: #555; padding-bottom: 8px; }
 .right-sidebar a { color: #666; }
 .right-sidebar .sidebar { margin-top: 0; margin-bottom: 10px; }
-.right-sidebar .tag-counter { color: #999; }
+.right-sidebar .tag-counter, .right-sidebar .gallery-counter  { color: #999; }
 
 .admin-buttons a { font-size: 12px; }
 

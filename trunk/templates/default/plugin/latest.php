@@ -39,15 +39,15 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Sidebar plugin
-     * @name $template-index
+     * Latest posts plugin
+     * @name $latest-posts-plugin
      * @package M2 Micro Framework
      * @subpackage Template
      * @author Alexander Chaika
      * @since 0.3RC3
      */
 
-    $posts = Model::getModel('blog')->getPosts(10);
+    $posts = Model::getModel('blog')->getPosts(7);
 ?>
 <ul class="sidebar">
     <h3><?php echo T('Latest Posts'); ?></h3>
