@@ -53,10 +53,15 @@
     <div class="description">
         <?php echo $options['data']->description; ?>
     </div>
+    <div class="favorite">
+        <a name="image-<?php echo $options['data']->favorite->id; ?>" href="<?php echo $options['data']->favorite->link; ?>" class="thumbnail" rel="<?php echo $options['data']->favorite->id; ?>">
+            <img src="<?php echo $options['data']->favorite->link; ?>" width="693" />
+        </a>
+    </div>
     <div class="thumbnails">
         <?php foreach ($options['data']->originals as $original) : ?>
             <a name="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
-                <img src="<?php echo $original->thumbnail; ?>" />
+                <img src="<?php echo $original->thumbnail; ?>" width="108" height="108" />
             </a>
         <?php endforeach; ?>
     </div>

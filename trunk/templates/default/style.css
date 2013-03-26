@@ -140,6 +140,9 @@ fieldset { margin: 10px 0; }
 #gallery .path { margin: 10px 0 20px 0; }
 #gallery .path a { text-decoration: underline; }
 
+#gallery .favorite a { height: 250px; overflow: hidden; }
+#gallery .favorite a img { position: relative; bottom: 50%; }
+
 #featured { padding-bottom: 20px; }
 #featured #slider { display: inline; list-style: none; padding: 0; }
 #featured .slider-item { display: inline-block; padding: 3px 0 3px 3px; margin-right: 3px; width: 100px; height: 350px;

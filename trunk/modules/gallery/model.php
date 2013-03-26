@@ -125,16 +125,26 @@
         private function appendGalleriesImages($galleries) {
             // Append originals and thumbnails
             foreach ($galleries as $gallery) {
+                $max_viewed = array('item' => null, 'viewed' => -1);
                 $this->database->query("CALL GET_GALLERY_ITEMS_BY_ID(" . $gallery->id. ")");
                 $gallery->originals = $this->database->getObjectsArray();
 
                 // Add originals and thumbnails links
                 if (count($gallery->originals)) {
                     foreach($gallery->originals as $original) {
+                        // Update image link and path
                         $original->link = Application::$config['http_host'] . substr($original->source, 1);
                         $original->thumbnail = Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1);
+
+                        // Check max viewed
+                        if ($max_viewed['viewed'] < $original->viewed) {
+                            $max_viewed = array('item' => $original, 'viewed' => $original->viewed);
+                        }
                     }
                 }
+
+                // Append max info
+                $gallery->favorite = $max_viewed['item'];
             }
 
             return $galleries;

@@ -67,7 +67,7 @@
             ?>
 
             <a name="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
-                <img src="<?php echo $original->thumbnail; ?>" />
+                <img src="<?php echo $original->thumbnail; ?>" width="108" height="108" />
             </a>
         <?php endforeach; ?>
     </div>

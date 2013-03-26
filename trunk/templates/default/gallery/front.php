@@ -61,7 +61,7 @@
             ?>
 
             <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>#image-<?php echo $original->id; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
-                <img src="<?php echo Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1); ?>" />
+                <img src="<?php echo Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1); ?>" width="100" height="100" />
             </a>
         <?php endforeach; ?>
     </div>
