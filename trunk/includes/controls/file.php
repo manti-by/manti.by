@@ -152,7 +152,19 @@
                 foreach ($files as $file) {
                     switch ($type) {
                         case FileEntity::TYPE_PREVIEW:
-                            $result .= '<audio controls><source src="' . Application::$config['http_host'] . substr($file->source, 1) . '" type="audio/mpeg;"><span class="red">' . T('Your browser did not supported audio tag') . '</span></audio>';
+                            $result .= '<audio controls>';
+
+                            // Default MP3 preview file
+                            $mp3_preview = Application::$config['http_host'] . substr($file->source, 1);
+                            $result .= '<source src="' . $mp3_preview . '" type="audio/mpeg">';
+
+                            // Add Mozilla OGG support
+                            $ogg_preview = str_replace('.mp3', '.ogg', $mp3_preview);
+                            $result .= '<source src="' . $ogg_preview . '" type="audio/ogg">';
+
+                            // Message for not supported browsers
+                            $result .= '<span class="red">' . T('Your browser did not supported audio tag. Please update your browser.') . '</span>';
+                            $result .= '</audio>';
                             break;
                         case FileEntity::TYPE_COVERS:
                             $result .= '<img src="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="cover" />';
