@@ -69,7 +69,7 @@
 
         <div id="header">
             <div class="wrapper">
-                <?php echo $this->getContents('partial', 'topmenu'); ?>
+                <?php echo $this->getContents('partial', 'topmenu', $options); ?>
                 <?php echo $this->getContents('partial', 'toolbar'); ?>
                 <div class="cls"></div>
             </div>

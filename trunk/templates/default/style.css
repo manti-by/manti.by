@@ -57,6 +57,7 @@ fieldset { margin: 10px 0; }
 #topmenu { margin: 36px 0 5px 50px; padding: 0; }
 #topmenu li { list-style: none; display: inline; padding-right: 40px; text-transform: uppercase; }
 #topmenu li a { color: #777; }
+#topmenu li a.active { color: #b40303; }
 
 #usermenu { background: url(./images/black-dotted-bg.png) repeat-x top left; color: #ECECEC;  }
 #usermenu a { color: #999; text-decoration: underline; }
@@ -107,7 +108,7 @@ fieldset { margin: 10px 0; }
 
 .admin-buttons a { font-size: 12px; }
 
-.relation { float: left; margin: 0 15px 15px 0; text-align: center; }
+.relation { float: left; margin: 0 15px 15px 0; text-align: center; width: 152px; overflow: hidden; }
 .relation .small-cover { display: block; width: 150px; height: 150px; margin-bottom: 10px; }
 .small-cover { border: 1px solid #CCC !important; }
 

@@ -96,7 +96,7 @@
                 $result = $this->view->offline();
             } else {
                 // Load module
-                $module = $this->loadModule(System::getInstance()->getCmd('module'));
+                $module = $this->loadModule(System::getInstance()->getCmd('module', 'front'));
                 if ($module) {
                     $result = $module->route();
                 } else {
@@ -112,7 +112,10 @@
          * Route request to action
          */
         public function route() {
-            // get action
+            // Append module name
+            $options['module'] = System::getInstance()->getCmd('module', 'front');
+
+            // Get action
             $options['action'] = System::getInstance()->getCmd('action', 'index');
             $method = $options['action'].'Action';
 

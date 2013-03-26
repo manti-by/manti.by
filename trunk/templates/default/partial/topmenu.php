@@ -46,14 +46,43 @@
      * @author Alexander Chaika
      * @since 0.1
      */
+
+    $active = array(
+        'home'      => ($options['module'] == 'front' ? true : false),
+        'blog'      => ($options['module'] == 'blog' && $options['id'] != '14'  ? true : false),
+        'gallery'   => ($options['module'] == 'gallery' ? true : false),
+        'download'  => ($options['module'] == 'file' ? true : false),
+        'about'     => ($options['module'] == 'blog' && $options['id'] == '14' ? true : false)
+    );
+
 ?>
 <a href="<?php echo Application::$config['http_host']; ?>" class="fl">
     <img src="<?php echo Application::$config['template_image_url_path']; ?>logo.png" alt="Manti Logo" width="155" height="50" />
 </a>
 <ul id="topmenu" class="fl">
-    <li><a href="<?php echo Application::$config['http_host']; ?>"><?php echo T('Home'); ?></a></li>
-    <li><a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"><?php echo T('Blog'); ?></a></li>
-    <li><a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"><?php echo T('Gallery'); ?></a></li>
-    <li><a href="<?php echo Sef::getSef('index.php?module=file'); ?>"><?php echo T('Download'); ?></a></li>
-    <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"><?php echo T('About'); ?></a></li>
+    <li>
+        <a href="<?php echo Application::$config['http_host']; ?>"<?php echo ($active['home'] ? ' class="active"' : ''); ?>>
+            <?php echo T('Home'); ?>
+        </a>
+    </li>
+    <li>
+        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"<?php echo ($active['blog'] ? ' class="active"' : ''); ?>>
+            <?php echo T('Blog'); ?>
+        </a>
+    </li>
+    <li>
+        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"<?php echo ($active['gallery'] ? ' class="active"' : ''); ?>>
+            <?php echo T('Gallery'); ?>
+        </a>
+    </li>
+    <li>
+        <a href="<?php echo Sef::getSef('index.php?module=file'); ?>"<?php echo ($active['download'] ? ' class="active"' : ''); ?>>
+            <?php echo T('Download'); ?>
+        </a>
+    </li>
+    <li>
+        <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"<?php echo ($active['about'] ? ' class="active"' : ''); ?>>
+            <?php echo T('About'); ?>
+        </a>
+    </li>
 </ul>
