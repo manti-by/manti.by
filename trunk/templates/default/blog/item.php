@@ -63,7 +63,7 @@
         <?php endif; ?>
     </h3>
 
-    <div class="teaser">
+    <div id="teaser-<?php echo $options['data']->id; ?>" class="teaser">
         <?php echo nl2br($options['data']->teaser); ?>
     </div>
 

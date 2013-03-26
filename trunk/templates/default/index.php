@@ -51,10 +51,13 @@
 <html>
     <head>
         <title><?php echo strip_tags($options['title']); ?></title>
+
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/default.css" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/style.css" />
+
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/default.js"></script>
+        <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/templates/default/default.js"></script>
     </head>
     <body>
         <?php echo $this->getContents('plugin', 'gototop'); ?>

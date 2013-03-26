@@ -48,7 +48,7 @@
      */
 ?>
 <?php if ($options['data']->is_music) : ?>
-    <div class="music-block">
+    <div id="music-block-<?php echo $options['data']->id; ?>" class="music-block">
         <?php if (json_decode($options['data']->covers)) : ?>
             <div class="covers fl">
                 <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>">
@@ -98,22 +98,22 @@
         </div>
         <?php endif; ?>
 
-        <?php if (json_decode($options['data']->release)) : ?>
-            <div class="release">
-                <?php echo File::getHtml($options['data']->release, FileEntity::TYPE_RELEASE); ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if ($options['data']->tracklist && $options['context'] != 'full') : ?>
-            <div class="tracklist">
-                <a href="#show-tracklist" class="show-tracklist"><?php echo T('Show tracklist'); ?></a>
-                <a href="#hide-tracklist" class="hide-tracklist"><?php echo T('Hide tracklist'); ?></a>
-                <div class="tracklist-block">
-                    <?php echo nl2br($options['data']->tracklist); ?>
-                </div>
-            </div>
-        <?php endif; ?>
-
         <div class="cls"></div>
     </div>
+
+    <?php if (json_decode($options['data']->release)) : ?>
+        <div class="release">
+            <?php echo File::getHtml($options['data']->release, FileEntity::TYPE_RELEASE); ?>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($options['data']->tracklist && $options['context'] != 'full') : ?>
+        <div class="tracklist">
+            <a href="#show-tracklist" class="show-tracklist" rel="<?php echo $options['data']->id; ?>"><?php echo T('Show tracklist'); ?></a>
+            <a href="#hide-tracklist" class="hide-tracklist" rel="<?php echo $options['data']->id; ?>"><?php echo T('Hide tracklist'); ?></a>
+            <div id="tracklist-<?php echo $options['data']->id; ?>" class="tracklist-block">
+                <?php echo nl2br($options['data']->tracklist); ?>
+            </div>
+        </div>
+    <?php endif; ?>
 <?php endif; ?>

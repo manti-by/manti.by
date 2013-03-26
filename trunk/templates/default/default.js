@@ -52,18 +52,20 @@ $(document).ready(function() {
     });
 
     $('.tracklist .show-tracklist').click(function() {
-        $(this).closest('.teaser, .music-block').hide();
-        $(this).next('.tracklist-block').show();
-
         $(this).hide();
-        $(this).next('.hide-tracklist').show();
+        $('.hide-tracklist[rel=' + $(this).attr('rel') + ']').show();
+
+        $('#tracklist-' + $(this).attr('rel')).fadeIn();
+        $('#teaser-' + $(this).attr('rel')).hide();
+        $('#music-block-' + $(this).attr('rel')).hide();
     });
 
     $('.tracklist .hide-tracklist').click(function() {
-        $(this).closest('.teaser, .music-block').show();
-        $(this).next('.tracklist-block').hide();
-
         $(this).hide();
-        $(this).prev('.show-tracklist').show();
+        $('.show-tracklist[rel=' + $(this).attr('rel') + ']').show();
+
+        $('#tracklist-' + $(this).attr('rel')).hide();
+        $('#teaser-' + $(this).attr('rel')).fadeIn();
+        $('#music-block-' + $(this).attr('rel')).fadeIn();
     });
 });
