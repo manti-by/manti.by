@@ -43,6 +43,10 @@ a:hover, a:active { text-decoration: underline; color: #7F2828 !important; }
 h1, h3, h4, h5, h6 { border-bottom: none; }
 h2 { padding-bottom: 3px; border-bottom: 1px solid #CCC; text-transform: uppercase; font-size: 14px; font-weight: bold; }
 
+h2.with-full-link a { color: inherit; }
+h2.with-full-link .view-all a { font-size: 12px; color: #b40303 !important; font-weight: normal;
+    text-decoration: underline; text-transform: lowercase; }
+
 fieldset { margin: 10px 0; }
 
 audio { width: 330px; transform: scale(0.8); }
@@ -53,7 +57,7 @@ audio { width: 330px; transform: scale(0.8); }
     font-size: 18px !important; text-transform: uppercase;
     background: #b40303 url(./images/red-button.png) repeat-x top left  !important; }
 
-#header { margin: 0 auto 20px auto; border-bottom: 1px solid #CCC; }
+#header { margin: 0 auto 25px auto; border-bottom: 1px solid #CCC; }
 #header .wrapper { padding-top: 20px; }
 
 #topmenu { margin: 36px 0 5px 50px; padding: 0; }
@@ -105,6 +109,7 @@ audio { width: 330px; transform: scale(0.8); }
 .right-sidebar li { list-style: none; padding: 8px 18px; }
 .right-sidebar h3 { color: #555; padding-bottom: 8px; }
 .right-sidebar a { color: #666; }
+.right-sidebar a:hover { color: #666 !important; }
 .right-sidebar .sidebar { margin-top: 0; margin-bottom: 10px; }
 .right-sidebar .tag-counter, .right-sidebar .gallery-counter  { color: #999; }
 
@@ -137,7 +142,9 @@ audio { width: 330px; transform: scale(0.8); }
     font-size: 80px; border-right: 3px solid white; color: white; background: black;  }
 #page-404 .right-column { padding: 100px 40px; font-size: 16px;  }
 
+#gallery h2 { margin-bottom: 5px; }
 #gallery h2 a { color: inherit; }
+#gallery .item { margin-bottom: 30px; }
 #gallery .thumbnail { display: inline-block; margin: 0; padding: 3px 3px 1px 3px; }
 #gallery .thumbnail:hover { background: #AAA; }
 #gallery .path { margin: 10px 0 20px 0; }
@@ -146,7 +153,7 @@ audio { width: 330px; transform: scale(0.8); }
 #gallery .favorite a { height: 250px; overflow: hidden; }
 #gallery .favorite a img { position: relative; bottom: 50%; }
 
-#featured { padding-bottom: 20px; }
+#featured { padding-bottom: 30px; }
 #featured #slider { display: inline; list-style: none; padding: 0; }
 #featured .slider-item { display: inline-block; padding: 3px 0 3px 3px; margin-right: 3px; width: 100px; height: 350px;
     overflow: hidden; opacity: 0.7; }
@@ -201,7 +208,7 @@ audio { width: 330px; transform: scale(0.8); }
 #popular-list li { display: inline-block; padding-right: 5px; text-transform: uppercase; }
 #popular-list li a { text-decoration: none; font-size: 11px; }
 
-#gallery { margin-bottom: 30px; }
+#gallery { margin-bottom: 35px; }
 #gallery .popular { height: 207px; overflow: hidden; text-align: right; margin: 0; border: 3px solid transparent; }
 #gallery .popular:hover { border: 3px solid #CCC; }
 #gallery .popular img { width: 625px; position: relative; bottom: 50%; }

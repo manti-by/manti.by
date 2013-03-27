@@ -50,10 +50,15 @@
     $count = 0;
 ?>
 <div class="item">
-    <h2>
+    <h2 class="with-full-link">
         <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $options['data']->id); ?>">
             <?php echo $options['data']->name; ?>
         </a>
+        <div class="fr view-all">
+            <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $options['data']->id); ?>">
+                <?php echo T('Show all'); ?>
+            </a>
+        </div>
     </h2>
     <div class="description">
         <?php echo $options['data']->description; ?>
@@ -70,8 +75,5 @@
                 <img src="<?php echo $original->thumbnail; ?>" width="108" height="108" />
             </a>
         <?php endforeach; ?>
-    </div>
-    <div class="path">
-        <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $options['data']->id); ?>"><?php echo T('Show all'); ?></a>
     </div>
 </div>

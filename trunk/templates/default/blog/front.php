@@ -60,7 +60,17 @@
         echo $this->getContents('gallery', 'front', $data);
     ?>
 
-    <h2 class="other-blog-posts"><?php echo T('Other blog posts'); ?></h2>
+    <h2 class="with-full-link">
+        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>">
+            <?php echo T('Other blog posts'); ?>
+        </a>
+        <div class="fr view-all">
+            <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>">
+                <?php echo T('Show all'); ?>
+            </a>
+        </div>
+    </h2>
+
     <div class="main-sidebar">
         <?php
             $data = array('module' => 'blog', 'data' => $options['data']['content'], 'context' => 'preview');

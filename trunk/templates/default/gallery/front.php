@@ -51,7 +51,16 @@
     $in_use = array();
 ?>
 <div id="gallery">
-    <h2><?php echo T('Latest shots from gallery'); ?></h2>
+    <h2 class="with-full-link">
+        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>">
+            <?php echo T('Latest shots from gallery'); ?>
+        </a>
+        <div class="fr view-all">
+            <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>">
+                <?php echo T('Show all'); ?>
+            </a>
+        </div>
+    </h2>
     <div class="latest fl">
         <?php foreach ($options['data']['gallery_latest'] as $original) : ?>
             <?php

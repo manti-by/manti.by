@@ -49,7 +49,9 @@
 
 ?>
 <div id="gallery">
-    <h2><?php echo $options['data']->name; ?></h2>
+    <h2 class="with-full-link">
+        <?php echo $options['data']->name; ?>
+    </h2>
     <div class="description">
         <?php echo $options['data']->description; ?>
     </div>
