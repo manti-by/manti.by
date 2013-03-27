@@ -68,4 +68,8 @@ $(document).ready(function() {
         $('#teaser-' + $(this).attr('rel')).fadeIn();
         $('#music-block-' + $(this).attr('rel')).fadeIn();
     });
+
+    $('#sitemap .open-spoiler').bind('click', function() {
+        $(this).next('.spoiler').toggle(400);
+    });
 });

@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /includes/
+Disallow: /language/
+Disallow: /modules/
+Disallow: /templates/
+Disallow: /user/
