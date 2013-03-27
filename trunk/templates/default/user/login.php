@@ -47,15 +47,12 @@
      * @since 0.1
      */
 ?>
+<h1>
+    <?php echo T('To access closed site areas please login first'); ?>
+</h1>
 <form id="login-form" method="POST" action="<?php echo Sef::getSef('index.php'); ?>">
     <input type="hidden" name="module" value="user" />
     <input type="hidden" name="action" value="login" />
-    <p class="big">
-        <?php echo T('To access closed site areas please login first'); ?>
-    </p>
-    <p>
-        &nbsp;
-    </p>
     <p>
         <label for="email"><?php echo T('Email'); ?></label>
         <input type="text" name="email" value="" />

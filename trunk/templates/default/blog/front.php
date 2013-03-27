@@ -60,7 +60,7 @@
         echo $this->getContents('gallery', 'front', $data);
     ?>
 
-    <h2 class="with-full-link">
+    <h2 class="with-full-link front-blog">
         <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>">
             <?php echo T('Other blog posts'); ?>
         </a>

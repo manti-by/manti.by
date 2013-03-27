@@ -73,7 +73,7 @@
                 $options['title'] = T('Search by tags') . ': ' . $options['tags'];
             } else {
                 $options['data'] = $this->model->getPosts(Application::$config['posts_per_page'], $options['page']);
-                $options['title'] = Application::$config['site_title_' . Application::$config['language']];
+                $options['title'] = T('All blog posts');
             }
             
             // Get items and render it

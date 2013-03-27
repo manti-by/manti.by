@@ -97,6 +97,8 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 .warning { background: #FFA; border-color: #990; }
 .message { background: #AFA; border-color: #090; }
 
+.form_notice { display: block; padding: 3px 0 10px 133px; }
+
 .error-message { min-height: 36px; line-height: 36px; color: red; padding-left: 36px;
     background: url('../images/icon-error-32x32.png') no-repeat top left; }
 .success-message { min-height: 36px; line-height: 36px; padding-left: 36px;

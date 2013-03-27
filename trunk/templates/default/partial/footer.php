@@ -68,13 +68,13 @@
     <h3><?php echo T('More on this site'); ?></h3>
     <ul>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=tag&action=search&q=Other'); ?>">
-                <?php echo T('Other posts'); ?>
+            <a href="<?php echo Sef::getSef('index.php?module=file'); ?>">
+                <?php echo T('Direct links'); ?>
             </a>
         </li>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=file'); ?>">
-                <?php echo T('Direct links'); ?>
+            <a href="<?php echo Sef::getSef('index.php?module=sitemap'); ?>">
+                <?php echo T('Sitemap'); ?>
             </a>
         </li>
         <?php if ($user->isLoggined()) : ?>
