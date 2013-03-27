@@ -39,17 +39,17 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Gallery Controller class
-     * @name $galleryController
+     * File Controller class
+     * @name $fileController
      * @package M2 Micro Framework
      * @subpackage Modules
      * @author Alexander Chaika
-     * @since 0.2RC1
+     * @since 0.3RC2
      */
-    class GalleryController extends Controller {
+    class FileController extends Controller {
 
         /**
-         * Default gallery action
+         * Default File module action
          * @param array $options
          * @return array $result
          */
@@ -58,92 +58,145 @@
         }
 
         /**
-         * List gallery action
+         * Show files list for downloading
          * @param array $options
          * @return array $result
          */
         public function listAction($options) {
-            // Get category ID
-            $tags = System::getInstance()->getCmd('id');
-
-            // Get category title
-            if ($tags) {
-                $options['data'] = $this->model->getGalleryByTags($tags);
-                $options['title'] = 'Search by tags: ' . implode(', ', $tags);
-            } else {
-                $options['data'] = $this->model->getGallery();
-                $options['title'] = T('Gallery of photo');
-            }
-
-            // Get category items and render it
-            $options['module'] = 'gallery';
-            $options['body'] = $this->view->renderItemsArray($options);
-
-            return $this->view->wrapSidebar($options);
-        }
-
-        /**
-         * Runs updates for files in gallery
-         */
-        public function updateFilesAction() {
-            $options['output'] = View::OUTPUT_TYPE_JSON;
-
-            // Run actions and compile response
-            $options['data'] = array(
-                'result' => 'success',
-                'message' => $this->view->wrapFileList(
-                    $this->model->updateFSList()
-                )
-            );
+            // Get all files list
+            $options['title'] = T('Download file list');
+            $options['data'] = $this->model->getDownloadList();
+            $options['body']  = $this->view->getContents('file', 'list', $options);
 
             return $options;
         }
 
         /**
-         * Rebuild thumbnails for images in gallery
-         */
-        public function rebuildThumbnailsAction() {
-            $options['output'] = View::OUTPUT_TYPE_JSON;
-
-            // Run actions and compile response
-            $options['data'] = array(
-                'result'  => 'success',
-                'message' => $this->view->wrapFileList(
-                    $this->model->rebuildThumbnails()
-                )
-            );
-
-            return $options;
-        }
-
-        /**
-         * Show gallery by id
+         * Edit files list
          * @param array $options
-         * @return array|bool $options
+         * @return array $result
          */
-        public function showAction($options) {
-            // Get item ID
-            $options['id'] = System::getInstance()->getCmd('id');
+        public function editAction($options) {
+            // Get all files list
+            $options['title'] = T('Edit file list');
+            $options['data'] = $this->model->getList();
+            $options['body']  = $this->view->getContents('file', 'edit', $options);
 
-            // Get item title and data
-            if ($options['id']) {
-                $options['data'] = $this->model->getGalleryById($options['id']);
-                $options['title'] = $options['data']->name;
-            } else {
-                return $this->view->_404($options);
-            }
-
-            // Render blog item
-            if (!empty($options['data'])) {
-                $options['body'] = $this->view->getContents('gallery', 'full', $options);
-                return $this->view->wrapSidebar($options);
-            } else {
-                return $this->view->_404($options);
-            }
+            return $options;
         }
 
         /**
-         * Track action for full gallery view
+         * Add file to DB action
+         * @param array $options
+         * @return array $result
+         */
+        public function addAction($options) {
+            // Set params
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+            $options['source'] = System::getInstance()->getCmd('source');
+            $options['name'] = System::getInstance()->getCmd('name');
+            $options['description'] = System::getInstance()->getCmd('description');
+
+            $id = $this->model->add($options);
+            if ($id > 0) {
+                $options['data'] = array('result' => 'success', 'id' => $id);
+            } else {
+                $error = $this->getLastFromStack();
+                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+            }
+
+            return $options;
+        }
+
+        /**
+         * Remove file from DB action
+         * @param array $options
+         * @return array $result
+         */
+        public function removeAction($options) {
+            // Set params
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+
+            // Get file id and try to remove file
+            $id = System::getInstance()->getCmd('id');
+            $source = $this->model->remove($id);
+
+            // Compile result
+            if (!empty($source)) {
+                $options['data'] = array('result' => 'success', 'source' => $source);
+            } else {
+                $error = $this->getLastFromStack();
+                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+            }
+
+            return $options;
+        }
+
+        /**
+         * Remove file from FS action
+         * @param array $options
+         * @return array $result
+         */
+        public function deleteAction($options) {
+            // Set params
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+
+            if ($this->model->delete(System::getInstance()->getCmd('source'))) {
+                $options['data'] = array('result' => 'success');
+            } else {
+                $error = $this->getLastFromStack();
+                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+            }
+
+            return $options;
+        }
+
+        /**
+         * Return add file form
+         * @param array $options
+         * @return array $result
+         */
+        public function getAddFormAction($options) {
+            // Set params
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+
+            $options['data']['source'] = System::getInstance()->getCmd('source');
+            $options['data']['rel_id'] = System::getInstance()->getCmd('rel_id');
+
+            if ($form = $this->view->getContents('file', 'add-file-form', $options)) {
+                $options['data'] = array('result' => 'success', 'data' => $form);
+            } else {
+                $error = $this->getLastFromStack();
+                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+            }
+
+            return $options;
+        }
+
+        /**
+         * Return delete file form
+         * @param array $options
+         * @return array $result
+         */
+        public function getDeleteFormAction($options) {
+            // Set params
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+
+            $options['data']['source'] = System::getInstance()->getCmd('source');
+            $options['data']['rel_id'] = System::getInstance()->getCmd('rel_id');
+
+            if ($form = $this->view->getContents('file', 'delete-file-form', $options)) {
+                $options['data'] = array('result' => 'success', 'data' => $form);
+            } else {
+                $error = $this->getLastFromStack();
+                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+            }
+
+            return $options;
+        }
+
+        /**
+         * Track action for file item
          * @param array $options
          * @return array|bool $options
          */
@@ -152,48 +205,8 @@
             $options['output'] = View::OUTPUT_TYPE_JSON;
             $options['id'] = System::getInstance()->getCmd('id');
 
-            if ($count = $this->model->trackGallery($options['id'])) {
+            if ($count = $this->model->trackFileById($options['id'])) {
                 $options['data'] = array('result' => 'success', 'count' => $count);
-            } else {
-                $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
-            }
-
-            return $options;
-        }
-
-        /**
-         * Return next image by ID
-         * @param array $options
-         * @return array|bool $options
-         */
-        public function nextAction($options) {
-            // Set output and get item ID
-            $options['output'] = View::OUTPUT_TYPE_JSON;
-            $options['id'] = System::getInstance()->getCmd('id');
-
-            if ($result = $this->model->nextImage($options['id'])) {
-                $options['data'] = array('result' => 'success', 'id' => $result->id, 'original' => Application::$config['http_host'] . substr($result->source, 1));
-            } else {
-                $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
-            }
-
-            return $options;
-        }
-
-        /**
-         * Return previous image by ID
-         * @param array $options
-         * @return array|bool $options
-         */
-        public function prevAction($options) {
-            // Set output and get item ID
-            $options['output'] = View::OUTPUT_TYPE_JSON;
-            $options['id'] = System::getInstance()->getCmd('id');
-
-            if ($result = $this->model->prevImage($options['id'])) {
-                $options['data'] = array('result' => 'success', 'id' => $result->id, 'original' => Application::$config['http_host'] . substr($result->source, 1));
             } else {
                 $error = $this->getLastFromStack();
                 $options['data'] = array('result' => 'error', 'error' => $error['message']);

@@ -202,7 +202,7 @@
 
                     // Get alias and stop search
                     if ($alias = Database::getInstance()->getField()) {
-                        $link = $source['prefix'] . $alias . $source['suffix'];
+                        $link = $source['prefix'] . self::getInstance()->sanitizeLink($alias) . $source['suffix'];
                         break;
                     }
                 }
@@ -229,9 +229,6 @@
                 $source_link = substr($source_link, -1) == '/' ? substr($source_link, 0, strlen($source_link) - 1) : $source_link;
                 $link = $source_link . Application::$config['sef_suffix'];
             }
-
-            // Sanitize link
-            $link = self::getInstance()->sanitizeLink($link);
 
             // Insert new route to redirection
             Database::getInstance()->query("CALL UPSERT_SEF('".Database::getInstance()->escape($request)."','".Database::getInstance()->escape($link)."');");
