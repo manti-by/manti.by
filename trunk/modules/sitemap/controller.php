@@ -59,4 +59,44 @@
             $options['body'] = $this->view->getContents('sitemap', 'list', $options);
             return $options;
         }
+
+        /**
+         * Generate XML sitemap action
+         * @param array $options
+         * @return array $result
+         */
+        public function generateAction($options) {
+            $options['output'] = View::OUTPUT_TYPE_JSON;
+
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                // Compile error response
+                $options['data'] = array(
+                    'result' => 'error',
+                    'message' => T('You do not have permissions to view this page')
+                );
+            } else {
+                // Run actions and compile response
+                try {
+                    if (file_put_contents(ROOT_PATH . DS . 'sitemap.xml', $this->model->getXML())) {
+                        $options['data'] = array(
+                            'result'  => 'success',
+                            'message' => T('Sitemap succefully generated')
+                        );
+                    } else {
+                        $options['data'] = array(
+                            'result'  => 'error',
+                            'message' => T('Please check file permissions')
+                        );
+                    }
+                } catch (Exception $e) {
+                    $options['data'] = array(
+                        'result'  => 'error',
+                        'message' => $e->getMessage()
+                    );
+                }
+            }
+
+            return $options;
+        }
     }

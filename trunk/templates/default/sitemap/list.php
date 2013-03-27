@@ -54,8 +54,23 @@
 <div id="sitemap">
     <ul class="l50">
         <li>
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>">
+                <?php echo T('For club promouters'); ?>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=2'); ?>">
+                <?php echo T('For IT HRs and developers'); ?>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=16'); ?>">
+                <?php echo T('Rules and Copyrights'); ?>
+            </a>
+        </li>
+        <li>
             <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>">
-                <?php echo T('Blog'); ?>
+                <?php echo T('All blog posts'); ?>
             </a>
             <ul>
                 <?php if (count($options['data']['blog'])) : ?>

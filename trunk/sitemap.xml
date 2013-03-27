@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">  <url>
+    <loc>http://m2.local//</loc>
+    <lastmod>Wed, 27 Mar 2013 00:00:00 +0300</lastmod>
+    <priority>1</priority>
+    <changefreq>hourly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/</loc>
+    <lastmod>Wed, 27 Mar 2013 00:00:00 +0300</lastmod>
+    <priority>1</priority>
+    <changefreq>daily</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/about/</loc>
+    <lastmod>Fri, 01 Mar 2013 00:00:00 +0300</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/dev/</loc>
+    <lastmod>Fri, 01 Mar 2013 00:00:00 +0300</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/copyrights/</loc>
+    <lastmod>Fri, 01 Mar 2013 00:00:00 +0300</lastmod>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/hi-pass/</loc>
+    <lastmod>Wed, 27 Mar 2013 14:04:06 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/iris/</loc>
+    <lastmod>Wed, 27 Mar 2013 14:06:21 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/all-she-wants-is/</loc>
+    <lastmod>Wed, 27 Mar 2013 14:02:52 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/cote-d-azur/</loc>
+    <lastmod>Wed, 27 Mar 2013 12:51:35 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/emofunk/</loc>
+    <lastmod>Tue, 26 Mar 2013 16:46:31 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/chillhouse-live/</loc>
+    <lastmod>Mon, 25 Mar 2013 13:47:19 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/basstech-2/</loc>
+    <lastmod>Wed, 27 Mar 2013 15:21:58 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/basstech/</loc>
+    <lastmod>Tue, 26 Mar 2013 16:46:28 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/bar-launge/</loc>
+    <lastmod>Mon, 25 Mar 2013 12:39:02 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/hobh-four/</loc>
+    <lastmod>Tue, 26 Mar 2013 16:47:08 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/hobh-three/</loc>
+    <lastmod>Wed, 27 Mar 2013 14:16:37 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/hobh-two/</loc>
+    <lastmod>Tue, 26 Mar 2013 16:46:58 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/hobh-one/</loc>
+    <lastmod>Tue, 26 Mar 2013 16:46:54 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/katana/</loc>
+    <lastmod>Wed, 27 Mar 2013 12:35:44 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/autoreply/</loc>
+    <lastmod>Wed, 27 Mar 2013 12:22:50 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/stockholm-syndrome/</loc>
+    <lastmod>Wed, 27 Mar 2013 14:09:29 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/solaris/</loc>
+    <lastmod>Wed, 27 Mar 2013 12:21:09 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/plastic-toy/</loc>
+    <lastmod>Fri, 22 Mar 2013 13:27:25 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/synthetic/</loc>
+    <lastmod>Tue, 26 Mar 2013 17:41:48 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/insomnia/</loc>
+    <lastmod>Wed, 27 Mar 2013 13:25:47 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/gallery/</loc>
+    <lastmod>Wed, 27 Mar 2013 00:00:00 +0300</lastmod>
+    <priority>0.8</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/insomnia/</loc>
+    <lastmod>Wed, 27 Mar 2013 14:03:06 +0300</lastmod>
+    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/dev/</loc>
+    <lastmod>Wed, 27 Mar 2013 14:22:25 +0300</lastmod>
+    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/synthetic/</loc>
+    <lastmod>Wed, 27 Mar 2013 14:06:46 +0300</lastmod>
+    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/plastic-toy/</loc>
+    <lastmod>Wed, 27 Mar 2013 12:10:12 +0300</lastmod>
+    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/blog/solaris/</loc>
+    <lastmod>Wed, 27 Mar 2013 15:53:01 +0300</lastmod>
+    <priority>0.7</priority>
+    <changefreq>weekly</changefreq>
+  </url>
+</urlset>

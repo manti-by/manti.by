@@ -146,6 +146,12 @@
          * @return array|bool $options
          */
         public function editAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Get item ID
             $options['id'] = System::getInstance()->getCmd('id');
             
@@ -176,6 +182,12 @@
          * @return array|bool $options
          */
         public function saveAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             $system = System::getInstance();
 
             $options['output'] = View::OUTPUT_TYPE_JSON;
@@ -245,6 +257,12 @@
          * @return array|bool $options
          */
         public function deleteAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Set output and get item ID
             $options['output'] = View::OUTPUT_TYPE_JSON;
             $options['id'] = System::getInstance()->getCmd('id');

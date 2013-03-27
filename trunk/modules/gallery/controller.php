@@ -88,13 +88,22 @@
         public function updateFilesAction() {
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
-            // Run actions and compile response
-            $options['data'] = array(
-                'result' => 'success',
-                'message' => $this->view->wrapFileList(
-                    $this->model->updateFSList()
-                )
-            );
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                // Compile error response
+                $options['data'] = array(
+                    'result' => 'error',
+                    'message' => T('You do not have permissions to view this page')
+                );
+            } else {
+                // Run actions and compile response
+                $options['data'] = array(
+                    'result' => 'success',
+                    'message' => $this->view->wrapFileList(
+                        $this->model->updateFSList()
+                    )
+                );
+            }
 
             return $options;
         }
@@ -105,13 +114,22 @@
         public function rebuildThumbnailsAction() {
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
-            // Run actions and compile response
-            $options['data'] = array(
-                'result'  => 'success',
-                'message' => $this->view->wrapFileList(
-                    $this->model->rebuildThumbnails()
-                )
-            );
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                // Compile error response
+                $options['data'] = array(
+                    'result' => 'error',
+                    'message' => T('You do not have permissions to view this page')
+                );
+            } else {
+                // Run actions and compile response
+                $options['data'] = array(
+                    'result'  => 'success',
+                    'message' => $this->view->wrapFileList(
+                        $this->model->rebuildThumbnails()
+                    )
+                );
+            }
 
             return $options;
         }

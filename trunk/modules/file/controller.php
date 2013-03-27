@@ -77,6 +77,12 @@
          * @return array $result
          */
         public function editAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Get all files list
             $options['title'] = T('Edit file list');
             $options['data'] = $this->model->getList();
@@ -91,6 +97,12 @@
          * @return array $result
          */
         public function addAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Set params
             $options['output'] = View::OUTPUT_TYPE_JSON;
             $options['source'] = System::getInstance()->getCmd('source');
@@ -114,6 +126,12 @@
          * @return array $result
          */
         public function removeAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Set params
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
@@ -138,6 +156,12 @@
          * @return array $result
          */
         public function deleteAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Set params
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
@@ -157,6 +181,12 @@
          * @return array $result
          */
         public function getAddFormAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Set params
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
@@ -179,6 +209,12 @@
          * @return array $result
          */
         public function getDeleteFormAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Set params
             $options['output'] = View::OUTPUT_TYPE_JSON;
 

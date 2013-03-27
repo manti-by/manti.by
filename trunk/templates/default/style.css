@@ -259,8 +259,8 @@ audio { width: 330px; transform: scale(0.8); }
 #sitemap .spoiler { display: none; }
 #sitemap .label { color: #777; }
 
-#sitemap ul { margin: 3px 0 15px 0; padding: 0; }
-#sitemap ul li { font-size: 14px; }
+#sitemap ul { margin: 0; padding: 0; }
+#sitemap ul li { font-size: 14px; margin-top: 7px; }
 
-#sitemap ul ul { margin-left: 15px; }
-#sitemap ul ul li { font-size: 12px; }
+#sitemap ul ul { margin: 5px 0 0 15px; }
+#sitemap ul ul li { font-size: 12px; margin: 0; }
