@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">  <url>
-    <loc>http://m2.local//</loc>
-    <lastmod>Wed, 27 Mar 2013 00:00:00 +0300</lastmod>
+    <loc>http://m2.local/</loc>
+    <lastmod>Thu, 28 Mar 2013 00:00:00 +0300</lastmod>
     <priority>1</priority>
     <changefreq>hourly</changefreq>
   </url>
   <url>
     <loc>http://m2.local/blog/</loc>
-    <lastmod>Wed, 27 Mar 2013 00:00:00 +0300</lastmod>
+    <lastmod>Thu, 28 Mar 2013 00:00:00 +0300</lastmod>
     <priority>1</priority>
     <changefreq>daily</changefreq>
   </url>
@@ -151,38 +151,56 @@
   </url>
   <url>
     <loc>http://m2.local/gallery/</loc>
-    <lastmod>Wed, 27 Mar 2013 00:00:00 +0300</lastmod>
-    <priority>0.8</priority>
+    <lastmod>Thu, 28 Mar 2013 00:00:00 +0300</lastmod>
+    <priority>0.9</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>http://m2.local/blog/insomnia/</loc>
+    <loc>http://m2.local/gallery/autumn-12/</loc>
     <lastmod>Wed, 27 Mar 2013 14:03:06 +0300</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>http://m2.local/dev/</loc>
+    <loc>http://m2.local/gallery/holland/</loc>
     <lastmod>Wed, 27 Mar 2013 14:22:25 +0300</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>http://m2.local/blog/synthetic/</loc>
+    <loc>http://m2.local/gallery/spring-13/</loc>
     <lastmod>Wed, 27 Mar 2013 14:06:46 +0300</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>http://m2.local/blog/plastic-toy/</loc>
+    <loc>http://m2.local/gallery/winter-13/</loc>
     <lastmod>Wed, 27 Mar 2013 12:10:12 +0300</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>http://m2.local/blog/solaris/</loc>
+    <loc>http://m2.local/gallery/z-xx/</loc>
     <lastmod>Wed, 27 Mar 2013 15:53:01 +0300</lastmod>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/register/</loc>
+    <lastmod>Fri, 01 Mar 2013 00:00:00 +0300</lastmod>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/login/</loc>
+    <lastmod>Fri, 01 Mar 2013 00:00:00 +0300</lastmod>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
+  </url>
+  <url>
+    <loc>http://m2.local/forgot/</loc>
+    <lastmod>Fri, 01 Mar 2013 00:00:00 +0300</lastmod>
+    <priority>0.6</priority>
+    <changefreq>monthly</changefreq>
   </url>
 </urlset>

@@ -78,7 +78,13 @@
             } else {
                 // Run actions and compile response
                 try {
-                    if (file_put_contents(ROOT_PATH . DS . 'sitemap.xml', $this->model->getXML())) {
+                    $sitemap = ROOT_PATH . DS . 'sitemap.xml';
+
+                    // Delete old map
+                    if (file_exists($sitemap)) unlink($sitemap);
+
+                    // Create new
+                    if (file_put_contents($sitemap, $this->model->getXML())) {
                         $options['data'] = array(
                             'result'  => 'success',
                             'message' => T('Sitemap succefully generated')

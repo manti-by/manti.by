@@ -65,63 +65,60 @@
          * Get XML
          */
         public function getXML() {
+            // Open XML
             $result  = '<?xml version="1.0" encoding="UTF-8"?>' . NL;
             $result .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">';
 
             // Default site link
-            $result .= '  <url>' . NL;
-            $result .= '    <loc>' .  Sef::getSef('index.php') . '</loc>' . NL;
-            $result .= '    <lastmod>' . date('r', strtotime(date('Y-m-d'))) . '</lastmod>' . NL;
-            $result .= '    <priority>1</priority>' . NL;
-            $result .= '    <changefreq>hourly</changefreq>' . NL;
-            $result .= '  </url>' . NL;
+            $result .= $this->getSitemapXMLItem(Sef::getSef('index.php'), date('r', strtotime(date('Y-m-d'))), 1, 'hourly');
 
             // Add general blog links
-            $result .= '  <url>' . NL;
-            $result .= '    <loc>' .  Sef::getSef('index.php?module=blog') . '</loc>' . NL;
-            $result .= '    <lastmod>' . date('r', strtotime(date('Y-m-d'))) . '</lastmod>' . NL;
-            $result .= '    <priority>1</priority>' . NL;
-            $result .= '    <changefreq>daily</changefreq>' . NL;
-            $result .= '  </url>' . NL;
+            $result .= $this->getSitemapXMLItem(Sef::getSef('index.php?module=blog'), date('r', strtotime(date('Y-m-d'))), 1, 'daily');
 
+            // Static pages
             foreach (array(14, 2, 16) as $id) {
-                $result .= '  <url>' . NL;
-                $result .= '    <loc>' .  Sef::getSef('index.php?module=blog&action=show&id=' . $id) . '</loc>' . NL;
-                $result .= '    <lastmod>' . date('r', strtotime(date('Y-m-01'))) . '</lastmod>' . NL;
-                $result .= '    <priority>0.9</priority>' . NL;
-                $result .= '    <changefreq>monthly</changefreq>' . NL;
-                $result .= '  </url>' . NL;
+                $result .= $this->getSitemapXMLItem(Sef::getSef('index.php?module=blog&action=show&id=' . $id), date('r', strtotime(date('Y-m-01'))), 0.9, 'monthly');
             }
 
             // Add blog posts
             foreach (Model::getModel('blog')->getPosts(1000) as $post) {
-                $result .= '  <url>' . NL;
-                $result .= '    <loc>' .  Sef::getSef('index.php?module=blog&action=show&id=' . $post->id) . '</loc>' . NL;
-                $result .= '    <lastmod>' . date('r', strtotime($post->timestamp)) . '</lastmod>' . NL;
-                $result .= '    <priority>0.8</priority>' . NL;
-                $result .= '    <changefreq>weekly</changefreq>' . NL;
-                $result .= '  </url>' . NL;
+                $result .= $this->getSitemapXMLItem(Sef::getSef('index.php?module=blog&action=show&id=' . $post->id), date('r', strtotime($post->timestamp)), 0.8, 'weekly');
             }
 
             // Add general gallery link
-            $result .= '  <url>' . NL;
-            $result .= '    <loc>' .  Sef::getSef('index.php?module=gallery') . '</loc>' . NL;
-            $result .= '    <lastmod>' . date('r', strtotime(date('Y-m-d'))) . '</lastmod>' . NL;
-            $result .= '    <priority>0.8</priority>' . NL;
-            $result .= '    <changefreq>weekly</changefreq>' . NL;
-            $result .= '  </url>' . NL;
+            $result .= $this->getSitemapXMLItem(Sef::getSef('index.php?module=gallery'), date('r', strtotime(date('Y-m-d'))), 0.9, 'weekly');
 
             // Add gallery entries
             foreach (Model::getModel('gallery')->getGallery(1000) as $gallery) {
-                $result .= '  <url>' . NL;
-                $result .= '    <loc>' .  Sef::getSef('index.php?module=blog&action=show&id=' . $gallery->id) . '</loc>' . NL;
-                $result .= '    <lastmod>' . date('r', strtotime($gallery->timestamp)) . '</lastmod>' . NL;
-                $result .= '    <priority>0.7</priority>' . NL;
-                $result .= '    <changefreq>weekly</changefreq>' . NL;
-                $result .= '  </url>' . NL;
+                $result .= $this->getSitemapXMLItem(Sef::getSef('index.php?module=gallery&action=show&id=' . $gallery->id), date('r', strtotime($gallery->timestamp)), 0.7, 'weekly');
             }
 
+            // Registration and sign in
+            $result .= $this->getSitemapXMLItem(Sef::getSef('index.php?module=user&action=registerform'), date('r', strtotime(date('Y-m-01'))), 0.6, 'monthly');
+            $result .= $this->getSitemapXMLItem(Sef::getSef('index.php?module=user&action=loginform'), date('r', strtotime(date('Y-m-01'))), 0.6, 'monthly');
+            $result .= $this->getSitemapXMLItem(Sef::getSef('index.php?module=user&action=forgotform'), date('r', strtotime(date('Y-m-01'))), 0.6, 'monthly');
+
+            // Close XML and return
             $result .= '</urlset>';
+            return $result;
+        }
+
+        /**
+         * Return XML markup for sitemap item
+         * @param string $link
+         * @param string $date
+         * @param float $priority
+         * @param string $frequency
+         * @return string
+         */
+        private function getSitemapXMLItem($link, $date, $priority, $frequency) {
+            $result  = '  <url>' . NL;
+            $result .= '    <loc>' .  $link . '</loc>' . NL;
+            $result .= '    <lastmod>' . $date . '</lastmod>' . NL;
+            $result .= '    <priority>' . $priority . '</priority>' . NL;
+            $result .= '    <changefreq>' . $frequency . '</changefreq>' . NL;
+            $result .= '  </url>' . NL;
+
             return $result;
         }
     }
