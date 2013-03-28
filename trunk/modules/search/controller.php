@@ -39,31 +39,36 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Toolbar plugin
-     * @name $toolbar
+     * Search Controller class
+     * @name $searchController
      * @package M2 Micro Framework
-     * @subpackage Template
+     * @subpackage Modules
      * @author Alexander Chaika
-     * @since 0.1
-     * @todo Add search functionality
+     * @since 0.3b
      */
+    class SearchController extends Controller {
+        /**
+         * Default action
+         * @param array $options
+         * @return array $options
+         */
+        public function indexAction($options) {
+            // Get search query
+            $q = System::getInstance()->getCmd('q');
 
-    $user = UserEntity::getInstance();
-?>
-<script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/autocomplete.jquery.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#switch-language').click(function() {
-            document.cookie = 'language=' + $(this).attr('rel') + '; path=/; expires=Mon, 01-Jan-2030 00:00:00 GMT';
-            location.href = location.href;
-        });
-    });
-</script>
-<div id="toolbar" class="fr">
-    <div id="search">
-        <form action="<?php echo Sef::getSef('index.php?module=search'); ?>" method="post">
-            <input type="text" id="query" name="q" value="" placeholder="<?php echo T('Search'); ?>..." class="autocomplete" src="<?php echo Sef::getSef('index.php?module=search&action=autocomplete'); ?>" />
-            <input type="submit" id="go" name="go" value=" " />
-        </form>
-    </div>
-</div>
+            // Get search results
+            if ($q) {
+                $options['title'] = T('Search results by query: ') . $q;
+                $options['data'] = $this->model->search($q);
+            } else {
+                $options['title'] = T('No search results found');
+                $options['data'] = Model::getModel('blog')->getPosts();
+            }
+
+            // Render search results
+            $options['module'] = 'search';
+            $options['body'] = $this->view->renderItemsArray($options);
+
+            return $this->view->wrapSidebar($options);
+        }
+    }

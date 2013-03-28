@@ -82,7 +82,7 @@ $(document).ready(function() {
                 }
 
                 $('.autocomplete-result-item').bind('click', function() {
-                    $('#' + $(this).attr('rel')).val($(this).html());
+                    // $('#' + $(this).attr('rel')).val($(this).html());
                 });
 
                 $('body').bind('click', function() {

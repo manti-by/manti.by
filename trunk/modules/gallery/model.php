@@ -124,7 +124,7 @@
          * @param array $galleries objects
          * @return array $galleries objects
          */
-        private function appendGalleriesImages($galleries) {
+        public function appendGalleriesImages($galleries) {
             // Append originals and thumbnails
             foreach ($galleries as $gallery) {
                 $max_viewed = array('item' => null, 'viewed' => -1);

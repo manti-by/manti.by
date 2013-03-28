@@ -188,9 +188,8 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 .file-control ul { margin: 0; padding: 10px; }
 .file-control li { list-style: none; margin: 0; padding: 0; }
 
-.autocomplete-result { position: absolute; width: 120px; border: 1px solid #CCC;
+.autocomplete-result { position: absolute; min-width: 120px; border: 1px solid #CCC;
     background: white; box-shadow: 3px 3px 3px #999; z-index: 1000; }
-.autocomplete-result ul { display: block; font-size: 14px; }
-.autocomplete-result ul li { display: block; margin: 0; padding: 5px; border: none; border-bottom: 1px solid #CCC;
-    background: white; cursor: pointer; }
+.autocomplete-result ul { display: block; margin: 5px; padding: 0; }
+.autocomplete-result ul li { display: block; margin: 0; padding: 2px 0; border: none; background: white; cursor: pointer; }
 .autocomplete-result ul li:hover { color: #ff721d; }

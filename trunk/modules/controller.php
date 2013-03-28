@@ -169,7 +169,7 @@
          * @return array result
          */
         public function autocompleteAction($options) {
-            $options['output'] = 'json';
+            $options['output'] = View::OUTPUT_TYPE_JSON;
 
             // Get query
             $query = System::getInstance()->getCmd('q');
