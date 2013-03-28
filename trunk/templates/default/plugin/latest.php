@@ -50,7 +50,7 @@
     $posts = Model::getModel('blog')->getPosts(7);
 ?>
 <ul class="sidebar">
-    <h3><?php echo T('Latest Posts'); ?></h3>
+    <h2><?php echo T('Latest Posts'); ?></h2>
     <?php foreach($posts as $post) : ?>
         <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $post->id); ?>" title="<?php echo $post->name; ?>"><?php echo $post->name; ?></a></li>
     <?php endforeach; ?>

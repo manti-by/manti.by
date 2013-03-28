@@ -50,7 +50,7 @@
     $galleries = Model::getModel('gallery')->getGallery(7);
 ?>
 <ul class="sidebar">
-    <h3><?php echo T('Photo galleries'); ?></h3>
+    <h2><?php echo T('Photo galleries'); ?></h2>
     <?php foreach($galleries as $item) : ?>
         <li>
             <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $item->id); ?>" title="<?php echo $item->name; ?>">

@@ -43,10 +43,10 @@ a:hover, a:active { text-decoration: underline; color: #7F2828 !important; }
 h1, h2, h3, h4, h5, h6 { border-bottom: none; }
 h2 { padding-bottom: 3px; border-bottom: 1px solid #CCC; text-transform: uppercase; font-size: 14px; font-weight: bold; }
 
-h2.with-full-link a { color: inherit; }
-h2.with-full-link .view-all a { font-size: 12px; color: #b40303 !important; font-weight: normal;
-    text-decoration: underline; text-transform: lowercase; }
-h2.front-blog { margin-bottom: 15px; }
+h2.with-full-link a, h3.with-full-link a { color: inherit; }
+h2.with-full-link .view-all a, h3.with-full-link .view-all a { font-size: 12px; color: #b40303 !important;
+    font-weight: normal; text-decoration: underline; text-transform: lowercase; }
+h2.front-blog, h3.front-blog { margin-bottom: 15px; }
 
 fieldset { margin: 10px 0; }
 
@@ -124,7 +124,10 @@ audio { width: 330px; transform: scale(0.8); }
 .main-sidebar { float: left; width: 700px; }
 .right-sidebar { float: right; width: 240px; }
 .right-sidebar li { list-style: none; padding: 8px 18px; }
-.right-sidebar h3 { color: #555; padding-bottom: 8px; }
+
+.right-sidebar h2 { color: #555; margin: 0 0 3px 0; padding-bottom: 8px; border: none; text-transform: none;
+    font-size: 18px; font-weight: normal; }
+
 .right-sidebar a { color: #666; }
 .right-sidebar a:hover { color: #666 !important; }
 .right-sidebar .sidebar { margin-top: 0; margin-bottom: 10px; }
@@ -159,13 +162,12 @@ audio { width: 330px; transform: scale(0.8); }
     font-size: 80px; border-right: 3px solid white; color: white; background: black;  }
 #page-404 .right-column { padding: 100px 40px; font-size: 16px;  }
 
-#gallery h2 { margin-bottom: 10px; }
-#gallery h2 a { color: inherit; }
-#gallery .item { margin-bottom: 30px; }
-#gallery .thumbnail { display: inline-block; margin: 0; padding: 3px 3px 1px 3px; }
-#gallery .thumbnail:hover { background: #AAA; }
-#gallery .path { margin: 10px 0 20px 0; }
-#gallery .path a { text-decoration: underline; }
+#gallery h3, #search h3 { margin-bottom: 10px; border-bottom: 1px dotted #CCC; }
+#gallery h3 a, #search h3 a { color: inherit; }
+#gallery .gallery-item { margin-bottom: 30px; }
+
+.gallery-item .thumbnail { display: inline-block; margin: 0; padding: 3px 3px 1px 3px; }
+.gallery-item .thumbnail:hover { background: #AAA; }
 
 #gallery .favorite a { height: 250px; overflow: hidden; }
 #gallery .favorite a img { position: relative; bottom: 50%; }

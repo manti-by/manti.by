@@ -49,8 +49,8 @@
 
     $count = 0;
 ?>
-<div class="item">
-    <h2 class="with-full-link">
+<div class="gallery-item">
+    <h3 class="with-full-link">
         <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $options['data']->id); ?>">
             <?php echo $options['data']->name; ?>
         </a>
@@ -59,10 +59,14 @@
                 <?php echo T('Show all'); ?>
             </a>
         </div>
-    </h2>
-    <div class="description">
-        <?php echo $options['data']->description; ?>
-    </div>
+    </h3>
+
+    <?php if (!empty($options['data']->description)) : ?>
+        <div class="description">
+            <?php echo $options['data']->description; ?>
+        </div>
+    <?php endif; ?>
+
     <div class="thumbnails">
         <?php foreach ($options['data']->originals as $original) : ?>
             <?php

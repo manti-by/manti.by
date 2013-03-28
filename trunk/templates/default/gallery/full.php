@@ -48,13 +48,14 @@
      */
 
 ?>
+<h1><?php echo $options['data']->name; ?></h1>
 <div id="gallery">
-    <h2 class="with-full-link">
-        <?php echo $options['data']->name; ?>
-    </h2>
-    <div class="description">
-        <?php echo $options['data']->description; ?>
-    </div>
+    <?php if (!empty($options['data']->description)) : ?>
+        <div class="description">
+            <?php echo $options['data']->description; ?>
+        </div>
+    <?php endif; ?>
+
     <div class="favorite">
         <a name="image-<?php echo $options['data']->favorite->id; ?>" href="<?php echo $options['data']->favorite->link; ?>" class="thumbnail" rel="<?php echo $options['data']->favorite->id; ?>">
             <img src="<?php echo $options['data']->favorite->link; ?>" width="693" />
