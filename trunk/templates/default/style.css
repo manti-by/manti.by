@@ -169,7 +169,7 @@ audio { width: 330px; transform: scale(0.8); }
 .gallery-item .thumbnail { display: inline-block; margin: 0; padding: 3px 3px 1px 3px; }
 .gallery-item .thumbnail:hover { background: #AAA; }
 
-#gallery .favorite a { height: 250px; overflow: hidden; margin: 0; padding: 3px 3px 1px 3px; }
+#gallery .favorite a { display: inline-block; height: 250px; overflow: hidden; margin: 0; padding: 3px 3px 1px 3px; }
 #gallery .favorite a img { position: relative; bottom: 50%; }
 
 #featured { padding-bottom: 30px; }
