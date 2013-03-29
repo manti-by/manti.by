@@ -108,7 +108,8 @@
 
             // Get global config
             $database = Database::getInstance();
-            $database->query("CALL UPDATE_SEF_COUNTER('".$database->escape($_SERVER['REQUEST_URI'])."','".$database->escape($_SERVER['REQUEST_URI'])."');");
+            $link = substr($database->escape($_SERVER['REQUEST_URI']), 1);
+            $database->query("CALL UPDATE_SEF_COUNTER('" . $link . "','" . $link . "');");
 
             // Get request string, delete question symbol and inject request data
             $request = self::getReal(substr($_SERVER['REQUEST_URI'], 1));
