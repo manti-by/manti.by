@@ -1,19 +1,508 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50525
-Source Host           : localhost:3336
-Source Database       : niiar
+Source Server         : manti.by
+Source Server Version : 50166
+Source Host           : localhost:3306
+Source Database       : prod
 
 Target Server Type    : MYSQL
-Target Server Version : 50525
+Target Server Version : 50166
 File Encoding         : 65001
 
-Date: 2013-03-28 19:17:14
+Date: 2013-03-29 16:16:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `_log`
+-- ----------------------------
+DROP TABLE IF EXISTS `_log`;
+CREATE TABLE `_log` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `module` varchar(50) DEFAULT NULL,
+  `action` varchar(50) DEFAULT NULL,
+  `task` varchar(50) DEFAULT NULL,
+  `refid` varchar(50) DEFAULT NULL,
+  `ip` varchar(50) DEFAULT NULL,
+  `browser` varchar(255) DEFAULT NULL,
+  `referer` varchar(500) DEFAULT NULL,
+  `sessionid` varchar(50) DEFAULT NULL,
+  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `ik_browser` (`browser`) USING BTREE,
+  KEY `ik_module` (`module`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=283 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of _log
+-- ----------------------------
+INSERT INTO `_log` VALUES ('1', 'file', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dashboard/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:01');
+INSERT INTO `_log` VALUES ('2', 'blog', 'show', '', '16', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/download/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:03');
+INSERT INTO `_log` VALUES ('3', 'blog', 'track', '', '16', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/copyrights/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:04');
+INSERT INTO `_log` VALUES ('4', 'blog', 'show', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/copyrights/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:06');
+INSERT INTO `_log` VALUES ('5', 'blog', 'track', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:06');
+INSERT INTO `_log` VALUES ('6', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:10');
+INSERT INTO `_log` VALUES ('7', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:11');
+INSERT INTO `_log` VALUES ('8', 'file', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:16');
+INSERT INTO `_log` VALUES ('9', 'sitemap', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/download/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:18');
+INSERT INTO `_log` VALUES ('10', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/map/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:45');
+INSERT INTO `_log` VALUES ('11', 'blog', 'show', '', '12', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:46');
+INSERT INTO `_log` VALUES ('12', 'blog', 'track', '', '12', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/hobh-three/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:47');
+INSERT INTO `_log` VALUES ('13', 'file', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/hobh-three/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:55');
+INSERT INTO `_log` VALUES ('14', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/download/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:57');
+INSERT INTO `_log` VALUES ('15', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:57');
+INSERT INTO `_log` VALUES ('16', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:59');
+INSERT INTO `_log` VALUES ('17', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 16:43:05');
+INSERT INTO `_log` VALUES ('18', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:09:35');
+INSERT INTO `_log` VALUES ('19', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:10:45');
+INSERT INTO `_log` VALUES ('20', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:13:31');
+INSERT INTO `_log` VALUES ('21', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:13:40');
+INSERT INTO `_log` VALUES ('22', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:13:42');
+INSERT INTO `_log` VALUES ('23', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:15:13');
+INSERT INTO `_log` VALUES ('24', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:15:53');
+INSERT INTO `_log` VALUES ('25', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:16:14');
+INSERT INTO `_log` VALUES ('26', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:17:00');
+INSERT INTO `_log` VALUES ('27', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:18:02');
+INSERT INTO `_log` VALUES ('28', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:18:08');
+INSERT INTO `_log` VALUES ('29', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:18:10');
+INSERT INTO `_log` VALUES ('30', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:18:13');
+INSERT INTO `_log` VALUES ('31', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:18:13');
+INSERT INTO `_log` VALUES ('32', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:20:57');
+INSERT INTO `_log` VALUES ('33', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:02');
+INSERT INTO `_log` VALUES ('34', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:02');
+INSERT INTO `_log` VALUES ('35', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:03');
+INSERT INTO `_log` VALUES ('36', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:04');
+INSERT INTO `_log` VALUES ('37', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:04');
+INSERT INTO `_log` VALUES ('38', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:04');
+INSERT INTO `_log` VALUES ('39', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:06');
+INSERT INTO `_log` VALUES ('40', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:06');
+INSERT INTO `_log` VALUES ('41', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:07');
+INSERT INTO `_log` VALUES ('42', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:34');
+INSERT INTO `_log` VALUES ('43', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:36');
+INSERT INTO `_log` VALUES ('44', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:38');
+INSERT INTO `_log` VALUES ('45', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:38');
+INSERT INTO `_log` VALUES ('46', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:42');
+INSERT INTO `_log` VALUES ('47', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:43');
+INSERT INTO `_log` VALUES ('48', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:43');
+INSERT INTO `_log` VALUES ('49', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:43');
+INSERT INTO `_log` VALUES ('50', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:54');
+INSERT INTO `_log` VALUES ('51', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:56');
+INSERT INTO `_log` VALUES ('52', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:59');
+INSERT INTO `_log` VALUES ('53', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:00');
+INSERT INTO `_log` VALUES ('54', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:47');
+INSERT INTO `_log` VALUES ('55', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:47');
+INSERT INTO `_log` VALUES ('56', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:48');
+INSERT INTO `_log` VALUES ('57', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:48');
+INSERT INTO `_log` VALUES ('58', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:49');
+INSERT INTO `_log` VALUES ('59', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:49');
+INSERT INTO `_log` VALUES ('60', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:49');
+INSERT INTO `_log` VALUES ('61', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:49');
+INSERT INTO `_log` VALUES ('62', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:24');
+INSERT INTO `_log` VALUES ('63', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:24');
+INSERT INTO `_log` VALUES ('64', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:26');
+INSERT INTO `_log` VALUES ('65', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:27');
+INSERT INTO `_log` VALUES ('66', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:28');
+INSERT INTO `_log` VALUES ('67', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:30');
+INSERT INTO `_log` VALUES ('68', 'blog', 'show', '', '24', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:32');
+INSERT INTO `_log` VALUES ('69', 'blog', 'track', '', '24', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:32');
+INSERT INTO `_log` VALUES ('70', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:36');
+INSERT INTO `_log` VALUES ('71', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:37');
+INSERT INTO `_log` VALUES ('72', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:45');
+INSERT INTO `_log` VALUES ('73', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:45');
+INSERT INTO `_log` VALUES ('74', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:49');
+INSERT INTO `_log` VALUES ('75', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:49');
+INSERT INTO `_log` VALUES ('76', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:51');
+INSERT INTO `_log` VALUES ('77', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:53');
+INSERT INTO `_log` VALUES ('78', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:54');
+INSERT INTO `_log` VALUES ('79', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:54');
+INSERT INTO `_log` VALUES ('80', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:55');
+INSERT INTO `_log` VALUES ('81', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:59');
+INSERT INTO `_log` VALUES ('82', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:59');
+INSERT INTO `_log` VALUES ('83', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:59');
+INSERT INTO `_log` VALUES ('84', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:24:01');
+INSERT INTO `_log` VALUES ('85', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:24:02');
+INSERT INTO `_log` VALUES ('86', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:24:02');
+INSERT INTO `_log` VALUES ('87', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:32:44');
+INSERT INTO `_log` VALUES ('88', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:32:45');
+INSERT INTO `_log` VALUES ('89', 'blog', 'show', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:32:48');
+INSERT INTO `_log` VALUES ('90', 'blog', 'track', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:32:48');
+INSERT INTO `_log` VALUES ('91', 'blog', 'show', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:34:22');
+INSERT INTO `_log` VALUES ('92', 'blog', 'track', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:34:23');
+INSERT INTO `_log` VALUES ('93', 'blog', 'show', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:34:28');
+INSERT INTO `_log` VALUES ('94', 'blog', 'track', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:34:28');
+INSERT INTO `_log` VALUES ('95', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:36:36');
+INSERT INTO `_log` VALUES ('96', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:39:01');
+INSERT INTO `_log` VALUES ('97', 'gallery', 'show', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:39:03');
+INSERT INTO `_log` VALUES ('98', 'gallery', 'track', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:39:03');
+INSERT INTO `_log` VALUES ('99', 'file', 'track', '', '455', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:17');
+INSERT INTO `_log` VALUES ('100', 'gallery', 'next', '', '455', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:18');
+INSERT INTO `_log` VALUES ('101', 'file', 'track', '', '454', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:18');
+INSERT INTO `_log` VALUES ('102', 'gallery', 'next', '', '454', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:19');
+INSERT INTO `_log` VALUES ('103', 'file', 'track', '', '453', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:19');
+INSERT INTO `_log` VALUES ('104', 'gallery', 'next', '', '453', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:20');
+INSERT INTO `_log` VALUES ('105', 'file', 'track', '', '452', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:20');
+INSERT INTO `_log` VALUES ('106', 'gallery', 'show', '', '3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:25');
+INSERT INTO `_log` VALUES ('107', 'gallery', 'track', '', '3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/spring-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:25');
+INSERT INTO `_log` VALUES ('108', 'file', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/spring-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:28');
+INSERT INTO `_log` VALUES ('109', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/download/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:28');
+INSERT INTO `_log` VALUES ('110', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:29');
+INSERT INTO `_log` VALUES ('111', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:38');
+INSERT INTO `_log` VALUES ('112', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:40');
+INSERT INTO `_log` VALUES ('113', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:42');
+INSERT INTO `_log` VALUES ('114', 'blog', 'show', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:43');
+INSERT INTO `_log` VALUES ('115', 'blog', 'track', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:43');
+INSERT INTO `_log` VALUES ('116', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:55:39');
+INSERT INTO `_log` VALUES ('117', 'gallery', 'show', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:55:41');
+INSERT INTO `_log` VALUES ('118', 'gallery', 'track', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:55:41');
+INSERT INTO `_log` VALUES ('119', 'gallery', 'show', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:39:58');
+INSERT INTO `_log` VALUES ('120', 'gallery', 'track', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:39:58');
+INSERT INTO `_log` VALUES ('121', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:40:00');
+INSERT INTO `_log` VALUES ('122', 'file', 'track', '', '490', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:40:05');
+INSERT INTO `_log` VALUES ('123', 'gallery', 'next', '', '490', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:40:08');
+INSERT INTO `_log` VALUES ('124', 'file', 'track', '', '489', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:40:09');
+INSERT INTO `_log` VALUES ('125', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:43:34');
+INSERT INTO `_log` VALUES ('126', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:45:27');
+INSERT INTO `_log` VALUES ('127', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:45:31');
+INSERT INTO `_log` VALUES ('128', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:45:31');
+INSERT INTO `_log` VALUES ('129', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:45:31');
+INSERT INTO `_log` VALUES ('130', 'blog', 'show', '', '20', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:45:33');
+INSERT INTO `_log` VALUES ('131', 'blog', 'track', '', '20', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/chillhouse-live/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:45:34');
+INSERT INTO `_log` VALUES ('132', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/chillhouse-live/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:50:18');
+INSERT INTO `_log` VALUES ('133', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:50:20');
+INSERT INTO `_log` VALUES ('134', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:50:25');
+INSERT INTO `_log` VALUES ('135', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:50:33');
+INSERT INTO `_log` VALUES ('136', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:52:02');
+INSERT INTO `_log` VALUES ('137', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:52:03');
+INSERT INTO `_log` VALUES ('138', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:52:34');
+INSERT INTO `_log` VALUES ('139', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:53:31');
+INSERT INTO `_log` VALUES ('140', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:54:32');
+INSERT INTO `_log` VALUES ('141', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:55:03');
+INSERT INTO `_log` VALUES ('142', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:55:24');
+INSERT INTO `_log` VALUES ('143', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:55:40');
+INSERT INTO `_log` VALUES ('144', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:55:40');
+INSERT INTO `_log` VALUES ('145', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:27');
+INSERT INTO `_log` VALUES ('146', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:27');
+INSERT INTO `_log` VALUES ('147', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:32');
+INSERT INTO `_log` VALUES ('148', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:34');
+INSERT INTO `_log` VALUES ('149', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:35');
+INSERT INTO `_log` VALUES ('150', 'blog', 'show', '', '25', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:37');
+INSERT INTO `_log` VALUES ('151', 'blog', 'track', '', '25', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/hi-pass/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:37');
+INSERT INTO `_log` VALUES ('152', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/hi-pass/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:39');
+INSERT INTO `_log` VALUES ('153', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:43');
+INSERT INTO `_log` VALUES ('154', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:45');
+INSERT INTO `_log` VALUES ('155', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:47');
+INSERT INTO `_log` VALUES ('156', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:47');
+INSERT INTO `_log` VALUES ('157', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:58:36');
+INSERT INTO `_log` VALUES ('158', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:58:36');
+INSERT INTO `_log` VALUES ('159', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:59:31');
+INSERT INTO `_log` VALUES ('160', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:59:31');
+INSERT INTO `_log` VALUES ('161', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:59:58');
+INSERT INTO `_log` VALUES ('162', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:59:58');
+INSERT INTO `_log` VALUES ('163', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:43');
+INSERT INTO `_log` VALUES ('164', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:44');
+INSERT INTO `_log` VALUES ('165', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:50');
+INSERT INTO `_log` VALUES ('166', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:54');
+INSERT INTO `_log` VALUES ('167', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:54');
+INSERT INTO `_log` VALUES ('168', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:54');
+INSERT INTO `_log` VALUES ('169', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:57');
+INSERT INTO `_log` VALUES ('170', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:57');
+INSERT INTO `_log` VALUES ('171', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:57');
+INSERT INTO `_log` VALUES ('172', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:00');
+INSERT INTO `_log` VALUES ('173', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:00');
+INSERT INTO `_log` VALUES ('174', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:00');
+INSERT INTO `_log` VALUES ('175', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:03');
+INSERT INTO `_log` VALUES ('176', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:03');
+INSERT INTO `_log` VALUES ('177', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:03');
+INSERT INTO `_log` VALUES ('178', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:11');
+INSERT INTO `_log` VALUES ('179', 'file', 'track', '', '438', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:14');
+INSERT INTO `_log` VALUES ('180', 'gallery', 'show', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:17');
+INSERT INTO `_log` VALUES ('181', 'gallery', 'track', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:17');
+INSERT INTO `_log` VALUES ('182', 'tag', 'search', '', '16', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:36');
+INSERT INTO `_log` VALUES ('183', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:42');
+INSERT INTO `_log` VALUES ('184', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:42');
+INSERT INTO `_log` VALUES ('185', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:43');
+INSERT INTO `_log` VALUES ('186', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:45');
+INSERT INTO `_log` VALUES ('187', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:45');
+INSERT INTO `_log` VALUES ('188', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:45');
+INSERT INTO `_log` VALUES ('189', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:45');
+INSERT INTO `_log` VALUES ('190', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:46');
+INSERT INTO `_log` VALUES ('191', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:02:24');
+INSERT INTO `_log` VALUES ('192', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:03:10');
+INSERT INTO `_log` VALUES ('193', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:03:18');
+INSERT INTO `_log` VALUES ('194', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:04:28');
+INSERT INTO `_log` VALUES ('195', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:05:04');
+INSERT INTO `_log` VALUES ('196', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:05:13');
+INSERT INTO `_log` VALUES ('197', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:05:13');
+INSERT INTO `_log` VALUES ('198', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:08:23');
+INSERT INTO `_log` VALUES ('199', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:09:24');
+INSERT INTO `_log` VALUES ('200', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:09:41');
+INSERT INTO `_log` VALUES ('201', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:11:41');
+INSERT INTO `_log` VALUES ('202', 'blog', 'show', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:12:19');
+INSERT INTO `_log` VALUES ('203', 'blog', 'track', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:12:19');
+INSERT INTO `_log` VALUES ('204', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:04');
+INSERT INTO `_log` VALUES ('205', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:04');
+INSERT INTO `_log` VALUES ('206', 'tag', 'search', '', '5', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:12');
+INSERT INTO `_log` VALUES ('207', 'tag', 'search', '', '36', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/lsc/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:16');
+INSERT INTO `_log` VALUES ('208', 'tag', 'search', '', '3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/dnb/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:18');
+INSERT INTO `_log` VALUES ('209', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/ambient/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:29');
+INSERT INTO `_log` VALUES ('210', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:30');
+INSERT INTO `_log` VALUES ('211', 'file', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:32');
+INSERT INTO `_log` VALUES ('212', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/download/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:33');
+INSERT INTO `_log` VALUES ('213', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:34');
+INSERT INTO `_log` VALUES ('214', 'user', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:18:39');
+INSERT INTO `_log` VALUES ('215', 'file', 'edit', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dashboard/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:18:44');
+INSERT INTO `_log` VALUES ('216', 'file', 'getdeleteform', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/file/edit/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:18:46');
+INSERT INTO `_log` VALUES ('217', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-29 11:50:33');
+INSERT INTO `_log` VALUES ('218', 'file', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-29 11:50:54');
+INSERT INTO `_log` VALUES ('219', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/download/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-29 11:50:58');
+INSERT INTO `_log` VALUES ('220', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-29 11:50:58');
+INSERT INTO `_log` VALUES ('221', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 11:42:20');
+INSERT INTO `_log` VALUES ('222', 'blog', 'show', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:01:42');
+INSERT INTO `_log` VALUES ('223', 'blog', 'track', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:01:43');
+INSERT INTO `_log` VALUES ('224', 'blog', 'show', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:06:58');
+INSERT INTO `_log` VALUES ('225', 'blog', 'track', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:06:59');
+INSERT INTO `_log` VALUES ('226', 'blog', 'show', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:19:33');
+INSERT INTO `_log` VALUES ('227', 'blog', 'track', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:19:33');
+INSERT INTO `_log` VALUES ('228', 'blog', 'show', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:20:01');
+INSERT INTO `_log` VALUES ('229', 'blog', 'track', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:20:01');
+INSERT INTO `_log` VALUES ('230', 'blog', 'show', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:22:20');
+INSERT INTO `_log` VALUES ('231', 'blog', 'track', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:22:20');
+INSERT INTO `_log` VALUES ('232', 'blog', 'show', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:22:23');
+INSERT INTO `_log` VALUES ('233', 'blog', 'track', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:22:23');
+INSERT INTO `_log` VALUES ('234', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:23:12');
+INSERT INTO `_log` VALUES ('235', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:27:33');
+INSERT INTO `_log` VALUES ('236', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:30:30');
+INSERT INTO `_log` VALUES ('237', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:33:44');
+INSERT INTO `_log` VALUES ('238', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:33:50');
+INSERT INTO `_log` VALUES ('239', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:34:16');
+INSERT INTO `_log` VALUES ('240', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:35:05');
+INSERT INTO `_log` VALUES ('241', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:36:06');
+INSERT INTO `_log` VALUES ('242', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:42:53');
+INSERT INTO `_log` VALUES ('243', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:44:51');
+INSERT INTO `_log` VALUES ('244', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:46:00');
+INSERT INTO `_log` VALUES ('245', 'blog', 'show', '', '1', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:48:04');
+INSERT INTO `_log` VALUES ('246', 'blog', 'track', '', '1', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/blog/insomnia/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:48:05');
+INSERT INTO `_log` VALUES ('247', 'tag', 'search', '', '16', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/blog/insomnia/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:48:16');
+INSERT INTO `_log` VALUES ('248', 'tag', 'search', '', '16', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/blog/insomnia/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:49:59');
+INSERT INTO `_log` VALUES ('249', 'tag', 'search', '', '16', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/blog/insomnia/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:53:21');
+INSERT INTO `_log` VALUES ('250', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/tag/tech-house/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:53:37');
+INSERT INTO `_log` VALUES ('251', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/tag/tech-house/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:53:54');
+INSERT INTO `_log` VALUES ('252', 'gallery', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:54:52');
+INSERT INTO `_log` VALUES ('253', 'file', 'track', '', '442', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/gallery/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:54:53');
+INSERT INTO `_log` VALUES ('254', 'gallery', 'next', '', '442', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/gallery/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:55:03');
+INSERT INTO `_log` VALUES ('255', 'file', 'track', '', '441', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/gallery/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:55:13');
+INSERT INTO `_log` VALUES ('256', 'gallery', 'next', '', '441', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/gallery/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:55:36');
+INSERT INTO `_log` VALUES ('257', 'file', 'track', '', '440', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/gallery/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:55:41');
+INSERT INTO `_log` VALUES ('258', 'gallery', 'next', '', '440', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/gallery/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:55:42');
+INSERT INTO `_log` VALUES ('259', 'file', 'track', '', '439', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/gallery/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:55:48');
+INSERT INTO `_log` VALUES ('260', 'gallery', 'show', '', '3', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/gallery/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:55:54');
+INSERT INTO `_log` VALUES ('261', 'gallery', 'track', '', '3', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/gallery/spring-13/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:55:54');
+INSERT INTO `_log` VALUES ('262', 'blog', 'show', '', '25', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/gallery/spring-13/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:56:00');
+INSERT INTO `_log` VALUES ('263', 'blog', 'track', '', '25', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/blog/hi-pass/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:56:00');
+INSERT INTO `_log` VALUES ('264', 'tag', 'search', '', '8', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/blog/hi-pass/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:56:03');
+INSERT INTO `_log` VALUES ('265', 'tag', 'search', '', '25', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/tag/chillout/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:56:07');
+INSERT INTO `_log` VALUES ('266', 'blog', 'show', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/tag/hobh/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:56:18');
+INSERT INTO `_log` VALUES ('267', 'blog', 'track', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:56:18');
+INSERT INTO `_log` VALUES ('268', 'search', 'autocomplete', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:56:24');
+INSERT INTO `_log` VALUES ('269', 'search', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:56:28');
+INSERT INTO `_log` VALUES ('270', '', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/search/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:56:37');
+INSERT INTO `_log` VALUES ('271', 'tag', 'search', '', '15', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:56:44');
+INSERT INTO `_log` VALUES ('272', 'tag', 'search', '', '16', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/tag/stockholm/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:56:49');
+INSERT INTO `_log` VALUES ('273', 'file', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/tag/tech-house/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:56:55');
+INSERT INTO `_log` VALUES ('274', 'file', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/tag/tech-house/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 12:59:33');
+INSERT INTO `_log` VALUES ('275', 'file', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/tag/tech-house/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 13:00:00');
+INSERT INTO `_log` VALUES ('276', 'file', '', '', '', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/tag/tech-house/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 13:03:02');
+INSERT INTO `_log` VALUES ('277', 'blog', 'show', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/download/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 13:06:44');
+INSERT INTO `_log` VALUES ('278', 'blog', 'track', '', '14', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 13:06:44');
+INSERT INTO `_log` VALUES ('279', 'blog', 'show', '', '2', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/about/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 13:06:46');
+INSERT INTO `_log` VALUES ('280', 'blog', 'track', '', '2', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/dev/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 13:06:46');
+INSERT INTO `_log` VALUES ('281', 'blog', 'show', '', '16', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/dev/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 13:06:51');
+INSERT INTO `_log` VALUES ('282', 'blog', 'track', '', '16', '86.57.158.234', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://62.109.5.89/copyrights/', 'vbir7vnllh56ej8g6anhbee0j6', '2013-03-29 13:06:51');
+
+-- ----------------------------
+-- Table structure for `_sef_alias`
+-- ----------------------------
+DROP TABLE IF EXISTS `_sef_alias`;
+CREATE TABLE `_sef_alias` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `request` varchar(255) NOT NULL,
+  `link` varchar(255) NOT NULL,
+  `viewed` int(11) unsigned DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=232 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of _sef_alias
+-- ----------------------------
+INSERT INTO `_sef_alias` VALUES ('74', 'index.php?module=blog&action=show&id=9', 'blog/katana/', '0');
+INSERT INTO `_sef_alias` VALUES ('75', 'index.php?module=tag&action=search&id=21', 'tag/katana/', '0');
+INSERT INTO `_sef_alias` VALUES ('76', 'index.php?module=tag&action=search&id=22', 'tag/techstep/', '0');
+INSERT INTO `_sef_alias` VALUES ('77', 'index.php?module=tag&action=search&id=23', 'tag/neurostep/', '0');
+INSERT INTO `_sef_alias` VALUES ('78', 'index.php?module=tag&action=search&id=14', 'tag/featured/', '0');
+INSERT INTO `_sef_alias` VALUES ('79', 'index.php?module=tag&action=search&id=24', 'tag/m25/', '0');
+INSERT INTO `_sef_alias` VALUES ('80', 'index.php?module=blog&action=show&id=6', 'blog/stockholm-syndrome/', '0');
+INSERT INTO `_sef_alias` VALUES ('81', 'index.php?module=tag&action=search&id=15', 'tag/stockholm/', '0');
+INSERT INTO `_sef_alias` VALUES ('82', 'index.php?module=tag&action=search&id=16', 'tag/tech-house/', '0');
+INSERT INTO `_sef_alias` VALUES ('83', 'index.php?module=tag&action=search&id=17', 'tag/deep-house/', '0');
+INSERT INTO `_sef_alias` VALUES ('84', 'index.php?module=tag&action=search&id=18', 'tag/m31/', '0');
+INSERT INTO `_sef_alias` VALUES ('85', 'index.php?module=blog&action=show&id=8', 'blog/autoreply/', '0');
+INSERT INTO `_sef_alias` VALUES ('86', 'index.php?module=tag&action=search&id=19', 'tag/autoreply/', '0');
+INSERT INTO `_sef_alias` VALUES ('1', 'index.php?module=blog', 'blog/', '0');
+INSERT INTO `_sef_alias` VALUES ('87', 'index.php?module=tag&action=search&id=20', 'tag/m27/', '0');
+INSERT INTO `_sef_alias` VALUES ('88', 'index.php?module=gallery', 'gallery/', '0');
+INSERT INTO `_sef_alias` VALUES ('89', 'index.php?module=blog&action=show&id=25', 'blog/hi-pass/', '0');
+INSERT INTO `_sef_alias` VALUES ('90', 'index.php?module=tag&action=search&id=55', 'tag/minimal-techno/', '0');
+INSERT INTO `_sef_alias` VALUES ('91', 'index.php?module=tag&action=search&id=56', 'tag/hi-pass/', '0');
+INSERT INTO `_sef_alias` VALUES ('92', 'index.php?module=tag&action=search&id=57', 'tag/m05/', '0');
+INSERT INTO `_sef_alias` VALUES ('93', 'index.php?module=blog&action=show&id=24', 'blog/iris/', '0');
+INSERT INTO `_sef_alias` VALUES ('94', 'index.php?module=tag&action=search&id=52', 'tag/iris/', '0');
+INSERT INTO `_sef_alias` VALUES ('95', 'index.php?module=tag&action=search&id=53', 'tag/all-about-me/', '0');
+INSERT INTO `_sef_alias` VALUES ('96', 'index.php?module=tag&action=search&id=54', 'tag/m04/', '0');
+INSERT INTO `_sef_alias` VALUES ('97', 'index.php?module=tag&action=search&id=48', 'tag/promo/', '0');
+INSERT INTO `_sef_alias` VALUES ('98', 'index.php?module=blog&action=show&id=23', 'blog/all-she-wants-is/', '0');
+INSERT INTO `_sef_alias` VALUES ('99', 'index.php?module=tag&action=search&id=50', 'tag/all-she-wants/', '0');
+INSERT INTO `_sef_alias` VALUES ('100', 'index.php?module=tag&action=search&id=51', 'tag/m02/', '0');
+INSERT INTO `_sef_alias` VALUES ('101', 'index.php?module=blog&action=show&id=22', 'blog/cote-d-azur/', '0');
+INSERT INTO `_sef_alias` VALUES ('102', 'index.php?module=tag&action=search&id=46', 'tag/funky-house/', '0');
+INSERT INTO `_sef_alias` VALUES ('103', 'index.php?module=tag&action=search&id=47', 'tag/cote-d-azur/', '0');
+INSERT INTO `_sef_alias` VALUES ('104', 'index.php?module=tag&action=search&id=49', 'tag/m30/', '0');
+INSERT INTO `_sef_alias` VALUES ('105', 'index.php?module=blog&action=show&id=21', 'blog/emofunk/', '0');
+INSERT INTO `_sef_alias` VALUES ('106', 'index.php?module=tag&action=search&id=37', 'tag/neurofunk/', '0');
+INSERT INTO `_sef_alias` VALUES ('107', 'index.php?module=tag&action=search&id=38', 'tag/technoid/', '0');
+INSERT INTO `_sef_alias` VALUES ('108', 'index.php?module=tag&action=search&id=36', 'tag/dnb/', '0');
+INSERT INTO `_sef_alias` VALUES ('109', 'index.php?module=tag&action=search&id=43', 'tag/live/', '0');
+INSERT INTO `_sef_alias` VALUES ('110', 'index.php?module=tag&action=search&id=45', 'tag/m14/', '0');
+INSERT INTO `_sef_alias` VALUES ('111', 'index.php?module=tag&action=search&id=3', 'tag/ambient/', '0');
+INSERT INTO `_sef_alias` VALUES ('112', 'index.php?module=tag&action=search&id=8', 'tag/chillout/', '0');
+INSERT INTO `_sef_alias` VALUES ('113', 'index.php?module=tag&action=search&id=25', 'tag/hobh/', '0');
+INSERT INTO `_sef_alias` VALUES ('114', 'index.php?module=tag&action=search&id=5', 'tag/lsc/', '0');
+INSERT INTO `_sef_alias` VALUES ('115', 'index.php?module=blog&action=show&id=20', 'blog/chillhouse-live/', '0');
+INSERT INTO `_sef_alias` VALUES ('116', 'index.php?module=blog&action=show&id=19', 'blog/basstech-2/', '0');
+INSERT INTO `_sef_alias` VALUES ('117', 'index.php?module=gallery&action=show&id=1', 'gallery/autumn-12/', '0');
+INSERT INTO `_sef_alias` VALUES ('118', 'index.php?module=gallery&action=show&id=2', 'gallery/holland/', '0');
+INSERT INTO `_sef_alias` VALUES ('2', 'index.php?module=user&action=loginform', 'login/', '0');
+INSERT INTO `_sef_alias` VALUES ('3', 'index.php?module=file', 'download/', '0');
+INSERT INTO `_sef_alias` VALUES ('4', 'index.php?module=blog&action=show&id=14', 'about/', '0');
+INSERT INTO `_sef_alias` VALUES ('5', 'index.php?module=sitemap', 'map/', '0');
+INSERT INTO `_sef_alias` VALUES ('6', 'index.php?module=user&action=registerform', 'register/', '0');
+INSERT INTO `_sef_alias` VALUES ('7', 'index.php?module=blog&action=show&id=2', 'dev/', '0');
+INSERT INTO `_sef_alias` VALUES ('8', 'index.php?module=blog&action=show&id=16', 'copyrights/', '0');
+INSERT INTO `_sef_alias` VALUES ('119', 'index.php?module=gallery&action=show&id=3', 'gallery/spring-13/', '0');
+INSERT INTO `_sef_alias` VALUES ('120', 'index.php?module=gallery&action=show&id=4', 'gallery/winter-13/', '0');
+INSERT INTO `_sef_alias` VALUES ('121', 'index.php?module=gallery&action=show&id=5', 'gallery/z-xx/', '0');
+INSERT INTO `_sef_alias` VALUES ('122', 'index.php?module=blog&action=show&id=1', 'blog/insomnia/', '0');
+INSERT INTO `_sef_alias` VALUES ('123', 'index.php?module=blog&action=show&id=3', 'blog/synthetic/', '0');
+INSERT INTO `_sef_alias` VALUES ('9', 'index.php?module=user&action=forgotform', 'forgot/', '0');
+INSERT INTO `_sef_alias` VALUES ('124', 'index.php?module=blog&action=show&id=12', 'blog/hobh-three/', '0');
+INSERT INTO `_sef_alias` VALUES ('125', 'index.php?module=blog&action=show&id=5', 'blog/solaris/', '0');
+INSERT INTO `_sef_alias` VALUES ('126', 'index.php?module=blog&action=show&id=4', 'blog/plastic-toy/', '0');
+INSERT INTO `_sef_alias` VALUES ('127', 'index.php?module=blog&action=show&id=17', 'blog/bar-launge/', '0');
+INSERT INTO `_sef_alias` VALUES ('128', 'index.php?module=tag&action=search&id=32', 'tag/acid-jazz/', '0');
+INSERT INTO `_sef_alias` VALUES ('129', 'index.php?module=tag&action=search&id=33', 'tag/lounge/', '0');
+INSERT INTO `_sef_alias` VALUES ('130', 'index.php?module=tag&action=search&id=34', 'tag/bar-la-unge/', '0');
+INSERT INTO `_sef_alias` VALUES ('131', 'index.php?module=tag&action=search&id=35', 'tag/m08/', '0');
+INSERT INTO `_sef_alias` VALUES ('132', 'index.php?module=blog&action=show&id=18', 'blog/basstech/', '0');
+INSERT INTO `_sef_alias` VALUES ('133', 'index.php?module=tag&action=search&id=39', 'tag/basstech/', '0');
+INSERT INTO `_sef_alias` VALUES ('134', 'index.php?module=tag&action=search&id=40', 'tag/m18/', '0');
+INSERT INTO `_sef_alias` VALUES ('135', 'index.php?module=tag&action=search&id=41', 'tag/m20/', '0');
+INSERT INTO `_sef_alias` VALUES ('136', 'index.php?module=blog&action=track&id=19', 'blog/track/id/19/', '0');
+INSERT INTO `_sef_alias` VALUES ('137', 'index.php?module=tag&action=search&id=42', 'tag/chillhouse/', '0');
+INSERT INTO `_sef_alias` VALUES ('138', 'index.php?module=tag&action=search&id=44', 'tag/m12/', '0');
+INSERT INTO `_sef_alias` VALUES ('139', 'index.php?module=blog&action=show&id=13', 'blog/hobh-four/', '0');
+INSERT INTO `_sef_alias` VALUES ('140', 'index.php?module=blog&action=show&id=11', 'blog/hobh-two/', '0');
+INSERT INTO `_sef_alias` VALUES ('141', 'index.php?module=blog&action=show&id=10', 'blog/hobh-one/', '0');
+INSERT INTO `_sef_alias` VALUES ('142', 'index.php?module=gallery&action=track', 'gallery/track/', '0');
+INSERT INTO `_sef_alias` VALUES ('143', 'index.php?module=file&action=track', 'file/track/', '0');
+INSERT INTO `_sef_alias` VALUES ('144', 'index.php?module=gallery&action=next', 'gallery/next/', '0');
+INSERT INTO `_sef_alias` VALUES ('145', 'index.php?module=gallery&action=prev', 'gallery/prev/', '0');
+INSERT INTO `_sef_alias` VALUES ('146', 'index.php', '', '13');
+INSERT INTO `_sef_alias` VALUES ('147', 'index.php?module=blog&action=edit&id=25', 'blog/edit/id/25/', '0');
+INSERT INTO `_sef_alias` VALUES ('148', 'index.php?module=blog&action=delete&id=25', 'blog/delete/id/25/', '0');
+INSERT INTO `_sef_alias` VALUES ('149', 'index.php?module=blog&action=edit&id=24', 'blog/edit/id/24/', '0');
+INSERT INTO `_sef_alias` VALUES ('150', 'index.php?module=blog&action=delete&id=24', 'blog/delete/id/24/', '0');
+INSERT INTO `_sef_alias` VALUES ('151', 'index.php?module=blog&action=edit&id=23', 'blog/edit/id/23/', '0');
+INSERT INTO `_sef_alias` VALUES ('152', 'index.php?module=blog&action=delete&id=23', 'blog/delete/id/23/', '0');
+INSERT INTO `_sef_alias` VALUES ('153', 'index.php?module=blog&action=edit&id=22', 'blog/edit/id/22/', '0');
+INSERT INTO `_sef_alias` VALUES ('154', 'index.php?module=blog&action=delete&id=22', 'blog/delete/id/22/', '0');
+INSERT INTO `_sef_alias` VALUES ('155', 'index.php?module=blog&action=edit&id=21', 'blog/edit/id/21/', '0');
+INSERT INTO `_sef_alias` VALUES ('156', 'index.php?module=blog&action=delete&id=21', 'blog/delete/id/21/', '0');
+INSERT INTO `_sef_alias` VALUES ('157', 'index.php?module=user&action=dashboard', 'dashboard/', '0');
+INSERT INTO `_sef_alias` VALUES ('158', 'index.php?module=blog&action=edit', 'blog/edit/', '0');
+INSERT INTO `_sef_alias` VALUES ('159', 'index.php?module=user&action=logout', 'logout/', '0');
+INSERT INTO `_sef_alias` VALUES ('160', 'index.php?module=user', 'dashboard/', '0');
+INSERT INTO `_sef_alias` VALUES ('161', 'index.php?module=file&action=edit', 'file/edit/', '0');
+INSERT INTO `_sef_alias` VALUES ('162', 'index.php?module=gallery&action=updatefiles', 'gallery/updatefiles/', '0');
+INSERT INTO `_sef_alias` VALUES ('163', 'index.php?module=gallery&action=rebuildthumbnails', 'gallery/rebuildthumbnails/', '0');
+INSERT INTO `_sef_alias` VALUES ('164', 'index.php?module=tag&action=autocomplete', 'tag/autocomplete/', '0');
+INSERT INTO `_sef_alias` VALUES ('165', 'index.php?module=blog&action=next', 'blog/next/', '0');
+INSERT INTO `_sef_alias` VALUES ('166', 'index.php?module=blog&action=edit&id=14', 'blog/edit/id/14/', '0');
+INSERT INTO `_sef_alias` VALUES ('167', 'index.php?module=blog&action=delete&id=14', 'blog/delete/id/14/', '0');
+INSERT INTO `_sef_alias` VALUES ('168', 'index.php?module=blog&action=track&id=14', 'blog/track/id/14/', '0');
+INSERT INTO `_sef_alias` VALUES ('169', 'index.php?module=blog&action=edit&id=20', 'blog/edit/id/20/', '0');
+INSERT INTO `_sef_alias` VALUES ('170', 'index.php?module=blog&action=delete&id=20', 'blog/delete/id/20/', '0');
+INSERT INTO `_sef_alias` VALUES ('171', 'index.php?module=blog&action=edit&id=19', 'blog/edit/id/19/', '0');
+INSERT INTO `_sef_alias` VALUES ('172', 'index.php?module=blog&action=delete&id=19', 'blog/delete/id/19/', '0');
+INSERT INTO `_sef_alias` VALUES ('173', 'index.php?module=blog&action=edit&id=18', 'blog/edit/id/18/', '0');
+INSERT INTO `_sef_alias` VALUES ('174', 'index.php?module=blog&action=delete&id=18', 'blog/delete/id/18/', '0');
+INSERT INTO `_sef_alias` VALUES ('175', 'index.php?module=blog&action=edit&id=17', 'blog/edit/id/17/', '0');
+INSERT INTO `_sef_alias` VALUES ('176', 'index.php?module=blog&action=delete&id=17', 'blog/delete/id/17/', '0');
+INSERT INTO `_sef_alias` VALUES ('177', 'index.php?module=blog&action=edit&id=13', 'blog/edit/id/13/', '0');
+INSERT INTO `_sef_alias` VALUES ('178', 'index.php?module=blog&action=delete&id=13', 'blog/delete/id/13/', '0');
+INSERT INTO `_sef_alias` VALUES ('179', 'index.php?module=blog&action=edit&id=12', 'blog/edit/id/12/', '0');
+INSERT INTO `_sef_alias` VALUES ('180', 'index.php?module=blog&action=delete&id=12', 'blog/delete/id/12/', '0');
+INSERT INTO `_sef_alias` VALUES ('181', 'index.php?module=blog&action=edit&id=11', 'blog/edit/id/11/', '0');
+INSERT INTO `_sef_alias` VALUES ('182', 'index.php?module=blog&action=delete&id=11', 'blog/delete/id/11/', '0');
+INSERT INTO `_sef_alias` VALUES ('183', 'index.php?module=blog&action=edit&id=10', 'blog/edit/id/10/', '0');
+INSERT INTO `_sef_alias` VALUES ('184', 'index.php?module=blog&action=delete&id=10', 'blog/delete/id/10/', '0');
+INSERT INTO `_sef_alias` VALUES ('185', 'index.php?module=blog&action=edit&id=9', 'blog/edit/id/9/', '0');
+INSERT INTO `_sef_alias` VALUES ('186', 'index.php?module=blog&action=delete&id=9', 'blog/delete/id/9/', '0');
+INSERT INTO `_sef_alias` VALUES ('187', 'index.php?module=sitemap&action=generate', 'map/generate/', '0');
+INSERT INTO `_sef_alias` VALUES ('188', 'index.php?module=blog&action=edit&id=16', 'blog/edit/id/16/', '0');
+INSERT INTO `_sef_alias` VALUES ('189', 'index.php?module=blog&action=delete&id=16', 'blog/delete/id/16/', '0');
+INSERT INTO `_sef_alias` VALUES ('190', 'index.php?module=blog&action=track&id=16', 'blog/track/id/16/', '0');
+INSERT INTO `_sef_alias` VALUES ('191', 'index.php?module=blog&action=edit&id=2', 'blog/edit/id/2/', '0');
+INSERT INTO `_sef_alias` VALUES ('192', 'index.php?module=blog&action=delete&id=2', 'blog/delete/id/2/', '0');
+INSERT INTO `_sef_alias` VALUES ('193', 'index.php?module=blog&action=track&id=2', 'blog/track/id/2/', '0');
+INSERT INTO `_sef_alias` VALUES ('194', 'index.php?module=blog&action=track&id=12', 'blog/track/id/12/', '0');
+INSERT INTO `_sef_alias` VALUES ('195', 'index.php?module=search&action=autocomplete', 'search/autocomplete/', '0');
+INSERT INTO `_sef_alias` VALUES ('196', 'index.php?module=blog&action=track&id=24', 'blog/track/id/24/', '0');
+INSERT INTO `_sef_alias` VALUES ('197', 'index.php?module=search', 'search/', '0');
+INSERT INTO `_sef_alias` VALUES ('198', 'index.php?module=blog&action=track&id=20', 'blog/track/id/20/', '0');
+INSERT INTO `_sef_alias` VALUES ('199', 'index.php?module=blog&action=track&id=25', 'blog/track/id/25/', '0');
+INSERT INTO `_sef_alias` VALUES ('200', 'index.php?module=blog&action=edit&id=8', 'blog/edit/id/8/', '0');
+INSERT INTO `_sef_alias` VALUES ('201', 'index.php?module=blog&action=delete&id=8', 'blog/delete/id/8/', '0');
+INSERT INTO `_sef_alias` VALUES ('202', 'index.php?module=blog&action=edit&id=6', 'blog/edit/id/6/', '0');
+INSERT INTO `_sef_alias` VALUES ('203', 'index.php?module=blog&action=delete&id=6', 'blog/delete/id/6/', '0');
+INSERT INTO `_sef_alias` VALUES ('204', 'index.php?module=blog&action=edit&id=5', 'blog/edit/id/5/', '0');
+INSERT INTO `_sef_alias` VALUES ('205', 'index.php?module=blog&action=delete&id=5', 'blog/delete/id/5/', '0');
+INSERT INTO `_sef_alias` VALUES ('206', 'index.php?module=tag&action=search&id=12', 'tag/solaris/', '0');
+INSERT INTO `_sef_alias` VALUES ('207', 'index.php?module=tag&action=search&id=13', 'tag/m21/', '0');
+INSERT INTO `_sef_alias` VALUES ('208', 'index.php?module=blog&action=edit&id=4', 'blog/edit/id/4/', '0');
+INSERT INTO `_sef_alias` VALUES ('209', 'index.php?module=blog&action=delete&id=4', 'blog/delete/id/4/', '0');
+INSERT INTO `_sef_alias` VALUES ('210', 'index.php?module=tag&action=search&id=10', 'tag/plastic-toy/', '0');
+INSERT INTO `_sef_alias` VALUES ('211', 'index.php?module=tag&action=search&id=11', 'tag/m17/', '0');
+INSERT INTO `_sef_alias` VALUES ('212', 'index.php?module=blog&action=edit&id=3', 'blog/edit/id/3/', '0');
+INSERT INTO `_sef_alias` VALUES ('213', 'index.php?module=blog&action=delete&id=3', 'blog/delete/id/3/', '0');
+INSERT INTO `_sef_alias` VALUES ('214', 'index.php?module=tag&action=search&id=7', 'tag/synthetic/', '0');
+INSERT INTO `_sef_alias` VALUES ('215', 'index.php?module=tag&action=search&id=9', 'tag/m07/', '0');
+INSERT INTO `_sef_alias` VALUES ('216', 'index.php?module=blog&action=edit&id=1', 'blog/edit/id/1/', '0');
+INSERT INTO `_sef_alias` VALUES ('217', 'index.php?module=blog&action=delete&id=1', 'blog/delete/id/1/', '0');
+INSERT INTO `_sef_alias` VALUES ('218', 'index.php?module=tag&action=search&id=1', 'tag/insomnia/', '0');
+INSERT INTO `_sef_alias` VALUES ('219', 'index.php?module=tag&action=search&id=2', 'tag/noise/', '0');
+INSERT INTO `_sef_alias` VALUES ('220', 'index.php?module=tag&action=search&id=4', 'tag/easy-listening/', '0');
+INSERT INTO `_sef_alias` VALUES ('221', 'index.php?module=tag&action=search&id=6', 'tag/m01/', '0');
+INSERT INTO `_sef_alias` VALUES ('222', 'index.php?module=file&action=getaddform', 'file/getaddform/', '0');
+INSERT INTO `_sef_alias` VALUES ('223', 'index.php?module=file&action=getdeleteform', 'file/getdeleteform/', '0');
+INSERT INTO `_sef_alias` VALUES ('224', 'index.php?module=file&action=remove', 'file/remove/', '0');
+INSERT INTO `_sef_alias` VALUES ('225', 'index.php?module=file&action=delete', 'file/delete/', '0');
+INSERT INTO `_sef_alias` VALUES ('226', 'index.php?module=tag&action=search&id=27', 'tag/other/', '0');
+INSERT INTO `_sef_alias` VALUES ('227', 'index.php?module=tag&action=search&id=29', 'tag/for-it/', '0');
+INSERT INTO `_sef_alias` VALUES ('228', 'index.php?module=tag&action=search&id=30', 'tag/copyrights/', '0');
+INSERT INTO `_sef_alias` VALUES ('229', 'index.php?module=tag&action=search&id=26', 'tag/about/', '0');
+INSERT INTO `_sef_alias` VALUES ('230', 'index.php?module=tag&action=search&id=28', 'tag/for-promouters/', '0');
+INSERT INTO `_sef_alias` VALUES ('231', 'index.php?module=blog&action=track&id=1', 'blog/track/id/1/', '0');
 
 -- ----------------------------
 -- Table structure for `db_migration`
@@ -347,10 +836,10 @@ INSERT INTO `files` VALUES ('435', 'gallery', '', '', './content/gallery/origina
 INSERT INTO `files` VALUES ('436', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC3362.jpg', '914876', '1219ed74e9382521a636622892aacb23', '14', '2013-03-11 00:00:00');
 INSERT INTO `files` VALUES ('437', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC3397.jpg', '612435', 'a5d160b3c9a651922319731cd5571a16', '19', '2013-03-11 00:00:00');
 INSERT INTO `files` VALUES ('438', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC3429.jpg', '521560', '89ba5ed74e8fa2c40f25f66cd8c62deb', '15', '2013-03-11 00:00:00');
-INSERT INTO `files` VALUES ('439', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC3533.jpg', '563152', '041e6313edeb9d1e82555d1ddb76b261', '13', '2013-03-11 00:00:00');
-INSERT INTO `files` VALUES ('440', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC3578.jpg', '503072', '23d8e90539a0973c6fcd3b07a51c7236', '17', '2013-03-11 00:00:00');
-INSERT INTO `files` VALUES ('441', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC3706.jpg', '980253', 'd5ae8ec46fb25eb11b4ce73f8784dc2c', '19', '2013-03-14 00:00:00');
-INSERT INTO `files` VALUES ('442', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC3767.JPG', '499831', '087555cc7bbafd0c11f5e1fe8fe9c425', '25', '2013-03-14 00:00:00');
+INSERT INTO `files` VALUES ('439', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC3533.jpg', '563152', '041e6313edeb9d1e82555d1ddb76b261', '14', '2013-03-11 00:00:00');
+INSERT INTO `files` VALUES ('440', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC3578.jpg', '503072', '23d8e90539a0973c6fcd3b07a51c7236', '18', '2013-03-11 00:00:00');
+INSERT INTO `files` VALUES ('441', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC3706.jpg', '980253', 'd5ae8ec46fb25eb11b4ce73f8784dc2c', '20', '2013-03-14 00:00:00');
+INSERT INTO `files` VALUES ('442', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC3767.JPG', '499831', '087555cc7bbafd0c11f5e1fe8fe9c425', '26', '2013-03-14 00:00:00');
 INSERT INTO `files` VALUES ('443', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC3916.JPG', '475548', '54cf7330495c6bb067504617f47fb444', '21', '2013-03-16 00:00:00');
 INSERT INTO `files` VALUES ('444', 'gallery', '', '', './content/gallery/originals/spring-13/_DSC4025.jpg', '758003', '6f3deb6385ec2b850caf1367bf31069c', '13', '2013-03-25 00:00:00');
 INSERT INTO `files` VALUES ('445', 'gallery', '', '', './content/gallery/originals/winter-13/DSC04343.jpg', '669646', '0c62d06a9eed49e44ad4b76db889547e', '1', '2012-12-04 00:00:00');
@@ -499,7 +988,7 @@ CREATE TABLE `gallery` (
 -- ----------------------------
 INSERT INTO `gallery` VALUES ('1', './content/gallery/originals/autumn-12', 'Autumn 12 session (Closed)', 'autumn-12', '', '', '26', '2013-03-28 19:00:44');
 INSERT INTO `gallery` VALUES ('2', './content/gallery/originals/holland', 'Trip to Holland (Vilnius/Frankfurt/Amsterdam/Kaunas)', 'holland', '', '', '6', '2013-03-28 18:42:52');
-INSERT INTO `gallery` VALUES ('3', './content/gallery/originals/spring-13', 'Spring 13 session', 'spring-13', '', '', '15', '2013-03-28 18:43:18');
+INSERT INTO `gallery` VALUES ('3', './content/gallery/originals/spring-13', 'Spring 13 session', 'spring-13', '', '', '16', '2013-03-29 12:55:54');
 INSERT INTO `gallery` VALUES ('4', './content/gallery/originals/winter-13', 'Winter 13 session', 'winter-13', '', '', '12', '2013-03-28 19:01:17');
 INSERT INTO `gallery` VALUES ('5', './content/gallery/originals/z-xx', 'Trip to KaZantip XX', 'z-xx', '', '', '5', '2013-03-28 18:43:06');
 
@@ -512,12 +1001,12 @@ CREATE TABLE `gallery_files` (
   `gallery_id` int(10) unsigned NOT NULL,
   `file_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_gallery_file` (`gallery_id`,`file_id`),
-  KEY `fk_gallery_files_file_id` (`file_id`),
-  KEY `fk_gallery_files_gallery_id` (`gallery_id`),
-  CONSTRAINT `fk_gallery_files_file_id` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_gallery_files_gallery_id` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=722 DEFAULT CHARSET=utf8;
+  UNIQUE KEY `uk_gallery_file` (`gallery_id`,`file_id`) USING BTREE,
+  KEY `fk_gallery_files_file_id` (`file_id`) USING BTREE,
+  KEY `fk_gallery_files_gallery_id` (`gallery_id`) USING BTREE,
+  CONSTRAINT `gallery_files_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gallery_files_ibfk_2` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=467 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of gallery_files
@@ -788,10 +1277,10 @@ CREATE TABLE `gallery_tags` (
   `tag_id` int(10) unsigned NOT NULL,
   `type` enum('taxonomy','meta') DEFAULT 'meta',
   PRIMARY KEY (`id`),
-  KEY `fk_gallery_tags_gallery_id` (`gallery_id`),
-  KEY `fk_gallery_tags_tag_id` (`tag_id`),
-  CONSTRAINT `fk_gallery_tags_gallery_id` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_gallery_tags_tag_id` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fk_gallery_tags_gallery_id` (`gallery_id`) USING BTREE,
+  KEY `fk_gallery_tags_tag_id` (`tag_id`) USING BTREE,
+  CONSTRAINT `gallery_tags_ibfk_1` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `gallery_tags_ibfk_2` FOREIGN KEY (`gallery_id`) REFERENCES `gallery` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -843,8 +1332,8 @@ CREATE TABLE `post` (
 -- ----------------------------
 -- Records of post
 -- ----------------------------
-INSERT INTO `post` VALUES ('1', 'Insomnia', 'insomnia', 'Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...', 'Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...', 'Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...', '1', 'MNT001', 'Noise, ambient', 'LAME 192kbps 44100Hz', '79:31', '1. Http - Звезды небесные\r\n2. I/dex - Zeel\r\n3. Pole 3 - Silbefisch\r\n4. Deep-z - Returning (Dedicated to Fula)\r\n5. I/dex - Ksren\r\n6. Plastikman - Disconnect    \r\n7. Akvalangist - Adpcm\r\n8. Fax - 20w\r\n9. David Alvarado - Aire  \r\n10. Fax - Aslip\r\n11. Deluge - Departure\r\n12. Pole 3 - Uberfahrt\r\n13. Taylor Deupree - Snow-Sand', '2013-02-27 16:04:36', '41', '2013-03-27 13:25:47');
-INSERT INTO `post` VALUES ('2', 'Для IT HRs и разработчиков', 'for-it', 'Кратко о себе, основные сведения, профессиональные знания и навыки.', '<img src=\"/content/images/exec.jpg\" style=\"margin: 0 0 10px 10px\" class=\"fr\" /><p><strong>Кратко о себе</strong>:</p><p>Высшее техническое образование по специальности инженер-программист со специализацией информационные и интернет технологии.</p><p>Коммуникабельность, умение работать в команде, технический английский, грамотная речь, эмоциональная выдержка, большой опыт общения с клиентами (от пенсионеров до высоких должностных лиц), крепкое здоровье, без вредных превычек.</p><p>Без проблем работаю как на windows платформе, так и на linux/debian платформах. Высокие знания пакета Adobe Photoshop.</p><p><strong>Основные сведения</strong>:</p><ul><li>Более чем 6-летний практический (3-летний коммерческий) опыт разработки web-приложений от стадии постановки задачи до запуска работающего проекта.</li><li>Высоконагруженные приложения со сложной архитектурой и пропускной способностью более чем 5000rps. Горизонтальное и вертикальное масштабирование.</li><li>Знание, понимание и практическое использование ООП. Шаблоны проектирования.</li><li>Грамотное оформление кода (иерархия, описание, комментарии), умение читать и понимать чужой код, в т.ч. и \"плохой\".</li><li>Оптимизация существующего кода: PHP, MySQL (Join / Union / Proc), кеширование (Memcached, FileCache), поиск по большим БД (Sphinx / Solr), HTML / CSS (replace table layout on the block). Возможно составление технической документации по проекту.</li><li>Администрирование и запуск серверов: XAMPP (WinServer, WinXP/Seven), LAMP (Red Hat, Ubuntu) on Apache / Nginx + PHP (Mod, FCGI, CLI) + Memcached + MySQL / MongoDB + IspManager / Munin; высокий уровень использования Ubuntu shell / bash, опыт работы с AWS.</li><li>Отладка и профилирование кода - xDebug; системы контроля версий - SVN / GIT, ветвление, слияние, откаты и т.п.</li></ul><p> <strong>Профессиональные знания и навыки</strong>:</p><ul><li>Языки программирования: PHP 5+ лет, JS (Native / jQuery) 7+ лет , MySQL 3+ лет, NoSQL / MongoDB 1+ лет, Python / Django 1+ лет, Ruby / Rails 6+ месяцев, HTML / DHTML / XHTML / HTML5 / CSS 7+ лет.</li><li>Технологии: SOAP, OAuth, RESTful, FB Graph API, XML / XSLT / JSON / AJAX / Protobuf, Google API / Yandex API / 5+ RTB APIs.</li><li>CMS, FW и ORM: Zend, Doctrine, Magento, Joomla, Wordpress, Drupal, jQuery, Cargo, Elgg, Tomato, ZenCart, OpenCart, Mantis, LiveStreet. </li><li>Участие в проектах: Blismobile.com, Clubautomation.com, OnlineAHA.org, AHALife.com, LYF.com, DealOn.com, 2buckfreight.com, 3Key.com, CrowdCloud.com, Vinatic.nl, VitaminGangster.com, NOICentral.com, Kronenbourg, PalUp, AWReminders, SaikoTeam.com, GISA.by, Srochnov.ru, Agrotour.by, NPK.of.by, NiiAR.com, Lib.PSU.by, Anastasia.travel, Kurtochka.by, Gihon.by, Damco.by и другие.</li></ul><p>Образцы исходного кода можно посмотреть здесь: <a href=\"https://github.com/marco-manti/M2_micro\" target=\"_blank\">https://github.com/marco-manti/M2_micro</a></p>', 'Кратко о себе, основные сведения, профессиональные знания и навыки.', '0', '', '', '', '', '', '2013-01-01 15:32:50', '35', '2013-03-28 19:12:19');
+INSERT INTO `post` VALUES ('1', 'Insomnia', 'insomnia', 'Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...', 'Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...', 'Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...', '1', 'MNT001', 'Noise, ambient', 'LAME 192kbps 44100Hz', '79:31', '1. Http - Звезды небесные\r\n2. I/dex - Zeel\r\n3. Pole 3 - Silbefisch\r\n4. Deep-z - Returning (Dedicated to Fula)\r\n5. I/dex - Ksren\r\n6. Plastikman - Disconnect    \r\n7. Akvalangist - Adpcm\r\n8. Fax - 20w\r\n9. David Alvarado - Aire  \r\n10. Fax - Aslip\r\n11. Deluge - Departure\r\n12. Pole 3 - Uberfahrt\r\n13. Taylor Deupree - Snow-Sand', '2013-02-27 16:04:36', '42', '2013-03-29 12:48:05');
+INSERT INTO `post` VALUES ('2', 'Для IT HRs и разработчиков', 'for-it', 'Кратко о себе, основные сведения, профессиональные знания и навыки.', '<img src=\"/content/images/exec.jpg\" style=\"margin: 0 0 10px 10px\" class=\"fr\" /><p><strong>Кратко о себе</strong>:</p><p>Высшее техническое образование по специальности инженер-программист со специализацией информационные и интернет технологии.</p><p>Коммуникабельность, умение работать в команде, технический английский, грамотная речь, эмоциональная выдержка, большой опыт общения с клиентами (от пенсионеров до высоких должностных лиц), крепкое здоровье, без вредных превычек.</p><p>Без проблем работаю как на windows платформе, так и на linux/debian платформах. Высокие знания пакета Adobe Photoshop.</p><p><strong>Основные сведения</strong>:</p><ul><li>Более чем 6-летний практический (3-летний коммерческий) опыт разработки web-приложений от стадии постановки задачи до запуска работающего проекта.</li><li>Высоконагруженные приложения со сложной архитектурой и пропускной способностью более чем 5000rps. Горизонтальное и вертикальное масштабирование.</li><li>Знание, понимание и практическое использование ООП. Шаблоны проектирования.</li><li>Грамотное оформление кода (иерархия, описание, комментарии), умение читать и понимать чужой код, в т.ч. и \"плохой\".</li><li>Оптимизация существующего кода: PHP, MySQL (Join / Union / Proc), кеширование (Memcached, FileCache), поиск по большим БД (Sphinx / Solr), HTML / CSS (replace table layout on the block). Возможно составление технической документации по проекту.</li><li>Администрирование и запуск серверов: XAMPP (WinServer, WinXP/Seven), LAMP (Red Hat, Ubuntu) on Apache / Nginx + PHP (Mod, FCGI, CLI) + Memcached + MySQL / MongoDB + IspManager / Munin; высокий уровень использования Ubuntu shell / bash, опыт работы с AWS.</li><li>Отладка и профилирование кода - xDebug; системы контроля версий - SVN / GIT, ветвление, слияние, откаты и т.п.</li></ul><p> <strong>Профессиональные знания и навыки</strong>:</p><ul><li>Языки программирования: PHP 5+ лет, JS (Native / jQuery) 7+ лет , MySQL 3+ лет, NoSQL / MongoDB 1+ лет, Python / Django 1+ лет, Ruby / Rails 6+ месяцев, HTML / DHTML / XHTML / HTML5 / CSS 7+ лет.</li><li>Технологии: SOAP, OAuth, RESTful, FB Graph API, XML / XSLT / JSON / AJAX / Protobuf, Google API / Yandex API / 5+ RTB APIs.</li><li>CMS, FW и ORM: Zend, Doctrine, Magento, Joomla, Wordpress, Drupal, jQuery, Cargo, Elgg, Tomato, ZenCart, OpenCart, Mantis, LiveStreet. </li><li>Участие в проектах: Blismobile.com, Clubautomation.com, OnlineAHA.org, AHALife.com, LYF.com, DealOn.com, 2buckfreight.com, 3Key.com, CrowdCloud.com, Vinatic.nl, VitaminGangster.com, NOICentral.com, Kronenbourg, PalUp, AWReminders, SaikoTeam.com, GISA.by, Srochnov.ru, Agrotour.by, NPK.of.by, NiiAR.com, Lib.PSU.by, Anastasia.travel, Kurtochka.by, Gihon.by, Damco.by и другие.</li></ul><p>Образцы исходного кода можно посмотреть здесь: <a href=\"https://github.com/marco-manti/M2_micro\" target=\"_blank\">https://github.com/marco-manti/M2_micro</a></p>', 'Кратко о себе, основные сведения, профессиональные знания и навыки.', '0', '', '', '', '', '', '2013-01-01 15:32:50', '36', '2013-03-29 13:06:46');
 INSERT INTO `post` VALUES ('3', 'Synthetic', 'synthetic', 'На мой взгляд, самая сложная, но и самая интересная моя амбиент работа. Интеллектуальный и качественный саунд в дополнении к немецким и чешским военным разработкам )))', 'На мой взгляд, самая сложная, но и самая интересная моя амбиент работа. Интеллектуальный и качественный саунд в дополнении к немецким и чешским военным разработкам )))', 'На мой взгляд, самая сложная, но и самая интересная моя амбиент работа. Интеллектуальный и качественный саунд в дополнении к немецким и чешским военным разработкам )))', '1', 'MNT007', 'Ambient, Chillout', 'LAME 192kbps 44100Hz', '59:40', '1. Falter - Nachtflug\r\n2. H.u.v.a - Distances\r\n3. H.u.v.a. - Acces to the long fields\r\n4. Biosphere (Hia) - Gas street basin  \r\n5. Fax - Deja vu\r\n6. Telefon Tel Aviv - TTV\r\n7. Lator - B-4 talk (Promo version)\r\n8. Shuttle 358 - Floops\r\n9. Solarise speek\r\n10. Vladislav Delay - He lived deeply  \r\n11. Monolake - Indigo    ', '2013-02-27 17:27:11', '29', '2013-03-26 17:41:48');
 INSERT INTO `post` VALUES ('4', 'Plastic toy', 'plastic-toy', 'Третий микс из серии \"light synthetic compilation\". Смесь амбиента, нойза и даб техно!!! Многие из треков связаны \"по-три\", тем самым усложняя и украшая \"шумовую\" картину. Сет для любителей ненапряжных битов и шумов, все медлено и запутанно.', 'Третий микс из серии \"light synthetic compilation\". Смесь амбиента, нойза и даб техно!!! Многие из треков связаны \"по-три\", тем самым усложняя и украшая \"шумовую\" картину. Сет для любителей ненапряжных битов и шумов, все медлено и запутанно.', 'Третий микс из серии \"light synthetic compilation\". Смесь амбиента, нойза и даб техно!!! Многие из треков связаны \"по-три\", тем самым усложняя и украшая \"шумовую\" картину. Сет для любителей ненапряжных битов и шумов, все медлено и запутанно.', '1', 'MNT017', 'Ambient, Chillout', 'LAME 320kbps 44100Hz', '49:01', '1. Biosphere - Kobresia\r\n2. Lowtec - A2 untitled\r\n3. I/dex - Drafts\r\n4. Pole-3 - Rondell zwei\r\n5. Minilogue - Stations II\r\n6. Ike - Cluster funk\r\n7. Intrusion - Tswana dub (Brendon Moeller vs Beat Pharmacy dub)\r\n8. Harmash - Hibernatoria08\r\n9. Apparat - Wooden (Anders Ilar remix)\r\n10. Minilogue - City lights\r\n11. Dolby - He0r\r\n12. Harmash - Hibernatoria05\r\n13. Minilogue - Cow, crickets and clay', '2013-02-27 17:44:22', '11', '2013-03-22 13:27:25');
 INSERT INTO `post` VALUES ('5', 'Solaris', 'solaris', 'Четвертый микс из серии \"light synthetic compilation\". Почти год я собирал и отфильтровывал материал с \"исключительным\" звучанием. По традиции сет построен по любимой схеме \"два+три\" (одновременно звучит более двух треков), тем самым усложняя и украшая \"шумовую\" картину.', 'Четвертый микс из серии \"light synthetic compilation\". Почти год я собирал и отфильтровывал материал с \"исключительным\" звучанием. По традиции сет построен по любимой схеме \"два+три\" (одновременно звучит более двух треков), тем самым усложняя и украшая \"шумовую\" картину.\r\nСет так назван не случайно, интро  - саундтрек к голливудской версии фильма \"Солярис\". Я очень долго его искал, но все-таки нашел. \r\nСлушайте, медитируйте, наслаждайтесь... ', 'Четвертый микс из серии \"light synthetic compilation\". Почти год я собирал и отфильтровывал материал с \"исключительным\" звучанием. ', '1', 'MNT021', 'Ambient, Chillout', 'LAME 320kbps 44100Hz', '52:44', '1. Cliff Martinez - We don\'t have to think like that anymore\r\n2. Cliff Martinez - First sleep\r\n3. Alva Noto - Xerrox monophaser 1\r\n4. Indo - Pneuma\r\n5. Avec.Berre - Stepdrop\r\n6. Ilpo Vaisanen - Autioitu 1\r\n7. Kassian Troyer - Plant shift\r\n8. Valliam – In samsara\r\n9. Clint Mansell - Stay with me\r\n10. Astrum - Saturn\r\n11. Pinch meets Pavel Ambiont - Poison/Remedy\r\n12. Alva Noto - Xerrox phaser acat 1', '2013-02-28 12:31:11', '12', '2013-03-27 12:21:09');
@@ -855,8 +1344,8 @@ INSERT INTO `post` VALUES ('10', 'Дом разбитых сердец, нача
 INSERT INTO `post` VALUES ('11', 'Дом разбитых сердец II, пепел', 'hobh-two', 'Вторая часть работы под общим названием \"Дом разбитых сердец\". Главная особенность данной компиляции в том, что абсолютно все треки - музыка \"наших\" исполнителей, это можно без труда заметить по треклисту. Вся музыка собиралась годами и тщательно фильтровалась. ', 'Вторая часть работы под общим названием \"Дом разбитых сердец\". Главная особенность данной компиляции в том, что абсолютно все треки - музыка \"наших\" исполнителей, это можно без труда заметить по треклисту. Вся музыка собиралась годами и тщательно фильтровалась. ', 'Вторая часть работы под общим названием \"Дом разбитых сердец\".', '1', 'MNT015', 'Indie, Lounge ', 'LAME 320kbps 44100Hz', '60:32', '1. Tokio - Когда ты плачешь \r\n2. Дельфин - Весна\r\n3. Без билета - Ромашка\r\n4. Земфира - Прости меня моя любовь\r\n5. Гришковец - Извини\r\n6. Ленинград - У меня есть все\r\n7. Грин грей - Осень\r\n8. 5\'nizza - Сюрная\r\n9. Океан ельзи - Вiдпусти\r\n10. Дельфин - Любовь\r\n11. T9 - Ода нашей любви\r\n12. Party makers - Новая любовь\r\n13. Нагано - Голос андеграунда\r\n14. Krec - Искра', '2013-02-28 14:19:56', '4', '2013-03-26 16:46:58');
 INSERT INTO `post` VALUES ('12', 'Дом разбитых сердец III, такая Lite', 'hobh-three', 'Только тогда рождаются такие сеты, когда по-настоящему больно...', 'Только тогда рождаются такие сеты, когда по-настоящему больно...', 'Только тогда рождаются такие сеты, когда по-настоящему больно...', '1', 'MNT019', 'Rock, Alternative', 'LAME 320kbps 44100Hz', '58:25', '1. Radiohead - Street spirit\r\n2. Blink 182 - I miss you\r\n3. Khoiba - That reason\r\n4. Royksopp - Vision one \r\n5. Planet Funk - Ultraviolet days\r\n6. Depeche Mode - Freelove\r\n7. Red Hot Chili Peppers - Scar tissue\r\n8. Coldplay - Clocks\r\n9. Sum 41 - Pieces\r\n10. Three Days Grays - Home\r\n11. Linkin Park - In the end\r\n12. The Cardigans - Erase and rewind\r\n13. Air - How does it make you feel', '2013-02-28 14:24:25', '19', '2013-03-28 12:55:47');
 INSERT INTO `post` VALUES ('13', 'Дом разбитых сердец 4, южные сны', 'hobh-four', 'Опять с разбитым сердцем, опять все болит, ноет и плачет… Не собирался компиляцию эту выпускать, по крайней мере так быстро, но так уж сошлись звезды.', 'Опять с разбитым сердцем, опять все болит, ноет и плачет… Не собирался компиляцию эту выпускать, по крайней мере так быстро, но так уж сошлись звезды, да и много чего накипело, поэтому высказался так, как смог. Многое мне очень близко в этих словах: «кое что между строк, кое что в кавычках». Спасибо парням, которые их пишут. Не относитесь серьезно к качеству, технике и другим бездушным параметрам, просто слушайте, если вам это близко.', 'Опять с разбитым сердцем, опять все болит, ноет и плачет… ', '1', 'MNT022', 'Hip-Hop', 'LAME 320kbps 44100Hz', '43:12', '1. Guf feat. Princip – Заходит луна\r\n2. Баста – Любовь без памяти\r\n3. Krec feat. Maestro A-Sid – Весна\r\n4. Каста – Встреча\r\n5. Смоки Мо – Герман и Патрик\r\n6. Дельфин – Надежда\r\n7. Guf feat. Ба – Дома\r\n8. Krec – Другие берега\r\n9. Лельфин – Любовь\r\n10. Михей и Джуманжи – Сука любовь\r\n11. Krec – Южные сны', '2013-02-28 14:28:30', '5', '2013-03-26 16:47:08');
-INSERT INTO `post` VALUES ('14', 'Для клубных промоутеров', 'for-promouters', 'Родился и вырос в г.Новополоцке (Беларусь). Сейчас живу в Минске.\r\nЗакончил музыкальную школу по классу фортепиано (11 лет!!!). Из них 6 лет отбомбил в ударной группе духового оркестра.', '<img src=\"/content/images/cut.jpg\" style=\"margin: 0 0 10px 10px\" class=\"fr\" /><p><i>Я творю только тогда, когда приходит муза. Если сидеть и специально выдавливать из себя, то и результат получится соответствующий...</i></p><br /><p>Я родился и вырос в СССР, г.Новополоцк (Беларусь). Сейчас живу в Минске.</p><p>Закончил музыкальную школу по классу фортепиано (11 лет!!!). Из них 6 лет отбомбил в ударной группе духового оркестра.</p><p>Потом университет ПГУ, программное обеспечение информационных и интернет технологий, т.е. я - Программист, чем и зарабатываю себе на жизнь.</p><p>Интерес к музыке возник где-то в году \'98. Сначала это было как у большинства моих друзей - децл))), дельфин и земфира, а потом меня понесло в другую от всех сторону - freestylers, bonfunk mc\'s, потом the prodigy, scooter, chemical brothers и т.д.</p><p>По сути люблю deep, noise, drum, minimal и еще кучу других направлений и стилей, также и играю, почти все, что нравится.</p><p>Поворотные музыкальные моменты в жизни - Richie Hawtin, потом Lator, а с утра Слава Финист. Отсюда и началась эпопея с теч хаузом и минималом. Немаловажными в формировании вкуса были поездки на КаZАнтип в \'05 и \'06 годах. </p><p>Позже был лес, Olien, Goa Gil - так я познакомился и заинтересовался психоделикой. После чего и родился двойник Janaca Express, который в последствии был \"вживую\" сыгран в клубе ХХ век. </p><p>Долгое время очень интересовал драм, а точнее techstep, neurofunk и darkstep. Два основных фактора, повлиявших на это - первых 56 релизов лэйбла \"Subtitles\" и творчество монстра даркстепа - Current Value. На данный момент это направление не потеряно, а лишь развивается по своей тонкой линии.</p><p>Последние годы стал все больше возвращаться к хаузу и его техничному направлению вместе с исконным техно и минималом. Благодаря этому, собралась уже небольшая коллекция винила, также этому способствовало появление виниловых проигрывателей.</p><p>На новый 12-й год сделал себе подарок - собрал комплект трактора, чему был несказанно рад. Сейчас и использую преимущественно его.</p><p><strong>Люблю</strong>: Виниловые пластинки, рупорный аналоговый звук, полноформатные фотоаппараты, Sony и Adidas.</p><p><strong>Ненавижу</strong>: Телефон и беспорядок.</p><p><strong>Рекомендую</strong>: Стивен Содерберг, Трудности перевода.</p><p><strong>Интересуюсь</strong>: Музыка, акустика, фотография, космос, World of Tanks.</p><p><strong>Знаю</strong>: Несколько языков программирования, нотную грамоту и сольфеджио.</p><p><strong>Умею</strong>: Есть два понятия - хочу и мне лень, а про то что я не умею пока, мне расскажет гугл.</p>', 'Родился и вырос в г.Новополоцке (Беларусь). Сейчас живу в Минске.\r\nЗакончил музыкальную школу по классу фортепиано (11 лет!!!).', '0', '', '', '', '', '', '2013-01-01 15:32:50', '63', '2013-03-28 19:14:33');
-INSERT INTO `post` VALUES ('16', 'Правила и Копирайт', 'copyrights', 'При использовании материалов с данного сайта, обязательна ссылка на сайт, автора и первоисточник!', '<p><strong>При использовании материалов с данного сайта, обязательна ссылка на сайт, автора и первоисточник!</strong></p><p>Информация для правообладателей</p><p>Если Вы являетесь правообладателем какого-либо материала, ссылка (либо ссылки) на который размещена на этом сайте, и не хотели бы чтобы данная информация распространялась пользователями без Вашего на то согласия, то мы будем рады оказать Вам содействие, удалив соответствующие ссылки.</p><p>Для этого необходимо, чтобы вы прислали нам письмо (в электронном виде) в котором указали нам следующую информацию:<ol><li>Документальное подтверждение ваших прав на материал, защищенный авторским правом:<ul><li>Отсканированный документ с печатью, либо</li><li>Email с официального почтового домена компании правообладателя, либо</li><li>Иная контактная информация, позволяющая однозначно идентифицировать вас, как правообладателя данного материала.<li></ul></li><li>Текст который Вы желаете разместить в сопровождении удаляемой информации. В нем вы можете указать где, и на каких условиях можно получить информацию, ссылки на которую были удалены, а так же ваши контактные данные, для того чтобы пользователи могли получить от вас всю интересующую их информацию относительно данного материала.</li><li>Прямые ссылки на страницы сайта, которые содержат ссылки на данные, которые необходимо удалить. Ссылки должны иметь вид http://manti.by/xxxx/xx/xx либо подобный.</li></ol><p>После этого, в течении 48 часов, мы удалим интересующие Вас ссылки с сайта.</p><p><strong>ВНИМАНИЕ!!!</strong></p><p>Мы оставляем за собой право публикации на сайте любой информации присланной нам по почте через форму обратной связи.</p><p>Мы не осуществляем контроль за действиями пользователей, которые могут повторно размещать ссылки на информацию, являющуюся объектом вашего авторского права. Любая информация на форуме, размещается автоматически, без какого либо контроля с чьей либо стороны, что соответствует общепринятой мировой практике размещения информации в сети интернет. Однако, мы в любом случае рассмотрим все Ваши запросы, относительно ссылок на информацию, нарушающую Ваши права.</p><p>Согласно закону об Авторском и Смежном правах, ссылка на любые данные (информационное сообщение), сама по себе, не является объектом авторского права. Таким образом, не стоит присылать письма содержащие угрозы либо требования, как не имеющие под собой реальных оснований.</p>', 'При использовании материалов с данного сайта, обязательна ссылка на сайт, автора и первоисточник!', '0', '', '', '', '', '', '2013-01-01 15:32:50', '18', '2013-03-28 12:55:04');
+INSERT INTO `post` VALUES ('14', 'Для клубных промоутеров', 'for-promouters', 'Родился и вырос в г.Новополоцке (Беларусь). Сейчас живу в Минске.\r\nЗакончил музыкальную школу по классу фортепиано (11 лет!!!). Из них 6 лет отбомбил в ударной группе духового оркестра.', '<img src=\"/content/images/cut.jpg\" style=\"margin: 0 0 10px 10px\" class=\"fr\" /><p><i>Я творю только тогда, когда приходит муза. Если сидеть и специально выдавливать из себя, то и результат получится соответствующий...</i></p><br /><p>Я родился и вырос в СССР, г.Новополоцк (Беларусь). Сейчас живу в Минске.</p><p>Закончил музыкальную школу по классу фортепиано (11 лет!!!). Из них 6 лет отбомбил в ударной группе духового оркестра.</p><p>Потом университет ПГУ, программное обеспечение информационных и интернет технологий, т.е. я - Программист, чем и зарабатываю себе на жизнь.</p><p>Интерес к музыке возник где-то в году \'98. Сначала это было как у большинства моих друзей - децл))), дельфин и земфира, а потом меня понесло в другую от всех сторону - freestylers, bonfunk mc\'s, потом the prodigy, scooter, chemical brothers и т.д.</p><p>По сути люблю deep, noise, drum, minimal и еще кучу других направлений и стилей, также и играю, почти все, что нравится.</p><p>Поворотные музыкальные моменты в жизни - Richie Hawtin, потом Lator, а с утра Слава Финист. Отсюда и началась эпопея с теч хаузом и минималом. Немаловажными в формировании вкуса были поездки на КаZАнтип в \'05 и \'06 годах. </p><p>Позже был лес, Olien, Goa Gil - так я познакомился и заинтересовался психоделикой. После чего и родился двойник Janaca Express, который в последствии был \"вживую\" сыгран в клубе ХХ век. </p><p>Долгое время очень интересовал драм, а точнее techstep, neurofunk и darkstep. Два основных фактора, повлиявших на это - первых 56 релизов лэйбла \"Subtitles\" и творчество монстра даркстепа - Current Value. На данный момент это направление не потеряно, а лишь развивается по своей тонкой линии.</p><p>Последние годы стал все больше возвращаться к хаузу и его техничному направлению вместе с исконным техно и минималом. Благодаря этому, собралась уже небольшая коллекция винила, также этому способствовало появление виниловых проигрывателей.</p><p>На новый 12-й год сделал себе подарок - собрал комплект трактора, чему был несказанно рад. Сейчас и использую преимущественно его.</p><p><strong>Люблю</strong>: Виниловые пластинки, рупорный аналоговый звук, полноформатные фотоаппараты, Sony и Adidas.</p><p><strong>Ненавижу</strong>: Телефон и беспорядок.</p><p><strong>Рекомендую</strong>: Стивен Содерберг, Трудности перевода.</p><p><strong>Интересуюсь</strong>: Музыка, акустика, фотография, космос, World of Tanks.</p><p><strong>Знаю</strong>: Несколько языков программирования, нотную грамоту и сольфеджио.</p><p><strong>Умею</strong>: Есть два понятия - хочу и мне лень, а про то что я не умею пока, мне расскажет гугл.</p>', 'Родился и вырос в г.Новополоцке (Беларусь). Сейчас живу в Минске.\r\nЗакончил музыкальную школу по классу фортепиано (11 лет!!!).', '0', '', '', '', '', '', '2013-01-01 15:32:50', '72', '2013-03-29 13:06:44');
+INSERT INTO `post` VALUES ('16', 'Правила и Копирайт', 'copyrights', 'При использовании материалов с данного сайта, обязательна ссылка на сайт, автора и первоисточник!', '<p><strong>При использовании материалов с данного сайта, обязательна ссылка на сайт, автора и первоисточник!</strong></p><p>Информация для правообладателей</p><p>Если Вы являетесь правообладателем какого-либо материала, ссылка (либо ссылки) на который размещена на этом сайте, и не хотели бы чтобы данная информация распространялась пользователями без Вашего на то согласия, то мы будем рады оказать Вам содействие, удалив соответствующие ссылки.</p><p>Для этого необходимо, чтобы вы прислали нам письмо (в электронном виде) в котором указали нам следующую информацию:<ol><li>Документальное подтверждение ваших прав на материал, защищенный авторским правом:<ul><li>Отсканированный документ с печатью, либо</li><li>Email с официального почтового домена компании правообладателя, либо</li><li>Иная контактная информация, позволяющая однозначно идентифицировать вас, как правообладателя данного материала.<li></ul></li><li>Текст который Вы желаете разместить в сопровождении удаляемой информации. В нем вы можете указать где, и на каких условиях можно получить информацию, ссылки на которую были удалены, а так же ваши контактные данные, для того чтобы пользователи могли получить от вас всю интересующую их информацию относительно данного материала.</li><li>Прямые ссылки на страницы сайта, которые содержат ссылки на данные, которые необходимо удалить. Ссылки должны иметь вид http://manti.by/xxxx/xx/xx либо подобный.</li></ol><p>После этого, в течении 48 часов, мы удалим интересующие Вас ссылки с сайта.</p><p><strong>ВНИМАНИЕ!!!</strong></p><p>Мы оставляем за собой право публикации на сайте любой информации присланной нам по почте через форму обратной связи.</p><p>Мы не осуществляем контроль за действиями пользователей, которые могут повторно размещать ссылки на информацию, являющуюся объектом вашего авторского права. Любая информация на форуме, размещается автоматически, без какого либо контроля с чьей либо стороны, что соответствует общепринятой мировой практике размещения информации в сети интернет. Однако, мы в любом случае рассмотрим все Ваши запросы, относительно ссылок на информацию, нарушающую Ваши права.</p><p>Согласно закону об Авторском и Смежном правах, ссылка на любые данные (информационное сообщение), сама по себе, не является объектом авторского права. Таким образом, не стоит присылать письма содержащие угрозы либо требования, как не имеющие под собой реальных оснований.</p>', 'При использовании материалов с данного сайта, обязательна ссылка на сайт, автора и первоисточник!', '0', '', '', '', '', '', '2013-01-01 15:32:50', '19', '2013-03-29 13:06:51');
 INSERT INTO `post` VALUES ('17', 'Bar La\'unge live', 'bar-launge', 'Приятное сочетание лаунжа, драма, айсид джаза.', 'Приятное сочетание лаунжа, драма, айсид джаза.', 'Приятное сочетание лаунжа, драма, айсид джаза.', '1', 'MNT008', 'Lounge, Acid Jazz', 'LAME 192kbps 44100Hz', '67:34', '1. Groove Armada - Suntoucher\r\n2. Lemon Jelly - 95 aka make things right  \r\n3. One Self - Unfamilar places\r\n4. Dj Dobry Chlopak - Waco (Pono pele)\r\n5. Bebel Gilberto - Aganju (John Beltram mix)    \r\n6. Copabossa - Mihna (Namorada mix)\r\n7. Jehro - All I want  \r\n8. Ohm G & Bruno - One  \r\n9. Linn & Freddie - Live 4 love  \r\n10. Aural Float - Still here  \r\n11. LTJ Bukem - Journey inward\r\n12. Nookie - Natural experience\r\n13. Macoto - Where are you going?\r\n14. Vice versa - Still don\'t it\r\n15. Telepopmusik - Yesterday was a lie', '2013-03-25 12:38:23', '1', '2013-03-25 12:39:02');
 INSERT INTO `post` VALUES ('18', 'Special mix for Basstech', 'basstech', 'Сет записан специально для программы BASSTECH (novoeradio.by/basstech). Все треки сведены \"вживую\" в гостях у Ильи (Dj Hotei), за что ему большое спасибо.', 'Сет записан специально для программы BASSTECH (<a href=\"http://novoeradio.by/basstech\">novoeradio.by/basstech</a>). Все треки сведены \"вживую\" в гостях у Ильи (Dj Hotei), за что ему большое спасибо.\r\n\r\nПеределки: до – подправил трек \"Im gonna bite you\", заменил конец и перенес его в середину, и подправил трек \"GITS\", приклеив в начале и в конце ОРИГИНАЛЬНЫЙ саундтрек к аниме \"Ghost in the shell\"; после записи единственным усовершенствованием был мастеринг (Izotope Ozone, L2).\r\n\r\nПрактически все треки представляют собой классический нейрофанк, часть треков европейский (Noisia, Spor), часть российский (Marqus, Paperclip).', 'Сет записан специально для программы BASSTECH (novoeradio.by/basstech). Все треки сведены \"вживую\" в гостях у Ильи (Dj Hotei), за что ему большое спасибо.', '1', 'MNT018', 'Neurofunk, Technoid', 'LAME 320kbps 44100Hz', '58:42', '1. Engage - Im gonna bite you\r\n2. Marqus - Angel  \r\n3. Bes & Flame - Eurofunk  \r\n4. Noisia - Exorcism\r\n5. Skynet - Carbon shock (Noisia remix)      \r\n6. Noisia - Block control  \r\n7. Hightech - GITS  \r\n8. Marqus - Mirage  \r\n9. Paperclip - Shogun  \r\n10. Paperclip - Bearing death  \r\n11. Spor - Supernova  \r\n12. Noisia, Maldini and Vegas - Meditation\r\n13. Quadrant - Rage and rapture  ', '2013-03-25 12:45:11', '5', '2013-03-26 16:46:28');
 INSERT INTO `post` VALUES ('19', 'Mix for Basstech part 2', 'basstech-2', 'Второй выход на программе BASSTECH (novoeradio.by/basstech). Все треки сведены \"вживую\", правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет есть и его можно слушать. ', 'Второй выход на программе BASSTECH (<a href=\"http://novoeradio.by/basstech\">novoeradio.by/basstech</a>). Все треки сведены \"вживую\", правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет есть и его можно слушать. \r\n\r\nБольшинство треков \"отечественного\" производителя, представляющие собой Русский нейрофанк, от диповых и лайтовых направлений, до самых жирных и безкомпромисных. Есть и немного техноида, для любителей прямой и сумашедшей бочки...', 'Второй выход на программе BASSTECH. Все треки сведены вживую, правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет ', '1', 'MNT020', 'Neurofunk, Technoid', 'LAME 320kbps 44100Hz', '56:18', '1. Strauss - Also sprach Zarathustra op.30 (Introduction)\r\n2. Miditacia - Power station  \r\n3. Miditacia - Anomalies  \r\n4. Brainfuzz - Scope  \r\n5. Hedj & Proktah - Rhino    \r\n6. Receptor - Rhyno    \r\n7. Marqus - Paranoik  \r\n8. Rregula and Dementia - Fortress  \r\n9. Isotop feat Shots and Kaiza - Kartago\r\n10. Dereck - Apollo    \r\n11. Nickbee - Iodine  \r\n12. Paperclip - Infinite drift  \r\n13. Receptor - Kurchatov      \r\n14. Telefon tel aviv - Fahrenheit fair enough (Prefuse 73 bonus beats remix)', '2013-03-25 12:54:13', '4', '2013-03-27 15:21:58');
@@ -865,7 +1354,7 @@ INSERT INTO `post` VALUES ('21', 'Emofunk (Christmas rave) live', 'emofunk-', '�
 INSERT INTO `post` VALUES ('22', 'Cote d\'Azur promo', 'cote-d-azur', 'Летний, летний микс, который лучше слушать стоя на песке и вдыхая запах соленого морского воздуха. Многое навеяно летней погодой, оупенами и людьми, которые меня окружали все это время.', 'Летний, летний микс, который лучше слушать стоя на песке и вдыхая запах соленого морского воздуха. Многое навеяно летней погодой, оупенами и людьми, которые меня окружали все это время.\r\n\r\nПо сути своей является сборкой лучших треков из двух моих различных компилов за летний период. Так что слушаем и наслаждаемся.', 'Летний, летний микс, который лучше слушать стоя на песке и вдыхая запах соленого морского воздуха.', '1', 'MNT030', 'Tech House', 'LAME 320kbps 44100Hz', '1:00:38', '1. Strict Border - Reboot Me (Hermanez remix) - Suara\r\n2. Danny Serrano & Westboy - Bubblegun - Suara\r\n3. Juliet Sikora, Tube & Berger - Jam Word Up (Original mix) - Kittball\r\n4. MSMS - Hold it (Original mix) - Plastic city\r\n5. Marco Bailey - Rubber band - Bedrock\r\n6. Piek - Burn Baby Burn (Siwell Remix) - Sphera\r\n7. Taster Peter, Phunx - Jack This Tune (Mario Ochoa remix) - Bitten\r\n8. Tiger Stripes - Give You Up - Toolroom\r\n9. Richard Grey - You are my high (Federico Scavo remix) - Tiger\r\n10. Marco Bailey - Jungle laps - Bedrock\r\n11. Oscar Barila and Maiki - Debbie white (Simone Tavazzi remix) - Kostbar\r\n12. Andrew Bayer - Gaff\'s Eulogy - Anjunadeep', '2013-03-25 13:56:28', '2', '2013-03-27 12:51:35');
 INSERT INTO `post` VALUES ('23', 'All she wants is (SCSI device)', 'all-she-wants-is', 'Одна из первых и очень старых работ, сделанная под впечатлением и польско-немецких техно отцов...', 'Одна из первых и очень старых работ, сделанная под впечатлением и польско-немецких техно отцов...', 'Одна из первых и очень старых работ, сделанная под впечатлением и польско-немецких техно отцов...', '1', 'MNT002', 'Tech House, Deep House', 'LAME 320kbps 44100Hz', '1:11:39', '', '2013-03-25 16:14:44', '3', '2013-03-27 14:02:52');
 INSERT INTO `post` VALUES ('24', 'IRIS, it\'s all about me promo', 'iris', 'Очень длительная и кропотливая работа, как технически, так и идейно. Выдержана в классическом стиле deep house, с привнесением ноток Tech House и Deep House.', 'Очень длительная и кропотливая работа, как технически, так и идейно. Выдержана в классическом стиле deep house, с привнесением ноток Tech House и Deep House.', 'Очень длительная и кропотливая работа, как технически, так и идейно. Выдержана в классическом стиле deep house, с привнесением ноток Tech House и De', '1', 'MNT004', 'Deep House, Tech House', 'LAME 320kbps 44100Hz', '1:00:15', '1. Lator - Rolling children  \r\n2. Acos CoolKAs feat. Metropoliz - Friends (Vocal mix)\r\n3. Brooks - Pink Sigarettes (Ajazz mix)\r\n4. Raz Ohara - This\'a beautiful day (Mathias Schaffhauser mix)  \r\n5. Jussipekka - Breeze\r\n6. Gamat 3000 - Whispering  \r\n7. Phunk Diggaz - Whispers  \r\n8. Terry Lee Brown Jr. - Bad house music (Dub\'98)  \r\n9. Plank 15 - Strings of life  \r\n10. Lator - Clown fish (kaZantip mix)  ', '2013-03-25 16:20:29', '4', '2013-03-28 17:23:32');
-INSERT INTO `post` VALUES ('25', 'Hi-Pass live', 'hi-pass', 'Сладкий летний микс на популярные минимальные темы. \r\n', 'Сладкий летний микс на популярные минимальные темы. \r\n\r\nРассвет в июне: \"... у нас было два пакета травы, 75 таблеток мискалина, 5 упаковок кислоты, пол солонки кокаина и бесконечное множество транквилизаторов всех сортов и расцветок, а также текила, ром, ящик пива, пинта чистого эфира и амил нитрат...\" Хантера С. Томпсон.', 'Сладкий летний микс на популярные минимальные темы. ', '1', 'MNT005', 'Tech House, Minimal Techno', 'LAME 160kbps 44100Hz', '53:22', '1. Лайв микс на рассвете. \r\n2. Треклист отсутствует. \r\n3. Если кто что узнал, буду рад информации.', '2013-03-25 16:27:09', '8', '2013-03-28 18:57:37');
+INSERT INTO `post` VALUES ('25', 'Hi-Pass live', 'hi-pass', 'Сладкий летний микс на популярные минимальные темы. \r\n', 'Сладкий летний микс на популярные минимальные темы. \r\n\r\nРассвет в июне: \"... у нас было два пакета травы, 75 таблеток мискалина, 5 упаковок кислоты, пол солонки кокаина и бесконечное множество транквилизаторов всех сортов и расцветок, а также текила, ром, ящик пива, пинта чистого эфира и амил нитрат...\" Хантера С. Томпсон.', 'Сладкий летний микс на популярные минимальные темы. ', '1', 'MNT005', 'Tech House, Minimal Techno', 'LAME 160kbps 44100Hz', '53:22', '1. Лайв микс на рассвете. \r\n2. Треклист отсутствует. \r\n3. Если кто что узнал, буду рад информации.', '2013-03-25 16:27:09', '9', '2013-03-29 12:56:00');
 
 -- ----------------------------
 -- Table structure for `post_files`
@@ -876,11 +1365,11 @@ CREATE TABLE `post_files` (
   `post_id` int(10) unsigned NOT NULL,
   `file_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_post_file` (`post_id`,`file_id`),
-  KEY `fk_post_files_post_id` (`post_id`),
-  KEY `fk_post_files_file_id` (`file_id`),
-  CONSTRAINT `fk_post_files_file_id` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fk_post_files_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  UNIQUE KEY `uk_post_file` (`post_id`,`file_id`) USING BTREE,
+  KEY `fk_post_files_post_id` (`post_id`) USING BTREE,
+  KEY `fk_post_files_file_id` (`file_id`) USING BTREE,
+  CONSTRAINT `post_files_ibfk_1` FOREIGN KEY (`file_id`) REFERENCES `files` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `post_files_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=92 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -956,10 +1445,10 @@ CREATE TABLE `post_relations` (
   `original_id` int(10) unsigned NOT NULL,
   `destination_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_original_to_destination` (`original_id`,`destination_id`),
-  KEY `fk_post_relations_destination_id` (`destination_id`),
-  CONSTRAINT `fk_post_relations_destination_id` FOREIGN KEY (`destination_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_post_relations_original_id` FOREIGN KEY (`original_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  UNIQUE KEY `uk_original_to_destination` (`original_id`,`destination_id`) USING BTREE,
+  KEY `fk_post_relations_destination_id` (`destination_id`) USING BTREE,
+  CONSTRAINT `post_relations_ibfk_1` FOREIGN KEY (`destination_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `post_relations_ibfk_2` FOREIGN KEY (`original_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -1027,10 +1516,10 @@ CREATE TABLE `post_tags` (
   `tag_id` int(10) unsigned NOT NULL,
   `type` enum('taxonomy','meta') DEFAULT 'meta',
   PRIMARY KEY (`id`),
-  KEY `fk_post_tags_post_id` (`post_id`),
-  KEY `fk_post_tags_tag_id` (`tag_id`),
-  CONSTRAINT `fk_post_tags_post_id` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `fk_post_tags_tag_id` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  KEY `fk_post_tags_post_id` (`post_id`) USING BTREE,
+  KEY `fk_post_tags_tag_id` (`tag_id`) USING BTREE,
+  CONSTRAINT `post_tags_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `post` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `post_tags_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tags` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=147 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -1215,425 +1704,15 @@ CREATE TABLE `user` (
   `group_id` int(11) unsigned NOT NULL DEFAULT '1000',
   `username` varchar(64) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_email` (`email`),
-  KEY `fk_user_group_id` (`group_id`),
-  CONSTRAINT `fk_user_group_id` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  UNIQUE KEY `uk_email` (`email`) USING BTREE,
+  KEY `fk_user_group_id` (`group_id`) USING BTREE,
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`group_id`) REFERENCES `group` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('1', 'marco.manti@gmail.com', 'd453e8618c7f43c084c74fbc9c197c5e', '2013-03-25 12:48:32', '1', 'Admin');
-
--- ----------------------------
--- Table structure for `_log`
--- ----------------------------
-DROP TABLE IF EXISTS `_log`;
-CREATE TABLE `_log` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `module` varchar(50) DEFAULT NULL,
-  `action` varchar(50) DEFAULT NULL,
-  `task` varchar(50) DEFAULT NULL,
-  `refid` varchar(50) DEFAULT NULL,
-  `ip` varchar(50) DEFAULT NULL,
-  `browser` varchar(255) DEFAULT NULL,
-  `referer` varchar(500) DEFAULT NULL,
-  `sessionid` varchar(50) DEFAULT NULL,
-  `timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  KEY `ik_browser` (`browser`) USING BTREE,
-  KEY `ik_module` (`module`) USING BTREE
-) ENGINE=MyISAM AUTO_INCREMENT=214 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of _log
--- ----------------------------
-INSERT INTO `_log` VALUES ('1', 'file', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dashboard/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:01');
-INSERT INTO `_log` VALUES ('2', 'blog', 'show', '', '16', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/download/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:03');
-INSERT INTO `_log` VALUES ('3', 'blog', 'track', '', '16', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/copyrights/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:04');
-INSERT INTO `_log` VALUES ('4', 'blog', 'show', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/copyrights/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:06');
-INSERT INTO `_log` VALUES ('5', 'blog', 'track', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:06');
-INSERT INTO `_log` VALUES ('6', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:10');
-INSERT INTO `_log` VALUES ('7', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:11');
-INSERT INTO `_log` VALUES ('8', 'file', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:16');
-INSERT INTO `_log` VALUES ('9', 'sitemap', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/download/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:18');
-INSERT INTO `_log` VALUES ('10', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/map/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:45');
-INSERT INTO `_log` VALUES ('11', 'blog', 'show', '', '12', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:46');
-INSERT INTO `_log` VALUES ('12', 'blog', 'track', '', '12', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/hobh-three/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:47');
-INSERT INTO `_log` VALUES ('13', 'file', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/hobh-three/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:55');
-INSERT INTO `_log` VALUES ('14', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/download/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:57');
-INSERT INTO `_log` VALUES ('15', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:57');
-INSERT INTO `_log` VALUES ('16', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 12:55:59');
-INSERT INTO `_log` VALUES ('17', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 16:43:05');
-INSERT INTO `_log` VALUES ('18', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:09:35');
-INSERT INTO `_log` VALUES ('19', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:10:45');
-INSERT INTO `_log` VALUES ('20', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:13:31');
-INSERT INTO `_log` VALUES ('21', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:13:40');
-INSERT INTO `_log` VALUES ('22', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:13:42');
-INSERT INTO `_log` VALUES ('23', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:15:13');
-INSERT INTO `_log` VALUES ('24', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:15:53');
-INSERT INTO `_log` VALUES ('25', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:16:14');
-INSERT INTO `_log` VALUES ('26', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:17:00');
-INSERT INTO `_log` VALUES ('27', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:18:02');
-INSERT INTO `_log` VALUES ('28', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:18:08');
-INSERT INTO `_log` VALUES ('29', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:18:10');
-INSERT INTO `_log` VALUES ('30', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:18:13');
-INSERT INTO `_log` VALUES ('31', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:18:13');
-INSERT INTO `_log` VALUES ('32', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:20:57');
-INSERT INTO `_log` VALUES ('33', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:02');
-INSERT INTO `_log` VALUES ('34', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:02');
-INSERT INTO `_log` VALUES ('35', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:03');
-INSERT INTO `_log` VALUES ('36', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:04');
-INSERT INTO `_log` VALUES ('37', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:04');
-INSERT INTO `_log` VALUES ('38', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:04');
-INSERT INTO `_log` VALUES ('39', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:06');
-INSERT INTO `_log` VALUES ('40', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:06');
-INSERT INTO `_log` VALUES ('41', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:07');
-INSERT INTO `_log` VALUES ('42', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', '', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:34');
-INSERT INTO `_log` VALUES ('43', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:36');
-INSERT INTO `_log` VALUES ('44', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:38');
-INSERT INTO `_log` VALUES ('45', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:38');
-INSERT INTO `_log` VALUES ('46', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:42');
-INSERT INTO `_log` VALUES ('47', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:43');
-INSERT INTO `_log` VALUES ('48', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:43');
-INSERT INTO `_log` VALUES ('49', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:43');
-INSERT INTO `_log` VALUES ('50', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:54');
-INSERT INTO `_log` VALUES ('51', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:56');
-INSERT INTO `_log` VALUES ('52', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:21:59');
-INSERT INTO `_log` VALUES ('53', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:00');
-INSERT INTO `_log` VALUES ('54', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:47');
-INSERT INTO `_log` VALUES ('55', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:47');
-INSERT INTO `_log` VALUES ('56', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:48');
-INSERT INTO `_log` VALUES ('57', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:48');
-INSERT INTO `_log` VALUES ('58', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:49');
-INSERT INTO `_log` VALUES ('59', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:49');
-INSERT INTO `_log` VALUES ('60', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:49');
-INSERT INTO `_log` VALUES ('61', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:22:49');
-INSERT INTO `_log` VALUES ('62', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:24');
-INSERT INTO `_log` VALUES ('63', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:24');
-INSERT INTO `_log` VALUES ('64', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:26');
-INSERT INTO `_log` VALUES ('65', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:27');
-INSERT INTO `_log` VALUES ('66', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:28');
-INSERT INTO `_log` VALUES ('67', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:30');
-INSERT INTO `_log` VALUES ('68', 'blog', 'show', '', '24', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:32');
-INSERT INTO `_log` VALUES ('69', 'blog', 'track', '', '24', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:32');
-INSERT INTO `_log` VALUES ('70', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:36');
-INSERT INTO `_log` VALUES ('71', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:37');
-INSERT INTO `_log` VALUES ('72', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:45');
-INSERT INTO `_log` VALUES ('73', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:45');
-INSERT INTO `_log` VALUES ('74', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:49');
-INSERT INTO `_log` VALUES ('75', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:49');
-INSERT INTO `_log` VALUES ('76', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:51');
-INSERT INTO `_log` VALUES ('77', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:53');
-INSERT INTO `_log` VALUES ('78', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:54');
-INSERT INTO `_log` VALUES ('79', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:54');
-INSERT INTO `_log` VALUES ('80', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:55');
-INSERT INTO `_log` VALUES ('81', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:59');
-INSERT INTO `_log` VALUES ('82', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:59');
-INSERT INTO `_log` VALUES ('83', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:23:59');
-INSERT INTO `_log` VALUES ('84', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:24:01');
-INSERT INTO `_log` VALUES ('85', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:24:02');
-INSERT INTO `_log` VALUES ('86', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:24:02');
-INSERT INTO `_log` VALUES ('87', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:32:44');
-INSERT INTO `_log` VALUES ('88', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:32:45');
-INSERT INTO `_log` VALUES ('89', 'blog', 'show', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:32:48');
-INSERT INTO `_log` VALUES ('90', 'blog', 'track', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:32:48');
-INSERT INTO `_log` VALUES ('91', 'blog', 'show', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:34:22');
-INSERT INTO `_log` VALUES ('92', 'blog', 'track', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:34:23');
-INSERT INTO `_log` VALUES ('93', 'blog', 'show', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/iris/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:34:28');
-INSERT INTO `_log` VALUES ('94', 'blog', 'track', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:34:28');
-INSERT INTO `_log` VALUES ('95', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:36:36');
-INSERT INTO `_log` VALUES ('96', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:39:01');
-INSERT INTO `_log` VALUES ('97', 'gallery', 'show', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:39:03');
-INSERT INTO `_log` VALUES ('98', 'gallery', 'track', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:39:03');
-INSERT INTO `_log` VALUES ('99', 'file', 'track', '', '455', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:17');
-INSERT INTO `_log` VALUES ('100', 'gallery', 'next', '', '455', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:18');
-INSERT INTO `_log` VALUES ('101', 'file', 'track', '', '454', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:18');
-INSERT INTO `_log` VALUES ('102', 'gallery', 'next', '', '454', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:19');
-INSERT INTO `_log` VALUES ('103', 'file', 'track', '', '453', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:19');
-INSERT INTO `_log` VALUES ('104', 'gallery', 'next', '', '453', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:20');
-INSERT INTO `_log` VALUES ('105', 'file', 'track', '', '452', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:20');
-INSERT INTO `_log` VALUES ('106', 'gallery', 'show', '', '3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:25');
-INSERT INTO `_log` VALUES ('107', 'gallery', 'track', '', '3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/spring-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:25');
-INSERT INTO `_log` VALUES ('108', 'file', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/spring-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:28');
-INSERT INTO `_log` VALUES ('109', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/download/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:28');
-INSERT INTO `_log` VALUES ('110', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:29');
-INSERT INTO `_log` VALUES ('111', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:38');
-INSERT INTO `_log` VALUES ('112', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:40');
-INSERT INTO `_log` VALUES ('113', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:42');
-INSERT INTO `_log` VALUES ('114', 'blog', 'show', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:43');
-INSERT INTO `_log` VALUES ('115', 'blog', 'track', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:54:43');
-INSERT INTO `_log` VALUES ('116', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:55:39');
-INSERT INTO `_log` VALUES ('117', 'gallery', 'show', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:55:41');
-INSERT INTO `_log` VALUES ('118', 'gallery', 'track', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 17:55:41');
-INSERT INTO `_log` VALUES ('119', 'gallery', 'show', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:39:58');
-INSERT INTO `_log` VALUES ('120', 'gallery', 'track', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:39:58');
-INSERT INTO `_log` VALUES ('121', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:40:00');
-INSERT INTO `_log` VALUES ('122', 'file', 'track', '', '490', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:40:05');
-INSERT INTO `_log` VALUES ('123', 'gallery', 'next', '', '490', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:40:08');
-INSERT INTO `_log` VALUES ('124', 'file', 'track', '', '489', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:40:09');
-INSERT INTO `_log` VALUES ('125', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:43:34');
-INSERT INTO `_log` VALUES ('126', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:45:27');
-INSERT INTO `_log` VALUES ('127', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:45:31');
-INSERT INTO `_log` VALUES ('128', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:45:31');
-INSERT INTO `_log` VALUES ('129', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:45:31');
-INSERT INTO `_log` VALUES ('130', 'blog', 'show', '', '20', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:45:33');
-INSERT INTO `_log` VALUES ('131', 'blog', 'track', '', '20', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/chillhouse-live/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:45:34');
-INSERT INTO `_log` VALUES ('132', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/chillhouse-live/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:50:18');
-INSERT INTO `_log` VALUES ('133', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:50:20');
-INSERT INTO `_log` VALUES ('134', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:50:25');
-INSERT INTO `_log` VALUES ('135', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:50:33');
-INSERT INTO `_log` VALUES ('136', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:52:02');
-INSERT INTO `_log` VALUES ('137', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:52:03');
-INSERT INTO `_log` VALUES ('138', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:52:34');
-INSERT INTO `_log` VALUES ('139', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:53:31');
-INSERT INTO `_log` VALUES ('140', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:54:32');
-INSERT INTO `_log` VALUES ('141', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:55:03');
-INSERT INTO `_log` VALUES ('142', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:55:24');
-INSERT INTO `_log` VALUES ('143', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:55:40');
-INSERT INTO `_log` VALUES ('144', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:55:40');
-INSERT INTO `_log` VALUES ('145', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:27');
-INSERT INTO `_log` VALUES ('146', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:27');
-INSERT INTO `_log` VALUES ('147', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:32');
-INSERT INTO `_log` VALUES ('148', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:34');
-INSERT INTO `_log` VALUES ('149', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:35');
-INSERT INTO `_log` VALUES ('150', 'blog', 'show', '', '25', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:37');
-INSERT INTO `_log` VALUES ('151', 'blog', 'track', '', '25', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/hi-pass/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:37');
-INSERT INTO `_log` VALUES ('152', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/hi-pass/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:39');
-INSERT INTO `_log` VALUES ('153', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:43');
-INSERT INTO `_log` VALUES ('154', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:45');
-INSERT INTO `_log` VALUES ('155', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:47');
-INSERT INTO `_log` VALUES ('156', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:57:47');
-INSERT INTO `_log` VALUES ('157', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:58:36');
-INSERT INTO `_log` VALUES ('158', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:58:36');
-INSERT INTO `_log` VALUES ('159', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:59:31');
-INSERT INTO `_log` VALUES ('160', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:59:31');
-INSERT INTO `_log` VALUES ('161', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:59:58');
-INSERT INTO `_log` VALUES ('162', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 18:59:58');
-INSERT INTO `_log` VALUES ('163', 'gallery', 'show', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:43');
-INSERT INTO `_log` VALUES ('164', 'gallery', 'track', '', '1', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:44');
-INSERT INTO `_log` VALUES ('165', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/autumn-12/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:50');
-INSERT INTO `_log` VALUES ('166', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:54');
-INSERT INTO `_log` VALUES ('167', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:54');
-INSERT INTO `_log` VALUES ('168', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:54');
-INSERT INTO `_log` VALUES ('169', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:57');
-INSERT INTO `_log` VALUES ('170', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:57');
-INSERT INTO `_log` VALUES ('171', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:00:57');
-INSERT INTO `_log` VALUES ('172', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:00');
-INSERT INTO `_log` VALUES ('173', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:00');
-INSERT INTO `_log` VALUES ('174', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:00');
-INSERT INTO `_log` VALUES ('175', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:03');
-INSERT INTO `_log` VALUES ('176', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:03');
-INSERT INTO `_log` VALUES ('177', 'blog', 'next', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:03');
-INSERT INTO `_log` VALUES ('178', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/blog/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:11');
-INSERT INTO `_log` VALUES ('179', 'file', 'track', '', '438', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:14');
-INSERT INTO `_log` VALUES ('180', 'gallery', 'show', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:17');
-INSERT INTO `_log` VALUES ('181', 'gallery', 'track', '', '4', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:17');
-INSERT INTO `_log` VALUES ('182', 'tag', 'search', '', '16', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/winter-13/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:36');
-INSERT INTO `_log` VALUES ('183', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:42');
-INSERT INTO `_log` VALUES ('184', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:42');
-INSERT INTO `_log` VALUES ('185', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:43');
-INSERT INTO `_log` VALUES ('186', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:45');
-INSERT INTO `_log` VALUES ('187', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:45');
-INSERT INTO `_log` VALUES ('188', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:45');
-INSERT INTO `_log` VALUES ('189', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:45');
-INSERT INTO `_log` VALUES ('190', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:01:46');
-INSERT INTO `_log` VALUES ('191', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:02:24');
-INSERT INTO `_log` VALUES ('192', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:03:10');
-INSERT INTO `_log` VALUES ('193', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:03:18');
-INSERT INTO `_log` VALUES ('194', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:04:28');
-INSERT INTO `_log` VALUES ('195', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/tech-house/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:05:04');
-INSERT INTO `_log` VALUES ('196', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:05:13');
-INSERT INTO `_log` VALUES ('197', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:05:13');
-INSERT INTO `_log` VALUES ('198', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:08:23');
-INSERT INTO `_log` VALUES ('199', 'search', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:09:24');
-INSERT INTO `_log` VALUES ('200', 'blog', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:09:41');
-INSERT INTO `_log` VALUES ('201', 'search', 'autocomplete', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:11:41');
-INSERT INTO `_log` VALUES ('202', 'blog', 'show', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:12:19');
-INSERT INTO `_log` VALUES ('203', 'blog', 'track', '', '2', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/dev/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:12:19');
-INSERT INTO `_log` VALUES ('204', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/search/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:04');
-INSERT INTO `_log` VALUES ('205', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:04');
-INSERT INTO `_log` VALUES ('206', 'tag', 'search', '', '5', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:12');
-INSERT INTO `_log` VALUES ('207', 'tag', 'search', '', '36', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/lsc/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:16');
-INSERT INTO `_log` VALUES ('208', 'tag', 'search', '', '3', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/dnb/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:18');
-INSERT INTO `_log` VALUES ('209', '', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/tag/ambient/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:29');
-INSERT INTO `_log` VALUES ('210', 'gallery', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:30');
-INSERT INTO `_log` VALUES ('211', 'file', '', '', '', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/gallery/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:32');
-INSERT INTO `_log` VALUES ('212', 'blog', 'show', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/download/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:33');
-INSERT INTO `_log` VALUES ('213', 'blog', 'track', '', '14', '127.0.0.1', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.43 Safari/537.31', 'http://m2.local/about/', 'n1kdd36gpqvb55hid3n5mvqj52', '2013-03-28 19:14:34');
-
--- ----------------------------
--- Table structure for `_sef_alias`
--- ----------------------------
-DROP TABLE IF EXISTS `_sef_alias`;
-CREATE TABLE `_sef_alias` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `request` varchar(255) NOT NULL,
-  `link` varchar(255) NOT NULL,
-  `viewed` int(11) unsigned DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=222 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of _sef_alias
--- ----------------------------
-INSERT INTO `_sef_alias` VALUES ('74', 'index.php?module=blog&action=show&id=9', 'blog/katana/', '0');
-INSERT INTO `_sef_alias` VALUES ('75', 'index.php?module=tag&action=search&id=21', 'tag/katana/', '0');
-INSERT INTO `_sef_alias` VALUES ('76', 'index.php?module=tag&action=search&id=22', 'tag/techstep/', '0');
-INSERT INTO `_sef_alias` VALUES ('77', 'index.php?module=tag&action=search&id=23', 'tag/neurostep/', '0');
-INSERT INTO `_sef_alias` VALUES ('78', 'index.php?module=tag&action=search&id=14', 'tag/featured/', '0');
-INSERT INTO `_sef_alias` VALUES ('79', 'index.php?module=tag&action=search&id=24', 'tag/m25/', '0');
-INSERT INTO `_sef_alias` VALUES ('80', 'index.php?module=blog&action=show&id=6', 'blog/stockholm-syndrome/', '0');
-INSERT INTO `_sef_alias` VALUES ('81', 'index.php?module=tag&action=search&id=15', 'tag/stockholm/', '0');
-INSERT INTO `_sef_alias` VALUES ('82', 'index.php?module=tag&action=search&id=16', 'tag/tech-house/', '0');
-INSERT INTO `_sef_alias` VALUES ('83', 'index.php?module=tag&action=search&id=17', 'tag/deep-house/', '0');
-INSERT INTO `_sef_alias` VALUES ('84', 'index.php?module=tag&action=search&id=18', 'tag/m31/', '0');
-INSERT INTO `_sef_alias` VALUES ('85', 'index.php?module=blog&action=show&id=8', 'blog/autoreply/', '0');
-INSERT INTO `_sef_alias` VALUES ('86', 'index.php?module=tag&action=search&id=19', 'tag/autoreply/', '0');
-INSERT INTO `_sef_alias` VALUES ('1', 'index.php?module=blog', 'blog/', '0');
-INSERT INTO `_sef_alias` VALUES ('87', 'index.php?module=tag&action=search&id=20', 'tag/m27/', '0');
-INSERT INTO `_sef_alias` VALUES ('88', 'index.php?module=gallery', 'gallery/', '0');
-INSERT INTO `_sef_alias` VALUES ('89', 'index.php?module=blog&action=show&id=25', 'blog/hi-pass/', '0');
-INSERT INTO `_sef_alias` VALUES ('90', 'index.php?module=tag&action=search&id=55', 'tag/minimal-techno/', '0');
-INSERT INTO `_sef_alias` VALUES ('91', 'index.php?module=tag&action=search&id=56', 'tag/hi-pass/', '0');
-INSERT INTO `_sef_alias` VALUES ('92', 'index.php?module=tag&action=search&id=57', 'tag/m05/', '0');
-INSERT INTO `_sef_alias` VALUES ('93', 'index.php?module=blog&action=show&id=24', 'blog/iris/', '0');
-INSERT INTO `_sef_alias` VALUES ('94', 'index.php?module=tag&action=search&id=52', 'tag/iris/', '0');
-INSERT INTO `_sef_alias` VALUES ('95', 'index.php?module=tag&action=search&id=53', 'tag/all-about-me/', '0');
-INSERT INTO `_sef_alias` VALUES ('96', 'index.php?module=tag&action=search&id=54', 'tag/m04/', '0');
-INSERT INTO `_sef_alias` VALUES ('97', 'index.php?module=tag&action=search&id=48', 'tag/promo/', '0');
-INSERT INTO `_sef_alias` VALUES ('98', 'index.php?module=blog&action=show&id=23', 'blog/all-she-wants-is/', '0');
-INSERT INTO `_sef_alias` VALUES ('99', 'index.php?module=tag&action=search&id=50', 'tag/all-she-wants/', '0');
-INSERT INTO `_sef_alias` VALUES ('100', 'index.php?module=tag&action=search&id=51', 'tag/m02/', '0');
-INSERT INTO `_sef_alias` VALUES ('101', 'index.php?module=blog&action=show&id=22', 'blog/cote-d-azur/', '0');
-INSERT INTO `_sef_alias` VALUES ('102', 'index.php?module=tag&action=search&id=46', 'tag/funky-house/', '0');
-INSERT INTO `_sef_alias` VALUES ('103', 'index.php?module=tag&action=search&id=47', 'tag/cote-d-azur/', '0');
-INSERT INTO `_sef_alias` VALUES ('104', 'index.php?module=tag&action=search&id=49', 'tag/m30/', '0');
-INSERT INTO `_sef_alias` VALUES ('105', 'index.php?module=blog&action=show&id=21', 'blog/emofunk/', '0');
-INSERT INTO `_sef_alias` VALUES ('106', 'index.php?module=tag&action=search&id=37', 'tag/neurofunk/', '0');
-INSERT INTO `_sef_alias` VALUES ('107', 'index.php?module=tag&action=search&id=38', 'tag/technoid/', '0');
-INSERT INTO `_sef_alias` VALUES ('108', 'index.php?module=tag&action=search&id=36', 'tag/dnb/', '0');
-INSERT INTO `_sef_alias` VALUES ('109', 'index.php?module=tag&action=search&id=43', 'tag/live/', '0');
-INSERT INTO `_sef_alias` VALUES ('110', 'index.php?module=tag&action=search&id=45', 'tag/m14/', '0');
-INSERT INTO `_sef_alias` VALUES ('111', 'index.php?module=tag&action=search&id=3', 'tag/ambient/', '0');
-INSERT INTO `_sef_alias` VALUES ('112', 'index.php?module=tag&action=search&id=8', 'tag/chillout/', '0');
-INSERT INTO `_sef_alias` VALUES ('113', 'index.php?module=tag&action=search&id=25', 'tag/hobh/', '0');
-INSERT INTO `_sef_alias` VALUES ('114', 'index.php?module=tag&action=search&id=5', 'tag/lsc/', '0');
-INSERT INTO `_sef_alias` VALUES ('115', 'index.php?module=blog&action=show&id=20', 'blog/chillhouse-live/', '0');
-INSERT INTO `_sef_alias` VALUES ('116', 'index.php?module=blog&action=show&id=19', 'blog/basstech-2/', '0');
-INSERT INTO `_sef_alias` VALUES ('117', 'index.php?module=gallery&action=show&id=1', 'gallery/autumn-12/', '0');
-INSERT INTO `_sef_alias` VALUES ('118', 'index.php?module=gallery&action=show&id=2', 'gallery/holland/', '0');
-INSERT INTO `_sef_alias` VALUES ('2', 'index.php?module=user&action=loginform', 'login/', '0');
-INSERT INTO `_sef_alias` VALUES ('3', 'index.php?module=file', 'download/', '0');
-INSERT INTO `_sef_alias` VALUES ('4', 'index.php?module=blog&action=show&id=14', 'about/', '0');
-INSERT INTO `_sef_alias` VALUES ('5', 'index.php?module=sitemap', 'map/', '0');
-INSERT INTO `_sef_alias` VALUES ('6', 'index.php?module=user&action=registerform', 'register/', '0');
-INSERT INTO `_sef_alias` VALUES ('7', 'index.php?module=blog&action=show&id=2', 'dev/', '0');
-INSERT INTO `_sef_alias` VALUES ('8', 'index.php?module=blog&action=show&id=16', 'copyrights/', '0');
-INSERT INTO `_sef_alias` VALUES ('119', 'index.php?module=gallery&action=show&id=3', 'gallery/spring-13/', '0');
-INSERT INTO `_sef_alias` VALUES ('120', 'index.php?module=gallery&action=show&id=4', 'gallery/winter-13/', '0');
-INSERT INTO `_sef_alias` VALUES ('121', 'index.php?module=gallery&action=show&id=5', 'gallery/z-xx/', '0');
-INSERT INTO `_sef_alias` VALUES ('122', 'index.php?module=blog&action=show&id=1', 'blog/insomnia/', '0');
-INSERT INTO `_sef_alias` VALUES ('123', 'index.php?module=blog&action=show&id=3', 'blog/synthetic/', '0');
-INSERT INTO `_sef_alias` VALUES ('9', 'index.php?module=user&action=forgotform', 'forgot/', '0');
-INSERT INTO `_sef_alias` VALUES ('124', 'index.php?module=blog&action=show&id=12', 'blog/hobh-three/', '0');
-INSERT INTO `_sef_alias` VALUES ('125', 'index.php?module=blog&action=show&id=5', 'blog/solaris/', '0');
-INSERT INTO `_sef_alias` VALUES ('126', 'index.php?module=blog&action=show&id=4', 'blog/plastic-toy/', '0');
-INSERT INTO `_sef_alias` VALUES ('127', 'index.php?module=blog&action=show&id=17', 'blog/bar-launge/', '0');
-INSERT INTO `_sef_alias` VALUES ('128', 'index.php?module=tag&action=search&id=32', 'tag/acid-jazz/', '0');
-INSERT INTO `_sef_alias` VALUES ('129', 'index.php?module=tag&action=search&id=33', 'tag/lounge/', '0');
-INSERT INTO `_sef_alias` VALUES ('130', 'index.php?module=tag&action=search&id=34', 'tag/bar-la-unge/', '0');
-INSERT INTO `_sef_alias` VALUES ('131', 'index.php?module=tag&action=search&id=35', 'tag/m08/', '0');
-INSERT INTO `_sef_alias` VALUES ('132', 'index.php?module=blog&action=show&id=18', 'blog/basstech/', '0');
-INSERT INTO `_sef_alias` VALUES ('133', 'index.php?module=tag&action=search&id=39', 'tag/basstech/', '0');
-INSERT INTO `_sef_alias` VALUES ('134', 'index.php?module=tag&action=search&id=40', 'tag/m18/', '0');
-INSERT INTO `_sef_alias` VALUES ('135', 'index.php?module=tag&action=search&id=41', 'tag/m20/', '0');
-INSERT INTO `_sef_alias` VALUES ('136', 'index.php?module=blog&action=track&id=19', 'blog/track/id/19/', '0');
-INSERT INTO `_sef_alias` VALUES ('137', 'index.php?module=tag&action=search&id=42', 'tag/chillhouse/', '0');
-INSERT INTO `_sef_alias` VALUES ('138', 'index.php?module=tag&action=search&id=44', 'tag/m12/', '0');
-INSERT INTO `_sef_alias` VALUES ('139', 'index.php?module=blog&action=show&id=13', 'blog/hobh-four/', '0');
-INSERT INTO `_sef_alias` VALUES ('140', 'index.php?module=blog&action=show&id=11', 'blog/hobh-two/', '0');
-INSERT INTO `_sef_alias` VALUES ('141', 'index.php?module=blog&action=show&id=10', 'blog/hobh-one/', '0');
-INSERT INTO `_sef_alias` VALUES ('142', 'index.php?module=gallery&action=track', 'gallery/track/', '0');
-INSERT INTO `_sef_alias` VALUES ('143', 'index.php?module=file&action=track', 'file/track/', '0');
-INSERT INTO `_sef_alias` VALUES ('144', 'index.php?module=gallery&action=next', 'gallery/next/', '0');
-INSERT INTO `_sef_alias` VALUES ('145', 'index.php?module=gallery&action=prev', 'gallery/prev/', '0');
-INSERT INTO `_sef_alias` VALUES ('146', 'index.php', '', '13');
-INSERT INTO `_sef_alias` VALUES ('147', 'index.php?module=blog&action=edit&id=25', 'blog/edit/id/25/', '0');
-INSERT INTO `_sef_alias` VALUES ('148', 'index.php?module=blog&action=delete&id=25', 'blog/delete/id/25/', '0');
-INSERT INTO `_sef_alias` VALUES ('149', 'index.php?module=blog&action=edit&id=24', 'blog/edit/id/24/', '0');
-INSERT INTO `_sef_alias` VALUES ('150', 'index.php?module=blog&action=delete&id=24', 'blog/delete/id/24/', '0');
-INSERT INTO `_sef_alias` VALUES ('151', 'index.php?module=blog&action=edit&id=23', 'blog/edit/id/23/', '0');
-INSERT INTO `_sef_alias` VALUES ('152', 'index.php?module=blog&action=delete&id=23', 'blog/delete/id/23/', '0');
-INSERT INTO `_sef_alias` VALUES ('153', 'index.php?module=blog&action=edit&id=22', 'blog/edit/id/22/', '0');
-INSERT INTO `_sef_alias` VALUES ('154', 'index.php?module=blog&action=delete&id=22', 'blog/delete/id/22/', '0');
-INSERT INTO `_sef_alias` VALUES ('155', 'index.php?module=blog&action=edit&id=21', 'blog/edit/id/21/', '0');
-INSERT INTO `_sef_alias` VALUES ('156', 'index.php?module=blog&action=delete&id=21', 'blog/delete/id/21/', '0');
-INSERT INTO `_sef_alias` VALUES ('157', 'index.php?module=user&action=dashboard', 'dashboard/', '0');
-INSERT INTO `_sef_alias` VALUES ('158', 'index.php?module=blog&action=edit', 'blog/edit/', '0');
-INSERT INTO `_sef_alias` VALUES ('159', 'index.php?module=user&action=logout', 'logout/', '0');
-INSERT INTO `_sef_alias` VALUES ('160', 'index.php?module=user', 'dashboard/', '0');
-INSERT INTO `_sef_alias` VALUES ('161', 'index.php?module=file&action=edit', 'file/edit/', '0');
-INSERT INTO `_sef_alias` VALUES ('162', 'index.php?module=gallery&action=updatefiles', 'gallery/updatefiles/', '0');
-INSERT INTO `_sef_alias` VALUES ('163', 'index.php?module=gallery&action=rebuildthumbnails', 'gallery/rebuildthumbnails/', '0');
-INSERT INTO `_sef_alias` VALUES ('164', 'index.php?module=tag&action=autocomplete', 'tag/autocomplete/', '0');
-INSERT INTO `_sef_alias` VALUES ('165', 'index.php?module=blog&action=next', 'blog/next/', '0');
-INSERT INTO `_sef_alias` VALUES ('166', 'index.php?module=blog&action=edit&id=14', 'blog/edit/id/14/', '0');
-INSERT INTO `_sef_alias` VALUES ('167', 'index.php?module=blog&action=delete&id=14', 'blog/delete/id/14/', '0');
-INSERT INTO `_sef_alias` VALUES ('168', 'index.php?module=blog&action=track&id=14', 'blog/track/id/14/', '0');
-INSERT INTO `_sef_alias` VALUES ('169', 'index.php?module=blog&action=edit&id=20', 'blog/edit/id/20/', '0');
-INSERT INTO `_sef_alias` VALUES ('170', 'index.php?module=blog&action=delete&id=20', 'blog/delete/id/20/', '0');
-INSERT INTO `_sef_alias` VALUES ('171', 'index.php?module=blog&action=edit&id=19', 'blog/edit/id/19/', '0');
-INSERT INTO `_sef_alias` VALUES ('172', 'index.php?module=blog&action=delete&id=19', 'blog/delete/id/19/', '0');
-INSERT INTO `_sef_alias` VALUES ('173', 'index.php?module=blog&action=edit&id=18', 'blog/edit/id/18/', '0');
-INSERT INTO `_sef_alias` VALUES ('174', 'index.php?module=blog&action=delete&id=18', 'blog/delete/id/18/', '0');
-INSERT INTO `_sef_alias` VALUES ('175', 'index.php?module=blog&action=edit&id=17', 'blog/edit/id/17/', '0');
-INSERT INTO `_sef_alias` VALUES ('176', 'index.php?module=blog&action=delete&id=17', 'blog/delete/id/17/', '0');
-INSERT INTO `_sef_alias` VALUES ('177', 'index.php?module=blog&action=edit&id=13', 'blog/edit/id/13/', '0');
-INSERT INTO `_sef_alias` VALUES ('178', 'index.php?module=blog&action=delete&id=13', 'blog/delete/id/13/', '0');
-INSERT INTO `_sef_alias` VALUES ('179', 'index.php?module=blog&action=edit&id=12', 'blog/edit/id/12/', '0');
-INSERT INTO `_sef_alias` VALUES ('180', 'index.php?module=blog&action=delete&id=12', 'blog/delete/id/12/', '0');
-INSERT INTO `_sef_alias` VALUES ('181', 'index.php?module=blog&action=edit&id=11', 'blog/edit/id/11/', '0');
-INSERT INTO `_sef_alias` VALUES ('182', 'index.php?module=blog&action=delete&id=11', 'blog/delete/id/11/', '0');
-INSERT INTO `_sef_alias` VALUES ('183', 'index.php?module=blog&action=edit&id=10', 'blog/edit/id/10/', '0');
-INSERT INTO `_sef_alias` VALUES ('184', 'index.php?module=blog&action=delete&id=10', 'blog/delete/id/10/', '0');
-INSERT INTO `_sef_alias` VALUES ('185', 'index.php?module=blog&action=edit&id=9', 'blog/edit/id/9/', '0');
-INSERT INTO `_sef_alias` VALUES ('186', 'index.php?module=blog&action=delete&id=9', 'blog/delete/id/9/', '0');
-INSERT INTO `_sef_alias` VALUES ('187', 'index.php?module=sitemap&action=generate', 'map/generate/', '0');
-INSERT INTO `_sef_alias` VALUES ('188', 'index.php?module=blog&action=edit&id=16', 'blog/edit/id/16/', '0');
-INSERT INTO `_sef_alias` VALUES ('189', 'index.php?module=blog&action=delete&id=16', 'blog/delete/id/16/', '0');
-INSERT INTO `_sef_alias` VALUES ('190', 'index.php?module=blog&action=track&id=16', 'blog/track/id/16/', '0');
-INSERT INTO `_sef_alias` VALUES ('191', 'index.php?module=blog&action=edit&id=2', 'blog/edit/id/2/', '0');
-INSERT INTO `_sef_alias` VALUES ('192', 'index.php?module=blog&action=delete&id=2', 'blog/delete/id/2/', '0');
-INSERT INTO `_sef_alias` VALUES ('193', 'index.php?module=blog&action=track&id=2', 'blog/track/id/2/', '0');
-INSERT INTO `_sef_alias` VALUES ('194', 'index.php?module=blog&action=track&id=12', 'blog/track/id/12/', '0');
-INSERT INTO `_sef_alias` VALUES ('195', 'index.php?module=search&action=autocomplete', 'search/autocomplete/', '0');
-INSERT INTO `_sef_alias` VALUES ('196', 'index.php?module=blog&action=track&id=24', 'blog/track/id/24/', '0');
-INSERT INTO `_sef_alias` VALUES ('197', 'index.php?module=search', 'search/', '0');
-INSERT INTO `_sef_alias` VALUES ('198', 'index.php?module=blog&action=track&id=20', 'blog/track/id/20/', '0');
-INSERT INTO `_sef_alias` VALUES ('199', 'index.php?module=blog&action=track&id=25', 'blog/track/id/25/', '0');
-INSERT INTO `_sef_alias` VALUES ('200', 'index.php?module=blog&action=edit&id=8', 'blog/edit/id/8/', '0');
-INSERT INTO `_sef_alias` VALUES ('201', 'index.php?module=blog&action=delete&id=8', 'blog/delete/id/8/', '0');
-INSERT INTO `_sef_alias` VALUES ('202', 'index.php?module=blog&action=edit&id=6', 'blog/edit/id/6/', '0');
-INSERT INTO `_sef_alias` VALUES ('203', 'index.php?module=blog&action=delete&id=6', 'blog/delete/id/6/', '0');
-INSERT INTO `_sef_alias` VALUES ('204', 'index.php?module=blog&action=edit&id=5', 'blog/edit/id/5/', '0');
-INSERT INTO `_sef_alias` VALUES ('205', 'index.php?module=blog&action=delete&id=5', 'blog/delete/id/5/', '0');
-INSERT INTO `_sef_alias` VALUES ('206', 'index.php?module=tag&action=search&id=12', 'tag/solaris/', '0');
-INSERT INTO `_sef_alias` VALUES ('207', 'index.php?module=tag&action=search&id=13', 'tag/m21/', '0');
-INSERT INTO `_sef_alias` VALUES ('208', 'index.php?module=blog&action=edit&id=4', 'blog/edit/id/4/', '0');
-INSERT INTO `_sef_alias` VALUES ('209', 'index.php?module=blog&action=delete&id=4', 'blog/delete/id/4/', '0');
-INSERT INTO `_sef_alias` VALUES ('210', 'index.php?module=tag&action=search&id=10', 'tag/plastic-toy/', '0');
-INSERT INTO `_sef_alias` VALUES ('211', 'index.php?module=tag&action=search&id=11', 'tag/m17/', '0');
-INSERT INTO `_sef_alias` VALUES ('212', 'index.php?module=blog&action=edit&id=3', 'blog/edit/id/3/', '0');
-INSERT INTO `_sef_alias` VALUES ('213', 'index.php?module=blog&action=delete&id=3', 'blog/delete/id/3/', '0');
-INSERT INTO `_sef_alias` VALUES ('214', 'index.php?module=tag&action=search&id=7', 'tag/synthetic/', '0');
-INSERT INTO `_sef_alias` VALUES ('215', 'index.php?module=tag&action=search&id=9', 'tag/m07/', '0');
-INSERT INTO `_sef_alias` VALUES ('216', 'index.php?module=blog&action=edit&id=1', 'blog/edit/id/1/', '0');
-INSERT INTO `_sef_alias` VALUES ('217', 'index.php?module=blog&action=delete&id=1', 'blog/delete/id/1/', '0');
-INSERT INTO `_sef_alias` VALUES ('218', 'index.php?module=tag&action=search&id=1', 'tag/insomnia/', '0');
-INSERT INTO `_sef_alias` VALUES ('219', 'index.php?module=tag&action=search&id=2', 'tag/noise/', '0');
-INSERT INTO `_sef_alias` VALUES ('220', 'index.php?module=tag&action=search&id=4', 'tag/easy-listening/', '0');
-INSERT INTO `_sef_alias` VALUES ('221', 'index.php?module=tag&action=search&id=6', 'tag/m01/', '0');
 
 -- ----------------------------
 -- Procedure structure for `ALL_POSTS`
@@ -1859,18 +1938,27 @@ DROP PROCEDURE IF EXISTS `GET_FILES`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_FILES`(IN `_type` varchar(32), IN `_limit` int)
 BEGIN
-    IF (_type <> '') THEN
-        SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`, `timestamp`
-        FROM `files`
-        WHERE `type` = _type
-        ORDER BY `source`
-        LIMIT _limit;
+    SET @type = _type;
+    SET @rows = _limit;
+		
+    IF _type <> '' THEN
+			PREPARE stmt FROM "
+				SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`, `timestamp`
+				FROM `files`
+				WHERE `type` = ?
+				ORDER BY `source`
+				LIMIT ?;";
+
+			EXECUTE stmt USING @type, @rows;
     ELSE
-        SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`, `timestamp`
-        FROM `files`
-        ORDER BY `source`
-        LIMIT _limit;
-    END IF;
+			PREPARE stmt FROM "
+				SELECT `id`, `type`, `name`, `description`, `source`, `size`, `md5`, `timestamp`
+				FROM `files`
+				ORDER BY `source`
+				LIMIT ?;";
+      
+      EXECUTE stmt USING @rows;
+    END IF;	
 END
 ;;
 DELIMITER ;
@@ -1882,23 +1970,27 @@ DROP PROCEDURE IF EXISTS `GET_GALLERY`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_GALLERY`(IN `_limit` int)
 BEGIN
-    SELECT g.`id`, g.`path`, g.`name`, g.`alias`, g.`description`, g.`metadesc`, g.`timestamp`,
-        (
-            SELECT GROUP_CONCAT(CONCAT_WS(':', _t.`id`, _t.`name`))
-            FROM `gallery_tags` AS _gt
-            JOIN `tags` AS _t ON _t.`id` = _gt.`tag_id`
-            WHERE _gt.`gallery_id` = g.`id`
-              AND _gt.`type` = 'meta'
-        ) AS `metatags`,
-        (
-            SELECT GROUP_CONCAT(CONCAT_WS(':', _t.`id`, _t.`name`))
-            FROM `gallery_tags` AS _gt
-            JOIN `tags` AS _t ON _t.`id` = _gt.`tag_id`
-            WHERE _gt.`gallery_id` = g.`id`
-              AND _gt.`type` = 'taxonomy'
-        ) AS `taxonomy`
-    FROM `gallery` AS g
-    LIMIT _limit;
+    PREPARE stmt FROM "
+		    SELECT g.`id`, g.`path`, g.`name`, g.`alias`, g.`description`, g.`metadesc`, g.`timestamp`,
+					(
+							SELECT GROUP_CONCAT(CONCAT_WS(':', _t.`id`, _t.`name`))
+							FROM `gallery_tags` AS _gt
+							JOIN `tags` AS _t ON _t.`id` = _gt.`tag_id`
+							WHERE _gt.`gallery_id` = g.`id`
+								AND _gt.`type` = 'meta'
+					) AS `metatags`,
+					(
+							SELECT GROUP_CONCAT(CONCAT_WS(':', _t.`id`, _t.`name`))
+							FROM `gallery_tags` AS _gt
+							JOIN `tags` AS _t ON _t.`id` = _gt.`tag_id`
+							WHERE _gt.`gallery_id` = g.`id`
+								AND _gt.`type` = 'taxonomy'
+					) AS `taxonomy`
+			  FROM `gallery` AS g
+			  LIMIT ?;";
+
+    SET @rows = _limit;
+    EXECUTE stmt USING @rows;
 END
 ;;
 DELIMITER ;
@@ -1928,38 +2020,6 @@ BEGIN
         g.`metadesc`
     FROM `gallery` AS g
     WHERE g.`id` = _id;
-END
-;;
-DELIMITER ;
-
--- ----------------------------
--- Procedure structure for `GET_GALLERY_BY_TAGS`
--- ----------------------------
-DROP PROCEDURE IF EXISTS `GET_GALLERY_BY_TAGS`;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_GALLERY_BY_TAGS`(IN `_tags` varchar(512), IN `_limit` int)
-BEGIN
-    SELECT g.`id`, g.`path`, g.`name`, g.`description`, g.`timestamp`,
-        (
-            SELECT GROUP_CONCAT(CONCAT_WS(':', _t.`id`, _t.`name`))
-            FROM `gallery_tags` AS _gt
-            JOIN `tags` AS _t ON _t.`id` = _gt.`tag_id`
-            WHERE _gt.`gallery_id` = g.`id`
-              AND _gt.`type` = 'meta'
-        ) AS `metatags`,
-        (
-            SELECT GROUP_CONCAT(CONCAT_WS(':', _t.`id`, _t.`name`))
-            FROM `gallery_tags` AS _gt
-            JOIN `tags` AS _t ON _t.`id` = _gt.`tag_id`
-            WHERE _gt.`gallery_id` = p.`id`
-              AND _gt.`type` = 'taxonomy'
-        ) AS `taxonomy`,
-        g.`metadesc`
-    FROM `gallery` AS p
-    JOIN `gallery_tags` AS gt ON gt.`gallery_id` = g.`id`
-    JOIN `tags` AS t ON t.`id` = gt.`tag_id`
-    WHERE t.`name` IN (_tags)
-    LIMIT _limit;
 END
 ;;
 DELIMITER ;
@@ -2001,11 +2061,15 @@ DROP PROCEDURE IF EXISTS `GET_LATEST_IMAGES`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_LATEST_IMAGES`(IN `_limit` int)
 BEGIN
-		SELECT *
-		FROM `files`
-		WHERE `type` = 'gallery'
-		ORDER BY `timestamp` DESC, `id` DESC
-		LIMIT _limit;
+    PREPARE stmt FROM "
+			SELECT *
+			FROM `files`
+			WHERE `type` = 'gallery'
+			ORDER BY `timestamp` DESC, `id` DESC
+			LIMIT ?;";
+
+    SET @rows = _limit;
+    EXECUTE stmt USING @rows;
 END
 ;;
 DELIMITER ;
@@ -2060,95 +2124,15 @@ DROP PROCEDURE IF EXISTS `GET_POPULAR_IMAGES`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_POPULAR_IMAGES`(IN `_limit` int)
 BEGIN
-		SELECT *
-		FROM `files`
-		WHERE `type` = 'gallery'
-		ORDER BY `viewed` DESC
-		LIMIT _limit;
-END
-;;
-DELIMITER ;
+    PREPARE stmt FROM "
+			SELECT *
+			FROM `files`
+			WHERE `type` = 'gallery'
+			ORDER BY `viewed` DESC
+			LIMIT ?;";
 
--- ----------------------------
--- Procedure structure for `GET_POSTS`
--- ----------------------------
-DROP PROCEDURE IF EXISTS `GET_POSTS`;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_POSTS`(IN `_limitstart` int, IN `_limit` int)
-BEGIN
-    CALL ALL_POSTS();
-
-    SELECT p.*
-    FROM `all_posts` AS p
-    WHERE p.`is_music` = 1
-    ORDER BY p.`created` DESC
-    LIMIT _limitstart, _limit;
-END
-;;
-DELIMITER ;
-
--- ----------------------------
--- Procedure structure for `GET_POSTS_BY_TAGS`
--- ----------------------------
-DROP PROCEDURE IF EXISTS `GET_POSTS_BY_TAGS`;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_POSTS_BY_TAGS`(IN `_tags` varchar(512), IN `_limit` int)
-BEGIN
-    CALL ALL_POSTS();
-
-    SELECT p.*
-    FROM `all_posts` AS p
-    JOIN `post_tags` AS pt ON pt.`post_id` = p.`id`
-    JOIN `tags` AS t ON t.`id` = pt.`tag_id` 
-    WHERE t.`name` IN (_tags)
-    ORDER BY p.`viewed` DESC
-    LIMIT _limit;
-END
-;;
-DELIMITER ;
-
--- ----------------------------
--- Procedure structure for `GET_POSTS_BY_TAG_ID`
--- ----------------------------
-DROP PROCEDURE IF EXISTS `GET_POSTS_BY_TAG_ID`;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_POSTS_BY_TAG_ID`(IN `_id` int, IN `_limit` int)
-BEGIN
-    CALL ALL_POSTS();
-
-    SELECT p.*
-    FROM `all_posts` AS p
-    JOIN `post_tags` AS pt ON pt.`post_id` = p.`id`
-    JOIN `tags` AS t ON t.`id` = pt.`tag_id` 
-    WHERE t.`id` = _id
-    LIMIT 0, _limit;
-END
-;;
-DELIMITER ;
-
--- ----------------------------
--- Procedure structure for `GET_POSTS_BY_VIEW_COUNT`
--- ----------------------------
-DROP PROCEDURE IF EXISTS `GET_POSTS_BY_VIEW_COUNT`;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_POSTS_BY_VIEW_COUNT`(IN `_limit` int, IN `_with_covers` tinyint)
-BEGIN
-    CALL ALL_POSTS();
-
-    CALL ALL_POSTS();
-
-		IF _with_covers > 0 THEN
-        SELECT p.*
-        FROM `all_posts` AS p
-        WHERE `covers` IS NOT NULL
-        ORDER BY p.`viewed` DESC, p.`created` DESC
-        LIMIT _limit;
-    ELSE
-        SELECT p.*
-        FROM `all_posts` AS p
-        ORDER BY p.`viewed` DESC, p.`created` DESC
-        LIMIT _limit;
-    END IF;
+    SET @rows = _limit;
+    EXECUTE stmt USING @rows;
 END
 ;;
 DELIMITER ;
@@ -2185,6 +2169,106 @@ BEGIN
         SELECT p.`id` AS `id`, p.`name` AS `name`
         FROM `post` AS p;
     END IF;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `GET_POSTS`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `GET_POSTS`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_POSTS`(IN `_limitstart` int, IN `_limit` int)
+BEGIN
+    CALL ALL_POSTS();
+
+    PREPARE stmt FROM "
+			SELECT p.*
+			FROM `all_posts` AS p
+			WHERE p.`is_music` = 1
+			ORDER BY p.`created` DESC
+			LIMIT ?, ?;";
+
+    SET @skip = _limitstart;
+    SET @rows = _limit;
+    EXECUTE stmt USING @skip, @rows;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `GET_POSTS_BY_TAG_ID`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `GET_POSTS_BY_TAG_ID`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_POSTS_BY_TAG_ID`(IN `_id` int, IN `_limit` int)
+BEGIN
+		CALL ALL_POSTS();
+
+    PREPARE stmt FROM "
+			SELECT p.*
+			FROM `all_posts` AS p
+			JOIN `post_tags` AS pt ON pt.`post_id` = p.`id`
+			JOIN `tags` AS t ON t.`id` = pt.`tag_id` 
+			WHERE t.`id` = ?
+			LIMIT 0, ?;";
+
+		SET @id = _id;
+    SET @rows = _limit;
+    EXECUTE stmt USING @id, @rows;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `GET_POSTS_BY_TAGS`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `GET_POSTS_BY_TAGS`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_POSTS_BY_TAGS`(IN `_tags` varchar(512), IN `_limit` int)
+BEGIN
+    CALL ALL_POSTS();
+
+    PREPARE stmt FROM "
+			SELECT p.*
+			FROM `all_posts` AS p
+			JOIN `post_tags` AS pt ON pt.`post_id` = p.`id`
+			JOIN `tags` AS t ON t.`id` = pt.`tag_id` 
+			WHERE t.`name` IN (?)
+			ORDER BY p.`viewed` DESC
+			LIMIT ?;";
+
+    SET @tags = _tags;
+    SET @rows = _limit;
+    EXECUTE stmt USING @tags, @rows;
+END
+;;
+DELIMITER ;
+
+-- ----------------------------
+-- Procedure structure for `GET_POSTS_BY_VIEW_COUNT`
+-- ----------------------------
+DROP PROCEDURE IF EXISTS `GET_POSTS_BY_VIEW_COUNT`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_POSTS_BY_VIEW_COUNT`(IN `_limit` int, IN `_with_covers` tinyint)
+BEGIN
+		IF _with_covers > 0 THEN
+		    PREPARE stmt FROM "SELECT p.*
+					FROM `all_posts` AS p
+					WHERE `covers` IS NOT NULL
+					ORDER BY p.`viewed` DESC, p.`created` DESC
+					LIMIT ?;";
+		ELSE
+				PREPARE stmt FROM "SELECT p.*
+					FROM `all_posts` AS p
+					ORDER BY p.`viewed` DESC, p.`created` DESC
+					LIMIT ?;";
+		END IF;
+
+    CALL ALL_POSTS();
+
+		SET @rows = _limit;
+    EXECUTE stmt USING @rows;
 END
 ;;
 DELIMITER ;
@@ -2268,12 +2352,16 @@ DROP PROCEDURE IF EXISTS `GET_TAGS`;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_TAGS`(IN `_limit` int)
 BEGIN
-    SELECT t.*, COUNT(pt.`id`) `count`
-    FROM `tags` t
-    JOIN `post_tags` pt ON pt.`tag_id` = t.`id`
-    GROUP BY t.`id`
-    ORDER BY `count` DESC
-    LIMIT _limit;
+    PREPARE stmt FROM "
+			SELECT t.*, COUNT(pt.`id`) `count`
+			FROM `tags` t
+			JOIN `post_tags` pt ON pt.`tag_id` = t.`id`
+			GROUP BY t.`id`
+			ORDER BY `count` DESC
+			LIMIT ?;";
+
+    SET @rows = _limit;
+    EXECUTE stmt USING @rows;
 END
 ;;
 DELIMITER ;
