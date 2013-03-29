@@ -61,7 +61,7 @@
             <img src="<?php echo $options['data']->favorite->link; ?>" width="693" />
         </a>
     </div>
-    <div class="thumbnails">
+    <div class="thumbnails gallery-item">
         <?php foreach ($options['data']->originals as $original) : ?>
             <a name="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
                 <img src="<?php echo $original->thumbnail; ?>" width="108" height="108" />

@@ -61,7 +61,7 @@
             </a>
         </div>
     </h2>
-    <div class="latest fl">
+    <div class="latest fl gallery-item">
         <?php foreach ($options['data']['gallery_latest'] as $original) : ?>
             <?php
                 // Check preview count
@@ -86,7 +86,7 @@
         }
     ?>
 
-    <div class="popular fl">
+    <div class="popular fl gallery-item">
         <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>#image-<?php echo $popular_image->id; ?>" rel="<?php echo $popular_image->id; ?>">
             <img src="<?php echo  Application::$config['http_host'] . substr($popular_image->source, 1); ?>" />
         </a>
