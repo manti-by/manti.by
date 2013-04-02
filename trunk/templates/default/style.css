@@ -266,3 +266,6 @@ audio { width: 330px; transform: scale(0.8); }
 
 #sitemap ul ul { margin: 5px 0 0 15px; }
 #sitemap ul ul li { font-size: 12px; margin: 0; }
+
+.contact { padding-bottom: 10px; font-weight: bold; }
+.contact a { font-weight: normal; color: #b40303 !important; }

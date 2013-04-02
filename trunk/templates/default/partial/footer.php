@@ -50,14 +50,14 @@
     $user = UserEntity::getInstance();
 ?>
 <div class="left-column">
-    <div class="site-title">
-        <?php echo Application::$config['site_title_' . Application::$config['language']]; ?>
+    <div class="trends">
+        Alexander Chaika a.k.a. Manti&copy; 2004 - <?php echo date('Y'); ?>
     </div>
     <div class="metadesc">
         <?php echo Application::$config['metadesc_' . Application::$config['language']]; ?>
     </div>
-    <div class="trends">
-        Alexander Chaika a.k.a. Manti&copy; 2004 - <?php echo date('Y'); ?>
+    <div class="contact">
+        <?php echo T('Contact me'); ?>: <a href="mailto://manti.by@gmail.com">manti.by@gmail.com</a> / Skype: <a href="callto://alexandr-chaika">alexandr-chaika</a>
     </div>
     <div class="copyright">
         <?php echo Application::$config['copyright_' . Application::$config['language']]; ?>
