@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2013-04-02 16:51:35
+Date: 2013-04-02 17:20:20
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,7 +49,7 @@ CREATE TABLE `_sef_alias` (
   `link` varchar(255) NOT NULL,
   `viewed` int(11) unsigned DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=319 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=340 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of _sef_alias
@@ -67,7 +67,7 @@ INSERT INTO `_sef_alias` VALUES ('83', 'index.php?module=tag&action=search&id=17
 INSERT INTO `_sef_alias` VALUES ('84', 'index.php?module=tag&action=search&id=18', 'tag/m31/', '0');
 INSERT INTO `_sef_alias` VALUES ('85', 'index.php?module=blog&action=show&id=8', 'blog/autoreply/', '0');
 INSERT INTO `_sef_alias` VALUES ('86', 'index.php?module=tag&action=search&id=19', 'tag/autoreply/', '0');
-INSERT INTO `_sef_alias` VALUES ('1', 'index.php?module=blog', 'blog/', '0');
+INSERT INTO `_sef_alias` VALUES ('1', 'index.php?module=blog', 'blog/', '3');
 INSERT INTO `_sef_alias` VALUES ('87', 'index.php?module=tag&action=search&id=20', 'tag/m27/', '0');
 INSERT INTO `_sef_alias` VALUES ('88', 'index.php?module=gallery', 'gallery/', '0');
 INSERT INTO `_sef_alias` VALUES ('89', 'index.php?module=blog&action=show&id=25', 'blog/hi-pass/', '0');
@@ -135,7 +135,7 @@ INSERT INTO `_sef_alias` VALUES ('142', 'index.php?module=gallery&action=track',
 INSERT INTO `_sef_alias` VALUES ('143', 'index.php?module=file&action=track', 'file/track/', '0');
 INSERT INTO `_sef_alias` VALUES ('144', 'index.php?module=gallery&action=next', 'gallery/next/', '0');
 INSERT INTO `_sef_alias` VALUES ('145', 'index.php?module=gallery&action=prev', 'gallery/prev/', '0');
-INSERT INTO `_sef_alias` VALUES ('146', 'index.php', '', '0');
+INSERT INTO `_sef_alias` VALUES ('146', 'index.php', '', '9');
 INSERT INTO `_sef_alias` VALUES ('147', 'index.php?module=blog&action=edit&id=25', 'blog/edit/id/25/', '0');
 INSERT INTO `_sef_alias` VALUES ('148', 'index.php?module=blog&action=delete&id=25', 'blog/delete/id/25/', '0');
 INSERT INTO `_sef_alias` VALUES ('149', 'index.php?module=blog&action=edit&id=24', 'blog/edit/id/24/', '0');
@@ -154,7 +154,7 @@ INSERT INTO `_sef_alias` VALUES ('161', 'index.php?module=file&action=edit', 'fi
 INSERT INTO `_sef_alias` VALUES ('162', 'index.php?module=gallery&action=updatefiles', 'gallery/updatefiles/', '0');
 INSERT INTO `_sef_alias` VALUES ('163', 'index.php?module=gallery&action=rebuildthumbnails', 'gallery/rebuildthumbnails/', '0');
 INSERT INTO `_sef_alias` VALUES ('164', 'index.php?module=tag&action=autocomplete', 'tag/autocomplete/', '0');
-INSERT INTO `_sef_alias` VALUES ('165', 'index.php?module=blog&action=next', 'blog/next/', '0');
+INSERT INTO `_sef_alias` VALUES ('165', 'index.php?module=blog&action=next', 'blog/next/', '16');
 INSERT INTO `_sef_alias` VALUES ('166', 'index.php?module=blog&action=edit&id=14', 'blog/edit/id/14/', '0');
 INSERT INTO `_sef_alias` VALUES ('167', 'index.php?module=blog&action=delete&id=14', 'blog/delete/id/14/', '0');
 INSERT INTO `_sef_alias` VALUES ('168', 'index.php?module=blog&action=track&id=14', 'blog/track/id/14/', '0');
@@ -241,41 +241,39 @@ INSERT INTO `_sef_alias` VALUES ('248', 'index.php?module=blog&action=delete&id=
 INSERT INTO `_sef_alias` VALUES ('249', 'index.php?module=blog&action=show&id=28', 'blog/marrakesh/', '0');
 INSERT INTO `_sef_alias` VALUES ('250', 'index.php?module=blog&action=edit&id=28', 'blog/edit/id/28/', '0');
 INSERT INTO `_sef_alias` VALUES ('251', 'index.php?module=blog&action=delete&id=28', 'blog/delete/id/28/', '0');
-INSERT INTO `_sef_alias` VALUES ('252', 'index.php?module=tag&action=search&id=63', 'tag/search/id/63/', '0');
-INSERT INTO `_sef_alias` VALUES ('253', 'index.php?module=tag&action=search&id=64', 'tag/search/id/64/', '0');
 INSERT INTO `_sef_alias` VALUES ('254', 'index.php?module=blog&action=show&id=27', 'blog/janaca-express-01/', '0');
 INSERT INTO `_sef_alias` VALUES ('255', 'index.php?module=blog&action=edit&id=27', 'blog/edit/id/27/', '0');
 INSERT INTO `_sef_alias` VALUES ('256', 'index.php?module=blog&action=delete&id=27', 'blog/delete/id/27/', '0');
-INSERT INTO `_sef_alias` VALUES ('257', 'index.php?module=tag&action=search&id=58', 'tag/search/id/58/', '0');
-INSERT INTO `_sef_alias` VALUES ('258', 'index.php?module=tag&action=search&id=59', 'tag/search/id/59/', '0');
-INSERT INTO `_sef_alias` VALUES ('259', 'index.php?module=tag&action=search&id=62', 'tag/search/id/62/', '0');
-INSERT INTO `_sef_alias` VALUES ('260', 'index.php?module=tag&action=search&id=61', 'tag/search/id/61/', '0');
+INSERT INTO `_sef_alias` VALUES ('339', 'index.php?module=tag&action=search&id=73', 'tag/trauma/', '0');
+INSERT INTO `_sef_alias` VALUES ('338', 'index.php?module=tag&action=search&id=72', 'tag/m23/', '0');
+INSERT INTO `_sef_alias` VALUES ('337', 'index.php?module=tag&action=search&id=75', 'tag/m24/', '0');
+INSERT INTO `_sef_alias` VALUES ('336', 'index.php?module=tag&action=search&id=74', 'tag/renaissance/', '0');
 INSERT INTO `_sef_alias` VALUES ('261', 'index.php?module=blog&action=show&id=26', 'blog/janaca-express/', '0');
 INSERT INTO `_sef_alias` VALUES ('262', 'index.php?module=blog&action=edit&id=26', 'blog/edit/id/26/', '0');
 INSERT INTO `_sef_alias` VALUES ('263', 'index.php?module=blog&action=delete&id=26', 'blog/delete/id/26/', '0');
-INSERT INTO `_sef_alias` VALUES ('264', 'index.php?module=tag&action=search&id=60', 'tag/search/id/60/', '0');
+INSERT INTO `_sef_alias` VALUES ('335', 'index.php?module=tag&action=search&id=91', 'tag/me01/', '0');
 INSERT INTO `_sef_alias` VALUES ('265', 'index.php?module=blog&action=track&id=27', 'blog/track/id/27/', '0');
 INSERT INTO `_sef_alias` VALUES ('266', 'index.php?module=blog&action=track&id=26', 'blog/track/id/26/', '0');
 INSERT INTO `_sef_alias` VALUES ('267', 'index.php?module=blog&action=show&id=30', 'blog/janaca-express-live/', '0');
 INSERT INTO `_sef_alias` VALUES ('268', 'index.php?module=blog&action=edit&id=30', 'blog/edit/id/30/', '0');
 INSERT INTO `_sef_alias` VALUES ('269', 'index.php?module=blog&action=delete&id=30', 'blog/delete/id/30/', '0');
-INSERT INTO `_sef_alias` VALUES ('270', 'index.php?module=tag&action=search&id=68', 'tag/search/id/68/', '0');
+INSERT INTO `_sef_alias` VALUES ('334', 'index.php?module=tag&action=search&id=90', 'tag/exclusive/', '0');
 INSERT INTO `_sef_alias` VALUES ('271', 'index.php?module=blog&action=show&id=31', 'blog/killing-machine/', '0');
 INSERT INTO `_sef_alias` VALUES ('272', 'index.php?module=blog&action=edit&id=31', 'blog/edit/id/31/', '0');
 INSERT INTO `_sef_alias` VALUES ('273', 'index.php?module=blog&action=delete&id=31', 'blog/delete/id/31/', '0');
 INSERT INTO `_sef_alias` VALUES ('274', 'index.php?module=blog&action=show&id=36', 'blog/enzo-cafe/', '0');
 INSERT INTO `_sef_alias` VALUES ('275', 'index.php?module=blog&action=edit&id=36', 'blog/edit/id/36/', '0');
 INSERT INTO `_sef_alias` VALUES ('276', 'index.php?module=blog&action=delete&id=36', 'blog/delete/id/36/', '0');
-INSERT INTO `_sef_alias` VALUES ('277', 'index.php?module=tag&action=search&id=83', 'tag/search/id/83/', '0');
-INSERT INTO `_sef_alias` VALUES ('278', 'index.php?module=tag&action=search&id=84', 'tag/search/id/84/', '0');
+INSERT INTO `_sef_alias` VALUES ('333', 'index.php?module=tag&action=search&id=89', 'tag/nlp/', '0');
+INSERT INTO `_sef_alias` VALUES ('332', 'index.php?module=tag&action=search&id=88', 'tag/rap/', '0');
 INSERT INTO `_sef_alias` VALUES ('279', 'index.php?module=blog&action=show&id=35', 'blog/progress/', '0');
 INSERT INTO `_sef_alias` VALUES ('280', 'index.php?module=blog&action=edit&id=35', 'blog/edit/id/35/', '0');
 INSERT INTO `_sef_alias` VALUES ('281', 'index.php?module=blog&action=delete&id=35', 'blog/delete/id/35/', '0');
-INSERT INTO `_sef_alias` VALUES ('282', 'index.php?module=tag&action=search&id=78', 'tag/search/id/78/', '0');
-INSERT INTO `_sef_alias` VALUES ('283', 'index.php?module=tag&action=search&id=79', 'tag/search/id/79/', '0');
-INSERT INTO `_sef_alias` VALUES ('284', 'index.php?module=tag&action=search&id=80', 'tag/search/id/80/', '0');
-INSERT INTO `_sef_alias` VALUES ('285', 'index.php?module=tag&action=search&id=81', 'tag/search/id/81/', '0');
-INSERT INTO `_sef_alias` VALUES ('286', 'index.php?module=tag&action=search&id=82', 'tag/search/id/82/', '0');
+INSERT INTO `_sef_alias` VALUES ('331', 'index.php?module=tag&action=search&id=87', 'tag/hip-hop/', '0');
+INSERT INTO `_sef_alias` VALUES ('330', 'index.php?module=tag&action=search&id=77', 'tag/m26/', '0');
+INSERT INTO `_sef_alias` VALUES ('329', 'index.php?module=tag&action=search&id=76', 'tag/exception/', '0');
+INSERT INTO `_sef_alias` VALUES ('328', 'index.php?module=tag&action=search&id=82', 'tag/pregressive/', '0');
+INSERT INTO `_sef_alias` VALUES ('327', 'index.php?module=tag&action=search&id=81', 'tag/m28/', '0');
 INSERT INTO `_sef_alias` VALUES ('287', 'index.php?module=blog&action=show&id=34', 'blog/exception/', '0');
 INSERT INTO `_sef_alias` VALUES ('288', 'index.php?module=blog&action=edit&id=34', 'blog/edit/id/34/', '0');
 INSERT INTO `_sef_alias` VALUES ('289', 'index.php?module=blog&action=delete&id=34', 'blog/delete/id/34/', '0');
@@ -285,28 +283,27 @@ INSERT INTO `_sef_alias` VALUES ('292', 'index.php?module=blog&action=delete&id=
 INSERT INTO `_sef_alias` VALUES ('293', 'index.php?module=blog&action=show&id=32', 'blog/trauma/', '0');
 INSERT INTO `_sef_alias` VALUES ('294', 'index.php?module=blog&action=edit&id=32', 'blog/edit/id/32/', '0');
 INSERT INTO `_sef_alias` VALUES ('295', 'index.php?module=blog&action=delete&id=32', 'blog/delete/id/32/', '0');
-INSERT INTO `_sef_alias` VALUES ('296', 'index.php?module=tag&action=search&id=65', 'tag/search/id/65/', '0');
+INSERT INTO `_sef_alias` VALUES ('326', 'index.php?module=tag&action=search&id=80', 'tag/progress/', '0');
 INSERT INTO `_sef_alias` VALUES ('297', 'index.php?module=file&action=add', 'file/add/', '0');
 INSERT INTO `_sef_alias` VALUES ('298', 'index.php?module=blog&action=show&id=38', 'blog/reach/', '0');
 INSERT INTO `_sef_alias` VALUES ('299', 'index.php?module=blog&action=edit&id=38', 'blog/edit/id/38/', '0');
 INSERT INTO `_sef_alias` VALUES ('300', 'index.php?module=blog&action=delete&id=38', 'blog/delete/id/38/', '0');
-INSERT INTO `_sef_alias` VALUES ('301', 'index.php?module=tag&action=search&id=86', 'tag/search/id/86/', '0');
+INSERT INTO `_sef_alias` VALUES ('325', 'index.php?module=tag&action=search&id=79', 'tag/athospheric/', '0');
 INSERT INTO `_sef_alias` VALUES ('302', 'index.php?module=blog&action=show&id=37', 'blog/stockholm-syndrome-backset/', '0');
 INSERT INTO `_sef_alias` VALUES ('303', 'index.php?module=blog&action=edit&id=37', 'blog/edit/id/37/', '0');
 INSERT INTO `_sef_alias` VALUES ('304', 'index.php?module=blog&action=delete&id=37', 'blog/delete/id/37/', '0');
-INSERT INTO `_sef_alias` VALUES ('305', 'index.php?module=tag&action=search&id=85', 'tag/search/id/85/', '0');
+INSERT INTO `_sef_alias` VALUES ('324', 'index.php?module=tag&action=search&id=78', 'tag/breaks/', '0');
 INSERT INTO `_sef_alias` VALUES ('306', 'index.php?module=blog&action=show&id=40', 'blog/my-friend-friday/', '0');
 INSERT INTO `_sef_alias` VALUES ('307', 'index.php?module=blog&action=edit&id=40', 'blog/edit/id/40/', '0');
 INSERT INTO `_sef_alias` VALUES ('308', 'index.php?module=blog&action=delete&id=40', 'blog/delete/id/40/', '0');
-INSERT INTO `_sef_alias` VALUES ('309', 'index.php?module=tag&action=search&id=92', 'tag/search/id/92/', '0');
+INSERT INTO `_sef_alias` VALUES ('323', 'index.php?module=tag&action=search&id=84', 'tag/m29/', '0');
 INSERT INTO `_sef_alias` VALUES ('310', 'index.php?module=blog&action=show&id=39', 'blog/nlp/', '0');
 INSERT INTO `_sef_alias` VALUES ('311', 'index.php?module=blog&action=edit&id=39', 'blog/edit/id/39/', '0');
 INSERT INTO `_sef_alias` VALUES ('312', 'index.php?module=blog&action=delete&id=39', 'blog/delete/id/39/', '0');
-INSERT INTO `_sef_alias` VALUES ('313', 'index.php?module=tag&action=search&id=87', 'tag/search/id/87/', '0');
-INSERT INTO `_sef_alias` VALUES ('314', 'index.php?module=tag&action=search&id=88', 'tag/search/id/88/', '0');
-INSERT INTO `_sef_alias` VALUES ('315', 'index.php?module=tag&action=search&id=89', 'tag/search/id/89/', '0');
-INSERT INTO `_sef_alias` VALUES ('316', 'index.php?module=tag&action=search&id=90', 'tag/search/id/90/', '0');
-INSERT INTO `_sef_alias` VALUES ('317', 'index.php?module=tag&action=search&id=91', 'tag/search/id/91/', '0');
+INSERT INTO `_sef_alias` VALUES ('322', 'index.php?module=tag&action=search&id=83', 'tag/enzo-cafe/', '0');
+INSERT INTO `_sef_alias` VALUES ('321', 'index.php?module=tag&action=search&id=85', 'tag/m32/', '0');
+INSERT INTO `_sef_alias` VALUES ('320', 'index.php?module=tag&action=search&id=92', 'tag/my-friend-friday/', '0');
+INSERT INTO `_sef_alias` VALUES ('319', 'index.php?module=tag&action=search&id=86', 'tag/m33/', '0');
 INSERT INTO `_sef_alias` VALUES ('318', 'index.php?module=blog&action=track&id=38', 'blog/track/id/38/', '0');
 
 -- ----------------------------
@@ -1178,10 +1175,10 @@ INSERT INTO `post` VALUES ('33', 'Renaissance promo', 'renaissance', 'Утром
 INSERT INTO `post` VALUES ('34', 'Exception', 'exception', 'Этот сет является продолжением серии минималистичных нейро миксов, продолжением работы под названием Katana.', 'Этот сет является продолжением серии минималистичных нейро миксов, продолжением работы под названием Katana.\r\nОдна из первых работ полностью записанная в живую на моем тракторе (Traktor Pro + X1 + TA6), немного была подмастерена, но в целом осталась довольно живой.\r\nПравда, часть свежих треков не вошла в микс, но они попадут в следующий, который уже понемногу собирается.', 'Этот сет является продолжением серии минималистичных нейро миксов, продолжением работы под названием Katana.', '1', 'MNT026', 'Techstep, Neurostep', 'LAME 320kbps 44100Hz', '51:35', '1. Mortem - Monoveler\r\n2. Icicle - Alien Groove\r\n3. Paimon - Hellraiser  \r\n4. Science Fiction - Abyss  \r\n5. Mortem - Get Close\r\n6. June Miller - Snapcase\r\n7. Alix Perez - Exemption\r\n8. Kabuki & Savine - Backup\r\n9. The Countamen & Alley Cat - Payload (Konflict remix)\r\n10. Science Fiction - Bystander effect  \r\n11. Nickbee & Malc - Cosmos\r\n12. Icicle, Distance - Exhale', '2012-04-25 00:00:00', '0', '2013-04-02 17:18:50');
 INSERT INTO `post` VALUES ('35', 'Progress R-7A', 'progress', 'Я не особо люблю Брейкс, но когда эта музыка сопровождается прогрессив атмосферой - получаются просто бесподобные вещи.', 'Я не особо люблю Брейкс, но когда эта музыка сопровождается прогрессив атмосферой - получаются просто бесподобные вещи.', 'Я не особо люблю Брейкс, но когда эта музыка сопровождается прогрессив атмосферой - получаются просто бесподобные вещи.', '1', 'MNT028', 'Progressive breaks', 'LAME 320kbps 44100Hz', '56:18', '1. Abdomen Burst - Lullaby (Original Mix)\r\n2. Jamie Stevens - The Night Before (Momu Remix)\r\n3. Rhino Drum - Underground Sound (Fretwell Remix) \r\n4. Neo - Aura (Cosmonaut-Rework)\r\n5. Pilot - Dilema (Plastic Shell Remix)\r\n6. Pete Gawtry - It\\\'s Life (Wrecked Angle Remix)\r\n7. Plastic Shell - Hard Way (Original Mix) \r\n8. Cosmonaut feat. Мумий Троль - Иди, я буду\r\n9. Shiloh - Dream On (Original Mix)\r\n10. Pinkbox Special - Nice Guys Finish Last (Original Mix)', '2012-06-01 00:00:00', '0', '2013-04-02 17:18:50');
 INSERT INTO `post` VALUES ('36', 'Enzo cafe live', 'enzo-cafe', 'Живой микс для Enzo cafe (Минск, Беларусь)', 'Живой микс для Enzo cafe (Минск, Беларусь)', 'Живой микс для Enzo cafe (Минск, Беларусь)', '1', 'MNT029', 'Tech House, Deep House', 'LAME 320kbps 44100Hz', '1:01:13', '1. La Fleur - Ten Fingers (Original Mix) \r\n2. Boss Axis - Cologne (Rodriguez Jr. remix)\r\n3. Tiefschwarz - I can\\\'t resist (feat. Dave Aju)\r\n4. Sebo K - Mr. Duke (Alternative version)\r\n5. Martin Landsky - Morning Caffeine (Organ Dub)\r\n6. Bambook feat. Arkanna - Off the system (Beat Factory remix)\r\n7. FCODE - Mixture (original mix)  \r\n8. Noir & Chris Minus - Sleep no more (vocal mix)\r\n9. Tojami Sessions - Tetra\r\n10. Strict Border - Pianist In The Zoo\r\n11. Strict Border - Rendevouz\r\n12. MSMS - Juice', '2012-06-30 00:00:00', '0', '2013-04-02 17:18:50');
-INSERT INTO `post` VALUES ('37', 'Stockholm syndrome - Backset', 'stockholm-syndrome-backset', 'Продолжение работы над собой. Второй микс из серии \\\"Stockholm syndrome\\\".', 'Продолжение работы над собой. Второй микс из серии \\\"Stockholm syndrome\\\".', 'Продолжение работы над собой. Второй микс из серии \\\"Stockholm syndrome\\\".', '1', 'MNT032', 'Tech House, Deep House', 'LAME 320kbps 44100Hz', '1:00:01', '1. Tube & Berger & Milan Euringer - Lovebreak (Original mix)\r\n2. Shades Of Gray - Crazee\r\n3. Layo & Bushwaka feat. Kim Ann Foxman - Cant hurt you (Original mix)\r\n4. Marc Romboy - More Muzik (Original mix)\r\n5. Darling Farah - Body (Jimmy Edgar remix)\r\n6. Tom Novy - Walking On the Moog (caTekk Remix)\r\n7. Kink - E79\r\n8. Norm - Foco (Paul Jey remix)\r\n9. Takt Tick - Gloomy Dawn (Original mix)\r\n10. Danny Daze and Matches - If this\r\n11. Vas Floyd - Deep house soul (Vas Floyd & Mr Jones strings mix)\r\n12. Terry Lee Brown Junior - Delightful encounter', '2012-11-27 00:00:00', '0', '2013-04-02 17:18:50');
+INSERT INTO `post` VALUES ('37', 'Stockholm syndrome - Backset', 'stockholm-syndrome-backset', 'Продолжение работы над собой. Второй микс из серии \"Stockholm syndrome\".', 'Продолжение работы над собой. Второй микс из серии \"Stockholm syndrome\".', 'Продолжение работы над собой. Второй микс из серии \"Stockholm syndrome\".', '1', 'MNT032', 'Tech House, Deep House', 'LAME 320kbps 44100Hz', '1:00:01', '1. Tube & Berger & Milan Euringer - Lovebreak (Original mix)\r\n2. Shades Of Gray - Crazee\r\n3. Layo & Bushwaka feat. Kim Ann Foxman - Cant hurt you (Original mix)\r\n4. Marc Romboy - More Muzik (Original mix)\r\n5. Darling Farah - Body (Jimmy Edgar remix)\r\n6. Tom Novy - Walking On the Moog (caTekk Remix)\r\n7. Kink - E79\r\n8. Norm - Foco (Paul Jey remix)\r\n9. Takt Tick - Gloomy Dawn (Original mix)\r\n10. Danny Daze and Matches - If this\r\n11. Vas Floyd - Deep house soul (Vas Floyd & Mr Jones strings mix)\r\n12. Terry Lee Brown Junior - Delightful encounter', '2012-11-27 00:00:00', '0', '2013-04-02 18:12:23');
 INSERT INTO `post` VALUES ('38', 'Reach out of the Sun', 'reach', 'Странные весенние настроения и куча различных событий в личной, и не только, жизни привели к созданию этой компиляции.', 'Странные весенние настроения и куча различных событий в личной, и не только, жизни привели к созданию этой компиляции.\r\nДанная работа, что-то среднее между сериями Дом разбитых сердец, пепел и Synthetic, с первым по-большей части эмоционально, а со вторым по звуку и общей атмосфере...', 'Странные весенние настроения и куча различных событий в личной, и не только, жизни привели к созданию этой компиляции.', '1', 'MNT033', 'Ambient, Chillout', 'LAME 320kbps 44100Hz', '1:05:37', '1. Idex - Arc 07\r\n2. Kriipis Tulo - The deep of the night\r\n3. Apparat - Black water\r\n4. June Miller - Coming Closer\r\n5. Ishome - Earth\r\n6. Digital Mystery Tour - The Blooming  \r\n7. Late - Dreams are    \r\n8. Monoceros - Monocrom    \r\n9. Oak - Otaku\r\n10. Monokle - Warm control\r\n11. Electrosoul system - Morning Forest\r\n12. Synkro - Spirals\r\n13. Nanobyte - Lost time\r\n14. Monolake - Television tower    ', '2013-03-05 00:00:00', '0', '2013-04-02 17:50:23');
 INSERT INTO `post` VALUES ('39', 'Топливо для танка (НЛП)', 'nlp', 'Пожалуй единственная на данный момент Hip-Hop компиляция в чистом виде, сборник моих любимых треков.', 'Пожалуй единственная на данный момент Hip-Hop компиляция в чистом виде, сборник моих любимых треков.', 'Пожалуй единственная на данный момент Hip-Hop компиляция в чистом виде, сборник моих любимых треков.', '1', 'MNTE01', 'Rap, Hip-Hop', 'LAME 320kbps 44100Hz', '1:13:57', '', '2011-10-12 00:00:00', '0', '2013-04-02 17:18:50');
-INSERT INTO `post` VALUES ('40', 'My friend Friday', 'my-friend-friday', 'Спонтанный пятничный микс...', 'Спонтанный пятничный микс...', 'Спонтанный пятничный микс...', '1', 'MNTE02', 'Tech House, Deep House', 'LAME 320kbps 44100Hz', '37:15', '', '2013-01-18 00:00:00', '0', '2013-04-02 17:18:50');
+INSERT INTO `post` VALUES ('40', 'My friend Friday', 'my-friend-friday', 'Спонтанный пятничный микс...', 'Спонтанный пятничный микс...', 'Спонтанный пятничный микс...', '1', 'MNTE02', 'Tech House, Deep House', 'LAME 320kbps 44100Hz', '37:15', '1. Milton Jackson - Breathe (David Labeij remix)\r\n2. Lee Van Dowski - Not A Remix (Original mix)\r\n3. DJ Smilk, Juan Ddd - Dollar bills\r\n4. The Messenger - Preachin\' Out\r\n5. Luca M & Just2 - Peak Week (Original mix)\r\n6. Per Hammar, Frida Fralk - Get that\r\n7. Oscar Barila - Yoda (Original mix)\r\n8. Tube & Berger - Fog Head (Louis Osbourne & Jamie Anderson remix)', '2013-01-18 00:00:00', '0', '2013-04-02 18:11:42');
 
 -- ----------------------------
 -- Table structure for `post_files`
@@ -1532,7 +1529,7 @@ INSERT INTO `post_tags` VALUES ('157', '28', '4', 'meta');
 INSERT INTO `post_tags` VALUES ('158', '28', '63', 'meta');
 INSERT INTO `post_tags` VALUES ('159', '28', '64', 'meta');
 INSERT INTO `post_tags` VALUES ('160', '29', '37', 'meta');
-INSERT INTO `post_tags` VALUES ('161', '29', '65', 'meta');
+INSERT INTO `post_tags` VALUES ('161', '29', '36', 'meta');
 INSERT INTO `post_tags` VALUES ('162', '29', '66', 'meta');
 INSERT INTO `post_tags` VALUES ('163', '29', '67', 'meta');
 INSERT INTO `post_tags` VALUES ('164', '30', '58', 'meta');
@@ -1542,23 +1539,23 @@ INSERT INTO `post_tags` VALUES ('167', '30', '43', 'meta');
 INSERT INTO `post_tags` VALUES ('168', '30', '68', 'meta');
 INSERT INTO `post_tags` VALUES ('169', '31', '69', 'meta');
 INSERT INTO `post_tags` VALUES ('170', '31', '38', 'meta');
-INSERT INTO `post_tags` VALUES ('171', '31', '65', 'meta');
+INSERT INTO `post_tags` VALUES ('171', '31', '36', 'meta');
 INSERT INTO `post_tags` VALUES ('172', '31', '70', 'meta');
 INSERT INTO `post_tags` VALUES ('173', '31', '71', 'meta');
 INSERT INTO `post_tags` VALUES ('174', '32', '37', 'meta');
 INSERT INTO `post_tags` VALUES ('175', '32', '38', 'meta');
-INSERT INTO `post_tags` VALUES ('176', '32', '65', 'meta');
+INSERT INTO `post_tags` VALUES ('176', '32', '36', 'meta');
 INSERT INTO `post_tags` VALUES ('177', '32', '72', 'meta');
 INSERT INTO `post_tags` VALUES ('178', '32', '73', 'meta');
 INSERT INTO `post_tags` VALUES ('179', '33', '37', 'meta');
 INSERT INTO `post_tags` VALUES ('180', '33', '38', 'meta');
-INSERT INTO `post_tags` VALUES ('181', '33', '65', 'meta');
+INSERT INTO `post_tags` VALUES ('181', '33', '36', 'meta');
 INSERT INTO `post_tags` VALUES ('182', '33', '74', 'meta');
 INSERT INTO `post_tags` VALUES ('183', '33', '48', 'meta');
 INSERT INTO `post_tags` VALUES ('184', '33', '75', 'meta');
 INSERT INTO `post_tags` VALUES ('185', '34', '22', 'meta');
 INSERT INTO `post_tags` VALUES ('186', '34', '23', 'meta');
-INSERT INTO `post_tags` VALUES ('187', '34', '65', 'meta');
+INSERT INTO `post_tags` VALUES ('187', '34', '36', 'meta');
 INSERT INTO `post_tags` VALUES ('188', '34', '76', 'meta');
 INSERT INTO `post_tags` VALUES ('189', '34', '77', 'meta');
 INSERT INTO `post_tags` VALUES ('190', '35', '78', 'meta');
@@ -1661,41 +1658,40 @@ INSERT INTO `tags` VALUES ('54', 'MNT004', 'M04', null, '2013-03-27 15:18:47');
 INSERT INTO `tags` VALUES ('55', 'Minimal Techno', 'minimal-techno', null, '2013-03-27 15:18:53');
 INSERT INTO `tags` VALUES ('56', 'Hi-Pass', 'hi-pass', null, '2013-03-27 15:18:57');
 INSERT INTO `tags` VALUES ('57', 'MNT005', 'M05', null, '2013-03-27 15:18:59');
-INSERT INTO `tags` VALUES ('58', 'Goa Trance', null, null, '2013-04-02 15:08:40');
-INSERT INTO `tags` VALUES ('59', 'Psy Trance', null, null, '2013-04-02 15:08:40');
-INSERT INTO `tags` VALUES ('60', 'MNT006', null, null, '2013-04-02 15:08:40');
-INSERT INTO `tags` VALUES ('61', 'Janaca Express', null, null, '2013-04-02 15:08:41');
-INSERT INTO `tags` VALUES ('62', 'MNT009', null, null, '2013-04-02 15:12:54');
-INSERT INTO `tags` VALUES ('63', 'Marrakesh', null, null, '2013-04-02 15:17:51');
-INSERT INTO `tags` VALUES ('64', 'MNT010', null, null, '2013-04-02 15:17:51');
-INSERT INTO `tags` VALUES ('65', 'Drum\\\'n\\\'Bass', null, null, '2013-04-02 15:23:18');
-INSERT INTO `tags` VALUES ('66', 'MNT011', null, null, '2013-04-02 15:23:18');
-INSERT INTO `tags` VALUES ('67', 'Helloween live', null, null, '2013-04-02 15:23:18');
-INSERT INTO `tags` VALUES ('68', 'MNT013', null, null, '2013-04-02 15:26:34');
-INSERT INTO `tags` VALUES ('69', 'Darkstep', null, null, '2013-04-02 15:54:29');
-INSERT INTO `tags` VALUES ('70', 'Killing machine', null, null, '2013-04-02 15:54:29');
-INSERT INTO `tags` VALUES ('71', 'MNT016', null, null, '2013-04-02 15:54:29');
-INSERT INTO `tags` VALUES ('72', 'MNT023', null, null, '2013-04-02 16:01:07');
-INSERT INTO `tags` VALUES ('73', 'Trauma', null, null, '2013-04-02 16:01:07');
-INSERT INTO `tags` VALUES ('74', 'Renaissance', null, null, '2013-04-02 16:05:40');
-INSERT INTO `tags` VALUES ('75', 'MNT024', null, null, '2013-04-02 16:05:40');
-INSERT INTO `tags` VALUES ('76', 'Exception', null, null, '2013-04-02 16:09:32');
-INSERT INTO `tags` VALUES ('77', 'MNT026', null, null, '2013-04-02 16:09:32');
-INSERT INTO `tags` VALUES ('78', 'Breaks', null, null, '2013-04-02 16:12:43');
-INSERT INTO `tags` VALUES ('79', 'Athmospheric', null, null, '2013-04-02 16:12:43');
-INSERT INTO `tags` VALUES ('80', 'Progress', null, null, '2013-04-02 16:12:43');
-INSERT INTO `tags` VALUES ('81', 'MNT028', null, null, '2013-04-02 16:12:43');
-INSERT INTO `tags` VALUES ('82', 'Progressive', null, null, '2013-04-02 16:12:43');
-INSERT INTO `tags` VALUES ('83', 'Enzo cafe', null, null, '2013-04-02 16:16:15');
-INSERT INTO `tags` VALUES ('84', 'MNT029', null, null, '2013-04-02 16:16:15');
-INSERT INTO `tags` VALUES ('85', 'MNT032', null, null, '2013-04-02 16:20:44');
-INSERT INTO `tags` VALUES ('86', 'MNT033', null, null, '2013-04-02 16:25:35');
-INSERT INTO `tags` VALUES ('87', 'Hip-Hop', null, null, '2013-04-02 17:05:08');
-INSERT INTO `tags` VALUES ('88', 'Rap', null, null, '2013-04-02 17:05:08');
-INSERT INTO `tags` VALUES ('89', 'NLP', null, null, '2013-04-02 17:05:08');
-INSERT INTO `tags` VALUES ('90', 'Exclusive', null, null, '2013-04-02 17:05:08');
-INSERT INTO `tags` VALUES ('91', 'MNTE01', null, null, '2013-04-02 17:05:08');
-INSERT INTO `tags` VALUES ('92', 'My friend Friday', null, null, '2013-04-02 17:09:49');
+INSERT INTO `tags` VALUES ('58', 'Goa Trance', 'goa', null, '2013-04-02 18:13:01');
+INSERT INTO `tags` VALUES ('59', 'Psy Trance', 'psy', null, '2013-04-02 18:13:04');
+INSERT INTO `tags` VALUES ('60', 'MNT006', 'M06', null, '2013-04-02 18:13:10');
+INSERT INTO `tags` VALUES ('61', 'Janaca Express', 'janaca-express', null, '2013-04-02 18:13:24');
+INSERT INTO `tags` VALUES ('62', 'MNT009', 'M09', null, '2013-04-02 18:13:32');
+INSERT INTO `tags` VALUES ('63', 'Marrakesh', 'marrakesh', null, '2013-04-02 18:13:37');
+INSERT INTO `tags` VALUES ('64', 'MNT010', 'M10', null, '2013-04-02 18:13:39');
+INSERT INTO `tags` VALUES ('66', 'MNT011', 'M11', null, '2013-04-02 18:15:26');
+INSERT INTO `tags` VALUES ('67', 'Helloween live', 'helloween', null, '2013-04-02 18:15:31');
+INSERT INTO `tags` VALUES ('68', 'MNT013', 'M13', null, '2013-04-02 18:15:34');
+INSERT INTO `tags` VALUES ('69', 'Darkstep', 'darkstep', null, '2013-04-02 18:15:39');
+INSERT INTO `tags` VALUES ('70', 'Killing machine', 'killing-machine', null, '2013-04-02 18:15:45');
+INSERT INTO `tags` VALUES ('71', 'MNT016', 'M16', null, '2013-04-02 18:15:48');
+INSERT INTO `tags` VALUES ('72', 'MNT023', 'M23', null, '2013-04-02 18:15:51');
+INSERT INTO `tags` VALUES ('73', 'Trauma', 'trauma', null, '2013-04-02 18:15:54');
+INSERT INTO `tags` VALUES ('74', 'Renaissance', 'renaissance', null, '2013-04-02 18:16:00');
+INSERT INTO `tags` VALUES ('75', 'MNT024', 'M24', null, '2013-04-02 18:16:03');
+INSERT INTO `tags` VALUES ('76', 'Exception', 'exception', null, '2013-04-02 18:16:08');
+INSERT INTO `tags` VALUES ('77', 'MNT026', 'M26', null, '2013-04-02 18:16:13');
+INSERT INTO `tags` VALUES ('78', 'Breaks', 'breaks', null, '2013-04-02 18:16:17');
+INSERT INTO `tags` VALUES ('79', 'Athmospheric', 'athospheric', null, '2013-04-02 18:16:23');
+INSERT INTO `tags` VALUES ('80', 'Progress', 'progress', null, '2013-04-02 18:16:27');
+INSERT INTO `tags` VALUES ('81', 'MNT028', 'M28', null, '2013-04-02 18:16:30');
+INSERT INTO `tags` VALUES ('82', 'Progressive', 'pregressive', null, '2013-04-02 18:16:35');
+INSERT INTO `tags` VALUES ('83', 'Enzo cafe', 'enzo-cafe', null, '2013-04-02 18:16:42');
+INSERT INTO `tags` VALUES ('84', 'MNT029', 'M29', null, '2013-04-02 18:16:48');
+INSERT INTO `tags` VALUES ('85', 'MNT032', 'M32', null, '2013-04-02 18:16:50');
+INSERT INTO `tags` VALUES ('86', 'MNT033', 'M33', null, '2013-04-02 18:16:53');
+INSERT INTO `tags` VALUES ('87', 'Hip-Hop', 'hip-hop', null, '2013-04-02 18:16:56');
+INSERT INTO `tags` VALUES ('88', 'Rap', 'rap', null, '2013-04-02 18:16:58');
+INSERT INTO `tags` VALUES ('89', 'NLP', 'nlp', null, '2013-04-02 18:17:03');
+INSERT INTO `tags` VALUES ('90', 'Exclusive', 'exclusive', null, '2013-04-02 18:17:09');
+INSERT INTO `tags` VALUES ('91', 'MNTE01', 'ME01', null, '2013-04-02 18:17:14');
+INSERT INTO `tags` VALUES ('92', 'My friend Friday', 'my-friend-friday', null, '2013-04-02 18:20:02');
 
 -- ----------------------------
 -- Table structure for `user`
