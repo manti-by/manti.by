@@ -106,7 +106,7 @@
         </script>
         <noscript><div><img src="//mc.yandex.ru/watch/20835088" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <!-- /Yandex.Metrika counter -->
-        
+
         <?php echo $this->getContents('plugin', 'gototop'); ?>
         <?php echo $this->getContents('plugin', 'ajax'); ?>
         <?php echo $this->getContents('plugin', 'popup'); ?>

@@ -87,7 +87,7 @@
             foreach ($posts as $item) {
                 if (!in_array($item->id, $in_use)) {
                     $result['popular'][] = $item;
-                    $in_use[] = $item->id;
+                    // $in_use[] = $item->id;
                 }
 
                 // Break when done
