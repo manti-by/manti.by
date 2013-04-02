@@ -52,8 +52,10 @@
     <head>
         <title><?php echo strip_tags($options['title']); ?></title>
 
-        <meta name='yandex-verification' content='6765012bcd05fac2' />
-        
+        <meta name="description" content="Сеты и компиляции Александра Чайка a.k.a. Manti в различных стилях: Tech House, Deep House, Neurofunk, Technoid, Techstep, Ambient, Chillout, Goa, Psy." />
+        <meta name="keywords" content="Manti, Tech House, Deep House, Neurofunk, Technoid, Techstep, Ambient, Chillout, Goa, Psy.">
+        <meta name="yandex-verification" content="6765012bcd05fac2" />
+
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/default.css" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/style.css" />
 
