@@ -201,6 +201,10 @@
          * @return array $result
          */
         public function registerformAction($options) {
+            // Disable registration
+            $this->_throw(T('Registration currently disabled'));
+            return $this->loginformAction($options);
+
             // Check login state
             if ($this->model->isLoggined()) {
                 $this->_throw(T('You already logined'));
@@ -219,6 +223,10 @@
          * @return array $result
          */
         public function registerAction($options) {
+            // Disable registration
+            $this->_throw(T('Registration currently disabled'));
+            return $this->loginformAction($options);
+
             // Check login state
             if ($this->model->isLoggined()) {
                 $this->_throw(T('You already logined'));
