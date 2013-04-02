@@ -52,6 +52,8 @@
     <head>
         <title><?php echo strip_tags($options['title']); ?></title>
 
+        <meta name='yandex-verification' content='6765012bcd05fac2' />
+        
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/default.css" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/style.css" />
 
