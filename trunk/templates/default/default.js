@@ -51,22 +51,40 @@ $(document).ready(function() {
         );
     });
 
-    $('.tracklist .show-tracklist').click(function() {
+    $('.content .tracklist .show-tracklist').click(function() {
         $(this).hide();
-        $('.hide-tracklist[rel=' + $(this).attr('rel') + ']').show();
+        $('.content .hide-tracklist[rel=' + $(this).attr('rel') + ']').show();
 
-        $('#tracklist-' + $(this).attr('rel')).fadeIn();
-        $('#teaser-' + $(this).attr('rel')).hide();
-        $('#music-block-' + $(this).attr('rel')).hide();
+        $('.content #tracklist-' + $(this).attr('rel')).fadeIn();
+        $('.content #teaser-' + $(this).attr('rel')).hide();
+        $('.content #music-block-' + $(this).attr('rel')).hide();
     });
 
-    $('.tracklist .hide-tracklist').click(function() {
+    $('.content .tracklist .hide-tracklist').click(function() {
         $(this).hide();
-        $('.show-tracklist[rel=' + $(this).attr('rel') + ']').show();
+        $('.content .show-tracklist[rel=' + $(this).attr('rel') + ']').show();
 
-        $('#tracklist-' + $(this).attr('rel')).hide();
-        $('#teaser-' + $(this).attr('rel')).fadeIn();
-        $('#music-block-' + $(this).attr('rel')).fadeIn();
+        $('.content #tracklist-' + $(this).attr('rel')).hide();
+        $('.content #teaser-' + $(this).attr('rel')).fadeIn();
+        $('.content #music-block-' + $(this).attr('rel')).fadeIn();
+    });
+
+    $('.post-item .tracklist .show-tracklist').click(function() {
+        $(this).hide();
+        $('.post-item .hide-tracklist[rel=' + $(this).attr('rel') + ']').show();
+
+        $('.post-item #tracklist-' + $(this).attr('rel')).fadeIn();
+        $('.post-item #teaser-' + $(this).attr('rel')).hide();
+        $('.post-item #music-block-' + $(this).attr('rel') + ' .flip-tracklist').hide();
+    });
+
+    $('.post-item .tracklist .hide-tracklist').click(function() {
+        $(this).hide();
+        $('.post-item .show-tracklist[rel=' + $(this).attr('rel') + ']').show();
+
+        $('.post-item #tracklist-' + $(this).attr('rel')).hide();
+        $('.post-item #teaser-' + $(this).attr('rel')).fadeIn();
+        $('.post-item #music-block-' + $(this).attr('rel') + ' .flip-tracklist').fadeIn();
     });
 
     $('#sitemap .open-spoiler').bind('click', function() {

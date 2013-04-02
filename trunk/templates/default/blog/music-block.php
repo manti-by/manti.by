@@ -65,41 +65,41 @@
         <?php endif; ?>
 
         <?php if ($options['data']->catnum) : ?>
-            <div class="catnum">
+            <div class="catnum flip-tracklist">
                 <span class="bold"><?php echo T('Catalog No'); ?></span> :
                 <?php echo $options['data']->catnum; ?>
             </div>
         <?php endif; ?>
 
         <?php if ($options['data']->genre) : ?>
-            <div class="genre">
+            <div class="genre flip-tracklist">
                 <span class="bold"><?php echo T('Genre'); ?></span> :
                 <?php echo $options['data']->genre; ?>
             </div>
         <?php endif; ?>
 
         <?php if ($options['data']->length) : ?>
-            <div class="length">
+            <div class="length flip-tracklist">
                 <span class="bold"><?php echo T('Length'); ?></span> :
                 <?php echo $options['data']->length; ?>
             </div>
         <?php endif; ?>
 
         <?php if ($options['data']->quality) : ?>
-            <div class="quality">
+            <div class="quality flip-tracklist">
                 <span class="bold"><?php echo T('Quality'); ?></span> :
                 <?php echo $options['data']->quality; ?>
             </div>
         <?php endif; ?>
 
         <?php if (json_decode($options['data']->preview)) : ?>
-            <div class="preview">
+            <div class="preview flip-tracklist">
                 <?php echo File::getHtml($options['data']->preview, FileEntity::TYPE_PREVIEW); ?>
             </div>
         <?php endif; ?>
 
         <?php if (json_decode($options['data']->metakeys)) : ?>
-        <div class="metakeys">
+        <div class="metakeys flip-tracklist">
             <span class="bold"><?php echo T('Post tags'); ?></span> :
             <?php echo Tag::getHtml($options['data']->metakeys); ?>
         </div>
