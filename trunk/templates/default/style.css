@@ -219,7 +219,7 @@ audio { width: 330px; transform: scale(0.8); }
 #popular .rollover-item img { width: 160px; height: 160px; border: 1px solid #CCC !important; }
 #popular .rollover-item h3 { height: 14px; text-transform: none; font-size: 14px; padding: 5px 0; overflow: hidden; }
 
-#popular-list { text-align: left; }
+#popular-list { text-align: left; width: 730px; height: 15px; overflow: hidden; }
 #popular-list h3 { display: inline; font-size: 11px; text-transform: uppercase; padding-right: 20px;
     color: #999; background: url(./images/arrows-red.png) no-repeat center right; }
 
