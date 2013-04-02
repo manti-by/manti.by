@@ -152,7 +152,7 @@
                 foreach ($files as $file) {
                     switch ($type) {
                         case FileEntity::TYPE_PREVIEW:
-                            $result .= '<audio controls>';
+                            $result .= '<audio controls preload="none">';
 
                             // Default MP3 preview file
                             $mp3_preview = Application::$config['http_host'] . substr($file->source, 1);
