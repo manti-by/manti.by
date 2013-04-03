@@ -66,6 +66,10 @@
          * @return array $result
          */
         public function generateAction($options) {
+            // Catch system messages
+            ob_start();
+
+            // Set JSON output
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
             // Check login state
@@ -102,6 +106,10 @@
                     );
                 }
             }
+
+            // Flush system messages to log
+            if ($message = ob_get_contents()) $this->_throw($message);
+            ob_end_clean();
 
             return $options;
         }
