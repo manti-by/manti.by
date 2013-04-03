@@ -50,7 +50,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         // Bind click to thumbnails
-        $('.thumbnail').bind('click', function(e) {
+        $('.thumbnail').live('click', function(e) {
             e.preventDefault();
 
             // Show loader and get original link
@@ -79,7 +79,7 @@
             return false;
         });
 
-        $(document).bind('click', function() {
+        $(document).live('click', function() {
             $('#image-wrapper').remove();
         });
 
