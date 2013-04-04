@@ -54,3 +54,5 @@
 <div id="search">
     <?php echo $options['data']; ?>
 </div>
+
+<?php echo $this->getContents('gallery', 'ajax'); ?>
