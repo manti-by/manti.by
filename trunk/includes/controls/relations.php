@@ -48,6 +48,22 @@
     class Relations extends Control {
 
         /**
+         * Set options
+         * @param array $options for set
+         * @return array $options
+         */
+        public function setOptions($options) {
+            parent::setOptions($options);
+
+            // Set reference id
+            if (isset($options['reference_id'])) {
+                $this->_options['reference_id'] = $options['reference_id'];
+            }
+
+            return $this->_options;
+        }
+
+        /**
          * Return HTML markup for control
          * @return bool|string
          */
@@ -56,6 +72,8 @@
             if (!empty($html)) {
                 $this->_data  = Model::getModel('blog')->getPosts(100, 1);
                 $this->_value = Model::getModel('blog')->getPostRelationsById($this->_options['reference_id']);
+                $this->_value_type = self::TYPE_ARRAY;
+
                 if ($this->_data) {
                     ob_start();
                     ?>
@@ -92,7 +110,7 @@
                                 <ul>
                                     <?php foreach ($this->_data as $item) : ?>
                                     <li>
-                                        <input type="checkbox" name="<?php echo $this->_options['name']; ?>-items" class="<?php echo $this->_options['class']; ?>" value="<?php echo $item->id; ?>" <?php if (in_array($item->id, $this->_value)) echo 'checked="checked"'; ?>/>
+                                        <input type="checkbox" name="<?php echo $this->_options['name']; ?>-items" class="<?php echo $this->_options['class']; ?>" value="<?php echo $item->id; ?>" <?php if (array_key_exists($item->id, $this->_value)) echo 'checked="checked"'; ?>/>
                                         <?php echo $item->name; ?>
                                     </li>
                                     <?php endforeach; ?>
