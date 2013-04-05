@@ -94,7 +94,7 @@ audio { width: 330px; transform: scale(0.8); }
 .post-item .teaser { padding-bottom: 15px; }
 .post-item .cover { width: 350px; height: 350px; border: 1px solid #CCC; }
 .post-item .covers { padding: 0 15px 15px 0; }
-.post-item .metakeys { margin-top: 5px; }
+.post-item .metakeys { margin-top: 5px; padding-left: 350px; width: 350px; white-space: nowrap;}
 .post-item .catnum, .post-item .genre,
 .post-item .length, .post-item .quality { margin-bottom: 5px; }
 
@@ -105,6 +105,7 @@ audio { width: 330px; transform: scale(0.8); }
     text-decoration: underline; }
 .post-item .hide-tracklist { display: none; position: absolute; bottom: 20px; left: 489px;
     color: #777; text-decoration: underline; }
+.post-item .tracklist-block { padding: 0 0 50px 350px; }
 
 .post-item .release { position: absolute; bottom: 10px; left: 218px; }
 .post-item .release a { color: #777; text-decoration: underline; }
@@ -116,7 +117,7 @@ audio { width: 330px; transform: scale(0.8); }
 .post-item-full .relations { margin: 20px 0 40px 0; }
 .post-item-full .catnum, .post-item-full .genre,
 .post-item-full .length, .post-item-full .quality { margin-bottom: 7px; }
-.post-item-full .metakeys { margin-top: 5px; }
+.post-item-full .metakeys { margin-top: 5px; padding-left: 350px; width: 350px; white-space: nowrap; }
 
 .post-item-full .release { margin-top: 10px; }
 .post-item-full .release a { font-size: 14px; text-decoration: underline; }
