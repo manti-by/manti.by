@@ -61,6 +61,12 @@
         <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=rebuildthumbnails');?>"><?php echo T('Rebuild thumbnails'); ?></a></li>
         <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=sitemap&action=generate');?>"><?php echo T('Generate sitemap'); ?></a></li>
     </ul>
+    <ul>
+        <li><a href="http://www.google.com/webmasters" target="_blank">Google Webmaster</a></li>
+        <li><a href="http://www.google.com/analytics" target="_blank">Google Analitycs</a></li>
+        <li><a href="http://webmaster.yandex.ru/" target="_blank">Yandex webmaster</a></li>
+        <li><a href="http://metrika.yandex.ru/" target="_blank">Yandex Metrika</a></li>
+    </ul>
 </div>
 <h2>
     <?php echo T('Statistics'); ?>
