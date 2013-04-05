@@ -170,14 +170,14 @@
             $tags = json_decode($json);
             if (is_array($tags)) {
                 foreach ($tags as $tag) {
-                    $result .= '<a href="' . Sef::getSef('index.php?module=tag&action=search&id=' . $tag->id) . '" class="tag" title="' . $tag->name . '">' . $tag->name . '</a>';
-
                     // Add auto breaking
                     $avg_length += strlen($tag->name);
                     if ($avg_length > Application::$config['tag_line_length']) {
                         $result .= '<br />';
                         $avg_length = 0;
                     }
+
+                    $result .= '<a href="' . Sef::getSef('index.php?module=tag&action=search&id=' . $tag->id) . '" class="tag" title="' . $tag->name . '">' . $tag->name . '</a>';
                 }
             } else {
                 return self::getInstance()->_throw(T('Incorect JSON data for tags'), MESSAGE);
