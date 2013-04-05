@@ -126,7 +126,7 @@
                 foreach ($relations as $relation) {
                     $result .= '<a href="' . Sef::getSef('index.php?module=blog&action=show&id=' . $relation->id) . '" class="relation">';
                     $result .= '<img src="' . Application::$config['http_host'] . substr($relation->source, 1) . '" class="small-cover" />';
-                    $result .= $relation->name;
+                    $result .= '<div class="title">' .$relation->name . '</div>';
                     $result .= '</a>';
                 }
             } else {

@@ -136,9 +136,12 @@ audio { width: 330px; transform: scale(0.8); }
 
 .admin-buttons a { font-size: 12px; }
 
-.relation { float: left; margin: 0 15px 15px 0; text-align: center; width: 152px; overflow: hidden; }
-.relation .small-cover { display: block; width: 150px; height: 150px; margin-bottom: 10px; }
-.small-cover { border: 1px solid #CCC !important; }
+.relation { float: left; border: 3px solid transparent; width: 227px; height: 124px; overflow: hidden; }
+.relation:hover { border: 3px solid #CCC; }
+.relation .small-cover { position: relative; bottom: 50px; width: 227px; }
+.relation .title { position: relative; bottom: 129px; padding: 3px 0 0 3px;
+    background: url(../../assets/images/white-bg-50.png);  }
+
 
 #footer { margin-top: 50px; padding: 20px 0; color: #666; border-top: 1px solid #CCC; background: #EEE; }
 #footer h3 { margin-bottom: 10px; font-size: 12px; color: #999; }
