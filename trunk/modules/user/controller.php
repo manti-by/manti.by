@@ -68,9 +68,12 @@
                 $this->_throw(T('You currently not loggined'));
                 return $this->loginformAction($options);
             }
-            
+
+            // Get stats data
+            $options['data']['browsers'] = Model::getModel('stats')->getBrowsersChartData();
+
             // Show dashboard
-            $options['title'] = 'Your Dashboard';
+            $options['title'] = T('User dashboard');
             $options['body'] = $this->view->getContents('user', 'dashboard', $options);
             return $options;
         }

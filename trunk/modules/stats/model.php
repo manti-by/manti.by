@@ -125,4 +125,22 @@
             $this->database->query("CALL GET_STATS('" . $start_date . "', '". $end_date ."');");
             return $this->database->getObjectsArray();
         }
+
+        /**
+         * Get browsers chart data
+         * @return string
+         */
+        public function getBrowsersChartData() {
+            // Get data
+            $this->database->query("CALL GET_BROWSER_STATS();");
+            $browsers = $this->database->getObjectsArray();
+
+            // Compile result
+            $result = array(array(T('Browser'), T('Hits')));
+            foreach ($browsers as $item) {
+                $result[] = array($item->browser, (int)$item->count);
+            }
+
+            return json_encode($result);
+        }
     }

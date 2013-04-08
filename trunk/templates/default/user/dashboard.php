@@ -48,28 +48,47 @@
      */
 ?>
 <h1>
-    <?php echo T('User dashboard'); ?>
+    <?php echo $options['title']; ?>
 </h1>
-<h2>
-    <?php echo T('Default actions'); ?>
-</h2>
 <div id="dashboard">
-    <ul>
-        <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=edit');?>"><?php echo T('Add new post'); ?></a></li>
-        <li><a href="<?php echo Sef::getSef('index.php?module=file&action=edit');?>"><?php echo T('View Files'); ?></a></li>
-        <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=updatefiles');?>"><?php echo T('Update gallery items'); ?></a></li>
-        <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=rebuildthumbnails');?>"><?php echo T('Rebuild thumbnails'); ?></a></li>
-        <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=sitemap&action=generate');?>"><?php echo T('Generate sitemap'); ?></a></li>
-    </ul>
-    <ul>
-        <li><a href="http://www.google.com/webmasters" target="_blank">Google Webmaster</a></li>
-        <li><a href="http://www.google.com/analytics" target="_blank">Google Analitycs</a></li>
-        <li><a href="http://webmaster.yandex.ru/" target="_blank">Yandex webmaster</a></li>
-        <li><a href="http://metrika.yandex.ru/" target="_blank">Yandex Metrika</a></li>
-    </ul>
-</div>
-<h2>
-    <?php echo T('Statistics'); ?>
-</h2>
+    <div id="menu-block">
+        <h2>
+            <?php echo T('Default actions'); ?>
+        </h2>
+        <ul>
+            <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=edit');?>"><?php echo T('Add new post'); ?></a></li>
+            <li><a href="<?php echo Sef::getSef('index.php?module=file&action=edit');?>"><?php echo T('View Files'); ?></a></li>
+            <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=updatefiles');?>"><?php echo T('Update gallery items'); ?></a></li>
+            <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=rebuildthumbnails');?>"><?php echo T('Rebuild thumbnails'); ?></a></li>
+            <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=sitemap&action=generate');?>"><?php echo T('Generate sitemap'); ?></a></li>
+        </ul>
+        <ul>
+            <li><a href="http://www.google.com/webmasters" target="_blank">Google Webmaster</a></li>
+            <li><a href="http://www.google.com/analytics" target="_blank">Google Analitycs</a></li>
+            <li><a href="http://webmaster.yandex.ru/" target="_blank">Yandex webmaster</a></li>
+            <li><a href="http://metrika.yandex.ru/" target="_blank">Yandex Metrika</a></li>
+        </ul>
+        <div class="cls"></div>
+    </div>
+    <div id="stats-block">
+        <h2>
+            <?php echo T('Statistics'); ?>
+        </h2>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("visualization", "1", { packages: ["corechart"]});
+            google.setOnLoadCallback(drawChart);
 
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['browsers']; ?>);
+                var options = { title: '<?php echo T('Browser statistics'); ?>', chartArea: { width: 480, height: 320 }};
+                var chart = new google.visualization.PieChart(document.getElementById('browser-stats-chart'));
+                chart.draw(data, options);
+            }
+        </script>
+        <div id="browser-stats-chart" class="l50">
+
+        </div>
+    </div>
+</div>
 

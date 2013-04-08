@@ -245,8 +245,8 @@ audio { width: 330px; transform: scale(0.8); }
 .next, .prev { position: absolute; width: 50px; height: 50px; top: 50%; }
 .next { right: 0; }
 
-#dashboard ul { list-style: none; margin: 0; padding: 0; }
-#dashboard li { display: inline-block; margin: 0 10px 10px 0; }
+#dashboard #menu-block { margin-bottom: 30px; }
+#dashboard #menu-block ul { float: left; margin-right: 15px; }
 
 .other-blog-posts { margin: 10px 0 20px 0; }
 .tag { color: #777; text-decoration: underline; }
