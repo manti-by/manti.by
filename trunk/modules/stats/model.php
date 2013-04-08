@@ -56,7 +56,7 @@
          */
         public function processDailyStats() {
             // Get dates
-            $start_date = date('Y-m-d', time() - 10 * 60 * 60 * 24);
+            $start_date = date('Y-m-d', time() - 60 * 60 * 24);
             $end_date = date('Y-m-d');
 
             // Get stats and compile metrics
@@ -65,7 +65,7 @@
             if ($stats) {
                 foreach ($stats as $item) {
                     // Check browser
-                    /*$browser = get_browser($item->browser, true);
+                    $browser = get_browser($item->browser, true);
                     if (array_key_exists($browser['browser'], $result['browsers'])) {
                         if (array_key_exists($browser['version'], $result['browsers'][$browser['browser']])) {
                             $result['browsers'][$browser['browser']][$browser['version']]++;
@@ -75,7 +75,6 @@
                     } else {
                         $result['browsers'][$browser['browser']] = array($browser['version'] => 1);
                     }
-                    */
 
                     // Check user sessions
                     $session = $item->sessionid;
