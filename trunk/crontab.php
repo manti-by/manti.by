@@ -36,62 +36,37 @@
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
-    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
-
     /**
-     * Default model class
-     * @name $model
+     * Crontab laucher
      * @package M2 Micro Framework
      * @subpackage Modules
      * @author Alexander Chaika
-     * @since 0.1
+     * @since 0.5
      */
-    class Model extends Application {
 
-        /**
-         * @var resource $cid db connection id
-         */
-        protected $cid;
+    // Simple ACL hook
+    define('M2_MICRO', 1);
 
-        /**
-         * @var Database $database db object pointer
-         */
-        protected $database;
+    // Get engine
+    require_once 'bootstrap.php';
 
-        /**
-         * @var User $user object pointer
-         */
-        protected $user;
+    // Init app and disable sef
+    Application::init();
+    Application::$config['sef_enabled'] = false;
 
-        /**
-         * @var array $models cache of called models
-         */
-        protected static $models = array();
-
-        /**
-         * Model class constructor with DB init
-         */
-        public function __construct() {
-            // get database object
-            $this->database = Database::getInstance();
-
-            // setup DB connection
-            if (empty($this->cid)) {
-                $this->cid = $this->database->connect();
-            }
+    // Check mode
+    if (php_sapi_name() == 'cli') {
+        switch($argv[1]) {
+            case 'dailystats';
+                if (Model::getModel('stats')->processDailyStats()) {
+                    Application::shutdown(T('Daily stats successfully processed'));
+                } else {
+                    $error = Application::getInstance()->getLastFromStack();
+                    Application::shutdown($error['message']);
+                }
+            default:
+                Application::shutdown(T('You need to specify crontab action'));
         }
-
-        /**
-         * Default getModel method
-         * @param string $name
-         * @return Model|BlogModel|FileModel|FrontModel|GalleryModel|SearchModel|SitemapModel|StatsModel|TagModel|UserModel $model
-         */
-        public static function getModel($name = null) {
-            // Check existing object pool
-            if (!(isset(self::$models[$name]) && is_object(self::$models[$name]))) {
-                $model_name = (string)ucfirst($name) . 'Model';
-                self::$models[$name] = new $model_name();
-            }
-            return self::$models[$name];
-        }
+    } else {
+        Application::shutdown(T('You do not have perrmissions to run this script'));
     }

@@ -187,8 +187,9 @@
 
         /**
          * Close application
+         * @param string $message
          */
-        public static function shutdown() {
+        public static function shutdown($message = null) {
             // Save to DB input data
             // and flush translation tokens into files
             self::saveLogData();
@@ -197,7 +198,7 @@
             // Close DB connection and clean stacks
             Database::getInstance()->close();
             self::clean();
-            die;
+            die($message);
         }
 
         /**
