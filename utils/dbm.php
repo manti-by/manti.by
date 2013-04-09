@@ -25,6 +25,7 @@
     // Migration files pattern
     define('FILE_PATTERN', '/^\d{4}\-\d{2}\-\d{2}\_\d+[a-zA-Z0-9\_\-]*\.(sql)$/i');
     define('PROC_PATTERN', '/DELIMITER\s[\S]{2}(.*)[\S]{2}(\s*)DELIMITER\s;/is');
+    define('COMMENTS_PATTERN', '@(([\'"`]).*?[^\\\]\2)|((?:\#|--).*?$|/\*(?:[^/*]|/(?!\*)|\*(?!/)|(?R))*\*\/)\s*|(?<=;)\s+@ms');
 
     // Check current task
     $task = isset($argv[1]) ? $argv[1] : 'migrate';
@@ -107,6 +108,9 @@
         // Skip previous migrations
         if ($version > $current_version) {
             $query = trim(file_get_contents(FILE_PATH . DS . $migration));
+            
+            // Remove comments
+            $query = trim(preg_replace(COMMENTS_PATTERN, '$1', $query));
 
             // Split queries in sql script
             // with procedure check
