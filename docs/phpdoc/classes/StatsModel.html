@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title>phpDocumentor » \TagModel</title>
+<title>phpDocumentor » \StatsModel</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -62,9 +62,9 @@
 <li class="method public inherited"><a href="#method__clean" title="_clean :: Clean errors stack and add message to messages stack"><span class="description">Clean errors stack and add message to messages stack</span><pre>_clean()</pre></a></li>
 <li class="method public inherited"><a href="#method__throw" title="_throw :: Throw error and add message to error stack"><span class="description">Throw error and add message to error stack</span><pre>_throw()</pre></a></li>
 <li class="method public inherited"><a href="#method_addToStack" title="addToStack :: Put message to error stack"><span class="description">Put message to error stack</span><pre>addToStack()</pre></a></li>
-<li class="method public "><a href="#method_autocomplete" title="autocomplete :: Tag aurocomlete data-provider"><span class="description">Tag aurocomlete data-provider</span><pre>autocomplete()</pre></a></li>
 <li class="method public inherited"><a href="#method_clean" title="clean :: Clean all stacks"><span class="description">Clean all stacks</span><pre>clean()</pre></a></li>
 <li class="method public inherited"><a href="#method_flushTranslations" title="flushTranslations :: Close application"><span class="description">Close application</span><pre>flushTranslations()</pre></a></li>
+<li class="method public "><a href="#method_getBrowsersChartData" title="getBrowsersChartData :: Get browsers chart data"><span class="description">Get browsers chart data</span><pre>getBrowsersChartData()</pre></a></li>
 <li class="method public inherited"><a href="#method_getInstance" title="getInstance :: GetInstance class method"><span class="description">GetInstance class method</span><pre>getInstance()</pre></a></li>
 <li class="method public inherited"><a href="#method_getLastFromStack" title="getLastFromStack :: Get last message from stack"><span class="description">Get last message from stack</span><pre>getLastFromStack()</pre></a></li>
 <li class="method public inherited"><a href="#method_getMessage" title="getMessage :: Get last error message"><span class="description">Get last error message</span><pre>getMessage()</pre></a></li>
@@ -73,10 +73,8 @@
 if $count &lt; 0, we have error"><span class="description">Get last result number
 if $count &lt; 0, we have error</span><pre>getResult()</pre></a></li>
 <li class="method public inherited"><a href="#method_getSQL" title="getSQL :: Get SQL queue"><span class="description">Get SQL queue</span><pre>getSQL()</pre></a></li>
+<li class="method public "><a href="#method_getSessionsChartData" title="getSessionsChartData :: Get browsers chart data"><span class="description">Get browsers chart data</span><pre>getSessionsChartData()</pre></a></li>
 <li class="method public inherited"><a href="#method_getStack" title="getStack :: Return messages stack"><span class="description">Return messages stack</span><pre>getStack()</pre></a></li>
-<li class="method public "><a href="#method_getTagNameById" title="getTagNameById :: Get tags array by IDs string"><span class="description">Get tags array by IDs string</span><pre>getTagNameById()</pre></a></li>
-<li class="method public "><a href="#method_getTags" title="getTags :: Get tags array"><span class="description">Get tags array</span><pre>getTags()</pre></a></li>
-<li class="method public "><a href="#method_getTagsByIds" title="getTagsByIds :: Get tags array by IDs string"><span class="description">Get tags array by IDs string</span><pre>getTagsByIds()</pre></a></li>
 <li class="method public inherited"><a href="#method_init" title="init :: Init application
 Get parse current route
 Get global user params
@@ -87,13 +85,16 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="method public inherited"><a href="#method_isMessagePresent" title="isMessagePresent :: Check error stack"><span class="description">Check error stack</span><pre>isMessagePresent()</pre></a></li>
 <li class="method public inherited"><a href="#method_logSQL" title="logSQL :: Put SQL query to query queue"><span class="description">Put SQL query to query queue</span><pre>logSQL()</pre></a></li>
 <li class="method public inherited"><a href="#method_parseConfig" title="parseConfig :: Parse config from Application INI file"><span class="description">Parse config from Application INI file</span><pre>parseConfig()</pre></a></li>
-<li class="method public "><a href="#method_processTags" title="processTags :: Upsert tags and return its ids"><span class="description">Upsert tags and return its ids</span><pre>processTags()</pre></a></li>
+<li class="method public "><a href="#method_processDailyStats" title="processDailyStats :: Process daily statistics"><span class="description">Process daily statistics</span><pre>processDailyStats()</pre></a></li>
 <li class="method public inherited"><a href="#method_saveToLog" title="saveToLog :: Put into log file current message"><span class="description">Put into log file current message</span><pre>saveToLog()</pre></a></li>
 <li class="method public inherited"><a href="#method_shutdown" title="shutdown :: Close application"><span class="description">Close application</span><pre>shutdown()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
-                    <ul><li class="method private inherited"><a href="#method_saveLogData" title="saveLogData :: Save to log input parameters"><span class="description">Save to log input parameters</span><pre>saveLogData()</pre></a></li></ul>
+                    <ul>
+<li class="method private "><a href="#method_getStats" title="getStats :: Get log stats"><span class="description">Get log stats</span><pre>getStats()</pre></a></li>
+<li class="method private inherited"><a href="#method_saveLogData" title="saveLogData :: Save to log input parameters"><span class="description">Save to log input parameters</span><pre>saveLogData()</pre></a></li>
+</ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
@@ -110,26 +111,33 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="property protected inherited"><a href="#property_user" title="$user :: "><span class="description">&lt;p&gt;object pointer&lt;/p&gt;</span><pre>$user</pre></a></li>
 </ul>
 </li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  "><a href="#constant_OTHER_SESSION_ID" title="OTHER_SESSION_ID :: "><span class="description">OTHER_SESSION_ID</span><pre>OTHER_SESSION_ID</pre></a></li>
+<li class="constant  "><a href="#constant_OTHER_SESSION_IP" title="OTHER_SESSION_IP :: "><span class="description">OTHER_SESSION_IP</span><pre>OTHER_SESSION_IP</pre></a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="span8">
-<a id="\TagModel"></a><ul class="breadcrumb">
+<a id="\StatsModel"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/global.html">global</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/TagModel.html">TagModel</a>
+<span class="divider">\</span><a href="../classes/StatsModel.html">StatsModel</a>
 </li>
 </ul>
 <div class="element class">
-<p class="short_description">Tag Model class</p>
+<p class="short_description">Stats Model class</p>
 <div class="details">
 <div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>name</th>
-<td>$tagModel</td>
+<td>$statsModel</td>
 </tr>
 <tr>
 <th>package</th>
@@ -145,7 +153,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </tr>
 <tr>
 <th>since</th>
-<td>0.3RC2</td>
+<td>0.5</td>
 </tr>
 </table>
 <h3>
@@ -245,22 +253,6 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <code>int</code>$index index of inserted item</div>
 </div></div>
 </div>
-<a id="method_autocomplete"></a><div class="element clickable method public method_autocomplete" data-toggle="collapse" data-target=".method_autocomplete .collapse">
-<h2>Tag aurocomlete data-provider</h2>
-<pre>autocomplete(string $query) : bool</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$query</h4>
-<code>string</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code>false</div>
-</div></div>
-</div>
 <a id="method_clean"></a><div class="element clickable method public method_clean" data-toggle="collapse" data-target=".method_clean .collapse">
 <h2>Clean all stacks</h2>
 <pre>clean() </pre>
@@ -299,6 +291,16 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <td>\Model::flushTranslations()</td>
 </tr>
 </table>
+</div></div>
+</div>
+<a id="method_getBrowsersChartData"></a><div class="element clickable method public method_getBrowsersChartData" data-toggle="collapse" data-target=".method_getBrowsersChartData .collapse">
+<h2>Get browsers chart data</h2>
+<pre>getBrowsersChartData() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
 </div></div>
 </div>
 <a id="method_getInstance"></a><div class="element clickable method public method_getInstance" data-toggle="collapse" data-target=".method_getInstance .collapse">
@@ -431,6 +433,16 @@ if $count &lt; 0, we have error</h2>
 <code>array</code>$sql sql stack</div>
 </div></div>
 </div>
+<a id="method_getSessionsChartData"></a><div class="element clickable method public method_getSessionsChartData" data-toggle="collapse" data-target=".method_getSessionsChartData .collapse">
+<h2>Get browsers chart data</h2>
+<pre>getSessionsChartData() : string</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Returns</h3>
+<div class="subelement response"><code>string</code></div>
+</div></div>
+</div>
 <a id="method_getStack"></a><div class="element clickable method public method_getStack" data-toggle="collapse" data-target=".method_getStack .collapse">
 <h2>Return messages stack</h2>
 <pre>getStack() : array</pre>
@@ -450,53 +462,6 @@ if $count &lt; 0, we have error</h2>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>array</code>$stack messages stack</div>
-</div></div>
-</div>
-<a id="method_getTagNameById"></a><div class="element clickable method public method_getTagNameById" data-toggle="collapse" data-target=".method_getTagNameById .collapse">
-<h2>Get tags array by IDs string</h2>
-<pre>getTagNameById(int $id) : bool | string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$id</h4>
-<code>int</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code><code>string</code>$tag</div>
-</div></div>
-</div>
-<a id="method_getTags"></a><div class="element clickable method public method_getTags" data-toggle="collapse" data-target=".method_getTags .collapse">
-<h2>Get tags array</h2>
-<pre>getTags(int $limit) : bool | array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$limit</h4>
-<code>int</code><p>OPTIONAL</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code><code>array</code>$tags</div>
-</div></div>
-</div>
-<a id="method_getTagsByIds"></a><div class="element clickable method public method_getTagsByIds" data-toggle="collapse" data-target=".method_getTagsByIds .collapse">
-<h2>Get tags array by IDs string</h2>
-<pre>getTagsByIds(string | array $ids) : bool | array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$ids</h4>
-<code>string</code><code>array</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code><code>array</code>$tags</div>
 </div></div>
 </div>
 <a id="method_init"></a><div class="element clickable method public method_init" data-toggle="collapse" data-target=".method_init .collapse">
@@ -591,19 +556,14 @@ Save stats into DB</h2>
 <code>bool</code>$state</div>
 </div></div>
 </div>
-<a id="method_processTags"></a><div class="element clickable method public method_processTags" data-toggle="collapse" data-target=".method_processTags .collapse">
-<h2>Upsert tags and return its ids</h2>
-<pre>processTags(string $tags) : array</pre>
+<a id="method_processDailyStats"></a><div class="element clickable method public method_processDailyStats" data-toggle="collapse" data-target=".method_processDailyStats .collapse">
+<h2>Process daily statistics</h2>
+<pre>processDailyStats() : array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$tags</h4>
-<code>string</code><p>comma separated list</p></div>
 <h3>Returns</h3>
-<div class="subelement response">
-<code>array</code>$result</div>
+<div class="subelement response"><code>array</code></div>
 </div></div>
 </div>
 <a id="method_saveToLog"></a><div class="element clickable method public method_saveToLog" data-toggle="collapse" data-target=".method_saveToLog .collapse">
@@ -653,6 +613,27 @@ Save stats into DB</h2>
 <div class="subelement argument">
 <h4>$message</h4>
 <code>string</code>
+</div>
+</div></div>
+</div>
+<a id="method_getStats"></a><div class="element clickable method private method_getStats" data-toggle="collapse" data-target=".method_getStats .collapse">
+<h2>Get log stats</h2>
+<pre>getStats(string $start_date, string $end_date) : array | bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$start_date</h4>
+<code>string</code>
+</div>
+<div class="subelement argument">
+<h4>$end_date</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>bool</code>
 </div>
 </div></div>
 </div>
@@ -797,6 +778,20 @@ Save stats into DB</h2>
 <td>\Model::$$user</td>
 </tr></table>
 </div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_OTHER_SESSION_ID"> </a><div class="element clickable constant  constant_OTHER_SESSION_ID" data-toggle="collapse" data-target=".constant_OTHER_SESSION_ID .collapse">
+<h2>OTHER_SESSION_ID</h2>
+<pre>OTHER_SESSION_ID </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_OTHER_SESSION_IP"> </a><div class="element clickable constant  constant_OTHER_SESSION_IP" data-toggle="collapse" data-target=".constant_OTHER_SESSION_IP .collapse">
+<h2>OTHER_SESSION_IP</h2>
+<pre>OTHER_SESSION_IP </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 </div>
 </div>

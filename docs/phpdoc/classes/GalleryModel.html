@@ -62,6 +62,7 @@
 <li class="method public inherited"><a href="#method__clean" title="_clean :: Clean errors stack and add message to messages stack"><span class="description">Clean errors stack and add message to messages stack</span><pre>_clean()</pre></a></li>
 <li class="method public inherited"><a href="#method__throw" title="_throw :: Throw error and add message to error stack"><span class="description">Throw error and add message to error stack</span><pre>_throw()</pre></a></li>
 <li class="method public inherited"><a href="#method_addToStack" title="addToStack :: Put message to error stack"><span class="description">Put message to error stack</span><pre>addToStack()</pre></a></li>
+<li class="method public "><a href="#method_appendGalleriesImages" title="appendGalleriesImages :: Append galleries images"><span class="description">Append galleries images</span><pre>appendGalleriesImages()</pre></a></li>
 <li class="method public inherited"><a href="#method_clean" title="clean :: Clean all stacks"><span class="description">Clean all stacks</span><pre>clean()</pre></a></li>
 <li class="method public inherited"><a href="#method_flushTranslations" title="flushTranslations :: Close application"><span class="description">Close application</span><pre>flushTranslations()</pre></a></li>
 <li class="method public "><a href="#method_getGallery" title="getGallery :: Get gallery list"><span class="description">Get gallery list</span><pre>getGallery()</pre></a></li>
@@ -69,8 +70,10 @@
 <li class="method public "><a href="#method_getGalleryByTags" title="getGalleryByTags :: Return gallery array by tags"><span class="description">Return gallery array by tags</span><pre>getGalleryByTags()</pre></a></li>
 <li class="method public inherited"><a href="#method_getInstance" title="getInstance :: GetInstance class method"><span class="description">GetInstance class method</span><pre>getInstance()</pre></a></li>
 <li class="method public inherited"><a href="#method_getLastFromStack" title="getLastFromStack :: Get last message from stack"><span class="description">Get last message from stack</span><pre>getLastFromStack()</pre></a></li>
+<li class="method public "><a href="#method_getLatestImages" title="getLatestImages :: Return latest gallery images"><span class="description">Return latest gallery images</span><pre>getLatestImages()</pre></a></li>
 <li class="method public inherited"><a href="#method_getMessage" title="getMessage :: Get last error message"><span class="description">Get last error message</span><pre>getMessage()</pre></a></li>
 <li class="method public inherited"><a href="#method_getModel" title="getModel :: Default getModel method"><span class="description">Default getModel method</span><pre>getModel()</pre></a></li>
+<li class="method public "><a href="#method_getPopularImages" title="getPopularImages :: Return popular gallery images"><span class="description">Return popular gallery images</span><pre>getPopularImages()</pre></a></li>
 <li class="method public inherited"><a href="#method_getResult" title="getResult :: Get last result number
 if $count &lt; 0, we have error"><span class="description">Get last result number
 if $count &lt; 0, we have error</span><pre>getResult()</pre></a></li>
@@ -96,10 +99,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </ul>
 </li>
 <li class="nav-header private">» Private
-                    <ul>
-<li class="method private "><a href="#method_appendGalleriesImages" title="appendGalleriesImages :: Append galleries images"><span class="description">Append galleries images</span><pre>appendGalleriesImages()</pre></a></li>
-<li class="method private inherited"><a href="#method_saveLogData" title="saveLogData :: Save to log input parameters"><span class="description">Save to log input parameters</span><pre>saveLogData()</pre></a></li>
-</ul>
+                    <ul><li class="method private inherited"><a href="#method_saveLogData" title="saveLogData :: Save to log input parameters"><span class="description">Save to log input parameters</span><pre>saveLogData()</pre></a></li></ul>
 </li>
 <li class="nav-header">
 <i class="icon-custom icon-property"></i> Properties
@@ -251,6 +251,21 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <code>int</code>$index index of inserted item</div>
 </div></div>
 </div>
+<a id="method_appendGalleriesImages"></a><div class="element clickable method public method_appendGalleriesImages" data-toggle="collapse" data-target=".method_appendGalleriesImages .collapse">
+<h2>Append galleries images</h2>
+<pre>appendGalleriesImages(array $galleries) : array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$galleries</h4>
+<code>array</code><p>objects</p></div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code>$galleries objects</div>
+</div></div>
+</div>
 <a id="method_clean"></a><div class="element clickable method public method_clean" data-toggle="collapse" data-target=".method_clean .collapse">
 <h2>Clean all stacks</h2>
 <pre>clean() </pre>
@@ -293,7 +308,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div>
 <a id="method_getGallery"></a><div class="element clickable method public method_getGallery" data-toggle="collapse" data-target=".method_getGallery .collapse">
 <h2>Get gallery list</h2>
-<pre>getGallery(int $limit) : array | bool</pre>
+<pre>getGallery(int $limit, bool $append_images) : array | bool</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -302,6 +317,9 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <h4>$limit</h4>
 <code>int</code>
 </div>
+<div class="subelement argument">
+<h4>$append_images</h4>
+<code>bool</code><p>OPTIONAL</p></div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>array</code><code>bool</code>
@@ -336,8 +354,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div>
 <div class="subelement argument">
 <h4>$limit</h4>
-<code>int</code>
-</div>
+<code>int</code><p>OPTIONAL</p></div>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>array</code><code>bool</code>
@@ -388,6 +405,23 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <code>string</code>$message last message from stack</div>
 </div></div>
 </div>
+<a id="method_getLatestImages"></a><div class="element clickable method public method_getLatestImages" data-toggle="collapse" data-target=".method_getLatestImages .collapse">
+<h2>Return latest gallery images</h2>
+<pre>getLatestImages(int $limit) : array | bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>bool</code>
+</div>
+</div></div>
+</div>
 <a id="method_getMessage"></a><div class="element clickable method public method_getMessage" data-toggle="collapse" data-target=".method_getMessage .collapse">
 <h2>Get last error message</h2>
 <pre>getMessage() : string</pre>
@@ -411,7 +445,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div>
 <a id="method_getModel"></a><div class="element clickable method public method_getModel" data-toggle="collapse" data-target=".method_getModel .collapse">
 <h2>Default getModel method</h2>
-<pre>getModel(string $name) : <a href="../classes/Model.html">\Model</a> | <a href="../classes/BlogModel.html">\BlogModel</a> | <a href="../classes/FileModel.html">\FileModel</a> | <a href="../classes/FrontModel.html">\FrontModel</a> | <a href="../classes/GalleryModel.html">\GalleryModel</a> | <a href="../classes/TagModel.html">\TagModel</a> | <a href="../classes/UserModel.html">\UserModel</a></pre>
+<pre>getModel(string $name) : <a href="../classes/Model.html">\Model</a> | <a href="../classes/BlogModel.html">\BlogModel</a> | <a href="../classes/FileModel.html">\FileModel</a> | <a href="../classes/FrontModel.html">\FrontModel</a> | <a href="../classes/GalleryModel.html">\GalleryModel</a> | <a href="../classes/SearchModel.html">\SearchModel</a> | <a href="../classes/SitemapModel.html">\SitemapModel</a> | <a href="../classes/StatsModel.html">\StatsModel</a> | <a href="../classes/TagModel.html">\TagModel</a> | <a href="../classes/UserModel.html">\UserModel</a></pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -428,7 +462,24 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
-<code><a href="../classes/Model.html">\Model</a></code><code><a href="../classes/BlogModel.html">\BlogModel</a></code><code><a href="../classes/FileModel.html">\FileModel</a></code><code><a href="../classes/FrontModel.html">\FrontModel</a></code><code><a href="../classes/GalleryModel.html">\GalleryModel</a></code><code><a href="../classes/TagModel.html">\TagModel</a></code><code><a href="../classes/UserModel.html">\UserModel</a></code>$model</div>
+<code><a href="../classes/Model.html">\Model</a></code><code><a href="../classes/BlogModel.html">\BlogModel</a></code><code><a href="../classes/FileModel.html">\FileModel</a></code><code><a href="../classes/FrontModel.html">\FrontModel</a></code><code><a href="../classes/GalleryModel.html">\GalleryModel</a></code><code><a href="../classes/SearchModel.html">\SearchModel</a></code><code><a href="../classes/SitemapModel.html">\SitemapModel</a></code><code><a href="../classes/StatsModel.html">\StatsModel</a></code><code><a href="../classes/TagModel.html">\TagModel</a></code><code><a href="../classes/UserModel.html">\UserModel</a></code>$model</div>
+</div></div>
+</div>
+<a id="method_getPopularImages"></a><div class="element clickable method public method_getPopularImages" data-toggle="collapse" data-target=".method_getPopularImages .collapse">
+<h2>Return popular gallery images</h2>
+<pre>getPopularImages(int $limit) : array | bool</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$limit</h4>
+<code>int</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>array</code><code>bool</code>
+</div>
 </div></div>
 </div>
 <a id="method_getResult"></a><div class="element clickable method public method_getResult" data-toggle="collapse" data-target=".method_getResult .collapse">
@@ -657,7 +708,7 @@ Save stats into DB</h2>
 </div>
 <a id="method_shutdown"></a><div class="element clickable method public method_shutdown" data-toggle="collapse" data-target=".method_shutdown .collapse">
 <h2>Close application</h2>
-<pre>shutdown() </pre>
+<pre>shutdown(string $message) </pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -673,6 +724,11 @@ Save stats into DB</h2>
 <td>\Model::shutdown()</td>
 </tr>
 </table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code>
+</div>
 </div></div>
 </div>
 <a id="method_trackGallery"></a><div class="element clickable method public method_trackGallery" data-toggle="collapse" data-target=".method_trackGallery .collapse">
@@ -700,21 +756,6 @@ Save stats into DB</h2>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>array</code>list of all new images from gallery path</div>
-</div></div>
-</div>
-<a id="method_appendGalleriesImages"></a><div class="element clickable method private method_appendGalleriesImages" data-toggle="collapse" data-target=".method_appendGalleriesImages .collapse">
-<h2>Append galleries images</h2>
-<pre>appendGalleriesImages(array $galleries) : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$galleries</h4>
-<code>array</code><p>objects</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>array</code>$galleries objects</div>
 </div></div>
 </div>
 <a id="method_saveLogData"></a><div class="element clickable method private method_saveLogData" data-toggle="collapse" data-target=".method_saveLogData .collapse">
@@ -878,7 +919,7 @@ Save stats into DB</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2013-03-13T14:59:54+03:00.<br></footer></div>
+            generated on 2013-04-09T14:42:30+03:00.<br></footer></div>
 </div>
 </body>
 </html>

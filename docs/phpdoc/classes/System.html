@@ -65,6 +65,7 @@
 <li class="method public inherited"><a href="#method_flushTranslations" title="flushTranslations :: Close application"><span class="description">Close application</span><pre>flushTranslations()</pre></a></li>
 <li class="method public "><a href="#method_getCmd" title="getCmd :: Get variable from Request or upload file and return uploaded file name"><span class="description">Get variable from Request or upload file and return uploaded file name</span><pre>getCmd()</pre></a></li>
 <li class="method public "><a href="#method_getCoords" title="getCoords :: Get coords from yamaps service"><span class="description">Get coords from yamaps service</span><pre>getCoords()</pre></a></li>
+<li class="method public "><a href="#method_getCountry" title="getCountry :: Get ip country"><span class="description">Get ip country</span><pre>getCountry()</pre></a></li>
 <li class="method public "><a href="#method_getDomainParts" title="getDomainParts :: Get domain parts"><span class="description">Get domain parts</span><pre>getDomainParts()</pre></a></li>
 <li class="method public "><a href="#method_getInstance" title="getInstance :: GetInstance class method"><span class="description">GetInstance class method</span><pre>getInstance()</pre></a></li>
 <li class="method public inherited"><a href="#method_getLastFromStack" title="getLastFromStack :: Get last message from stack"><span class="description">Get last message from stack</span><pre>getLastFromStack()</pre></a></li>
@@ -289,6 +290,22 @@ NOTICE: This class implemented as Singleton</p>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>array</code>$coords</div>
+</div></div>
+</div>
+<a id="method_getCountry"></a><div class="element clickable method public method_getCountry" data-toggle="collapse" data-target=".method_getCountry .collapse">
+<h2>Get ip country</h2>
+<pre>getCountry(string $ip) : string</pre>
+<div class="labels"><span class="label">Static</span></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$ip</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>string</code>$country</div>
 </div></div>
 </div>
 <a id="method_getDomainParts"></a><div class="element clickable method public method_getDomainParts" data-toggle="collapse" data-target=".method_getDomainParts .collapse">
@@ -605,7 +622,7 @@ Save stats into DB</h2>
 </div>
 <a id="method_shutdown"></a><div class="element clickable method public method_shutdown" data-toggle="collapse" data-target=".method_shutdown .collapse">
 <h2>Close application</h2>
-<pre>shutdown() </pre>
+<pre>shutdown(string $message) </pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -615,6 +632,11 @@ Save stats into DB</h2>
 <th>inherited_from</th>
 <td>\Application::shutdown()</td>
 </tr></table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code>
+</div>
 </div></div>
 </div>
 <a id="method___construct"></a><div class="element clickable method protected method___construct" data-toggle="collapse" data-target=".method___construct .collapse">
@@ -708,7 +730,7 @@ Save stats into DB</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2013-03-13T14:59:54+03:00.<br></footer></div>
+            generated on 2013-04-09T14:42:30+03:00.<br></footer></div>
 </div>
 </body>
 </html>

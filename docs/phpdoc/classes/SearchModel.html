@@ -3,7 +3,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
 <meta charset="utf-8">
-<title>phpDocumentor » \TagModel</title>
+<title>phpDocumentor » \SearchModel</title>
 <meta name="author" content="Mike van Riel">
 <meta name="description" content="">
 <link href="../css/template.css" rel="stylesheet" media="all">
@@ -62,7 +62,7 @@
 <li class="method public inherited"><a href="#method__clean" title="_clean :: Clean errors stack and add message to messages stack"><span class="description">Clean errors stack and add message to messages stack</span><pre>_clean()</pre></a></li>
 <li class="method public inherited"><a href="#method__throw" title="_throw :: Throw error and add message to error stack"><span class="description">Throw error and add message to error stack</span><pre>_throw()</pre></a></li>
 <li class="method public inherited"><a href="#method_addToStack" title="addToStack :: Put message to error stack"><span class="description">Put message to error stack</span><pre>addToStack()</pre></a></li>
-<li class="method public "><a href="#method_autocomplete" title="autocomplete :: Tag aurocomlete data-provider"><span class="description">Tag aurocomlete data-provider</span><pre>autocomplete()</pre></a></li>
+<li class="method public "><a href="#method_autocomplete" title="autocomplete :: Autocomplete search results"><span class="description">Autocomplete search results</span><pre>autocomplete()</pre></a></li>
 <li class="method public inherited"><a href="#method_clean" title="clean :: Clean all stacks"><span class="description">Clean all stacks</span><pre>clean()</pre></a></li>
 <li class="method public inherited"><a href="#method_flushTranslations" title="flushTranslations :: Close application"><span class="description">Close application</span><pre>flushTranslations()</pre></a></li>
 <li class="method public inherited"><a href="#method_getInstance" title="getInstance :: GetInstance class method"><span class="description">GetInstance class method</span><pre>getInstance()</pre></a></li>
@@ -74,9 +74,6 @@ if $count &lt; 0, we have error"><span class="description">Get last result numbe
 if $count &lt; 0, we have error</span><pre>getResult()</pre></a></li>
 <li class="method public inherited"><a href="#method_getSQL" title="getSQL :: Get SQL queue"><span class="description">Get SQL queue</span><pre>getSQL()</pre></a></li>
 <li class="method public inherited"><a href="#method_getStack" title="getStack :: Return messages stack"><span class="description">Return messages stack</span><pre>getStack()</pre></a></li>
-<li class="method public "><a href="#method_getTagNameById" title="getTagNameById :: Get tags array by IDs string"><span class="description">Get tags array by IDs string</span><pre>getTagNameById()</pre></a></li>
-<li class="method public "><a href="#method_getTags" title="getTags :: Get tags array"><span class="description">Get tags array</span><pre>getTags()</pre></a></li>
-<li class="method public "><a href="#method_getTagsByIds" title="getTagsByIds :: Get tags array by IDs string"><span class="description">Get tags array by IDs string</span><pre>getTagsByIds()</pre></a></li>
 <li class="method public inherited"><a href="#method_init" title="init :: Init application
 Get parse current route
 Get global user params
@@ -87,8 +84,8 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="method public inherited"><a href="#method_isMessagePresent" title="isMessagePresent :: Check error stack"><span class="description">Check error stack</span><pre>isMessagePresent()</pre></a></li>
 <li class="method public inherited"><a href="#method_logSQL" title="logSQL :: Put SQL query to query queue"><span class="description">Put SQL query to query queue</span><pre>logSQL()</pre></a></li>
 <li class="method public inherited"><a href="#method_parseConfig" title="parseConfig :: Parse config from Application INI file"><span class="description">Parse config from Application INI file</span><pre>parseConfig()</pre></a></li>
-<li class="method public "><a href="#method_processTags" title="processTags :: Upsert tags and return its ids"><span class="description">Upsert tags and return its ids</span><pre>processTags()</pre></a></li>
 <li class="method public inherited"><a href="#method_saveToLog" title="saveToLog :: Put into log file current message"><span class="description">Put into log file current message</span><pre>saveToLog()</pre></a></li>
+<li class="method public "><a href="#method_search" title="search :: Search via toolbar form"><span class="description">Search via toolbar form</span><pre>search()</pre></a></li>
 <li class="method public inherited"><a href="#method_shutdown" title="shutdown :: Close application"><span class="description">Close application</span><pre>shutdown()</pre></a></li>
 </ul>
 </li>
@@ -110,26 +107,33 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="property protected inherited"><a href="#property_user" title="$user :: "><span class="description">&lt;p&gt;object pointer&lt;/p&gt;</span><pre>$user</pre></a></li>
 </ul>
 </li>
+<li class="nav-header">
+<i class="icon-custom icon-constant"></i> Constants
+                    <ul>
+<li class="constant  "><a href="#constant_GALLERY_TYPE" title="GALLERY_TYPE :: "><span class="description">GALLERY_TYPE</span><pre>GALLERY_TYPE</pre></a></li>
+<li class="constant  "><a href="#constant_POST_TYPE" title="POST_TYPE :: "><span class="description">POST_TYPE</span><pre>POST_TYPE</pre></a></li>
+</ul>
+</li>
 </ul>
 </div>
 <div class="span8">
-<a id="\TagModel"></a><ul class="breadcrumb">
+<a id="\SearchModel"></a><ul class="breadcrumb">
 <li>
 <a href="../index.html"><i class="icon-custom icon-class"></i></a><span class="divider">\</span>
 </li>
 <li><a href="../namespaces/global.html">global</a></li>
 <li class="active">
-<span class="divider">\</span><a href="../classes/TagModel.html">TagModel</a>
+<span class="divider">\</span><a href="../classes/SearchModel.html">SearchModel</a>
 </li>
 </ul>
 <div class="element class">
-<p class="short_description">Tag Model class</p>
+<p class="short_description">Search Model class</p>
 <div class="details">
 <div class="long_description"></div>
 <table class="table table-bordered">
 <tr>
 <th>name</th>
-<td>$tagModel</td>
+<td>$searchModel</td>
 </tr>
 <tr>
 <th>package</th>
@@ -145,7 +149,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </tr>
 <tr>
 <th>since</th>
-<td>0.3RC2</td>
+<td>0.3b</td>
 </tr>
 </table>
 <h3>
@@ -246,8 +250,8 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div></div>
 </div>
 <a id="method_autocomplete"></a><div class="element clickable method public method_autocomplete" data-toggle="collapse" data-target=".method_autocomplete .collapse">
-<h2>Tag aurocomlete data-provider</h2>
-<pre>autocomplete(string $query) : bool</pre>
+<h2>Autocomplete search results</h2>
+<pre>autocomplete(string $query) : bool | array</pre>
 <div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
@@ -258,7 +262,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
-<code>bool</code>false</div>
+<code>bool</code><code>array</code>$result</div>
 </div></div>
 </div>
 <a id="method_clean"></a><div class="element clickable method public method_clean" data-toggle="collapse" data-target=".method_clean .collapse">
@@ -452,53 +456,6 @@ if $count &lt; 0, we have error</h2>
 <code>array</code>$stack messages stack</div>
 </div></div>
 </div>
-<a id="method_getTagNameById"></a><div class="element clickable method public method_getTagNameById" data-toggle="collapse" data-target=".method_getTagNameById .collapse">
-<h2>Get tags array by IDs string</h2>
-<pre>getTagNameById(int $id) : bool | string</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$id</h4>
-<code>int</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code><code>string</code>$tag</div>
-</div></div>
-</div>
-<a id="method_getTags"></a><div class="element clickable method public method_getTags" data-toggle="collapse" data-target=".method_getTags .collapse">
-<h2>Get tags array</h2>
-<pre>getTags(int $limit) : bool | array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$limit</h4>
-<code>int</code><p>OPTIONAL</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code><code>array</code>$tags</div>
-</div></div>
-</div>
-<a id="method_getTagsByIds"></a><div class="element clickable method public method_getTagsByIds" data-toggle="collapse" data-target=".method_getTagsByIds .collapse">
-<h2>Get tags array by IDs string</h2>
-<pre>getTagsByIds(string | array $ids) : bool | array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$ids</h4>
-<code>string</code><code>array</code>
-</div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>bool</code><code>array</code>$tags</div>
-</div></div>
-</div>
 <a id="method_init"></a><div class="element clickable method public method_init" data-toggle="collapse" data-target=".method_init .collapse">
 <h2>Init application
 Get parse current route
@@ -591,21 +548,6 @@ Save stats into DB</h2>
 <code>bool</code>$state</div>
 </div></div>
 </div>
-<a id="method_processTags"></a><div class="element clickable method public method_processTags" data-toggle="collapse" data-target=".method_processTags .collapse">
-<h2>Upsert tags and return its ids</h2>
-<pre>processTags(string $tags) : array</pre>
-<div class="labels"></div>
-<div class="row collapse"><div class="detail-description">
-<div class="long_description"></div>
-<h3>Parameters</h3>
-<div class="subelement argument">
-<h4>$tags</h4>
-<code>string</code><p>comma separated list</p></div>
-<h3>Returns</h3>
-<div class="subelement response">
-<code>array</code>$result</div>
-</div></div>
-</div>
 <a id="method_saveToLog"></a><div class="element clickable method public method_saveToLog" data-toggle="collapse" data-target=".method_saveToLog .collapse">
 <h2>Put into log file current message</h2>
 <pre>saveToLog(string $message) : bool</pre>
@@ -629,6 +571,22 @@ Save stats into DB</h2>
 <h3>Returns</h3>
 <div class="subelement response">
 <code>bool</code>$result write operation result</div>
+</div></div>
+</div>
+<a id="method_search"></a><div class="element clickable method public method_search" data-toggle="collapse" data-target=".method_search .collapse">
+<h2>Search via toolbar form</h2>
+<pre>search(string $query) : bool | array</pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description">
+<div class="long_description"></div>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$query</h4>
+<code>string</code>
+</div>
+<h3>Returns</h3>
+<div class="subelement response">
+<code>bool</code><code>array</code>$result</div>
 </div></div>
 </div>
 <a id="method_shutdown"></a><div class="element clickable method public method_shutdown" data-toggle="collapse" data-target=".method_shutdown .collapse">
@@ -797,6 +755,20 @@ Save stats into DB</h2>
 <td>\Model::$$user</td>
 </tr></table>
 </div></div>
+</div>
+<h3>
+<i class="icon-custom icon-constant"></i> Constants</h3>
+<a id="constant_GALLERY_TYPE"> </a><div class="element clickable constant  constant_GALLERY_TYPE" data-toggle="collapse" data-target=".constant_GALLERY_TYPE .collapse">
+<h2>GALLERY_TYPE</h2>
+<pre>GALLERY_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
+</div>
+<a id="constant_POST_TYPE"> </a><div class="element clickable constant  constant_POST_TYPE" data-toggle="collapse" data-target=".constant_POST_TYPE .collapse">
+<h2>POST_TYPE</h2>
+<pre>POST_TYPE </pre>
+<div class="labels"></div>
+<div class="row collapse"><div class="detail-description"><div class="long_description"></div></div></div>
 </div>
 </div>
 </div>
