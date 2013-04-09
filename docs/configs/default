@@ -4,7 +4,7 @@ server {
     error_log  /var/www/manti.by/log/error.log;
 
     index index.php index.html index.htm;
-    server_name 62.109.5.89;
+    server_name manti.by;
 
     location / { 
         try_files $uri $uri/ @rewrites;
@@ -14,16 +14,25 @@ server {
         rewrite ^ /index.php last;
     }
 
+    # add headers to media files
     location ~* \.(?:ico|css|js|gif|jpe?g|png)$ {
         expires max;
         add_header Pragma public;
         add_header Cache-Control "public, must-revalidate, proxy-revalidate";
     }
 
+    # add headers to audio files
     location ~* \.mp3$ {
         expires max;
         add_header Pragma public;
         add_header Cache-Control "public, must-revalidate, proxy-revalidate";
+        add_header Content-Disposition "attachment";
+    }
+
+    # restrict access to system directories
+    location ~ /(includes|language|modules) {
+        deny all;
+        return 404;
     }
 
     # proxy the PHP scripts to fastcgi
@@ -35,13 +44,17 @@ server {
         fastcgi_temp_path /var/www/manti.by/tmp;
 
         include fastcgi_params;
+        fastcgi_param php_value "display_errors=off";
         fastcgi_param php_value "error_log /var/www/manti.by/log/php_error.log";
         fastcgi_param php_value "session.save_path /var/www/manti.by/tmp";
         fastcgi_param php_value "upload_tmp_dir /var/www/manti.by/tmp";
     }
 
-    # download files
-    location /content/release {
-        add_header Content-Disposition 'attachment; filename="$args"';
+    # proxy isp routes
+    location /manager {
+        proxy_pass http://127.0.0.1:8080/manager;
+    }
+    location /webmail {
+        proxy_pass http://127.0.0.1:8080/webmail;
     }
 }
