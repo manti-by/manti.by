@@ -77,12 +77,20 @@
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
             google.load("visualization", "1", { packages: ["corechart"]});
-            google.setOnLoadCallback(drawChart);
+            google.setOnLoadCallback(drawBrowsersChart);
+            google.setOnLoadCallback(drawSessionsChart);
 
-            function drawChart() {
+            function drawBrowsersChart() {
                 var data = google.visualization.arrayToDataTable(<?php echo $options['data']['browsers']; ?>);
                 var options = { title: '<?php echo T('Browser statistics'); ?>', chartArea: { width: 480, height: 320 }};
                 var chart = new google.visualization.PieChart(document.getElementById('browser-stats-chart'));
+                chart.draw(data, options);
+            }
+
+            function drawSessionsChart() {
+                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['sessions']; ?>);
+                var options = { title: '<?php echo T('Session statistics'); ?>', hAxis: { title: '<?php echo T('Date'); ?>'}};
+                var chart = new google.visualization.AreaChart(document.getElementById('sessions-stats-chart'));
                 chart.draw(data, options);
             }
         </script>

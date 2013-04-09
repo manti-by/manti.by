@@ -66,7 +66,7 @@
             if ($stats) {
                 foreach ($stats as $item) {
                     // Check browser
-                    /*$browser = get_browser($item->browser, true);
+                    $browser = get_browser($item->browser, true);
                     if (array_key_exists($browser['browser'], $result['browsers'])) {
                         if (array_key_exists($browser['version'], $result['browsers'][$browser['browser']])) {
                             $result['browsers'][$browser['browser']][$browser['version']]++;
@@ -76,7 +76,7 @@
                     } else {
                         $result['browsers'][$browser['browser']] = array($browser['version'] => 1);
                     }
-*/
+
                     // Check user sessions
                     if (array_key_exists($item->ip, $result['sessions'])) {
                         if (array_key_exists($item->sessionid, $result['sessions'][$item->ip])) {
@@ -161,12 +161,48 @@
         public function getSessionsChartData() {
             // Get data
             $this->database->query("CALL GET_SESSION_STATS();");
-            $browsers = $this->database->getObjectsArray();
+            $sessions = $this->database->getObjectsArray();
 
-            // Compile result
-            $result = array(array(T('IP'), T('Hits')));
-            foreach ($browsers as $item) {
-                $result[] = array($item->browser, (int)$item->count);
+            // Compile result by visitors
+            $visitors = $head = $dates = array();
+            foreach ($sessions as $item) {
+                // Format date
+                $date = date('d-m-Y', strtotime($item->timestamp));
+
+                // Calculate counters
+                if (array_key_exists($item->visitor, $visitors)) {
+                    if (array_key_exists($date, $visitors[$item->visitor])) {
+                        $visitors[$item->visitor][$date] += (int)$item->count;
+                    } else {
+                        $visitors[$item->visitor] = array($date => (int)$item->count);
+                    }
+                } else {
+                    $visitors[$item->visitor] = array($date => (int)$item->count);
+                }
+
+                // Create dates array
+                if (!array_key_exists($date, $dates)) {
+                    $dates[$date] = array();
+                }
+            }
+
+            // Pivot data and compile dates
+            $head[] = T('Date');
+            foreach ($visitors as $visitor => $data) {
+                $head[] = $visitor;
+                foreach($dates as $date => $array) {
+                    if (array_key_exists($date, $data)) {
+                        $dates[$date][] = $data[$date];
+                    } else {
+                        $dates[$date][] = 0;
+                    }
+                }
+            }
+
+            // Compile result and return
+            $result = array($head);
+            foreach ($dates as $date => $values) {
+                $result[] = array_merge(array($date), $values);
             }
 
             return json_encode($result);
