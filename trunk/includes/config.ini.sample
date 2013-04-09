@@ -75,3 +75,6 @@ db_encoding = utf8
 [database credentials]
 memcache_host = "127.0.0.1"
 memcache_port = 11211
+
+[geolocation]
+ipinfo_key = "example"

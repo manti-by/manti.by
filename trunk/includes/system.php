@@ -426,6 +426,30 @@
         }
 
         /**
+         * Get ip country
+         * @param string $ip
+         * @return string $country
+         */
+        public static function getCountry($ip) {
+            // Open CURL session
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_FAILONERROR, 1);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER,1);
+
+            // Get coords
+            $url = 'http://api.ipinfodb.com/v3/ip-country/?key=' . Application::$config['ipinfo_key'] . '&ip='.urlencode($ip);
+            curl_setopt($curl, CURLOPT_URL, $url); // set url to post to
+            $result = trim(curl_exec($curl)); // run the whole process
+
+            // Close CURL
+            curl_close($curl);
+
+            // Return only ISO2
+            $result = explode(';', $result);
+            return $result[3];
+        }
+
+        /**
          * Convert size in bytes to human readable
          * @param int $bytes
          * @param int $decimals OPTIONAL

@@ -59,14 +59,14 @@
         switch($argv[1]) {
             case 'dailystats';
                 if (Model::getModel('stats')->processDailyStats()) {
-                    Application::shutdown(T('Daily stats successfully processed'));
+                    Application::shutdown('Daily stats successfully processed' . NL);
                 } else {
                     $error = Application::getInstance()->getLastFromStack();
                     Application::shutdown($error['message']);
                 }
             default:
-                Application::shutdown(T('You need to specify crontab action'));
+                Application::shutdown('You need to specify crontab action' . NL);
         }
     } else {
-        Application::shutdown(T('You do not have perrmissions to run this script'));
+        Application::shutdown('You do not have perrmissions to run this script' . NL);
     }

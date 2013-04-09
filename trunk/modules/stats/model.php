@@ -49,6 +49,7 @@
     class StatsModel extends Model {
 
         const OTHER_SESSION_ID = 'other-session-id';
+        const OTHER_SESSION_IP = '127.0.0.1';
 
         /**
          * Process daily statistics
@@ -56,7 +57,7 @@
          */
         public function processDailyStats() {
             // Get dates
-            $start_date = date('Y-m-d', time() - 60 * 60 * 24);
+            $start_date = date('Y-m-d', time() - 10 * 60 * 60 * 24);
             $end_date = date('Y-m-d');
 
             // Get stats and compile metrics
@@ -65,7 +66,7 @@
             if ($stats) {
                 foreach ($stats as $item) {
                     // Check browser
-                    $browser = get_browser($item->browser, true);
+                    /*$browser = get_browser($item->browser, true);
                     if (array_key_exists($browser['browser'], $result['browsers'])) {
                         if (array_key_exists($browser['version'], $result['browsers'][$browser['browser']])) {
                             $result['browsers'][$browser['browser']][$browser['version']]++;
@@ -75,13 +76,16 @@
                     } else {
                         $result['browsers'][$browser['browser']] = array($browser['version'] => 1);
                     }
-
+*/
                     // Check user sessions
-                    $session = $item->sessionid;
-                    if (array_key_exists($session, $result['sessions'])) {
-                        $result['sessions'][$session]++;
+                    if (array_key_exists($item->ip, $result['sessions'])) {
+                        if (array_key_exists($item->sessionid, $result['sessions'][$item->ip])) {
+                            $result['sessions'][$item->ip][$item->sessionid]++;
+                        } else {
+                            $result['sessions'][$item->ip][$item->sessionid] = 1;
+                        }
                     } else {
-                        $result['sessions'][$session] = 1;
+                        $result['sessions'][$item->ip] = array($item->sessionid => 1);
                     }
                 }
             }
@@ -98,17 +102,23 @@
             // Insert session stats to DB
             if (count($result['sessions']) > 0) {
                 // Trim "small" counters
-                $result['sessions'][self::OTHER_SESSION_ID] = 0;
-                foreach($result['sessions'] as $session => $count) {
-                    if ($count == 1) {
-                        $result['sessions'][self::OTHER_SESSION_ID]++;
-                        unset($result['sessions'][$session]);
+                $result['sessions'][self::OTHER_SESSION_IP] = array(self::OTHER_SESSION_ID => 0);
+                foreach($result['sessions'] as $ip => $data) {
+                    foreach($data as $session => $count) {
+                        if ($count <= 1) {
+                            $result['sessions'][self::OTHER_SESSION_IP][self::OTHER_SESSION_ID]++;
+                            unset($result['sessions'][$ip][$session]);
+                        }
                     }
                 }
 
                 // Insert result into DB
-                foreach($result['sessions'] as $session => $count) {
-                    $this->database->query("CALL UPSERT_SESSION_STAT('" . $session . "', " . $count . ");");
+                foreach($result['sessions'] as $ip => $data) {
+                    foreach($data as $session => $count) {
+                        // Get IP country
+                        $country = System::getInstance()->getCountry($ip);
+                        $this->database->query("CALL UPSERT_SESSION_STAT('" . $session . "', '" . $ip . "', '" . $country . "', " . $count . ");");
+                    }
                 }
             }
 
@@ -137,6 +147,24 @@
 
             // Compile result
             $result = array(array(T('Browser'), T('Hits')));
+            foreach ($browsers as $item) {
+                $result[] = array($item->browser, (int)$item->count);
+            }
+
+            return json_encode($result);
+        }
+
+        /**
+         * Get browsers chart data
+         * @return string
+         */
+        public function getSessionsChartData() {
+            // Get data
+            $this->database->query("CALL GET_SESSION_STATS();");
+            $browsers = $this->database->getObjectsArray();
+
+            // Compile result
+            $result = array(array(T('IP'), T('Hits')));
             foreach ($browsers as $item) {
                 $result[] = array($item->browser, (int)$item->count);
             }

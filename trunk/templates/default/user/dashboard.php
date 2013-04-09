@@ -86,9 +86,8 @@
                 chart.draw(data, options);
             }
         </script>
-        <div id="browser-stats-chart" class="l50">
-
-        </div>
+        <div id="browser-stats-chart" class="l50"></div>
+        <div id="sessions-stats-chart" class="r50"></div>
     </div>
 </div>
 
