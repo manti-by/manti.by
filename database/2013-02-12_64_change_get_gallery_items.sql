@@ -6,7 +6,7 @@ BEGIN
     FROM `files` f
     JOIN `gallery_files` gf ON gf.`file_id` = f.`id`
     WHERE gf.`gallery_id` = _id
-    ORDER BY f.`viewed` DESC;;
+    ORDER BY f.`viewed` DESC;
 END
 ;;
 DELIMITER ;

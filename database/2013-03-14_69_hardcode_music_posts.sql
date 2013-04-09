@@ -8,7 +8,7 @@ BEGIN
     FROM `all_posts` AS p
     WHERE p.`is_music` = 1
     ORDER BY p.`created` DESC
-    LIMIT _limitstart, _limit;
+    LIMIT 0, _limit;
 END
 ;;
 DELIMITER ;
