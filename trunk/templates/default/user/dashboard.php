@@ -63,11 +63,10 @@
             <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=sitemap&action=generate');?>"><?php echo T('Generate sitemap'); ?></a></li>
         </ul>
         <ul>
+            <li><a href="http://www.google.com/webmasters" target="_blank">Google Webmaster</a> / <a href="http://www.google.com/analytics" target="_blank">Analitycs</a></li>
+            <li><a href="http://webmaster.yandex.ru/" target="_blank">Yandex webmaster</a> / <a href="http://metrika.yandex.ru/" target="_blank">Metrika</a></li>
             <li><a href="https://developers.google.com/speed/pagespeed/insights" target="_blank">Pagespeed Check</a></li>
-            <li><a href="http://www.google.com/webmasters" target="_blank">Google Webmaster</a></li>
-            <li><a href="http://www.google.com/analytics" target="_blank">Google Analitycs</a></li>
-            <li><a href="http://webmaster.yandex.ru/" target="_blank">Yandex webmaster</a></li>
-            <li><a href="http://metrika.yandex.ru/" target="_blank">Yandex Metrika</a></li>
+            <li><a href="http://validator.w3.org/" target="_blank">W3C Validation</a></li>
         </ul>
         <div class="cls"></div>
     </div>

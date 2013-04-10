@@ -51,14 +51,6 @@
     $user = UserEntity::getInstance();
 ?>
 <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/autocomplete.jquery.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#switch-language').click(function() {
-            document.cookie = 'language=' + $(this).attr('rel') + '; path=/; expires=Mon, 01-Jan-2030 00:00:00 GMT';
-            location.href = location.href;
-        });
-    });
-</script>
 <div id="toolbar" class="fr">
     <div id="search">
         <form action="<?php echo Sef::getSef('index.php?module=search'); ?>" method="post">
