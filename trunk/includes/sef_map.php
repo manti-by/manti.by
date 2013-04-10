@@ -52,24 +52,36 @@
             'table'  => 'post',
             'field'  => 'alias',
             'prefix' => 'blog/',
-            'suffix' => Application::$config['sef_suffix']
+            'suffix' => Application::$config['sef_suffix'],
+            'type'   => Sef::SEF_MAP_TYPE_DB
         ),
         '/\?module\=gallery\&action\=show\&id\=(.*)/' => array(
             'table'  => 'gallery',
             'field'  => 'alias',
             'prefix' => 'gallery/',
-            'suffix' => Application::$config['sef_suffix']
+            'suffix' => Application::$config['sef_suffix'],
+            'type'   => Sef::SEF_MAP_TYPE_DB
         ),
         '/\?module\=tag\&action\=search\&id\=(.*)/' => array(
             'table'  => 'tags',
             'field'  => 'alias',
             'prefix' => 'tag/',
-            'suffix' => Application::$config['sef_suffix']
+            'suffix' => Application::$config['sef_suffix'],
+            'type'   => Sef::SEF_MAP_TYPE_DB
         ),
         '/\?module\=tag\&action\=search\&q\=(.*)/' => array(
             'table'  => 'tags',
             'field'  => 'name',
             'prefix' => 'tag/',
-            'suffix' => Application::$config['sef_suffix']
+            'suffix' => Application::$config['sef_suffix'],
+            'type'   => Sef::SEF_MAP_TYPE_DB
+        ),
+        '/\?module\=sitemap/' => array(
+            'name'   => 'map/',
+            'type'   => Sef::SEF_MAP_TYPE_SIMPLE
+        ),
+        '/\?module\=sitemap\&action\=generate/' => array(
+            'prefix' => 'map/gen/',
+            'type'   => Sef::SEF_MAP_TYPE_SIMPLE
         )
     );

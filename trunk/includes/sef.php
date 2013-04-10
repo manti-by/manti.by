@@ -48,6 +48,9 @@
      */
     class Sef extends Application {
 
+        const SEF_MAP_TYPE_DB       = 0;
+        const SEF_MAP_TYPE_SIMPLE   = 1;
+
         /**
          * @var array $character_replace_table replace table for strict symbols
          */
@@ -198,18 +201,22 @@
             foreach($sef_map as $pattern => $source) {
                 preg_match($pattern, $request, $matches);
                 if ($matches) {
-                    // If pattern found, get table and alias fields
-                    Database::getInstance()->query("CALL GET_SEF_MAP_ALIAS('".$source['field']."','".$source['table']."',".(int)$matches[1].");");
+                    if ($source['type'] == self::SEF_MAP_TYPE_DB) {
+                        // If pattern found, get table and alias fields
+                        Database::getInstance()->query("CALL GET_SEF_MAP_ALIAS('".$source['field']."','".$source['table']."',".(int)$matches[1].");");
 
-                    // Get alias and stop search
-                    if ($alias = Database::getInstance()->getField()) {
-                        $link = $source['prefix'] . self::getInstance()->sanitizeLink($alias) . $source['suffix'];
-                        break;
+                        // Get alias and stop search
+                        if ($alias = Database::getInstance()->getField()) {
+                            $link = $source['prefix'] . self::getInstance()->sanitizeLink($alias) . $source['suffix'];
+                            break;
+                        }
+                    } elseif ($source['type'] == self::SEF_MAP_TYPE_SIMPLE) {
+                        $link = $source['name'];
                     }
                 }
             }
 
-            // If link not found by alias
+            // If link not found by alias or simple slug
             if (empty($link)) {
                 // Explode request params
                 $params = strchr($request, '?') ? substr(strstr($request, '?'), 1) : $request;
