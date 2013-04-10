@@ -144,7 +144,7 @@
                                     <?php $i++; ?>
                                 <?php endforeach; ?>
                             </ul>
-                            <input type="text" name="<?php echo $this->_options['name']; ?>-input" id="<?php echo $this->_options['id']; ?>-input" class="tag-input autocomplete" src="<?php echo Sef::getSef('index.php?module=tag&action=autocomplete'); ?>" value="" />
+                            <input type="text" name="<?php echo $this->_options['name']; ?>-input" id="<?php echo $this->_options['id']; ?>-input" class="tag-input autocomplete" source="<?php echo Sef::getSef('index.php?module=tag&action=autocomplete'); ?>" value="" />
                         </div>
                         <input type="button" name="<?php echo $this->_options['name']; ?>-add" id="<?php echo $this->_options['id']; ?>-add" class="tag-add" value="Add" />
                     </div>

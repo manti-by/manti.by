@@ -52,8 +52,9 @@
     <head>
         <title><?php echo strip_tags($options['title']); ?></title>
 
+        <meta charset="utf-8" />
         <meta name="description" content="<?php echo Model::getModel('tag')->getMetadescString(); ?>" />
-        <meta name="keywords" content="<?php echo Model::getModel('tag')->getMetakeysString(); ?>">
+        <meta name="keywords" content="<?php echo Model::getModel('tag')->getMetakeysString(); ?>" />
         <meta name="yandex-verification" content="6765012bcd05fac2" />
 
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/default.css" />

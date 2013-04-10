@@ -51,7 +51,7 @@
     <div class="left-column">404</div>
     <div class="right-column">
         <?php echo Application::$config['not_found_' . Application::$config['language']]; ?>
-        <a href="<?php echo Application::$config['http_host']; ?>"><br />
+        <a href="<?php echo Application::$config['http_host']; ?>" rel="first"><br />
             <?php echo T('Return to homepage'); ?>
         </a>
     </div>

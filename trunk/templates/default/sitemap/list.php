@@ -54,22 +54,22 @@
 <div id="sitemap">
     <ul class="l50">
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>" rel="author">
                 <?php echo T('For club promouters'); ?>
             </a>
         </li>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=2'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=2'); ?>" rel="author">
                 <?php echo T('For IT HRs and developers'); ?>
             </a>
         </li>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=16'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=16'); ?>" rel="license">
                 <?php echo T('Rules and Copyrights'); ?>
             </a>
         </li>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>" rel="bookmark">
                 <?php echo T('All blog posts'); ?>
             </a>
             <ul>
@@ -88,7 +88,7 @@
             </ul>
         </li>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>" rel="bookmark">
                 <?php echo T('Gallery'); ?>
             </a>
             <ul>
@@ -136,7 +136,7 @@
     </ul>
     <ul class="r50">
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=file'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=file'); ?>" rel="bookmark">
                 <?php echo T('Direct links'); ?>
             </a>
             <ul>

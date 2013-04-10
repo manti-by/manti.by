@@ -167,7 +167,7 @@
                             $result .= '</audio>';
                             break;
                         case FileEntity::TYPE_COVERS:
-                            $result .= '<img src="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="cover" />';
+                            $result .= '<img src="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="cover" alt="' . $file->name . ' cover" />';
                             break;
                         case FileEntity::TYPE_RELEASE:
                         default:

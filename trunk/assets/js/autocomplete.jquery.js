@@ -58,7 +58,7 @@ $(document).ready(function() {
 
         // Get source
         var query = $(self).val();
-        var source = $(self).attr('src');
+        var source = $(self).attr('source');
 
         // Get coords
         var page_x = $(self).offset().left;

@@ -56,32 +56,32 @@
     );
 
 ?>
-<a href="<?php echo Application::$config['http_host']; ?>" class="fl">
+<a href="<?php echo Application::$config['http_host']; ?>" class="fl" rel="first">
     <img src="<?php echo Application::$config['template_image_url_path']; ?>logo.png" alt="Manti Logo" width="155" height="50" />
 </a>
 <ul id="topmenu" class="fl">
     <li>
-        <a href="<?php echo Application::$config['http_host']; ?>"<?php echo ($active['home'] ? ' class="active"' : ''); ?>>
+        <a href="<?php echo Application::$config['http_host']; ?>"<?php echo ($active['home'] ? ' class="active"' : ''); ?> rel="first">
             <?php echo T('Home'); ?>
         </a>
     </li>
     <li>
-        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"<?php echo ($active['blog'] ? ' class="active"' : ''); ?>>
+        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"<?php echo ($active['blog'] ? ' class="active"' : ''); ?> rel="bookmark">
             <?php echo T('Blog'); ?>
         </a>
     </li>
     <li>
-        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"<?php echo ($active['gallery'] ? ' class="active"' : ''); ?>>
+        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"<?php echo ($active['gallery'] ? ' class="active"' : ''); ?> rel="bookmark">
             <?php echo T('Gallery'); ?>
         </a>
     </li>
     <li>
-        <a href="<?php echo Sef::getSef('index.php?module=file'); ?>"<?php echo ($active['download'] ? ' class="active"' : ''); ?>>
+        <a href="<?php echo Sef::getSef('index.php?module=file'); ?>"<?php echo ($active['download'] ? ' class="active"' : ''); ?> rel="bookmark">
             <?php echo T('Download'); ?>
         </a>
     </li>
     <li>
-        <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"<?php echo ($active['about'] ? ' class="active"' : ''); ?>>
+        <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"<?php echo ($active['about'] ? ' class="active"' : ''); ?> rel="author">
             <?php echo T('About'); ?>
         </a>
     </li>

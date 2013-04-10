@@ -63,6 +63,7 @@
             <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=sitemap&action=generate');?>"><?php echo T('Generate sitemap'); ?></a></li>
         </ul>
         <ul>
+            <li><a href="https://developers.google.com/speed/pagespeed/insights" target="_blank">Pagespeed Check</a></li>
             <li><a href="http://www.google.com/webmasters" target="_blank">Google Webmaster</a></li>
             <li><a href="http://www.google.com/analytics" target="_blank">Google Analitycs</a></li>
             <li><a href="http://webmaster.yandex.ru/" target="_blank">Yandex webmaster</a></li>

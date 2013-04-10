@@ -57,7 +57,7 @@
         <?php echo Application::$config['metadesc_' . Application::$config['language']]; ?>
     </div>
     <div class="contact">
-        <?php echo T('Contact me'); ?>: <a href="mailto://manti.by@gmail.com">manti.by@gmail.com</a> / Skype: <a href="callto://alexandr-chaika">alexandr-chaika</a>
+        <?php echo T('Contact me'); ?>: <a href="mailto:manti.by@gmail.com">manti.by@gmail.com</a> / Skype: <a href="callto://alexandr-chaika">alexandr-chaika</a>
     </div>
     <div class="copyright">
         <?php echo Application::$config['copyright_' . Application::$config['language']]; ?>
@@ -73,7 +73,7 @@
             </a>
         </li>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=sitemap'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=sitemap'); ?>" rel="index">
                 <?php echo T('Sitemap'); ?>
             </a>
         </li>
@@ -107,17 +107,17 @@
     <h3><?php echo T('Who am I'); ?></h3>
     <ul>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>" rel="author">
                 <?php echo T('For club promouters'); ?>
             </a>
         </li>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=2'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=2'); ?>" rel="author">
                 <?php echo T('For IT HRs and developers'); ?>
             </a>
         </li>
         <li>
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=16'); ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=16'); ?>" rel="license">
                 <?php echo T('Rules and Copyrights'); ?>
             </a>
         </li>
@@ -128,22 +128,22 @@
     <h3><?php echo T('Follow me'); ?></h3>
     <ul>
         <li>
-            <a href="http://promodj.com/manti.by" target="_blank">
+            <a href="http://promodj.com/manti.by" target="_blank" rel="nofollow">
                 <img src="<?php echo Application::$config['template_image_url_path']; ?>promodj.png" alt="PromoDj" width="101" height="25" />
             </a>
         </li>
         <li>
-            <a href="http://www.facebook.com/manti.by" target="_blank">
+            <a href="http://www.facebook.com/manti.by" target="_blank" rel="nofollow">
                 <img src="<?php echo Application::$config['template_image_url_path']; ?>facebook.png" alt="Facebook" width="101" height="28" />
             </a>
         </li>
         <li>
-            <a href="http://www.vk.com/manti_by" target="_blank">
+            <a href="http://www.vk.com/manti_by" target="_blank" rel="nofollow">
                 <img src="<?php echo Application::$config['template_image_url_path']; ?>vkontakte.png" alt="Vkontakte" width="101" height="25" />
             </a>
         </li>
         <li>
-            <a href="http://www.mixcloud.com/marcomantiby" target="_blank">
+            <a href="http://www.mixcloud.com/marcomantiby" target="_blank" rel="nofollow">
                 <img src="<?php echo Application::$config['template_image_url_path']; ?>mixcloud.png" alt="Mixcloud" width="117" height="22" />
             </a>
         </li>

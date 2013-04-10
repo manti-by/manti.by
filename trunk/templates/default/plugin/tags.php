@@ -49,8 +49,8 @@
 
     $tags = Model::getModel('tag')->getTags(7);
 ?>
+<h2><?php echo T('Popular Categories'); ?></h2>
 <ul class="sidebar">
-    <h2><?php echo T('Popular Categories'); ?></h2>
     <?php foreach($tags as $item) : ?>
         <li><a href="<?php echo Sef::getSef('index.php?module=tag&action=search&id=' . $item->id); ?>" title="<?php echo $item->name; ?>"><?php echo $item->name . ' <span class="tag-counter">(' . $item->count . ')</span>'; ?></a></li>
     <?php endforeach; ?>

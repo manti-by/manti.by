@@ -126,7 +126,7 @@ audio { width: 330px; transform: scale(0.8); }
 .right-sidebar { float: right; width: 240px; }
 .right-sidebar li { list-style: none; padding: 8px 18px; }
 
-.right-sidebar h2 { color: #555; margin: 0 0 3px 0; padding-bottom: 8px; border: none; text-transform: none;
+.right-sidebar h2 { color: #555; margin: 0 0 3px 20px; padding-bottom: 8px; border: none; text-transform: none;
     font-size: 18px; font-weight: normal; }
 
 .right-sidebar a { color: #666; }

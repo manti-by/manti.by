@@ -58,13 +58,13 @@
 
     <div class="favorite">
         <a name="image-<?php echo $options['data']->favorite->id; ?>" href="<?php echo $options['data']->favorite->link; ?>" class="thumbnail" rel="<?php echo $options['data']->favorite->id; ?>">
-            <img src="<?php echo $options['data']->favorite->link; ?>" width="693" />
+            <img src="<?php echo $options['data']->favorite->link; ?>" width="693" alt="Favorite image from <?php echo $options['data']->name; ?> gallery" />
         </a>
     </div>
     <div class="thumbnails gallery-item">
         <?php foreach ($options['data']->originals as $original) : ?>
             <a name="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
-                <img src="<?php echo $original->thumbnail; ?>" width="108" height="108" />
+                <img src="<?php echo $original->thumbnail; ?>" width="108" height="108" alt="<?php echo $options['data']->name; ?> gallery image #<?php echo $original->id; ?>" />
             </a>
         <?php endforeach; ?>
     </div>
