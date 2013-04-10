@@ -57,6 +57,10 @@
             $options['title'] = T('Sitemap');
             $options['data'] = $this->model->getSitemap();
             $options['body'] = $this->view->getContents('sitemap', 'list', $options);
+
+            // Append some tags
+            Model::getModel('tag')->appendMetakeys(array('data' => 'Sitemap'));
+
             return $options;
         }
 

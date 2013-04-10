@@ -65,6 +65,9 @@
                 $options['data'] = Model::getModel('blog')->getPosts();
             }
 
+            // Append meta info
+            Model::getModel('tag')->appendMetakeys($options);
+
             // Render search results
             $options['module'] = 'search';
             $options['body'] = $this->view->renderItemsArray($options);

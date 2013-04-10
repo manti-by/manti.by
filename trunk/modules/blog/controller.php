@@ -75,7 +75,10 @@
                 $options['data'] = $this->model->getPosts(Application::$config['posts_per_page'], $options['page']);
                 $options['title'] = T('All blog posts');
             }
-            
+
+            // Append meta info
+            Model::getModel('tag')->appendMetakeys($options);
+
             // Get items and render it
             if (!empty($options['data'])) {
                 $options['module'] = 'blog';
@@ -129,7 +132,11 @@
             } else {
                 return $this->view->_404($options);
             }
-            
+
+            // Append meta info
+            Model::getModel('tag')->appendMetakeys($options);
+            Model::getModel('tag')->replaceMetadesc($options);
+
             // Render blog item
             if (!empty($options['data'])) {
                 $options['body'] = $this->view->getContents('blog', 'item-full', $options);
