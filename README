@@ -8,13 +8,14 @@ About:
     which will be very simple to understand app logic for each level of developers.
 
 Source link:
-    https://github.com/marco-manti/M2_micro/
+    https://github.com/manti-by/M2_micro/
 
 Current version:
     0.3beta
 
 Requirements: 
-    PHP 5.3+, MySQL 5.0+, MySQLi PHP driver.
+    PHP 5.3+ (GD, CURL, Browscap), MySQL 5.0+ with MySQLi PHP driver, Memcached.
+    CURL and Browscap extentions needed for stats module.
 
 
 Installation at Ubuntu: 
@@ -55,8 +56,7 @@ Installation at Ubuntu:
     
 7. Create symlink for host:
     $ ln -s /etc/apache2/sites-available/m2.local /etc/apache2/sites-enabled/m2.local
-    
-    
+
 8. Deploy database
 
     8.1. You can use already compiled DB from file ./source/database/database.sql.
