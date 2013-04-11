@@ -70,8 +70,9 @@
             }
 
             // Get stats data
-            $options['data']['browsers'] = Model::getModel('stats')->getBrowsersChartData();
-            $options['data']['sessions'] = Model::getModel('stats')->getSessionsChartData();
+            $options['data']['browsers'] = Model::getModel('stats')->getBrowsersChartData(10);
+            $options['data']['sessions'] = Model::getModel('stats')->getSessionsChartData(10);
+            $options['data']['downloads'] = Model::getModel('file')->getDownloadsChartData(10);
 
             // Show dashboard
             $options['title'] = T('User dashboard');

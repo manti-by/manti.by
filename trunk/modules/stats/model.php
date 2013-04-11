@@ -138,11 +138,12 @@
 
         /**
          * Get browsers chart data
+         * @param int $limit
          * @return string
          */
-        public function getBrowsersChartData() {
+        public function getBrowsersChartData($limit = 10) {
             // Get data
-            $this->database->query("CALL GET_BROWSER_STATS();");
+            $this->database->query("CALL GET_BROWSER_STATS(" . $limit . ");");
             $browsers = $this->database->getObjectsArray();
 
             // Compile result
@@ -156,11 +157,12 @@
 
         /**
          * Get browsers chart data
+         * @param int $limit
          * @return string
          */
-        public function getSessionsChartData() {
+        public function getSessionsChartData($limit = 10) {
             // Get data
-            $this->database->query("CALL GET_SESSION_STATS();");
+            $this->database->query("CALL GET_SESSION_STATS(" . $limit . ");");
             $sessions = $this->database->getObjectsArray();
 
             // Compile result by visitors

@@ -79,23 +79,32 @@
             google.load("visualization", "1", { packages: ["corechart"]});
             google.setOnLoadCallback(drawBrowsersChart);
             google.setOnLoadCallback(drawSessionsChart);
+            google.setOnLoadCallback(drawDownloadsChart);
 
             function drawBrowsersChart() {
                 var data = google.visualization.arrayToDataTable(<?php echo $options['data']['browsers']; ?>);
-                var options = { title: '<?php echo T('Browser statistics'); ?>', chartArea: { width: 480, height: 320 }};
+                var options = { title: '<?php echo T('Browser statistics'); ?>', height: 400 };
                 var chart = new google.visualization.PieChart(document.getElementById('browser-stats-chart'));
                 chart.draw(data, options);
             }
 
             function drawSessionsChart() {
                 var data = google.visualization.arrayToDataTable(<?php echo $options['data']['sessions']; ?>);
-                var options = { title: '<?php echo T('Session statistics'); ?>', hAxis: { title: '<?php echo T('Date'); ?>'}};
+                var options = { title: '<?php echo T('Session statistics'); ?>', hAxis: { title: '<?php echo T('Date'); ?>'}, height: 400 };
                 var chart = new google.visualization.AreaChart(document.getElementById('sessions-stats-chart'));
                 chart.draw(data, options);
             }
+
+            function drawDownloadsChart() {
+                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['downloads']; ?>);
+                var options = { title: '<?php echo T('Downloads statistics'); ?>', hAxis: { title: '<?php echo T('Release'); ?>'}, height: 400 };
+                var chart = new google.visualization.BarChart(document.getElementById('downloads-stats-chart'));
+                chart.draw(data, options);
+            }
         </script>
-        <div id="browser-stats-chart" class="l50"></div>
-        <div id="sessions-stats-chart" class="r50"></div>
+        <div id="browser-stats-chart"></div>
+        <div id="sessions-stats-chart"></div>
+        <div id="downloads-stats-chart"></div>
     </div>
 </div>
 

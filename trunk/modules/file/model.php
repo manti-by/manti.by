@@ -277,4 +277,46 @@
             $this->database->query("CALL TRACK_FILE_BY_ID($id);");
             return $this->database->getField();
         }
+
+        /**
+         * Get download stats string
+         * @param int $limit
+         * @return bool|object $result
+         */
+        public function getDownloadsChartData($limit = 10){
+            // Get all releases
+            $this->database->query("CALL GET_FILES('release', 100);");
+            $files = $this->database->getObjectsArray();
+
+            // Process files
+            if ($files) {
+                // Sort array and slice
+                usort($files, array($this, 'sortFilesByViewCount'));
+                $files = array_slice($files, 0, $limit);
+
+                // Compile result
+                $result = array(array(T('Release'), T('Downloads')));
+                foreach ($files as $file) {
+                    $name = $file->name ? $file->name : end(explode('/', $file->source));
+                    $result[] = array($name, (int)$file->viewed);
+                }
+
+                return json_encode($result);
+            } else {
+                return '';
+            }
+        }
+
+        /**
+         * Callback function for sorting files array
+         * @param object $a
+         * @param object $b
+         * @return int $cmp_result
+         */
+        private function sortFilesByViewCount($a, $b) {
+            if ($a->viewed == $b->viewed) {
+                return 0;
+            }
+            return ($a->viewed < $b->viewed) ? 1 : -1;
+        }
     }
