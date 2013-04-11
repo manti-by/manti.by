@@ -52,9 +52,13 @@
 
         <?php if (json_decode($options['data']->covers)) : ?>
             <div class="covers fl">
-                <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>">
+                <?php if ($options['context'] == 'short') : ?>
+                    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>">
+                <?php endif; ?>
                     <?php echo File::getHtml($options['data']->covers, FileEntity::TYPE_COVERS); ?>
-                </a>
+                <?php if ($options['context'] == 'short') : ?>
+                    </a>
+                <?php endif; ?>
             </div>
         <?php endif; ?>
 
