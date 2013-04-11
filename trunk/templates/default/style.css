@@ -134,10 +134,11 @@ audio { width: 330px; transform: scale(0.8); }
 .right-sidebar .sidebar { margin-top: 0; margin-bottom: 10px; }
 .right-sidebar .tag-counter, .right-sidebar .gallery-counter  { color: #999; }
 
-.right-sidebar #hidden-tags  { display: none; }
-.right-sidebar #show-more-tags { margin: 5px 0 25px 44px;  }
-.right-sidebar #show-more-tags a { text-decoration: underline; color: #b40303; }
-.right-sidebar .sidebar.tags { margin-bottom: 0; }
+.right-sidebar #hidden-tags, .right-sidebar #hidden-latest  { display: none; }
+.right-sidebar #show-more-tags, .right-sidebar #show-more-latest { margin: 5px 0 25px 44px;  }
+.right-sidebar #show-more-tags a, .right-sidebar #show-more-latest a { text-decoration: underline; color: #b40303; }
+.right-sidebar #show-more-tags a:hover, .right-sidebar #show-more-latest a:hover { color: #7F2828 !important; }
+.right-sidebar .sidebar.tags, .right-sidebar .sidebar.latest { margin-bottom: 0; }
 
 .admin-buttons a { font-size: 12px; }
 
