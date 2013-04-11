@@ -134,6 +134,11 @@ audio { width: 330px; transform: scale(0.8); }
 .right-sidebar .sidebar { margin-top: 0; margin-bottom: 10px; }
 .right-sidebar .tag-counter, .right-sidebar .gallery-counter  { color: #999; }
 
+.right-sidebar #hidden-tags  { display: none; }
+.right-sidebar #show-more-tags { margin: 5px 0 25px 44px;  }
+.right-sidebar #show-more-tags a { text-decoration: underline; color: #b40303; }
+.right-sidebar .sidebar.tags { margin-bottom: 0; }
+
 .admin-buttons a { font-size: 12px; }
 
 .relation { float: left; border: 3px solid transparent; width: 227px; height: 124px; overflow: hidden; }
