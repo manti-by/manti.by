@@ -52,6 +52,11 @@
         const OTHER_SESSION_IP = '127.0.0.1';
 
         /**
+         * @var array $browsers
+         */
+        private $skip_browsers = array('YandexMetrika 0.0', 'YandexBot 0.0', 'Googlebot 2.1', 'Default Browser 0.0');
+
+        /**
          * Process daily statistics
          * @return array
          */
@@ -149,7 +154,10 @@
             // Compile result
             $result = array(array(T('Browser'), T('Hits')));
             foreach ($browsers as $item) {
-                $result[] = array($item->browser, (int)$item->count);
+                // Skip bots
+                if (!in_array($item->browser, $this->skip_browsers))  {
+                    $result[] = array($item->browser, (int)$item->count);
+                }
             }
 
             return json_encode($result);
@@ -162,7 +170,7 @@
          */
         public function getSessionsChartData($limit = 10) {
             // Get data
-            $this->database->query("CALL GET_SESSION_STATS(" . $limit . ");");
+            $this->database->query("CALL GET_SESSION_STATS(10000);");
             $sessions = $this->database->getObjectsArray();
 
             // Compile result by visitors
@@ -176,7 +184,7 @@
                     if (array_key_exists($date, $visitors[$item->visitor])) {
                         $visitors[$item->visitor][$date] += (int)$item->count;
                     } else {
-                        $visitors[$item->visitor] = array($date => (int)$item->count);
+                        $visitors[$item->visitor][$date] = (int)$item->count;
                     }
                 } else {
                     $visitors[$item->visitor] = array($date => (int)$item->count);
@@ -187,6 +195,10 @@
                     $dates[$date] = array();
                 }
             }
+
+            // Sort by view count and slice visitors limit
+            uasort($visitors, array($this, 'sortVisitorsByViewCount'));
+            $visitors = array_slice($visitors, 0, $limit);
 
             // Pivot data and compile dates
             $head[] = T('Date');
@@ -208,5 +220,18 @@
             }
 
             return json_encode($result);
+        }
+
+        private function sortVisitorsByViewCount($a, $b) {
+            // Calculate counters
+            $a_count = $b_count = 0;
+            foreach($a as $count) $a_count += $count;
+            foreach($b as $count) $b_count += $count;
+
+            // Return result
+            if ($a_count == $b_count) {
+                return 0;
+            }
+            return ($a_count < $b_count) ? 1 : -1;
         }
     }
