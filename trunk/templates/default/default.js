@@ -51,6 +51,14 @@ $(document).ready(function() {
         );
     });
 
+    $('audio').bind('canplay', function() {
+        var self = this;
+        $.post(
+            '/index.php?module=file&action=track',
+            { id : $(self).attr('rel') }
+        );
+    });
+
     $('.content .tracklist .show-tracklist').live('click', function() {
         $(this).hide();
         $('.content .hide-tracklist[rel=' + $(this).attr('rel') + ']').show();

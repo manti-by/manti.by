@@ -58,6 +58,14 @@
                 $.post('<?php echo Sef::getSef('index.php?module=blog&action=next'); ?>', { page : page }, function(responce) {
                     if (responce != '') {
                         $('#content .main-sidebar').append(responce);
+
+                        $('audio').bind('canplay', function() {
+                            var self = this;
+                            $.post(
+                                '/index.php?module=file&action=track',
+                                { id : $(self).attr('rel') }
+                            );
+                        });
                     } else {
                         page = 0;
                     }
