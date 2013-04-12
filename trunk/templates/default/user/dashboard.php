@@ -84,9 +84,9 @@
             function drawBrowsersChart() {
                 var data = google.visualization.arrayToDataTable(<?php echo $options['data']['browsers']; ?>);
                 var options = {
-                    width: '100%',
                     height: 400,
-                    title: '<?php echo T('Browser statistics'); ?>'
+                    title: '<?php echo T('Browser statistics'); ?>',
+                    chartArea: { width: 650}
                 }
 
                 var chart = new google.visualization.PieChart(document.getElementById('browser-stats-chart'));
@@ -99,7 +99,7 @@
                     height: 400,
                     title: '<?php echo T('Session statistics'); ?>',
                     hAxis: { title: '<?php echo T('Date'); ?>'},
-                    chatArea: { width: '50%'}
+                    chartArea: { width: '50%'}
                 };
 
                 var chart = new google.visualization.AreaChart(document.getElementById('sessions-stats-chart'));
@@ -109,10 +109,11 @@
             function drawDownloadsChart() {
                 var data = google.visualization.arrayToDataTable(<?php echo $options['data']['downloads']; ?>);
                 var options = {
-                    height: 400,
+                    height: 500,
                     title: '<?php echo T('Downloads statistics'); ?>',
                     hAxis: { title: '<?php echo T('Count'); ?>'},
-                    chatArea: { width: '50%'}
+                    chartArea: { width: '50%'},
+                    bar: { groupWidth: '80%' }
                 };
 
                 var chart = new google.visualization.BarChart(document.getElementById('downloads-stats-chart'));
