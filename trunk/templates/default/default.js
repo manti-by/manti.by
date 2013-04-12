@@ -46,7 +46,7 @@ $(document).ready(function() {
     $('.release a').live('click', function() {
         var self = this;
         $.post(
-            'index.php?module=file&action=track',
+            '/index.php?module=file&action=track',
             { id : $(self).attr('rel') }
         );
     });
