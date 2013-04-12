@@ -83,21 +83,38 @@
 
             function drawBrowsersChart() {
                 var data = google.visualization.arrayToDataTable(<?php echo $options['data']['browsers']; ?>);
-                var options = { title: '<?php echo T('Browser statistics'); ?>', height: 400 };
+                var options = {
+                    width: '100%',
+                    height: 400,
+                    title: '<?php echo T('Browser statistics'); ?>'
+                }
+
                 var chart = new google.visualization.PieChart(document.getElementById('browser-stats-chart'));
                 chart.draw(data, options);
             }
 
             function drawSessionsChart() {
                 var data = google.visualization.arrayToDataTable(<?php echo $options['data']['sessions']; ?>);
-                var options = { title: '<?php echo T('Session statistics'); ?>', hAxis: { title: '<?php echo T('Date'); ?>'}, height: 400 };
+                var options = {
+                    height: 400,
+                    title: '<?php echo T('Session statistics'); ?>',
+                    hAxis: { title: '<?php echo T('Date'); ?>'},
+                    chatArea: { width: '50%'}
+                };
+
                 var chart = new google.visualization.AreaChart(document.getElementById('sessions-stats-chart'));
                 chart.draw(data, options);
             }
 
             function drawDownloadsChart() {
                 var data = google.visualization.arrayToDataTable(<?php echo $options['data']['downloads']; ?>);
-                var options = { title: '<?php echo T('Downloads statistics'); ?>', hAxis: { title: '<?php echo T('Release'); ?>'}, height: 400 };
+                var options = {
+                    height: 400,
+                    title: '<?php echo T('Downloads statistics'); ?>',
+                    hAxis: { title: '<?php echo T('Count'); ?>'},
+                    chatArea: { width: '50%'}
+                };
+
                 var chart = new google.visualization.BarChart(document.getElementById('downloads-stats-chart'));
                 chart.draw(data, options);
             }
