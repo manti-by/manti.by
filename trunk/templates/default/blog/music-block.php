@@ -68,6 +68,13 @@
             </div>
         <?php endif; ?>
 
+        <?php if ($options['data']->created) : ?>
+            <div class="catnum flip-tracklist">
+                <span class="bold"><?php echo T('Created'); ?></span> :
+                <?php echo date('d.m.Y', strtotime($options['data']->created)); ?>
+            </div>
+        <?php endif; ?>
+
         <?php if ($options['data']->catnum) : ?>
             <div class="catnum flip-tracklist">
                 <span class="bold"><?php echo T('Catalog No'); ?></span> :
