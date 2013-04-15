@@ -57,7 +57,7 @@
 
 ?>
 <a href="<?php echo Application::$config['http_host']; ?>" class="fl" rel="first">
-    <img src="<?php echo Application::$config['template_image_url_path']; ?>logo.png" alt="Manti Logo" width="155" height="50" />
+    <img src="<?php echo Application::$config['template_image_url_path']; ?>logo.png" alt="Manti Logo" width="155" height="62" />
 </a>
 <ul id="topmenu" class="fl">
     <li>
