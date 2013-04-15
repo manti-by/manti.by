@@ -291,10 +291,10 @@
             // Process files
             if ($files) {
                 // Compile result
-                $result = array(array(T('Release'), T('Downloads'), T('Previews')));
+                $result = array(array(T('Release'), T('Views'), T('Previews'), T('Downloads')));
                 foreach ($files as $file) {
                     $name = $file->name ? $file->name : end(explode('/', $file->source));
-                    $result[] = array($name, (int)$file->viewed, (int)$file->previewed);
+                    $result[] = array($name, (int)$file->viewed, (int)$file->previewed, (int)$file->downloaded);
                 }
 
                 return json_encode($result);
