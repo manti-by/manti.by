@@ -174,6 +174,40 @@
             $sessions = $this->database->getObjectsArray();
 
             // Compile result by visitors
+            $visitors = array();
+            foreach ($sessions as $item) {
+                // Calculate counters
+                if (array_key_exists($item->visitor, $visitors)) {
+                    $visitors[$item->visitor] += (int)$item->count;
+                } else {
+                    $visitors[$item->visitor] = (int)$item->count;
+                }
+            }
+
+            // Sort by view count and slice visitors limit
+            arsort($visitors);
+            $visitors = array_slice($visitors, 0, $limit);
+
+            // Pivot data and compile dates
+            $result = array(array(T('Visitor'), T('Hits')));
+            foreach ($visitors as $session => $count) {
+                $result[] = array($session, (int)$count);
+            }
+
+            return json_encode($result);
+        }
+
+        /**
+         * Get browsers chart data by day
+         * @param int $limit
+         * @return string
+         */
+        public function getSessionsChartDataByDay($limit = 10) {
+            // Get data
+            $this->database->query("CALL GET_SESSION_STATS(10000);");
+            $sessions = $this->database->getObjectsArray();
+
+            // Compile result by visitors
             $visitors = $head = $dates = array();
             foreach ($sessions as $item) {
                 // Format date

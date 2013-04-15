@@ -67,6 +67,7 @@
             <li><a href="http://webmaster.yandex.ru/" target="_blank">Yandex webmaster</a> / <a href="http://metrika.yandex.ru/" target="_blank">Metrika</a></li>
             <li><a href="https://developers.google.com/speed/pagespeed/insights" target="_blank">Pagespeed Check</a></li>
             <li><a href="http://validator.w3.org/" target="_blank">W3C Validation</a></li>
+            <li><a href="http://2ip.ru/whois/" target="_blank">Whois IP</a></li>
         </ul>
         <div class="cls"></div>
     </div>
@@ -79,6 +80,7 @@
             google.load("visualization", "1", { packages: ["corechart"]});
             google.setOnLoadCallback(drawBrowsersChart);
             google.setOnLoadCallback(drawSessionsChart);
+            google.setOnLoadCallback(drawSessionsChartByDay);
             google.setOnLoadCallback(drawDownloadsChart);
 
             function drawBrowsersChart() {
@@ -98,17 +100,31 @@
                 var options = {
                     height: 400,
                     title: '<?php echo T('Session statistics'); ?>',
+                    chartArea: { width: 650}
+                }
+
+                var chart = new google.visualization.PieChart(document.getElementById('sessions-stats-chart'));
+                chart.draw(data, options);
+            }
+
+            function drawSessionsChartByDay() {
+                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['sessions_by_day']; ?>);
+                var options = {
+                    width: 960,
+                    height: 500,
+                    title: '<?php echo T('Session statistics by date'); ?>',
                     hAxis: { title: '<?php echo T('Date'); ?>'},
                     chartArea: { width: '50%'}
                 };
 
-                var chart = new google.visualization.AreaChart(document.getElementById('sessions-stats-chart'));
+                var chart = new google.visualization.AreaChart(document.getElementById('sessions-by-day-stats-chart'));
                 chart.draw(data, options);
             }
 
             function drawDownloadsChart() {
                 var data = google.visualization.arrayToDataTable(<?php echo $options['data']['downloads']; ?>);
                 var options = {
+                    width: 960,
                     height: 500,
                     title: '<?php echo T('Downloads statistics'); ?>',
                     hAxis: { title: '<?php echo T('Count'); ?>'},
@@ -120,8 +136,12 @@
                 chart.draw(data, options);
             }
         </script>
-        <div id="browser-stats-chart"></div>
-        <div id="sessions-stats-chart"></div>
+        <div>
+            <div id="browser-stats-chart" class="l50"></div>
+            <div id="sessions-stats-chart" class="r50"></div>
+            <div class="cls"></div>
+        </div>
+        <div id="sessions-by-day-stats-chart"></div>
         <div id="downloads-stats-chart"></div>
     </div>
 </div>
