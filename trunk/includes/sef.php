@@ -135,6 +135,7 @@
             if (!Application::$config['sef_enabled']) return $link;
 
             // Check memory, if exist, get array value by key
+            $link = (string)$link;
             if (self::checkStorage($link)) {
                 $storage = self::getStorage();
                 $flip = array_flip($storage);
