@@ -64,6 +64,9 @@
                     $error = Application::getInstance()->getLastFromStack();
                     Application::shutdown($error['message']);
                 }
+            case 'batchstats';
+                Model::getModel('stats')->processBatchStats(Application::$config['batch_start'], Application::$config['batch_end']);
+                Application::shutdown('Batch stats successfully processed' . NL);
             default:
                 Application::shutdown('You need to specify crontab action' . NL);
         }

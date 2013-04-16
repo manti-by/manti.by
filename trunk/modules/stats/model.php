@@ -58,12 +58,14 @@
 
         /**
          * Process daily statistics
+         * @param string $start_date
+         * @param string $end_date
          * @return array
          */
-        public function processDailyStats() {
+        public function processDailyStats($start_date = null, $end_date = null) {
             // Get dates
-            $start_date = date('Y-m-d', time() - 10 * 60 * 60 * 24);
-            $end_date = date('Y-m-d');
+            $start_date = $start_date ? $start_date : date('Y-m-d', time() - 60 * 60 * 24);
+            $end_date = $end_date ? $end_date : date('Y-m-d', time());
 
             // Get stats and compile metrics
             $result = array('browsers' => array(), 'sessions' => array());
@@ -99,7 +101,7 @@
             if (count($result['browsers']) > 0) {
                 foreach($result['browsers'] as $browser => $data) {
                     foreach($data as $version => $count) {
-                        $this->database->query("CALL UPSERT_BROWSER_STAT('" . $browser . "', '" . $version . "', " . $count . ");");
+                        $this->database->query("CALL UPSERT_BROWSER_STAT('" . $browser . "', '" . $version . "', " . $count . ", '" . $start_date . "');");
                     }
                 }
             }
@@ -122,12 +124,51 @@
                     foreach($data as $session => $count) {
                         // Get IP country
                         $country = System::getInstance()->getCountry($ip);
-                        $this->database->query("CALL UPSERT_SESSION_STAT('" . $session . "', '" . $ip . "', '" . $country . "', " . $count . ");");
+                        $this->database->query("CALL UPSERT_SESSION_STAT('" . $session . "', '" . $ip . "', '" . $country . "', " . $count . ", '" . $start_date . "');");
                     }
                 }
             }
 
             return $result;
+        }
+
+        /**
+         * Batch stats processing
+         * @param string $start_date
+         * @param string $end_date
+         */
+        public function processBatchStats($start_date, $end_date) {
+            // Empty message
+            $prev_message = '';
+
+            // Expand dates
+            $start = array(
+                'z' => (int) date('z', strtotime($start_date)),
+                'y' => (int) date('y', strtotime($start_date))
+            );
+
+            $end = array(
+                'z' => (int) date('z', strtotime($end_date)),
+                'y' => (int) date('y', strtotime($end_date))
+            );
+
+            // Calculate count days
+            $range = $end['z'] - $start['z'] + (($end['y'] - $start['y']) * 365);
+            for($i = 0; $i < $range; $i++) {
+                // Process current day
+                $start = date('Y-m-d', strtotime($start_date) + ($i * 60 * 60 *24));
+                $end   = date('Y-m-d', strtotime($start_date) + (($i + 1) * 60 * 60 *24));
+                $this->processDailyStats($start, $end);
+
+                // Show output message
+                $message = $this->getLastFromStack();
+                if ($message && $prev_message != $message['message']) {
+                    echo 'Error: ' .  $message['message'] . '.' . NL;
+                    $prev_message = $message['message'];
+                } else {
+                    echo 'Stats for date ' . $start . ' succesfully processed.' . NL;
+                }
+            }
         }
 
         /**

@@ -80,3 +80,7 @@ memcache_port = 11211
 
 [geolocation]
 ipinfo_key = "example"
+
+[stats]
+batch_start = "2013-04-06"
+batch_end = "2013-04-16"
