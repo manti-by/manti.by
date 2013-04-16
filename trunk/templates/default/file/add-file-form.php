@@ -96,7 +96,8 @@
                                 '<a href="#remove" class="file-remove" rel_id="' + rel_id + '" rel="' + response.id + '"><?php echo T('Remove'); ?></a>'
                         );
                     } else {
-                        $.fn.popupShow(response.error);
+                        var popup_block = $('<div class="error-message">' + response.message + '</div>');
+                        $.fn.popupShow(popup_block);
                     }
                 }
             )

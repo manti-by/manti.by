@@ -92,13 +92,13 @@
             if (!UserEntity::getInstance()->isLoggined()) {
                 // Compile error response
                 $options['data'] = array(
-                    'result' => 'error',
+                    'result'  => 'error',
                     'message' => T('You do not have permissions to view this page')
                 );
             } else {
                 // Run actions and compile response
                 $options['data'] = array(
-                    'result' => 'success',
+                    'result'  => 'success',
                     'message' => $this->view->wrapFileList(
                         $this->model->updateFSList()
                     )
@@ -118,7 +118,7 @@
             if (!UserEntity::getInstance()->isLoggined()) {
                 // Compile error response
                 $options['data'] = array(
-                    'result' => 'error',
+                    'result'  => 'error',
                     'message' => T('You do not have permissions to view this page')
                 );
             } else {
@@ -171,10 +171,16 @@
             $options['id'] = System::getInstance()->getCmd('id');
 
             if ($count = $this->model->trackGallery($options['id'])) {
-                $options['data'] = array('result' => 'success', 'count' => $count);
+                $options['data'] = array(
+                    'result' => 'success',
+                    'count'  => $count
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;
@@ -191,10 +197,17 @@
             $options['id'] = System::getInstance()->getCmd('id');
 
             if ($result = $this->model->nextImage($options['id'])) {
-                $options['data'] = array('result' => 'success', 'id' => $result->id, 'original' => Application::$config['http_host'] . substr($result->source, 1));
+                $options['data'] = array(
+                    'result'   => 'success',
+                    'id'       => $result->id,
+                    'original' => Application::$config['http_host'] . substr($result->source, 1)
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;
@@ -211,10 +224,17 @@
             $options['id'] = System::getInstance()->getCmd('id');
 
             if ($result = $this->model->prevImage($options['id'])) {
-                $options['data'] = array('result' => 'success', 'id' => $result->id, 'original' => Application::$config['http_host'] . substr($result->source, 1));
+                $options['data'] = array(
+                    'result'   => 'success',
+                    'id'       => $result->id,
+                    'original' => Application::$config['http_host'] . substr($result->source, 1)
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;

@@ -78,7 +78,7 @@
                             $.fn.popupShow(popup_block);
                         }
                     } else {
-                        var popup_block = $('<div class="error-message">' + response.error + '</div>');
+                        var popup_block = $('<div class="error-message">' + response.message + '</div>');
                         $.fn.popupShow(popup_block);
                     }
                 });

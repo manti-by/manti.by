@@ -177,9 +177,15 @@
             // Get category title
             if ($query) {
                 $data = toJSNumArray($this->model->autocomplete($query));
-                $options['data'] = array('result' => 'success', 'data' => $data);
+                $options['data'] = array(
+                    'result' => 'success',
+                    'data'   => $data
+                );
             } else {
-                $options['data'] = array('result' => 'error' , 'error' => T('Empty query string'));
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => T('Empty query string')
+                );
             }
 
             return $options;

@@ -103,8 +103,9 @@
                     );
                 });
             } else {
-                if (response.error) {
-                    $.fn.popupShow(response.error);
+                if (response.message) {
+                    var popup_block = $('<div class="error-message">' + response.message + '</div>');
+                    $.fn.popupShow(popup_block);
                 } else {
                     $.fn.loaderHide();
                 }

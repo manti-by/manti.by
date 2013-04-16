@@ -202,7 +202,10 @@
 
             $options['name'] = $system->getCmd('name', '');
             if (empty($options['name'])) {
-                $options['data'] = array('result' => 'error', 'error' => T('Post title could not be empty'));
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => T('Post title could not be empty')
+                );
                 return $options;
             }
 
@@ -214,7 +217,10 @@
 
             $options['description'] = $system->getCmd('description', '');
             if (empty($options['description'])) {
-                $options['data'] = array('result' => 'error', 'error' => T('Post description could not be empty'));
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => T('Post description could not be empty')
+                );
                 return $options;
             }
 
@@ -249,10 +255,17 @@
             // Save result
             $options['result'] = $this->model->savePost($options);
             if (!empty($options['result'])) {
-                $options['data'] = array('result' => 'success', 'id' => $options['result'], 'options' => $options);
+                $options['data'] = array(
+                    'result'  => 'success',
+                    'id'      => $options['result'],
+                    'options' => $options
+                );
             } else {
                 $error =  $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
             
             return $options;
@@ -275,10 +288,16 @@
             $options['id'] = System::getInstance()->getCmd('id');
 
             if ($this->model->deletePost($options['id'])) {
-                $options['data'] = array('result' => 'success', 'message' => T('Post deleted successfully'));
+                $options['data'] = array(
+                    'result'  => 'success',
+                    'message' => T('Post deleted successfully')
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;
@@ -295,10 +314,16 @@
             $options['id'] = System::getInstance()->getCmd('id');
 
             if ($count = $this->model->trackPost($options['id'])) {
-                $options['data'] = array('result' => 'success', 'count' => $count);
+                $options['data'] = array(
+                    'result' => 'success',
+                    'count'  => $count
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
         }
     }

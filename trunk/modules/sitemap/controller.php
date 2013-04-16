@@ -80,7 +80,7 @@
             if (!UserEntity::getInstance()->isLoggined()) {
                 // Compile error response
                 $options['data'] = array(
-                    'result' => 'error',
+                    'result'  => 'error',
                     'message' => T('You do not have permissions to view this page')
                 );
             } else {
