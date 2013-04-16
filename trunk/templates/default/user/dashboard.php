@@ -80,7 +80,9 @@
             google.load("visualization", "1", { packages: ["corechart"]});
             google.setOnLoadCallback(drawBrowsersChart);
             google.setOnLoadCallback(drawSessionsChart);
-            google.setOnLoadCallback(drawSessionsChartByDay);
+            google.setOnLoadCallback(drawVisitorsChart);
+
+            google.setOnLoadCallback(drawPostnginxChart);
             google.setOnLoadCallback(drawDownloadsChart);
 
             function drawBrowsersChart() {
@@ -107,8 +109,8 @@
                 chart.draw(data, options);
             }
 
-            function drawSessionsChartByDay() {
-                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['sessions_by_day']; ?>);
+            function drawVisitorsChart() {
+                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['visitors']; ?>);
                 var options = {
                     width: 960,
                     height: 500,
@@ -117,7 +119,22 @@
                     chartArea: { width: '50%'}
                 };
 
-                var chart = new google.visualization.AreaChart(document.getElementById('sessions-by-day-stats-chart'));
+                var chart = new google.visualization.AreaChart(document.getElementById('visitors-stats-chart'));
+                chart.draw(data, options);
+            }
+
+            function drawPostnginxChart() {
+                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['postnginx']; ?>);
+                var options = {
+                    width: 960,
+                    height: 500,
+                    title: '<?php echo T('Post/Nginx statistics'); ?>',
+                    hAxis: { title: '<?php echo T('Count'); ?>'},
+                    chartArea: { width: '50%'},
+                    bar: { groupWidth: '80%' }
+                };
+
+                var chart = new google.visualization.BarChart(document.getElementById('postnginx-stats-chart'));
                 chart.draw(data, options);
             }
 
@@ -141,7 +158,8 @@
             <div id="sessions-stats-chart" class="r50"></div>
             <div class="cls"></div>
         </div>
-        <div id="sessions-by-day-stats-chart"></div>
+        <div id="visitors-stats-chart"></div>
+        <div id="postnginx-stats-chart"></div>
         <div id="downloads-stats-chart"></div>
     </div>
 </div>
