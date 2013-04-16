@@ -64,9 +64,19 @@
                     $error = Application::getInstance()->getLastFromStack();
                     Application::shutdown($error['message']);
                 }
-            case 'batchstats';
-                Model::getModel('stats')->processBatchStats(Application::$config['batch_start'], Application::$config['batch_end']);
-                Application::shutdown('Batch stats successfully processed' . NL);
+            case 'dailynginx';
+                if (Model::getModel('stats')->processNginxStats()) {
+                    Application::shutdown('Nginx stats successfully processed' . NL);
+                } else {
+                    $error = Application::getInstance()->getLastFromStack();
+                    Application::shutdown($error['message']);
+                }
+            case 'batchdaily';
+                Model::getModel('stats')->processBatchStats(Application::$config['batch_start'], Application::$config['batch_end'], StatsModel::DAILY_STATS);
+                Application::shutdown('Batch daily stats successfully processed' . NL);
+            case 'batchnginx';
+                Model::getModel('stats')->processBatchStats(Application::$config['batch_start'], Application::$config['batch_end'], StatsModel::NGINX_STATS);
+                Application::shutdown('Batch nginx stats successfully processed' . NL);
             default:
                 Application::shutdown('You need to specify crontab action' . NL);
         }

@@ -82,5 +82,6 @@ memcache_port = 11211
 ipinfo_key = "example"
 
 [stats]
+nginx_log = "../../log/access.log"
 batch_start = "2013-04-06"
 batch_end = "2013-04-16"

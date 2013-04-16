@@ -51,6 +51,10 @@
         const OTHER_SESSION_ID = 'other-session-id';
         const OTHER_SESSION_IP = '127.0.0.1';
 
+        const ALL_STATS   = 'All';
+        const DAILY_STATS = 'Daily';
+        const NGINX_STATS = 'Nginx';
+
         /**
          * @var array $browsers
          */
@@ -133,11 +137,54 @@
         }
 
         /**
-         * Batch stats processing
+         * Process nginx statistics
          * @param string $start_date
          * @param string $end_date
+         * @return array
          */
-        public function processBatchStats($start_date, $end_date) {
+        public function processNginxStats($start_date = null, $end_date = null) {
+            // Get dates
+            $start_date = $start_date ? $start_date : date('Y-m-d', time() - 60 * 60 * 24);
+            $end_date = $end_date ? $end_date : date('Y-m-d', time());
+
+            // Get stats and compile metrics
+            $result = array();
+            $stats = file_get_contents(Application::$config['nginx_log']);
+
+            if ($stats) {
+                $stats = explode("\n", $stats);
+                foreach ($stats as $line) {
+                    // IP - - [DATE] "METHOD REQUEST TYPE" HTTP_CODE SIZE "REFERRER" "USER_AGENT"
+                    $regex = '/(.*?)\s-\s-\s\[(.*?)\]\s"GET\s(.*?)\s(.*?)"\s\d+\s\d+\s"(.*?)"\s"(.*?)"/';
+                    preg_match($regex, $line, $matches);
+
+                    // Check date and calculate counters
+                    $date = date('Y-m-d', strtotime($matches[2]));
+                    if ($date >= $start_date && $date < $end_date) {
+                        if (array_key_exists($matches[3], $result) && !empty($matches[3])) {
+                            $result[$matches[3]]++;
+                        } else {
+                            $result[$matches[3]] = 1;
+                        }
+                    }
+                }
+            }
+
+            // Upsert nginx stats
+            foreach($result as $request => $count) {
+                $this->database->query("CALL UPSERT_NGINX_STAT('" . $request . "', " . $count . ");");
+            }
+
+            return $result;
+        }
+
+        /**
+         * Batch nginx stats processing
+         * @param string $start_date
+         * @param string $end_date
+         * @param string $type
+         */
+        public function processBatchStats($start_date, $end_date, $type = self::ALL_STATS) {
             // Empty message
             $prev_message = '';
 
@@ -158,7 +205,18 @@
                 // Process current day
                 $start = date('Y-m-d', strtotime($start_date) + ($i * 60 * 60 *24));
                 $end   = date('Y-m-d', strtotime($start_date) + (($i + 1) * 60 * 60 *24));
-                $this->processDailyStats($start, $end);
+
+                switch ($type) {
+                    case self::DAILY_STATS:
+                        $this->processDailyStats($start, $end);
+                        break;
+                    case self::NGINX_STATS:
+                        $this->processNginxStats($start, $end);
+                        break;
+                    default:
+                        $this->processDailyStats($start, $end);
+                        $this->processNginxStats($start, $end);
+                }
 
                 // Show output message
                 $message = $this->getLastFromStack();
@@ -166,7 +224,7 @@
                     echo 'Error: ' .  $message['message'] . '.' . NL;
                     $prev_message = $message['message'];
                 } else {
-                    echo 'Stats for date ' . $start . ' succesfully processed.' . NL;
+                    echo $type . ' stats for date ' . $start . ' succesfully processed.' . NL;
                 }
             }
         }
