@@ -216,9 +216,10 @@
 
         /**
          * Batch resize for gallery originals
+         * @param bool $is_update
          * @return array list of all resized images
          */
-        public function rebuildThumbnails() {
+        public function rebuildThumbnails($is_update = false) {
             $resized = $db_files = array();
 
             // Get all registered images
@@ -250,22 +251,34 @@
                 }
 
                 // Remove old thumbnail
-                if (file_exists($thumbname)) {
+                $is_file_exists = file_exists($thumbname);
+                if ($is_file_exists && !$is_update) {
                     unlink($thumbname);
                 }
 
                 // And try to create new
-                if (System::getInstance()->resize($source, $thumbname, Application::$config['thumb_width'], Application::$config['thumb_height'], System::RESIZE_WITH_CROP)) {
-                    $resized[] = array(
-                        'source' => $source,
-                        'status' => T('Successfully resized')
+                if (!($is_update && $is_file_exists)) {
+                    $result = System::getInstance()->resize(
+                        $source,
+                        $thumbname,
+                        Application::$config['thumb_width'],
+                        Application::$config['thumb_height'],
+                        System::RESIZE_WITH_CROP
                     );
-                } else {
-                    $message = $this->getLastFromStack();
-                    $resized[] = array(
-                        'source' => $source,
-                        'status' => $message['message']
-                    );
+
+                    // Check result
+                    if ($result) {
+                        $resized[] = array(
+                            'source' => $source,
+                            'status' => T('Successfully resized')
+                        );
+                    } else {
+                        $message = $this->getLastFromStack();
+                        $resized[] = array(
+                            'source' => $source,
+                            'status' => $message['message']
+                        );
+                    }
                 }
             }
 

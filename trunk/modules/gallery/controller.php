@@ -110,8 +110,9 @@
 
         /**
          * Rebuild thumbnails for images in gallery
+         * @param array $options
          */
-        public function rebuildThumbnailsAction() {
+        public function rebuildThumbnailsAction($options) {
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
             // Check login state
@@ -122,16 +123,30 @@
                     'message' => T('You do not have permissions to view this page')
                 );
             } else {
+                // Check action
+                if (isset($options['is_update']) && $options['is_update'] == true) {
+                    $result = $this->model->rebuildThumbnails(true);
+                } else {
+                    $result = $this->model->rebuildThumbnails(false);
+                }
+
                 // Run actions and compile response
                 $options['data'] = array(
                     'result'  => 'success',
-                    'message' => $this->view->wrapFileList(
-                        $this->model->rebuildThumbnails()
-                    )
+                    'message' => $this->view->wrapFileList($result)
                 );
             }
 
             return $options;
+        }
+
+        /**
+         * Update thumbnails for new images in gallery
+         * @param array $options
+         */
+        public function updateThumbnailsAction($options) {
+            $options['is_update'] = true;
+            return $this->rebuildThumbnailsAction($options);
         }
 
         /**

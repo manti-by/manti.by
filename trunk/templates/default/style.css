@@ -279,3 +279,5 @@ audio { width: 330px; transform: scale(0.8); }
 
 .contact { padding-bottom: 10px; font-weight: bold; }
 .contact a { font-weight: normal; color: #b40303 !important; }
+
+.success-message li { list-style: none; line-height: 18px; }

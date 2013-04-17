@@ -60,6 +60,7 @@
             <li><a href="<?php echo Sef::getSef('index.php?module=file&action=edit');?>"><?php echo T('View Files'); ?></a></li>
             <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=updatefiles');?>"><?php echo T('Update gallery items'); ?></a></li>
             <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=rebuildthumbnails');?>"><?php echo T('Rebuild thumbnails'); ?></a></li>
+            <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=updatethumbnails');?>"><?php echo T('Update thumbnails'); ?></a></li>
             <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=sitemap&action=generate');?>"><?php echo T('Generate sitemap'); ?></a></li>
         </ul>
         <ul>
