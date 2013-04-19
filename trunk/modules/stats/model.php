@@ -149,7 +149,8 @@
 
             // Get stats and compile metrics
             $result = array();
-            $stats = file_get_contents(Application::$config['nginx_log']);
+            $access_log_file = realpath(ROOT_PATH . DS . Application::$config['nginx_log']);
+            $stats = file_get_contents($access_log_file);
 
             if ($stats) {
                 $stats = explode("\n", $stats);
