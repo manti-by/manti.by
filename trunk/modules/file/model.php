@@ -283,7 +283,7 @@
          * @param int $limit
          * @return bool|object $result
          */
-        public function getPostsChartData($limit = 10){
+        public function getNginxChartData($limit = 10){
             // Get all releases
             $this->database->query("CALL GET_DOWNLOAD_STATS(" . $limit . ");");
             $files = $this->database->getObjectsArray();
@@ -291,10 +291,10 @@
             // Process files
             if ($files) {
                 // Compile result
-                $result = array(array(T('Release'), T('Views'), T('Downloads')));
+                $result = array(array(T('Release'), T('Views'), T('Previews'), T('Downloads')));
                 foreach ($files as $file) {
                     $name = $file->name ? $file->name : end(explode('/', $file->source));
-                    $result[] = array($name, (int)$file->viewed, (int)$file->nginx);
+                    $result[] = array($name, (int)$file->nginx_viewed, (int)$file->nginx_previewed, (int)$file->nginx_downloaded);
                 }
 
                 return json_encode($result);
@@ -308,7 +308,7 @@
          * @param int $limit
          * @return bool|object $result
          */
-        public function getDownloadsChartData($limit = 10){
+        public function getTrackChartData($limit = 10){
             // Get all releases
             $this->database->query("CALL GET_DOWNLOAD_STATS(" . $limit . ");");
             $files = $this->database->getObjectsArray();
@@ -316,10 +316,10 @@
             // Process files
             if ($files) {
                 // Compile result
-                $result = array(array(T('Release'), T('Previews'), T('Downloads')));
+                $result = array(array(T('Release'), T('Views'), T('Previews'), T('Downloads')));
                 foreach ($files as $file) {
                     $name = $file->name ? $file->name : end(explode('/', $file->source));
-                    $result[] = array($name, (int)$file->previewed, (int)$file->downloaded);
+                    $result[] = array($name, (int)$file->viewed, (int)$file->previewed, (int)$file->downloaded);
                 }
 
                 return json_encode($result);
