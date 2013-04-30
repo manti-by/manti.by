@@ -115,7 +115,7 @@
         <?php echo $this->getContents('plugin', 'popup'); ?>
         <?php echo $this->getContents('plugin', 'loader'); ?>
         <?php echo $this->getContents('plugin', 'messages'); ?>
-        <?php echo $this->getContents('partial', 'usermenu', array('data' => $options['data'])); ?>
+        <?php echo $this->getContents('partial', 'usermenu'); ?>
 
         <div id="header">
             <div class="wrapper">
@@ -128,7 +128,6 @@
         <div id="content" class="wrapper">
             <?php echo $options['body']; ?>
         </div>
-
 
         <div id="footer">
             <div class="wrapper">
