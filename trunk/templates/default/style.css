@@ -287,32 +287,34 @@ audio { width: 330px; transform: scale(0.8); }
 .player { position: relative; height: 22px; width: 350px; }
 
 .player .button { float: left; width: 16px; height: 16px; margin: 0 1px; cursor: pointer;
-    border: 1px solid #CCC; background: url(images/shape-player.png) no-repeat; }
-.player .button:hover { background-color: #999; }
+    border: 1px solid #999; border-radius: 1px; background: url(images/shape-player.png) no-repeat; }
+.player .button:hover { background-color: #666; }
 .player .play { background-position: 0 0; }
 .player .pause { background-position: 0 -16px; }
 .player .next-track { background-position: 0 -32px; }
 .player .prev-track { background-position: 0 -48px; }
 
-.player .progressbar { float: right; position: relative; margin-right: 5px; }
+.player .progressbar { float: right; position: relative; margin-right: 5px; color: #999; cursor: pointer; }
 .player .progressbar .progress-line,
-.player .progressbar .progress-line-active { float: left; height: 4px; position: absolute; top: 8px; left: 0; }
-.player .progressbar .progress-line { width: 100%; cursor: pointer; background: #999; }
-.player .progressbar .progress-line-active { width: 30%; background: #b40303; z-index: 10; }
-.player .progressbar .progress-line-label { float: right; width: 30px; padding: 2px 4px 0 2px; font-size: 11px; }
+.player .progressbar .progress-line-active { float: left; height: 4px; position: absolute; top: 8px; left: 0; cursor: pointer; }
+.player .progressbar .progress-line { width: 100%; background: #999; }
+.player .progressbar .progress-line-active { width: 30%; background: #b40303; z-index: 10;}
+.player .progressbar .progress-line-label { float: right; padding: 2px 4px 0 2px; font-size: 11px; }
 
 .player .position { width: 200px; }
-.player .progressbar.position .progress-line { width: 170px; }
+.player .progressbar.position .progress-line { width: 150px; }
+.player .progressbar.position .progress-line-label { width: 50px; }
 
 .player .volume { width: 70px; }
 .player .progressbar.volume .progress-line { width: 40px; }
+.player .progressbar.volume .progress-line-label { width: 30px; }
 
 .player .now-playing { display: none; float: left; padding: 2px 5px; max-width: 35%; height: 16px; overflow: hidden;
     color: #ECECEC; text-align: left; }
 .player .now-playing a { color: inherit !important; text-decoration: none !important; }
 
-.player .high-definition { float: right; margin: 2px 3px; padding: 0 2px; border: 1px solid #CCC;
-    cursor: pointer; text-decoration: line-through; font-size: 11px; }
+.player .high-definition { float: right; margin: 2px 3px; padding: 0 2px; border: 1px solid #999; border-radius: 1px;
+    cursor: pointer; text-decoration: line-through; font-size: 11px; color: #999; }
 .player .high-definition:hover, .player .high-definition.active { color: #b40303; text-decoration: none; }
 
 #player .now-playing { display: block; }
