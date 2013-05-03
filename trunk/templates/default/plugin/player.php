@@ -1,52 +1,53 @@
 <?php
-/**
- * M2 Micro Framework - a micro PHP 5 framework
- *
- * @author      Alexander Chaika <marco.manti@gmail.com>
- * @copyright   2012 Alexander Chaika
- * @link        https://github.com/marco-manti/M2_micro
- * @version     0.3
- * @package     M2 Micro Framework
- * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
- *
- * NEW BSD LICENSE
- *
- * All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
- *  * Redistributions of source code must retain the above copyright
- * notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- * notice, this list of conditions and the following disclaimer in the
- * documentation and/or other materials provided with the distribution.
- *  * Neither the name of the "M2 Micro Framework" nor "manti.by" nor the
- * names of its contributors may be used to endorse or promote products
- * derived from this software without specific prior written permission.
+    /**
+     * M2 Micro Framework - a micro PHP 5 framework
+     *
+     * @author      Alexander Chaika <marco.manti@gmail.com>
+     * @copyright   2012 Alexander Chaika
+     * @link        https://github.com/marco-manti/M2_micro
+     * @version     0.3
+     * @package     M2 Micro Framework
+     * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
+     *
+     * NEW BSD LICENSE
+     *
+     * All rights reserved.
+     *
+     * Redistribution and use in source and binary forms, with or without
+     * modification, are permitted provided that the following conditions are met:
+     *  * Redistributions of source code must retain the above copyright
+     * notice, this list of conditions and the following disclaimer.
+     *  * Redistributions in binary form must reproduce the above copyright
+     * notice, this list of conditions and the following disclaimer in the
+     * documentation and/or other materials provided with the distribution.
+     *  * Neither the name of the "M2 Micro Framework" nor "manti.by" nor the
+     * names of its contributors may be used to endorse or promote products
+     * derived from this software without specific prior written permission.
 
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
- * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
- * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDER BE LIABLE FOR ANY
- * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
- * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
- * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
- * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+     * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+     * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+     * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+     * DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDER BE LIABLE FOR ANY
+     * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+     * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+     * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+     * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+     * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+     * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+     */
 
-defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
+    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
-/**
- * Player plugin
- * @name $loaderPlugin
- * @author Alexander Chaika a.k.a. Manti
- * @package M2 Micro Framework
- * @subpackage Plugin
- * @since 0.3RC3
- */
+    /**
+     * Player plugin
+     * @name $loaderPlugin
+     * @author Alexander Chaika a.k.a. Manti
+     * @package M2 Micro Framework
+     * @subpackage Plugin
+     * @since 0.3RC3
+     */
 
+    $player = json_encode(Cache::get('player'));
 ?>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -68,22 +69,40 @@ defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
         }
 
         // Set HD source action
-        $.fn.updateSource = function() {
-            var source = JSON.parse($('#player').find('input[name=source]').val());
+        var player_source = JSON.parse($('#player').find('input[name=source]').val());
+        $.fn.updateSource = function(index) {
             if ($('#player .high-definition').hasClass('active')) {
                 if ($.fn.canPlayMp3()) {
-                    var src = source.hd.mp3;
+                    var src = player_source[index].hd.mp3;
                 } else {
-                    var src = source.hd.ogg;
+                    var src = player_source[index].hd.ogg;
                 }
             } else {
                 if ($.fn.canPlayMp3()) {
-                    var src = source.web.mp3;
+                    var src = player_source[index].web.mp3;
                 } else {
-                    var src = source.web.ogg;
+                    var src = player_source[index].web.ogg;
                 }
             }
+
             $('#player audio').attr('src', src);
+            $('#player .now-playing a').html(player_source[index].name);
+        }
+
+        // Update player source
+        $.fn.reloadPlayer = function(id) {
+            // Restart player with new source
+            $('#player audio').get(0).pause();
+            $.fn.updateSource(id);
+            $('#player audio').get(0).load();
+
+            // Check playing state
+            if (getCookie('is_playing') == 1) {
+                $('#player audio').get(0).play();
+            }
+
+            // Check position
+            $('#player audio').trigger('canplay');
         }
 
         // Progressbar control
@@ -111,17 +130,15 @@ defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
         }
 
         // Init player
-        $.fn.initPlayer = function() {
+        $.fn.initPlayer = function(current_played) {
             // Update source
             if (getCookie('use_hd') == 1) $('#player .high-definition').addClass('active');
-            $.fn.updateSource();
-
-            // Call load
-            $('#player audio').get(0).load();
+            $.fn.reloadPlayer(current_played);
         }
 
         // Init plyer source links
-        $.fn.initPlayer();
+        var player_current_id = 0;
+        $.fn.initPlayer(player_current_id);
 
         // Set on load update position
         $('#player audio').bind('canplay', function() {
@@ -130,7 +147,7 @@ defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
             setCookie('position', position);
 
             $(this).get(0).currentTime = $(this).get(0).duration * position / 100;
-            $('#player .position .progress-line-label span').html(secondsToTime($(this).currentTime));
+            $('#player .position .progress-line-label span').html(secondsToTime($(this).get(0).currentTime));
 
             position = position * $('#player .position .progress-line').width() /100;
             $('#player .position .progress-line-active').width(position);
@@ -150,23 +167,43 @@ defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
         $('.player .play').live('click', function () {
             $(this).removeClass('play').addClass('pause');
             $('#player audio').get(0).play();
+            setCookie('is_playing', 1);
         });
 
         // Pause action
         $('.player .pause').live('click', function () {
             $(this).removeClass('pause').addClass('play');
             $('#player audio').get(0).pause();
+            setCookie('is_playing', 0);
         });
 
+        // Next action
+        $('.player .next-track').live('click', function () {
+            // Reset position state
+            setCookie('position', 0);
+
+            // Check next id and restart player with new source
+            player_current_id = player_current_id + 1 >= player_source.length ? 0 : player_current_id + 1;
+            $.fn.reloadPlayer(player_current_id);
+        });
+
+        // Prev action
+        $('.player .prev-track').live('click', function () {
+            // Reset position state
+            setCookie('position', 0);
+
+            // Check prev id and restart player with new source
+            player_current_id = player_current_id - 1 < 0 ? player_source.length - 1 : player_current_id - 1;
+            $.fn.reloadPlayer(player_current_id);
+        });
+
+        // change quality
         $('.player .high-definition').live('click', function () {
-            $('#player audio').get(0).pause();
             $(this).toggleClass('active');
-
-            $.fn.updateSource();
-            $('#player audio').get(0).load();
-            $('#player audio').get(0).play();
+            $.fn.reloadPlayer(player_current_id);
         });
 
+        // Progressbars
         $('.player .progressbar').live('click', function (event) {
             $(this).updateProgressbar(event);
         });
@@ -192,11 +229,23 @@ defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
             $('#player .position .progress-line-active').width(position);
             setCookie('position', position);
         }, 1000);
+
+        // Scroll for label
+        setInterval(function() {
+            if ($('#player .now-playing').width() < $('#player .now-playing a').width()) {
+                var length = $('#player .now-playing').width() - $('#player .now-playing a').width();
+                $('#player .now-playing a')
+                    .animate({ left: length }, 2500)
+                    .animate({ opacity: 1 }, 5000)
+                    .animate({ left: 0 }, 2500)
+                    .animate({ opacity: 1 }, 5000);
+            }
+        }, 14000);
     });
 </script>
 <div id="player" class="player">
     <audio preload="none" class="hidden"></audio>
-    <input type="hidden" name="source" value='{ "web" : { "mp3" : "/content/preview/alice.mp3", "ogg" : "/content/preview/alice.ogg"}, "hd" : { "mp3" : "/content/release/M06_Manti_Janaca_express_mix_01.mp3", "ogg" : "/content/release/M06_Manti_Janaca_express_mix_01.ogg"} }' />
+    <input type="hidden" name="source" value='<?php echo $player; ?>' />
 
     <div class="button play"></div>
     <div class="button next-track"></div>

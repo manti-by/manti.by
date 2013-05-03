@@ -62,8 +62,8 @@
             $in_use = array();
             $result = array(
                 'featured' => array(),
-                'popular'  => array(),
-                'content'  => array()
+                'content'  => array(),
+                'player'   => array()
             );
 
             // Get featured posts
@@ -72,26 +72,12 @@
             foreach ($featured as $item) {
                 if (!in_array($item->id, $in_use)) {
                     $result['featured'][] = $item;
+                    $result['player'][] = $this->getPlayerItem($item);
                     $in_use[] = $item->id;
                 }
 
                 // Break when done
                 if (count($result['featured']) >= Application::$config['featured_count']) {
-                    break;
-                }
-            }
-
-            // Get popular posts with covers
-            $this->database->query("CALL GET_POSTS_BY_VIEW_COUNT(10, 1);");
-            $posts = $this->database->getObjectsArray();
-            foreach ($posts as $item) {
-                if (!in_array($item->id, $in_use)) {
-                    $result['popular'][] = $item;
-                    // $in_use[] = $item->id;
-                }
-
-                // Break when done
-                if (count($result['popular']) >= Application::$config['popular_count']) {
                     break;
                 }
             }
@@ -102,6 +88,7 @@
             foreach ($posts as $item) {
                 if (!in_array($item->id, $in_use)) {
                     $result['content'][] = $item;
+                    $result['player'][] = $this->getPlayerItem($item);
                     $in_use[] = $item->id;
                 }
 
@@ -117,5 +104,27 @@
             $result['gallery_popular'] = Model::getModel('gallery')->getPopularImages(10);
 
             return $result;
+        }
+
+        /**
+         * Return player item
+         * @param object $item
+         * @return array
+         */
+        private function getPlayerItem($item) {
+            $preview = json_decode($item->preview);
+            $release = json_decode($item->release);
+
+            return array(
+                'name'=> htmlspecialchars($item->name . ' /' . $item->genre . '/', ENT_QUOTES),
+                'web' => array(
+                    'mp3' => substr($preview[0]->source, 1),
+                    'ogg' => str_replace('mp3', 'ogg', substr($preview[0]->source, 1)),
+                ),
+                'hd' => array(
+                    'mp3' => substr($release[0]->source, 1),
+                    'ogg' => str_replace('mp3', 'ogg', substr($release[0]->source, 1)),
+                )
+            );
         }
     }
