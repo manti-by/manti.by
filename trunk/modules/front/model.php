@@ -116,6 +116,7 @@
             $release = json_decode($item->release);
 
             return array(
+                'id'  => $item->id,
                 'name'=> htmlspecialchars($item->name . ' /' . $item->genre . '/', ENT_QUOTES),
                 'web' => array(
                     'mp3' => substr($preview[0]->source, 1),

@@ -105,7 +105,7 @@
 
         <?php if (json_decode($options['data']->preview)) : ?>
             <div class="preview flip-tracklist">
-                <?php echo File::getHtml($options['data']->preview, FileEntity::TYPE_PREVIEW); ?>
+                <?php echo File::getHtml($options['data']->preview, FileEntity::TYPE_PREVIEW, false, $options['data']->id); ?>
             </div>
         <?php endif; ?>
 

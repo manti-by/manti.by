@@ -70,23 +70,32 @@
 
         // Set HD source action
         var player_source = JSON.parse($('#player').find('input[name=source]').val());
-        $.fn.updateSource = function(index) {
+        $.fn.updateSource = function(id) {
+            // Search source by ID
+            for (var i = 0; i < player_source.length; i++) {
+                if (player_source[i].id == id) {
+                    var source = player_source[i];
+                    break;
+                }
+            }
+
+            // Get source
             if ($('#player .high-definition').hasClass('active')) {
                 if ($.fn.canPlayMp3()) {
-                    var src = player_source[index].hd.mp3;
+                    var src = source.hd.mp3;
                 } else {
-                    var src = player_source[index].hd.ogg;
+                    var src = source.hd.ogg;
                 }
             } else {
                 if ($.fn.canPlayMp3()) {
-                    var src = player_source[index].web.mp3;
+                    var src = source.web.mp3;
                 } else {
-                    var src = player_source[index].web.ogg;
+                    var src = source.web.ogg;
                 }
             }
 
             $('#player audio').attr('src', src);
-            $('#player .now-playing a').html(player_source[index].name);
+            $('#player .now-playing a').html(source.name);
         }
 
         // Update player source
@@ -130,15 +139,15 @@
         }
 
         // Init player
-        $.fn.initPlayer = function(current_played) {
+        $.fn.initPlayer = function(id) {
             // Update source
             if (getCookie('use_hd') == 1) $('#player .high-definition').addClass('active');
-            $.fn.reloadPlayer(current_played);
+            $.fn.reloadPlayer(id);
         }
 
         // Init plyer source links
-        var player_current_id = 0;
-        $.fn.initPlayer(player_current_id);
+        var current_source_id = player_source[0].id;
+        $.fn.initPlayer(current_source_id);
 
         // Set on load update position
         $('#player audio').bind('canplay', function() {
@@ -182,9 +191,16 @@
             // Reset position state
             setCookie('position', 0);
 
+            // Search current player source index
+            for (var i = 0; i < player_source.length; i++) {
+                if (player_source[i].id == current_source_id) {
+                    break;
+                }
+            }
+
             // Check next id and restart player with new source
-            player_current_id = player_current_id + 1 >= player_source.length ? 0 : player_current_id + 1;
-            $.fn.reloadPlayer(player_current_id);
+            current_source_id = typeof player_source[i + 1] != 'undefined' ? player_source[i + 1].id : player_source[0].id;
+            $.fn.reloadPlayer(current_source_id);
         });
 
         // Prev action
@@ -192,15 +208,22 @@
             // Reset position state
             setCookie('position', 0);
 
+            // Search current player source index
+            for (var i = 0; i < player_source.length; i++) {
+                if (player_source[i].id == current_source_id) {
+                    break;
+                }
+            }
+
             // Check prev id and restart player with new source
-            player_current_id = player_current_id - 1 < 0 ? player_source.length - 1 : player_current_id - 1;
-            $.fn.reloadPlayer(player_current_id);
+            current_source_id = i > 0 ? player_source[i - 1].id : player_source[player_source.length - 1].id;
+            $.fn.reloadPlayer(current_source_id);
         });
 
         // change quality
         $('.player .high-definition').live('click', function () {
             $(this).toggleClass('active');
-            $.fn.reloadPlayer(player_current_id);
+            $.fn.reloadPlayer(current_source_id);
         });
 
         // Progressbars
@@ -218,6 +241,11 @@
 
         $('.player .progressbar').live('mouseup', function (event) {
             $(this).data('active', false);
+        });
+
+        // End action
+        $('#player audio').bind('ended', function() {
+            $('#player .next-track').click();
         });
 
         // Update position progressbar
@@ -241,15 +269,28 @@
                     .animate({ opacity: 1 }, 5000);
             }
         }, 14000);
+
+        // Bind inline players
+        $('.player.inline .play').live('click', function () {
+            $('.player.inline').removeClass('active');
+            $(this).closest('.player.inline').addClass('active');
+
+            current_source_id = $(this).closest('.player.inline').data('release-id');
+            $.fn.reloadPlayer(current_source_id);
+
+            console.log(current_source_id);
+        });
+
+
     });
 </script>
 <div id="player" class="player">
     <audio preload="none" class="hidden"></audio>
     <input type="hidden" name="source" value='<?php echo $player; ?>' />
 
+    <div class="button prev-track"></div>
     <div class="button play"></div>
     <div class="button next-track"></div>
-    <div class="button prev-track"></div>
 
     <div class="now-playing">
         <a href="#go">Manti - Reach out of the sun</a>

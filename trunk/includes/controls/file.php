@@ -142,29 +142,36 @@
          * @param string $json
          * @param string $type OPTIONAL
          * @param bool $multiple OPTIONAL false
+         * @param int $release_id OPTIONAL null
          * @return bool|string
          * @todo Add implementation for multiple items
          */
-        public static function getHtml($json, $type = null, $multiple = false) {
+        public static function getHtml($json, $type = null, $multiple = false, $release_id = null) {
             $result = '';
             $files = json_decode($json);
             if (is_array($files)) {
                 foreach ($files as $file) {
                     switch ($type) {
                         case FileEntity::TYPE_PREVIEW:
-                            $result .= '<audio controls preload="none" rel="' . $file->id . '">';
+                            $result .= '<div class="player inline" data-release-id="' . $release_id . '">';
+                            $result .= '<div class="button play"></div>';
+                            $result .= '<div class="high-definition">HD</div>';
 
-                            // Default MP3 preview file
-                            $mp3_preview = Application::$config['http_host'] . substr($file->source, 1);
-                            $result .= '<source src="' . $mp3_preview . '" type="audio/mpeg">';
+                            $result .= '
+                                <div class="progressbar volume">
+                                    <div class="progress-line"></div>
+                                    <div class="progress-line-active"></div>
+                                    <div class="progress-line-label"><span>70</span>%</div>
+                                </div>';
 
-                            // Add Mozilla OGG support
-                            $ogg_preview = str_replace('.mp3', '.ogg', $mp3_preview);
-                            $result .= '<source src="' . $ogg_preview . '" type="audio/ogg">';
+                            $result .= '
+                                <div class="progressbar position">
+                                    <div class="progress-line"></div>
+                                    <div class="progress-line-active"></div>
+                                    <div class="progress-line-label"><span>0</span></div>
+                                </div>';
 
-                            // Message for not supported browsers
-                            $result .= '<span class="red">' . T('Your browser did not supported audio tag. Please update your browser.') . '</span>';
-                            $result .= '</audio>';
+                            $result .= '<div class="cls"></div></div>';
                             break;
                         case FileEntity::TYPE_COVERS:
                             $result .= '<img src="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="cover" alt="' . $file->name . ' cover" />';
