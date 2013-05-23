@@ -281,3 +281,6 @@ audio { width: 330px; transform: scale(0.8); }
 .contact a { font-weight: normal; color: #b40303 !important; }
 
 .success-message li { list-style: none; line-height: 18px; }
+
+#forthcoming { text-transform: uppercase; padding: 0 0 15px 20px; }
+#forthcoming a { color: #b40303; font-size: 18px; font-weight: normal; }

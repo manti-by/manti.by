@@ -79,6 +79,9 @@
     </div>
 
     <div class="right-sidebar">
+        <div id="forthcoming">
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=43'); ?>"><?php echo T('Forthcoming'); ?></a>
+        </div>
         <?php echo $this->getContents('plugin', 'tags'); ?>
         <?php echo $this->getContents('plugin', 'latest'); ?>
         <?php echo $this->getContents('plugin', 'galleries'); ?>
