@@ -349,4 +349,20 @@
             $this->database->query("CALL GET_POPULAR_IMAGES($limit)");
             return $this->database->getObjectsArray();
         }
+
+        /**
+         * Add watermark to requested file and retunr its contents
+         * @param string $request
+         * @return string $image_contents
+         */
+        public function addWatermark($request) {
+            $source = ROOT_PATH . DS . $request;
+            $watermark = ROOT_PATH . DS . Application::$config['watermark'];
+
+            if (file_exists($source)) {
+                return System::getInstance()->addWatermark($source, $watermark);
+            } else {
+                return $this->_throw(T('Image not found') . ': ' . $request);
+            }
+        }
     }

@@ -47,8 +47,7 @@ server {
         fastcgi_param php_value "upload_tmp_dir /var/www/beta.manti.by/tmp";
     }
 
-    # link content from production
-    location /content {
-        alias /var/www/manti.by/source/trunk/content;
+    location ~ content/gallery/originals/* {
+        rewrite ^ /index.php?module=gallery&action=watermark last;
     }
 }
