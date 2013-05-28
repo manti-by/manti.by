@@ -85,7 +85,7 @@
         public function __call($name, $args) {
             // Add redirect to 404 page
             header('HTTP/1.1 301 Moved Permanently');
-            header('Location: ' . Application::$config['http_host'] . '/404');
+            header('Location: ' . Application::$config['http_host'] . '/404/');
         }
 
         /**
