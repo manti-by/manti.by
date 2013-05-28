@@ -63,7 +63,7 @@
     </div>
     <div class="thumbnails gallery-item">
         <?php foreach ($options['data']->originals as $original) : ?>
-            <a name="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" data-image-id="<?php echo $original->id; ?>">
+            <a href="#image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" data-image-id="<?php echo $original->id; ?>">
                 <img src="<?php echo $original->thumbnail; ?>" width="108" height="108" alt="<?php echo $options['data']->name; ?> gallery image #<?php echo $original->id; ?>" />
             </a>
         <?php endforeach; ?>
