@@ -32,6 +32,7 @@ sef_max_alias_length = 64
 show_debug_panel = 0
 default_error_level = 2
 log_write_level = 6
+message_level = 6
 debug_level_max = 3
 debug_level_skip = 2
 error_log = "../../log/app_error.log"

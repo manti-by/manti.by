@@ -54,6 +54,7 @@
         const OUTPUT_TYPE_RAW       = 'raw';
         const OUTPUT_TYPE_LOG       = 'log';
         const OUTPUT_TYPE_WRAP      = 'wrap';
+        const OUTPUT_TYPE_REDIRECT  = 'redirect';
 
         /**
          * Default getView method

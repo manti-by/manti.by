@@ -50,8 +50,9 @@
     $stack = $this->getLastFromStack();
     $message = $stack['message'];
     $class = strtolower($stack['level']);
+    $level = getErrorIntFromString($stack['level']);
 ?>
-<?php if ($this->isMessagePresent()) : ?>
+<?php if ($this->isMessagePresent() && $level >= Application::$config['message_level']) : ?>
     <div id="message" class="<?php echo $class; ?>">
         <div class="hide_this">[X] <?php echo T('Close'); ?></div>
         <div><?php echo $message; ?></div>
