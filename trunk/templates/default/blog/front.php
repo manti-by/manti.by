@@ -64,11 +64,9 @@
         <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>">
             <?php echo T('Other blog posts'); ?>
         </a>
-        <div class="fr view-all">
-            <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>">
-                <?php echo T('Show all'); ?>
-            </a>
-        </div>
+        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>" class="fr view-all">
+            <?php echo T('Show all'); ?>
+        </a>
     </h2>
 
     <div class="main-sidebar">

@@ -55,11 +55,9 @@
         <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>">
             <?php echo T('Latest shots from gallery'); ?>
         </a>
-        <div class="fr view-all">
-            <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>">
-                <?php echo T('Show all'); ?>
-            </a>
-        </div>
+        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>" class="fr view-all">
+            <?php echo T('Show all'); ?>
+        </a>
     </h2>
     <div class="latest fl gallery-item">
         <?php foreach ($options['data']['gallery_latest'] as $original) : ?>
