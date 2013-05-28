@@ -124,8 +124,8 @@
 
         <?php if ($options['data']->tracklist && $options['context'] == 'short') : ?>
             <div class="tracklist">
-                <a href="#show-tracklist" class="show-tracklist" rel="<?php echo $options['data']->id; ?>"><?php echo T('Show tracklist'); ?></a>
-                <a href="#hide-tracklist" class="hide-tracklist" rel="<?php echo $options['data']->id; ?>"><?php echo T('Hide tracklist'); ?></a>
+                <a href="#show-tracklist" class="show-tracklist" data-release-id="<?php echo $options['data']->id; ?>"><?php echo T('Show tracklist'); ?></a>
+                <a href="#hide-tracklist" class="hide-tracklist" data-release-id="<?php echo $options['data']->id; ?>"><?php echo T('Hide tracklist'); ?></a>
                 <div id="tracklist-<?php echo $options['data']->id; ?>" class="tracklist-block">
                     <?php echo nl2br($options['data']->tracklist); ?>
                 </div>

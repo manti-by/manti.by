@@ -152,7 +152,7 @@
                 foreach ($files as $file) {
                     switch ($type) {
                         case FileEntity::TYPE_PREVIEW:
-                            $result .= '<audio controls preload="none" rel="' . $file->id . '">';
+                            $result .= '<audio controls preload="none" data-file-id="' . $file->id . '">';
 
                             // Default MP3 preview file
                             $mp3_preview = Application::$config['http_host'] . substr($file->source, 1);
@@ -171,7 +171,7 @@
                             break;
                         case FileEntity::TYPE_RELEASE:
                         default:
-                            $result .= '<a href="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="release" rel="' . $file->id . '">' . T('Download') . '</a>';
+                            $result .= '<a href="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="release" data-file-id="' . $file->id . '">' . T('Download') . '</a>';
                             break;
                     }
 
