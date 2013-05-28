@@ -134,8 +134,10 @@
             // Get config
             if (!Application::$config['sef_enabled']) return $link;
 
+            // Remove GET params
+            $link = strpos($link, '?') !== false ? substr($link, 0, strpos($link, '?')) : (string)$link;
+
             // Check memory, if exist, get array value by key
-            $link = (string)$link;
             if (self::checkStorage($link)) {
                 $storage = self::getStorage();
                 $flip = array_flip($storage);
@@ -149,7 +151,7 @@
             if (!empty($request) && is_object($request)) {
                 $request = $request->request;
             } else {
-                $request = $link;
+                $request = self::convertToOriginal($link);
             }
 
             // Add to mem storage
@@ -340,5 +342,52 @@
 
             // Trim length and return
             return substr($string, 0, Application::$config['sef_max_alias_length']);
+        }
+
+        /**
+         * Convert sef link to original route
+         * @param string $request
+         * @return string $real_link
+         */
+        public static function convertToOriginal($request) {
+            // Prepare data and fix trailing slash
+            $result = '/index.php';
+            $request = $request[0] == '/' ? substr($request, 1) : $request;
+
+            // GET request params
+            if (strpos($request, '?') !== false) {
+                $route = substr($request, 0, strpos($request, '?'));
+                $get = substr(strstr($request, '?'), 1);
+            } else {
+                $route = $request;
+                $get = '';
+            }
+
+            // Add route params
+            if ($route) {
+                $route_data = array_diff(explode('/', $route), array('', 'index.php'));
+                if (count($route_data)) {
+                    $result .= '?module=' . $route_data[0];
+                    if (isset($route_data[1])) {
+                        $result .= '&action=' . $route_data[1];
+
+                        // Additional route params
+                        for ($i = 2; $i < count($route_data); $i += 2) {
+                            if (isset($route_data[$i]) && isset($route_data[$i + 1])) {
+                                $result .= '&' . $route_data[$i] . '=' . $route_data[$i + 1];
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Add GET params
+            if ($get) {
+                $result .= strstr($result, '?') ? '&' . $get : '?' . $get;
+            }
+
+            return $result;
         }
     }
