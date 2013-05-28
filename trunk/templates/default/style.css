@@ -86,8 +86,6 @@ audio { width: 330px; transform: scale(0.8); }
 
 #content { min-height: 490px; }
 
-#file-table a { display: inline-block; min-width: 40px; }
-
 .post-item { margin-bottom: 40px; line-height: 18px; }
 .post-item h3 { margin-bottom: 15px; padding-bottom: 3px; border-bottom: 1px dotted #CCC; font-size: 18px; }
 .post-item h3 a { color: inherit; }
@@ -260,6 +258,9 @@ audio { width: 330px; transform: scale(0.8); }
 .fulllink { }
 .fulllink a { text-decoration: underline; }
 
+#file-table { border-collapse: collapse; }
+#file-table td { padding: 5px !important; }
+#file-table a { display: inline-block; min-width: 40px; }
 #file-table th { background: #EEE; border-bottom: 1px solid #CCC; }
 #file-table tr:last-child td { border-bottom: none; }
 
