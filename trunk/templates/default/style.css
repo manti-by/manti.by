@@ -258,7 +258,7 @@ audio { width: 330px; transform: scale(0.8); }
 .fulllink { }
 .fulllink a { text-decoration: underline; }
 
-#file-table { border-collapse: collapse; }
+#file-table { border-collapse: collapse; width: 100%; }
 #file-table td { padding: 5px !important; }
 #file-table a { display: inline-block; min-width: 40px; }
 #file-table th { background: #EEE; border-bottom: 1px solid #CCC; }

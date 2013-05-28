@@ -55,7 +55,7 @@
          */
         public function printFileArray($array) {
             // Print head
-            $result  = '<table id="file-table" cellpadding="5" cellspacing="0" width="100%">';
+            $result  = '<table id="file-table">';
             $result .= '<thead>';
             $result .= '<tr>';
             $result .= '<th>' . T('Filename') . '</th>';
@@ -121,7 +121,7 @@
          */
         public function printDownloadList($array) {
             // Print head
-            $result  = '<table id="file-table" width="100%">';
+            $result  = '<table id="file-table">';
             $result .= '<thead>';
             $result .= '<tr>';
             $result .= '<th>' . T('Filename') . '</th>';
