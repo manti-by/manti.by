@@ -61,38 +61,42 @@ $(document).ready(function() {
 
     $('.content .tracklist .show-tracklist').live('click', function() {
         $(this).hide();
-        $('.content .hide-tracklist[rel=' + $(this).attr('rel') + ']').show();
+        var release_id = $(this).data('release-id');
 
-        $('.content #tracklist-' + $(this).attr('rel')).fadeIn();
-        $('.content #teaser-' + $(this).attr('rel')).hide();
-        $('.content #music-block-' + $(this).attr('rel')).hide();
+        $('.content .hide-tracklist[data-release-id=' + release_id + ']').show();
+        $('.content #tracklist-' + release_id).fadeIn();
+        $('.content #teaser-' + release_id).hide();
+        $('.content #music-block-' + release_id).hide();
     });
 
     $('.content .tracklist .hide-tracklist').live('click', function() {
         $(this).hide();
-        $('.content .show-tracklist[rel=' + $(this).attr('rel') + ']').show();
+        var release_id = $(this).data('release-id');
 
-        $('.content #tracklist-' + $(this).attr('rel')).hide();
-        $('.content #teaser-' + $(this).attr('rel')).fadeIn();
-        $('.content #music-block-' + $(this).attr('rel')).fadeIn();
+        $('.content .show-tracklist[data-release-id=' + release_id + ']').show();
+        $('.content #tracklist-' + release_id).hide();
+        $('.content #teaser-' + release_id).fadeIn();
+        $('.content #music-block-' + release_id).fadeIn();
     });
 
     $('.post-item .tracklist .show-tracklist').live('click', function() {
         $(this).hide();
-        $('.post-item .hide-tracklist[rel=' + $(this).attr('rel') + ']').show();
+        var release_id = $(this).data('release-id');
 
-        $('.post-item #tracklist-' + $(this).attr('rel')).fadeIn();
-        $('.post-item #teaser-' + $(this).attr('rel')).hide();
-        $('.post-item #music-block-' + $(this).attr('rel') + ' .flip-tracklist').hide();
+        $('.post-item .hide-tracklist[data-release-id=' + release_id + ']').show();
+        $('.post-item #tracklist-' + release_id).fadeIn();
+        $('.post-item #teaser-' + release_id).hide();
+        $('.post-item #music-block-' + release_id + ' .flip-tracklist').hide();
     });
 
     $('.post-item .tracklist .hide-tracklist').live('click', function() {
         $(this).hide();
-        $('.post-item .show-tracklist[rel=' + $(this).attr('rel') + ']').show();
+        var release_id = $(this).data('release-id');
 
-        $('.post-item #tracklist-' + $(this).attr('rel')).hide();
-        $('.post-item #teaser-' + $(this).attr('rel')).fadeIn();
-        $('.post-item #music-block-' + $(this).attr('rel') + ' .flip-tracklist').fadeIn();
+        $('.post-item .show-tracklist[data-release-id=' + release_id + ']').show();
+        $('.post-item #tracklist-' + release_id).hide();
+        $('.post-item #teaser-' + release_id).fadeIn();
+        $('.post-item #music-block-' + release_id + ' .flip-tracklist').fadeIn();
     });
 
     $('#sitemap .open-spoiler').live('click', function() {
