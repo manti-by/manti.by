@@ -51,6 +51,7 @@
     require_once 'bootstrap.php';
     
     // Init Sef engine
+    Application::$config['sef_enabled'] = 0;
     Application::init();
 
     // Get MVC controller and dispatch request

@@ -6,12 +6,13 @@ server {
     index index.php index.html index.htm;
     server_name beta.manti.by;
 
+    rewrite ^/content/gallery/originals/(.*)$ /watermark.php last;
+
     location / { 
         try_files $uri $uri/ @rewrites;
     }
  
     location @rewrites {
-        rewrite /content/gallery/originals/(.*)$ /watermark.php;
         rewrite ^ /index.php last;
     }
 
