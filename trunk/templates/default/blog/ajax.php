@@ -63,7 +63,7 @@
                             var self = this;
                             $.post(
                                 '/index.php?module=file&action=track',
-                                { id : $(self).attr('rel') }
+                                { id : $(self).data('file-id') }
                             );
                         });
                     } else {

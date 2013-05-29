@@ -111,6 +111,7 @@
         /**
          * Rebuild thumbnails for images in gallery
          * @param array $options
+         * @return array
          */
         public function rebuildThumbnailsAction($options) {
             $options['output'] = View::OUTPUT_TYPE_JSON;
@@ -143,6 +144,7 @@
         /**
          * Update thumbnails for new images in gallery
          * @param array $options
+         * @return array
          */
         public function updateThumbnailsAction($options) {
             $options['is_update'] = true;
@@ -253,5 +255,24 @@
             }
 
             return $options;
+        }
+
+        /**
+         * Return previous image by ID
+         * @param array $options
+         * @return array|bool $options
+         */
+        public function watermarkAction($options) {
+            // Set output and get item ID
+            $options['output'] = View::OUTPUT_TYPE_RAW;
+            $options['request'] = $_SERVER['REQUEST_URI'];
+
+            if ($result = $this->model->addWatermark($options['request'])) {
+                header('Content-type: image/' . $result['type']);
+                $options['data'] = $result['data'];
+                return $options;
+            } else {
+                return $this->view->_404();
+            }
         }
     }

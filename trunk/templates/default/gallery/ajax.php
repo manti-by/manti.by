@@ -56,7 +56,7 @@
             // Show loader and get original link
             $.fn.loaderShow();
             var original = $(this).attr('href');
-            var rel_id = $(this).attr('rel');
+            var rel_id = $(this).data('image-id');
 
             // Ping view counter
             $.post(
@@ -65,7 +65,7 @@
             );
 
             // Create image block
-            var image_block = $('<img src="' + original + '" class="original" rel="' + rel_id + '" />');
+            var image_block = $('<img src="' + original + '" class="original" data-image-id="' + rel_id + '" />');
 
             // Wait while loading and bind click
             image_block.load(function() {
@@ -86,7 +86,7 @@
         buildImage = function(response) {
             if (response.result == 'success') {
                 // Create image block
-                var image_block = $('<img src="' + response.original + '" class="original resizible black-shadow" rel="' + response.id + '" />');
+                var image_block = $('<img src="' + response.original + '" class="original resizible black-shadow" data-image-id="' + response.id + '" />');
 
                 // Wait while loading and bind click and track
                 image_block.load(function() {
@@ -118,8 +118,8 @@
 
             // Popup blocks
             var close_pointer = $('<div class="close"></div>').bind('click', $('#image-wrapper').remove());
-            var next_pointer = $('<div class="next" rel="' + rel_id + '"></div>').bind('click', nextImage);
-            var prev_pointer = $('<div class="prev" rel="' + rel_id + '"></div>').bind('click', prevImage);
+            var next_pointer = $('<div class="next" data-image-id="' + rel_id + '"></div>').bind('click', nextImage);
+            var prev_pointer = $('<div class="prev" data-image-id="' + rel_id + '"></div>').bind('click', prevImage);
             var wrapper = $('<div id="image-wrapper"></div>');
 
             // Build block wrapper and append to contents
@@ -137,7 +137,7 @@
             $.fn.loaderShow();
             $.post(
                 '<?php echo Sef::getSef('index.php?module=gallery&action=next'); ?>',
-                { id : $(this).attr('rel') }, buildImage
+                { id : $(this).data('image-id') }, buildImage
             );
 
             return false;
@@ -150,7 +150,7 @@
             $.fn.loaderShow();
             $.post(
                 '<?php echo Sef::getSef('index.php?module=gallery&action=prev'); ?>',
-                { id : $(this).attr('rel') }, buildImage
+                { id : $(this).data('image-id') }, buildImage
             );
 
             return false;
@@ -158,7 +158,7 @@
 
         // Check anchor
         var anchor = window.location.hash.substring(1);
-        $('a[name=' + anchor + ']').click();
+        $('#' + anchor).click();
 
         // Add escape action
         $(document).bind('keydown', function(e) {

@@ -54,11 +54,9 @@
         <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $options['data']->id); ?>">
             <?php echo $options['data']->name; ?>
         </a>
-        <div class="fr view-all">
-            <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $options['data']->id); ?>">
-                <?php echo T('Show all'); ?>
-            </a>
-        </div>
+        <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $options['data']->id); ?>" class="fr view-all">
+            <?php echo T('Show all'); ?>
+        </a>
     </h3>
 
     <?php if (!empty($options['data']->description)) : ?>
@@ -75,7 +73,7 @@
                 else $count++;
             ?>
 
-            <a name="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
+            <a id="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" data-image-id="<?php echo $original->id; ?>">
                 <img src="<?php echo $original->thumbnail; ?>" width="108" height="108" alt="<?php echo $options['data']->name; ?> gallery image #<?php echo $original->id; ?>" />
             </a>
         <?php endforeach; ?>

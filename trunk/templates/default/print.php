@@ -39,51 +39,38 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Frontpage template
-     * @name $frontpage
-     * @author Alexander Chaika
+     * Default template file
+     * @name $template-index
      * @package M2 Micro Framework
      * @subpackage Template
-     * @since 0.3RC3
-     * @todo Fix other posts out
+     * @author Alexander Chaika
+     * @since 0.1
      */
 ?>
-<div id="frontpage">
-    <?php
-        $data = array('data' => $options['data']['featured']);
-        echo $this->getContents('blog', 'featured', $data);
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><?php echo strip_tags($options['title']); ?></title>
 
-        $data = array('data' => array(
-            'gallery_latest'  => $options['data']['gallery_latest'],
-            'gallery_popular' => $options['data']['gallery_popular']
-        ));
-        echo $this->getContents('gallery', 'front', $data);
-    ?>
+        <meta charset="utf-8" />
+        <meta name="description" content="<?php echo Model::getModel('tag')->getMetadescString(); ?>" />
+        <meta name="keywords" content="<?php echo Model::getModel('tag')->getMetakeysString(); ?>" />
 
-    <h2 class="with-full-link front-blog">
-        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>">
-            <?php echo T('Other blog posts'); ?>
-        </a>
-        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>" class="fr view-all">
-            <?php echo T('Show all'); ?>
-        </a>
-    </h2>
+        <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/default.css" />
+        <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/style.css" />
+        <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/print.css" />
 
-    <div class="main-sidebar">
-        <?php
-            $data = array('module' => 'blog', 'data' => $options['data']['content'], 'context' => 'preview');
-            echo $this->renderItemsArray($data);
-        ?>
-    </div>
+        <?php if (preg_match('/MSIE/i', $_SERVER['HTTP_USER_AGENT'])) : ?>
+            <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/ie.css" />
+        <?php endif; ?>
 
-    <div class="right-sidebar">
-        <div id="forthcoming">
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=43'); ?>"><?php echo T('Forthcoming'); ?></a>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/default.js"></script>
+        <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/templates/default/default.js"></script>
+    </head>
+    <body>
+        <div id="content" class="wrapper">
+            <?php echo $options['body']; ?>
         </div>
-        <?php echo $this->getContents('plugin', 'tags'); ?>
-        <?php echo $this->getContents('plugin', 'latest'); ?>
-        <?php echo $this->getContents('plugin', 'galleries'); ?>
-    </div>
-
-    <div class="cls"></div>
-</div>
+    </body>
+</html>

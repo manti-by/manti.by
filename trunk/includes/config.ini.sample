@@ -32,6 +32,7 @@ sef_max_alias_length = 64
 show_debug_panel = 0
 default_error_level = 2
 log_write_level = 6
+message_level = 6
 debug_level_max = 3
 debug_level_skip = 2
 error_log = "../../log/app_error.log"
@@ -50,6 +51,7 @@ preview_count = 12
 front_count = 6
 thumb_width = 100
 thumb_height = 100
+watermark = "./content/images/watermark.png"
 
 [blog settings]
 teaser_length = 250

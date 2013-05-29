@@ -301,6 +301,75 @@
             return $this->_clean();
         }
 
+        /**
+         * Add waterwark to image
+         * @param string $source path to file
+         * @param string $watermark path to watermark
+         * @param int $shift_x horizontal shift
+         * @param int $shift_y vertical shift
+         * @param bool $is_bottom place to bottom of image corner
+         * @param bool $is_right place to right of image corner
+         * @return array|bool
+         */
+        public function addWatermark($source, $watermark, $shift_x = 10, $shift_y = 10, $is_bottom = true, $is_right = true) {
+            // Create source
+            $result = array('type' => str_replace('.', '', strtolower(strrchr($source, '.'))));
+            switch ($result['type']) {
+                case 'jpg':
+                    $source = imagecreatefromjpeg($source);
+                    break;
+                case 'gif':
+                    $source = imagecreatefromgif($source);
+                    break;
+                case 'png':
+                    $source = imagecreatefrompng($source);
+                    break;
+                default:
+                    return $this->_throw(T('This is not an image') . ': ' . $source);
+            }
+
+            // Create watermark
+            switch (str_replace('.', '', strtolower(strrchr($watermark, '.')))) {
+                case 'jpg':
+                    $watermark = imagecreatefromjpeg($watermark);
+                    break;
+                case 'gif':
+                    $watermark = imagecreatefromgif($watermark);
+                    break;
+                case 'png':
+                    $watermark = imagecreatefrompng($watermark);
+                    break;
+                default:
+                    return $this->_throw(T('This is not an image') . ': ' . $watermark);
+            }
+
+            // Get dimensions
+            $watermark_width  = imagesx($watermark);
+            $watermark_height = imagesy($watermark);
+
+            $source_x = $is_right ? imagesx($source) - $shift_x - $watermark_width : $shift_x;
+            $source_y = $is_bottom ? imagesy($source) - $shift_y - $watermark_height : $shift_y;
+
+            // Copy watermark and create output
+            imagecopy($source, $watermark, $source_x, $source_y, 0, 0, $watermark_width, $watermark_height);
+
+            ob_start();
+            switch ($result['type']) {
+                case 'jpg':
+                    imagejpeg($source);
+                    break;
+                case 'gif':
+                    imagegif($source);
+                    break;
+                case 'png':
+                    imagepng($source);
+                    break;
+            }
+            $result['data'] = ob_get_contents();
+            ob_end_clean();
+
+            return $result;
+        }
 
         /**
          * Email validation

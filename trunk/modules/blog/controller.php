@@ -122,13 +122,17 @@
          * @return array|bool $options
          */
         public function showAction($options) {
+            // Check print template
+            $options['is_print'] = System::getInstance()->getCmd('print');
+            $options['output'] = $options['is_print'] ? View::OUTPUT_TYPE_PRINT : View::OUTPUT_TYPE_DEFAULT;
+
             // Get item ID
             $options['id'] = System::getInstance()->getCmd('id');
             
             // Get item title and data
             if ($options['id']) {
                 $options['data'] = $this->model->getPost($options['id']);
-                $options['title'] = $options['data']->name;
+                $options['title'] = $options['data']->name . ($options['data']->genre ? ' /' . $options['data']->genre . '/' : '');
             } else {
                 return $this->view->_404($options);
             }
@@ -140,8 +144,7 @@
             // Render blog item
             if (!empty($options['data'])) {
                 $options['body'] = $this->view->getContents('blog', 'item-full', $options);
-
-                return $this->view->wrapSidebar($options);
+                return $options['is_print'] ? $options : $this->view->wrapSidebar($options);
             } else {
                 return $this->view->_404($options);
             }

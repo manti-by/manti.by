@@ -36,54 +36,41 @@
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
-    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
-
     /**
-     * Frontpage template
-     * @name $frontpage
-     * @author Alexander Chaika
+     * Front index controller
      * @package M2 Micro Framework
-     * @subpackage Template
-     * @since 0.3RC3
-     * @todo Fix other posts out
+     * @subpackage Modules
+     * @author Alexander Chaika
+     * @since 0.1
      */
-?>
-<div id="frontpage">
-    <?php
-        $data = array('data' => $options['data']['featured']);
-        echo $this->getContents('blog', 'featured', $data);
 
-        $data = array('data' => array(
-            'gallery_latest'  => $options['data']['gallery_latest'],
-            'gallery_popular' => $options['data']['gallery_popular']
-        ));
-        echo $this->getContents('gallery', 'front', $data);
-    ?>
+    // Simple ACL hook
+    define('M2_MICRO', 1);
 
-    <h2 class="with-full-link front-blog">
-        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>">
-            <?php echo T('Other blog posts'); ?>
-        </a>
-        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>" class="fr view-all">
-            <?php echo T('Show all'); ?>
-        </a>
-    </h2>
+    // Get engine
+    require_once 'bootstrap.php';
+    
+    // Init Sef engine
+    Application::$config['sef_enabled'] = 0;
+    Application::init();
 
-    <div class="main-sidebar">
-        <?php
-            $data = array('module' => 'blog', 'data' => $options['data']['content'], 'context' => 'preview');
-            echo $this->renderItemsArray($data);
-        ?>
-    </div>
+    // Get MVC controller and dispatch request
+    if ($image = Model::getModel('gallery')->addWatermark($_SERVER['REQUEST_URI'])) {
+        header('HTTP/1.1 200 OK');
 
-    <div class="right-sidebar">
-        <div id="forthcoming">
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=43'); ?>"><?php echo T('Forthcoming'); ?></a>
-        </div>
-        <?php echo $this->getContents('plugin', 'tags'); ?>
-        <?php echo $this->getContents('plugin', 'latest'); ?>
-        <?php echo $this->getContents('plugin', 'galleries'); ?>
-    </div>
+        header('Expires: ' . gmdate('D, d M Y H:i:s', strtotime("1 year")) . ' GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: public, must-revalidate, proxy-revalidate');
+        header('Pragma: public');
 
-    <div class="cls"></div>
-</div>
+        $image['type'] = $image['type'] = 'jpg' ? 'jpeg' : $image['type'];
+        header('Content-type: image/' . $image['type']);
+
+        echo $image['data'];
+    } else {
+        $controller = new Controller();
+        $controller->redirectTo404();
+    }
+    
+    // Shutdown application
+    Application::shutdown();

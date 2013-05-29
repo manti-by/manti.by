@@ -6,6 +6,8 @@ server {
     index index.php index.html index.htm;
     server_name beta.manti.by;
 
+    rewrite ^/content/gallery/originals/(.*)$ /watermark.php last;
+
     location / { 
         try_files $uri $uri/ @rewrites;
     }
@@ -45,10 +47,5 @@ server {
         fastcgi_param php_value "error_log /var/www/beta.manti.by/log/php_error.log";
         fastcgi_param php_value "session.save_path /var/www/beta.manti.by/tmp";
         fastcgi_param php_value "upload_tmp_dir /var/www/beta.manti.by/tmp";
-    }
-
-    # link content from production
-    location /content {
-        alias /var/www/manti.by/source/trunk/content;
     }
 }

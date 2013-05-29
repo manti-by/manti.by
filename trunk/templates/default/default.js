@@ -47,6 +47,14 @@ $(document).ready(function() {
         var self = this;
         $.post(
             '/index.php?module=file&action=track',
+            { id : $(self).data('file-id') }
+        );
+    });
+
+    $('audio').bind('canplay', function() {
+        var self = this;
+        $.post(
+            '/index.php?module=file&action=track',
             { id : $(self).attr('rel') }
         );
     });

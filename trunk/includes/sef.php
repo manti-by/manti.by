@@ -117,11 +117,12 @@
             // Get request string, delete question symbol and inject request data
             $request = self::getReal(substr($_SERVER['REQUEST_URI'], 1));
             $result = substr(strstr($request, "?"), 1);
-            if (!empty($result)) {
-                parse_str($result, $_REQUEST);
 
-                // Add POST params to request
-                $_REQUEST = array_merge($_REQUEST, $_POST);
+
+            // Add POST params to request
+            if (!empty($result)) {
+                parse_str($result, $request);
+                $_REQUEST = array_merge($request, $_GET, $_POST);
             }
         }
 
@@ -134,8 +135,10 @@
             // Get config
             if (!Application::$config['sef_enabled']) return $link;
 
+            // Remove GET params
+            $link = strpos($link, '?') !== false ? substr($link, 0, strpos($link, '?')) : (string)$link;
+
             // Check memory, if exist, get array value by key
-            $link = (string)$link;
             if (self::checkStorage($link)) {
                 $storage = self::getStorage();
                 $flip = array_flip($storage);
@@ -149,7 +152,7 @@
             if (!empty($request) && is_object($request)) {
                 $request = $request->request;
             } else {
-                $request = $link;
+                $request = self::convertToOriginal($link);
             }
 
             // Add to mem storage
@@ -340,5 +343,55 @@
 
             // Trim length and return
             return substr($string, 0, Application::$config['sef_max_alias_length']);
+        }
+
+        /**
+         * Convert sef link to original route
+         * @param string $request
+         * @return string $real_link
+         */
+        public static function convertToOriginal($request) {
+            // Prepare data and fix trailing slash
+            $result = array();
+            $request = $request[0] == '/' ? substr($request, 1) : $request;
+
+            // GET request params
+            if (strpos($request, '?') !== false) {
+                $route = substr($request, 0, strpos($request, '?'));
+                $get = substr(strstr($request, '?'), 1);
+                parse_str($get, $get);
+            } else {
+                $route = $request;
+                $get = array();
+            }
+
+            // Add route params
+            if ($route) {
+                $route_data = array_diff(explode('/', $route), array('', 'index.php'));
+                if (count($route_data)) {
+                    $result['module'] = $route_data[0];
+                    if (isset($route_data[1])) {
+                        $result['action'] = $route_data[1];
+
+                        // Additional route params
+                        for ($i = 2; $i < count($route_data); $i += 2) {
+                            if (isset($route_data[$i]) && isset($route_data[$i + 1])) {
+                                $result[$route_data[$i]] = $route_data[$i + 1];
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Add GET params
+            $return = array();
+            $result = array_merge($get, $result);
+            foreach ($result as $key => $value) {
+                $return[] = $key . '=' . $value;
+            }
+
+            return '/index.php?' . implode('&', $return);
         }
     }
