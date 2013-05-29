@@ -51,6 +51,7 @@ preview_count = 12
 front_count = 6
 thumb_width = 100
 thumb_height = 100
+watermark = "./content/images/watermark.png"
 
 [blog settings]
 teaser_length = 250
