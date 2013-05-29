@@ -57,11 +57,15 @@
     // Get MVC controller and dispatch request
     if ($image = Model::getModel('gallery')->addWatermark($_SERVER['REQUEST_URI'])) {
         header('HTTP/1.1 200 OK');
+
         header('Expires: ' . gmdate(DATE_RFC822, strtotime("1 year")));
         header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
         header('Cache-Control: public, must-revalidate, proxy-revalidate');
         header('Pragma: public');
+
+        $image['type'] = $image['type'] = 'jpg' ? 'jpeg' : $image['type'];
         header('Content-type: image/' . $image['type']);
+
         echo $image['data'];
     } else {
         $controller = new Controller();
