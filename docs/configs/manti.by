@@ -6,6 +6,8 @@ server {
     index index.php index.html index.htm;
     server_name manti.by;
 
+    rewrite ^/content/gallery/originals/(.*)$ /watermark.php last;
+
     location / { 
         try_files $uri $uri/ @rewrites;
     }
