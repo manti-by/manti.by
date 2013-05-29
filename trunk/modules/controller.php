@@ -83,7 +83,9 @@
          * @return array $options
          */
         public function __call($name, $args) {
-            return $this->view->_404(array('page' => $name, 'args' => $args));
+            // Add redirect to 404 page
+            header('HTTP/1.1 301 Moved Permanently');
+            header('Location: ' . Application::$config['http_host'] . '/404/');
         }
 
         /**
@@ -96,16 +98,20 @@
                 $result = $this->view->offline();
             } else {
                 // Load module
-                $module = $this->loadModule(System::getInstance()->getCmd('module', 'front'));
+                $request = System::getInstance()->getCmd('module', 'front');
+                $module = $this->loadModule($request);
                 if ($module) {
                     $result = $module->route();
                 } else {
-                    $result = $this->view->_404();
+                    if ($request == '404') {
+                        $result = $this->view->_404();
+                    } else {
+                        $this->__call('404', null);
+                        return;
+                    }
                 }
             }
-
-            // Render page
-            return $this->view->render($result);
+            $this->view->render($result);
         }
 
         /**

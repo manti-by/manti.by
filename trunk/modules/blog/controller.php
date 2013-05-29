@@ -128,7 +128,7 @@
             // Get item title and data
             if ($options['id']) {
                 $options['data'] = $this->model->getPost($options['id']);
-                $options['title'] = $options['data']->name;
+                $options['title'] = $options['data']->name . ($options['data']->genre ? ' /' . $options['data']->genre . '/' : '');
             } else {
                 return $this->view->_404($options);
             }

@@ -77,6 +77,7 @@
 
                 // Break when done
                 if (count($result['featured']) >= Application::$config['featured_count']) {
+                    $result['featured'] = array_reverse($result['featured']);
                     break;
                 }
             }

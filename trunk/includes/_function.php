@@ -62,6 +62,29 @@
     }
 
     /**
+     * Return index of error level
+     * @param string $display_name
+     * @return int $number error level
+     */
+    function getErrorIntFromString($display_name) {
+        switch ($display_name) {
+            case 'Warning':
+                return WARNING;
+                break;
+            case 'Notice':
+                return NOTICE;
+                break;
+            case 'Message':
+                return MESSAGE;
+                break;
+            case 'Error':
+            default:
+                return ERROR;
+                break;
+        }
+    }
+
+    /**
      * Return first applicable module
      * @return bool|string $module_name
      */

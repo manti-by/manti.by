@@ -55,11 +55,9 @@
         <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>">
             <?php echo T('Latest shots from gallery'); ?>
         </a>
-        <div class="fr view-all">
-            <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>">
-                <?php echo T('Show all'); ?>
-            </a>
-        </div>
+        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>" class="fr view-all">
+            <?php echo T('Show all'); ?>
+        </a>
     </h2>
     <div class="latest fl gallery-item">
         <?php foreach ($options['data']['gallery_latest'] as $original) : ?>
@@ -72,7 +70,7 @@
                 $in_use[] = $original->id;
             ?>
 
-            <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>#image-<?php echo $original->id; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
+            <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>#image-<?php echo $original->id; ?>" class="thumbnail">
                 <img src="<?php echo Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1); ?>" width="100" height="100"  alt="Latest image from gallery" />
             </a>
         <?php endforeach; ?>
@@ -87,7 +85,7 @@
     ?>
 
     <div class="popular fl gallery-item">
-        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>#image-<?php echo $popular_image->id; ?>" rel="<?php echo $popular_image->id; ?>">
+        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>#image-<?php echo $popular_image->id; ?>">
             <img src="<?php echo  Application::$config['http_host'] . substr($popular_image->source, 1); ?>" alt="Popular image from gallery" />
         </a>
     </div>

@@ -56,12 +56,12 @@
     );
 
 ?>
-<a href="<?php echo Application::$config['http_host']; ?>" class="fl" rel="first">
+<a href="<?php echo Application::$config['http_host']; ?>" class="fl" rel="home">
     <img src="<?php echo Application::$config['template_image_url_path']; ?>logo.png" alt="Manti Logo" width="155" height="62" />
 </a>
 <ul id="topmenu" class="fl">
     <li>
-        <a href="<?php echo Application::$config['http_host']; ?>"<?php echo ($active['home'] ? ' class="active"' : ''); ?> rel="first">
+        <a href="<?php echo Application::$config['http_host']; ?>"<?php echo ($active['home'] ? ' class="active"' : ''); ?> rel="home">
             <?php echo T('Home'); ?>
         </a>
     </li>

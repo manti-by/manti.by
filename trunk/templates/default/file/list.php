@@ -62,7 +62,7 @@
             var self = this;
             $.post(
                 '<?php echo Sef::getSef('index.php?module=file&action=track'); ?>',
-                { id : $(self).attr('rel') }
+                { id : $(self).data('file-id') }
             );
         });
     });
