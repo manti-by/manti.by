@@ -58,7 +58,7 @@
     if ($image = Model::getModel('gallery')->addWatermark($_SERVER['REQUEST_URI'])) {
         header('HTTP/1.1 200 OK');
 
-        header('Expires: ' . gmdate(DATE_RFC822, strtotime("1 year")));
+        header('Expires: ' . gmdate('D, d M Y H:i:s', strtotime("1 year")) . ' GMT');
         header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
         header('Cache-Control: public, must-revalidate, proxy-revalidate');
         header('Pragma: public');
