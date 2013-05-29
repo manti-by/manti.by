@@ -117,11 +117,12 @@
             // Get request string, delete question symbol and inject request data
             $request = self::getReal(substr($_SERVER['REQUEST_URI'], 1));
             $result = substr(strstr($request, "?"), 1);
-            if (!empty($result)) {
-                parse_str($result, $_REQUEST);
 
-                // Add POST params to request
-                $_REQUEST = array_merge($_REQUEST, $_POST);
+
+            // Add POST params to request
+            if (!empty($result)) {
+                parse_str($result, $request);
+                $_REQUEST = array_merge($request, $_GET, $_POST);
             }
         }
 
@@ -351,30 +352,31 @@
          */
         public static function convertToOriginal($request) {
             // Prepare data and fix trailing slash
-            $result = '/index.php';
+            $result = array();
             $request = $request[0] == '/' ? substr($request, 1) : $request;
 
             // GET request params
             if (strpos($request, '?') !== false) {
                 $route = substr($request, 0, strpos($request, '?'));
                 $get = substr(strstr($request, '?'), 1);
+                parse_str($get, $get);
             } else {
                 $route = $request;
-                $get = '';
+                $get = array();
             }
 
             // Add route params
             if ($route) {
                 $route_data = array_diff(explode('/', $route), array('', 'index.php'));
                 if (count($route_data)) {
-                    $result .= '?module=' . $route_data[0];
+                    $result['module'] = $route_data[0];
                     if (isset($route_data[1])) {
-                        $result .= '&action=' . $route_data[1];
+                        $result['action'] = $route_data[1];
 
                         // Additional route params
                         for ($i = 2; $i < count($route_data); $i += 2) {
                             if (isset($route_data[$i]) && isset($route_data[$i + 1])) {
-                                $result .= '&' . $route_data[$i] . '=' . $route_data[$i + 1];
+                                $result[$route_data[$i]] = $route_data[$i + 1];
                             } else {
                                 break;
                             }
@@ -384,10 +386,12 @@
             }
 
             // Add GET params
-            if ($get) {
-                $result .= strstr($result, '?') ? '&' . $get : '?' . $get;
+            $return = array();
+            $result = array_merge($get, $result);
+            foreach ($result as $key => $value) {
+                $return[] = $key . '=' . $value;
             }
 
-            return $result;
+            return '/index.php?' . implode('&', $return);
         }
     }
