@@ -53,6 +53,7 @@
         const OUTPUT_TYPE_JSON      = 'json';
         const OUTPUT_TYPE_RAW       = 'raw';
         const OUTPUT_TYPE_LOG       = 'log';
+        const OUTPUT_TYPE_WRAP      = 'wrap';
 
         /**
          * Default getView method
@@ -87,6 +88,10 @@
                     header('Cache-Control: no-cache, must-revalidate');
                     header('Pragma: no-cache');
 
+                    echo $this->wrapPage($options);
+                    break;
+                case self::OUTPUT_TYPE_WRAP:
+                    // Output without headers
                     echo $this->wrapPage($options);
                     break;
                 case self::OUTPUT_TYPE_HTML:
@@ -236,7 +241,11 @@
          * @return array|null $options
          */
         public function _404($options = null) {
+            $options['output'] = self::OUTPUT_TYPE_WRAP;
+
+            header('HTTP/1.0 404 Not Found');
             $options['body'] = $this->getContents('partial', '404', $options);
+
             return $options;
         }
     }
