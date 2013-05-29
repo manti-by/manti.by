@@ -117,11 +117,12 @@
             // Get request string, delete question symbol and inject request data
             $request = self::getReal(substr($_SERVER['REQUEST_URI'], 1));
             $result = substr(strstr($request, "?"), 1);
-            if (!empty($result)) {
-                parse_str($result, $_REQUEST);
 
-                // Add POST params to request
-                $_REQUEST = array_merge($_REQUEST, $_POST);
+
+            // Add POST params to request
+            if (!empty($result)) {
+                parse_str($result, $request);
+                $_REQUEST = array_merge($request, $_GET, $_POST);
             }
         }
 
