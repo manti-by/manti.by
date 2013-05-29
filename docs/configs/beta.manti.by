@@ -11,6 +11,7 @@ server {
     }
  
     location @rewrites {
+        rewrite /content/gallery/originals/(.*)$ /watermark.php;
         rewrite ^ /index.php last;
     }
 
@@ -45,9 +46,5 @@ server {
         fastcgi_param php_value "error_log /var/www/beta.manti.by/log/php_error.log";
         fastcgi_param php_value "session.save_path /var/www/beta.manti.by/tmp";
         fastcgi_param php_value "upload_tmp_dir /var/www/beta.manti.by/tmp";
-    }
-
-    location ~ content/gallery/originals/* {
-        rewrite ^ /index.php?module=gallery&action=watermark last;
     }
 }

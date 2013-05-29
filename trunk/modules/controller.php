@@ -80,9 +80,15 @@
          * Overide non exist methods calls
          * @param string $name method name
          * @param string $args method args
-         * @return array $options
          */
         public function __call($name, $args) {
+            $this->redirectTo404();
+        }
+
+        /**
+         * 404 Redirect
+         */
+        public function redirectTo404() {
             // Add redirect to 404 page
             header('HTTP/1.1 301 Moved Permanently');
             header('Location: ' . Application::$config['http_host'] . '/404/');
@@ -106,7 +112,7 @@
                     if ($request == '404') {
                         $result = $this->view->_404();
                     } else {
-                        $this->__call('404', null);
+                        $this->redirectTo404();
                         return;
                     }
                 }
