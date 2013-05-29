@@ -351,30 +351,31 @@
          */
         public static function convertToOriginal($request) {
             // Prepare data and fix trailing slash
-            $result = '/index.php';
+            $result = array();
             $request = $request[0] == '/' ? substr($request, 1) : $request;
 
             // GET request params
             if (strpos($request, '?') !== false) {
                 $route = substr($request, 0, strpos($request, '?'));
                 $get = substr(strstr($request, '?'), 1);
+                parse_str($get, $get);
             } else {
                 $route = $request;
-                $get = '';
+                $get = array();
             }
 
             // Add route params
             if ($route) {
                 $route_data = array_diff(explode('/', $route), array('', 'index.php'));
                 if (count($route_data)) {
-                    $result .= '?module=' . $route_data[0];
+                    $result['module'] = $route_data[0];
                     if (isset($route_data[1])) {
-                        $result .= '&action=' . $route_data[1];
+                        $result['action'] = $route_data[1];
 
                         // Additional route params
                         for ($i = 2; $i < count($route_data); $i += 2) {
                             if (isset($route_data[$i]) && isset($route_data[$i + 1])) {
-                                $result .= '&' . $route_data[$i] . '=' . $route_data[$i + 1];
+                                $result[$route_data[$i]] = $route_data[$i + 1];
                             } else {
                                 break;
                             }
@@ -384,10 +385,12 @@
             }
 
             // Add GET params
-            if ($get) {
-                $result .= strstr($result, '?') ? '&' . $get : '?' . $get;
+            $return = array();
+            $result = array_merge($get, $result);
+            foreach ($result as $key => $value) {
+                $return[] = $key . '=' . $value;
             }
 
-            return $result;
+            return '/index.php?' . implode('&', $return);
         }
     }
