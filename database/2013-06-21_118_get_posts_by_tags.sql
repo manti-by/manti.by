@@ -10,7 +10,7 @@ BEGIN
         JOIN `post_tags` AS pt ON pt.`post_id` = p.`id`
         JOIN `tags` AS t ON t.`id` = pt.`tag_id` 
         WHERE t.`name` IN (?)
-        ORDER BY p.`timestamp` DESC
+        ORDER BY p.`created` DESC
         LIMIT ?;";
 
     SET @tags = _tags;
