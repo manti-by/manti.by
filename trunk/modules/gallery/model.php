@@ -356,7 +356,7 @@
          * @return string $image_contents
          */
         public function addWatermark($request) {
-            $source = ROOT_PATH . DS . $request;
+            $source = ROOT_PATH . DS . 'content' . DS . 'gallery' . DS .'originals' . DS . $request;
             $watermark = ROOT_PATH . DS . Application::$config['watermark'];
 
             if (file_exists($source)) {

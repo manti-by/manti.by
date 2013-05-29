@@ -55,6 +55,7 @@
     Application::init();
 
     // Get MVC controller and dispatch request
+    $request = System::getInstance()->getCmd('request');
     if ($image = Model::getModel('gallery')->addWatermark($_SERVER['REQUEST_URI'])) {
         header('Content-type: image/' . $image['type']);
         echo $image['data'];
