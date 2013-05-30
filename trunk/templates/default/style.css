@@ -58,7 +58,7 @@ audio { width: 330px; transform: scale(0.8); }
     font-size: 18px !important; text-transform: uppercase;
     background: #b40303 url(./images/red-button.png) repeat-x top left  !important; }
 
-#header { margin: 0 auto 25px auto; border-bottom: 1px solid #CCC; }
+#header { margin: 0 auto 25px auto; padding-top: 34px; border-bottom: 1px solid #CCC; }
 #header .wrapper { padding-top: 20px; }
 
 #topmenu { margin: 36px 0 5px 50px; padding: 0; }
@@ -66,7 +66,8 @@ audio { width: 330px; transform: scale(0.8); }
 #topmenu li a { color: #777; }
 #topmenu li a.active { color: #b40303; }
 
-#usermenu { background: url(./images/black-dotted-bg.png) repeat-x top left; color: #ECECEC;  }
+#usermenu { position: fixed; width: 100%; color: #ECECEC; z-index: 20000; border-bottom: 6px solid white;
+    background: url(./images/black-dotted-bg.png) repeat-x top left; }
 #usermenu a { color: #999; text-decoration: underline; }
 #usermenu .wrapper { padding: 0; background: inherit; color: inherit; text-align: right; }
 #usermenu .usermenu { font-size: 14px; padding-top: 10px; }
@@ -288,8 +289,8 @@ audio { width: 330px; transform: scale(0.8); }
 #forthcoming a { color: #b40303; font-size: 18px; font-weight: normal; }
 .success-message li { list-style: none; line-height: 18px; }
 
-#player { float: left; width: 570px; margin-top: 6px; }
-.player { position: relative; height: 32px; width: 350px; }
+#player { float: left; width: 570px; margin: 6px 0 4px 0; }
+.player { position: relative; height: 26px; width: 350px; }
 
 .player .button { float: left; width: 16px; height: 16px; margin: 0 1px; cursor: pointer;
     background: url(images/shape-player.png) no-repeat; opacity: 0.9; }
@@ -324,7 +325,7 @@ audio { width: 330px; transform: scale(0.8); }
 
 #player .now-playing { display: block; }
 
-.player.inline { position: relative; margin-left: 367px; height: 25px; padding: 3px; width: 330px;
+.player.inline { position: relative; margin-left: 367px; height: 24px; padding: 3px; width: 330px;
     background: #DEDEDE; border-radius: 4px; }
 #featured .slider-item .content .music-block .preview .player.inline { margin-left: 0; }
 

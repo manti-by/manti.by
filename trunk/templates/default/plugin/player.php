@@ -106,7 +106,7 @@
             $('#player audio').get(0).load();
 
             // Check playing state
-            if (getCookie('is_playing') == 1) {
+            if (getCookie('player_is_playing') == 1) {
                 $('#player audio').get(0).play();
             }
 
@@ -127,21 +127,23 @@
             if ($(this).hasClass('position')) {
                 $('#player audio').get(0).currentTime = $('#player audio').get(0).duration * value_pc / 100;
                 $(this).find('.progress-line-label span').html(secondsToTime($('#player audio').get(0).currentTime));
-                setCookie('position', value_pc);
+                setCookie('player_position', value_pc);
             }
 
             // Update control volume
             if ($(this).hasClass('volume')) {
                 $('#player audio').get(0).volume = value_pc / 100;
                 $(this).find('.progress-line-label span').html(value_pc);
-                setCookie('volume', value_pc);
+                setCookie('player_volume', value_pc);
             }
         }
 
         // Init player
         $.fn.initPlayer = function(id) {
             // Update source
-            if (getCookie('use_hd') == 1) $('#player .high-definition').addClass('active');
+            if (getCookie('player_use_hd') == 1) {
+                $('#player .high-definition, .player.active .high-definition').addClass('active');
+            }
             $.fn.reloadPlayer(id);
         }
 
@@ -152,8 +154,8 @@
         // Set on load update position
         $('#player audio').bind('canplay', function() {
             // Set position
-            var position = getCookie('position') ? getCookie('position') : 0;
-            setCookie('position', position);
+            var position = getCookie('player_position') ? getCookie('player_position') : 0;
+            setCookie('player_position', position);
 
             $(this).get(0).currentTime = $(this).get(0).duration * position / 100;
             $('#player .position .progress-line-label span').html(secondsToTime($(this).get(0).currentTime));
@@ -162,8 +164,8 @@
             $('#player .position .progress-line-active').width(position);
 
             // Set volume
-            var volume = getCookie('volume') ? getCookie('volume') : 70;
-            setCookie('volume', volume);
+            var volume = getCookie('player_volume') ? getCookie('player_volume') : 70;
+            setCookie('player_volume', volume);
 
             $(this).get(0).volume = volume / 100;
             $('#player .volume .progress-line-label span').html(volume);
@@ -174,22 +176,37 @@
 
         // Play action
         $('.player .play').live('click', function () {
-            $(this).removeClass('play').addClass('pause');
+            // Bind active state for inline player
+            if ($(this).closest('.player').hasClass('inline')) {
+                // Reset all inline players
+                $('.player.inline').removeClass('active');
+
+                // Update source player
+                $(this).closest('.player').addClass('active');
+                current_source_id = $(this).closest('.player').data('release-id');
+                $.fn.reloadPlayer(current_source_id);
+            }
+
+            // Update button and run player
+            $('#player .play, .player.active .play').removeClass('play').addClass('pause');
             $('#player audio').get(0).play();
-            setCookie('is_playing', 1);
+
+            setCookie('player_is_playing', 1);
         });
 
         // Pause action
         $('.player .pause').live('click', function () {
-            $(this).removeClass('pause').addClass('play');
+            // Update button and pause player
+            $('#player .pause, .player.active .pause').removeClass('pause').addClass('play');
             $('#player audio').get(0).pause();
-            setCookie('is_playing', 0);
+
+            setCookie('player_is_playing', 0);
         });
 
         // Next action
         $('.player .next-track').live('click', function () {
             // Reset position state
-            setCookie('position', 0);
+            setCookie('player_position', 0);
 
             // Search current player source index
             for (var i = 0; i < player_source.length; i++) {
@@ -206,7 +223,7 @@
         // Prev action
         $('.player .prev-track').live('click', function () {
             // Reset position state
-            setCookie('position', 0);
+            setCookie('player_position', 0);
 
             // Search current player source index
             for (var i = 0; i < player_source.length; i++) {
@@ -222,7 +239,13 @@
 
         // change quality
         $('.player .high-definition').live('click', function () {
-            $(this).toggleClass('active');
+            if (getCookie('player_use_hd') == 1) {
+                setCookie('player_use_hd', 0);
+                $('#player .high-definition, .player.active .high-definition').removeClass('active');
+            } else {
+                setCookie('player_use_hd', 1);
+                $('#player .high-definition, .player.active .high-definition').addClass('active');
+            }
             $.fn.reloadPlayer(current_source_id);
         });
 
@@ -255,7 +278,7 @@
 
             var position = position * $('#player .position .progress-line').width() /100;
             $('#player .position .progress-line-active').width(position);
-            setCookie('position', position);
+            setCookie('player_position', position);
         }, 1000);
 
         // Scroll for label
@@ -269,19 +292,6 @@
                     .animate({ opacity: 1 }, 5000);
             }
         }, 14000);
-
-        // Bind inline players
-        $('.player.inline .play').live('click', function () {
-            $('.player.inline').removeClass('active');
-            $(this).closest('.player.inline').addClass('active');
-
-            current_source_id = $(this).closest('.player.inline').data('release-id');
-            $.fn.reloadPlayer(current_source_id);
-
-            console.log(current_source_id);
-        });
-
-
     });
 </script>
 <div id="player" class="player">
