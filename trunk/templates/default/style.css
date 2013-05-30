@@ -68,7 +68,8 @@ audio { width: 330px; transform: scale(0.8); }
 
 #usermenu { background: url(./images/black-dotted-bg.png) repeat-x top left; color: #ECECEC;  }
 #usermenu a { color: #999; text-decoration: underline; }
-#usermenu .wrapper { padding: 5px 0; background: inherit; color: inherit; text-align: right; }
+#usermenu .wrapper { padding: 0; background: inherit; color: inherit; text-align: right; }
+#usermenu .usermenu { font-size: 14px; padding-top: 10px; }
 
 #language { margin-bottom: 15px; }
 #language img { position: relative; top: 3px; }
@@ -287,16 +288,16 @@ audio { width: 330px; transform: scale(0.8); }
 #forthcoming a { color: #b40303; font-size: 18px; font-weight: normal; }
 .success-message li { list-style: none; line-height: 18px; }
 
-#player { float: left; width: 570px; }
-.player { position: relative; height: 22px; width: 350px; }
+#player { float: left; width: 570px; margin-top: 6px; }
+.player { position: relative; height: 32px; width: 350px; }
 
 .player .button { float: left; width: 16px; height: 16px; margin: 0 1px; cursor: pointer;
-    border: 1px solid #999; border-radius: 1px; background: url(images/shape-player.png) no-repeat; }
-.player .button:hover { background-color: #666; }
-.player .play { background-position: 0 0; }
-.player .pause { background-position: 0 -16px; }
-.player .next-track { background-position: 0 -48px; }
-.player .prev-track { background-position: 0 -32px; }
+    background: url(images/shape-player.png) no-repeat; opacity: 0.9; }
+.player .button:hover { opacity: 1; }
+.player .play { background-position: 0 0; width: 24px; height: 24px; }
+.player .pause { background-position: 0 -24px; width: 24px; height: 24px; }
+.player .next-track { background-position: -0px -64px; margin-top: 4px; }
+.player .prev-track { background-position: -0px -48px; margin-top: 4px; }
 
 .player .progressbar { float: right; position: relative; margin-right: 5px; color: #999; cursor: pointer; }
 .player .progressbar .progress-line,
@@ -305,31 +306,38 @@ audio { width: 330px; transform: scale(0.8); }
 .player .progressbar .progress-line-active { width: 0; background: #b40303; z-index: 10;}
 .player .progressbar .progress-line-label { float: right; padding: 2px 4px 0 2px; font-size: 11px; }
 
-.player .position { width: 200px; }
-.player .progressbar.position .progress-line { width: 150px; }
+.player .position { width: 190px; margin-top: 3px; }
+.player .progressbar.position .progress-line { width: 140px; }
 .player .progressbar.position .progress-line-label { width: 50px; }
 
-.player .volume { width: 70px; }
+.player .volume { width: 70px; margin-top: 3px; }
 .player .progressbar.volume .progress-line { width: 40px; }
 .player .progressbar.volume .progress-line-label { width: 30px; }
 
-.player .now-playing { display: none; float: left; padding: 2px 0; margin: 0 5px; width: 190px; height: 16px; overflow: hidden;
-    color: #ECECEC; text-align: left;  }
+.player .now-playing { display: none; float: left; padding: 4px 0 0 0; margin: 0 5px; width: 190px; height: 24px; overflow: hidden;
+    color: #ECECEC; text-align: left; font-size: 14px; }
 .player .now-playing a { position: relative; color: inherit !important; text-decoration: none !important; white-space: nowrap; }
 
-.player .high-definition { float: right; margin: 2px 3px; padding: 0 2px; border: 1px solid #999; border-radius: 1px;
-    cursor: pointer; text-decoration: line-through; font-size: 11px; color: #999; }
-.player .high-definition:hover, .player .high-definition.active { color: #b40303; text-decoration: none; }
+.player .high-definition { float: right; margin: 3px; padding: 0 2px; border: 1px solid #999; border-radius: 1px;
+    cursor: pointer; text-decoration: line-through; font-size: 14px; color: #999; }
+.player .high-definition:hover, .player .high-definition.active { color: #b40303; border-color: #b40303; text-decoration: none; }
 
 #player .now-playing { display: block; }
 
-.player.inline { position: relative; margin-left: 367px; width: 330px; padding: 2px; background: #EEE; }
+.player.inline { position: relative; margin-left: 367px; height: 25px; padding: 3px; width: 330px;
+    background: #DEDEDE; border-radius: 4px; }
 #featured .slider-item .content .music-block .preview .player.inline { margin-left: 0; }
 
-.player.inline .position { width: 200px; }
-.player.inline .progressbar.position .progress-line { width: 150px; }
-.player.inline .progressbar.position .progress-line-label { width: 50px; }
+.player.inline .progressbar .progress-line,
+.player.inline .progressbar .progress-line-active { top: 8px; }
+
+.player.inline .progressbar .progress-line-label { padding-top: 1px; }
+#featured .player.inline .progressbar .progress-line-label { padding-top: 3px; }
+
+.player.inline .position { width: 185px; }
+.player.inline .progressbar.position .progress-line { width: 130px; }
+.player.inline .progressbar.position .progress-line-label { width: 50px; text-align: right; }
 
 .player.inline .volume { width: 70px; }
 .player.inline .progressbar.volume .progress-line { width: 40px; }
-.player.inline .progressbar.volume .progress-line-label { width: 30px; }
+.player.inline .progressbar.volume .progress-line-label { width: 30px; text-align: right; }

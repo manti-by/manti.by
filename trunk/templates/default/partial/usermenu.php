@@ -56,13 +56,16 @@
     <div class="wrapper">
         <?php echo $this->getContents('plugin', 'player'); ?>
 
-        <?php if ($user->isLoggined()) : ?>
-            <?php echo T('Hi') . ' ' . $salutation; ?>!
-            <a href="<?php echo Sef::getSef('index.php?module=user&action=dashboard');?>"><?php echo T('Dashboard'); ?></a>
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=edit');?>">[+]</a> |
-            <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Sign Out'); ?></a>
-        <?php else : ?>
-            <a href="<?php echo Sef::getSef('index.php?module=user&action=loginform'); ?>"><?php echo T('Login'); ?></a>
-        <?php endif; ?>
+        <div class="usermenu">
+            <?php if ($user->isLoggined()) : ?>
+                <?php echo T('Hi') . ' ' . $salutation; ?>!
+                <a href="<?php echo Sef::getSef('index.php?module=user&action=dashboard');?>"><?php echo T('Dashboard'); ?></a>
+                <a href="<?php echo Sef::getSef('index.php?module=blog&action=edit');?>">[+]</a> |
+                <a href="<?php echo Sef::getSef('index.php?module=user&action=logout'); ?>"><?php echo T('Sign Out'); ?></a>
+            <?php else : ?>
+                <a href="<?php echo Sef::getSef('index.php?module=user&action=loginform'); ?>"><?php echo T('Login'); ?></a>
+            <?php endif; ?>
+        </div>
+        <div class="cls"></div>
     </div>
 </div>
