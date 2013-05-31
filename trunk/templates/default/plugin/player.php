@@ -191,7 +191,9 @@
             $('#player .play, .player.active .play').removeClass('play').addClass('pause');
             $('#player audio').get(0).play();
 
+            // Update cookie and favicon
             setCookie('player_is_playing', 1);
+            $('link[rel=icon]').attr('href', '/templates/default/images/favicon-play.png');
         });
 
         // Pause action
@@ -200,7 +202,9 @@
             $('#player .pause, .player.active .pause').removeClass('pause').addClass('play');
             $('#player audio').get(0).pause();
 
+            // Update cookie and favicon
             setCookie('player_is_playing', 0);
+            $('link[rel=icon]').attr('href', '/templates/default/images/favicon.png');
         });
 
         // Next action
