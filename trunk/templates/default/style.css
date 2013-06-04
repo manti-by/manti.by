@@ -342,3 +342,5 @@ audio { width: 330px; transform: scale(0.8); }
 .player.inline .volume { width: 70px; }
 .player.inline .progressbar.volume .progress-line { width: 40px; }
 .player.inline .progressbar.volume .progress-line-label { width: 30px; text-align: right; }
+
+#loader div { background: url(./images/loader.gif) no-repeat center center; }
