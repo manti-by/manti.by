@@ -153,7 +153,7 @@
                 foreach ($files as $file) {
                     switch ($type) {
                         case FileEntity::TYPE_PREVIEW:
-                            $result .= '<div class="player inline" data-release-id="' . $release_id . '">';
+                            $result .= '<div id="player-' . $release_id . '" class="player inline" data-release-id="' . $release_id . '">';
                             $result .= '<div class="button play"></div>';
                             $result .= '<div class="high-definition">HD</div>';
 
@@ -161,7 +161,7 @@
                                 <div class="progressbar volume">
                                     <div class="progress-line"></div>
                                     <div class="progress-line-active"></div>
-                                    <div class="progress-line-label"><span>70</span>%</div>
+                                    <div class="progress-line-label"><span>0</span>%</div>
                                 </div>';
 
                             $result .= '

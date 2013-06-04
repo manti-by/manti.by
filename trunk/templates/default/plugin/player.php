@@ -68,8 +68,11 @@
             }
         }
 
-        // Set HD source action
+        // Get main objects
         var player_source = JSON.parse($('#player').find('input[name=source]').val());
+        var current_source_id = getCookie('player_current_id') ? getCookie('player_current_id') : player_source[0].id;
+
+        // Update source function
         $.fn.updateSource = function(id) {
             // Search source by ID
             for (var i = 0; i < player_source.length; i++) {
@@ -80,7 +83,7 @@
             }
 
             // Get source
-            if ($('#player .high-definition').hasClass('active')) {
+            if (getCookie('player_use_hd') == 1) {
                 if ($.fn.canPlayMp3()) {
                     var src = source.hd.mp3;
                 } else {
@@ -100,6 +103,12 @@
 
         // Update player source
         $.fn.reloadPlayer = function(id) {
+            // Update cookie
+            setCookie('player_current_id', id);
+
+            // Show loader
+            $.fn.loaderShow();
+
             // Restart player with new source
             $('#player audio').get(0).pause();
             $.fn.updateSource(id);
@@ -108,6 +117,13 @@
             // Check playing state
             if (getCookie('player_is_playing') == 1) {
                 $('#player audio').get(0).play();
+                $('#player .play, #player-'+ current_source_id +' .play').removeClass('play').addClass('pause');
+                $('link[rel=icon]').attr('href', '/templates/default/images/favicon-play.png');
+            }
+
+            // Check HD
+            if (getCookie('player_use_hd') == 1) {
+                $('#player .high-definition, #player-'+ current_source_id +' .high-definition').addClass('active');
             }
 
             // Check position
@@ -126,14 +142,21 @@
             // Update control progress
             if ($(this).hasClass('position')) {
                 $('#player audio').get(0).currentTime = $('#player audio').get(0).duration * value_pc / 100;
-                $(this).find('.progress-line-label span').html(secondsToTime($('#player audio').get(0).currentTime));
+
+                var timestamp = secondsToTime($('#player audio').get(0).currentTime);
+                $('#player .position .progress-line-label span').html(timestamp);
+                $('#player-' + current_source_id + ' .position .progress-line-label span').html(timestamp);
+
                 setCookie('player_position', value_pc);
             }
 
             // Update control volume
             if ($(this).hasClass('volume')) {
                 $('#player audio').get(0).volume = value_pc / 100;
-                $(this).find('.progress-line-label span').html(value_pc);
+
+                $('#player .volume .progress-line-label span').html(value_pc);
+                $('#player-' + current_source_id + ' .volume .progress-line-label span').html(value_pc);
+
                 setCookie('player_volume', value_pc);
             }
         }
@@ -142,53 +165,88 @@
         $.fn.initPlayer = function(id) {
             // Update source
             if (getCookie('player_use_hd') == 1) {
-                $('#player .high-definition, .player.active .high-definition').addClass('active');
+                $('#player .high-definition, #player-'+ current_source_id +' .high-definition').addClass('active');
             }
             $.fn.reloadPlayer(id);
         }
 
+        // Reset all players
+        $.fn.resetAllPlayers = function() {
+            $('.player .pause').removeClass('pause').addClass('play');
+            $('link[rel=icon]').attr('href', '/templates/default/images/favicon.png');
+
+            $('.player .position .progress-line-label span').html('00:00:00');
+            $('.player .position .progress-line-active').width(0);
+
+            $('.player .volume .progress-line-label span').html('0');
+            $('.player .volume .progress-line-active').width(0);
+
+            $('.player .high-definition').removeClass('active');
+        }
+
         // Init plyer source links
-        var current_source_id = player_source[0].id;
         $.fn.initPlayer(current_source_id);
 
         // Set on load update position
         $('#player audio').bind('canplay', function() {
-            // Set position
+            // Set position to cookie
             var position = getCookie('player_position') ? getCookie('player_position') : 0;
             setCookie('player_position', position);
 
+            // Update current player position
             $(this).get(0).currentTime = $(this).get(0).duration * position / 100;
-            $('#player .position .progress-line-label span').html(secondsToTime($(this).get(0).currentTime));
+            var timestamp = secondsToTime($(this).get(0).currentTime);
 
-            position = position * $('#player .position .progress-line').width() /100;
-            $('#player .position .progress-line-active').width(position);
+            $('#player .position .progress-line-label span').html(timestamp);
+            $('#player-'+ current_source_id +' .position .progress-line-label span').html(timestamp);
 
-            // Set volume
+            // Update progressline width
+            var width = position * $('#player .position .progress-line').width() /100;
+            $('#player .position .progress-line-active').width(width);
+
+            width = position * $('#player-'+ current_source_id +' .position .progress-line').width() /100;
+            $('#player-'+ current_source_id +' .position .progress-line-active').width(width);
+
+            // Set volume to cookie
             var volume = getCookie('player_volume') ? getCookie('player_volume') : 70;
             setCookie('player_volume', volume);
 
+            // Update volume label
             $(this).get(0).volume = volume / 100;
             $('#player .volume .progress-line-label span').html(volume);
+            $('#player-'+ current_source_id +' .volume .progress-line-label span').html(volume);
 
-            volume = volume * $('#player .volume .progress-line').width() /100;
-            $('#player .volume .progress-line-active').width(volume);
+            // Update vilume width
+            width = volume * $('#player .volume .progress-line').width() /100;
+            $('#player .volume .progress-line-active').width(width);
+
+            width = volume * $('#player-'+ current_source_id +' .volume .progress-line').width() /100;
+            $('#player-'+ current_source_id +' .volume .progress-line-active').width(width);
+
+            // Hide loader
+            $.fn.loaderHide();
         });
 
         // Play action
         $('.player .play').live('click', function () {
+            // Reset all players
+            $.fn.resetAllPlayers();
+
             // Bind active state for inline player
             if ($(this).closest('.player').hasClass('inline')) {
-                // Reset all inline players
-                $('.player.inline').removeClass('active');
+                // Show loader
+                $.fn.loaderShow();
 
-                // Update source player
-                $(this).closest('.player').addClass('active');
+                // Reset position
+                setCookie('player_position', 0);
+
+                // Update player source
                 current_source_id = $(this).closest('.player').data('release-id');
                 $.fn.reloadPlayer(current_source_id);
             }
 
             // Update button and run player
-            $('#player .play, .player.active .play').removeClass('play').addClass('pause');
+            $('#player .play, #player-'+ current_source_id +' .play').removeClass('play').addClass('pause');
             $('#player audio').get(0).play();
 
             // Update cookie and favicon
@@ -198,8 +256,11 @@
 
         // Pause action
         $('.player .pause').live('click', function () {
+            // Reset all players
+            $.fn.resetAllPlayers();
+
             // Update button and pause player
-            $('#player .pause, .player.active .pause').removeClass('pause').addClass('play');
+            $('#player .pause, #player-'+ current_source_id +' .pause').removeClass('pause').addClass('play');
             $('#player audio').get(0).pause();
 
             // Update cookie and favicon
@@ -209,7 +270,10 @@
 
         // Next action
         $('.player .next-track').live('click', function () {
-            // Reset position state
+            // Reset all players
+            $.fn.resetAllPlayers();
+
+            // Reset position
             setCookie('player_position', 0);
 
             // Search current player source index
@@ -226,6 +290,9 @@
 
         // Prev action
         $('.player .prev-track').live('click', function () {
+            // Reset all players
+            $.fn.resetAllPlayers();
+
             // Reset position state
             setCookie('player_position', 0);
 
@@ -243,13 +310,20 @@
 
         // change quality
         $('.player .high-definition').live('click', function () {
+            // Reset all players
+            $.fn.resetAllPlayers();
+
+            // Show loader
+            $.fn.loaderShow();
+
+            // Update cookie
             if (getCookie('player_use_hd') == 1) {
                 setCookie('player_use_hd', 0);
-                $('#player .high-definition, .player.active .high-definition').removeClass('active');
             } else {
                 setCookie('player_use_hd', 1);
-                $('#player .high-definition, .player.active .high-definition').addClass('active');
             }
+
+            // Reload player
             $.fn.reloadPlayer(current_source_id);
         });
 
@@ -278,10 +352,19 @@
         // Update position progressbar
         setInterval(function() {
             var position = $('#player audio').get(0).currentTime / $('#player audio').get(0).duration * 100;
-            $('#player .position .progress-line-label span').html(secondsToTime($('#player audio').get(0).currentTime));
+            var timestamp = secondsToTime($('#player audio').get(0).currentTime);
 
-            var position = position * $('#player .position .progress-line').width() /100;
-            $('#player .position .progress-line-active').width(position);
+            // Update timestamps
+            $('#player .position .progress-line-label span').html(timestamp);
+            $('#player-' + current_source_id + ' .position .progress-line-label span').html(timestamp);
+
+            // Update position
+            var width = position * $('#player .position .progress-line').width() /100;
+            $('#player .position .progress-line-active').width(width);
+
+            width = position * $('#player-' + current_source_id + ' .position .progress-line').width() /100;
+            $('#player-' + current_source_id + ' .position .progress-line-active').width(width);
+
             setCookie('player_position', position);
         }, 1000);
 
