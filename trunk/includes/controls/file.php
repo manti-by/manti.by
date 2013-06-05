@@ -167,6 +167,7 @@
                             $result .= '
                                 <div class="progressbar position">
                                     <div class="progress-line"></div>
+                                    <div class="progress-line-loaded"></div>
                                     <div class="progress-line-active"></div>
                                     <div class="progress-line-label"><span>00:00:00</span></div>
                                 </div>';

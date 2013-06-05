@@ -72,7 +72,6 @@
             foreach ($featured as $item) {
                 if (!in_array($item->id, $in_use)) {
                     $result['featured'][] = $item;
-                    $result['player'][] = $this->getPlayerItem($item);
                     $in_use[] = $item->id;
                 }
 
@@ -89,7 +88,6 @@
             foreach ($posts as $item) {
                 if (!in_array($item->id, $in_use)) {
                     $result['content'][] = $item;
-                    $result['player'][] = $this->getPlayerItem($item);
                     $in_use[] = $item->id;
                 }
 
@@ -105,28 +103,5 @@
             $result['gallery_popular'] = Model::getModel('gallery')->getPopularImages(10);
 
             return $result;
-        }
-
-        /**
-         * Return player item
-         * @param object $item
-         * @return array
-         */
-        private function getPlayerItem($item) {
-            $preview = json_decode($item->preview);
-            $release = json_decode($item->release);
-
-            return array(
-                'id'  => $item->id,
-                'name'=> htmlspecialchars($item->name . ' /' . $item->genre . '/', ENT_QUOTES),
-                'web' => array(
-                    'mp3' => substr($preview[0]->source, 1),
-                    'ogg' => str_replace('mp3', 'ogg', substr($preview[0]->source, 1)),
-                ),
-                'hd' => array(
-                    'mp3' => substr($release[0]->source, 1),
-                    'ogg' => str_replace('mp3', 'ogg', substr($release[0]->source, 1)),
-                )
-            );
         }
     }

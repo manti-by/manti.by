@@ -47,7 +47,7 @@
      * @since 0.3RC3
      */
 
-    $player = json_encode(Cache::get('player'));
+    $player_contents = json_encode(Model::getModel('file')->getPlayerContent());
 ?>
 <script type="text/javascript">
     $(document).ready(function() {
@@ -69,7 +69,7 @@
         }
 
         // Get main objects
-        var player_source = JSON.parse($('#player').find('input[name=source]').val());
+        var player_source = <?php echo $player_contents; ?>;
         var current_source_id = getCookie('player_current_id') ? getCookie('player_current_id') : player_source[0].id;
 
         // Update source function
@@ -178,9 +178,6 @@
             $('.player .position .progress-line-label span').html('00:00:00');
             $('.player .position .progress-line-active').width(0);
 
-            $('.player .volume .progress-line-label span').html('0');
-            $('.player .volume .progress-line-active').width(0);
-
             $('.player .high-definition').removeClass('active');
         }
 
@@ -248,6 +245,10 @@
             // Update button and run player
             $('#player .play, #player-'+ current_source_id +' .play').removeClass('play').addClass('pause');
             $('#player audio').get(0).play();
+
+            // Update active state
+            $('.player').removeClass('active');
+            $('#player, #player-'+ current_source_id).addClass('active');
 
             // Update cookie and favicon
             setCookie('player_is_playing', 1);
@@ -328,19 +329,19 @@
         });
 
         // Progressbars
-        $('.player .progressbar').live('click', function (event) {
+        $('.player.active .progressbar').live('click', function (event) {
             $(this).updateProgressbar(event);
         });
 
-        $('.player .progressbar').live('mousedown', function (event) {
+        $('.player.active .progressbar').live('mousedown', function (event) {
             $(this).data('active', true);
         });
 
-        $('.player .progressbar').live('mousemove', function (event) {
+        $('.player.active .progressbar').live('mousemove', function (event) {
             if ($(this).data('active') == true) $(this).updateProgressbar(event);
         });
 
-        $('.player .progressbar').live('mouseup', function (event) {
+        $('.player.active .progressbar').live('mouseup', function (event) {
             $(this).data('active', false);
         });
 
@@ -351,21 +352,33 @@
 
         // Update position progressbar
         setInterval(function() {
-            var position = $('#player audio').get(0).currentTime / $('#player audio').get(0).duration * 100;
-            var timestamp = secondsToTime($('#player audio').get(0).currentTime);
+            if (!$('#player audio').get(0).paused) {
+                // Update timestamps
+                var timestamp = secondsToTime($('#player audio').get(0).currentTime);
+                $('#player .position .progress-line-label span').html(timestamp);
+                $('#player-' + current_source_id + ' .position .progress-line-label span').html(timestamp);
 
-            // Update timestamps
-            $('#player .position .progress-line-label span').html(timestamp);
-            $('#player-' + current_source_id + ' .position .progress-line-label span').html(timestamp);
+                // Update position
+                var position = $('#player audio').get(0).currentTime / $('#player audio').get(0).duration;
 
-            // Update position
-            var width = position * $('#player .position .progress-line').width() /100;
-            $('#player .position .progress-line-active').width(width);
+                var width = position * $('#player .position .progress-line').width();
+                $('#player .position .progress-line-active').width(width);
 
-            width = position * $('#player-' + current_source_id + ' .position .progress-line').width() /100;
-            $('#player-' + current_source_id + ' .position .progress-line-active').width(width);
+                width = position * $('#player-' + current_source_id + ' .position .progress-line').width();
+                $('#player-' + current_source_id + ' .position .progress-line-active').width(width);
 
-            setCookie('player_position', position);
+                // Update buffered state
+                var buffered = $('#player audio').get(0).buffered.end(0)  / $('#player audio').get(0).duration;
+
+                width = buffered * $('#player .position .progress-line').width();
+                $('#player .position .progress-line-loaded').width(width);
+
+                width = buffered * $('#player-' + current_source_id + ' .position .progress-line').width();
+                $('#player-' + current_source_id + ' .position .progress-line-loaded').width(width);
+
+                // Update cookie
+                setCookie('player_position', position);
+            }
         }, 1000);
 
         // Scroll for label
@@ -382,8 +395,7 @@
     });
 </script>
 <div id="player" class="player">
-    <audio preload="none" class="hidden"></audio>
-    <input type="hidden" name="source" value='<?php echo $player; ?>' />
+    <audio preload="auto" class="hidden"></audio>
 
     <div class="button prev-track"></div>
     <div class="button play"></div>
@@ -403,6 +415,7 @@
 
     <div class="progressbar position">
         <div class="progress-line"></div>
+        <div class="progress-line-loaded"></div>
         <div class="progress-line-active"></div>
         <div class="progress-line-label"><span>0</span></div>
     </div>

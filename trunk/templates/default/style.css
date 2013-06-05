@@ -302,13 +302,16 @@ audio { width: 330px; transform: scale(0.8); }
 
 .player .progressbar { float: right; position: relative; margin-right: 5px; color: #999; cursor: pointer; }
 .player .progressbar .progress-line,
+.player .progressbar .progress-line-loaded,
 .player .progressbar .progress-line-active { float: left; height: 4px; position: absolute; top: 8px; left: 0; cursor: pointer; }
 .player .progressbar .progress-line { width: 100%; background: #999; }
+.player .progressbar .progress-line-loaded { width: 0; background: #390; z-index: 5; }
 .player .progressbar .progress-line-active { width: 0; background: #b40303; z-index: 10;}
 .player .progressbar .progress-line-label { float: right; padding: 2px 4px 0 2px; font-size: 11px; }
 
 .player .position { width: 190px; margin-top: 3px; }
 .player .progressbar.position .progress-line { width: 140px; }
+.player .progressbar.position .progress-line-loaded { width: 140px; }
 .player .progressbar.position .progress-line-label { width: 50px; }
 
 .player .volume { width: 70px; margin-top: 3px; }
@@ -330,6 +333,7 @@ audio { width: 330px; transform: scale(0.8); }
 #featured .slider-item .content .music-block .preview .player.inline { margin-left: 0; }
 
 .player.inline .progressbar .progress-line,
+.player.inline .progressbar .progress-line-loaded,
 .player.inline .progressbar .progress-line-active { top: 8px; }
 
 .player.inline .progressbar .progress-line-label { padding-top: 1px; }
@@ -337,6 +341,7 @@ audio { width: 330px; transform: scale(0.8); }
 
 .player.inline .position { width: 185px; }
 .player.inline .progressbar.position .progress-line { width: 130px; }
+.player.inline .progressbar.position .progress-line-loaded { width: 0; background: #3C0; }
 .player.inline .progressbar.position .progress-line-label { width: 50px; text-align: right; }
 
 .player.inline .volume { width: 70px; }

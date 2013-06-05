@@ -60,9 +60,6 @@
             $options['data'] = $this->model->getFrontpageItems();
             $options['body'] = $this->view->getContents('blog', 'front', $options);
 
-            // Set to cache player items
-            Cache::set('player', $options['data']['player']);
-
             return $options;
         }
     }

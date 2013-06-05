@@ -327,4 +327,32 @@
                 return '';
             }
         }
+
+        public function getPlayerContent() {
+            $result = array();
+
+            // Get all posts
+            $this->database->query("CALL GET_POSTS(0, 100);");
+            if ($posts = $this->database->getObjectsArray()) {
+                foreach ($posts as $post) {
+                    $preview = json_decode($post->preview);
+                    $release = json_decode($post->release);
+
+                    $result[] = array(
+                        'id'  => $post->id,
+                        'name'=> $post->name . ' /' . $post->genre . '/',
+                        'web' => array(
+                            'mp3' => substr($preview[0]->source, 1),
+                            'ogg' => str_replace('mp3', 'ogg', substr($preview[0]->source, 1)),
+                        ),
+                        'hd' => array(
+                            'mp3' => substr($release[0]->source, 1),
+                            'ogg' => str_replace('mp3', 'ogg', substr($release[0]->source, 1)),
+                        )
+                    );
+                }
+            }
+
+            return $result;
+        }
     }
