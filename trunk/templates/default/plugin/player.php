@@ -69,6 +69,7 @@
         }
 
         // Get main objects
+        var player = $('#player audio').get(0);
         var player_source = <?php echo $player_contents; ?>;
         var current_source_id = getCookie('player_current_id') ? getCookie('player_current_id') : player_source[0].id;
 
@@ -101,6 +102,56 @@
             $('#player .now-playing a').html(source.name);
         }
 
+        // Update players progress bars
+        $.fn.updatePlayerProgress = function () {
+            // Update position
+            var position = getCookie('player_position') ? getCookie('player_position') : 0;
+
+            var width = position * $('#player .position .progress-line').width() / 100;
+            $('#player .position .progress-line-active').width(width);
+
+            width = position * $('#player-'+ current_source_id +' .position .progress-line').width() /100;
+            $('#player-'+ current_source_id +' .position .progress-line-active').width(width);
+
+            // Set position to cookie
+            position = player.currentTime / player.duration * 100;
+            setCookie('player_position', position);
+
+            // Update current player timestamps
+            var timestamp = secondsToTime(player.currentTime);
+
+            $('#player .position .progress-line-label span').html(timestamp);
+            $('#player-'+ current_source_id +' .position .progress-line-label span').html(timestamp);
+
+            // Update buffered state
+            var buffered = player.buffered.end(0)  / player.duration;
+
+            width = buffered * $('#player .position .progress-line').width();
+            $('#player .position .progress-line-loaded').width(width);
+
+            width = buffered * $('#player-' + current_source_id + ' .position .progress-line').width();
+            $('#player-' + current_source_id + ' .position .progress-line-loaded').width(width);
+        }
+
+        // Update players volume bars
+        $.fn.updatePlayerVolume = function() {
+            // Set volume to cookie
+            var volume = getCookie('player_volume') ? getCookie('player_volume') : 70;
+            setCookie('player_volume', volume);
+
+            // Update volume label
+            player.volume = volume / 100;
+            $('#player .volume .progress-line-label span').html(volume);
+            $('#player-'+ current_source_id +' .volume .progress-line-label span').html(volume);
+
+            // Update volume width
+            var width = volume * $('#player .volume .progress-line').width() / 100;
+            $('#player .volume .progress-line-active').width(width);
+
+            width = volume * $('#player-'+ current_source_id +' .volume .progress-line').width() / 100;
+            $('#player-'+ current_source_id +' .volume .progress-line-active').width(width);
+        }
+
         // Update player source
         $.fn.reloadPlayer = function(id) {
             // Update cookie
@@ -110,13 +161,13 @@
             $.fn.loaderShow();
 
             // Restart player with new source
-            $('#player audio').get(0).pause();
+            player.pause();
             $.fn.updateSource(id);
-            $('#player audio').get(0).load();
+            player.load();
 
             // Check playing state
             if (getCookie('player_is_playing') == 1) {
-                $('#player audio').get(0).play();
+                player.play();
                 $('#player .play, #player-'+ current_source_id +' .play').removeClass('play').addClass('pause');
                 $('link[rel=icon]').attr('href', '/templates/default/images/favicon-play.png');
             }
@@ -124,40 +175,6 @@
             // Check HD
             if (getCookie('player_use_hd') == 1) {
                 $('#player .high-definition, #player-'+ current_source_id +' .high-definition').addClass('active');
-            }
-
-            // Check position
-            $('#player audio').trigger('canplay');
-        }
-
-        // Progressbar control
-        $.fn.updateProgressbar = function(event) {
-            // Update progressbar
-            var value_px = event.clientX - $(this).offset().left;
-            $(this).find('.progress-line-active').width(value_px);
-
-            // Update counter
-            var value_pc = parseInt($(this).find('.progress-line-active').width() / $(this).find('.progress-line').width() * 100);
-
-            // Update control progress
-            if ($(this).hasClass('position')) {
-                $('#player audio').get(0).currentTime = $('#player audio').get(0).duration * value_pc / 100;
-
-                var timestamp = secondsToTime($('#player audio').get(0).currentTime);
-                $('#player .position .progress-line-label span').html(timestamp);
-                $('#player-' + current_source_id + ' .position .progress-line-label span').html(timestamp);
-
-                setCookie('player_position', value_pc);
-            }
-
-            // Update control volume
-            if ($(this).hasClass('volume')) {
-                $('#player audio').get(0).volume = value_pc / 100;
-
-                $('#player .volume .progress-line-label span').html(value_pc);
-                $('#player-' + current_source_id + ' .volume .progress-line-label span').html(value_pc);
-
-                setCookie('player_volume', value_pc);
             }
         }
 
@@ -177,8 +194,6 @@
 
             $('.player .position .progress-line-label span').html('00:00:00');
             $('.player .position .progress-line-active').width(0);
-
-            $('.player .high-definition').removeClass('active');
         }
 
         // Init plyer source links
@@ -186,41 +201,8 @@
 
         // Set on load update position
         $('#player audio').bind('canplay', function() {
-            // Set position to cookie
-            var position = getCookie('player_position') ? getCookie('player_position') : 0;
-            setCookie('player_position', position);
-
-            // Update current player position
-            $(this).get(0).currentTime = $(this).get(0).duration * position / 100;
-            var timestamp = secondsToTime($(this).get(0).currentTime);
-
-            $('#player .position .progress-line-label span').html(timestamp);
-            $('#player-'+ current_source_id +' .position .progress-line-label span').html(timestamp);
-
-            // Update progressline width
-            var width = position * $('#player .position .progress-line').width() /100;
-            $('#player .position .progress-line-active').width(width);
-
-            width = position * $('#player-'+ current_source_id +' .position .progress-line').width() /100;
-            $('#player-'+ current_source_id +' .position .progress-line-active').width(width);
-
-            // Set volume to cookie
-            var volume = getCookie('player_volume') ? getCookie('player_volume') : 70;
-            setCookie('player_volume', volume);
-
-            // Update volume label
-            $(this).get(0).volume = volume / 100;
-            $('#player .volume .progress-line-label span').html(volume);
-            $('#player-'+ current_source_id +' .volume .progress-line-label span').html(volume);
-
-            // Update vilume width
-            width = volume * $('#player .volume .progress-line').width() /100;
-            $('#player .volume .progress-line-active').width(width);
-
-            width = volume * $('#player-'+ current_source_id +' .volume .progress-line').width() /100;
-            $('#player-'+ current_source_id +' .volume .progress-line-active').width(width);
-
-            // Hide loader
+            $.fn.updatePlayerProgress();
+            $.fn.updatePlayerVolume();
             $.fn.loaderHide();
         });
 
@@ -230,7 +212,7 @@
             $.fn.resetAllPlayers();
 
             // Bind active state for inline player
-            if ($(this).closest('.player').hasClass('inline')) {
+            if ($(this).closest('.player').hasClass('inline') && !$(this).closest('.player').hasClass('active')) {
                 // Show loader
                 $.fn.loaderShow();
 
@@ -244,7 +226,7 @@
 
             // Update button and run player
             $('#player .play, #player-'+ current_source_id +' .play').removeClass('play').addClass('pause');
-            $('#player audio').get(0).play();
+            player.play();
 
             // Update active state
             $('.player').removeClass('active');
@@ -262,7 +244,7 @@
 
             // Update button and pause player
             $('#player .pause, #player-'+ current_source_id +' .pause').removeClass('pause').addClass('play');
-            $('#player audio').get(0).pause();
+            player.pause();
 
             // Update cookie and favicon
             setCookie('player_is_playing', 0);
@@ -328,6 +310,37 @@
             $.fn.reloadPlayer(current_source_id);
         });
 
+        // Progressbar control
+        $.fn.updateProgressbar = function(event) {
+            // Update progressbar
+            var value_px = event.clientX - $(this).offset().left;
+            $(this).find('.progress-line-active').width(value_px);
+
+            // Update counter
+            var value_pc = parseInt($(this).find('.progress-line-active').width() / $(this).find('.progress-line').width() * 100);
+
+            // Update control progress
+            if ($(this).hasClass('position')) {
+                player.currentTime = player.duration * value_pc / 100;
+
+                var timestamp = secondsToTime(player.currentTime);
+                $('#player .position .progress-line-label span').html(timestamp);
+                $('#player-' + current_source_id + ' .position .progress-line-label span').html(timestamp);
+
+                setCookie('player_position', value_pc);
+            }
+
+            // Update control volume
+            if ($(this).hasClass('volume')) {
+                player.volume = value_pc / 100;
+
+                $('#player .volume .progress-line-label span').html(value_pc);
+                $('#player-' + current_source_id + ' .volume .progress-line-label span').html(value_pc);
+
+                setCookie('player_volume', value_pc);
+            }
+        }
+
         // Progressbars
         $('.player.active .progressbar').live('click', function (event) {
             $(this).updateProgressbar(event);
@@ -353,31 +366,7 @@
         // Update position progressbar
         setInterval(function() {
             if (!$('#player audio').get(0).paused) {
-                // Update timestamps
-                var timestamp = secondsToTime($('#player audio').get(0).currentTime);
-                $('#player .position .progress-line-label span').html(timestamp);
-                $('#player-' + current_source_id + ' .position .progress-line-label span').html(timestamp);
-
-                // Update position
-                var position = $('#player audio').get(0).currentTime / $('#player audio').get(0).duration;
-
-                var width = position * $('#player .position .progress-line').width();
-                $('#player .position .progress-line-active').width(width);
-
-                width = position * $('#player-' + current_source_id + ' .position .progress-line').width();
-                $('#player-' + current_source_id + ' .position .progress-line-active').width(width);
-
-                // Update buffered state
-                var buffered = $('#player audio').get(0).buffered.end(0)  / $('#player audio').get(0).duration;
-
-                width = buffered * $('#player .position .progress-line').width();
-                $('#player .position .progress-line-loaded').width(width);
-
-                width = buffered * $('#player-' + current_source_id + ' .position .progress-line').width();
-                $('#player-' + current_source_id + ' .position .progress-line-loaded').width(width);
-
-                // Update cookie
-                setCookie('player_position', position);
+                $.fn.updatePlayerProgress();
             }
         }, 1000);
 
