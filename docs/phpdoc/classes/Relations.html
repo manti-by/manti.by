@@ -88,7 +88,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 <li class="method public inherited"><a href="#method_parseConfig" title="parseConfig :: Parse config from Application INI file"><span class="description">Parse config from Application INI file</span><pre>parseConfig()</pre></a></li>
 <li class="method public "><a href="#method_render" title="render :: Return HTML markup for control"><span class="description">Return HTML markup for control</span><pre>render()</pre></a></li>
 <li class="method public inherited"><a href="#method_saveToLog" title="saveToLog :: Put into log file current message"><span class="description">Put into log file current message</span><pre>saveToLog()</pre></a></li>
-<li class="method public inherited"><a href="#method_setOptions" title="setOptions :: Set options"><span class="description">Set options</span><pre>setOptions()</pre></a></li>
+<li class="method public "><a href="#method_setOptions" title="setOptions :: Set options"><span class="description">Set options</span><pre>setOptions()</pre></a></li>
 <li class="method public inherited"><a href="#method_setValue" title="setValue :: Set data set"><span class="description">Set data set</span><pre>setValue()</pre></a></li>
 <li class="method public inherited"><a href="#method_shutdown" title="shutdown :: Close application"><span class="description">Close application</span><pre>shutdown()</pre></a></li>
 </ul>
@@ -634,13 +634,9 @@ Save stats into DB</h2>
 <a id="method_setOptions"></a><div class="element clickable method public method_setOptions" data-toggle="collapse" data-target=".method_setOptions .collapse">
 <h2>Set options</h2>
 <pre>setOptions(array $options) : array</pre>
-<div class="labels"><span class="label">Inherited</span></div>
+<div class="labels"></div>
 <div class="row collapse"><div class="detail-description">
 <div class="long_description"></div>
-<table class="table table-bordered"><tr>
-<th>inherited_from</th>
-<td>\Control::setOptions()</td>
-</tr></table>
 <h3>Parameters</h3>
 <div class="subelement argument">
 <h4>$options</h4>
@@ -671,7 +667,7 @@ Save stats into DB</h2>
 </div>
 <a id="method_shutdown"></a><div class="element clickable method public method_shutdown" data-toggle="collapse" data-target=".method_shutdown .collapse">
 <h2>Close application</h2>
-<pre>shutdown() </pre>
+<pre>shutdown(string $message) </pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -687,6 +683,11 @@ Save stats into DB</h2>
 <td>\Control::shutdown()</td>
 </tr>
 </table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code>
+</div>
 </div></div>
 </div>
 <a id="method_saveLogData"></a><div class="element clickable method private method_saveLogData" data-toggle="collapse" data-target=".method_saveLogData .collapse">
@@ -876,7 +877,7 @@ Save stats into DB</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2013-03-13T14:59:53+03:00.<br></footer></div>
+            generated on 2013-04-09T14:42:30+03:00.<br></footer></div>
 </div>
 </body>
 </html>

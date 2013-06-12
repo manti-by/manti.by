@@ -49,6 +49,7 @@
 
     $user = UserEntity::getInstance();
 ?>
+<h2><?php echo T('Popular'); ?></h2>
 <div id="popular">
     <?php if (count($options['data'])) : ?>
         <ul id="rollover">

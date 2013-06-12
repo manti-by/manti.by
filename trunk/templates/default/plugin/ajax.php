@@ -67,7 +67,7 @@
                                 if (callback != '') eval(callback);
                                 $.fn.popupShow('<div class="success-message">' + response.message + '</div>');
                             } else {
-                                $.fn.popupShow('<div class="error-message">' + response.error + '</div>');
+                                $.fn.popupShow('<div class="error-message">' + response.message + '</div>');
                             }
                         });
                     }

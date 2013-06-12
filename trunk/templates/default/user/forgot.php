@@ -47,15 +47,12 @@
      * @since 0.1
      */
 ?>
+<h1>
+    <?php echo T('Enter your email for new password'); ?>
+</h1>
 <form id="forgot-form" method="POST" action="<?php echo Sef::getSef('index.php'); ?>">
     <input type="hidden" name="module" value="user" />
     <input type="hidden" name="action" value="forgot" />
-    <p class="big">
-        <?php echo T('Enter your email for new password'); ?>
-    </p>
-    <p>
-        &nbsp;
-    </p>
     <p>
         <label for="email"><?php echo T('Email'); ?></label>
         <input type="text" name="email" value="" />

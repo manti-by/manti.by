@@ -62,7 +62,8 @@
                     if (response.result == 'success') {
                         $.fn.popupShow(response.data);
                     } else {
-                        $.fn.popupShow(response.error);
+                        var popup_block = $('<div class="error-message">' + response.message + '</div>');
+                        $.fn.popupShow(popup_block);
                     }
             });
         });
@@ -80,7 +81,8 @@
                         if (response.result == 'success') {
                             $.fn.popupShow(response.data);
                         } else {
-                            $.fn.popupShow(response.error);
+                            var popup_block = $('<div class="error-message">' + response.message + '</div>');
+                            $.fn.popupShow(popup_block);
                         }
                     });
         });
@@ -104,7 +106,8 @@
                             '<a href="#add" class="file-add green" rel_id="' + rel_id + '" rel="' + response.source + '"><?php echo T('Add'); ?></a>'
                         );
                     } else {
-                        $.fn.popupShow(response.error);
+                        var popup_block = $('<div class="error-message">' + response.message + '</div>');
+                        $.fn.popupShow(popup_block);
                     }
                 }
             )

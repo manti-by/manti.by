@@ -62,8 +62,8 @@
             $in_use = array();
             $result = array(
                 'featured' => array(),
-                'popular'  => array(),
-                'content'  => array()
+                'content'  => array(),
+                'player'   => array()
             );
 
             // Get featured posts
@@ -77,21 +77,7 @@
 
                 // Break when done
                 if (count($result['featured']) >= Application::$config['featured_count']) {
-                    break;
-                }
-            }
-
-            // Get popular posts with covers
-            $this->database->query("CALL GET_POSTS_BY_VIEW_COUNT(10, 1);");
-            $posts = $this->database->getObjectsArray();
-            foreach ($posts as $item) {
-                if (!in_array($item->id, $in_use)) {
-                    $result['popular'][] = $item;
-                    $in_use[] = $item->id;
-                }
-
-                // Break when done
-                if (count($result['popular']) >= Application::$config['popular_count']) {
+                    $result['featured'] = array_reverse($result['featured']);
                     break;
                 }
             }
@@ -111,6 +97,10 @@
                     break;
                 }
             }
+
+            // Append gallery images
+            $result['gallery_latest'] = Model::getModel('gallery')->getLatestImages(6);
+            $result['gallery_popular'] = Model::getModel('gallery')->getPopularImages(10);
 
             return $result;
         }

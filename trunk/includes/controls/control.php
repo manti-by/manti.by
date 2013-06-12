@@ -156,10 +156,12 @@
         public function getValue($main_field = null) {
             // Compile value
             $result = '';
-            foreach ($this->_value as $value) {
+            foreach ($this->_value as $key => $value) {
                 if ($this->_value_type == self::TYPE_JSON) {
                     $main_field = empty($main_field) ? $this->_main_field : $main_field;
                     $temp = $value->$main_field;
+                } elseif ($this->_value_type == self::TYPE_ARRAY) {
+                    $temp = $key;
                 } else {
                     $temp = $value;
                 }

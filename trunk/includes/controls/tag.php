@@ -144,7 +144,7 @@
                                     <?php $i++; ?>
                                 <?php endforeach; ?>
                             </ul>
-                            <input type="text" name="<?php echo $this->_options['name']; ?>-input" id="<?php echo $this->_options['id']; ?>-input" class="tag-input autocomplete" src="<?php echo Sef::getSef('index.php?module=tag&action=autocomplete'); ?>" value="" />
+                            <input type="text" name="<?php echo $this->_options['name']; ?>-input" id="<?php echo $this->_options['id']; ?>-input" class="tag-input autocomplete" source="<?php echo Sef::getSef('index.php?module=tag&action=autocomplete'); ?>" value="" />
                         </div>
                         <input type="button" name="<?php echo $this->_options['name']; ?>-add" id="<?php echo $this->_options['id']; ?>-add" class="tag-add" value="Add" />
                     </div>
@@ -166,9 +166,17 @@
          */
         public static function getHtml($json) {
             $result = '';
+            $avg_length = 0;
             $tags = json_decode($json);
             if (is_array($tags)) {
                 foreach ($tags as $tag) {
+                    // Add auto breaking
+                    $avg_length += strlen($tag->name);
+                    if ($avg_length > Application::$config['tag_line_length']) {
+                        $result .= '<br />';
+                        $avg_length = 0;
+                    }
+
                     $result .= '<a href="' . Sef::getSef('index.php?module=tag&action=search&id=' . $tag->id) . '" class="tag" title="' . $tag->name . '">' . $tag->name . '</a>';
                 }
             } else {

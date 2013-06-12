@@ -58,7 +58,7 @@ $(document).ready(function() {
 
         // Get source
         var query = $(self).val();
-        var source = $(self).attr('src');
+        var source = $(self).data('source');
 
         // Get coords
         var page_x = $(self).offset().left;
@@ -82,7 +82,7 @@ $(document).ready(function() {
                 }
 
                 $('.autocomplete-result-item').bind('click', function() {
-                    $('#' + $(this).attr('rel')).val($(this).html());
+                    // $('#' + $(this).attr('rel')).val($(this).html());
                 });
 
                 $('body').bind('click', function() {

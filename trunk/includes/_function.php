@@ -62,6 +62,29 @@
     }
 
     /**
+     * Return index of error level
+     * @param string $display_name
+     * @return int $number error level
+     */
+    function getErrorIntFromString($display_name) {
+        switch ($display_name) {
+            case 'Warning':
+                return WARNING;
+                break;
+            case 'Notice':
+                return NOTICE;
+                break;
+            case 'Message':
+                return MESSAGE;
+                break;
+            case 'Error':
+            default:
+                return ERROR;
+                break;
+        }
+    }
+
+    /**
      * Return first applicable module
      * @return bool|string $module_name
      */
@@ -85,7 +108,7 @@
      * @return string $text translated text
      */
     function T($text) {
-        $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'en');
+        $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'ru');
         $references = Cache::get('translations_' . $language);
 
         // Check language existance

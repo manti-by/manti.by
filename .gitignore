@@ -7,3 +7,6 @@ trunk/content/*
 # Remove language files for later development
 trunk/language/en.ini
 trunk/language/ru.ini
+
+# Remove sitemap
+trunk/sitemap.xml

@@ -51,20 +51,78 @@
 <html>
     <head>
         <title><?php echo strip_tags($options['title']); ?></title>
+
+        <meta charset="utf-8" />
+        <meta name="description" content="<?php echo Model::getModel('tag')->getMetadescString(); ?>" />
+        <meta name="keywords" content="<?php echo Model::getModel('tag')->getMetakeysString(); ?>" />
+        <meta name="yandex-verification" content="6765012bcd05fac2" />
+
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/default.css" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/style.css" />
+        <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/print.css" media="print" />
+
+        <link rel="icon" type="image/png" href="<?php echo Application::$config['http_host']; ?>/templates/default/images/favicon.png">
+
+        <?php if (preg_match('/MSIE/i', $_SERVER['HTTP_USER_AGENT'])) : ?>
+            <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/ie.css" />
+        <?php endif; ?>
+
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
         <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/default.js"></script>
+        <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/templates/default/default.js"></script>
     </head>
     <body>
+        <script type="text/javascript">
+
+            var _gaq = _gaq || [];
+            _gaq.push(['_setAccount', 'UA-39793152-1']);
+            _gaq.push(['_trackPageview']);
+
+            (function() {
+                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+            })();
+
+        </script>
+
+        <!-- Yandex.Metrika counter -->
+        <script type="text/javascript">
+            (function (d, w, c) {
+                (w[c] = w[c] || []).push(function() {
+                    try {
+                        w.yaCounter20835088 = new Ya.Metrika({id:20835088,
+                            clickmap:true,
+                            trackLinks:true,
+                            accurateTrackBounce:true});
+                    } catch(e) { }
+                });
+
+                var n = d.getElementsByTagName("script")[0],
+                    s = d.createElement("script"),
+                    f = function () { n.parentNode.insertBefore(s, n); };
+                s.type = "text/javascript";
+                s.async = true;
+                s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
+
+                if (w.opera == "[object Opera]") {
+                    d.addEventListener("DOMContentLoaded", f, false);
+                } else { f(); }
+            })(document, window, "yandex_metrika_callbacks");
+        </script>
+        <noscript><div><img src="//mc.yandex.ru/watch/20835088" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        <!-- /Yandex.Metrika counter -->
+
+        <?php echo $this->getContents('plugin', 'gototop'); ?>
         <?php echo $this->getContents('plugin', 'ajax'); ?>
         <?php echo $this->getContents('plugin', 'popup'); ?>
         <?php echo $this->getContents('plugin', 'loader'); ?>
         <?php echo $this->getContents('plugin', 'messages'); ?>
+        <?php echo $this->getContents('partial', 'usermenu'); ?>
 
         <div id="header">
             <div class="wrapper">
-                <?php echo $this->getContents('partial', 'topmenu'); ?>
+                <?php echo $this->getContents('partial', 'topmenu', $options); ?>
                 <?php echo $this->getContents('partial', 'toolbar'); ?>
                 <div class="cls"></div>
             </div>
@@ -73,7 +131,6 @@
         <div id="content" class="wrapper">
             <?php echo $options['body']; ?>
         </div>
-
 
         <div id="footer">
             <div class="wrapper">

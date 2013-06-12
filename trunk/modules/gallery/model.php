@@ -71,7 +71,7 @@
         /**
          * Return gallery array by tags
          * @param array $tags
-         * @param int $limit
+         * @param int $limit OPTIONAL
          * @return array|bool
          */
         public function getGalleryByTags($tags, $limit = 100) {
@@ -89,14 +89,16 @@
         /**
          * Get gallery list
          * @param int $limit
+         * @param bool $append_images OPTIONAL
          * @return array|bool
          */
-        public function getGallery($limit = 100) {
+        public function getGallery($limit = 100, $append_images = true) {
             // Get galleries list
             $this->database->query("CALL GET_GALLERY($limit)");
             $galleries = $this->database->getObjectsArray();
 
-            return $this->appendGalleriesImages($galleries);
+            // Check bool param
+            return $append_images ? $this->appendGalleriesImages($galleries) : $galleries;
         }
 
         /**
@@ -122,19 +124,29 @@
          * @param array $galleries objects
          * @return array $galleries objects
          */
-        private function appendGalleriesImages($galleries) {
+        public function appendGalleriesImages($galleries) {
             // Append originals and thumbnails
             foreach ($galleries as $gallery) {
+                $max_viewed = array('item' => null, 'viewed' => -1);
                 $this->database->query("CALL GET_GALLERY_ITEMS_BY_ID(" . $gallery->id. ")");
                 $gallery->originals = $this->database->getObjectsArray();
 
                 // Add originals and thumbnails links
                 if (count($gallery->originals)) {
                     foreach($gallery->originals as $original) {
+                        // Update image link and path
                         $original->link = Application::$config['http_host'] . substr($original->source, 1);
                         $original->thumbnail = Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1);
+
+                        // Check max viewed
+                        if ($max_viewed['viewed'] < $original->viewed) {
+                            $max_viewed = array('item' => $original, 'viewed' => $original->viewed);
+                        }
                     }
                 }
+
+                // Append max info
+                $gallery->favorite = $max_viewed['item'];
             }
 
             return $galleries;
@@ -204,9 +216,10 @@
 
         /**
          * Batch resize for gallery originals
+         * @param bool $is_update
          * @return array list of all resized images
          */
-        public function rebuildThumbnails() {
+        public function rebuildThumbnails($is_update = false) {
             $resized = $db_files = array();
 
             // Get all registered images
@@ -238,22 +251,34 @@
                 }
 
                 // Remove old thumbnail
-                if (file_exists($thumbname)) {
+                $is_file_exists = file_exists($thumbname);
+                if ($is_file_exists && !$is_update) {
                     unlink($thumbname);
                 }
 
                 // And try to create new
-                if (System::getInstance()->resize($source, $thumbname, Application::$config['thumb_width'], Application::$config['thumb_height'], System::RESIZE_WITH_CROP)) {
-                    $resized[] = array(
-                        'source' => $source,
-                        'status' => T('Successfully resized')
+                if (!($is_update && $is_file_exists)) {
+                    $result = System::getInstance()->resize(
+                        $source,
+                        $thumbname,
+                        Application::$config['thumb_width'],
+                        Application::$config['thumb_height'],
+                        System::RESIZE_WITH_CROP
                     );
-                } else {
-                    $message = $this->getLastFromStack();
-                    $resized[] = array(
-                        'source' => $source,
-                        'status' => $message['message']
-                    );
+
+                    // Check result
+                    if ($result) {
+                        $resized[] = array(
+                            'source' => $source,
+                            'status' => T('Successfully resized')
+                        );
+                    } else {
+                        $message = $this->getLastFromStack();
+                        $resized[] = array(
+                            'source' => $source,
+                            'status' => $message['message']
+                        );
+                    }
                 }
             }
 
@@ -303,5 +328,41 @@
 
             $this->database->query("CALL GET_PREV_IMAGE_BY_ID($id);");
             return $this->database->getObject();
+        }
+
+        /**
+         * Return latest gallery images
+         * @param int $limit
+         * @return array|bool
+         */
+        public function getLatestImages($limit = 100) {
+            $this->database->query("CALL GET_LATEST_IMAGES($limit)");
+            return $this->database->getObjectsArray();
+        }
+
+        /**
+         * Return popular gallery images
+         * @param int $limit
+         * @return array|bool
+         */
+        public function getPopularImages($limit = 100) {
+            $this->database->query("CALL GET_POPULAR_IMAGES($limit)");
+            return $this->database->getObjectsArray();
+        }
+
+        /**
+         * Add watermark to requested file and retunr its contents
+         * @param string $request
+         * @return string $image_contents
+         */
+        public function addWatermark($request) {
+            $source = ROOT_PATH . $request;
+            $watermark = ROOT_PATH . DS . Application::$config['watermark'];
+
+            if (file_exists($source)) {
+                return System::getInstance()->addWatermark($source, $watermark);
+            } else {
+                return $this->_throw(T('Image not found') . ': ' . $source);
+            }
         }
     }

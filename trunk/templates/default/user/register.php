@@ -79,15 +79,12 @@
         });
     });
 </script>
+<h1>
+    <?php echo T('Please enter your personal details below'); ?>
+</h1>
 <form id="register-form" method="POST" action="<?php echo Sef::getSef('index.php'); ?>">
     <input type="hidden" name="module" value="user" />
     <input type="hidden" name="action" value="register" />
-    <p class="big">
-        <?php echo T('Please enter your personal details below'); ?>
-    </p>
-    <p>
-        &nbsp;
-    </p>
     <p>
         <label for="username"><?php echo T('Username'); ?></label>
         <input type="text" name="username" id="username" value="<?php echo $options['username']; ?>" />

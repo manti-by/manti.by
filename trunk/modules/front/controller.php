@@ -55,9 +55,11 @@
          */
         public function indexAction($options) {
             // Get frontpage contents items
+            $options['module'] = 'front';
             $options['title'] = Application::$config['site_title_' . Application::$config['language']];
             $options['data'] = $this->model->getFrontpageItems();
             $options['body'] = $this->view->getContents('blog', 'front', $options);
+
             return $options;
         }
     }

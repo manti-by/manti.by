@@ -68,9 +68,18 @@
                 $this->_throw(T('You currently not loggined'));
                 return $this->loginformAction($options);
             }
-            
+
+            // Get stats data
+            $options['data']['browsers'] = Model::getModel('stats')->getBrowsersChartData(15);
+            $options['data']['sessions'] = Model::getModel('stats')->getSessionsChartData(10);
+            $options['data']['visitors'] = Model::getModel('stats')->getSessionsChartDataByDay(10);
+
+            // Downloads stats
+            $options['data']['nginx'] = Model::getModel('file')->getNginxChartData(15);
+            $options['data']['track'] = Model::getModel('file')->getTrackChartData(15);
+
             // Show dashboard
-            $options['title'] = 'Your Dashboard';
+            $options['title'] = T('User dashboard');
             $options['body'] = $this->view->getContents('user', 'dashboard', $options);
             return $options;
         }
@@ -201,6 +210,10 @@
          * @return array $result
          */
         public function registerformAction($options) {
+            // Disable registration
+            $this->_throw(T('Registration currently disabled'));
+            return $this->loginformAction($options);
+
             // Check login state
             if ($this->model->isLoggined()) {
                 $this->_throw(T('You already logined'));
@@ -219,6 +232,10 @@
          * @return array $result
          */
         public function registerAction($options) {
+            // Disable registration
+            $this->_throw(T('Registration currently disabled'));
+            return $this->loginformAction($options);
+
             // Check login state
             if ($this->model->isLoggined()) {
                 $this->_throw(T('You already logined'));

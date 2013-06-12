@@ -80,10 +80,18 @@
          * Overide non exist methods calls
          * @param string $name method name
          * @param string $args method args
-         * @return array $options
          */
         public function __call($name, $args) {
-            return $this->view->_404(array('page' => $name, 'args' => $args));
+            $this->redirectTo404();
+        }
+
+        /**
+         * 404 Redirect
+         */
+        public function redirectTo404() {
+            // Add redirect to 404 page
+            header('HTTP/1.1 301 Moved Permanently');
+            header('Location: ' . Application::$config['http_host'] . '/404/');
         }
 
         /**
@@ -96,23 +104,30 @@
                 $result = $this->view->offline();
             } else {
                 // Load module
-                $module = $this->loadModule(System::getInstance()->getCmd('module'));
+                $request = System::getInstance()->getCmd('module', 'front');
+                $module = $this->loadModule($request);
                 if ($module) {
                     $result = $module->route();
                 } else {
-                    $result = $this->view->_404();
+                    if ($request == '404') {
+                        $result = $this->view->_404();
+                    } else {
+                        $this->redirectTo404();
+                        return;
+                    }
                 }
             }
-
-            // Render page
-            return $this->view->render($result);
+            $this->view->render($result);
         }
 
         /**
          * Route request to action
          */
         public function route() {
-            // get action
+            // Append module name
+            $options['module'] = System::getInstance()->getCmd('module', 'front');
+
+            // Get action
             $options['action'] = System::getInstance()->getCmd('action', 'index');
             $method = $options['action'].'Action';
 
@@ -166,7 +181,7 @@
          * @return array result
          */
         public function autocompleteAction($options) {
-            $options['output'] = 'json';
+            $options['output'] = View::OUTPUT_TYPE_JSON;
 
             // Get query
             $query = System::getInstance()->getCmd('q');
@@ -174,9 +189,15 @@
             // Get category title
             if ($query) {
                 $data = toJSNumArray($this->model->autocomplete($query));
-                $options['data'] = array('result' => 'success', 'data' => $data);
+                $options['data'] = array(
+                    'result' => 'success',
+                    'data'   => $data
+                );
             } else {
-                $options['data'] = array('result' => 'error' , 'error' => T('Empty query string'));
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => T('Empty query string')
+                );
             }
 
             return $options;

@@ -47,11 +47,14 @@
      * @since 0.1
      */
 
+    $options['context'] = 'short';
     $user = UserEntity::getInstance();
 ?>
 <div class="post-item">
-    <h2>
-        <?php echo $options['data']->name; ?>
+    <h3>
+        <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>">
+            <?php echo $options['data']->name  . (!empty($options['data']->genre) ? ' /' . $options['data']->genre.  '/' : ''); ?>
+        </a>
 
         <?php if ($user->getGroup() == 'Root') : ?>
             <div class="fr admin-buttons">
@@ -59,15 +62,13 @@
                 <a href="<?php echo Sef::getSef('index.php?module=blog&action=delete&id=' . $options['data']->id); ?>" class="ajax" callback="$(self).closest('.post-item').remove();"><?php echo T('Delete'); ?></a>
             </div>
         <?php endif; ?>
-    </h2>
+    </h3>
 
-    <div class="teaser">
-        <?php echo nl2br($options['data']->teaser); ?>
-    </div>
+    <?php if (!$options['data']->is_music) : ?>
+        <div id="teaser-<?php echo $options['data']->id; ?>" class="teaser">
+            <?php echo nl2br($options['data']->teaser); ?>
+        </div>
+    <?php endif; ?>
 
     <?php echo $this->getContents('blog', 'music-block', $options); ?>
-
-    <div class="fulllink">
-        <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>"><?php echo T('View full post'); ?></a>
-    </div>
 </div>

@@ -56,5 +56,16 @@
         }
     ?>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#file-table .file-name a').bind('click', function() {
+            var self = this;
+            $.post(
+                '<?php echo Sef::getSef('index.php?module=file&action=track'); ?>',
+                { id : $(self).data('file-id') }
+            );
+        });
+    });
+</script>
 
 

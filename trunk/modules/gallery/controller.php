@@ -72,7 +72,7 @@
                 $options['title'] = 'Search by tags: ' . implode(', ', $tags);
             } else {
                 $options['data'] = $this->model->getGallery();
-                $options['title'] = Application::$config['site_title_' . Application::$config['language']];
+                $options['title'] = T('Gallery of photo');
             }
 
             // Get category items and render it
@@ -88,32 +88,67 @@
         public function updateFilesAction() {
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
-            // Run actions and compile response
-            $options['data'] = array(
-                'result' => 'success',
-                'message' => $this->view->wrapFileList(
-                    $this->model->updateFSList()
-                )
-            );
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                // Compile error response
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => T('You do not have permissions to view this page')
+                );
+            } else {
+                // Run actions and compile response
+                $options['data'] = array(
+                    'result'  => 'success',
+                    'message' => $this->view->wrapFileList(
+                        $this->model->updateFSList()
+                    )
+                );
+            }
 
             return $options;
         }
 
         /**
          * Rebuild thumbnails for images in gallery
+         * @param array $options
+         * @return array
          */
-        public function rebuildThumbnailsAction() {
+        public function rebuildThumbnailsAction($options) {
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
-            // Run actions and compile response
-            $options['data'] = array(
-                'result'  => 'success',
-                'message' => $this->view->wrapFileList(
-                    $this->model->rebuildThumbnails()
-                )
-            );
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                // Compile error response
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => T('You do not have permissions to view this page')
+                );
+            } else {
+                // Check action
+                if (isset($options['is_update']) && $options['is_update'] == true) {
+                    $result = $this->model->rebuildThumbnails(true);
+                } else {
+                    $result = $this->model->rebuildThumbnails(false);
+                }
+
+                // Run actions and compile response
+                $options['data'] = array(
+                    'result'  => 'success',
+                    'message' => $this->view->wrapFileList($result)
+                );
+            }
 
             return $options;
+        }
+
+        /**
+         * Update thumbnails for new images in gallery
+         * @param array $options
+         * @return array
+         */
+        public function updateThumbnailsAction($options) {
+            $options['is_update'] = true;
+            return $this->rebuildThumbnailsAction($options);
         }
 
         /**
@@ -153,10 +188,16 @@
             $options['id'] = System::getInstance()->getCmd('id');
 
             if ($count = $this->model->trackGallery($options['id'])) {
-                $options['data'] = array('result' => 'success', 'count' => $count);
+                $options['data'] = array(
+                    'result' => 'success',
+                    'count'  => $count
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;
@@ -173,10 +214,17 @@
             $options['id'] = System::getInstance()->getCmd('id');
 
             if ($result = $this->model->nextImage($options['id'])) {
-                $options['data'] = array('result' => 'success', 'id' => $result->id, 'original' => $result->source);
+                $options['data'] = array(
+                    'result'   => 'success',
+                    'id'       => $result->id,
+                    'original' => Application::$config['http_host'] . substr($result->source, 1)
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;
@@ -193,12 +241,38 @@
             $options['id'] = System::getInstance()->getCmd('id');
 
             if ($result = $this->model->prevImage($options['id'])) {
-                $options['data'] = array('result' => 'success', 'id' => $result->id, 'original' => $result->source);
+                $options['data'] = array(
+                    'result'   => 'success',
+                    'id'       => $result->id,
+                    'original' => Application::$config['http_host'] . substr($result->source, 1)
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;
+        }
+
+        /**
+         * Return previous image by ID
+         * @param array $options
+         * @return array|bool $options
+         */
+        public function watermarkAction($options) {
+            // Set output and get item ID
+            $options['output'] = View::OUTPUT_TYPE_RAW;
+            $options['request'] = $_SERVER['REQUEST_URI'];
+
+            if ($result = $this->model->addWatermark($options['request'])) {
+                header('Content-type: image/' . $result['type']);
+                $options['data'] = $result['data'];
+                return $options;
+            } else {
+                return $this->view->_404();
+            }
         }
     }

@@ -49,6 +49,18 @@
     class TagModel extends Model {
 
         /**
+         * Current page metakeys
+         * @var array $metakeys
+         */
+        private $metakeys;
+
+        /**
+         * Current page metadesc
+         * @var string $metadesc
+         */
+        private $metadesc;
+
+        /**
          * Upsert tags and return its ids
          * @param string $tags comma separated list
          * @return array $result
@@ -118,5 +130,68 @@
         public function autocomplete($query = null) {
             $this->database->query("CALL SEARCH_TAGS('%". $query ."%');");
             return $this->database->getPairs('id', 'name');
+        }
+
+        /**
+         * Append new metakeys to global stack
+         * @param array $options
+         */
+        public function appendMetakeys($options) {
+            // Append new keys
+            $result = array();
+            if (is_array($options['data'])) {
+                foreach ($options['data'] as $item) {
+                    $metakeys = json_decode($item->metakeys);
+                    if (is_array($metakeys)) {
+                        foreach($metakeys as $key) {
+                            $result[] = $key->name;
+                        }
+                    }
+                }
+            } elseif (is_object($options['data'])) {
+                $metakeys = json_decode($options['data']->metakeys);
+                if (is_array($metakeys)) {
+                    foreach($metakeys as $key) {
+                        $result[] = $key->name;
+                    }
+                }
+            } elseif (is_string($options['data'])) {
+                $result = explode(',', $options['data']);
+            }
+
+            // Append defaults
+            $defaults = explode(',', Application::$config['metakeys_' . Application::$config['language']]);
+            $result = array_merge($result, $defaults);
+
+            // Clear keys, remove dublicates
+            $this->metakeys = array_unique(array_map('trim', $result));
+        }
+
+        /**
+         * Replace current metadesc
+         * @param array $options
+         */
+        public function replaceMetadesc($options) {
+            if ($options['data']->metadesc) {
+                $this->metadesc = $options['data']->metadesc;
+            } else {
+                $this->metadesc = Application::$config['metadesc_' . Application::$config['language']];
+            }
+        }
+
+        /**
+         * Return metakeys string
+         * @return string $metakeys
+         */
+        public function getMetakeysString() {
+            return $this->metakeys ? implode(',', $this->metakeys) : Application::$config['metakeys_' . Application::$config['language']];
+        }
+
+        /**
+         * Return metadesc string
+         * @return string $metadesc
+         */
+        public function getMetadescString() {
+            return $this->metadesc ? $this->metadesc : Application::$config['metadesc_' . Application::$config['language']];
         }
     }

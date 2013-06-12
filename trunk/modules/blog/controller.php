@@ -73,16 +73,19 @@
                 $options['title'] = T('Search by tags') . ': ' . $options['tags'];
             } else {
                 $options['data'] = $this->model->getPosts(Application::$config['posts_per_page'], $options['page']);
-                $options['title'] = Application::$config['site_title_' . Application::$config['language']];
+                $options['title'] = T('All blog posts');
             }
-            
+
+            // Append meta info
+            Model::getModel('tag')->appendMetakeys($options);
+
             // Get items and render it
             if (!empty($options['data'])) {
                 $options['module'] = 'blog';
                 $options['body'] = $this->view->renderItemsArray($options);
 
                 // Add ajax loader
-                $options['body'] .= $this->view->getContents('blog', 'ajax-load', $options);
+                $options['body'] .= $this->view->getContents('blog', 'ajax', $options);
 
                 return $this->view->wrapSidebar($options);
             } else {
@@ -119,22 +122,29 @@
          * @return array|bool $options
          */
         public function showAction($options) {
+            // Check print template
+            $options['is_print'] = System::getInstance()->getCmd('print');
+            $options['output'] = $options['is_print'] ? View::OUTPUT_TYPE_PRINT : View::OUTPUT_TYPE_DEFAULT;
+
             // Get item ID
             $options['id'] = System::getInstance()->getCmd('id');
             
             // Get item title and data
             if ($options['id']) {
                 $options['data'] = $this->model->getPost($options['id']);
-                $options['title'] = $options['data']->name;
+                $options['title'] = $options['data']->name . ($options['data']->genre ? ' /' . $options['data']->genre . '/' : '');
             } else {
                 return $this->view->_404($options);
             }
-            
+
+            // Append meta info
+            Model::getModel('tag')->appendMetakeys($options);
+            Model::getModel('tag')->replaceMetadesc($options);
+
             // Render blog item
             if (!empty($options['data'])) {
                 $options['body'] = $this->view->getContents('blog', 'item-full', $options);
-
-                return $this->view->wrapSidebar($options);
+                return $options['is_print'] ? $options : $this->view->wrapSidebar($options);
             } else {
                 return $this->view->_404($options);
             }
@@ -146,6 +156,12 @@
          * @return array|bool $options
          */
         public function editAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Get item ID
             $options['id'] = System::getInstance()->getCmd('id');
             
@@ -176,6 +192,12 @@
          * @return array|bool $options
          */
         public function saveAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             $system = System::getInstance();
 
             $options['output'] = View::OUTPUT_TYPE_JSON;
@@ -183,7 +205,10 @@
 
             $options['name'] = $system->getCmd('name', '');
             if (empty($options['name'])) {
-                $options['data'] = array('result' => 'error', 'error' => T('Post title could not be empty'));
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => T('Post title could not be empty')
+                );
                 return $options;
             }
 
@@ -195,7 +220,10 @@
 
             $options['description'] = $system->getCmd('description', '');
             if (empty($options['description'])) {
-                $options['data'] = array('result' => 'error', 'error' => T('Post description could not be empty'));
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => T('Post description could not be empty')
+                );
                 return $options;
             }
 
@@ -230,10 +258,17 @@
             // Save result
             $options['result'] = $this->model->savePost($options);
             if (!empty($options['result'])) {
-                $options['data'] = array('result' => 'success', 'id' => $options['result'], 'options' => $options);
+                $options['data'] = array(
+                    'result'  => 'success',
+                    'id'      => $options['result'],
+                    'options' => $options
+                );
             } else {
                 $error =  $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
             
             return $options;
@@ -245,15 +280,27 @@
          * @return array|bool $options
          */
         public function deleteAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Set output and get item ID
             $options['output'] = View::OUTPUT_TYPE_JSON;
             $options['id'] = System::getInstance()->getCmd('id');
 
             if ($this->model->deletePost($options['id'])) {
-                $options['data'] = array('result' => 'success', 'message' => T('Post deleted successfully'));
+                $options['data'] = array(
+                    'result'  => 'success',
+                    'message' => T('Post deleted successfully')
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;
@@ -270,10 +317,16 @@
             $options['id'] = System::getInstance()->getCmd('id');
 
             if ($count = $this->model->trackPost($options['id'])) {
-                $options['data'] = array('result' => 'success', 'count' => $count);
+                $options['data'] = array(
+                    'result' => 'success',
+                    'count'  => $count
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
         }
     }

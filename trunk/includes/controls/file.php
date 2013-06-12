@@ -142,24 +142,44 @@
          * @param string $json
          * @param string $type OPTIONAL
          * @param bool $multiple OPTIONAL false
+         * @param int $release_id OPTIONAL null
          * @return bool|string
          * @todo Add implementation for multiple items
          */
-        public static function getHtml($json, $type = null, $multiple = false) {
+        public static function getHtml($json, $type = null, $multiple = false, $release_id = null) {
             $result = '';
             $files = json_decode($json);
             if (is_array($files)) {
                 foreach ($files as $file) {
                     switch ($type) {
                         case FileEntity::TYPE_PREVIEW:
-                            $result .= '<audio controls><source src="' . Application::$config['http_host'] . substr($file->source, 1) . '" type="audio/mpeg;"></audio>';
+                            $result .= '<div id="player-' . $release_id . '" class="player inline" data-release-id="' . $release_id . '">';
+                            $result .= '<div class="button play"></div>';
+                            $result .= '<div class="high-definition">HD</div>';
+
+                            $result .= '
+                                <div class="progressbar volume">
+                                    <div class="progress-line"></div>
+                                    <div class="progress-line-active"></div>
+                                    <div class="progress-line-label"><span>0</span>%</div>
+                                </div>';
+
+                            $result .= '
+                                <div class="progressbar position">
+                                    <div class="progress-line"></div>
+                                    <div class="progress-line-loaded"></div>
+                                    <div class="progress-line-active"></div>
+                                    <div class="progress-line-label"><span>00:00:00</span></div>
+                                </div>';
+
+                            $result .= '<div class="cls"></div></div>';
                             break;
                         case FileEntity::TYPE_COVERS:
-                            $result .= '<img src="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="cover" />';
+                            $result .= '<img src="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="cover" alt="' . $file->name . ' cover" />';
                             break;
                         case FileEntity::TYPE_RELEASE:
                         default:
-                            $result .= '<a href="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="release">' . T('Download') . '</a>';
+                            $result .= '<a href="' . Application::$config['http_host'] . substr($file->source, 1) . '" class="release" data-file-id="' . $file->id . '">' . T('Download') . '</a>';
                             break;
                     }
 

@@ -49,11 +49,22 @@
 
     $count = 0;
 ?>
-<div class="item">
-    <h2><?php echo $options['data']->name; ?></h2>
-    <div class="description">
-        <?php echo $options['data']->description; ?>
-    </div>
+<div class="gallery-item">
+    <h3 class="with-full-link">
+        <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $options['data']->id); ?>">
+            <?php echo $options['data']->name; ?>
+        </a>
+        <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $options['data']->id); ?>" class="fr view-all">
+            <?php echo T('Show all'); ?>
+        </a>
+    </h3>
+
+    <?php if (!empty($options['data']->description)) : ?>
+        <div class="description">
+            <?php echo $options['data']->description; ?>
+        </div>
+    <?php endif; ?>
+
     <div class="thumbnails">
         <?php foreach ($options['data']->originals as $original) : ?>
             <?php
@@ -62,12 +73,9 @@
                 else $count++;
             ?>
 
-            <a href="<?php echo $original->link; ?>" class="thumbnail" rel="<?php echo $original->id; ?>">
-                <img src="<?php echo $original->thumbnail; ?>" />
+            <a id="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" data-image-id="<?php echo $original->id; ?>">
+                <img src="<?php echo $original->thumbnail; ?>" width="108" height="108" alt="<?php echo $options['data']->name; ?> gallery image #<?php echo $original->id; ?>" />
             </a>
         <?php endforeach; ?>
-    </div>
-    <div class="path">
-        <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $options['data']->id); ?>"><?php echo T('Show all'); ?></a>
     </div>
 </div>

@@ -36,34 +36,41 @@
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
-    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
-
     /**
-     * Blog category ajax loader
-     * @name $blog-ajax-loader
+     * Front index controller
      * @package M2 Micro Framework
-     * @subpackage Template
+     * @subpackage Modules
      * @author Alexander Chaika
-     * @since 0.3RC4
+     * @since 0.1
      */
-?>
 
-<script type="text/javascript">
-    $(document).ready(function() {
-        var page = <?php echo $options['page']; ?>;
-        $(window).scroll(function() {
-            if ($('#footer').offset().top < $(window).scrollTop() + $(window).height() && page > 0) {
-                $.fn.loaderShow();
-                page++;
-                $.post('<?php echo Sef::getSef('index.php?module=blog&action=next'); ?>', { page : page }, function(responce) {
-                    if (responce != '') {
-                        $('#content .main-sidebar').append(responce);
-                    } else {
-                        page = 0;
-                    }
-                    $.fn.loaderHide();
-                });
-            }
-        });
-    });
-</script>
+    // Simple ACL hook
+    define('M2_MICRO', 1);
+
+    // Get engine
+    require_once 'bootstrap.php';
+    
+    // Init Sef engine
+    Application::$config['sef_enabled'] = 0;
+    Application::init();
+
+    // Get MVC controller and dispatch request
+    if ($image = Model::getModel('gallery')->addWatermark($_SERVER['REQUEST_URI'])) {
+        header('HTTP/1.1 200 OK');
+
+        header('Expires: ' . gmdate('D, d M Y H:i:s', strtotime("1 year")) . ' GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: public, must-revalidate, proxy-revalidate');
+        header('Pragma: public');
+
+        $image['type'] = $image['type'] = 'jpg' ? 'jpeg' : $image['type'];
+        header('Content-type: image/' . $image['type']);
+
+        echo $image['data'];
+    } else {
+        $controller = new Controller();
+        $controller->redirectTo404();
+    }
+    
+    // Shutdown application
+    Application::shutdown();

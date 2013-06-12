@@ -47,12 +47,121 @@
      * @since 0.1
      */
 ?>
+<h1>
+    <?php echo $options['title']; ?>
+</h1>
 <div id="dashboard">
-    <ul>
-        <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=edit');?>"><?php echo T('Add new post'); ?></a></li>
-        <li><a href="<?php echo Sef::getSef('index.php?module=file&action=edit');?>"><?php echo T('View Files'); ?></a></li>
-        <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=updatefiles');?>"><?php echo T('Update gallery items'); ?></a></li>
-        <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=rebuildthumbnails');?>"><?php echo T('Rebuild thumbnails'); ?></a></li>
-    </ul>
+    <div id="menu-block">
+        <h2>
+            <?php echo T('Default actions'); ?>
+        </h2>
+        <ul>
+            <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=edit');?>"><?php echo T('Add new post'); ?></a></li>
+            <li><a href="<?php echo Sef::getSef('index.php?module=file&action=edit');?>"><?php echo T('View Files'); ?></a></li>
+            <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=updatefiles');?>"><?php echo T('Update gallery items'); ?></a></li>
+            <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=rebuildthumbnails');?>"><?php echo T('Rebuild thumbnails'); ?></a></li>
+            <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=gallery&action=updatethumbnails');?>"><?php echo T('Update thumbnails'); ?></a></li>
+            <li><a class="ajax" href="<?php echo Sef::getSef('index.php?module=sitemap&action=generate');?>"><?php echo T('Generate sitemap'); ?></a></li>
+        </ul>
+        <ul>
+            <li><a href="http://www.google.com/webmasters" target="_blank">Google Webmaster</a> / <a href="http://www.google.com/analytics" target="_blank">Analitycs</a></li>
+            <li><a href="http://webmaster.yandex.ru/" target="_blank">Yandex webmaster</a> / <a href="http://metrika.yandex.ru/" target="_blank">Metrika</a></li>
+            <li><a href="https://developers.google.com/speed/pagespeed/insights" target="_blank">Pagespeed Check</a></li>
+            <li><a href="http://validator.w3.org/" target="_blank">W3C Validation</a></li>
+            <li><a href="http://2ip.ru/whois/" target="_blank">Whois IP</a></li>
+        </ul>
+        <div class="cls"></div>
+    </div>
+    <div id="stats-block">
+        <h2>
+            <?php echo T('Statistics'); ?>
+        </h2>
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("visualization", "1", { packages: ["corechart"]});
+            google.setOnLoadCallback(drawBrowsersChart);
+            google.setOnLoadCallback(drawSessionsChart);
+            google.setOnLoadCallback(drawVisitorsChart);
+
+            google.setOnLoadCallback(drawNginxChart);
+            google.setOnLoadCallback(drawTrackChart);
+
+            function drawBrowsersChart() {
+                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['browsers']; ?>);
+                var options = {
+                    height: 400,
+                    title: '<?php echo T('Browser statistics'); ?>',
+                    chartArea: { width: 650}
+                }
+
+                var chart = new google.visualization.PieChart(document.getElementById('browser-stats-chart'));
+                chart.draw(data, options);
+            }
+
+            function drawSessionsChart() {
+                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['sessions']; ?>);
+                var options = {
+                    height: 400,
+                    title: '<?php echo T('Session statistics'); ?>',
+                    chartArea: { width: 650}
+                }
+
+                var chart = new google.visualization.PieChart(document.getElementById('sessions-stats-chart'));
+                chart.draw(data, options);
+            }
+
+            function drawVisitorsChart() {
+                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['visitors']; ?>);
+                var options = {
+                    width: 960,
+                    height: 500,
+                    title: '<?php echo T('Session statistics by date'); ?>',
+                    hAxis: { title: '<?php echo T('Date'); ?>'},
+                    chartArea: { width: '50%'}
+                };
+
+                var chart = new google.visualization.AreaChart(document.getElementById('visitors-stats-chart'));
+                chart.draw(data, options);
+            }
+
+            function drawNginxChart() {
+                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['nginx']; ?>);
+                var options = {
+                    width: 960,
+                    height: 500,
+                    title: '<?php echo T('Nginx statistics'); ?>',
+                    hAxis: { title: '<?php echo T('Count'); ?>'},
+                    chartArea: { width: '50%'},
+                    bar: { groupWidth: '80%' }
+                };
+
+                var chart = new google.visualization.BarChart(document.getElementById('nginx-stats-chart'));
+                chart.draw(data, options);
+            }
+
+            function drawTrackChart() {
+                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['track']; ?>);
+                var options = {
+                    width: 960,
+                    height: 500,
+                    title: '<?php echo T('Track statistics'); ?>',
+                    hAxis: { title: '<?php echo T('Count'); ?>'},
+                    chartArea: { width: '50%'},
+                    bar: { groupWidth: '80%' }
+                };
+
+                var chart = new google.visualization.BarChart(document.getElementById('track-stats-chart'));
+                chart.draw(data, options);
+            }
+        </script>
+        <div>
+            <div id="browser-stats-chart" class="l50"></div>
+            <div id="sessions-stats-chart" class="r50"></div>
+            <div class="cls"></div>
+        </div>
+        <div id="visitors-stats-chart"></div>
+        <div id="nginx-stats-chart"></div>
+        <div id="track-stats-chart"></div>
+    </div>
 </div>
 

@@ -76,10 +76,13 @@
                 function(response) {
                     $.fn.loaderHide();
                     if (response.result == 'success') {
-                        $.fn.popupShow('<?php echo T('File deleted from FS'); ?>');
+                        var popup_block = $('<div class="success-message"><?php echo T('File deleted from FS'); ?></div>');
+                        $.fn.popupShow(popup_block);
+
                         $('#' + rel_id).remove();
                     } else {
-                        $.fn.popupShow(response.error);
+                        var popup_block = $('<div class="error-message">' + response.message + '</div>');
+                        $.fn.popupShow(popup_block);
                     }
                 }
             )

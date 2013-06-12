@@ -39,19 +39,57 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Sidebar plugin
-     * @name $template-index
+     * Top tags plugin
+     * @name $top-tags-plugin
      * @package M2 Micro Framework
      * @subpackage Template
      * @author Alexander Chaika
      * @since 0.3RC3
      */
 
-    $tags = Model::getModel('tag')->getTags();
+    $i = 0;
+    $tags = Model::getModel('tag')->getTags(15);
 ?>
-<ul class="sidebar">
-    <h3><?php echo T('Popular Categories'); ?></h3>
+<h2><?php echo T('Popular Categories'); ?></h2>
+<ul id="active-tags" class="sidebar tags">
     <?php foreach($tags as $item) : ?>
+        <?php
+            $i++;
+            if ($i > 7) {
+                $i = 0;
+                break;
+            }
+        ?>
         <li><a href="<?php echo Sef::getSef('index.php?module=tag&action=search&id=' . $item->id); ?>" title="<?php echo $item->name; ?>"><?php echo $item->name . ' <span class="tag-counter">(' . $item->count . ')</span>'; ?></a></li>
     <?php endforeach; ?>
 </ul>
+<ul id="hidden-tags" class="sidebar tags">
+    <?php foreach($tags as $item) : ?>
+        <?php
+            $i++;
+            if ($i <= 7) continue;
+        ?>
+        <li><a href="<?php echo Sef::getSef('index.php?module=tag&action=search&id=' . $item->id); ?>" title="<?php echo $item->name; ?>"><?php echo $item->name . ' <span class="tag-counter">(' . $item->count . ')</span>'; ?></a></li>
+    <?php endforeach; ?>
+</ul>
+<div id="show-more-tags">
+    <a href="#show-more-tags"><?php echo T('show more'); ?></a>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#show-more-tags a').click(function(e) {
+            // Prevent click action
+            e.preventDefault();
+
+            // Show / hide additional tags
+            $('#hidden-tags').toggle(400);
+
+            // Change link label
+            if ($(this).html() == '<?php echo T('show more'); ?>') {
+                $(this).html('<?php echo T('show less'); ?>');
+            } else {
+                $(this).html('<?php echo T('show more'); ?>');
+            }
+        });
+    });
+</script>

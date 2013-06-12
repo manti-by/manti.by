@@ -1,0 +1,11 @@
+User-agent: Yandex
+Host: manti.by
+
+User-agent: *
+Disallow: /includes/
+Disallow: /language/
+Disallow: /modules/
+Disallow: /templates/
+Disallow: /user/
+
+Sitemap: http://manti.by/sitemap.xml

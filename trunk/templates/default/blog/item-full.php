@@ -52,7 +52,7 @@
 <div class="post-item-full">
 
     <h1>
-        <?php echo $options['data']->name; ?>
+        <?php echo $options['data']->name . (!empty($options['data']->genre) ? ' /' . $options['data']->genre.  '/' : ''); ?>
 
         <?php if ($user->getGroup() == 'Root') : ?>
             <div class="fr admin-buttons">

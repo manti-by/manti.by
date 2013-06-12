@@ -84,7 +84,7 @@
         /**
          * Default getModel method
          * @param string $name
-         * @return Model|BlogModel|FileModel|FrontModel|GalleryModel|TagModel|UserModel $model
+         * @return Model|BlogModel|FileModel|FrontModel|GalleryModel|SearchModel|SitemapModel|StatsModel|TagModel|UserModel $model
          */
         public static function getModel($name = null) {
             // Check existing object pool

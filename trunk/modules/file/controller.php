@@ -77,9 +77,15 @@
          * @return array $result
          */
         public function editAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Get all files list
             $options['title'] = T('Edit file list');
-            $options['data'] = $this->model->getList();
+            $options['data']  = $this->model->getList();
             $options['body']  = $this->view->getContents('file', 'edit', $options);
 
             return $options;
@@ -91,6 +97,12 @@
          * @return array $result
          */
         public function addAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Set params
             $options['output'] = View::OUTPUT_TYPE_JSON;
             $options['source'] = System::getInstance()->getCmd('source');
@@ -99,10 +111,16 @@
 
             $id = $this->model->add($options);
             if ($id > 0) {
-                $options['data'] = array('result' => 'success', 'id' => $id);
+                $options['data'] = array(
+                    'result' => 'success',
+                    'id' => $id
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;
@@ -114,6 +132,12 @@
          * @return array $result
          */
         public function removeAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Set params
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
@@ -123,10 +147,16 @@
 
             // Compile result
             if (!empty($source)) {
-                $options['data'] = array('result' => 'success', 'source' => $source);
+                $options['data'] = array(
+                    'result' => 'success',
+                    'source' => $source
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;
@@ -138,6 +168,12 @@
          * @return array $result
          */
         public function deleteAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Set params
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
@@ -157,6 +193,12 @@
          * @return array $result
          */
         public function getAddFormAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Set params
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
@@ -164,10 +206,16 @@
             $options['data']['rel_id'] = System::getInstance()->getCmd('rel_id');
 
             if ($form = $this->view->getContents('file', 'add-file-form', $options)) {
-                $options['data'] = array('result' => 'success', 'data' => $form);
+                $options['data'] = array(
+                    'result' => 'success',
+                    'data'   => $form
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;
@@ -179,6 +227,12 @@
          * @return array $result
          */
         public function getDeleteFormAction($options) {
+            // Check login state
+            if (!UserEntity::getInstance()->isLoggined()) {
+                $this->_throw(T('You do not have permissions to view this page'));
+                return $this->view->_404();
+            }
+
             // Set params
             $options['output'] = View::OUTPUT_TYPE_JSON;
 
@@ -186,10 +240,16 @@
             $options['data']['rel_id'] = System::getInstance()->getCmd('rel_id');
 
             if ($form = $this->view->getContents('file', 'delete-file-form', $options)) {
-                $options['data'] = array('result' => 'success', 'data' => $form);
+                $options['data'] = array(
+                    'result' => 'success',
+                    'data'   => $form
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;
@@ -206,10 +266,16 @@
             $options['id'] = System::getInstance()->getCmd('id');
 
             if ($count = $this->model->trackFileById($options['id'])) {
-                $options['data'] = array('result' => 'success', 'count' => $count);
+                $options['data'] = array(
+                    'result' => 'success',
+                    'count' => $count
+                );
             } else {
                 $error = $this->getLastFromStack();
-                $options['data'] = array('result' => 'error', 'error' => $error['message']);
+                $options['data'] = array(
+                    'result'  => 'error',
+                    'message' => $error['message']
+                );
             }
 
             return $options;

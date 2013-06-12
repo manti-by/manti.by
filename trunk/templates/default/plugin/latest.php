@@ -39,19 +39,57 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Sidebar plugin
-     * @name $template-index
+     * Latest posts plugin
+     * @name $latest-posts-plugin
      * @package M2 Micro Framework
      * @subpackage Template
      * @author Alexander Chaika
      * @since 0.3RC3
      */
 
-    $posts = Model::getModel('blog')->getPosts(10);
+    $i = 0;
+    $posts = Model::getModel('blog')->getPosts(15);
 ?>
-<ul class="sidebar">
-    <h3><?php echo T('Latest Posts'); ?></h3>
+<h2><?php echo T('Latest Posts'); ?></h2>
+<ul id="active-latest" class="sidebar latest">
     <?php foreach($posts as $post) : ?>
+        <?php
+            $i++;
+            if ($i > 7) {
+                $i = 0;
+                break;
+            }
+        ?>
         <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $post->id); ?>" title="<?php echo $post->name; ?>"><?php echo $post->name; ?></a></li>
     <?php endforeach; ?>
 </ul>
+<ul id="hidden-latest" class="sidebar latest">
+    <?php foreach($posts as $post) : ?>
+        <?php
+            $i++;
+            if ($i <= 7) continue;
+        ?>
+        <li><a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $post->id); ?>" title="<?php echo $post->name; ?>"><?php echo $post->name; ?></a></li>
+    <?php endforeach; ?>
+</ul>
+<div id="show-more-latest">
+    <a href="#show-more-latest"><?php echo T('show more'); ?></a>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#show-more-latest a').click(function(e) {
+            // Prevent click action
+            e.preventDefault();
+
+            // Show / hide additional tags
+            $('#hidden-latest').toggle(400);
+
+            // Change link label
+            if ($(this).html() == '<?php echo T('show more'); ?>') {
+                $(this).html('<?php echo T('show less'); ?>');
+            } else {
+                $(this).html('<?php echo T('show more'); ?>');
+            }
+        });
+    });
+</script>

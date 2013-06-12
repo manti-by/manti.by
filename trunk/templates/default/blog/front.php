@@ -53,9 +53,21 @@
         $data = array('data' => $options['data']['featured']);
         echo $this->getContents('blog', 'featured', $data);
 
-        $data = array('data' => $options['data']['popular']);
-        echo $this->getContents('blog', 'popular', $data);
+        $data = array('data' => array(
+            'gallery_latest'  => $options['data']['gallery_latest'],
+            'gallery_popular' => $options['data']['gallery_popular']
+        ));
+        echo $this->getContents('gallery', 'front', $data);
     ?>
+
+    <h2 class="with-full-link front-blog">
+        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>">
+            <?php echo T('Other blog posts'); ?>
+        </a>
+        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>" class="fr view-all">
+            <?php echo T('Show all'); ?>
+        </a>
+    </h2>
 
     <div class="main-sidebar">
         <?php
@@ -65,8 +77,12 @@
     </div>
 
     <div class="right-sidebar">
+        <div id="forthcoming">
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=43'); ?>"><?php echo T('Forthcoming'); ?></a>
+        </div>
         <?php echo $this->getContents('plugin', 'tags'); ?>
         <?php echo $this->getContents('plugin', 'latest'); ?>
+        <?php echo $this->getContents('plugin', 'galleries'); ?>
     </div>
 
     <div class="cls"></div>

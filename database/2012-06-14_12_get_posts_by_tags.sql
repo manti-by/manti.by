@@ -9,6 +9,7 @@ BEGIN
     JOIN `post_tags` AS pt ON pt.`post_id` = p.`id`
     JOIN `tags` AS t ON t.`id` = pt.`tag_id` 
     WHERE t.`name` IN (_tags)
+    ORDER BY p.`viewed` DESC
     LIMIT _limit;
 END
 ;;

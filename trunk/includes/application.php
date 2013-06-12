@@ -156,7 +156,8 @@
 
                 // Check cookie language
                 if (!empty($_COOKIE['language'])) {
-                    Application::$config['language'] = $_COOKIE['language'];
+                    // #43634771
+                    // Application::$config['language'] = $_COOKIE['language'];
                 }
 
                 // Define helper options
@@ -186,8 +187,9 @@
 
         /**
          * Close application
+         * @param string $message
          */
-        public static function shutdown() {
+        public static function shutdown($message = null) {
             // Save to DB input data
             // and flush translation tokens into files
             self::saveLogData();
@@ -196,14 +198,14 @@
             // Close DB connection and clean stacks
             Database::getInstance()->close();
             self::clean();
-            die;
+            die($message);
         }
 
         /**
          * Close application
          */
         public static function flushTranslations() {
-            $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'en');
+            $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'ru');
             $current = Cache::get('translations_' . $language);
 
             $lang_file = ROOT_PATH . DS . 'language' . DS . $language . '.ini';

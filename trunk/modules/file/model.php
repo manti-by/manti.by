@@ -277,4 +277,82 @@
             $this->database->query("CALL TRACK_FILE_BY_ID($id);");
             return $this->database->getField();
         }
+
+        /**
+         * Get nginx stats string
+         * @param int $limit
+         * @return bool|object $result
+         */
+        public function getNginxChartData($limit = 10){
+            // Get all releases
+            $this->database->query("CALL GET_DOWNLOAD_STATS(" . $limit . ");");
+            $files = $this->database->getObjectsArray();
+
+            // Process files
+            if ($files) {
+                // Compile result
+                $result = array(array(T('Release'), T('Views'), T('Previews'), T('Downloads')));
+                foreach ($files as $file) {
+                    $name = $file->name ? $file->name : end(explode('/', $file->source));
+                    $result[] = array($name, (int)$file->nginx_viewed, (int)$file->nginx_previewed, (int)$file->nginx_downloaded);
+                }
+
+                return json_encode($result);
+            } else {
+                return '';
+            }
+        }
+
+        /**
+         * Get download stats string
+         * @param int $limit
+         * @return bool|object $result
+         */
+        public function getTrackChartData($limit = 10){
+            // Get all releases
+            $this->database->query("CALL GET_DOWNLOAD_STATS(" . $limit . ");");
+            $files = $this->database->getObjectsArray();
+
+            // Process files
+            if ($files) {
+                // Compile result
+                $result = array(array(T('Release'), T('Views'), T('Previews'), T('Downloads')));
+                foreach ($files as $file) {
+                    $name = $file->name ? $file->name : end(explode('/', $file->source));
+                    $result[] = array($name, (int)$file->viewed, (int)$file->previewed, (int)$file->downloaded);
+                }
+
+                return json_encode($result);
+            } else {
+                return '';
+            }
+        }
+
+        public function getPlayerContent() {
+            $result = array();
+
+            // Get all posts
+            $this->database->query("CALL GET_POSTS(0, 100);");
+            if ($posts = $this->database->getObjectsArray()) {
+                foreach ($posts as $post) {
+                    $preview = json_decode($post->preview);
+                    $release = json_decode($post->release);
+
+                    $result[] = array(
+                        'id'  => $post->id,
+                        'name'=> $post->name . ' /' . $post->genre . '/',
+                        'web' => array(
+                            'mp3' => substr($preview[0]->source, 1),
+                            'ogg' => str_replace('mp3', 'ogg', substr($preview[0]->source, 1)),
+                        ),
+                        'hd' => array(
+                            'mp3' => substr($release[0]->source, 1),
+                            'ogg' => str_replace('mp3', 'ogg', substr($release[0]->source, 1)),
+                        )
+                    );
+                }
+            }
+
+            return $result;
+        }
     }

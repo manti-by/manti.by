@@ -58,7 +58,7 @@ h5 { font-size: 12px; margin: 0 0; }
 h6 { font-size: 11px; margin: 0 0; }
 
 a { color: #ff721d;}
-a img { border: none !important; }
+a img { border: none; }
 
 b { font-weight: normal; }
 code, pre { margin: 6px; padding: 12px; white-space: pre; background: #FFC; border: 1px dashed #CCC; }
@@ -97,14 +97,18 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 .warning { background: #FFA; border-color: #990; }
 .message { background: #AFA; border-color: #090; }
 
+.form_notice { display: block; padding: 3px 0 10px 133px; }
+
 .error-message { min-height: 36px; line-height: 36px; color: red; padding-left: 36px;
     background: url('../images/icon-error-32x32.png') no-repeat top left; }
 .success-message { min-height: 36px; line-height: 36px; padding-left: 36px;
     background: url('../images/icon-success-32x32.png') no-repeat top left; }
 
-.close { background: url('../images/icon-close-32x32.png') no-repeat center center; }
-.prev { background: url('../images/icon-prev-32x32.png') no-repeat center center; }
-.next { background: url('../images/icon-next-32x32.png') no-repeat center center; }
+.close { background: url('../images/icon-close-48x48.png') no-repeat center center; }
+.prev { background: url('../images/icon-prev-48x48.png') no-repeat center center; }
+.next { background: url('../images/icon-next-48x48.png') no-repeat center center; }
+.close, .prev, .next { opacity: 0.7; }
+.close:hover, .prev:hover, .next:hover { opacity: 1; }
 
 .form-error { display: none; color: red; font-size: 11px; padding-left: 5px; position: absolute; width: 250px;
     overflow: visible; }
@@ -184,9 +188,8 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 .file-control ul { margin: 0; padding: 10px; }
 .file-control li { list-style: none; margin: 0; padding: 0; }
 
-.autocomplete-result { position: absolute; width: 120px; border: 1px solid #CCC;
+.autocomplete-result { position: absolute; min-width: 120px; border: 1px solid #CCC;
     background: white; box-shadow: 3px 3px 3px #999; z-index: 1000; }
-.autocomplete-result ul { display: block; font-size: 14px; }
-.autocomplete-result ul li { display: block; margin: 0; padding: 5px; border: none; border-bottom: 1px solid #CCC;
-    background: white; cursor: pointer; }
+.autocomplete-result ul { display: block; margin: 5px; padding: 0; }
+.autocomplete-result ul li { display: block; margin: 0; padding: 2px 0; border: none; background: white; cursor: pointer; }
 .autocomplete-result ul li:hover { color: #ff721d; }

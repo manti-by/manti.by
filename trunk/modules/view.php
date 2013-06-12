@@ -53,6 +53,9 @@
         const OUTPUT_TYPE_JSON      = 'json';
         const OUTPUT_TYPE_RAW       = 'raw';
         const OUTPUT_TYPE_LOG       = 'log';
+        const OUTPUT_TYPE_WRAP      = 'wrap';
+        const OUTPUT_TYPE_REDIRECT  = 'redirect';
+        const OUTPUT_TYPE_PRINT     = 'print';
 
         /**
          * Default getView method
@@ -79,38 +82,31 @@
             switch ($options['output']) {
                 default:
                 case self::OUTPUT_TYPE_DEFAULT:
-                    // Set headers
-                    header('HTTP/1.1 200 OK');
-                    header('Content-Type: text/html; charset=UTF-8');
-                    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-                    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-                    header('Cache-Control: no-cache, must-revalidate');
-                    header('Pragma: no-cache');
-
+                    self::setDefaultHeaders();
+                    echo $this->wrapPage($options);
+                    break;
+                case self::OUTPUT_TYPE_PRINT:
+                    self::setDefaultHeaders();
+                    echo $this->wrapPrint($options);
+                    break;
+                case self::OUTPUT_TYPE_WRAP:
+                    // Output without headers
                     echo $this->wrapPage($options);
                     break;
                 case self::OUTPUT_TYPE_HTML:
-                    // Set headers
-                    header('HTTP/1.1 200 OK');
-                    header('Content-Type: text/html; charset=UTF-8');
-                    header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
-                    header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-                    header('Cache-Control: no-cache, must-revalidate');
-                    header('Pragma: no-cache');
-
-                    // output html data
+                    self::setDefaultHeaders();
                     echo $options['body'];
                     break;
                 case self::OUTPUT_TYPE_JSON:
-                    // set headers
+                    // Set headers
                     header('HTTP/1.1 200 OK');
                     header('Content-type: application/json');
 
-                    // output json data
+                    // Output json data
                     echo json_encode($options['data']);
                     break;
                 case self::OUTPUT_TYPE_RAW:
-                    // output raw data
+                    // Output raw data
                     echo $options['data'];
                     break;
                 case self::OUTPUT_TYPE_LOG:
@@ -157,6 +153,16 @@
         public function wrapPage($options) {
             // get form contents
             return $this->getContents(null, 'index', $options);
+        }
+
+        /**
+         * Wrap HTML data for printing
+         * @param array $options
+         * @return string $html
+         */
+        public function wrapPrint($options) {
+            // get form contents
+            return $this->getContents(null, 'print', $options);
         }
 
         /**
@@ -236,7 +242,23 @@
          * @return array|null $options
          */
         public function _404($options = null) {
+            $options['output'] = self::OUTPUT_TYPE_WRAP;
+
+            header('HTTP/1.0 404 Not Found');
             $options['body'] = $this->getContents('partial', '404', $options);
+
             return $options;
+        }
+
+        /**
+         * Set to output default headers
+         */
+        protected static function setDefaultHeaders() {
+            header('HTTP/1.1 200 OK');
+            header('Content-Type: text/html; charset=UTF-8');
+            header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+            header('Cache-Control: no-cache, must-revalidate');
+            header('Pragma: no-cache');
         }
     }

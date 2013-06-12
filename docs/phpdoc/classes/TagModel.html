@@ -368,7 +368,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div>
 <a id="method_getModel"></a><div class="element clickable method public method_getModel" data-toggle="collapse" data-target=".method_getModel .collapse">
 <h2>Default getModel method</h2>
-<pre>getModel(string $name) : <a href="../classes/Model.html">\Model</a> | <a href="../classes/BlogModel.html">\BlogModel</a> | <a href="../classes/FileModel.html">\FileModel</a> | <a href="../classes/FrontModel.html">\FrontModel</a> | <a href="../classes/GalleryModel.html">\GalleryModel</a> | <a href="../classes/TagModel.html">\TagModel</a> | <a href="../classes/UserModel.html">\UserModel</a></pre>
+<pre>getModel(string $name) : <a href="../classes/Model.html">\Model</a> | <a href="../classes/BlogModel.html">\BlogModel</a> | <a href="../classes/FileModel.html">\FileModel</a> | <a href="../classes/FrontModel.html">\FrontModel</a> | <a href="../classes/GalleryModel.html">\GalleryModel</a> | <a href="../classes/SearchModel.html">\SearchModel</a> | <a href="../classes/SitemapModel.html">\SitemapModel</a> | <a href="../classes/StatsModel.html">\StatsModel</a> | <a href="../classes/TagModel.html">\TagModel</a> | <a href="../classes/UserModel.html">\UserModel</a></pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -385,7 +385,7 @@ Save stats into DB</span><pre>init()</pre></a></li>
 </div>
 <h3>Returns</h3>
 <div class="subelement response">
-<code><a href="../classes/Model.html">\Model</a></code><code><a href="../classes/BlogModel.html">\BlogModel</a></code><code><a href="../classes/FileModel.html">\FileModel</a></code><code><a href="../classes/FrontModel.html">\FrontModel</a></code><code><a href="../classes/GalleryModel.html">\GalleryModel</a></code><code><a href="../classes/TagModel.html">\TagModel</a></code><code><a href="../classes/UserModel.html">\UserModel</a></code>$model</div>
+<code><a href="../classes/Model.html">\Model</a></code><code><a href="../classes/BlogModel.html">\BlogModel</a></code><code><a href="../classes/FileModel.html">\FileModel</a></code><code><a href="../classes/FrontModel.html">\FrontModel</a></code><code><a href="../classes/GalleryModel.html">\GalleryModel</a></code><code><a href="../classes/SearchModel.html">\SearchModel</a></code><code><a href="../classes/SitemapModel.html">\SitemapModel</a></code><code><a href="../classes/StatsModel.html">\StatsModel</a></code><code><a href="../classes/TagModel.html">\TagModel</a></code><code><a href="../classes/UserModel.html">\UserModel</a></code>$model</div>
 </div></div>
 </div>
 <a id="method_getResult"></a><div class="element clickable method public method_getResult" data-toggle="collapse" data-target=".method_getResult .collapse">
@@ -633,7 +633,7 @@ Save stats into DB</h2>
 </div>
 <a id="method_shutdown"></a><div class="element clickable method public method_shutdown" data-toggle="collapse" data-target=".method_shutdown .collapse">
 <h2>Close application</h2>
-<pre>shutdown() </pre>
+<pre>shutdown(string $message) </pre>
 <div class="labels">
 <span class="label">Inherited</span><span class="label">Static</span>
 </div>
@@ -649,6 +649,11 @@ Save stats into DB</h2>
 <td>\Model::shutdown()</td>
 </tr>
 </table>
+<h3>Parameters</h3>
+<div class="subelement argument">
+<h4>$message</h4>
+<code>string</code>
+</div>
 </div></div>
 </div>
 <a id="method_saveLogData"></a><div class="element clickable method private method_saveLogData" data-toggle="collapse" data-target=".method_saveLogData .collapse">
@@ -800,7 +805,7 @@ Save stats into DB</h2>
 <div class="row"><footer class="span12">
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by <a href="http://glyphicons.com/">Glyphicons</a>.<br>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor 2.0.0a10</a> and<br>
-            generated on 2013-03-13T14:59:54+03:00.<br></footer></div>
+            generated on 2013-04-09T14:42:30+03:00.<br></footer></div>
 </div>
 </body>
 </html>

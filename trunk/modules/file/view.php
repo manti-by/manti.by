@@ -55,14 +55,14 @@
          */
         public function printFileArray($array) {
             // Print head
-            $result  = '<table id="file-table" cellpadding="5" cellspacing="0" width="100%">';
+            $result  = '<table id="file-table">';
             $result .= '<thead>';
             $result .= '<tr>';
             $result .= '<th>' . T('Filename') . '</th>';
             $result .= '<th>' . T('Filesize') . '</th>';
             $result .= '<th width="120">' . T('Actions') . '</th>';
             $result .= '</tr>';
-            $result .= '<thead>';
+            $result .= '</thead>';
             $result .= '<tbody>';
 
             // Print body
@@ -121,14 +121,29 @@
          */
         public function printDownloadList($array) {
             // Print head
-            $result  = '<ul id="download-list">';
+            $result  = '<table id="file-table">';
+            $result .= '<thead>';
+            $result .= '<tr>';
+            $result .= '<th>' . T('Filename') . '</th>';
+            $result .= '<th>' . T('Filesize') . '</th>';
+            $result .= '<th>' . T('MD5 Sum') . '</th>';
+            $result .= '<th>' . T('Date created') . '</th>';
+            $result .= '</tr>';
+            $result .= '</thead>';
+            $result .= '<tbody>';
 
             // Print body
             foreach ($array as $object) {
-                $result .= '<li id="file-' . $object->id . '"><a href="' . str_replace('./', Application::$config['http_host'] . '/', $object->source) . '">' . $object->source . '</a> (' . System::humanReadableFilesize($object->size) . ')</li>';
+                $result .= '<tr id="file-'.  $object->id .'">';
+                $result .= '<td class="file-name"><a href="' . str_replace('./', Application::$config['http_host'] . '/', $object->source) . '" data-file-id="' . $object->id . '">' . end(explode('/', $object->source)) . '</a></td>';
+                $result .= '<td class="file-size">' . System::humanReadableFilesize($object->size) . '</td>';
+                $result .= '<td class="file-md5">' . $object->md5 . '</td>';
+                $result .= '<td class="file-date">' . date('d-m-Y', strtotime($object->timestamp)) . '</td>';
+                $result .= '</tr>';
             }
 
-            $result .= '</ul>';
+            $result .= '</tbody>';
+            $result .= '</table>';
 
             return $result;
         }

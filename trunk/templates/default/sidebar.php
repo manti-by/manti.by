@@ -53,5 +53,6 @@
 <div class="right-sidebar">
     <?php echo $this->getContents('plugin', 'tags'); ?>
     <?php echo $this->getContents('plugin', 'latest'); ?>
+    <?php echo $this->getContents('plugin', 'galleries'); ?>
 </div>
 <div class="cls"></div>

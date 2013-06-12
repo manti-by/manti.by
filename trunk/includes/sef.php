@@ -48,6 +48,9 @@
      */
     class Sef extends Application {
 
+        const SEF_MAP_TYPE_DB       = 0;
+        const SEF_MAP_TYPE_SIMPLE   = 1;
+
         /**
          * @var array $character_replace_table replace table for strict symbols
          */
@@ -108,16 +111,18 @@
 
             // Get global config
             $database = Database::getInstance();
-            $database->query("CALL UPDATE_SEF_COUNTER('".$database->escape($_SERVER['REQUEST_URI'])."','".$database->escape($_SERVER['REQUEST_URI'])."');");
+            $link = substr($database->escape($_SERVER['REQUEST_URI']), 1);
+            $database->query("CALL UPDATE_SEF_COUNTER('" . $link . "','" . $link . "');");
 
             // Get request string, delete question symbol and inject request data
             $request = self::getReal(substr($_SERVER['REQUEST_URI'], 1));
             $result = substr(strstr($request, "?"), 1);
-            if (!empty($result)) {
-                parse_str($result, $_REQUEST);
 
-                // Add POST params to request
-                $_REQUEST = array_merge($_REQUEST, $_POST);
+
+            // Add POST params to request
+            if (!empty($result)) {
+                parse_str($result, $request);
+                $_REQUEST = array_merge($request, $_GET, $_POST);
             }
         }
 
@@ -129,6 +134,9 @@
         public static function getReal($link) {
             // Get config
             if (!Application::$config['sef_enabled']) return $link;
+
+            // Remove GET params
+            $link = strpos($link, '?') !== false ? substr($link, 0, strpos($link, '?')) : (string)$link;
 
             // Check memory, if exist, get array value by key
             if (self::checkStorage($link)) {
@@ -144,7 +152,7 @@
             if (!empty($request) && is_object($request)) {
                 $request = $request->request;
             } else {
-                $request = $link;
+                $request = self::convertToOriginal($link);
             }
 
             // Add to mem storage
@@ -197,18 +205,22 @@
             foreach($sef_map as $pattern => $source) {
                 preg_match($pattern, $request, $matches);
                 if ($matches) {
-                    // If pattern found, get table and alias fields
-                    Database::getInstance()->query("CALL GET_SEF_MAP_ALIAS('".$source['field']."','".$source['table']."',".(int)$matches[1].");");
+                    if ($source['type'] == self::SEF_MAP_TYPE_DB) {
+                        // If pattern found, get table and alias fields
+                        Database::getInstance()->query("CALL GET_SEF_MAP_ALIAS('".$source['field']."','".$source['table']."',".(int)$matches[1].");");
 
-                    // Get alias and stop search
-                    if ($alias = Database::getInstance()->getField()) {
-                        $link = $source['prefix'] . $alias . $source['suffix'];
-                        break;
+                        // Get alias and stop search
+                        if ($alias = Database::getInstance()->getField()) {
+                            $link = $source['prefix'] . self::getInstance()->sanitizeLink($alias) . $source['suffix'];
+                            break;
+                        }
+                    } elseif ($source['type'] == self::SEF_MAP_TYPE_SIMPLE) {
+                        $link = $source['name'];
                     }
                 }
             }
 
-            // If link not found by alias
+            // If link not found by alias or simple slug
             if (empty($link)) {
                 // Explode request params
                 $params = strchr($request, '?') ? substr(strstr($request, '?'), 1) : $request;
@@ -229,9 +241,6 @@
                 $source_link = substr($source_link, -1) == '/' ? substr($source_link, 0, strlen($source_link) - 1) : $source_link;
                 $link = $source_link . Application::$config['sef_suffix'];
             }
-
-            // Sanitize link
-            $link = self::getInstance()->sanitizeLink($link);
 
             // Insert new route to redirection
             Database::getInstance()->query("CALL UPSERT_SEF('".Database::getInstance()->escape($request)."','".Database::getInstance()->escape($link)."');");
@@ -334,5 +343,55 @@
 
             // Trim length and return
             return substr($string, 0, Application::$config['sef_max_alias_length']);
+        }
+
+        /**
+         * Convert sef link to original route
+         * @param string $request
+         * @return string $real_link
+         */
+        public static function convertToOriginal($request) {
+            // Prepare data and fix trailing slash
+            $result = array();
+            $request = $request[0] == '/' ? substr($request, 1) : $request;
+
+            // GET request params
+            if (strpos($request, '?') !== false) {
+                $route = substr($request, 0, strpos($request, '?'));
+                $get = substr(strstr($request, '?'), 1);
+                parse_str($get, $get);
+            } else {
+                $route = $request;
+                $get = array();
+            }
+
+            // Add route params
+            if ($route) {
+                $route_data = array_diff(explode('/', $route), array('', 'index.php'));
+                if (count($route_data)) {
+                    $result['module'] = $route_data[0];
+                    if (isset($route_data[1])) {
+                        $result['action'] = $route_data[1];
+
+                        // Additional route params
+                        for ($i = 2; $i < count($route_data); $i += 2) {
+                            if (isset($route_data[$i]) && isset($route_data[$i + 1])) {
+                                $result[$route_data[$i]] = $route_data[$i + 1];
+                            } else {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Add GET params
+            $return = array();
+            $result = array_merge($get, $result);
+            foreach ($result as $key => $value) {
+                $return[] = $key . '=' . $value;
+            }
+
+            return '/index.php?' . implode('&', $return);
         }
     }
