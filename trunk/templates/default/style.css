@@ -66,7 +66,7 @@ audio { width: 330px; transform: scale(0.8); }
 #topmenu li a { color: #777; }
 #topmenu li a.active { color: #b40303; }
 
-#usermenu { position: fixed; width: 100%; color: #ECECEC; z-index: 1000; border-bottom: 6px solid white;
+#usermenu { position: fixed; width: 100%; color: #ECECEC; border-bottom: 6px solid white;
     background: url(./images/black-dotted-bg.png) repeat-x top left; }
 #usermenu a { color: #999; text-decoration: underline; }
 #usermenu .wrapper { padding: 0; background: inherit; color: inherit; text-align: right; }
@@ -104,7 +104,7 @@ audio { width: 330px; transform: scale(0.8); }
 .post-item .show-tracklist { position: absolute; bottom: 20px; left: 489px; color: #777;
     text-decoration: underline; }
 .post-item .hide-tracklist { display: none; position: absolute; bottom: 20px; left: 489px;
-    color: #777; text-decoration: underline; }
+    text-decoration: underline; }
 .post-item .tracklist-block { padding: 0 0 50px 350px; }
 
 .post-item .release { position: absolute; bottom: 10px; left: 218px; }
@@ -205,8 +205,8 @@ audio { width: 330px; transform: scale(0.8); }
 
 #featured .slider-item .content .show-tracklist { position: absolute; bottom: 0px; left: 139px; color: #777;
     text-decoration: underline; }
-#featured .slider-item .content .hide-tracklist { display: none; position: absolute; bottom: 0px; left: 139px;
-    color: #777; text-decoration: underline; }
+#featured .slider-item .content .hide-tracklist { display: none; position: absolute; bottom: 0px;
+    left: 139px; color: #777; text-decoration: underline; }
 
 #featured .slider-item .content .music-block { padding: 10px 0 0 15px; }
 
@@ -243,7 +243,7 @@ audio { width: 330px; transform: scale(0.8); }
 #gallery .popular img { width: 625px; position: relative; bottom: 50%; }
 #gallery .latest { width: 328px; }
 
-#image-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000;
+#image-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     text-align: center; vertical-align: middle; background: url(../../assets/images/black-bg-50.png); }
 #image-wrapper img { margin: 1% auto; max-width: 96%; max-height: 96%; box-shadow: 3px 5px 10px #333; }
 .original, .next, .prev, .close { cursor: pointer; }
@@ -266,8 +266,9 @@ audio { width: 330px; transform: scale(0.8); }
 #file-table th { background: #EEE; border-bottom: 1px solid #CCC; }
 #file-table tr:last-child td { border-bottom: none; }
 
-#gototop { display: none; position: fixed; left: 5px; top: 40%; width: 50px; height: 50px;
-    background: url('../../assets/images/icon-up-48x48.png') no-repeat center center; z-index: 10000; }
+#gototop { display: none; position: fixed; width: 50px; height: 100%; margin-top: 36px; opacity: 0.5;
+    background: transparent url('./images/icon-up-24x24.png') no-repeat center center; }
+#gototop:hover { background-color: #999; }
 
 #sitemap { padding: 0 15px; }
 #sitemap .open-spoiler { text-transform: lowercase; }
@@ -349,3 +350,11 @@ audio { width: 330px; transform: scale(0.8); }
 .player.inline .progressbar.volume .progress-line-label { width: 30px; text-align: right; }
 
 #loader div { background: url(./images/loader.gif) no-repeat center center; }
+
+/** Element Z position **/
+#loader { z-index: 10000; }
+#image-wrapper { z-index: 5000; }
+#gototop { z-index: 2000; }
+#popup { z-index: 1000; }
+#usermenu {  z-index: 500; }
+.autocomplete-result { z-index: 100; }

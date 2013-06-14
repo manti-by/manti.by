@@ -164,7 +164,7 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 #popup .content { padding: 15px; border: 1px solid #CCC; background: #FFF; font-size: 14px; }
 
 .popup { position: absolute;  min-width: 400px; padding: 15px; box-shadow: 3px 3px 3px #999;
-    background: url(../images/black-bg-75.png); z-index: 1000; }
+    background: url(../images/black-bg-75.png); }
 .popup .content { padding: 15px; border: 1px solid #CCC; background: #FFF; }
 
 #message { position: fixed; top: 0; left: 50%; width: 1000px; margin-left: -500px; }
