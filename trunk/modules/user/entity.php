@@ -92,6 +92,10 @@
         protected function __construct($id = null) {
             // Get db handler
             $this->database = Database::getInstance();
+
+            // Check user login state and setup session
+            $this->isLoggined();
+            $this->checkSession();
         }
         
         /**
@@ -170,6 +174,8 @@
         public function load($id) {
             // Get items
             $id = (int)$id;
+            if (!$id) return false;
+
             $this->database->query("CALL GET_USER_BY_ID($id);");
             $result = $this->database->getObject();
             if (!empty($result) && is_object($result)) {
@@ -229,7 +235,7 @@
                 return $this->load($_SESSION['user_id']);
             }
 
-            return true;
+            return false;
         }
         
         /**
@@ -259,14 +265,12 @@
         public function isLoggined() {
             // Get cookie uid
             if (isset($_COOKIE['token']) && $user_id = $this->getId(array('cookie' => utf8_encode($_COOKIE['token'])))) {
-                if (!isset($_SESSION['user_id'])) $_SESSION['user_id'] = $user_id;
-                return true;
+                $_SESSION['user_id'] = $user_id;
             }
 
             // Check session
             if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
-                $this->id = $_SESSION['user_id'];
-                return $this->checkSession();
+                return $this->load($_SESSION['user_id']);
             }
 
             return false;
