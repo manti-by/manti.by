@@ -98,6 +98,9 @@
                 $(this).val(0);
             }
         });
+
+        // Autocomplete for tags control
+        $('.tag-input').autocomplete();
     });
 </script>
 <form id="edit-post-form">
@@ -128,14 +131,14 @@
             <textarea name="description" id="description"><?php echo $options['data']->description; ?></textarea>
             <span class="form_error"></span>
         </p>
-        <p>
+        <div>
             <label for="metakeys"><?php echo T('Metakeys'); ?></label>
             <?php
                 $tags = new Tag($options['data']->metakeys, array('name' => 'metakeys'));
                 echo $tags->render();
             ?>
             <span class="form_error"></span>
-        </p>
+        </div>
         <p>
             <label for="metadesc"><?php echo T('Metadesc'); ?></label>
             <textarea name="metadesc" id="metadesc"><?php echo $options['data']->metadesc; ?></textarea>

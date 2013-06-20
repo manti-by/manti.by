@@ -134,6 +134,8 @@
 
                         <?php $i = 1; ?>
                         <input type="hidden" id="<?php echo $this->_options['id']; ?>" name="<?php echo $this->_options['name']; ?>" value="<?php echo $this->getValue(); ?>" />
+                        <input type="text" name="<?php echo $this->_options['name']; ?>-input" id="<?php echo $this->_options['id']; ?>-input" class="tag-input" data-source="<?php echo Sef::getSef('index.php?module=tag&action=autocomplete'); ?>" value="" />
+                        <input type="button" name="<?php echo $this->_options['name']; ?>-add" id="<?php echo $this->_options['id']; ?>-add" class="tag-add" value="Add" />
                         <div class="tag-wrap">
                             <ul id="<?php echo $this->_options['id']; ?>-control" class="<?php echo $this->_options['class']; ?>-control">
                                 <?php foreach ($this->_data as $tag) : ?>
@@ -144,9 +146,7 @@
                                     <?php $i++; ?>
                                 <?php endforeach; ?>
                             </ul>
-                            <input type="text" name="<?php echo $this->_options['name']; ?>-input" id="<?php echo $this->_options['id']; ?>-input" class="tag-input autocomplete" source="<?php echo Sef::getSef('index.php?module=tag&action=autocomplete'); ?>" value="" />
                         </div>
-                        <input type="button" name="<?php echo $this->_options['name']; ?>-add" id="<?php echo $this->_options['id']; ?>-add" class="tag-add" value="Add" />
                     </div>
                 <?php
                 $html = ob_get_contents();

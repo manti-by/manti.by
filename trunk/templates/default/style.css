@@ -83,8 +83,7 @@ audio { width: 330px; transform: scale(0.8); }
 #edit-post-form #name, #edit-post-form #alias, #edit-post-form #teaser,
 #edit-post-form #description, #edit-post-form #metadesc { width: 600px; font-size: 18px; }
 
-#edit-post-form .tag-wrap { width: 523px; }
-#edit-post-form .tag-wrap .tag-input { width: 100px; min-width: 100px; }
+#edit-post-form .tag-control { width: 607px; }
 
 #content { min-height: 490px; }
 
