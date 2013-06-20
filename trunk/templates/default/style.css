@@ -351,6 +351,8 @@ audio { width: 330px; transform: scale(0.8); }
 
 #loader div { background: url(./images/loader.gif) no-repeat center center; }
 
+#search .autocomplete-result { width: 250px; }
+
 /** Element Z position **/
 #loader { z-index: 10000; }
 #image-wrapper { z-index: 5000; }

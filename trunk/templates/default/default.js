@@ -102,4 +102,10 @@ $(document).ready(function() {
     $('#sitemap .open-spoiler').live('click', function() {
         $(this).next('.spoiler').toggle(400);
     });
+
+    $('#query').autocomplete({
+        selectmode  : 'url',
+        autosize    : false,
+        minsymbols  : 2
+    });
 });

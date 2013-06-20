@@ -36,59 +36,78 @@
  */
 
 /**
- * Default template js file
+ * Autocomplete jQuery plugin
  * @package M2 Micro Framework
  * @subpackage Template
  * @author Alexander Chaika
  */
 
-$(document).ready(function() {
-    // Disable browser autocomplete
-    $('.autocomplete').each(function() {
-        $(this).attr('autocomplete', 'off');
-    });
+(function($){
+    $.fn.autocomplete = function (options) {
+        // Save default options
+        var options = options;
 
-    // Bind change function
-    $('.autocomplete').bind('keyup', function() {
-        // Hide previous results
-        $('.autocomplete-result').remove();
+        // Process each element
+        return this.each(function () {
+            // Self pointer
+            var self = this;
 
-        // Store self pointer
-        var self = this;
+            // Extend default options
+            self.defaults   = { selectmode : 'select', autosize : true, minsymbols : 2 }
+            self.options    = $.extend(self.defaults, options);
 
-        // Get source
-        var query = $(self).val();
-        var source = $(self).data('source');
+            // Check keys
+            $(self).bind('keyup', function () {
+                // Hide previous results
+                $('.autocomplete-result').remove();
 
-        // Get coords
-        var page_x = $(self).offset().left;
-        var page_y = $(self).offset().top + $(self).height();
+                // Get source
+                var query = $(self).val();
+                var source = $(self).data('source');
 
-        if (query.length > 2) {
-            $.post(source, { q : query }, function(response){
-                if (response.result == 'success') {
-                    // #43634465 - Fix autocomplete with empty result set
-                    if (response.data.length > 0) {
-                        // Show values
-                        var html = '<div class="autocomplete-result" style="left:' + page_x + '; top: ' + page_y + ';"><ul>';
+                // Get coords
+                var page_x = $(self).offset().left;
+                var page_y = $(self).offset().top + $(self).height();
+                var width  = $(self).width();
 
-                        for (var i = 0; i < response.data.length; i++) {
-                            html += '<li class="autocomplete-result-item" rel="' + $(self).attr('id') + '">' + response.data[i] + '</li>';
+                // Start if query have more than symbols count in options
+                if (query.length > self.options.minsymbols) {
+                    $.post(source, { q : query }, function(response){
+                        if (response.result == 'success') {
+                            // Check autocomplete with empty result set
+                            if (response.data.length > 0) {
+                                // Show values
+                                var pos = 'left:' + page_x + '; top: ' + page_y + ';';
+
+                                // Check autosize option
+                                pos += self.options.autosize ? ' width: ' + width + 'px;' : '';
+
+                                // Compile output html
+                                var html = '<div class="autocomplete-result" style="' + pos + '"><ul>';
+                                for (var i = 0; i < response.data.length; i++) {
+                                    html += '<li class="autocomplete-result-item" data-input-id="' + $(self).attr('id') + '">' + response.data[i] + '</li>';
+                                }
+                                html += '</ul></div>';
+
+                                // Insert result in DOM
+                                $(self).after(html);
+                            }
                         }
 
-                        html += '</ul></div>';
-                        $(self).after(html);
-                    }
+                        // Check select mode
+                        $('.autocomplete-result-item').bind('click', function() {
+                            if (self.options.selectmode == 'select') {
+                                $('#' + $(this).data('input-id')).val($(this).html());
+                            }
+                        });
+
+                        // Bind close
+                        $('body').bind('click', function() {
+                            $('.autocomplete-result').remove();
+                        });
+                    });
                 }
-
-                $('.autocomplete-result-item').bind('click', function() {
-                    // $('#' + $(this).attr('rel')).val($(this).html());
-                });
-
-                $('body').bind('click', function() {
-                    $('.autocomplete-result').remove();
-                });
             });
-        }
-    });
-});
+        });
+    }
+})(jQuery);
