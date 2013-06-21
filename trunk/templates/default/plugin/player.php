@@ -71,6 +71,8 @@
         // Get main objects
         var player = $('#player audio').get(0);
         var player_source = <?php echo $player_contents; ?>;
+
+        var is_player_loaded = false;
         var current_source_id = getCookie('player_current_id') ? getCookie('player_current_id') : player_source[0].id;
 
         // Update source function
@@ -189,11 +191,12 @@
 
         // Reset all players
         $.fn.resetAllPlayers = function() {
-            $('.player .pause').removeClass('pause').addClass('play');
+            $('.player:not(.active) .pause').removeClass('pause').addClass('play');
             $('link[rel=icon]').attr('href', '/templates/default/images/favicon.png');
 
-            $('.player .position .progress-line-label span').html('00:00:00');
-            $('.player .position .progress-line-active').width(0);
+            $('.player:not(.active) .position .progress-line-label span').html('00:00:00');
+            $('.player:not(.active) .position .progress-line-loaded').width(0);
+            $('.player:not(.active) .position .progress-line-active').width(0);
         }
 
         // Init plyer source links
@@ -203,14 +206,13 @@
         $('#player audio').bind('canplay', function() {
             $.fn.updatePlayerProgress();
             $.fn.updatePlayerVolume();
+
+            is_player_loaded = true;
             $.fn.loaderHide();
         });
 
         // Play action
         $('.player .play').live('click', function () {
-            // Reset all players
-            $.fn.resetAllPlayers();
-
             // Bind active state for inline player
             if ($(this).closest('.player').hasClass('inline') && !$(this).closest('.player').hasClass('active')) {
                 // Show loader
@@ -223,6 +225,10 @@
                 current_source_id = $(this).closest('.player').data('release-id');
                 $.fn.reloadPlayer(current_source_id);
             }
+
+            // Reset all players
+            $.fn.resetAllPlayers();
+
 
             // Update button and run player
             $('#player .play, #player-'+ current_source_id +' .play').removeClass('play').addClass('pause');
@@ -253,6 +259,8 @@
 
         // Next action
         $('.player .next-track').live('click', function () {
+            is_player_loaded = false;
+
             // Reset all players
             $.fn.resetAllPlayers();
 
@@ -273,6 +281,8 @@
 
         // Prev action
         $('.player .prev-track').live('click', function () {
+            is_player_loaded = false;
+
             // Reset all players
             $.fn.resetAllPlayers();
 
@@ -293,6 +303,8 @@
 
         // change quality
         $('.player .high-definition').live('click', function () {
+            is_player_loaded = false;
+
             // Reset all players
             $.fn.resetAllPlayers();
 
@@ -317,7 +329,12 @@
             $(this).find('.progress-line-active').width(value_px);
 
             // Update counter
-            var value_pc = parseInt($(this).find('.progress-line-active').width() / $(this).find('.progress-line').width() * 100);
+            var max_length = $(this).find('.progress-line-active').width();
+            if ($(this).find('.progress-line-active').width() > $(this).find('.progress-line-loaded').width()) {
+                max_length = $(this).find('.progress-line-loaded').width();
+            }
+
+            var value_pc = parseInt(max_length / $(this).find('.progress-line').width() * 100);
 
             // Update control progress
             if ($(this).hasClass('position')) {
@@ -365,7 +382,7 @@
 
         // Update position progressbar
         setInterval(function() {
-            if (!$('#player audio').get(0).paused) {
+            if (is_player_loaded) {
                 $.fn.updatePlayerProgress();
             }
         }, 1000);

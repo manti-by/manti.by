@@ -57,7 +57,20 @@
             self.options    = $.extend(self.defaults, options);
 
             // Check keys
-            $(self).bind('keyup', function () {
+            $(self).bind('keyup', function (event) {
+                // Check system symbols
+                if (event.which == 13) {
+                    if ($('.autocomplete-result-item .active').length) {
+                        if (self.options.selectmode == 'select') {
+                            $('#' + $(this).get(0).data('input-id')).val($(this).get(0).html());
+                        } else {
+                            if ($(this).find('a').length) {
+                                $(this).find('a').get(0).click();
+                            }
+                        }
+                    }
+                }
+
                 // Hide previous results
                 $('.autocomplete-result').remove();
 

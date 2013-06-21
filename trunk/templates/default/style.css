@@ -303,9 +303,9 @@ audio { width: 330px; transform: scale(0.8); }
 .player .progressbar { float: right; position: relative; margin-right: 5px; color: #999; cursor: pointer; }
 .player .progressbar .progress-line,
 .player .progressbar .progress-line-loaded,
-.player .progressbar .progress-line-active { float: left; height: 4px; position: absolute; top: 8px; left: 0; cursor: pointer; }
+.player .progressbar .progress-line-active { float: left; height: 4px; position: absolute; top: 8px; left: 0; }
 .player .progressbar .progress-line { width: 100%; background: #999; }
-.player .progressbar .progress-line-loaded { width: 0; background: #390; z-index: 5; }
+.player .progressbar .progress-line-loaded { width: 0; background: #390; z-index: 5; cursor: pointer; }
 .player .progressbar .progress-line-active { width: 0; background: #b40303; z-index: 10;}
 .player .progressbar .progress-line-label { float: right; padding: 2px 4px 0 2px; font-size: 11px; }
 
