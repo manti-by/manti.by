@@ -109,7 +109,12 @@
      */
     function T($text) {
         $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'ru');
-        $references = Cache::get('translations_' . $language);
+
+        // Try to get from memory
+        $references = Cache::get('translations_' . $language, Cache::TYPE_MEMORY);
+        if (is_null($references)) {
+            $references = Cache::get('translations_' . $language);
+        }
 
         // Check language existance
         if (!is_array($references)) {
@@ -121,6 +126,7 @@
                 $references = parse_ini_file($lang_file);
             }
             Cache::set('translations_' . $language, $references);
+            Cache::set('translations_' . $language, $references, Cache::TYPE_MEMORY);
         }
 
         // Remove spaces and other characters
@@ -136,6 +142,7 @@
         if (!array_key_exists($key, $references)) {
             $references[$key] = $text;
             Cache::set('translations_' . $language, $references);
+            Cache::set('translations_' . $language, $references, Cache::TYPE_MEMORY);
         }
 
         return $references[$key];
