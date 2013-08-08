@@ -57,6 +57,25 @@
         const OUTPUT_TYPE_REDIRECT  = 'redirect';
         const OUTPUT_TYPE_PRINT     = 'print';
 
+        const CACHE_KEY = 'views';
+
+        /**
+         * @var array memory storage
+         */
+        private $storage = null;
+
+        /**
+         * Singleton protection
+         */
+        protected function __construct() {
+            // Init views storage
+            $this->storage = Cache::get('views');
+            if (!$this->storage) {
+                $this->storage = array();
+                Cache::set(self::CACHE_KEY, $this->storage);
+            }
+        }
+
         /**
          * Default getView method
          * @param string $name
@@ -184,11 +203,17 @@
          * @return string $html
          */
         public function getContents($type, $name, $options = null) {
-            // get content type
+            // Check cache
+            $cache_key = json_encode($type . $name . $options);
+            if (isset($this->storage[$cache_key])) {
+                return $this->storage[$cache_key];
+            }
+
+            // Get content type
             $type = (!empty($type) ? $type . DS : '');
             $name = (!empty($name) ? $name : 'index');
 
-            // compile template prefix and postfix
+            // Compile template prefix and postfix
             $prefix = Application::$config['doc_root'] . DS . 'templates' . DS;
             $postfix = DS . $type . $name . '.php';
             if (isset($options['template']) && !empty($options['template'])) {
@@ -198,7 +223,7 @@
             }
             $default_template_name = realpath($prefix . Application::$config['template'] . $postfix);
 
-            // check content file existance
+            // Check content file existance
             if ($content_template_name && file_exists($content_template_name)) {
                 $content_file_name = $content_template_name;
             } elseif (file_exists($default_template_name)) {
@@ -212,15 +237,19 @@
                 return $this->_throw('Template file for ' . implode('/', $content_file) . ' not found');
             }
 
-            // render to buffer
+            // Render to buffer
             ob_start();
 
-            // get contents
+            // Get contents
             include $content_file_name;
             $result = ob_get_contents();
 
-            // clean buffer
+            // Clean buffer
             ob_end_clean();
+
+            // Cache rendered item
+            $this->storage[$cache_key] = $result;
+            Cache::set(self::CACHE_KEY, $this->storage);
 
             return $result;
         }
