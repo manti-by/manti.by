@@ -57,7 +57,7 @@
         <?php echo Application::$config['metadesc_' . Application::$config['language']]; ?>
     </div>
     <div class="contact">
-        <?php echo T('Contact me'); ?>: <a href="mailto:manti.by@gmail.com">manti.by@gmail.com</a> / Skype: <a href="callto://alexandr-chaika">alexandr-chaika</a>
+        <?php echo T('Contact me'); ?>: <a href="mailto:manti.by@gmail.com">manti.by@gmail.com</a> / Skype: <a href="callto://manti.by">manti.by</a>
     </div>
     <div class="copyright">
         <?php echo Application::$config['copyright_' . Application::$config['language']]; ?>
