@@ -59,3 +59,6 @@
         </li>
     <?php endforeach; ?>
 </ul>
+<div id="show-more-galleries">
+    <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"><?php echo T('all galleries'); ?></a>
+</div>
