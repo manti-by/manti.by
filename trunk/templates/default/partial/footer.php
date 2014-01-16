@@ -128,23 +128,23 @@
     <h3><?php echo T('Follow me'); ?></h3>
     <ul>
         <li>
+            <a href="https://soundcloud.com/manti_by" target="_blank" rel="nofollow">
+                <img src="<?php echo Application::$config['template_image_url_path']; ?>soundcloud.png" alt="Soundcloud" width="101" height="25" />
+            </a>
+        </li>
+        <li>
             <a href="http://promodj.com/manti.by" target="_blank" rel="nofollow">
                 <img src="<?php echo Application::$config['template_image_url_path']; ?>promodj.png" alt="PromoDj" width="101" height="25" />
             </a>
         </li>
         <li>
             <a href="http://www.facebook.com/manti.by" target="_blank" rel="nofollow">
-                <img src="<?php echo Application::$config['template_image_url_path']; ?>facebook.png" alt="Facebook" width="101" height="28" />
+                <img src="<?php echo Application::$config['template_image_url_path']; ?>facebook.png" alt="Facebook" width="101" height="25" />
             </a>
         </li>
         <li>
             <a href="http://www.vk.com/manti_by" target="_blank" rel="nofollow">
                 <img src="<?php echo Application::$config['template_image_url_path']; ?>vkontakte.png" alt="Vkontakte" width="101" height="25" />
-            </a>
-        </li>
-        <li>
-            <a href="http://www.mixcloud.com/marcomantiby" target="_blank" rel="nofollow">
-                <img src="<?php echo Application::$config['template_image_url_path']; ?>mixcloud.png" alt="Mixcloud" width="117" height="22" />
             </a>
         </li>
     </ul>
