@@ -109,7 +109,13 @@
      */
     function T($text) {
         $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'ru');
-        $references = Cache::get('translations_' . $language);
+        $cache_key = 'translations_' . $language;
+
+        // Try to get from memory
+        $references = Cache::get($cache_key, Cache::TYPE_MEMORY);
+        if (is_null($references)) {
+            $references = Cache::get($cache_key);
+        }
 
         // Check language existance
         if (!is_array($references)) {
@@ -120,7 +126,8 @@
                 $lang_file = ROOT_PATH . DS . 'language' . DS . 'en.ini';
                 $references = parse_ini_file($lang_file);
             }
-            Cache::set('translations_' . $language, $references);
+            Cache::set($cache_key, $references);
+            Cache::set($cache_key, $references, Cache::TYPE_MEMORY);
         }
 
         // Remove spaces and other characters
@@ -135,7 +142,8 @@
         // Check for token and set to cache
         if (!array_key_exists($key, $references)) {
             $references[$key] = $text;
-            Cache::set('translations_' . $language, $references);
+            Cache::set($cache_key, $references);
+            Cache::set($cache_key, $references, Cache::TYPE_MEMORY);
         }
 
         return $references[$key];

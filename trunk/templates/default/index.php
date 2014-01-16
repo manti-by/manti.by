@@ -63,7 +63,9 @@
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/print.css" media="print" />
 
         <?php if (preg_match('/MSIE/i', $_SERVER['HTTP_USER_AGENT'])) : ?>
-            <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/ie.css" />
+            <!--[if IE]>
+                <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/ie.css" />
+            <![endif]-->
         <?php endif; ?>
 
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>

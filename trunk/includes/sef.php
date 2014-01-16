@@ -51,6 +51,8 @@
         const SEF_MAP_TYPE_DB       = 0;
         const SEF_MAP_TYPE_SIMPLE   = 1;
 
+        const CACHE_KEY = 'sef';
+
         /**
          * @var array $character_replace_table replace table for strict symbols
          */
@@ -82,12 +84,19 @@
         protected static $instance = null;
 
         /**
+         * @var array memory storage
+         */
+        private $storage = null;
+
+        /**
          * Singleton protection
          */
         protected function __construct() {
             // Init sef aliases storage
-            if (!Cache::get('sef')) {
-                Cache::set('sef', array());
+            $this->storage = Cache::get(self::CACHE_KEY);
+            if (!$this->storage) {
+                $this->storage = array();
+                Cache::set(self::CACHE_KEY, $this->storage);
             }
         }
 
@@ -117,7 +126,6 @@
             // Get request string, delete question symbol and inject request data
             $request = self::getReal(substr($_SERVER['REQUEST_URI'], 1));
             $result = substr(strstr($request, "?"), 1);
-
 
             // Add POST params to request
             if (!empty($result)) {
@@ -199,7 +207,7 @@
             if (!Application::$config['sef_enabled']) return $request;
 
             // Sef map creation
-            $sef_map = include 'sef_map.php';
+            $sef_map = include_once 'sef_map.php';
 
             // Search by pattern
             foreach($sef_map as $pattern => $source) {
@@ -262,7 +270,7 @@
          */
         private static function checkStorage($link) {
             // Get storage data
-            $data = Cache::get('sef');
+            $data = self::getInstance()->getStorageData();
 
             // Check both array sides
             if (isset($data[$link])) {
@@ -298,10 +306,8 @@
          */
         private function addToStorageData($request, $link) {
             // Append new link to storage
-            $storage = Cache::get('sef');
-            $storage[$request] = $link;
-
-            return Cache::set('sef', $storage);
+            $this->storage[$request] = $link;
+            return Cache::set(self::CACHE_KEY, $this->storage);
         }
 
         /**
@@ -317,7 +323,11 @@
          * @return array $storage
          */
         private function getStorageData() {
-            return Cache::get('sef');
+            if (is_null($this->storage)) {
+                $this->storage = Cache::get('sef');
+            }
+
+            return $this->storage;
         }
 
         /**
