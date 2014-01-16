@@ -205,7 +205,7 @@
         public function getContents($type, $name, $options = null) {
             // Check cache
             $cache_key = $type . $name . '-' . json_encode($options);
-            if (isset($this->storage[$cache_key])) {
+            if (isset($this->storage[$cache_key]) && Application::$config['view_cache_enabled']) {
                 return $this->storage[$cache_key];
             }
 
@@ -248,8 +248,10 @@
             ob_end_clean();
 
             // Cache rendered item
-            $this->storage[$cache_key] = $result;
-            Cache::set(self::CACHE_KEY, $this->storage);
+            if (Application::$config['view_cache_enabled']) {
+                $this->storage[$cache_key] = $result;
+                Cache::set(self::CACHE_KEY, $this->storage);
+            }
 
             return $result;
         }

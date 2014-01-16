@@ -99,14 +99,20 @@
                 $error = T('Configuration error');
             }
 
-            // Init sef to parse request string
-            Sef::init();
+            // Check memcached
+            if (!$error && !Cache::init()) {
+                $message = self::getInstance()->getLastFromStack();
+                $error = $message['message'];
+            }
 
             // Clean output buffer, show error message and die
             ob_end_clean();
             if (!empty($error)) {
                 die($error);
             }
+
+            // Init sef to parse request string
+            Sef::init();
         }
 
         /**

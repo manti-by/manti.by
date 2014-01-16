@@ -133,6 +133,13 @@
 
             width = buffered * $('#player-' + current_source_id + ' .position .progress-line').width();
             $('#player-' + current_source_id + ' .position .progress-line-loaded').width(width);
+
+            // Flip favicon
+            if ($('link[rel=icon]').attr('href') == '/templates/default/images/favicon-play.png') {
+                $('link[rel=icon]').attr('href', '/templates/default/images/favicon.png');
+            } else {
+                $('link[rel=icon]').attr('href', '/templates/default/images/favicon-play.png');
+            }
         }
 
         // Update players volume bars
@@ -163,9 +170,9 @@
             $.fn.loaderShow();
 
             // Restart player with new source
-            player.pause();
+            if (typeof $('#player audio').pause != 'undefined') $('#player audio').pause();
             $.fn.updateSource(id);
-            player.load();
+            $('#player audio').load();
 
             // Check playing state
             if (getCookie('player_is_playing') == 1) {

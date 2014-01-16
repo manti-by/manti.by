@@ -76,30 +76,44 @@
         public static function getInstance() {
             if (is_null(self::$instance)) {
                 self::$instance = new Cache;
+
+
             }
             return self::$instance;
         }
 
         /**
-         * Get memcache objects
+         * Init function
          * @throws Exception
-         * @return Cache $instance
          */
-        public static function getMemcache() {
-            ob_start();
-            if (is_null(self::$memcache)) {
-                try {
-                    self::$memcache = new Memcache;
-                    if (!self::$memcache->pconnect(Application::$config['memcache_host'], Application::$config['memcache_port'])) {
-                        throw new Exception('Please check connection properties');
+        public static function init() {
+            if (Cache::TYPE_DEFAULT == Cache::TYPE_MEMCACHE) {
+                if (is_null(self::$memcache)) {
+                    try {
+                        if (class_exists('Memcache')) {
+                            self::$memcache = new Memcache;
+                            if (!self::$memcache->pconnect(Application::$config['memcache_host'], Application::$config['memcache_port'])) {
+                                throw new Exception('Please check connection properties');
+                            }
+                        } else {
+                            throw new Exception('Memcached not installed.');
+                        }
+                    } catch (Exception $e) {
+                        return self::getInstance()->_throw(T('Could not connect to memcache: ') . $e->getMessage(), ERROR);
                     }
-                } catch (Exception $e) {
-                    ob_end_clean();
-                    return self::getInstance()->_throw(T('Could not connect to memcache: ') . $e->getMessage(), ERROR);
                 }
             }
+        }
 
-            ob_end_clean();
+        /**
+         * Get memcache objects
+         * @return Memcache $instance
+         */
+        public static function getMemcache() {
+            if (is_null(self::$memcache)) {
+                self::init();
+            }
+
             return self::$memcache;
         }
 
