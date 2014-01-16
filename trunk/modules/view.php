@@ -204,7 +204,7 @@
          */
         public function getContents($type, $name, $options = null) {
             // Check cache
-            $cache_key = $type . $name . json_encode($options);
+            $cache_key = Application::$config['memcache_suffix'] . $type . $name . json_encode($options);
             if (isset($this->storage[$cache_key])) {
                 return $this->storage[$cache_key];
             }

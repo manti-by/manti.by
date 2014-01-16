@@ -108,8 +108,8 @@
      * @return string $text translated text
      */
     function T($text) {
-        $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'ru');
-        $cache_key = 'translations_' . $language;
+        $language = (isset(Application::$config['language']) ? Application::$config['language'] : 'ru');
+        $cache_key = Application::$config['memcache_suffix'] . 'translations_' . $language;
 
         // Try to get from memory
         $references = Cache::get($cache_key, Cache::TYPE_MEMORY);
