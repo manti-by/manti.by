@@ -1,3 +1,3 @@
 @echo off
-C:\www\php5\php.exe -f dbm.php -- -r
+php -f scripts\dbm.php -r
 pause
