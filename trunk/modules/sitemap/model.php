@@ -121,4 +121,43 @@
 
             return $result;
         }
+
+        /**
+         * Get site links
+         */
+        public function getLinks() {
+            $result = array();
+
+            // Default site link
+            $result[] = Sef::getSef('index.php');
+
+            // Add general blog links
+            $result[] = Sef::getSef('index.php?module=blog');
+
+            // Static pages
+            foreach (array(14, 2, 16) as $id) {
+                $result[] = Sef::getSef('index.php?module=blog&action=show&id=' . $id);
+            }
+
+            // Add blog posts
+            foreach (Model::getModel('blog')->getPosts(1000) as $post) {
+                $result[] = Sef::getSef('index.php?module=blog&action=show&id=' . $post->id);
+            }
+
+            // Add general gallery link
+            $result[] = Sef::getSef('index.php?module=gallery');
+
+            // Add gallery entries
+            foreach (Model::getModel('gallery')->getGallery(1000) as $gallery) {
+                $result[] = Sef::getSef('index.php?module=gallery&action=show&id=' . $gallery->id);
+            }
+
+            // Registration and sign in
+            $result[] = Sef::getSef('index.php?module=user&action=registerform');
+            $result[] = Sef::getSef('index.php?module=user&action=loginform');
+            $result[] = Sef::getSef('index.php?module=user&action=forgotform');
+
+            // Close XML and return
+            return $result;
+        }
     }

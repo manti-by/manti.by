@@ -36,50 +36,14 @@
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
+    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
+
     /**
-     * Crontab laucher
+     * Command View Class
+     * @name $commandView
      * @package M2 Micro Framework
      * @subpackage Modules
      * @author Alexander Chaika
-     * @since 0.5
+     * @since 0.3b
      */
-
-    // Simple ACL hook
-    define('M2_MICRO', 1);
-
-    // Get engine
-    require_once 'bootstrap.php';
-
-    // Init app and disable sef
-    Application::init();
-    Application::$config['sef_enabled'] = false;
-
-    // Check mode
-    if (php_sapi_name() == 'cli') {
-        switch($argv[1]) {
-            case 'dailystats';
-                if (Model::getModel('stats')->processDailyStats()) {
-                    Application::shutdown('Daily stats successfully processed' . NL);
-                } else {
-                    $error = Application::getInstance()->getLastFromStack();
-                    Application::shutdown($error['message']);
-                }
-            case 'dailynginx';
-                if (Model::getModel('stats')->processNginxStats()) {
-                    Application::shutdown('Nginx stats successfully processed' . NL);
-                } else {
-                    $error = Application::getInstance()->getLastFromStack();
-                    Application::shutdown($error['message']);
-                }
-            case 'batchdaily';
-                Model::getModel('stats')->processBatchStats(Application::$config['batch_start'], Application::$config['batch_end'], StatsModel::DAILY_STATS);
-                Application::shutdown('Batch daily stats successfully processed' . NL);
-            case 'batchnginx';
-                Model::getModel('stats')->processBatchStats(Application::$config['batch_start'], Application::$config['batch_end'], StatsModel::NGINX_STATS);
-                Application::shutdown('Batch nginx stats successfully processed' . NL);
-            default:
-                Application::shutdown('You need to specify crontab action' . NL);
-        }
-    } else {
-        Application::shutdown('You do not have perrmissions to run this script' . NL);
-    }
+    class CommandView extends View { }

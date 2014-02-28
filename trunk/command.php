@@ -36,39 +36,28 @@
      * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
      */
 
-    defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
-
     /**
-     * Bootstrap base engine classes
+     * Crontab laucher
      * @package M2 Micro Framework
      * @subpackage Modules
      * @author Alexander Chaika
-     * @since 0.1
+     * @since 0.6
      */
 
-    // start session
-    if (isset($_COOKIE['PHPSESSID'])) {
-        session_id($_COOKIE['PHPSESSID']);
+    // Simple ACL hook
+    define('M2_MICRO', 1);
+
+    // Get engine
+    require_once 'bootstrap.php';
+
+    // Init app and disable sef
+    M2::init();
+
+    // Check mode
+    if (php_sapi_name() == 'cli') {
+        $controller = new CommandController();
+        $controller->route($argv);
+        M2::shutdown($controller->getOutput() . NL);
+    } else {
+        M2::shutdown('You do not have perrmissions to run this script' . NL);
     }
-    session_start();
-
-    // set working mode
-    date_default_timezone_set('Europe/Minsk');
-    ini_set('display_errors', 1);
-
-    // define globals
-    define('NL', PHP_EOL);
-    define('DS', DIRECTORY_SEPARATOR);
-    define('ROOT_PATH', __DIR__);
-    define('LIB_PATH', ROOT_PATH . DS . 'includes');
-    define('MIGRATION_PATH', ROOT_PATH . DS . '..' . DS . 'includes');
-
-    // errors & messages levels
-    define('ERROR',   1);
-    define('WARNING', 2);
-    define('NOTICE',  6);
-    define('MESSAGE', 8);
-
-    // system classes
-    require_once LIB_PATH . DS . '_autoload.php';
-    require_once LIB_PATH . DS . '_function.php';

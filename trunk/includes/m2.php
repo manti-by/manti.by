@@ -39,36 +39,25 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Bootstrap base engine classes
-     * @package M2 Micro Framework
-     * @subpackage Modules
-     * @author Alexander Chaika
-     * @since 0.1
+     * Framework alias of Application
      */
+    class M2 extends Application {
 
-    // start session
-    if (isset($_COOKIE['PHPSESSID'])) {
-        session_id($_COOKIE['PHPSESSID']);
+        public static function app() {
+            return Application::getInstance();
+        }
+
+        public static function error() {
+            $error = Application::getInstance()->getLastFromStack();
+            switch ($error['level']) {
+                case 1:
+                    return 'ERROR: ' . $error['message'];
+                case 2:
+                    return 'WARNING: ' . $error['message'];
+                case 6:
+                    return 'NOTICE: ' . $error['message'];
+                case 8:
+                    return 'MESSAGE: ' . $error['message'];
+            }
+        }
     }
-    session_start();
-
-    // set working mode
-    date_default_timezone_set('Europe/Minsk');
-    ini_set('display_errors', 1);
-
-    // define globals
-    define('NL', PHP_EOL);
-    define('DS', DIRECTORY_SEPARATOR);
-    define('ROOT_PATH', __DIR__);
-    define('LIB_PATH', ROOT_PATH . DS . 'includes');
-    define('MIGRATION_PATH', ROOT_PATH . DS . '..' . DS . 'includes');
-
-    // errors & messages levels
-    define('ERROR',   1);
-    define('WARNING', 2);
-    define('NOTICE',  6);
-    define('MESSAGE', 8);
-
-    // system classes
-    require_once LIB_PATH . DS . '_autoload.php';
-    require_once LIB_PATH . DS . '_function.php';
