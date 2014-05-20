@@ -133,7 +133,7 @@
 
                 // Camping gallery reverse sorting
                 if ($gallery->id == 13) {
-                    usort($gallery->originals, array('self', 'sortByTimestamp'));
+                    usort($gallery->originals, array('self', 'sortById'));
                 }
 
                 // Add originals and thumbnails links
@@ -377,5 +377,13 @@
                 return 0;
             }
             return ($a->timestamp > $b->timestamp) ? 1 : -1;
+        }
+        
+        public static function sortById($a, $b)
+        {
+            if ($a->id == $b->id) {
+                return 0;
+            }
+            return ($a->id > $b->id) ? 1 : -1;
         }
     }
