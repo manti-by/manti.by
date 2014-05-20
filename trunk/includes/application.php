@@ -205,8 +205,8 @@
          * Close application
          */
         public static function flushTranslations() {
-            $language = (isset($_COOKIE['language']) ? $_COOKIE['language'] : 'ru');
-            $current = Cache::get('translations_' . $language);
+            $language = (isset(self::$config['language']) ? self::$config['language'] : 'ru');
+            $current = Cache::get(self::$config['memcache_suffix'] . 'translations_' . $language);
 
             $lang_file = ROOT_PATH . DS . 'language' . DS . $language . '.ini';
             if (file_exists($lang_file)) {
