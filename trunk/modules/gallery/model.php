@@ -131,6 +131,11 @@
                 $this->database->query("CALL GET_GALLERY_ITEMS_BY_ID(" . $gallery->id. ")");
                 $gallery->originals = $this->database->getObjectsArray();
 
+                // Camping gallery reverse sorting
+                if ($gallery->id == 13) {
+                    usort($gallery->originals, array('self', 'sortByTimestamp'));
+                }
+
                 // Add originals and thumbnails links
                 if (count($gallery->originals)) {
                     foreach($gallery->originals as $original) {
@@ -364,5 +369,13 @@
             } else {
                 return $this->_throw(T('Image not found') . ': ' . $source);
             }
+        }
+
+        public static function sortByTimestamp($a, $b)
+        {
+            if ($a->timestamp == $b->timestamp) {
+                return 0;
+            }
+            return ($a->timestamp > $b->timestamp) ? 1 : -1;
         }
     }
