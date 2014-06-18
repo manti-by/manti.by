@@ -57,23 +57,17 @@
         const OUTPUT_TYPE_REDIRECT  = 'redirect';
         const OUTPUT_TYPE_PRINT     = 'print';
 
-        const CACHE_KEY = 'views';
-
         /**
-         * @var array memory storage
+         * Cache key
+         * @var string
          */
-        private $storage = null;
+        private $_ckey;
 
         /**
          * Singleton protection
          */
         protected function __construct() {
-            // Init views storage
-            $this->storage = Cache::get('views');
-            if (!$this->storage) {
-                $this->storage = array();
-                Cache::set(self::CACHE_KEY, $this->storage);
-            }
+            $this->_ckey = Application::$config['memcache_suffix'] . '-view-';
         }
 
         /**
@@ -204,10 +198,9 @@
          */
         public function getContents($type, $name, $options = null) {
             // Check cache
-            $cache_key = Application::$config['memcache_suffix'] . $type . $name . json_encode($options);
-            if (isset($this->storage[$cache_key])) {
-                return $this->storage[$cache_key];
-            }
+            $hash = $this->_ckey . crc32($type . $name . json_encode($options));
+            $result = Cache::get($hash);
+            if ($result) return $result;
 
             // Get content type
             $type = (!empty($type) ? $type . DS : '');
@@ -248,9 +241,7 @@
             ob_end_clean();
 
             // Cache rendered item
-            $this->storage[$cache_key] = $result;
-            Cache::set(self::CACHE_KEY, $this->storage);
-
+            Cache::set($hash, $result);
             return $result;
         }
 

@@ -188,7 +188,7 @@
         public function query($query) {
             // Execute
             $this->query = $this->replacePrefix($query);
-            $this->hash = md5($query);
+            $this->hash = Application::$config['memcache_suffix'] . '-model-' . crc32($query);
 
             // Check cache
             $result = Cache::get($this->hash);

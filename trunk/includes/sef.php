@@ -51,8 +51,6 @@
         const SEF_MAP_TYPE_DB       = 0;
         const SEF_MAP_TYPE_SIMPLE   = 1;
 
-        const CACHE_KEY = 'sef';
-
         /**
          * @var array $character_replace_table replace table for strict symbols
          */
@@ -84,6 +82,12 @@
         protected static $instance = null;
 
         /**
+         * Cache key
+         * @var string
+         */
+        private $_ckey;
+
+        /**
          * @var array memory storage
          */
         private $storage = null;
@@ -92,11 +96,14 @@
          * Singleton protection
          */
         protected function __construct() {
+            // Generate cache key
+            $this->_ckey = Application::$config['memcache_suffix'] . '-sef';
+
             // Init sef aliases storage
-            $this->storage = Cache::get(self::CACHE_KEY);
+            $this->storage = Cache::get($this->_ckey);
             if (!$this->storage) {
                 $this->storage = array();
-                Cache::set(self::CACHE_KEY, $this->storage);
+                Cache::set($this->_ckey, $this->storage);
             }
         }
 
@@ -307,7 +314,7 @@
         private function addToStorageData($request, $link) {
             // Append new link to storage
             $this->storage[$request] = $link;
-            return Cache::set(self::CACHE_KEY, $this->storage);
+            return Cache::set($this->_ckey, $this->storage);
         }
 
         /**
@@ -324,7 +331,7 @@
          */
         private function getStorageData() {
             if (is_null($this->storage)) {
-                $this->storage = Cache::get('sef');
+                $this->storage = Cache::get($this->_ckey);
             }
 
             return $this->storage;

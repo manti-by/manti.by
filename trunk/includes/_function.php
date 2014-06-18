@@ -109,13 +109,10 @@
      */
     function T($text) {
         $language = (isset(Application::$config['language']) ? Application::$config['language'] : 'ru');
-        $cache_key = Application::$config['memcache_suffix'] . 'translations_' . $language;
+        $cache_key = Application::$config['memcache_suffix'] . '-translations-' . $language;
 
-        // Try to get from memory
-        $references = Cache::get($cache_key, Cache::TYPE_MEMORY);
-        if (is_null($references)) {
-            $references = Cache::get($cache_key);
-        }
+        // Try to get from cache
+        $references = Cache::get($cache_key);
 
         // Check language existance
         if (!is_array($references)) {
@@ -127,7 +124,6 @@
                 $references = parse_ini_file($lang_file);
             }
             Cache::set($cache_key, $references);
-            Cache::set($cache_key, $references, Cache::TYPE_MEMORY);
         }
 
         // Remove spaces and other characters
@@ -143,7 +139,6 @@
         if (!array_key_exists($key, $references)) {
             $references[$key] = $text;
             Cache::set($cache_key, $references);
-            Cache::set($cache_key, $references, Cache::TYPE_MEMORY);
         }
 
         return $references[$key];
