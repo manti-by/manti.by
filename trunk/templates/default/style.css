@@ -297,3 +297,7 @@ audio { width: 330px; transform: scale(0.8); }
 
 #forthcoming { text-transform: uppercase; padding: 0 0 15px 20px; }
 #forthcoming a { color: #b40303; font-size: 18px; font-weight: normal; }
+
+#disqus_thread { margin-top: 15px; }
+
+.tab-community { display: none !important; }

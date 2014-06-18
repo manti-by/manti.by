@@ -68,6 +68,11 @@
          * @var string $query latest query
          */
         private $query;
+        
+        /**
+         * @var string $hash latest query hash
+         */
+        private $hash;
 
         /**
          * @var object $instance self pointer
@@ -183,19 +188,27 @@
         public function query($query) {
             // Execute
             $this->query = $this->replacePrefix($query);
-            $this->res = $this->mysqli->query($this->query);
+            $this->hash = md5($query);
+
+            // Check cache
+            $result = Cache::get($this->hash);
+            if ($result) {
+                $this->result = 1;
+                return true;
+            }
 
             // Add debug info
             $this->logSQL($this->query);
 
+            // Execute query
+            $this->res = $this->mysqli->query($this->query);
             if ($this->getLastErrorNum() > 0) {
                 return $this->_throw($this->getError(), ERROR);
             } else {
+                $this->result = 1;
                 while ($this->mysqli->next_result()) {
-                    // #43635349 - Fix multiple saving for new posts
                     $resource = $this->mysqli->store_result();
                     $this->res = $resource ? $resource : $this->res;
-                    $this->result = 1;
                 }
                 return true;
             }
@@ -206,6 +219,9 @@
          * @return string|bool $result
          */
         public function getField() {
+            // Check cache
+            if ($result = Cache::get($this->hash)) return $result;
+        
             // Check result
             if (!$this->checkResult()) {
                 return false;
@@ -221,6 +237,7 @@
             if (!$row || empty($row)) {
                 return false;
             } else {
+                Cache::set($this->hash, $row[0]);
                 return $row[0];
             }
         }
@@ -230,6 +247,9 @@
          * @return object|bool $result resulted object or false
          */
         public function getObject() {
+            // Check cache
+            if ($result = Cache::get($this->hash)) return $result;
+
             // Check result
             if (!$this->checkResult()) {
                 return false;
@@ -244,6 +264,7 @@
             if (!$obj || empty($obj)) {
                 return false;
             } else {
+                Cache::set($this->hash, $obj);
                 return $obj;
             }
         }
@@ -253,6 +274,9 @@
          * @return array|bool $result resulted array of objects or false
          */
         public function getObjectsArray() {
+            // Check cache
+            if ($result = Cache::get($this->hash)) return $result;
+
             // Check result
             if (!$this->checkResult()) {
                 return false;
@@ -269,6 +293,7 @@
             // Check CALL result
             $this->res->free_result();
 
+            Cache::set($this->hash, $result);
             return $result;
         }
 
@@ -277,6 +302,9 @@
          * @return array|bool $result resulted array of rows (arrays too) or false
          */
         public function getArray() {
+            // Check cache
+            if ($result = Cache::get($this->hash)) return $result;
+
             // Check result
             if (!$this->checkResult()) {
                 return false;
@@ -293,6 +321,7 @@
             // Check CALL result
             $this->res->free_result();
 
+            Cache::set($this->hash, $result);
             return $result;
         }
 
@@ -303,6 +332,9 @@
          * @return array|bool $result associative array of pairs ($index => $field) or false
          */
         public function getPairs($index, $field) {
+            // Check cache
+            if ($result = Cache::get($this->hash)) return $result;
+
             // Check result
             if (!$this->checkResult()) {
                 return false;
@@ -324,6 +356,7 @@
             // Check CALL result
             $this->res->free_result();
 
+            Cache::set($this->hash, $result);
             return $result;
         }
 

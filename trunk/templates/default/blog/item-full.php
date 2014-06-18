@@ -75,6 +75,8 @@
         </div>
     <?php endif; ?>
 
+    <div id="disqus_thread"></div>
+
     <?php if (json_decode($options['data']->relations)) : ?>
         <div class="relations">
             <h2><?php echo T('Similar posts'); ?></h2>
@@ -88,4 +90,14 @@
     $(document).ready(function() {
         $.get('<?php echo Sef::getSef('index.php?module=blog&action=track&id=' . $options['data']->id)?>');
     });
+
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'manti';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
 </script>

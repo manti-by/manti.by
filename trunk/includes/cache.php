@@ -120,7 +120,7 @@
                     break;
                 case Cache::TYPE_MEMCACHE :
                     if ($memcache = self::getMemcache()) {
-                        return $memcache->set($key, $value) ? $value : false;
+                        return $memcache->set($key, $value, 0, 60 * 60 * 24 * 7) ? $value : false;
                     } else {
                         return false;
                     }
