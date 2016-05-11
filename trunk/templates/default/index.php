@@ -135,5 +135,20 @@
         </div>
 
         <?php echo $this->getContents('plugin', 'debug'); ?>
+        
+        <script type="application/ld+json">
+        {
+          "@context" : "http://schema.org",
+          "@type" : "MusicGroup",
+          "name" : "Manti",
+          "url" : "http://manti.by",
+          "logo": "http://manti.by/content/images/logo.jpg",
+          "sameAs" : [
+            "https://soundcloud.com/manti_by",
+            "https://twitter.com/manti_by",
+            "http://promodj.com/manti.by"
+          ]
+        }
+        </script>
     </body>
 </html>

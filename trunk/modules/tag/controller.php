@@ -70,14 +70,14 @@
             // Get search results
             if ($q) {
                 $options['title'] = T('Search results by tags: ') . $q;
-                $options['data'] = Model::getModel('blog')->getPostsByTags($q);
+                $options['data'] = Model::getModel('blog')->getPostsByTags($q, 20);
             } elseif ($id) {
                 $tag_name = $this->model->getTagNameById($id);
                 $options['title'] = $tag_name ? T('Search results for tag #') . $tag_name : T('Search results');
-                $options['data'] = Model::getModel('blog')->getPostsByTagId($id);
+                $options['data'] = Model::getModel('blog')->getPostsByTagId($id, 20);
             } else {
                 $options['title'] = T('No search results found');
-                $options['data'] = Model::getModel('blog')->getPosts();
+                $options['data'] = Model::getModel('blog')->getPosts(20);
             }
             
             // Render search results

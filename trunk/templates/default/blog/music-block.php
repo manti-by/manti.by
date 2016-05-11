@@ -47,7 +47,7 @@
      * @since 0.3RC3
      */
 ?>
-<?php if ($options['data']->is_music) : ?>
+<?php if ($options['data']->is_music == 1) : ?>
     <div id="music-block-<?php echo $options['data']->id; ?>" class="music-block">
 
         <?php if (json_decode($options['data']->covers)) : ?>

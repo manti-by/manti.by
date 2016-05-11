@@ -178,6 +178,10 @@
                 // Create gallery DB entry
                 $dir_name = substr(strrchr($path, '/'), 1);
                 $dir_name = $this->database->escape($dir_name);
+                
+                // Test mode
+                //if ($dir_name != 'autumn-15') continue;
+                
                 $this->database->query("CALL UPSERT_GALLERY(0, '" . $this->database->escape($path) . "', '" . ucfirst($dir_name) . "',  '" . strtolower($dir_name) . "', '', '');");
                 $gallery_id = $this->database->getField();
 
@@ -198,11 +202,11 @@
                                     );
                                 } else {
                                     // @todo Add error handler for file dublicates
-                                    /*$message = $this->getLastFromStack();
+                                    $message = $this->getLastFromStack();
                                     $file_list[] = array(
                                         'source' => $source,
                                         'status' => $message['message']
-                                    );*/
+                                    );
                                 }
                             } else {
                                 $message = $this->getLastFromStack();

@@ -216,6 +216,7 @@
          * @static
          */
         public static function set($key, $value, $storage = Cache::TYPE_DEFAULT) {
+            if (!Application::$config['cache_enabled']) return null;
             return self::getInstance()->setData($key, $value, $storage);
         }
 
@@ -228,6 +229,7 @@
          * @static
          */
         public static function append($key, $value, $storage = Cache::TYPE_DEFAULT) {
+            if (!Application::$config['cache_enabled']) return null;
             return self::getInstance()->appendData($key, $value, $storage);
         }
 
@@ -239,6 +241,7 @@
          * @static
          */
         public static function get($key, $storage = Cache::TYPE_DEFAULT) {
+            if (!Application::$config['cache_enabled']) return null;
             return self::getInstance()->getData($key, $storage);
         }
     }

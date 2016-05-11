@@ -51,7 +51,7 @@
 ?>
 <div class="left-column">
     <div class="trends">
-        Alexander Chaika a.k.a. Manti&copy; 2004 - <?php echo date('Y'); ?>
+        Alexander Manti a.k.a. Manti&copy; 2004 - <?php echo date('Y'); ?>
     </div>
     <div class="metadesc">
         <?php echo Application::$config['metadesc_' . Application::$config['language']]; ?>
@@ -138,14 +138,8 @@
             </a>
         </li>
         <li>
-            <a href="http://www.facebook.com/manti.by" target="_blank" rel="nofollow">
-                <img src="<?php echo Application::$config['template_image_url_path']; ?>facebook.png" alt="Facebook" width="101" height="25" />
-            </a>
         </li>
         <li>
-            <a href="http://www.vk.com/manti_by" target="_blank" rel="nofollow">
-                <img src="<?php echo Application::$config['template_image_url_path']; ?>vkontakte.png" alt="Vkontakte" width="101" height="25" />
-            </a>
         </li>
     </ul>
 </div>

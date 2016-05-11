@@ -213,7 +213,7 @@
                 $exist = parse_ini_file($lang_file);
             }
 
-            $new = array_diff_key($current, $exist);
+            $new = array_diff_key(is_array($current) ? $current : array(), $exist);
             $handler = fopen($lang_file, 'a');
             foreach ($new as $key => $value) {
                 fwrite($handler, $key . ' = "' . $value . '"' . NL);

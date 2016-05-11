@@ -64,7 +64,7 @@
         <?php endif; ?>
     </h3>
 
-    <?php if (!$options['data']->is_music) : ?>
+    <?php if ($options['data']->is_music != 1) : ?>
         <div id="teaser-<?php echo $options['data']->id; ?>" class="teaser">
             <?php echo nl2br($options['data']->teaser); ?>
         </div>

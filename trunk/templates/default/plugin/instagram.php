@@ -5,7 +5,7 @@
      * @author      Alexander Chaika <marco.manti@gmail.com>
      * @copyright   2012 Alexander Chaika
      * @link        https://github.com/marco-manti/M2_micro
-     * @version     0.3
+     * @version     0.3.1
      * @package     M2 Micro Framework
      * @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
      *
@@ -39,52 +39,27 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Frontpage template
-     * @name $frontpage
-     * @author Alexander Chaika
+     * Gallery list plugin
+     * @name $gallery-list-plugin
      * @package M2 Micro Framework
      * @subpackage Template
-     * @since 0.3RC3
-     * @todo Fix other posts out
+     * @author Alexander Chaika
+     * @since 0.3.1
      */
+
 ?>
-<div id="frontpage">
-    <?php
-        $data = array('data' => $options['data']['featured']);
-        echo $this->getContents('blog', 'featured', $data);
+<h2><?php echo T('Instagram'); ?></h2>
+<div id="instagram" class="sidebar latest">
+    <script src="//lightwidget.com/widgets/lightwidget.js"></script>
+    <iframe src="//lightwidget.com/widgets/765b8e6b142a59e290f0775359a288cf.html" 
+            id="lightwidget_765b8e6b14"
+            name="lightwidget_765b8e6b14"
+            scrolling="no"
+            allowtransparency="true"
+            class="lightwidget-widget"
+            style="width: 100%; border: 0; overflow: hidden;"></iframe>
 
-        $data = array('data' => array(
-            'gallery_latest'  => $options['data']['gallery_latest'],
-            'gallery_popular' => $options['data']['gallery_popular']
-        ));
-        echo $this->getContents('gallery', 'front', $data);
-    ?>
-
-    <h2 class="with-full-link front-blog">
-        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>">
-            <?php echo T('Other blog posts'); ?>
-        </a>
-        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>" class="fr view-all">
-            <?php echo T('Show all'); ?>
-        </a>
-    </h2>
-
-    <div class="main-sidebar">
-        <?php
-            $data = array('module' => 'blog', 'data' => $options['data']['content'], 'context' => 'preview');
-            echo $this->renderItemsArray($data);
-        ?>
+    <div id="instagram-profile">
+        <?php echo T('Profile'); ?>: <a href="https://www.instagram.com/manti_by/">@manti_by</a>
     </div>
-
-    <div class="right-sidebar">
-        <div id="forthcoming">
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=43'); ?>"><?php echo T('Forthcoming'); ?></a>
-        </div>
-        <?php echo $this->getContents('plugin', 'tags'); ?>
-        <?php echo $this->getContents('plugin', 'latest'); ?>
-        <?php echo $this->getContents('plugin', 'galleries'); ?>
-        <?php echo $this->getContents('plugin', 'instagram'); ?>
-    </div>
-
-    <div class="cls"></div>
 </div>

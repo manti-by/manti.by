@@ -150,6 +150,9 @@ audio { width: 330px; transform: scale(0.8); }
 .right-sidebar .sidebar.tags, 
 .right-sidebar .sidebar.latest { margin-bottom: 0; }
 
+.right-sidebar #instagram { margin-left: 38px; }
+.right-sidebar #instagram-profile { margin-top: 5px; color: #666; }
+
 .admin-buttons a { font-size: 12px; }
 
 .relation { float: left; border: 3px solid transparent; width: 227px; height: 124px; overflow: hidden; }
@@ -186,7 +189,7 @@ audio { width: 330px; transform: scale(0.8); }
 #gallery h3 a, #search h3 a { color: inherit; }
 #gallery .gallery-item { margin-bottom: 30px; }
 
-.gallery-item .thumbnail { display: inline-block; margin: 0; padding: 3px 3px 1px 3px; }
+.gallery-item .thumbnail { display: inline-block; margin: 0; padding: 3px 3px 1px 2px; }
 .gallery-item .thumbnail:hover { background: #AAA; }
 
 #gallery .favorite a { display: inline-block; height: 250px; overflow: hidden; margin: 0; padding: 3px 3px 1px 3px; }
