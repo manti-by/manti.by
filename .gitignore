@@ -10,3 +10,6 @@ trunk/language/ru.ini
 
 # Remove sitemap
 trunk/sitemap.xml
+
+# Remove vagrant instance folder
+.vagrant/
