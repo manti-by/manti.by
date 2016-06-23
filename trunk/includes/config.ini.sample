@@ -1,9 +1,9 @@
-; configuration of M2 Micro Framework
+; configuration of M2 Micro
 [general settings]
 http_host =
 doc_root =
-mail_from = "marco.manti@gmail.com"
-secret = 21232f297a57a5a743894a0e4a801fc3
+mail_from = "manti.by@gmail.com"
+secret = secret
 new_pass_length = 10
 default_module = front
 date_format = "M d, Y"
@@ -11,7 +11,7 @@ template = default
 language = en
 gzip = 0
 
-[default texts]
+[text defaults]
 not_found_ru = "Оооой( Страница, которую вы искали не существует."
 not_found_en = "Oooops( The page you are requested does not exists."
 site_title_ru = "Мой блог"
@@ -71,7 +71,7 @@ frontpage_count = 12
 db_path = "127.0.0.1"
 db_port = 3306
 db_user = root
-db_pass = password
+db_pass =
 db_base = default
 db_prefix =
 db_encoding = utf8
@@ -80,6 +80,7 @@ db_encoding = utf8
 memcache_host = "127.0.0.1"
 memcache_port = 11211
 memcache_suffix = ru
+cache_enabled = 0
 view_cache_enabled = 0
 
 [geolocation]
