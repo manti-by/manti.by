@@ -131,6 +131,11 @@
                 $this->database->query("CALL GET_GALLERY_ITEMS_BY_ID(" . $gallery->id. ")");
                 $gallery->originals = $this->database->getObjectsArray();
 
+                // Camping gallery reverse sorting
+                if ($gallery->id == 13) {
+                    usort($gallery->originals, array('self', 'sortById'));
+                }
+
                 // Add originals and thumbnails links
                 if (count($gallery->originals)) {
                     foreach($gallery->originals as $original) {
@@ -173,6 +178,10 @@
                 // Create gallery DB entry
                 $dir_name = substr(strrchr($path, '/'), 1);
                 $dir_name = $this->database->escape($dir_name);
+                
+                // Test mode
+                //if ($dir_name != 'autumn-15') continue;
+                
                 $this->database->query("CALL UPSERT_GALLERY(0, '" . $this->database->escape($path) . "', '" . ucfirst($dir_name) . "',  '" . strtolower($dir_name) . "', '', '');");
                 $gallery_id = $this->database->getField();
 
@@ -193,11 +202,11 @@
                                     );
                                 } else {
                                     // @todo Add error handler for file dublicates
-                                    /*$message = $this->getLastFromStack();
+                                    $message = $this->getLastFromStack();
                                     $file_list[] = array(
                                         'source' => $source,
                                         'status' => $message['message']
-                                    );*/
+                                    );
                                 }
                             } else {
                                 $message = $this->getLastFromStack();
@@ -364,5 +373,21 @@
             } else {
                 return $this->_throw(T('Image not found') . ': ' . $source);
             }
+        }
+
+        public static function sortByTimestamp($a, $b)
+        {
+            if ($a->timestamp == $b->timestamp) {
+                return 0;
+            }
+            return ($a->timestamp > $b->timestamp) ? 1 : -1;
+        }
+        
+        public static function sortById($a, $b)
+        {
+            if ($a->id == $b->id) {
+                return 0;
+            }
+            return ($a->id > $b->id) ? 1 : -1;
         }
     }

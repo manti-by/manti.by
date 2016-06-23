@@ -134,7 +134,7 @@
                     break;
                 case Cache::TYPE_MEMCACHE :
                     if ($memcache = self::getMemcache()) {
-                        return $memcache->set($key, $value) ? $value : false;
+                        return $memcache->set($key, $value, 0, 60 * 60 * 24 * 7) ? $value : false;
                     } else {
                         return false;
                     }
@@ -230,6 +230,7 @@
          * @static
          */
         public static function set($key, $value, $storage = Cache::TYPE_DEFAULT) {
+            if (!Application::$config['cache_enabled']) return null;
             return self::getInstance()->setData($key, $value, $storage);
         }
 
@@ -242,6 +243,7 @@
          * @static
          */
         public static function append($key, $value, $storage = Cache::TYPE_DEFAULT) {
+            if (!Application::$config['cache_enabled']) return null;
             return self::getInstance()->appendData($key, $value, $storage);
         }
 
@@ -253,6 +255,7 @@
          * @static
          */
         public static function get($key, $storage = Cache::TYPE_DEFAULT) {
+            if (!Application::$config['cache_enabled']) return null;
             return self::getInstance()->getData($key, $storage);
         }
     }

@@ -83,6 +83,7 @@
         <?php echo $this->getContents('plugin', 'tags'); ?>
         <?php echo $this->getContents('plugin', 'latest'); ?>
         <?php echo $this->getContents('plugin', 'galleries'); ?>
+        <?php echo $this->getContents('plugin', 'instagram'); ?>
     </div>
 
     <div class="cls"></div>

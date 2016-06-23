@@ -244,6 +244,7 @@
                         }
                     }
                 }
+                ksort($result);
                 return $result;
             } catch (Exception $e) {
                 return $this->_throw(T('Error while trying read directory') . ' "' . $directory . '" : ' . $e->getMessage(), ERROR);

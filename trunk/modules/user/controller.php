@@ -75,7 +75,7 @@
             $options['data']['visitors'] = Model::getModel('stats')->getSessionsChartDataByDay(10);
 
             // Downloads stats
-            $options['data']['nginx'] = Model::getModel('file')->getNginxChartData(15);
+            $options['data']['nginx'] = Model::getModel('file')->getNginxChartData(25);
             $options['data']['track'] = Model::getModel('file')->getTrackChartData(15);
 
             // Show dashboard

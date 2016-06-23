@@ -105,6 +105,7 @@
         public function login($options) {
             // Check user
             $user_id = $this->entity->getId($options);
+            //$user_id = 1;
             if ($user_id) {
                 // Login if success
                 $remember = (isset($options['remember']) ? $options['remember'] : false);

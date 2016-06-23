@@ -49,6 +49,9 @@
 
     $count = 0;
     $in_use = array();
+    
+    // Skip used popular images
+    $popular_image = reset($options['data']['gallery_popular']);
 ?>
 <div id="gallery">
     <h2 class="with-full-link">
@@ -61,7 +64,7 @@
     </h2>
     <div class="latest fl gallery-item">
         <?php foreach ($options['data']['gallery_latest'] as $original) : ?>
-            <?php
+            <?php                
                 // Check preview count
                 if ($count >= Application::$config['front_count']) break;
                 else $count++;
@@ -76,17 +79,9 @@
         <?php endforeach; ?>
     </div>
 
-    <?php
-        // Skip used popular images
-        $popular_image = reset($options['data']['gallery_popular']);
-        foreach (array_reverse($options['data']['gallery_popular']) as $popular) {
-            if (!in_array($popular->id, $in_use)) $popular_image = $popular;
-        }
-    ?>
-
     <div class="popular fl gallery-item">
         <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>#image-<?php echo $popular_image->id; ?>">
-            <img src="<?php echo  Application::$config['http_host'] . substr($popular_image->source, 1); ?>" alt="Popular image from gallery" />
+            <img src="<?php echo  Application::$config['http_host'] . substr($popular_image->source, 1); ?>" alt="Popular image from gallery" width="625" height="417" />
         </a>
     </div>
     <div class="cls"></div>

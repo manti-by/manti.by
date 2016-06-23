@@ -54,7 +54,7 @@
 
     // set working mode
     date_default_timezone_set('Europe/Minsk');
-    ini_set('display_errors', 1);
+    ini_set('display_errors', 0);
 
     // define globals
     define('NL', PHP_EOL);

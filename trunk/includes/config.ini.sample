@@ -37,7 +37,7 @@ debug_level_max = 3
 debug_level_skip = 2
 error_log = "../../log/app_error.log"
 
-[content files]
+[content]
 allowed_file_extensions = "png,jpg,mp3,zip"
 
 [music releases in blog module]
@@ -45,7 +45,7 @@ preview_path = "./content/preview"
 release_path = "./content/release"
 covers_path = "./content/covers"
 
-[gallery settings]
+[gallery]
 gallery_path = "./content/gallery"
 preview_count = 12
 front_count = 6
@@ -53,7 +53,7 @@ thumb_width = 100
 thumb_height = 100
 watermark = "./content/images/watermark.png"
 
-[blog settings]
+[blog]
 teaser_length = 250
 metadesc_length = 250
 cover_width = 350
@@ -67,7 +67,7 @@ popular_count = 5
 content_count = 2
 frontpage_count = 12
 
-[database credentials]
+[database]
 db_path = "127.0.0.1"
 db_port = 3306
 db_user = root
@@ -76,9 +76,10 @@ db_base = default
 db_prefix =
 db_encoding = utf8
 
-[database credentials]
+[cache]
 memcache_host = "127.0.0.1"
 memcache_port = 11211
+memcache_suffix = ru
 view_cache_enabled = 0
 
 [geolocation]

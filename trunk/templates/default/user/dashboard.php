@@ -84,7 +84,6 @@
             google.setOnLoadCallback(drawVisitorsChart);
 
             google.setOnLoadCallback(drawNginxChart);
-            google.setOnLoadCallback(drawTrackChart);
 
             function drawBrowsersChart() {
                 var data = google.visualization.arrayToDataTable(<?php echo $options['data']['browsers']; ?>);
@@ -128,7 +127,7 @@
                 var data = google.visualization.arrayToDataTable(<?php echo $options['data']['nginx']; ?>);
                 var options = {
                     width: 960,
-                    height: 500,
+                    height: 750,
                     title: '<?php echo T('Nginx statistics'); ?>',
                     hAxis: { title: '<?php echo T('Count'); ?>'},
                     chartArea: { width: '50%'},
@@ -136,21 +135,6 @@
                 };
 
                 var chart = new google.visualization.BarChart(document.getElementById('nginx-stats-chart'));
-                chart.draw(data, options);
-            }
-
-            function drawTrackChart() {
-                var data = google.visualization.arrayToDataTable(<?php echo $options['data']['track']; ?>);
-                var options = {
-                    width: 960,
-                    height: 500,
-                    title: '<?php echo T('Track statistics'); ?>',
-                    hAxis: { title: '<?php echo T('Count'); ?>'},
-                    chartArea: { width: '50%'},
-                    bar: { groupWidth: '80%' }
-                };
-
-                var chart = new google.visualization.BarChart(document.getElementById('track-stats-chart'));
                 chart.draw(data, options);
             }
         </script>
@@ -161,7 +145,6 @@
         </div>
         <div id="visitors-stats-chart"></div>
         <div id="nginx-stats-chart"></div>
-        <div id="track-stats-chart"></div>
     </div>
 </div>
 

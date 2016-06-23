@@ -64,7 +64,9 @@
         <link rel="icon" type="image/png" href="<?php echo Application::$config['http_host']; ?>/templates/default/images/favicon.png">
 
         <?php if (preg_match('/MSIE/i', $_SERVER['HTTP_USER_AGENT'])) : ?>
-            <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/ie.css" />
+            <!--[if IE]>
+                <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/ie.css" />
+            <![endif]-->
         <?php endif; ?>
 
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
@@ -73,20 +75,15 @@
     </head>
     <body>
         <script type="text/javascript">
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-            var _gaq = _gaq || [];
-            _gaq.push(['_setAccount', 'UA-39793152-1']);
-            _gaq.push(['_trackPageview']);
-
-            (function() {
-                var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-            })();
-
+            ga('create', 'UA-39793152-1', 'manti.by');
+            ga('send', 'pageview');
         </script>
 
-        <!-- Yandex.Metrika counter -->
         <script type="text/javascript">
             (function (d, w, c) {
                 (w[c] = w[c] || []).push(function() {
@@ -111,7 +108,6 @@
             })(document, window, "yandex_metrika_callbacks");
         </script>
         <noscript><div><img src="//mc.yandex.ru/watch/20835088" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-        <!-- /Yandex.Metrika counter -->
 
         <?php echo $this->getContents('plugin', 'gototop'); ?>
         <?php echo $this->getContents('plugin', 'ajax'); ?>
@@ -139,5 +135,20 @@
         </div>
 
         <?php echo $this->getContents('plugin', 'debug'); ?>
+        
+        <script type="application/ld+json">
+        {
+          "@context" : "http://schema.org",
+          "@type" : "MusicGroup",
+          "name" : "Manti",
+          "url" : "http://manti.by",
+          "logo": "http://manti.by/content/images/logo.jpg",
+          "sameAs" : [
+            "https://soundcloud.com/manti_by",
+            "https://twitter.com/manti_by",
+            "http://promodj.com/manti.by"
+          ]
+        }
+        </script>
     </body>
 </html>
