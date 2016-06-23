@@ -1,0 +1,3 @@
+ALTER TABLE `tags`
+    ADD COLUMN `created` datetime AFTER `name`,
+    ADD COLUMN `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP;
