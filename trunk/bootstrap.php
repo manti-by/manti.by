@@ -61,7 +61,7 @@
     define('DS', DIRECTORY_SEPARATOR);
     define('ROOT_PATH', __DIR__);
     define('LIB_PATH', ROOT_PATH . DS . 'includes');
-    define('MIGRATION_PATH', ROOT_PATH . DS . '..' . DS . 'includes');
+    define('MIGRATION_PATH', ROOT_PATH . DS . '..' . DS . 'database' . DS . 'migrations');
 
     // errors & messages levels
     define('ERROR',   1);

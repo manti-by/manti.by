@@ -332,12 +332,16 @@
          * @return string $ip
          */
         public static function getIp() {
-            if (isset($_SERVER['HTTP_CLIENT_IP'])) {
-                return $_SERVER['HTTP_CLIENT_IP'];
-            } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-                return $_SERVER['HTTP_X_FORWARDED_FOR'];
+            if (php_sapi_name() != 'cli') {
+                if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+                    return $_SERVER['HTTP_CLIENT_IP'];
+                } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+                    return $_SERVER['HTTP_X_FORWARDED_FOR'];
+                } else {
+                    return $_SERVER['REMOTE_ADDR'];
+                }
             } else {
-                return $_SERVER['REMOTE_ADDR'];
+                return '127.0.0.1';
             }
         }
 

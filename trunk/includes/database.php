@@ -121,11 +121,11 @@
 
             // Connect to DB
             $this->mysqli = new mysqli(
-                Application::$config['db_path'] . ':' .
-                Application::$config['db_port'],
+                Application::$config['db_path'],
                 Application::$config['db_user'],
                 Application::$config['db_pass'],
-                Application::$config['db_base']
+                Application::$config['db_base'],
+                Application::$config['db_port']
             );
 
             if (!$this->mysqli || !empty($this->mysqli->error) || !empty($this->mysqli->connect_error)) {

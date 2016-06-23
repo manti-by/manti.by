@@ -191,8 +191,8 @@
             foreach ($migrations as $migration_version => $migration) {
                 // Skip previous migrations
                 if ($migration_version > $version) {
-                    if (file_exists(FILE_PATH . DS . $migration)) {
-                        if (!$this->model->migrateFile(FILE_PATH . DS . $migration, $migration_version)) {
+                    if (file_exists(MIGRATION_PATH . DS . $migration)) {
+                        if (!$this->model->migrateFile(MIGRATION_PATH . DS . $migration, $migration_version)) {
                             $this->_output = M2::error();
                             return;
                         }

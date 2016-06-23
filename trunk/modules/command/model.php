@@ -134,13 +134,13 @@
                 while (false !== ($item = $dir->read())) {
                     if ($item != '.' && $item != '..' && $item != '') {
                         // Check file pattern
-                        preg_match(self::FILE_PATTERN, $item, $result);
-                        $result = reset($result);
+                        preg_match(self::FILE_PATTERN, $item, $matches);
+                        $matches = reset($matches);
 
                         // Save items with version key
-                        if (!empty($result)) {
-                            preg_match_all('/\d+/', $result, $keys);
-                            $result[(int)$keys[0][3]] = $result;
+                        if (!empty($matches)) {
+                            preg_match_all('/\d+/', $matches, $keys);
+                            $result[(int)$keys[0][3]] = $matches;
                         }
                     }
                 }

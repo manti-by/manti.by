@@ -153,22 +153,17 @@
                 }
 
                 // Define http_host & doc_root if empty
-                if (empty(Application::$config['http_host'])) {
+                if (empty(Application::$config['http_host']) && php_sapi_name() != 'cli') {
                     Application::$config['http_host']  = 'http://' . $_SERVER['HTTP_HOST'];
                 }
                 if (empty(Application::$config['doc_root'])) {
                     Application::$config['doc_root']   = ROOT_PATH;
                 }
 
-                // Check cookie language
-                if (!empty($_COOKIE['language'])) {
-                    // #43634771
-                    // Application::$config['language'] = $_COOKIE['language'];
-                }
-
                 // Define helper options
                 if (empty(Application::$config['template_image_url_path'])) {
-                    Application::$config['template_image_url_path'] = Application::$config['http_host'] . '/templates/' . Application::$config['template'] . '/images/';
+                    Application::$config['template_image_url_path'] = Application::$config['http_host'] . '/templates/'
+                        . Application::$config['template'] . '/images/';
                 }
 
                 // Check debug token
