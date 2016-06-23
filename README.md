@@ -39,17 +39,10 @@ Vagrant setup
     $ cd src/
     $ vagrant up
 
-4. Login to vagrant and deploy DB
+4. Open browser at http://192.168.1.12
 
-    $ vagrant ssh
-    $ cd /vagrant/database
-    $ mysql -u root -p
-    $ CREATE DATABASE manti CHARACTER SET utf8 COLLATE utf8_general_ci;
-    $ USE manti;
-    $ SOURCE database.sql;
-
-        NOTICE:
-        You can create "clean" database from migrations in ./src/database/. 
-        For this you should use "Database migration tool", which you can find 
-        in ./src/scripts directory, to run it simply call: $ ./db-migrate.sh
+    NOTICE:
+    You can create "clean" database from migrations in ./src/database/. 
+    For this you should use "Database migration tool", which you can find 
+    in ./src/scripts directory, to run it simply call: $ ./db-migrate.sh
 
