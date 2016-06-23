@@ -47,179 +47,197 @@
      * @since 0.3RC3
      */
 
-    $player_contents = json_encode(Model::getModel('file')->getPlayerContent());
+    $player_source = json_encode(Model::getModel('file')->getPlayerContent());
 ?>
 <script type="text/javascript">
+(function($) {
+
+    'use strict';
+
+    // Check mp3 support
+    var is_mp3_support = -1;
+    $.fn.canPlayMp3 = function () {
+        if (is_mp3_support > -1) {
+            return is_mp3_support ? true : false;
+        } else {
+            var audio  = document.createElement("audio");
+            if (typeof audio.canPlayType === "function" && audio.canPlayType("audio/mpeg") !== "") {
+                is_mp3_support = 1;
+                return true;
+            } else {
+                is_mp3_support = 0;
+                return false;
+            }
+        }
+    };
+
+    // Update source function
+    var player = $('#player'),
+        player_audio = player.find('audio'),
+        player_title = player.find('.now-playing a'),
+        player_source = <?php echo $player_source; ?>,
+        favicon = $('link[rel=icon]');
+
+    $.fn.updateSource = function(id) {
+        var quality, is_mp3;
+
+        // Search source by ID
+        for (var i = 0; i < player_source.length; i++) {
+            if (player_source[i].id == id) {
+                // Update cookie
+                setCookie('player_id', id);
+
+                // Check quality
+                quality = getCookie('player_use_hd') == 1 ? 'hd' : 'web';
+                is_mp3  = $.fn.canPlayMp3() ? 'mp3' : 'web';
+
+                // Update player
+                player_audio.attr('src', player_source[i][quality][is_mp3]);
+                player_title.html(player_source[i]['name']);
+
+                return;
+            }
+        }
+    };
+
+    // Update players progress bars
+    $.fn.updatePlayerProgress = function () {
+        var player_progress_line = player.find('.position .progress-line'),
+            player_progress_line_active = player.find('.position .progress-line-active'),
+            player_progress_line_loaded = player.find('.position .progress-line-loaded'),
+            player_progress_label = player.find('.position .progress-line-label span');
+
+        var position = getCookie('player_position') ? getCookie('player_position') : 0,
+            player_id = getCookie('player_id') ? getCookie('player_id') : 0,
+            current_player = $('#player-'+ player_id),
+            width;
+
+        // Update active progress line
+        width = position * player_progress_line.width() / 100;
+        player_progress_line_active.width(width);
+
+        width = position * current_player.find('.position .progress-line').width() / 100;
+        current_player.find('.position .progress-line-active').width(width);
+
+        // Update current player timestamps
+        var timestamp = secondsToTime(player.currentTime);
+
+        player_progress_label.html(timestamp);
+        current_player.find('.position .progress-line-label span').html(timestamp);
+
+        // Update buffered state
+        var buffered = player_audio.buffered.end(0) / player_audio.duration;
+
+        width = buffered * player_progress_line.width();
+        player_progress_line_loaded.width(width);
+
+        width = buffered * current_player.find('.position .progress-line').width();
+        current_player.find('.position .progress-line-loaded').width(width);
+    };
+
+    // Update players volume bars
+    $.fn.updatePlayerVolume = function() {
+        var player_volume_line = player.find('.volume .progress-line'),
+            player_volume_line_active = player.find('.volume .progress-line-active'),
+            player_volume_label = player.find('.volume .progress-line-label span');
+
+        var volume = getCookie('player_volume') ? getCookie('player_volume') : 70,
+            player_id = getCookie('player_id') ? getCookie('player_id') : 0,
+            current_player = $('#player-'+ player_id),
+            width;
+
+        // Update volume label
+        player_volume_label.html(volume);
+        current_player.find('.volume .progress-line-label span').html(volume);
+
+        // Update volume width
+        width = volume * player_volume_line.width() / 100;
+        player_volume_line_active.width(width);
+
+        width = volume * current_player.find('.volume .progress-line').width() / 100;
+        current_player.find('.volume .progress-line-active').width(width);
+    };
+
+    // Update player source
+    $.fn.reloadPlayer = function(id) {
+        // Show loader
+        $.fn.loaderShow();
+
+        // Restart player with new source
+        if (typeof player_audio.pause != 'undefined') {
+            player_audio.pause();
+        }
+
+        $.fn.updateSource(id);
+        player_audio.load();
+
+        // Check playing state
+        if (getCookie('player_is_playing') == 1) {
+            player.play();
+            $('#player .play, #player-'+ id +' .play').removeClass('play').addClass('pause');
+            favicon.attr('href', '/templates/default/images/favicon-play.png');
+        } else {
+            favicon.attr('href', '/templates/default/images/favicon.png');
+        }
+
+        // Check HD
+        if (getCookie('player_use_hd') == 1) {
+            $('#player .high-definition, #player-'+ id +' .high-definition').addClass('active');
+        }
+
+        // Hide loader
+        $.fn.loaderHide();
+    };
+
+    // Init player
+    $.fn.initPlayer = function() {
+        var player_id = getCookie('player_id') ? getCookie('player_id') : 0;
+        player_id = player_id ? player_id : player_source[0]['id'];
+        $.fn.reloadPlayer(player_id);
+    };
+
+    // Reset all players
+    $.fn.resetAllPlayers = function() {
+        favicon.attr('href', '/templates/default/images/favicon.png');
+
+        $('.player:not(.active) .pause').removeClass('pause').addClass('play');
+        $('.player:not(.active) .position .progress-line-label span').html('00:00:00');
+        $('.player:not(.active) .position .progress-line-loaded').width(0);
+        $('.player:not(.active) .position .progress-line-active').width(0);
+    };
+
+    $.fn.animatePlayerTitle = function() {
+        var now_playing = $('#player .now-playing'),
+            now_playing_title = $('#player .now-playing a'),
+            overflow = now_playing.width() - now_playing_title.width();
+
+        if (overflow < 0) {
+            now_playing_title
+                .animate({ left: overflow }, 2500).animate({ opacity: 1 }, 5000)
+                .animate({ left: 0 }, 2500).animate({ opacity: 1 }, 5000);
+        }
+    };
+
     $(document).ready(function() {
-        // Check mp3 support
-        var is_mp3_support = -1;
-        $.fn.canPlayMp3 = function () {
-            if (is_mp3_support > -1) {
-                return is_mp3_support ? true : false;
-            } else {
-                var audio  = document.createElement("audio");
-                if (typeof audio.canPlayType === "function" && audio.canPlayType("audio/mpeg") !== "") {
-                    is_mp3_support = 1;
-                    return true;
-                } else {
-                    is_mp3_support = 0;
-                    return false;
-                }
-            }
-        }
 
-        // Get main objects
-        var player = $('#player audio').get(0);
-        var player_source = <?php echo $player_contents; ?>;
-
-        var is_player_loaded = false;
-        var current_source_id = getCookie('player_current_id') ? getCookie('player_current_id') : player_source[0].id;
-
-        // Update source function
-        $.fn.updateSource = function(id) {
-            // Search source by ID
-            for (var i = 0; i < player_source.length; i++) {
-                if (player_source[i].id == id) {
-                    var source = player_source[i];
-                    break;
-                }
-            }
-
-            // Get source
-            if (getCookie('player_use_hd') == 1) {
-                if ($.fn.canPlayMp3()) {
-                    var src = source.hd.mp3;
-                } else {
-                    var src = source.hd.ogg;
-                }
-            } else {
-                if ($.fn.canPlayMp3()) {
-                    var src = source.web.mp3;
-                } else {
-                    var src = source.web.ogg;
-                }
-            }
-
-            $('#player audio').attr('src', src);
-            $('#player .now-playing a').html(source.name);
-        }
-
-        // Update players progress bars
-        $.fn.updatePlayerProgress = function () {
-            // Update position
-            var position = getCookie('player_position') ? getCookie('player_position') : 0;
-
-            var width = position * $('#player .position .progress-line').width() / 100;
-            $('#player .position .progress-line-active').width(width);
-
-            width = position * $('#player-'+ current_source_id +' .position .progress-line').width() /100;
-            $('#player-'+ current_source_id +' .position .progress-line-active').width(width);
-
-            // Set position to cookie
-            position = player.currentTime / player.duration * 100;
-            setCookie('player_position', position);
-
-            // Update current player timestamps
-            var timestamp = secondsToTime(player.currentTime);
-
-            $('#player .position .progress-line-label span').html(timestamp);
-            $('#player-'+ current_source_id +' .position .progress-line-label span').html(timestamp);
-
-            // Update buffered state
-            var buffered = player.buffered.end(0)  / player.duration;
-
-            width = buffered * $('#player .position .progress-line').width();
-            $('#player .position .progress-line-loaded').width(width);
-
-            width = buffered * $('#player-' + current_source_id + ' .position .progress-line').width();
-            $('#player-' + current_source_id + ' .position .progress-line-loaded').width(width);
-
-            // Flip favicon
-            if ($('link[rel=icon]').attr('href') == '/templates/default/images/favicon-play.png') {
-                $('link[rel=icon]').attr('href', '/templates/default/images/favicon.png');
-            } else {
-                $('link[rel=icon]').attr('href', '/templates/default/images/favicon-play.png');
-            }
-        }
-
-        // Update players volume bars
-        $.fn.updatePlayerVolume = function() {
-            // Set volume to cookie
-            var volume = getCookie('player_volume') ? getCookie('player_volume') : 70;
-            setCookie('player_volume', volume);
-
-            // Update volume label
-            player.volume = volume / 100;
-            $('#player .volume .progress-line-label span').html(volume);
-            $('#player-'+ current_source_id +' .volume .progress-line-label span').html(volume);
-
-            // Update volume width
-            var width = volume * $('#player .volume .progress-line').width() / 100;
-            $('#player .volume .progress-line-active').width(width);
-
-            width = volume * $('#player-'+ current_source_id +' .volume .progress-line').width() / 100;
-            $('#player-'+ current_source_id +' .volume .progress-line-active').width(width);
-        }
-
-        // Update player source
-        $.fn.reloadPlayer = function(id) {
-            // Update cookie
-            setCookie('player_current_id', id);
-
-            // Show loader
-            $.fn.loaderShow();
-
-            // Restart player with new source
-            if (typeof $('#player audio').pause != 'undefined') $('#player audio').pause();
-            $.fn.updateSource(id);
-            $('#player audio').load();
-
-            // Check playing state
-            if (getCookie('player_is_playing') == 1) {
-                player.play();
-                $('#player .play, #player-'+ current_source_id +' .play').removeClass('play').addClass('pause');
-                $('link[rel=icon]').attr('href', '/templates/default/images/favicon-play.png');
-            }
-
-            // Check HD
-            if (getCookie('player_use_hd') == 1) {
-                $('#player .high-definition, #player-'+ current_source_id +' .high-definition').addClass('active');
-            }
-        }
-
-        // Init player
-        $.fn.initPlayer = function(id) {
-            // Update source
-            if (getCookie('player_use_hd') == 1) {
-                $('#player .high-definition, #player-'+ current_source_id +' .high-definition').addClass('active');
-            }
-            $.fn.reloadPlayer(id);
-        }
-
-        // Reset all players
-        $.fn.resetAllPlayers = function() {
-            $('.player:not(.active) .pause').removeClass('pause').addClass('play');
-            $('link[rel=icon]').attr('href', '/templates/default/images/favicon.png');
-
-            $('.player:not(.active) .position .progress-line-label span').html('00:00:00');
-            $('.player:not(.active) .position .progress-line-loaded').width(0);
-            $('.player:not(.active) .position .progress-line-active').width(0);
-        }
-
-        // Init plyer source links
-        $.fn.initPlayer(current_source_id);
+        // Init player source links
+        $.fn.initPlayer();
 
         // Set on load update position
-        $('#player audio').bind('canplay', function() {
+        player_audio.bind('canplay', function() {
             $.fn.updatePlayerProgress();
             $.fn.updatePlayerVolume();
+        });
 
-            is_player_loaded = true;
-            $.fn.loaderHide();
+        // End action
+        player_audio.bind('ended', function() {
+            player.find('.next-track').click();
         });
 
         // Play action
         $('.player .play').live('click', function () {
+            var current_player_id = $(this).closest('.player').data('release-id');
+
             // Bind active state for inline player
             if ($(this).closest('.player').hasClass('inline') && !$(this).closest('.player').hasClass('active')) {
                 // Show loader
@@ -229,44 +247,36 @@
                 setCookie('player_position', 0);
 
                 // Update player source
-                current_source_id = $(this).closest('.player').data('release-id');
-                $.fn.reloadPlayer(current_source_id);
+                $.fn.reloadPlayer(current_player_id);
             }
 
             // Reset all players
             $.fn.resetAllPlayers();
 
-
-            // Update button and run player
-            $('#player .play, #player-'+ current_source_id +' .play').removeClass('play').addClass('pause');
-            player.play();
-
             // Update active state
             $('.player').removeClass('active');
-            $('#player, #player-'+ current_source_id).addClass('active');
-
-            // Update cookie and favicon
-            setCookie('player_is_playing', 1);
-            $('link[rel=icon]').attr('href', '/templates/default/images/favicon-play.png');
+            $('#player, #player-'+ current_player_id).addClass('active');
         });
 
         // Pause action
         $('.player .pause').live('click', function () {
+            var current_player_id = $(this).closest('.player').data('release-id');
+
             // Reset all players
             $.fn.resetAllPlayers();
 
             // Update button and pause player
-            $('#player .pause, #player-'+ current_source_id +' .pause').removeClass('pause').addClass('play');
+            $('#player .pause, #player-'+ current_player_id +' .pause').removeClass('pause').addClass('play');
             player.pause();
 
             // Update cookie and favicon
             setCookie('player_is_playing', 0);
-            $('link[rel=icon]').attr('href', '/templates/default/images/favicon.png');
+            favicon.attr('href', '/templates/default/images/favicon.png');
         });
 
         // Next action
         $('.player .next-track').live('click', function () {
-            is_player_loaded = false;
+            var current_player_id = $(this).closest('.player').data('release-id');
 
             // Reset all players
             $.fn.resetAllPlayers();
@@ -276,19 +286,19 @@
 
             // Search current player source index
             for (var i = 0; i < player_source.length; i++) {
-                if (player_source[i].id == current_source_id) {
+                if (player_source[i].id == current_player_id) {
                     break;
                 }
             }
 
             // Check next id and restart player with new source
-            current_source_id = typeof player_source[i + 1] != 'undefined' ? player_source[i + 1].id : player_source[0].id;
-            $.fn.reloadPlayer(current_source_id);
+            current_player_id = typeof player_source[i + 1] != 'undefined' ? player_source[i + 1].id : player_source[0].id;
+            $.fn.reloadPlayer(current_player_id);
         });
 
         // Prev action
         $('.player .prev-track').live('click', function () {
-            is_player_loaded = false;
+            var current_player_id = $(this).closest('.player').data('release-id');
 
             // Reset all players
             $.fn.resetAllPlayers();
@@ -298,19 +308,19 @@
 
             // Search current player source index
             for (var i = 0; i < player_source.length; i++) {
-                if (player_source[i].id == current_source_id) {
+                if (player_source[i].id == current_player_id) {
                     break;
                 }
             }
 
             // Check prev id and restart player with new source
-            current_source_id = i > 0 ? player_source[i - 1].id : player_source[player_source.length - 1].id;
-            $.fn.reloadPlayer(current_source_id);
+            current_player_id = i > 0 ? player_source[i - 1].id : player_source[player_source.length - 1].id;
+            $.fn.reloadPlayer(current_player_id);
         });
 
         // change quality
         $('.player .high-definition').live('click', function () {
-            is_player_loaded = false;
+            var current_player_id = $(this).closest('.player').data('release-id');
 
             // Reset all players
             $.fn.resetAllPlayers();
@@ -326,11 +336,11 @@
             }
 
             // Reload player
-            $.fn.reloadPlayer(current_source_id);
+            $.fn.reloadPlayer(current_player_id);
         });
 
         // Progressbar control
-        $.fn.updateProgressbar = function(event) {
+        $.fn.updateProgressbarMoving = function(event) {
             // Update progressbar
             var value_px = event.clientX - $(this).offset().left;
             $(this).find('.progress-line-active').width(value_px);
@@ -346,66 +356,48 @@
             // Update control progress
             if ($(this).hasClass('position')) {
                 player.currentTime = player.duration * value_pc / 100;
-
-                var timestamp = secondsToTime(player.currentTime);
-                $('#player .position .progress-line-label span').html(timestamp);
-                $('#player-' + current_source_id + ' .position .progress-line-label span').html(timestamp);
-
                 setCookie('player_position', value_pc);
+                $.fn.updatePlayerProgress();
             }
 
             // Update control volume
             if ($(this).hasClass('volume')) {
                 player.volume = value_pc / 100;
-
-                $('#player .volume .progress-line-label span').html(value_pc);
-                $('#player-' + current_source_id + ' .volume .progress-line-label span').html(value_pc);
-
                 setCookie('player_volume', value_pc);
+                $.fn.updatePlayerVolume();
             }
-        }
+        };
 
-        // Progressbars
-        $('.player.active .progressbar').live('click', function (event) {
-            $(this).updateProgressbar(event);
+        // Progress bars moving behaviour
+        var player_progress_bars = $('.player.active .progressbar');
+
+        player_progress_bars.live('click', function (event) {
+            $(this).updateProgressbarMoving(event);
         });
 
-        $('.player.active .progressbar').live('mousedown', function (event) {
+        player_progress_bars.live('mousedown', function (event) {
             $(this).data('active', true);
         });
 
-        $('.player.active .progressbar').live('mousemove', function (event) {
-            if ($(this).data('active') == true) $(this).updateProgressbar(event);
+        player_progress_bars.live('mousemove', function (event) {
+            if ($(this).data('active') == true) $(this).updateProgressbarMoving(event);
         });
 
-        $('.player.active .progressbar').live('mouseup', function (event) {
+        player_progress_bars.live('mouseup', function (event) {
             $(this).data('active', false);
-        });
-
-        // End action
-        $('#player audio').bind('ended', function() {
-            $('#player .next-track').click();
         });
 
         // Update position progressbar
         setInterval(function() {
-            if (is_player_loaded) {
-                $.fn.updatePlayerProgress();
-            }
+            $.fn.updatePlayerProgress();
         }, 1000);
 
-        // Scroll for label
+        // Scroll player title
         setInterval(function() {
-            if ($('#player .now-playing').width() < $('#player .now-playing a').width()) {
-                var length = $('#player .now-playing').width() - $('#player .now-playing a').width();
-                $('#player .now-playing a')
-                    .animate({ left: length }, 2500)
-                    .animate({ opacity: 1 }, 5000)
-                    .animate({ left: 0 }, 2500)
-                    .animate({ opacity: 1 }, 5000);
-            }
+            $.fn.animatePlayerTitle();
         }, 14000);
     });
+})(jQuery);
 </script>
 <div id="player" class="player">
     <audio preload="auto" class="hidden"></audio>
