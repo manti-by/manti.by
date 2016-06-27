@@ -76,11 +76,6 @@
         </a>
     </li>
     <li>
-        <a href="<?php echo Sef::getSef('index.php?module=file'); ?>"<?php echo ($active['download'] ? ' class="active"' : ''); ?> rel="bookmark">
-            <?php echo T('Download'); ?>
-        </a>
-    </li>
-    <li>
         <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"<?php echo ($active['about'] ? ' class="active"' : ''); ?> rel="author">
             <?php echo T('About'); ?>
         </a>

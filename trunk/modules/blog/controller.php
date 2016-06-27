@@ -144,7 +144,7 @@
             // Render blog item
             if (!empty($options['data'])) {
                 $options['body'] = $this->view->getContents('blog', 'item-full', $options);
-                return $options['is_print'] ? $options : $this->view->wrapSidebar($options);
+                return $options;
             } else {
                 return $this->view->_404($options);
             }

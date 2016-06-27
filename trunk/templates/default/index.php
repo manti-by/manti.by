@@ -57,6 +57,7 @@
         <meta name="keywords" content="<?php echo Model::getModel('tag')->getMetakeysString(); ?>" />
         <meta name="yandex-verification" content="6765012bcd05fac2" />
 
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&subset=cyrillic" rel="stylesheet" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/default.css" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/style.css" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/print.css" media="print" />
@@ -114,27 +115,33 @@
         <?php echo $this->getContents('plugin', 'popup'); ?>
         <?php echo $this->getContents('plugin', 'loader'); ?>
         <?php echo $this->getContents('plugin', 'messages'); ?>
-        <?php echo $this->getContents('plugin', 'player'); ?>
 
-        <?php echo $this->getContents('partial', 'usermenu'); ?>
-
-        <div id="header">
+        <header>
             <div class="wrapper">
-                <?php echo $this->getContents('partial', 'topmenu', $options); ?>
+                <?php echo $this->getContents('plugin', 'player'); ?>
                 <?php echo $this->getContents('partial', 'toolbar'); ?>
                 <div class="cls"></div>
             </div>
-        </div>
+        </header>
 
-        <div id="content" class="wrapper">
-            <?php echo $options['body']; ?>
-        </div>
+        <menu>
+            <div class="wrapper">
+                <?php echo $this->getContents('partial', 'topmenu', $options); ?>
+                <div class="cls"></div>
+            </div>
+        </menu>
 
-        <div id="footer">
+        <main>
+            <div class="wrapper">
+                <?php echo $options['body']; ?>
+            </div>
+        </main>
+
+        <footer>
             <div class="wrapper">
                 <?php echo $this->getContents('partial', 'footer'); ?>
             </div>
-        </div>
+        </footer>
 
         <?php echo $this->getContents('plugin', 'debug'); ?>
         

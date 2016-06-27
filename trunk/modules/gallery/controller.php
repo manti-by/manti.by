@@ -79,7 +79,7 @@
             $options['module'] = 'gallery';
             $options['body'] = $this->view->renderItemsArray($options);
 
-            return $this->view->wrapSidebar($options);
+            return $options;
         }
 
         /**

@@ -90,11 +90,6 @@
             </li>
         <?php else : ?>
             <li>
-                <a href="<?php echo Sef::getSef('index.php?module=user&action=registerform'); ?>">
-                    <?php echo T('Register'); ?>
-                </a>
-            </li>
-            <li>
                 <a href="<?php echo Sef::getSef('index.php?module=user&action=loginform'); ?>">
                     <?php echo T('Login'); ?>
                 </a>
