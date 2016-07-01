@@ -62,6 +62,9 @@
         // Check mp3 support
         var is_mp3_support = -1;
         $.fn.canPlayMp3 = function () {
+
+            console.log('Check mp3 support');
+
             if (is_mp3_support > -1) {
                 return is_mp3_support ? true : false;
             } else {
@@ -87,6 +90,8 @@
 
         $.fn.updateSource = function(id) {
             var quality, is_mp3;
+
+            console.log('updateSource with #' + id);
 
             // Search source by ID
             for (var i = 0; i < player_source.length; i++) {
@@ -114,12 +119,17 @@
                 player_progress_line_loaded = player.find('.position .progress-line-loaded'),
                 player_progress_label = player.find('.position .progress-line-label span');
 
-            var position = getCookie('player_position') ? getCookie('player_position') : 0,
-                player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id,
+            var player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id,
                 current_player = $('#player-'+ player_id),
-                width;
+                position, width;
+
+            console.log('updatePlayerProgress for player #' + player_id);
+
+            // Skip if not loaded
+            if (player_audio.get(0).readyState === 0) return;
 
             // Update active progress line
+            position = player_api.currentTime / player_api.duration * 100;
             width = position * player_progress_line.width() / 100;
             player_progress_line_active.width(width);
 
@@ -127,22 +137,21 @@
             current_player.find('.position .progress-line-active').width(width);
 
             // Update current player timestamps
-            var timestamp = secondsToTime(player.currentTime);
+            var timestamp = secondsToTime(player_api.currentTime);
 
             player_progress_label.html(timestamp);
             current_player.find('.position .progress-line-label span').html(timestamp);
 
-            // Skip if not loaded
-            if (player_audio.get(0).readyState === 0) return;
-
             // Update buffered state
-            var buffered = player_audio.get(0).buffered.end(0) / player_audio.get(0).duration;
+            var buffered = player_api.buffered.end(0) / player_api.duration;
 
             width = buffered * player_progress_line.width();
             player_progress_line_loaded.width(width);
 
             width = buffered * current_player.find('.position .progress-line').width();
             current_player.find('.position .progress-line-loaded').width(width);
+
+            setCookie('player_position', position);
         };
 
         // Update players volume bars
@@ -155,6 +164,8 @@
                 player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id,
                 current_player = $('#player-'+ player_id),
                 width;
+
+            console.log('updatePlayerVolume for player #' + player_id);
 
             // Update volume label
             player_volume_label.html(volume);
@@ -170,6 +181,8 @@
 
         // Update player source
         $.fn.reloadPlayer = function(id) {
+            console.log('reloadPlayer with #' + id);
+
             // Show loader
             $.fn.loaderShow();
 
@@ -244,24 +257,35 @@
 
         // Play action
         $('.player .play').live('click', function () {
-            var current_player_id = $(this).closest('.player').data('release-id');
+            console.log('Play action');
+
+            var is_playing = getCookie('player_is_playing') ? 1 : 0,
+                current_player_id = $(this).closest('.player').data('release-id');
 
             // Check main player
             if (!current_player_id) {
                 current_player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id;
             }
 
-            // Reset position
-            setCookie('player_position', 0);
+            if (player_api.readyState == 0) {
+                // Reset position
+                setCookie('player_position', 0);
 
-            // Update cookie and favicon
-            setCookie('player_is_playing', 1);
+                // Update cookie and favicon
+                setCookie('player_is_playing', 1);
 
-            // Update player source
-            $.fn.reloadPlayer(current_player_id);
+                // Update player source
+                $.fn.reloadPlayer(current_player_id);
 
-            // Reset all players
-            $.fn.resetAllPlayers();
+                // Reset all players
+                $.fn.resetAllPlayers();
+            } else {
+                player_api.play();
+                setCookie('player_is_playing', 1);
+
+                $('#player .play, #player-'+ current_player_id +' .play').removeClass('play').addClass('pause');
+                favicon.attr('href', '/templates/default/images/favicon-play.png');
+            }
 
             // Update active state
             $('.player').removeClass('active');
@@ -270,6 +294,8 @@
 
         // Pause action
         $('.player .pause').live('click', function () {
+            console.log('Pause action');
+
             var current_player_id = $(this).closest('.player').data('release-id');
 
             // Check main player
@@ -282,7 +308,7 @@
 
             // Update button and pause player
             $('#player .pause, #player-'+ current_player_id +' .pause').removeClass('pause').addClass('play');
-            player.pause();
+            player_api.pause();
 
             // Update cookie and favicon
             setCookie('player_is_playing', 0);
@@ -291,6 +317,8 @@
 
         // Next action
         $('.player .next-track').live('click', function () {
+            console.log('Next action');
+
             var current_player_id = $(this).closest('.player').data('release-id');
 
             // Check main player
@@ -318,6 +346,8 @@
 
         // Prev action
         $('.player .prev-track').live('click', function () {
+            console.log('Prev action');
+
             var current_player_id = $(this).closest('.player').data('release-id');
 
             // Check main player
@@ -343,8 +373,10 @@
             $.fn.reloadPlayer(current_player_id);
         });
 
-        // change quality
+        // Change quality
         $('.player .high-definition').live('click', function () {
+            console.log('Change quality');
+
             var current_player_id = $(this).closest('.player').data('release-id');
 
             // Check main player
@@ -371,6 +403,8 @@
 
         // Progressbar control
         $.fn.updateProgressbarMoving = function(event) {
+            console.log('updateProgressbarMoving');
+
             // Update progressbar
             var value_px = event.clientX - $(this).offset().left;
             $(this).find('.progress-line-active').width(value_px);
@@ -385,14 +419,14 @@
 
             // Update control progress
             if ($(this).hasClass('position')) {
-                player.currentTime = player.duration * value_pc / 100;
+                player_api.currentTime = player_api.duration * value_pc / 100;
                 setCookie('player_position', value_pc);
                 $.fn.updatePlayerProgress();
             }
 
             // Update control volume
             if ($(this).hasClass('volume')) {
-                player.volume = value_pc / 100;
+                player_api.volume = value_pc / 100;
                 setCookie('player_volume', value_pc);
                 $.fn.updatePlayerVolume();
             }
