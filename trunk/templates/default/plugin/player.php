@@ -433,7 +433,7 @@
         };
 
         // Progress bars moving behaviour
-        var player_progress_bars = $('.player.active .progressbar');
+        var player_progress_bars = $('.player .progressbar');
 
         player_progress_bars.live('click', function (event) {
             $(this).updateProgressbarMoving(event);
