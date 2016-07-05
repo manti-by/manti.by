@@ -65,7 +65,7 @@
             </div>
         <?php endif; ?>
 
-        <?php if ($options['data']->catnum) : ?>
+        <?php if ($options['data']->catnum && $options['context'] == 'short') : ?>
             <div class="catnum">
                 <span class="bold"><?php echo T('Catalog No'); ?></span> :
                 <?php echo $options['data']->catnum; ?>
@@ -86,7 +86,7 @@
             </div>
         <?php endif; ?>
 
-        <?php if ($options['data']->quality) : ?>
+        <?php if ($options['data']->quality && $options['context'] == 'short') : ?>
             <div class="quality">
                 <span class="bold"><?php echo T('Quality'); ?></span> :
                 <?php echo $options['data']->quality; ?>
@@ -101,7 +101,6 @@
 
         <?php if (json_decode($options['data']->metakeys)) : ?>
         <div class="metakeys">
-            <span class="bold"><?php echo T('Post tags'); ?></span> :
             <?php echo Tag::getHtml($options['data']->metakeys); ?>
         </div>
         <?php endif; ?>

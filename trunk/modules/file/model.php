@@ -336,6 +336,8 @@
             $this->database->query("CALL GET_POSTS(0, 100);");
             if ($posts = $this->database->getObjectsArray()) {
                 foreach ($posts as $post) {
+                    if ($post->is_music != 1) continue;
+
                     $preview = json_decode($post->preview);
                     $release = json_decode($post->release);
 

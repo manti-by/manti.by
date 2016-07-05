@@ -259,15 +259,10 @@
         $('.player .play').live('click', function () {
             console.log('Play action');
 
-            var is_playing = getCookie('player_is_playing') ? 1 : 0,
-                current_player_id = $(this).closest('.player').data('release-id');
+            var current_player_id = $(this).closest('.player').data('release-id'),
+                cookie_player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id;
 
-            // Check main player
-            if (!current_player_id) {
-                current_player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id;
-            }
-
-            if (player_api.readyState == 0) {
+            if (player_api.readyState == 0 || current_player_id != cookie_player_id) {
                 // Reset position
                 setCookie('player_position', 0);
 
@@ -296,23 +291,33 @@
         $('.player .pause').live('click', function () {
             console.log('Pause action');
 
-            var current_player_id = $(this).closest('.player').data('release-id');
+            var current_player_id = $(this).closest('.player').data('release-id'),
+                cookie_player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id;
 
-            // Check main player
-            if (!current_player_id) {
-                current_player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id;
+            if (cookie_player_id && cookie_player_id != current_player_id) {
+                // Reset position
+                setCookie('player_position', 0);
+
+                // Update cookie and favicon
+                setCookie('player_is_playing', 1);
+
+                // Update player source
+                $.fn.reloadPlayer(current_player_id);
+
+                // Reset all players
+                $.fn.resetAllPlayers();
+            } else {
+                // Reset all players
+                $.fn.resetAllPlayers();
+
+                // Update button and pause player
+                $('#player .pause, #player-'+ current_player_id +' .pause').removeClass('pause').addClass('play');
+                player_api.pause();
+
+                // Update cookie and favicon
+                setCookie('player_is_playing', 0);
+                favicon.attr('href', '/templates/default/images/favicon.png');
             }
-
-            // Reset all players
-            $.fn.resetAllPlayers();
-
-            // Update button and pause player
-            $('#player .pause, #player-'+ current_player_id +' .pause').removeClass('pause').addClass('play');
-            player_api.pause();
-
-            // Update cookie and favicon
-            setCookie('player_is_playing', 0);
-            favicon.attr('href', '/templates/default/images/favicon.png');
         });
 
         // Next action
