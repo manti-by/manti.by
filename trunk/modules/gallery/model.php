@@ -216,6 +216,8 @@
                                 );
                             }
                         }
+                    } else {
+                        // @TODO: remove not existed files from DB
                     }
                 }
             }
@@ -238,9 +240,10 @@
             }
 
             // Rebuild thumbnails
-            foreach($db_files as $source) {
+            foreach ($db_files as $source) {
                 // Generate thumbnail pathes
                 $pathinfo = pathinfo($source);
+
                 $thumbpath = $this->file_path . DS . 'thumbnails' . strrchr($pathinfo['dirname'], '/');
                 $thumbname = $thumbpath . DS . $pathinfo['basename'];
 
@@ -249,30 +252,64 @@
                     if (!mkdir($thumbpath)) {
                         $message = T('Could not create thumbnail directory');
                         $this->_throw($message);
-
                         $resized[] = array(
                             'source' => $thumbpath,
                             'status' => $message
                         );
-
                         continue;
                     }
                 }
 
-                // Remove old thumbnail
-                $is_file_exists = file_exists($thumbname);
-                if ($is_file_exists && !$is_update) {
+                $previewpath = $this->file_path . DS . 'preview' . strrchr($pathinfo['dirname'], '/');
+                $previewname = $previewpath . DS . $pathinfo['basename'];
+
+                // Check directory path and try to create it
+                if (!file_exists($previewpath)) {
+                    if (!mkdir($previewpath)) {
+                        $message = T('Could not create preview directory');
+                        $this->_throw($message);
+                        $resized[] = array(
+                            'source' => $previewpath,
+                            'status' => $message
+                        );
+                        continue;
+                    }
+                }
+
+                // Remove old thumbnail and preview
+                $is_thumb_exists = file_exists($thumbname);
+                if ($is_thumb_exists && !$is_update) {
                     unlink($thumbname);
+                }
+                $is_preview_exists = file_exists($previewname);
+                if ($is_preview_exists && !$is_update) {
+                    unlink($previewname);
                 }
 
                 // And try to create new
-                if (!($is_update && $is_file_exists)) {
+                if (!($is_update && $is_thumb_exists && $is_preview_exists)) {
                     $result = System::getInstance()->resize(
                         $source,
                         $thumbname,
                         Application::$config['thumb_width'],
                         Application::$config['thumb_height'],
                         System::RESIZE_WITH_CROP
+                    );
+
+                    if (!$result) {
+                        $message = $this->getLastFromStack();
+                        $resized[] = array(
+                            'source' => $source,
+                            'status' => $message['message']
+                        );
+                    }
+
+                    $result = System::getInstance()->resize(
+                        $source,
+                        $previewname,
+                        Application::$config['preview_width'],
+                        Application::$config['preview_height'],
+                        System::RESIZE_WITH_RATIO
                     );
 
                     // Check result

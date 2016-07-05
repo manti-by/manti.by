@@ -94,6 +94,14 @@
                 case '--migrate':
                     $this->migrateAction();
                     break;
+                case '-t':
+                case '--thumbs':
+                    $this->rebuildThumbnailsAction();
+                    break;
+                case '-u':
+                case '--update':
+                    $this->updateGalleryFilesAction();
+                    break;
                 case '-h':
                 case '--help':
                 default:
@@ -236,8 +244,8 @@
         }
 
         /**
-         * Rellback migrations
-         * @param $limit migrations
+         * Rollback migrations
+         * @param int $limit migrations
          */
         protected function rollbackAction($limit) {
             // Rollback latest migrations
@@ -257,12 +265,39 @@
         }
 
         /**
+         * Rebuild thumbnails
+         * @param bool $is_update
+         */
+        protected function rebuildThumbnailsAction($is_update = false) {
+            // Rollback latest migrations
+            if (!Model::getModel('gallery')->rebuildThumbnails($is_update)) {
+                $this->_output = M2::error();
+                return;
+            }
+
+            $this->_output = 'Rebuild thumbnails action complete.';
+        }
+
+        /**
+         * Update gallery list
+         */
+        protected function updateGalleryFilesAction() {
+            // Rollback latest migrations
+            if (!Model::getModel('gallery')->updateFSList()) {
+                $this->_output = M2::error();
+                return;
+            }
+
+            $this->_output = 'Rebuild thumbnails action complete.';
+        }
+
+        /**
          * Return result message
          * @return mixed
          */
         protected function helpAction() {
             $this->_output = str_repeat('-', 80) . NL
-                . '  Command line tool for M2 Micro Framework. Version 0.1.0 beta. ' . NL
+                . '  Command line tool for M2 Micro CMS. Version 0.2.1 beta. ' . NL
                 . '  Author: Alexander Chaika <manti.by@gmail.com>.' . NL
                 . NL
                 . '  Usage: php -f command.php -- [OPTIONS]' . NL
@@ -275,6 +310,7 @@
                 . '      [-n, --dailynginx]     Process daily nginx stats' . NL
                 . '      [-p, --performance]    Check all site links' . NL
                 . '      [-r, --remigrate]      Remigrate all DB migrations' . NL
+                . '      [-t, --thumbs]         Rebuild thumbnails' . NL
                 . str_repeat('-', 80);
         }
 
