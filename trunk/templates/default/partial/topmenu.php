@@ -51,33 +51,22 @@
         'home'      => ($options['module'] == 'front' ? true : false),
         'blog'      => ($options['module'] == 'blog' && $options['id'] != '14'  ? true : false),
         'gallery'   => ($options['module'] == 'gallery' ? true : false),
-        'download'  => ($options['module'] == 'file' ? true : false),
         'about'     => ($options['module'] == 'blog' && $options['id'] == '14' ? true : false)
     );
 
 ?>
-<a href="<?php echo ($active['home'] ? '#' : Application::$config['http_host']); ?>" class="fl" rel="home">
-    <img src="<?php echo Application::$config['template_image_url_path']; ?>logo.png" alt="Manti Logo" width="155" height="62" />
-</a>
-<ul id="topmenu" class="fl">
-    <li>
-        <a href="<?php echo ($active['home'] ? '#' : Application::$config['http_host']); ?>"<?php echo ($active['home'] ? ' class="active"' : ''); ?> rel="home">
-            <?php echo T('Home'); ?>
-        </a>
-    </li>
-    <li>
-        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"<?php echo ($active['blog'] ? ' class="active"' : ''); ?> rel="bookmark">
-            <?php echo T('Blog'); ?>
-        </a>
-    </li>
-    <li>
-        <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"<?php echo ($active['gallery'] ? ' class="active"' : ''); ?> rel="bookmark">
-            <?php echo T('Gallery'); ?>
-        </a>
-    </li>
-    <li>
-        <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"<?php echo ($active['about'] ? ' class="active"' : ''); ?> rel="author">
-            <?php echo T('About'); ?>
-        </a>
-    </li>
-</ul>
+<nav>
+    <a href="<?php echo ($active['home'] ? '#' : Application::$config['http_host']); ?>"
+       class="home<?php echo ($active['front'] ? ' active' : ''); ?>" rel="home">
+        <img src="<?php echo Application::$config['template_image_url_path']; ?>logo.png" alt="Manti Logo" width="155" height="62" />
+    </a>
+    <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"<?php echo ($active['blog'] ? ' class="active"' : ''); ?> rel="bookmark">
+        <?php echo T('Music'); ?>
+    </a>
+    <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"<?php echo ($active['gallery'] ? ' class="active"' : ''); ?> rel="bookmark">
+        <?php echo T('Photo'); ?>
+    </a>
+    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"<?php echo ($active['about'] ? ' class="active"' : ''); ?> rel="author">
+        <?php echo T('About'); ?>
+    </a>
+</nav>

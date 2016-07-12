@@ -155,15 +155,6 @@
                         case FileEntity::TYPE_PREVIEW:
                             $result .= '<div id="player-' . $release_id . '" class="player inline" data-release-id="' . $release_id . '">';
                             $result .= '<div class="button play"></div>';
-                            $result .= '<div class="high-definition">HD</div>';
-
-                            $result .= '
-                                <div class="progressbar volume">
-                                    <div class="progress-line"></div>
-                                    <div class="progress-line-active"></div>
-                                    <div class="progress-line-label"><span>0</span>%</div>
-                                </div>';
-
                             $result .= '
                                 <div class="progressbar position">
                                     <div class="progress-line"></div>
@@ -171,7 +162,6 @@
                                     <div class="progress-line-active"></div>
                                     <div class="progress-line-label"><span>00:00:00</span></div>
                                 </div>';
-
                             $result .= '<div class="cls"></div></div>';
                             break;
                         case FileEntity::TYPE_COVERS:

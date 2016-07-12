@@ -83,7 +83,9 @@
         var player = $('#player'),
             player_audio = player.find('audio'),
             player_api = player_audio.get(0),
-            player_title = player.find('.now-playing a'),
+            player_link = player.find('.now-playing a'),
+            player_image = player.find('.now-playing img'),
+            player_title = player.find('.now-playing span'),
             player_source = <?php echo $player_source; ?>,
             player_default_id = <?php echo $player_default_id; ?>,
             favicon = $('link[rel=icon]');
@@ -104,6 +106,8 @@
                     is_mp3  = $.fn.canPlayMp3() ? 'mp3' : 'web';
 
                     // Update player
+                    player_link.attr('href', player_source[i]['link']);
+                    player_image.attr('src', player_source[i]['cover']);
                     player_audio.attr('src', player_source[i][quality][is_mp3]);
                     player_title.html(player_source[i]['name']);
 
@@ -471,27 +475,32 @@
 <div id="player" class="player">
     <audio preload="auto" class="hidden"></audio>
 
-    <div class="button prev-track"></div>
-    <div class="button play"></div>
-    <div class="button next-track"></div>
+    <div class="controls">
+        <div class="button prev-track"></div>
+        <div class="button play"></div>
+        <div class="button next-track"></div>
+
+        <div class="progressbar position">
+            <div class="progress-line"></div>
+            <div class="progress-line-loaded"></div>
+            <div class="progress-line-active"></div>
+            <div class="progress-line-label"><span>0</span></div>
+        </div>
+
+        <div class="progressbar volume">
+            <div class="progress-line"></div>
+            <div class="progress-line-active"></div>
+            <div class="progress-line-label"><span>70</span>%</div>
+        </div>
+
+        <div class="high-definition">HD</div>
+    </div>
 
     <div class="now-playing">
-        <a href="#go">Manti - Reach out of the sun</a>
-    </div>
-
-    <div class="high-definition">HD</div>
-
-    <div class="progressbar volume">
-        <div class="progress-line"></div>
-        <div class="progress-line-active"></div>
-        <div class="progress-line-label"><span>70</span>%</div>
-    </div>
-
-    <div class="progressbar position">
-        <div class="progress-line"></div>
-        <div class="progress-line-loaded"></div>
-        <div class="progress-line-active"></div>
-        <div class="progress-line-label"><span>0</span></div>
+        <a href="#">
+            <img src="#" width="40" height="40" />
+            <span></span>
+        </a>
     </div>
 
     <div class="cls"></div>

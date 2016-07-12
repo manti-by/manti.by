@@ -340,10 +340,13 @@
 
                     $preview = json_decode($post->preview);
                     $release = json_decode($post->release);
+                    $covers = json_decode($post->covers);
 
                     $result[] = array(
                         'id'  => $post->id,
                         'name'=> $post->name . ' /' . $post->genre . '/',
+                        'link'=> Sef::getSef('index.php?module=blog&action=show&id=' . $post->id),
+                        'cover'=> Application::$config['http_host'] . substr($covers[0]->source, 1),
                         'web' => array(
                             'mp3' => substr($preview[0]->source, 1),
                             'ogg' => str_replace('mp3', 'ogg', substr($preview[0]->source, 1)),

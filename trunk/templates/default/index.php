@@ -57,7 +57,7 @@
         <meta name="keywords" content="<?php echo Model::getModel('tag')->getMetakeysString(); ?>" />
         <meta name="yandex-verification" content="6765012bcd05fac2" />
 
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&subset=cyrillic" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700&subset=cyrillic" rel="stylesheet" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/default.css" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/style.css" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/print.css" media="print" />
@@ -118,18 +118,11 @@
 
         <header>
             <div class="wrapper">
-                <?php echo $this->getContents('plugin', 'player'); ?>
+                <?php echo $this->getContents('partial', 'topmenu', $options); ?>
                 <?php echo $this->getContents('partial', 'toolbar'); ?>
                 <div class="cls"></div>
             </div>
         </header>
-
-        <menu>
-            <div class="wrapper">
-                <?php echo $this->getContents('partial', 'topmenu', $options); ?>
-                <div class="cls"></div>
-            </div>
-        </menu>
 
         <main>
             <div class="wrapper">
@@ -142,6 +135,13 @@
                 <?php echo $this->getContents('partial', 'footer'); ?>
             </div>
         </footer>
+
+        <aside>
+            <div class="wrapper">
+                <?php echo $this->getContents('plugin', 'player'); ?>
+                <div class="cls"></div>
+            </div>
+        </aside>
 
         <?php echo $this->getContents('plugin', 'debug'); ?>
         

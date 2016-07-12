@@ -35,7 +35,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-body { font-family: 'Roboto',  Arial, Tahoma, Verdana, sans-serif; font-size: 12pt; color: #333; }
+body { font-family: 'Roboto',  Arial, Tahoma, Verdana, sans-serif; font-size: 12pt; color: #333; background: #FAFAFA; }
 
 a { color: #b40303; text-decoration: none; }
 a:hover, a:active { text-decoration: underline; color: #7F2828 !important; }
@@ -52,19 +52,21 @@ fieldset { margin: 10px 0; }
 
 audio { width: 330px; transform: scale(0.8); }
 
-.wrapper { width: 1020px; padding: 0; border: none; }
+.wrapper { width: 1000px; padding: 0; background: transparent; border: none; }
 
 .red-button { border: 1px solid #CCC; border-radius: 2px; box-shadow: 3px 3px 3px #AAA; color: white;
     font-size: 18px !important; text-transform: uppercase;
     background: #b40303 url(./images/red-button.png) repeat-x top left  !important; }
 
-header { position: fixed; top: 0; width: 100%; margin: 0 auto 25px auto; color: #ECECEC; z-index: 1000;
-    border-bottom: 6px solid white; background: url(./images/black-dotted-bg.png) repeat-x top left; }
-header .wrapper { padding: 0; background: transparent; text-align: right; }
+header { width: 100%; margin: 0 auto 5px auto; z-index: 1000; border-bottom: 1px solid #CCC; background: #FFF; }
+header .wrapper { padding: 8px 0; background: transparent; text-align: right; }
+header nav { position: relative; }
+header nav a { margin-right: 16px; color: #999; text-decoration: none; font-size: 12pt; font-weight: 500; }
+header nav .home { position: absolute; left: 0; }
 
-header a { color: #999; text-decoration: underline; }
-
-menu { margin-top: 40px; padding: 0; }
+aside { position: fixed; bottom: 0; width: 100%; margin: 5px auto 0 auto; z-index: 1000;
+    border-top: 1px solid #CCC; background: #FFF; }
+aside .wrapper { padding: 0; background: transparent; }
 
 #topmenu { float: right; margin: 30px 0 0 0; padding: 0; }
 #topmenu li { list-style: none; display: inline-block; }
@@ -84,7 +86,7 @@ menu { margin-top: 40px; padding: 0; }
 
 #edit-post-form .tag-control { width: 607px; }
 
-main { min-height: 490px; }
+main { min-height: 490px; margin: 20px; }
 
 .post-item { margin-bottom: 40px; line-height: 18px; }
 .post-item h3 { margin-bottom: 15px; padding-bottom: 6px; border-bottom: 1px dotted #CCC; font-size: 18pt; }
@@ -161,24 +163,11 @@ main { min-height: 490px; }
 .relation .title { position: relative; bottom: 129px; padding: 3px 0 0 3px;
     background: url(../../assets/images/white-bg-50.png);  }
 
-
-footer { margin-top: 50px; padding: 20px 0; color: #666; border-top: 1px solid #CCC; background: #EEE; }
-footer h3 { margin-bottom: 10px; font-size: 12px; color: #999; }
-
-footer a { color: #666; }
-footer a:hover, #footer a:active { color: #b40303 !important; }
-
-footer ul { margin: 0; padding: 0; }
-footer li { margin: 0; padding: 0; list-style: none; line-height: 24px; }
-
-footer .site-title, #footer .trends { color: #666; font-weight: bold; padding-bottom: 15px;  }
-footer .metadesc { padding-bottom: 15px; }
-footer .wrapper { background: #EEE; }
-
-footer .left-column { float: left; width: 330px; margin-right: 40px; }
-footer .other-column { float: left; width: 160px; margin-right: 40px; }
-footer .info-column { float: left; width: 180px; margin-right: 40px; }
-footer .follow-me-column { float: right; width: 160px; }
+footer { margin: 70px 0 100px 0; padding: 0 25px; color: #666; }
+footer a { padding-right: 20px; font-size: 11pt; font-weight: 500; text-transform: uppercase; color: #b40303; }
+footer a:hover, #footer a:active { text-decoration: underline; }
+footer .wrapper { margin-bottom: 50px; }
+footer #copy { float: right; }
 
 #page-404 { width: 800px; margin: 40px auto; padding: 0; background: #EEE; color: black; }
 #page-404 .left-column { float: left; width: 160px; margin-right: 40px; padding: 80px 40px; text-align: center;
@@ -305,44 +294,52 @@ footer .follow-me-column { float: right; width: 160px; }
 
 .tab-community { display: none !important; }
 
-#player { float: left; width: 570px; margin: 6px 0 4px 0; }
-.player { position: relative; height: 26px; width: 350px; }
+#player { width: 1000px; margin: 6px 0 4px 0; }
+#player .controls { margin-top: 8px; }
 
-.player .button { float: left; width: 16px; height: 16px; margin: 0 1px; cursor: pointer;
+.player { position: relative; width: 350px; }
+.player div { display: inline-block; vertical-align: top; }
+
+.player .button { width: 16px; height: 16px; margin: 0 1px; cursor: pointer;
     background: url(images/shape-player.png) no-repeat; opacity: 0.9; }
 .player .button:hover { opacity: 1; }
+
 .player .play { background-position: 0 0; width: 24px; height: 24px; }
 .player .pause { background-position: 0 -24px; width: 24px; height: 24px; }
 .player .next-track { background-position: -0px -64px; margin-top: 4px; }
 .player .prev-track { background-position: -0px -48px; margin-top: 4px; }
 
-.player .progressbar { float: right; position: relative; margin-right: 5px; color: #999; cursor: pointer; }
+.player .progressbar { position: relative; margin: 0 5px; color: #999; text-align: right; cursor: pointer; }
 .player .progressbar .progress-line,
 .player .progressbar .progress-line-loaded,
-.player .progressbar .progress-line-active { float: left; height: 4px; position: absolute; top: 8px; left: 0; }
+.player .progressbar .progress-line-active { position: absolute; top: 8px; left: 0; height: 4px; }
 .player .progressbar .progress-line { width: 100%; background: #999; }
 .player .progressbar .progress-line-loaded { width: 0; background: #390; z-index: 5; cursor: pointer; }
 .player .progressbar .progress-line-active { width: 0; background: #b40303; z-index: 10;}
-.player .progressbar .progress-line-label { float: right; padding: 2px 4px 0 2px; font-size: 11px; }
+.player .progressbar .progress-line-label { font-size: 11pt; }
 
-.player .position { width: 190px; margin-top: 3px; }
-.player .progressbar.position .progress-line { width: 140px; }
-.player .progressbar.position .progress-line-loaded { width: 140px; }
-.player .progressbar.position .progress-line-label { width: 50px; }
+.player .position { width: 370px; margin-top: 3px; }
+.player .progressbar.position .progress-line { width: 310px; }
+.player .progressbar.position .progress-line-loaded { width: 345px; }
+.player .progressbar.position .progress-line-label { width: 55px; }
 
-.player .volume { width: 70px; margin-top: 3px; }
-.player .progressbar.volume .progress-line { width: 40px; }
-.player .progressbar.volume .progress-line-label { width: 30px; }
+.player .volume { width: 165px; margin-top: 3px; }
+.player .progressbar.volume .progress-line { width: 135px; }
+.player .progressbar.volume .progress-line-label { width: 30px; font-size: 11pt; }
 
-.player .now-playing { display: none; float: left; padding: 4px 0 0 0; margin: 0 5px; width: 190px; height: 24px; overflow: hidden;
-    color: #ECECEC; text-align: left; font-size: 14px; }
-.player .now-playing a { position: relative; color: inherit !important; text-decoration: none !important; white-space: nowrap; }
+.player .now-playing { padding: 0; margin: 0 5px; width: 190px; text-align: left; font-size: 12pt;
+    overflow: hidden; color: #ECECEC; }
+.player .now-playing a { display: block; position: relative; height: 40px; text-decoration: none !important;
+    overflow: hidden; }
+.player .now-playing a span { display: inline-block; position: absolute; top: 11px; padding-left: 8px;
+    white-space: nowrap; }
 
-.player .high-definition { float: right; margin: 3px; padding: 0 2px; border: 1px solid #999; border-radius: 1px;
+.player .high-definition { margin: 3px; padding: 0 2px; border: 1px solid #999; border-radius: 1px;
     cursor: pointer; text-decoration: line-through; font-size: 14px; color: #999; }
-.player .high-definition:hover, .player .high-definition.active { color: #b40303; border-color: #b40303; text-decoration: none; }
+.player .high-definition:hover, .player .high-definition.active { color: #b40303; border-color: #b40303;
+    text-decoration: none; }
 
-#player .now-playing { display: block; }
+#player .now-playing { width: 285px; margin-left: 30px; }
 
 .player.inline { position: relative; margin-left: 367px; height: 24px; padding: 3px; width: 330px;
     background: #DEDEDE; border-radius: 4px; }
@@ -353,10 +350,9 @@ footer .follow-me-column { float: right; width: 160px; }
 .player.inline .progressbar .progress-line-active { top: 8px; }
 
 .player.inline .progressbar .progress-line-label { padding-top: 1px; }
-#featured .player.inline .progressbar .progress-line-label { padding-top: 3px; }
 
-.player.inline .position { width: 185px; }
-.player.inline .progressbar.position .progress-line { width: 130px; }
+.player.inline .position { width: 282px; }
+.player.inline .progressbar.position .progress-line { width: 227px; }
 .player.inline .progressbar.position .progress-line-loaded { width: 0; background: #3C0; }
 .player.inline .progressbar.position .progress-line-label { width: 50px; text-align: right; }
 
