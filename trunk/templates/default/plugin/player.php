@@ -203,6 +203,9 @@
                 player_api.play();
                 $('#player .play, #player-'+ id +' .play').removeClass('play').addClass('pause');
                 favicon.attr('href', '/templates/default/images/favicon-play.png');
+
+                $('aside').removeClass('hidden');
+                $('header').addClass('padded');
             } else {
                 favicon.attr('href', '/templates/default/images/favicon.png');
             }
@@ -226,6 +229,9 @@
         // Reset all players
         $.fn.resetAllPlayers = function() {
             favicon.attr('href', '/templates/default/images/favicon.png');
+
+            $('aside').removeClass('hidden');
+            $('header').addClass('padded');
 
             $('.player:not(.active) .pause').removeClass('pause').addClass('play');
             $('.player:not(.active) .position .progress-line-label span').html('00:00:00');

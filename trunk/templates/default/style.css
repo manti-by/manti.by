@@ -64,9 +64,10 @@ header .wrapper { padding: 8px 0; background: transparent; text-align: right; }
 header nav { position: relative; }
 header nav a { margin-right: 16px; color: #999; text-decoration: none; font-size: 12pt; font-weight: 500; }
 header nav .home { position: absolute; left: 0; }
+header.padded { margin-top: 50px; border-bottom: none; background: transparent; }
 
 aside { position: fixed; top: 0; width: 100%; margin: 0 auto 5px auto; z-index: 1000;
-    border-bottom: 1px solid #CCC; background: #FFF; }
+    border-bottom: 1px solid #EEE; background: #FFF; }
 aside .wrapper { padding: 0; background: transparent; }
 
 #topmenu { float: right; margin: 30px 0 0 0; padding: 0; }
@@ -125,7 +126,7 @@ main { min-height: 490px; }
 .post-item-full .admin-buttons a { font-size: 12px; }
 
 .post-item-full .relation { float: left; width: 320px; height: 180px; margin: 6px; padding: 0; overflow: hidden; }
-.post-item-full .relation:hover { border: 3px solid #CCC; }
+.post-item-full .relation:hover { background: #EEE; }
 .post-item-full .relation .small-cover { position: relative; bottom: 90px; max-width: 100%; }
 .post-item-full .relation .title { position: relative; bottom: 175px; padding: 6px;
     background: url(../../assets/images/white-bg-50.png);  }
@@ -183,10 +184,10 @@ footer #copy { float: right; }
 .gallery-item .thumbnail:hover { background: #EEE; }
 .gallery-item .thumbnail img { min-width: 100%; max-width: 100%; }
 
-.gallery-item .preview { display: block; float: left; width: 320px; height: 180px; margin: 6px; padding: 0;
-    overflow: hidden; }
+.gallery-item .preview-list { display: flex; flex-flow: row wrap; justify-content: space-between; }
+.gallery-item .preview { width: 328px; height: 183px; margin: 0 0 8px 0; padding: 0; overflow: hidden; }
 .gallery-item .preview:hover { background: #EEE; }
-.gallery-item .preview img { min-width: 100%; max-width: 100%; }
+.gallery-item .preview img { display: inline-block; min-width: 100%; vertical-align: middle; }
 
 #gallery .favorite a { display: inline-block; height: 250px; overflow: hidden; margin: 0; padding: 3px 3px 1px 3px; }
 #gallery .favorite a img { position: relative; bottom: 50%; }

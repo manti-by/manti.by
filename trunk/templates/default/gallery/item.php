@@ -62,7 +62,7 @@
         </div>
     <?php endif; ?>
 
-    <div class="thumbnails">
+    <div class="preview-list">
         <?php foreach ($options['data']->originals as $original) : ?>
             <?php
                 // Check preview count
@@ -70,11 +70,9 @@
                 else $count++;
             ?>
 
-            <a id="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" data-image-id="<?php echo $original->id; ?>">
+            <a id="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="preview" data-image-id="<?php echo $original->id; ?>">
                 <img src="<?php echo $original->preview; ?>" alt="<?php echo $options['data']->name; ?> gallery image #<?php echo $original->id; ?>" />
             </a>
         <?php endforeach; ?>
-
-        <div class="cls"></div>
     </div>
 </div>

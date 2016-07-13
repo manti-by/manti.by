@@ -45,13 +45,12 @@
      * @subpackage Template
      * @author Alexander Chaika
      * @since 0.1
-     * @todo Add search functionality
      */
 
     $user = UserEntity::getInstance();
 ?>
 <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/autocomplete.jquery.js"></script>
-<div id="toolbar" class="fr">
+<div id="toolbar">
     <div id="search">
         <form action="<?php echo Sef::getSef('index.php?module=search'); ?>" method="post">
             <input type="text" id="query" name="q" value="" placeholder="<?php echo T('Search'); ?>..." class="autocomplete" data-source="<?php echo Sef::getSef('index.php?module=search&action=autocomplete'); ?>" />
