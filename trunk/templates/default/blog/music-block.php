@@ -51,7 +51,7 @@
     <div id="music-block-<?php echo $options['data']->id; ?>" class="music-block">
 
         <?php if (json_decode($options['data']->covers)) : ?>
-            <div class="covers fl">
+            <div class="cover">
                 <?php if ($options['context'] == 'short') : ?>
                     <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>">
                 <?php endif; ?>
@@ -62,81 +62,82 @@
             </div>
         <?php endif; ?>
 
-        <?php if ($options['context'] == 'short') : ?>
-            <div id="teaser-<?php echo $options['data']->id; ?>" class="teaser">
-                <?php echo nl2br($options['data']->teaser); ?>
-            </div>
-        <?php endif; ?>
+        <div class="info">
 
-        <?php if ($options['data']->created) : ?>
-            <div class="catnum flip-tracklist">
-                <span class="bold"><?php echo T('Created'); ?></span> :
-                <?php echo date('d.m.Y', strtotime($options['data']->created)); ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if ($options['data']->catnum && $options['context'] != 'short') : ?>
-            <div class="catnum flip-tracklist">
-                <span class="bold"><?php echo T('Catalog No'); ?></span> :
-                <?php echo $options['data']->catnum; ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if ($options['data']->genre) : ?>
-            <div class="genre flip-tracklist">
-                <span class="bold"><?php echo T('Genre'); ?></span> :
-                <?php echo $options['data']->genre; ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if ($options['data']->length) : ?>
-            <div class="length flip-tracklist">
-                <span class="bold"><?php echo T('Length'); ?></span> :
-                <?php echo $options['data']->length; ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if ($options['data']->quality && $options['context'] != 'short') : ?>
-            <div class="quality flip-tracklist">
-                <span class="bold"><?php echo T('Quality'); ?></span> :
-                <?php echo $options['data']->quality; ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if (json_decode($options['data']->preview)) : ?>
-            <div class="preview flip-tracklist">
-                <?php echo File::getHtml($options['data']->preview, FileEntity::TYPE_PREVIEW, false, $options['data']->id); ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if (json_decode($options['data']->metakeys)) : ?>
-        <div class="metakeys flip-tracklist">
-            <?php echo Tag::getHtml($options['data']->metakeys); ?>
-        </div>
-        <?php endif; ?>
-
-        <?php if (json_decode($options['data']->release)) : ?>
-            <div class="release">
-                <?php echo File::getHtml($options['data']->release, FileEntity::TYPE_RELEASE); ?>
-            </div>
-        <?php endif; ?>
-
-        <?php if ($options['data']->tracklist && $options['context'] == 'short') : ?>
-            <div class="tracklist">
-                <a href="#show-tracklist" class="show-tracklist" data-release-id="<?php echo $options['data']->id; ?>"><?php echo T('Show tracklist'); ?></a>
-                <a href="#hide-tracklist" class="hide-tracklist" data-release-id="<?php echo $options['data']->id; ?>"><?php echo T('Hide tracklist'); ?></a>
-                <div id="tracklist-<?php echo $options['data']->id; ?>" class="tracklist-block">
-                    <?php echo nl2br($options['data']->tracklist); ?>
+            <?php if ($options['context'] == 'short') : ?>
+                <div id="teaser-<?php echo $options['data']->id; ?>" class="teaser">
+                    <?php echo nl2br($options['data']->teaser); ?>
                 </div>
-            </div>
-        <?php endif; ?>
+            <?php endif; ?>
 
-        <?php if ($options['context'] == 'short') : ?>
-            <div class="fulllink">
-                <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>"><?php echo T('View full post'); ?></a>
+            <?php if ($options['data']->created) : ?>
+                <div class="catnum flip-tracklist">
+                    <span class="bold"><?php echo T('Created'); ?></span> :
+                    <?php echo date('d.m.Y', strtotime($options['data']->created)); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($options['data']->catnum && $options['context'] != 'short') : ?>
+                <div class="catnum flip-tracklist">
+                    <span class="bold"><?php echo T('Catalog No'); ?></span> :
+                    <?php echo $options['data']->catnum; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($options['data']->genre) : ?>
+                <div class="genre flip-tracklist">
+                    <span class="bold"><?php echo T('Genre'); ?></span> :
+                    <?php echo $options['data']->genre; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($options['data']->length) : ?>
+                <div class="length flip-tracklist">
+                    <span class="bold"><?php echo T('Length'); ?></span> :
+                    <?php echo $options['data']->length; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if ($options['data']->quality && $options['context'] != 'short') : ?>
+                <div class="quality flip-tracklist">
+                    <span class="bold"><?php echo T('Quality'); ?></span> :
+                    <?php echo $options['data']->quality; ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (json_decode($options['data']->preview)) : ?>
+                <div class="preview flip-tracklist">
+                    <?php echo File::getHtml($options['data']->preview, FileEntity::TYPE_PREVIEW, false, $options['data']->id); ?>
+                </div>
+            <?php endif; ?>
+
+            <?php if (json_decode($options['data']->metakeys)) : ?>
+            <div class="metakeys flip-tracklist">
+                <?php echo Tag::getHtml($options['data']->metakeys); ?>
             </div>
-        <?php endif; ?>
+            <?php endif; ?>
+
+            <div class="links">
+                <?php if (json_decode($options['data']->release)) : ?>
+                    <?php echo File::getHtml($options['data']->release, FileEntity::TYPE_RELEASE); ?>
+                <?php endif; ?>
+
+                <?php if ($options['data']->tracklist && $options['context'] == 'short') : ?>
+                    <a href="#show-tracklist" class="show-tracklist" data-release-id="<?php echo $options['data']->id; ?>">
+                        <?php echo T('Tracklist'); ?>
+                    </a>
+                    <a href="#hide-tracklist" class="hide-tracklist" data-release-id="<?php echo $options['data']->id; ?>">
+                        <?php echo T('Hide tracklist'); ?>
+                    </a>
+                    <div id="tracklist-<?php echo $options['data']->id; ?>" class="tracklist-block">
+                        <?php echo nl2br($options['data']->tracklist); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+
+        </div>
 
         <div class="cls"></div>
+
     </div>
 <?php endif; ?>

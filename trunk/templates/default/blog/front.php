@@ -60,12 +60,6 @@
         echo $this->getContents('gallery', 'front', $data);
     ?>
 
-    <h2 class="with-full-link front-blog">
-        <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>">
-            <?php echo T('Other blog posts'); ?>
-        </a>
-    </h2>
-
     <div class="main-sidebar">
         <?php
             $data = array('module' => 'blog', 'data' => $options['data']['content'], 'context' => 'preview');

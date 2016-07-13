@@ -64,10 +64,6 @@
     <a href="mailto:manti.by@gmail.com">
         <?php echo T('Contact'); ?>
     </a>
-    <a href="<?php echo Sef::getSef('index.php?module=user&action=loginform'); ?>">
-        <?php echo T('Login'); ?>
-    </a>
-
     <div id="copy">
         Alex Manti&copy; <?php echo date('Y'); ?>
     </div>

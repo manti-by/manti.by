@@ -173,11 +173,11 @@
                     // Add auto breaking
                     $avg_length += strlen($tag->name);
                     if ($avg_length > Application::$config['tag_line_length']) {
-                        $result .= '<br />';
+                        // $result .= '<br />';
                         $avg_length = 0;
                     }
 
-                    $result .= '<a href="' . Sef::getSef('index.php?module=tag&action=search&id=' . $tag->id) . '" class="tag" title="' . $tag->name . '">' . $tag->name . '</a>';
+                    $result .= '<a href="' . Sef::getSef('index.php?module=tag&action=search&id=' . $tag->id) . '" class="tag" title="' . $tag->name . '">#' . $tag->name . '</a>';
                 }
             } else {
                 return self::getInstance()->_throw(T('Incorect JSON data for tags'), MESSAGE);

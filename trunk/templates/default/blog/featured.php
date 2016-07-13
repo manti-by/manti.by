@@ -58,12 +58,12 @@
                 <?php if (json_decode($item->covers)) : ?>
                     <li class="slider-item<?php echo $active ? ' active' : ''; ?>">
                         <div class="wrap">
-                            <div class="cover l50">
+                            <div class="cover">
                                 <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>">
                                     <?php echo File::getHtml($item->covers, FileEntity::TYPE_COVERS); ?>
                                 </a>
                             </div>
-                            <div class="content r50">
+                            <div class="info">
                                 <h3>
                                     <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>">
                                         <?php echo $item->name . (!empty($item->genre) ? ' /' . $item->genre.  '/' : ''); ?>
@@ -73,14 +73,10 @@
                                 <div id="teaser-<?php echo $item->id; ?>" class="teaser">
                                     <?php echo nl2br($item->teaser); ?>
                                 </div>
+
                                 <?php
-                                    // Delete covers and show music info
-                                    $item->covers = null;
                                     echo $this->getContents('blog', 'featured-music-block', array('data' => $item));
                                 ?>
-                                <div class="fulllink">
-                                    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>"><?php echo T('View full post'); ?></a>
-                                </div>
                             </div>
                             <?php $active = (++$count == 2 ? true : false); ?>
                         </div>

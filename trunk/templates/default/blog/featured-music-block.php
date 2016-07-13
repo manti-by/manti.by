@@ -50,14 +50,6 @@
 <?php if ($options['data']->is_music) : ?>
     <div id="music-block-<?php echo $options['data']->id; ?>" class="music-block">
 
-        <?php if (json_decode($options['data']->covers)) : ?>
-            <div class="covers fl">
-                <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>">
-                    <?php echo File::getHtml($options['data']->covers, FileEntity::TYPE_COVERS); ?>
-                </a>
-            </div>
-        <?php endif; ?>
-
         <?php if ($options['data']->created) : ?>
             <div class="catnum">
                 <span class="bold"><?php echo T('Created'); ?></span> :
@@ -100,27 +92,26 @@
         <?php endif; ?>
 
         <?php if (json_decode($options['data']->metakeys)) : ?>
-        <div class="metakeys">
-            <?php echo Tag::getHtml($options['data']->metakeys); ?>
-        </div>
+            <div class="metakeys">
+                <?php echo Tag::getHtml($options['data']->metakeys); ?>
+            </div>
         <?php endif; ?>
 
-        <div class="cls"></div>
-    </div>
+        <div class="links">
+            <?php if (json_decode($options['data']->release)) : ?>
+                <?php echo File::getHtml($options['data']->release, FileEntity::TYPE_RELEASE); ?>
+            <?php endif; ?>
 
-    <?php if (json_decode($options['data']->release)) : ?>
-        <div class="release">
-            <?php echo File::getHtml($options['data']->release, FileEntity::TYPE_RELEASE); ?>
+            <?php if ($options['data']->tracklist && $options['context'] != 'full') : ?>
+                <a href="#show-tracklist" class="show-tracklist" data-release-id="<?php echo $options['data']->id; ?>">
+                    <?php echo T('Tracklist'); ?>
+                </a>
+                <a href="#hide-tracklist" class="hide-tracklist" data-release-id="<?php echo $options['data']->id; ?>">
+                    <?php echo T('Hide tracklist'); ?>
+                </a>
+                <div id="tracklist-<?php echo $options['data']->id; ?>" class="tracklist-block">
+                    <?php echo nl2br($options['data']->tracklist); ?>
+                </div>
+            <?php endif; ?>
         </div>
-    <?php endif; ?>
-
-    <?php if ($options['data']->tracklist && $options['context'] != 'full') : ?>
-        <div class="tracklist">
-            <a href="#show-tracklist" class="show-tracklist" data-release-id="<?php echo $options['data']->id; ?>"><?php echo T('Show tracklist'); ?></a>
-            <a href="#hide-tracklist" class="hide-tracklist" data-release-id="<?php echo $options['data']->id; ?>"><?php echo T('Hide tracklist'); ?></a>
-            <div id="tracklist-<?php echo $options['data']->id; ?>" class="tracklist-block">
-                <?php echo nl2br($options['data']->tracklist); ?>
-            </div>
-        </div>
-    <?php endif; ?>
 <?php endif; ?>
