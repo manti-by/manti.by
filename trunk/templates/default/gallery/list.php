@@ -47,7 +47,6 @@
      * @since 0.2RC1
      */
 ?>
-<h1><?php echo $options['title']; ?></h1>
 <div id="gallery">
     <?php echo $options['data']; ?>
 </div>

@@ -116,6 +116,13 @@
         <?php echo $this->getContents('plugin', 'loader'); ?>
         <?php echo $this->getContents('plugin', 'messages'); ?>
 
+        <aside class="hidden">
+            <div class="wrapper">
+                <?php echo $this->getContents('plugin', 'player'); ?>
+                <div class="cls"></div>
+            </div>
+        </aside>
+
         <header>
             <div class="wrapper">
                 <?php echo $this->getContents('partial', 'topmenu', $options); ?>
@@ -135,13 +142,6 @@
                 <?php echo $this->getContents('partial', 'footer'); ?>
             </div>
         </footer>
-
-        <aside>
-            <div class="wrapper">
-                <?php echo $this->getContents('plugin', 'player'); ?>
-                <div class="cls"></div>
-            </div>
-        </aside>
 
         <?php echo $this->getContents('plugin', 'debug'); ?>
         
