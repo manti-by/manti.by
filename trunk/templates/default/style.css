@@ -35,12 +35,12 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-body { font-family: 'Roboto',  Arial, Tahoma, Verdana, sans-serif; font-size: 12pt; color: #333; background: #FAFAFA; }
+body { font-family: 'Roboto', Arial, Tahoma, Verdana, sans-serif; font-size: 12pt; color: #333; background: #FAFAFA; }
 
 a { color: #b40303; text-decoration: none; }
 a:hover, a:active { text-decoration: underline; color: #7F2828 !important; }
 
-h1, h2, h3, h4, h5, h6 { font-family: 'Roboto',  Arial, Tahoma, Verdana, sans-serif; border-bottom: none; }
+h1, h2, h3, h4, h5, h6 { font-family: Tahoma, Verdana, Arial, sans-serif; border-bottom: none; }
 h2 { font-size: 20pt; }
 
 h2.with-full-link a, h3.with-full-link a { color: inherit; }
