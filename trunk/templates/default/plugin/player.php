@@ -205,7 +205,7 @@
                 favicon.attr('href', '/templates/default/images/favicon-play.png');
 
                 $('aside').removeClass('hidden');
-                $('header').addClass('padded');
+                $('header').addClass('hidden');
             } else {
                 favicon.attr('href', '/templates/default/images/favicon.png');
             }
@@ -230,8 +230,12 @@
         $.fn.resetAllPlayers = function() {
             favicon.attr('href', '/templates/default/images/favicon.png');
 
-            $('aside').removeClass('hidden');
-            $('header').addClass('padded');
+            if ($('aside').hasClass('hidden')) {
+                $('aside').css('opacity', 0).removeClass('hidden').animate({opacity: 1}, 400);
+                $('header').css('opacity', 1).animate({opacity: 1}, 400, function () {
+                    this.addClass('hidden');
+                });
+            }
 
             $('.player:not(.active) .pause').removeClass('pause').addClass('play');
             $('.player:not(.active) .position .progress-line-label span').html('00:00:00');

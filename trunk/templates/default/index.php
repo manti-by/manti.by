@@ -125,9 +125,7 @@
 
         <header>
             <div class="wrapper">
-                <?php echo $this->getContents('partial', 'topmenu', $options); ?>
-                <?php echo $this->getContents('partial', 'toolbar'); ?>
-                <div class="cls"></div>
+                <?php echo $this->getContents('partial', 'toolbar', $options); ?>
             </div>
         </header>
 
