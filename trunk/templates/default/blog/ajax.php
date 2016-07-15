@@ -52,12 +52,12 @@
     $(document).ready(function() {
         var page = <?php echo $options['page']; ?>;
         $(window).scroll(function() {
-            if ($('#footer').offset().top < $(window).scrollTop() + $(window).height() && page > 0) {
+            if ($('footer').offset().top < $(window).scrollTop() + $(window).height() && page > 0) {
                 $.fn.loaderShow();
                 page++;
                 $.post('<?php echo Sef::getSef('index.php?module=blog&action=next'); ?>', { page : page }, function(responce) {
                     if (responce != '') {
-                        $('#content .main-sidebar').append(responce);
+                        $('main .main-sidebar').append(responce);
 
                         $('audio').bind('canplay', function() {
                             var self = this;

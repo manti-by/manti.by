@@ -150,7 +150,9 @@
             // render each item
             $items_html = '';
             foreach($options['data'] as $item) {
-                $items_html .= $this->getContents($options['module'], 'item', array('data' => $item));
+                $current_options = $options;
+                $current_options['data'] = $item;
+                $items_html .= $this->getContents($options['module'], 'item', $current_options);
             }
 
             // render category
