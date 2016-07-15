@@ -242,9 +242,20 @@
 
             // Rebuild thumbnails
             foreach ($db_files as $source) {
-                // Generate thumbnail pathes
-                $pathinfo = pathinfo($source);
+                $original = ROOT_PATH . substr($source, 1);
+                if (!file_exists($original)) {
+                    $message = T('File does not exists');
+                    $this->_throw($message);
+                    $resized[] = array(
+                        'source' => $original,
+                        'status' => $message
+                    );
+                    continue;
+                }
 
+                $pathinfo = pathinfo($original);
+
+                // Generate thumbnails
                 $thumbpath = $this->file_path . DS . 'thumbnails' . strrchr($pathinfo['dirname'], '/');
                 $thumbname = $thumbpath . DS . $pathinfo['basename'];
 
@@ -310,7 +321,7 @@
                         $previewname,
                         Application::$config['preview_width'],
                         Application::$config['preview_height'],
-                        System::RESIZE_WITH_RATIO
+                        System::RESIZE_HEAD_ON
                     );
 
                     // Check result

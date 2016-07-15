@@ -49,9 +49,10 @@
      */
     class System extends Application {
 
-        const RESIZE_WITH_RATIO = 0;
-        const RESIZE_WITH_CROP  = 1;
-        const RESIZE_HEAD_ON    = 2;
+        const RESIZE_WITH_RATIO = 0; // Resize with aspect ratio
+        const RESIZE_WITH_CROP  = 1; // Resize to square and crop excess
+        const RESIZE_HEAD_ON    = 2; // Resize and crop excess header and footer
+        const RESIZE_EXACT      = 3; // Resize to exact size
 
         /**
          * @var object $instance self pointer
@@ -199,7 +200,7 @@
          * @param string $dname destination
          * @param int $width width to resize
          * @param int $height height to resize
-         * @param int $mode (optional: 0 - with aspect ratio, 1 - crop, other - head-on)
+         * @param int $mode
          * @return bool $result
          */
         public function resize($sname, $dname, $width, $height, $mode = System::RESIZE_WITH_RATIO) {
@@ -230,57 +231,61 @@
                         $ratioy = $sheight / $height;
 
                         if ($ratiox < $ratioy) {
-                            $dwidth  = intval($swidth / $ratioy);
-                            $dheight = intval($height);
+                            $dwidth  = $swidth / $ratioy;
+                            $dheight = $height;
                         } else {
-                            $dwidth  = intval($width);
-                            $dheight = intval($sheight / $ratiox);
+                            $dwidth  = $width;
+                            $dheight = $sheight / $ratiox;
                         }
                     } elseif ($mode == System::RESIZE_WITH_CROP) {
                         if ($swidth > $sheight) {
-                            $dwidth  = intval($height);
-                            $dheight = intval($height);
+                            $dwidth  = $height;
+                            $dheight = $height;
                         } else {
-                            $dwidth  = intval($width);
-                            $dheight = intval($width);
+                            $dwidth  = $width;
+                            $dheight = $width;
                         }
-                    } else {
-                        $dheight = $height;
+                    } elseif ($mode == System::RESIZE_HEAD_ON) {
                         $dwidth  = $width;
+                        $dheight = $width * $sheight / $swidth;
+                    } else {
+                        $dwidth  = $width;
+                        $dheight = $height;
                     }
 
                     // Create destination resource
                     if (function_exists("imagecreatetruecolor")) {
-                        $dest = imagecreatetruecolor($dwidth, $dheight);
+                        $dest = imagecreatetruecolor((int)$dwidth, (int)$dheight);
                     } else {
-                        $dest = imagecreate($dwidth, $dheight);
+                        $dest = imagecreate((int)$dwidth, (int)$dheight);
                     }
 
+                    // Set background to white
+                    $white = imagecolorallocate($dest, 255, 255, 255);
+                    imagefill($dest, 0, 0, $white);
+
                     // Create destination image
-                    if (function_exists("imagecopyresampled")) {
-                        if ($mode != System::RESIZE_WITH_CROP) {
-                            imagecopyresampled($dest, $source, 0, 0, 0, 0, (int)$dwidth, (int)$dheight, $swidth, $sheight);
+                    $function = function_exists("imagecopyresampled") ? 'imagecopyresampled' : 'imagecopyresized';
+                    if ($mode == System::RESIZE_WITH_CROP) {
+                        if ($swidth > $sheight) {
+                            $shift = ($swidth - $sheight) / 2;
+                            call_user_func($function, $dest, $source, 0, 0, $shift, 0,
+                                (int)$dwidth, (int)$dheight, $sheight, $sheight);
                         } else {
-                            if ($swidth > $sheight) {
-                                $shift = ($swidth - $sheight) / 2;
-                                imagecopyresampled($dest, $source, 0, 0, $shift, 0, (int)$dwidth, (int)$dheight, $sheight, $sheight);
-                            } else {
-                                $shift = ($sheight - $swidth) / 2;
-                                imagecopyresampled($dest, $source, 0, 0, 0, $shift, (int)$dwidth, (int)$dheight, $swidth, $swidth);
-                            }
+                            $shift = ($sheight - $swidth) / 2;
+                            call_user_func($function, $dest, $source, 0, 0, 0, $shift,
+                                (int)$dwidth, (int)$dheight, $swidth, $swidth);
                         }
+                    } elseif ($mode == System::RESIZE_HEAD_ON) {
+                        $shift = ($height - $dheight) / 2;
+                        call_user_func($function, $dest, $source, 0, $shift, 0, 0,
+                            (int)$dwidth, (int)$dheight, $swidth, $sheight);
+
+                        $dest = imagecrop($dest,
+                            array('x' => 0, 'y' => 0, 'width' => $width, 'height' => $height));
                     } else {
-                        if ($mode != System::RESIZE_WITH_CROP) {
-                            imagecopyresized($dest, $source, 0, 0, 0, 0, (int)$dwidth, (int)$dheight, $swidth, $sheight);
-                        } else {
-                            if ($swidth > $sheight) {
-                                $shift = ($swidth - $sheight) / 2;
-                                imagecopyresized($dest, $source, 0, 0, $shift, 0, (int)$dwidth, (int)$dheight, $sheight, $sheight);
-                            } else {
-                                $shift = ($sheight - $swidth) / 2;
-                                imagecopyresized($dest, $source, 0, 0, 0, $shift, (int)$dwidth, (int)$dheight, $swidth, $swidth);
-                            }
-                        }
+                        call_user_func($function, $dest, $source, 0, 0, 0, 0,
+                            (int)$dwidth, (int)$dheight, $swidth, $swidth);
                     }
 
                     // Destination file
