@@ -177,9 +177,9 @@ footer #copy { float: right; }
 #gallery h3, #search h3 { margin-bottom: 8px; padding-bottom: 6px; font-size: 18pt; }
 #gallery h3 a, #search h3 a { color: inherit; }
 
-#gallery .gallery-item { margin-bottom: 30px; }
+#gallery .gallery-item { }
 
-.gallery-item .thumbnail { width: 100px; height: 100px; margin: 0; padding: 5px; }
+.gallery-item .thumbnail { display: block; float: left; width: 100px; height: 100px; margin: 0; padding: 5px; }
 .gallery-item .thumbnail:hover { background: #EEE; }
 .gallery-item .thumbnail img { min-width: 100%; max-width: 100%; }
 
