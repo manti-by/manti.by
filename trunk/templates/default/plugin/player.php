@@ -230,10 +230,11 @@
         $.fn.resetAllPlayers = function() {
             favicon.attr('href', '/templates/default/images/favicon.png');
 
-            if ($('aside').hasClass('hidden')) {
-                $('aside').css('opacity', 0).removeClass('hidden').animate({opacity: 1}, 400);
-                $('header').css('opacity', 1).animate({opacity: 1}, 400, function () {
-                    this.addClass('hidden');
+            var aside = $('aside');
+            if (aside.hasClass('hidden')) {
+                aside.css('top', '-50px').removeClass('hidden').animate({ top: 0 }, 400);
+                $('header').animate({ opacity: 0 }, 400, function() {
+                    $(this).addClass('hidden');
                 });
             }
 

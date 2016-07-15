@@ -171,7 +171,7 @@
             // Render blog item
             if (!empty($options['data'])) {
                 $options['body'] = $this->view->getContents('gallery', 'full', $options);
-                return $this->view->wrapSidebar($options);
+                return $options;
             } else {
                 return $this->view->_404($options);
             }

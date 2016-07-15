@@ -176,9 +176,10 @@ footer #copy { float: right; }
 #gallery h2 { margin: 0 0 8px 0; padding: 0 0 4px 3px; }
 #gallery h3, #search h3 { margin-bottom: 8px; padding-bottom: 6px; font-size: 18pt; }
 #gallery h3 a, #search h3 a { color: inherit; }
+
 #gallery .gallery-item { margin-bottom: 30px; }
 
-.gallery-item .thumbnail { display: block; float: left; width: 100px; height: 100px; margin: 0; padding: 5px; }
+.gallery-item .thumbnail { width: 100px; height: 100px; margin: 0; padding: 5px; }
 .gallery-item .thumbnail:hover { background: #EEE; }
 .gallery-item .thumbnail img { min-width: 100%; max-width: 100%; }
 
@@ -187,7 +188,12 @@ footer #copy { float: right; }
 .gallery-item .preview:hover { background: #EEE; }
 .gallery-item .preview img { display: inline-block; min-width: 100%; vertical-align: middle; }
 
-#gallery .favorite a { display: inline-block; height: 250px; overflow: hidden; margin: 0; padding: 3px 3px 1px 3px; }
+
+#gallery .gallery-full { display: flex; flex-flow: row wrap; justify-content: space-between; margin-bottom: 30px; }
+#gallery .gallery-full .thumbnail { width: 105px; height: 105px; margin-bottom: 5px; overflow: hidden; }
+#gallery .gallery-full .thumbnail img { min-width: 100%; max-width: 100%; }
+
+#gallery .favorite a { display: inline-block; height: 300px; overflow: hidden; margin: 0; }
 #gallery .favorite a img { position: relative; bottom: 50%; }
 
 #featured { padding-bottom: 20px; }
@@ -239,7 +245,7 @@ footer #copy { float: right; }
 #popular-list li { display: inline-block; padding-right: 5px; text-transform: uppercase; }
 #popular-list li a { text-decoration: none; font-size: 11px; }
 
-#gallery {  }
+#gallery { padding-bottom: 50px; }
 #gallery .popular { overflow: hidden; text-align: right; margin: 0; padding: 5px; }
 #gallery .popular:hover { background: #EEE; }
 #gallery .popular a { display: block; height: 210px; overflow: hidden; }
@@ -334,7 +340,7 @@ footer #copy { float: right; }
 .player .now-playing a { display: block; position: relative; height: 40px; text-decoration: none !important;
     overflow: hidden; }
 .player .now-playing a span { display: inline-block; position: absolute; top: 11px; padding-left: 8px;
-    white-space: nowrap; }
+    white-space: nowrap; color: #999; }
 
 .player .high-definition { margin: 3px; padding: 0 2px; border: 1px solid #999; border-radius: 1px;
     cursor: pointer; text-decoration: line-through; font-size: 14px; color: #999; }

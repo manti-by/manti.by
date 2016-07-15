@@ -96,7 +96,7 @@
             e.preventDefault();
 
             $('.slider-item.active').removeClass('active').animate({ width : 100, opacity: 0.7 }, 400);
-            $(this).parent('.slider-item').addClass('active').animate({ width: 735, opacity: 1 }, 400);
+            $(this).parent('.slider-item').addClass('active').animate({ width: 774, opacity: 1 }, 400);
 
             return false;
         });

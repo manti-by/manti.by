@@ -58,16 +58,18 @@
 
     <div class="favorite">
         <a id="image-<?php echo $options['data']->favorite->id; ?>" href="<?php echo $options['data']->favorite->link; ?>" class="thumbnail" data-image-id="<?php echo $options['data']->favorite->id; ?>">
-            <img src="<?php echo $options['data']->favorite->link; ?>" width="693" alt="Favorite image from <?php echo $options['data']->name; ?> gallery" />
+            <img src="<?php echo $options['data']->favorite->link; ?>" width="1000" alt="Favorite image from <?php echo $options['data']->name; ?> gallery" />
         </a>
     </div>
-    <div class="thumbnails gallery-item">
+    <div class="thumbnails gallery-full">
         <?php foreach ($options['data']->originals as $original) : ?>
             <a id="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" data-image-id="<?php echo $original->id; ?>">
-                <img src="<?php echo $original->thumbnail; ?>" width="108" height="108" alt="<?php echo $options['data']->name; ?> gallery image #<?php echo $original->id; ?>" />
+                <img src="<?php echo $original->thumbnail; ?>" 
+                     alt="<?php echo $options['data']->name; ?> gallery image #<?php echo $original->id; ?>" />
             </a>
         <?php endforeach; ?>
     </div>
+    <div class="cls"></div>
 </div>
 <script type="text/javascript">
     $(document).ready(function() {
