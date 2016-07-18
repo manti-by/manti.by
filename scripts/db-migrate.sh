@@ -1,2 +1,2 @@
 #!/bin/sh
-php -f ../trunk/command.php -- -m
+php -f ../app/command.php -- -m

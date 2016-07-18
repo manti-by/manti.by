@@ -1,15 +1,15 @@
 #.gitignore
 
 # Ignore local config and content pathes
-trunk/includes/config.ini
-trunk/content/*
+app/includes/config.ini
+app/content/*
 
 # Remove language files for later development
-trunk/language/en.ini
-trunk/language/ru.ini
+app/language/en.ini
+app/language/ru.ini
 
 # Remove sitemap
-trunk/sitemap.xml
+app/sitemap.xml
 
 # Remove vagrant instance folder
 .vagrant/

@@ -10,10 +10,10 @@
         
         public static function setUpBeforeClass() {
             // include libraries
-            include '../trunk/bootstrap.php';
+            include '../app/bootstrap.php';
             
             // setup doc root for test files
-            System::getInstance()->configAttr('doc_root', dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'trunk');
+            System::getInstance()->configAttr('doc_root', dirname(dirname(__FILE__)) . DIRECTORY_SEPARATOR . 'app');
         }
         
         public function setUp() {

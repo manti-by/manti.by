@@ -5,6 +5,8 @@ header () {
     echo "--------------------------------------------------------------------------------"
 }
 
+ROOT_PATH=$(pwd)
+
 header "Updating system"
 sudo apt-get update && sudo apt-get upgrade
 
@@ -18,22 +20,22 @@ header "Install Apache and PHP addons"
 sudo apt-get install -y php5-common php5-cli php5-dev php5-mysql php5-gd php5-mcrypt php5-curl php-pear php5-xdebug php5-memcache
 
 header "Deploy database"
-unzip /vagrant/database/production.zip -d /tmp/
+unzip $ROOT_PATH/database/production.zip -d /tmp/
 mysql -uroot -e "CREATE DATABASE manti CHARACTER SET utf8 COLLATE utf8_general_ci;"
 mysql -uroot manti < /tmp/database.sql
 rm /tmp/database.sql
 
 header "Update Apache and App config"
 sudo a2enmod rewrite
-sudo cp /vagrant/src/confs/apache2.conf /etc/apache2/
-sudo cp /vagrant/src/confs/000-default.conf /etc/apache2/sites-available/
-sudo cp /vagrant/src/confs/xdebug.ini /etc/php5/mods-available/
-cp /vagrant/src/trunk/includes/config.ini.sample /vagrant/src/trunk/includes/config.ini
+sudo cp $ROOT_PATH/confs/apache2.conf /etc/apache2/
+sudo cp $ROOT_PATH/confs/000-default.conf /etc/apache2/sites-available/
+sudo cp $ROOT_PATH/confs/xdebug.ini /etc/php5/mods-available/
+cp $ROOT_PATH/app/includes/config.ini.sample ROOT_PATH/app/includes/config.ini
 
 header "Update log files and write permissions"
-touch /vagrant/log/app_error.log
-sudo chmod -R 777 /vagrant/log
-sudo chmod -R 777 /vagrant/src/trunk/language
+touch $ROOT_PATH/../log/app_error.log
+sudo chmod -R 777 $ROOT_PATH/../log
+sudo chmod -R 777 $ROOT_PATH/../src/app/language
 
 header "Restarting apache"
 sudo service apache2 restart

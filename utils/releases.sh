@@ -1,4 +1,4 @@
-#/bin/sh
+#!/bin/sh
 wget "http://manti.by/content/release/M01_Manti_Insomnia_mix.mp3"
 wget "http://manti.by/content/release/M01_Manti_Insomnia_mix.ogg"
 wget "http://manti.by/content/release/M02_Manti_All_she_wants_is_mix_(SCSI_device).mp3"

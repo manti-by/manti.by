@@ -1,3 +1,3 @@
 @echo off
-php -f ..\..\trunk\command.php -- -m
+php -f ..\..\app\command.php -- -m
 pause
