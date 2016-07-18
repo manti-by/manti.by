@@ -223,6 +223,11 @@
             $swidth = imagesx($source);
             $sheight = imagesy($source);
 
+            // Check resource
+            if (!$swidth || !$sheight) {
+                return $this->_throw('Please check preview image settings');
+            }
+
             try {
                 // Check if dest dimensions larger than source
                 if (($width < $swidth) || ($height < $sheight)) {
@@ -258,6 +263,11 @@
                         $dest = imagecreatetruecolor((int)$dwidth, (int)$dheight);
                     } else {
                         $dest = imagecreate((int)$dwidth, (int)$dheight);
+                    }
+
+                    // Check resource
+                    if (!$dest) {
+                        return $this->_throw('Cant create image resource, please check environment');
                     }
 
                     // Set background to white

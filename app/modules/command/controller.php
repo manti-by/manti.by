@@ -58,7 +58,8 @@
          * Route command to action
          */
         public function route($options) {
-            switch($options[1]) {
+            $action = isset($options[1]) ? $options[1] : 0;
+            switch($action) {
                 case '-d':
                 case '--dailystats':
                     $this->dailystatsAction();
