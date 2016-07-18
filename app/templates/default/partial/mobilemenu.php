@@ -39,54 +39,35 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Player plugin
-     * @name $loaderPlugin
-     * @author Alexander Chaika a.k.a. Manti
+     * Top menu plugin
+     * @name $topmenu
      * @package M2 Micro Framework
-     * @subpackage Plugin
-     * @since 0.3RC3
+     * @subpackage Template
+     * @author Alexander Chaika
+     * @since 0.1
      */
 
-    $player_data = Model::getModel('file')->getPlayerContent();
-    $player_source = json_encode($player_data);
-    $player_default_id = (int)$player_data[0]['id'];
+    $active = array(
+        'home'      => ($options['module'] == 'front' ? true : false),
+        'blog'      => ($options['module'] == 'blog' && $options['id'] != '14'  ? true : false),
+        'gallery'   => ($options['module'] == 'gallery' ? true : false),
+        'about'     => ($options['module'] == 'blog' && $options['id'] == '14' ? true : false)
+    );
 
 ?>
-<script type="text/javascript">
-    window.player_source = <?php echo $player_source; ?>;
-    window.player_default_id = <?php echo $player_default_id; ?>;
-</script>
-<script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/templates/default/player.js"></script>
-<div id="player" class="player">
-    <audio preload="auto" class="hidden"></audio>
-
-    <div class="controls">
-        <div class="button prev-track"></div>
-        <div class="button play"></div>
-        <div class="button next-track"></div>
-
-        <div class="progressbar position">
-            <div class="progress-line"></div>
-            <div class="progress-line-loaded"></div>
-            <div class="progress-line-active"></div>
-            <div class="progress-line-label"><span>0</span></div>
-        </div>
-
-        <div class="progressbar volume">
-            <div class="progress-line"></div>
-            <div class="progress-line-active"></div>
-            <div class="progress-line-label"><span>70</span>%</div>
-        </div>
-
-        <div class="high-definition">HD</div>
-    </div>
-
-    <div class="now-playing">
-        <a href="#">
-            <img src="#" width="33" height="33" />
-            <span></span>
-        </a>
-    </div>
-
-    <div class="cls"></div>
-</div>
+<div id="mobile-menu-button">&#xE5D4;</div>
+<nav id="mobile-menu" class="hidden">
+    <a href="<?php echo ($active['home'] ? '#' : Application::$config['http_host']); ?>"
+       class="home<?php echo ($active['front'] ? ' active' : ''); ?>" rel="home">
+        <?php echo T('Home'); ?>
+    </a>
+    <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"<?php echo ($active['blog'] ? ' class="active"' : ''); ?> rel="bookmark">
+        <?php echo T('Music'); ?>
+    </a>
+    <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"<?php echo ($active['gallery'] ? ' class="active"' : ''); ?> rel="bookmark">
+        <?php echo T('Photo'); ?>
+    </a>
+    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"<?php echo ($active['about'] ? ' class="active"' : ''); ?> rel="author">
+        <?php echo T('About'); ?>
+    </a>
+</nav>

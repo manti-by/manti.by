@@ -279,9 +279,8 @@ footer #copy { float: right; }
 #file-table th { background: #EEE; border-bottom: 1px solid #CCC; }
 #file-table tr:last-child td { border-bottom: none; }
 
-#gototop { display: none; position: fixed; right: 0; width: 50px; height: 100%; opacity: 0.5;
-    background: transparent url('./images/icon-up-24x24.png') no-repeat center center; }
-#gototop:hover { background-color: #999; }
+#gototop { display: none; position: fixed; bottom: 100px; right: 0; width: 50px; height: 50px; opacity: 0.5;
+    background: #999 url('./images/icon-up-24x24.png') no-repeat center center; }
 
 #sitemap { padding: 0 15px 50px 0; }
 #sitemap .open-spoiler { text-transform: lowercase; }
@@ -305,7 +304,7 @@ footer #copy { float: right; }
 
 .tab-community { display: none !important; }
 
-#player { width: 1000px; margin: 6px 0 4px 0; }
+#player { width: 985px; float: left; margin: 6px 0 4px 0; }
 #player .controls { margin-top: 5px; }
 
 .player { position: relative; width: 350px; }
@@ -323,14 +322,14 @@ footer #copy { float: right; }
 .player .progressbar { position: relative; margin: 0 5px; color: #999; text-align: right; cursor: pointer; }
 .player .progressbar .progress-line,
 .player .progressbar .progress-line-loaded,
-.player .progressbar .progress-line-active { position: absolute; top: 8px; left: 0; height: 4px; }
+.player .progressbar .progress-line-active { position: absolute; top: 7px; left: 0; height: 4px; }
 .player .progressbar .progress-line { width: 100%; background: #999; }
 .player .progressbar .progress-line-loaded { width: 0; background: #390; z-index: 5; cursor: pointer; }
 .player .progressbar .progress-line-active { width: 0; background: #b40303; z-index: 10;}
 .player .progressbar .progress-line-label { font-size: 11pt; }
 
-.player .position { width: 370px; margin-top: 3px; }
-.player .progressbar.position .progress-line { width: 310px; }
+.player .position { width: 410px; margin-top: 3px; }
+.player .progressbar.position .progress-line { width: 350px; }
 .player .progressbar.position .progress-line-loaded { width: 345px; }
 .player .progressbar.position .progress-line-label { width: 55px; }
 
@@ -350,7 +349,7 @@ footer #copy { float: right; }
 .player .high-definition:hover, .player .high-definition.active { color: #b40303; border-color: #b40303;
     text-decoration: none; }
 
-#player .now-playing { width: 285px; margin-left: 30px; }
+#player .now-playing { width: 235px; margin: 0 0 0 30px; }
 
 .player.inline { position: relative; height: 24px; padding: 3px; width: 330px;
     background: #DEDEDE; border-radius: 4px; }
@@ -370,6 +369,12 @@ footer #copy { float: right; }
 .player.inline .volume { width: 70px; }
 .player.inline .progressbar.volume .progress-line { width: 40px; }
 .player.inline .progressbar.volume .progress-line-label { width: 30px; text-align: right; }
+
+#mobile-menu-button { font-family: 'Material Icons'; width: 15px; padding: 12px 0 10px 0; float: right;
+    font-size: 18pt; cursor: pointer; }
+#mobile-menu { position: fixed; top: 48px; min-width: 150px; border: 1px solid #EEE; background: #FFF;
+    box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.2); }
+#mobile-menu a { display: block; padding: 4px 10px; }
 
 #loader div { background: url(./images/loader.gif) no-repeat center center; }
 

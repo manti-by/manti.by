@@ -57,7 +57,7 @@
         <meta name="keywords" content="<?php echo Model::getModel('tag')->getMetakeysString(); ?>" />
         <meta name="yandex-verification" content="6765012bcd05fac2" />
 
-        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700&subset=cyrillic" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto|Material+Icons:300,400,500,600,700&subset=cyrillic" rel="stylesheet" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/default.css" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/style.css" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/print.css" media="print" />
@@ -119,6 +119,7 @@
         <aside class="hidden">
             <div class="wrapper">
                 <?php echo $this->getContents('plugin', 'player'); ?>
+                <?php echo $this->getContents('partial', 'mobilemenu', $options); ?>
                 <div class="cls"></div>
             </div>
         </aside>
