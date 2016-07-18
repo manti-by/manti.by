@@ -118,21 +118,6 @@
                 <?php endif; ?>
             </ul>
         </li>
-        <li>
-            <a href="<?php echo Sef::getSef('index.php?module=user&action=registerform'); ?>">
-                <?php echo T('Register'); ?>
-            </a>
-        </li>
-        <li>
-            <a href="<?php echo Sef::getSef('index.php?module=user&action=loginform'); ?>">
-                <?php echo T('Login'); ?>
-            </a>
-        </li>
-        <li>
-            <a href="<?php echo Sef::getSef('index.php?module=user&action=forgotform'); ?>">
-                <?php echo T('Forgot password?'); ?>
-            </a>
-        </li>
     </ul>
     <ul class="r50">
         <li>

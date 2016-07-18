@@ -280,7 +280,7 @@ footer #copy { float: right; }
     background: transparent url('./images/icon-up-24x24.png') no-repeat center center; }
 #gototop:hover { background-color: #999; }
 
-#sitemap { padding: 0 15px; }
+#sitemap { padding: 0 15px 50px 0; }
 #sitemap .open-spoiler { text-transform: lowercase; }
 #sitemap .spoiler { display: none; }
 #sitemap .label { color: #777; }

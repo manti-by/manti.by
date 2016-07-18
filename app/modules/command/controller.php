@@ -98,6 +98,10 @@
                 case '--thumbs':
                     $this->rebuildThumbnailsAction();
                     break;
+                case '-s':
+                case '--sitemap':
+                    $this->generateSitemapAction();
+                    break;
                 case '-u':
                 case '--update':
                     $this->updateGalleryFilesAction();
@@ -292,6 +296,30 @@
         }
 
         /**
+        * Update gallery list
+        */
+        protected function generateSitemapAction() {
+
+            $sitemap = ROOT_PATH . DS . 'sitemap.xml';
+
+            // Delete old map
+            if (file_exists($sitemap)) {
+                if (!unlink($sitemap)) {
+                    $this->_output = 'ERROR: Cant delete old sitemap.';
+                    return;
+                }
+            }
+
+            // Create new
+            if (!file_put_contents($sitemap, Model::getModel('sitemap')->getXML())) {
+                $this->_output = 'ERROR: Cant put new sitemap content to the file.';
+                return;
+            }
+
+            $this->_output = 'Generate sitemap action complete.';
+        }
+
+        /**
          * Return result message
          * @return mixed
          */
@@ -310,6 +338,7 @@
                 . '      [-n, --dailynginx]     Process daily nginx stats' . NL
                 . '      [-p, --performance]    Check all site links' . NL
                 . '      [-r, --remigrate]      Remigrate all DB migrations' . NL
+                . '      [-s, --sitemap]        Generate new sitemap' . NL
                 . '      [-t, --thumbs]         Rebuild thumbnails' . NL
                 . str_repeat('-', 80);
         }

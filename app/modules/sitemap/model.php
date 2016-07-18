@@ -93,11 +93,6 @@
                 $result .= $this->getSitemapXMLItem(Sef::getSef('index.php?module=gallery&action=show&id=' . $gallery->id), strtotime($gallery->timestamp), 0.7, 'weekly');
             }
 
-            // Registration and sign in
-            $result .= $this->getSitemapXMLItem(Sef::getSef('index.php?module=user&action=registerform'), strtotime(date('Y-m-01')), 0.6, 'monthly');
-            $result .= $this->getSitemapXMLItem(Sef::getSef('index.php?module=user&action=loginform'), strtotime(date('Y-m-01')), 0.6, 'monthly');
-            $result .= $this->getSitemapXMLItem(Sef::getSef('index.php?module=user&action=forgotform'), strtotime(date('Y-m-01')), 0.6, 'monthly');
-
             // Close XML and return
             $result .= '</urlset>';
             return $result;
@@ -151,11 +146,6 @@
             foreach (Model::getModel('gallery')->getGallery(1000) as $gallery) {
                 $result[] = Sef::getSef('index.php?module=gallery&action=show&id=' . $gallery->id);
             }
-
-            // Registration and sign in
-            $result[] = Sef::getSef('index.php?module=user&action=registerform');
-            $result[] = Sef::getSef('index.php?module=user&action=loginform');
-            $result[] = Sef::getSef('index.php?module=user&action=forgotform');
 
             // Close XML and return
             return $result;
