@@ -232,8 +232,8 @@
 
             var aside = $('aside');
             if (aside.hasClass('hidden')) {
-                aside.css('top', '-50px').removeClass('hidden').animate({ top: 0 }, 400);
-                $('header').animate({ opacity: 0 }, 400, function() {
+                aside.css('top', '-40px').removeClass('hidden').animate({ top: 0 }, 1200);
+                $('header').animate({ opacity: 0 }, 800, function() {
                     $(this).addClass('hidden');
                 });
             }
@@ -509,7 +509,7 @@
 
     <div class="now-playing">
         <a href="#">
-            <img src="#" width="40" height="40" />
+            <img src="#" width="33" height="33" />
             <span></span>
         </a>
     </div>

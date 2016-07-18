@@ -51,13 +51,10 @@
 <h2><?php echo T('Instagram'); ?></h2>
 <div id="instagram" class="sidebar latest">
     <script src="//lightwidget.com/widgets/lightwidget.js"></script>
-    <iframe src="//lightwidget.com/widgets/765b8e6b142a59e290f0775359a288cf.html" 
-            id="lightwidget_765b8e6b14"
-            name="lightwidget_765b8e6b14"
-            scrolling="no"
-            allowtransparency="true"
-            class="lightwidget-widget"
-            style="width: 100%; border: 0; overflow: hidden;"></iframe>
+    <iframe src="//lightwidget.com/widgets/f21f75a49ab159d1b32d1fa2df17a90f.html"
+            id="lightwidget_f21f75a49a" name="lightwidget_f21f75a49a" scrolling="no"
+            allowtransparency="true" class="lightwidget-widget" style="width: 100%; border: 0; overflow: hidden;">
+    </iframe>
 
     <div id="instagram-profile">
         <?php echo T('Profile'); ?>: <a href="https://www.instagram.com/manti_by/">@manti_by</a>

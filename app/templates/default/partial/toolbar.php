@@ -59,7 +59,7 @@
 <nav>
     <a href="<?php echo ($active['home'] ? '#' : Application::$config['http_host']); ?>"
        class="home<?php echo ($active['front'] ? ' active' : ''); ?>" rel="home">
-        <img src="<?php echo Application::$config['http_host']; ?>/content/images/new-logo.png" alt="Manti Logo" width="240" />
+        <span class="image">&FilledSmallSquare;</span><span class="spacer">|</span><span class="text">Manti.by</span>
     </a>
     <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"<?php echo ($active['blog'] ? ' class="active"' : ''); ?> rel="bookmark">
         <?php echo T('Music'); ?>
