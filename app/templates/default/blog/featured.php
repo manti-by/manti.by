@@ -57,12 +57,13 @@
             <?php foreach($options['data'] as $item) : ?>
                 <?php if (json_decode($item->covers)) : ?>
                     <li class="slider-item<?php echo $active ? ' active' : ''; ?>">
-                        <div class="wrap">
+                        <div class="wrap post-item">
                             <div class="cover">
                                 <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>">
                                     <?php echo File::getHtml($item->covers, FileEntity::TYPE_COVERS); ?>
                                 </a>
                             </div>
+
                             <div class="info">
                                 <h3>
                                     <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $item->id); ?>">
@@ -78,6 +79,18 @@
                                     echo $this->getContents('blog', 'featured-music-block', array('data' => $item));
                                 ?>
                             </div>
+
+                            <?php if ($item->tracklist) : ?>
+                                <div id="tracklist-<?php echo $item->id; ?>" class="tracklist hidden">
+                                    <?php echo nl2br($item->tracklist); ?>
+                                    <div class="links">
+                                        <a href="#hide-tracklist" class="hide-tracklist">
+                                            <?php echo T('Hide tracklist'); ?>
+                                        </a>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
+
                             <?php $active = (++$count == 2 ? true : false); ?>
                         </div>
                     </li>
@@ -88,17 +101,3 @@
         <?php echo T('There are no contents found'); ?>
     <?php endif; ?>
 </div>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('.slider-item.active').width(735).css('opacity', 1);
-
-        $('.slider-item:not(.active) .wrap').live('click', function(e) {
-            e.preventDefault();
-
-            $('.slider-item.active').removeClass('active').animate({ width : 100, opacity: 0.7 }, 400);
-            $(this).parent('.slider-item').addClass('active').animate({ width: 774, opacity: 1 }, 400);
-
-            return false;
-        });
-    });
-</script>

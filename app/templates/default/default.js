@@ -53,47 +53,30 @@
             $('#mobile-menu').css('right', offset + 'px').toggleClass('hidden');
         });
 
-        $('.content .tracklist .show-tracklist').live('click', function() {
-            $(this).hide();
-            var release_id = $(this).data('release-id');
+        $('.slider-item.active').width(735).css('opacity', 1);
 
-            $('.content .hide-tracklist[data-release-id=' + release_id + ']').show();
-            $('.content #tracklist-' + release_id).fadeIn();
-            $('.content #teaser-' + release_id).hide();
-            $('.content #music-block-' + release_id).hide();
+        $('.slider-item:not(.active) .wrap').live('click', function(e) {
+            e.preventDefault();
+
+            $('.slider-item.active').removeClass('active').animate({ width : 100, opacity: 0.7 }, 400);
+            $(this).parent('.slider-item').addClass('active').animate({ width: 774, opacity: 1 }, 400);
+
+            return false;
         });
 
-        $('.content .tracklist .hide-tracklist').live('click', function() {
-            $(this).hide();
-            var release_id = $(this).data('release-id');
-
-            $('.content .show-tracklist[data-release-id=' + release_id + ']').show();
-            $('.content #tracklist-' + release_id).hide();
-            $('.content #teaser-' + release_id).fadeIn();
-            $('.content #music-block-' + release_id).fadeIn();
+        $('.info .show-tracklist').live('click', function() {
+            var post = $(this).closest('.post-item');
+            post.find('.info').hide();
+            post.find('.tracklist').fadeIn();
         });
 
-        $('.post-item .tracklist .show-tracklist').live('click', function() {
-            $(this).hide();
-            var release_id = $(this).data('release-id');
-
-            $('.post-item .hide-tracklist[data-release-id=' + release_id + ']').show();
-            $('.post-item #tracklist-' + release_id).fadeIn();
-            $('.post-item #teaser-' + release_id).hide();
-            $('.post-item #music-block-' + release_id + ' .flip-tracklist').hide();
+        $('.tracklist .hide-tracklist').live('click', function() {
+            var post = $(this).closest('.post-item');
+            post.find('.tracklist').hide();
+            post.find('.info').fadeIn();
         });
 
-        $('.post-item .tracklist .hide-tracklist').live('click', function() {
-            $(this).hide();
-            var release_id = $(this).data('release-id');
-
-            $('.post-item .show-tracklist[data-release-id=' + release_id + ']').show();
-            $('.post-item #tracklist-' + release_id).hide();
-            $('.post-item #teaser-' + release_id).fadeIn();
-            $('.post-item #music-block-' + release_id + ' .flip-tracklist').fadeIn();
-        });
-
-        $('#sitemap .open-spoiler').live('click', function() {
+        $('#sitemap').find('.open-spoiler').live('click', function() {
             $(this).next('.spoiler').toggle(400);
         });
 

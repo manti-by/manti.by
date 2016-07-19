@@ -98,8 +98,11 @@ main { min-height: 490px; margin-top: 60px; }
 .post-item .teaser { padding-bottom: 15px; font-size: 13pt; }
 .post-item .cover { float: left; width: 350px; height: 350px; }
 .post-item .cover img { width: 350px; height: 350px; border: 1px solid #EEE; }
-.post-item .info { float: left; position: relative; width: 338px; height: 350px; margin-left: 12px; }
 .post-item .music-block { padding-bottom: 20px; }
+
+.post-item .info,
+.post-item .tracklist { float: left; position: relative; width: 338px; height: 350px; margin-left: 12px; }
+.post-item .tracklist { font-size: 10pt; }
 
 .post-item .metakeys { margin-top: 5px; width: 350px; line-height: 10pt; }
 .post-item .catnum, .post-item .genre,
@@ -108,9 +111,8 @@ main { min-height: 490px; margin-top: 60px; }
 
 .post-item .links { position: absolute; bottom: -2px; }
 .post-item .links a { color: #999; text-decoration: underline; }
-.post-item .show-tracklist { }
-.post-item .hide-tracklist { display: none; }
-.post-item .tracklist-block { display: none; }
+
+.post-item .tracklist { }
 
 .post-item-full { padding-bottom: 20px; }
 .post-item-full .description { padding-bottom: 15px; }
@@ -217,9 +219,7 @@ footer #copy { float: right; }
 #featured .slider-item .info .links { position: absolute; bottom: 0; }
 #featured .slider-item .info .links a { color: #777; text-decoration: underline; }
 
-#featured .slider-item .info .show-tracklist {  }
-#featured .slider-item .info .hide-tracklist { display: none; }
-#featured .slider-item .info .tracklist-block { display: none; }
+#featured .slider-item .tracklist { }
 
 #featured .slider-item .info .catnum,
 #featured .slider-item .info .genre,

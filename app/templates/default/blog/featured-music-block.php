@@ -103,15 +103,10 @@
             <?php endif; ?>
 
             <?php if ($options['data']->tracklist && $options['context'] != 'full') : ?>
-                <a href="#show-tracklist" class="show-tracklist" data-release-id="<?php echo $options['data']->id; ?>">
+                <a href="#show-tracklist" class="show-tracklist">
                     <?php echo T('Tracklist'); ?>
                 </a>
-                <a href="#hide-tracklist" class="hide-tracklist" data-release-id="<?php echo $options['data']->id; ?>">
-                    <?php echo T('Hide tracklist'); ?>
-                </a>
-                <div id="tracklist-<?php echo $options['data']->id; ?>" class="tracklist-block">
-                    <?php echo nl2br($options['data']->tracklist); ?>
-                </div>
             <?php endif; ?>
         </div>
+    </div>
 <?php endif; ?>
