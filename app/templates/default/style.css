@@ -324,7 +324,7 @@ footer #copy { float: right; }
 .player .progressbar .progress-line-loaded,
 .player .progressbar .progress-line-active { position: absolute; top: 7px; left: 0; height: 4px; }
 .player .progressbar .progress-line { width: 100%; background: #999; }
-.player .progressbar .progress-line-loaded { width: 0; background: #390; z-index: 5; cursor: pointer; }
+.player .progressbar .progress-line-loaded { width: 0; background: #3C0; z-index: 5; cursor: pointer; }
 .player .progressbar .progress-line-active { width: 0; background: #b40303; z-index: 10;}
 .player .progressbar .progress-line-label { font-size: 11pt; }
 
@@ -341,7 +341,7 @@ footer #copy { float: right; }
     overflow: hidden; color: #ECECEC; }
 .player .now-playing a { display: block; position: relative; height: 35px; text-decoration: none !important;
     overflow: hidden; }
-.player .now-playing a span { display: inline-block; position: absolute; top: 9px; padding-left: 8px;
+.player .now-playing a span { display: inline-block; position: absolute; top: 8px; left: 38px;
     white-space: nowrap; color: #999; }
 
 .player .high-definition { margin: 3px; padding: 0 2px; border: 1px solid #999; border-radius: 1px;
