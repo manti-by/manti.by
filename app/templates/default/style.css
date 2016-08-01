@@ -372,9 +372,12 @@ footer #copy { float: right; }
 
 #mobile-menu-button { font-family: 'Material Icons'; width: 15px; padding: 12px 0 10px 0; float: right;
     font-size: 18pt; cursor: pointer; }
-#mobile-menu { position: fixed; top: 48px; min-width: 150px; border: 1px solid #EEE; background: #FFF;
-    box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.2); }
-#mobile-menu a { display: block; padding: 4px 10px; }
+#mobile-menu { position: fixed; top: 48px; min-width: 150px; padding: 4px 0; border: 1px solid #EEE; background: #FFF;
+    box-shadow: 1px 1px 3px 0 rgba(0,0,0,0.2); }
+#mobile-menu a { display: block; margin: 0 4px; padding: 8px 4px; color: #999;
+    border-bottom: 1px solid #FAFAFA; }
+#mobile-menu a:hover { color: #b40303; text-decoration: none; background-color: #EEE; }
+#mobile-menu a:last-child { border-bottom: none; }
 
 #loader div { background: url(./images/loader.gif) no-repeat center center; }
 

@@ -102,10 +102,12 @@
                     header.addClass('hidden');
                 });
             } else {
-                header.removeClass('hidden').animate({ opacity: 1 }, 400);
-                aside.animate({ top: -40 }, 800, function() {
-                    aside.addClass('hidden');
-                });
+                if (getCookie('player_is_playing') != 1) {
+                    header.removeClass('hidden').animate({opacity: 1}, 400);
+                    aside.animate({top: -40}, 800, function () {
+                        aside.addClass('hidden');
+                    });
+                }
             }
         };
 
@@ -156,6 +158,7 @@
                     is_mp3  = $.fn.canPlayMp3() ? 'mp3' : 'web';
 
                     // Update player
+                    player.attr('data-release-id', id);
                     player_link.attr('href', player_source[i]['link']);
                     player_image.attr('src', player_source[i]['cover']);
                     player_audio.attr('src', player_source[i][quality][is_mp3]);
@@ -300,15 +303,15 @@
                 console.log('Play action');
             }
 
-            var current_player_id = $(event.currentTarget).closest('.player').data('release-id'),
+            var player_id = $(event.currentTarget).closest('.player').data('release-id'),
                 cookie_player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id;
 
-            if (player_api.readyState == 0 || current_player_id != cookie_player_id) {
+            if (player_api.readyState == 0 || player_id != cookie_player_id) {
                 setCookie('player_position', 0);
                 setCookie('player_is_playing', 1);
 
                 $.fn.resetAllPlayers();
-                $.fn.reloadPlayer(current_player_id);
+                $.fn.reloadPlayer(player_id);
             } else {
                 if (is_pause) {
                     setCookie('player_is_playing', 0);
@@ -319,23 +322,23 @@
                 }
             }
 
-            $.fn.checkActivePLayer(current_player_id);
+            $.fn.checkActivePLayer(player_id);
             $.fn.checkFaviconState();
             $.fn.checkPlayerVisibility();
         };
 
-        $.fn.changeTrack = function (prev) {
+        $.fn.changeTrack = function (event, prev) {
             if (prev) {
                 console.log('Prev action');
             } else {
                 console.log('Next action');
             }
 
-            var current_player_id = $(this).closest('.player').data('release-id');
+            var player_id = $(event.currentTarget).closest('.player').data('release-id');
 
             // Check main player
-            if (!current_player_id) {
-                current_player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id;
+            if (!player_id) {
+                player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id;
             }
 
             $.fn.resetAllPlayers();
@@ -343,18 +346,21 @@
             setCookie('player_position', 0);
 
             for (var i = 0; i < player_source.length; i++) {
-                if (player_source[i].id == current_player_id) {
+                if (player_source[i].id == player_id) {
                     break;
                 }
             }
 
             if (prev) {
-                current_player_id = i > 0 ? player_source[i - 1].id : player_source[player_source.length - 1].id;
+                player_id = i > 0 ? player_source[i - 1].id : player_source[player_source.length - 1].id;
             } else {
-                current_player_id = typeof player_source[i + 1] != 'undefined' ? player_source[i + 1].id : player_source[0].id;
+                player_id = typeof player_source[i + 1] != 'undefined' ? player_source[i + 1].id : player_source[0].id;
             }
 
-            $.fn.reloadPlayer(current_player_id);
+            $.fn.reloadPlayer(player_id);
+            $.fn.checkActivePLayer(player_id);
+            $.fn.checkFaviconState();
+            $.fn.checkPlayerVisibility();
         };
 
         $.fn.initPlayer = function() {
@@ -396,13 +402,13 @@
         });
 
         // Next action
-        $('.player .next-track').live('click', function () {
-            $.fn.changeTrack(false);
+        $('.player .next-track').live('click', function (event) {
+            $.fn.changeTrack(event, false);
         });
 
         // Prev action
-        $('.player .prev-track').live('click', function () {
-            $.fn.changeTrack(true);
+        $('.player .prev-track').live('click', function (event) {
+            $.fn.changeTrack(event, true);
         });
 
         // Change quality
