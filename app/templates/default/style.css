@@ -114,7 +114,8 @@ main { min-height: 490px; margin-top: 60px; }
 
 .post-item .tracklist { }
 
-.post-item-full { padding-bottom: 20px; }
+.post-item-full { padding: 0 0 20px 5px; }
+.post-item-full li { padding-bottom: 10px; line-height: 15pt; }
 .post-item-full .description { padding-bottom: 15px; }
 .post-item-full .cover { float: left; width: 400px; height: 400px; border: 1px solid #CCC; }
 .post-item-full .info { float: left; width: 480px; height: 400px; margin-left: 20px; }
@@ -128,6 +129,7 @@ main { min-height: 490px; margin-top: 60px; }
 .post-item-full .release a { font-size: 14px; text-decoration: underline; }
 
 .post-item-full .admin-buttons a { font-size: 12px; }
+.post-item-full .post-image { float: right; padding: 0 0 10px 10px; }
 
 .post-item-full .relation { float: left; width: 320px; height: 210px; margin: 6px; padding: 0; overflow: hidden; }
 .post-item-full .relation:hover { background: #EEE; }
@@ -287,11 +289,12 @@ footer #copy { float: right; }
 #sitemap .spoiler { display: none; }
 #sitemap .label { color: #777; }
 
-#sitemap ul { margin: 0; padding: 0; }
-#sitemap ul li { font-size: 14px; margin-top: 7px; }
+#sitemap ul { margin: 0; padding: 0 0 0 20px; }
+#sitemap ul li { font-size: 12pt; margin-top: 7px; }
 
-#sitemap ul ul { margin: 5px 0 0 15px; }
-#sitemap ul ul li { font-size: 12px; margin: 0; }
+#sitemap ul ul { margin: 5px 0 0 0; }
+#sitemap ul ul li { font-size: 11pt; margin: 0; }
+#sitemap .l50 { width: 40%; }
 
 .contact { padding-bottom: 10px; font-weight: bold; }
 .contact a { font-weight: normal; color: #b40303 !important; }

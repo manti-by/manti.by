@@ -63,7 +63,11 @@
     </h1>
 
     <div class="description">
-        <?php echo nl2br($options['data']->description); ?>
+        <?php if ($options['data']->is_music == 1) : ?>
+            <?php echo nl2br($options['data']->description); ?>
+        <?php else: ?>
+            <?php echo $options['data']->description; ?>
+        <?php endif; ?>
     </div>
 
     <?php echo $this->getContents('blog', 'music-block', $options); ?>
