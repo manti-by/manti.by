@@ -133,7 +133,10 @@
 
         <?php if ($options['data']->tracklist && $options['context'] == 'short') : ?>
             <div class="tracklist hidden">
-                <?php echo nl2br($options['data']->tracklist); ?>
+                <div class="content">
+                    <?php echo nl2br($options['data']->tracklist); ?>
+                </div>
+
                 <div class="links">
                     <a href="#hide-tracklist" class="hide-tracklist">
                         <?php echo T('Hide tracklist'); ?>

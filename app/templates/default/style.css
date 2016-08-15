@@ -101,8 +101,9 @@ main { min-height: 490px; margin-top: 60px; }
 .post-item .music-block { padding-bottom: 20px; }
 
 .post-item .info,
-.post-item .tracklist { float: left; position: relative; width: 338px; height: 350px; margin-left: 12px; }
-.post-item .tracklist { font-size: 10pt; }
+.post-item .tracklist { float: left; position: relative; width: 338px; height: 350px; margin-left: 12px;
+    font-size: 11pt; }
+.post-item .tracklist .content { height: 325px; overflow-y: auto; }
 
 .post-item .metakeys { margin-top: 5px; width: 350px; line-height: 10pt; }
 .post-item .catnum, .post-item .genre,

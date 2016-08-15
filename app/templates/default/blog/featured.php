@@ -82,7 +82,10 @@
 
                             <?php if ($item->tracklist) : ?>
                                 <div id="tracklist-<?php echo $item->id; ?>" class="tracklist hidden">
-                                    <?php echo nl2br($item->tracklist); ?>
+                                    <div class="content">
+                                        <?php echo nl2br($item->tracklist); ?>
+                                    </div>
+
                                     <div class="links">
                                         <a href="#hide-tracklist" class="hide-tracklist">
                                             <?php echo T('Hide tracklist'); ?>
