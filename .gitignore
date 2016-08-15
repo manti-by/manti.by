@@ -4,10 +4,6 @@
 app/includes/config.ini
 app/content/*
 
-# Remove language files for later development
-app/language/en.ini
-app/language/ru.ini
-
 # Remove sitemap
 app/sitemap.xml
 

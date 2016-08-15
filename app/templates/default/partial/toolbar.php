@@ -59,13 +59,16 @@
 <nav>
     <a href="<?php echo ($active['home'] ? '#' : Application::$config['http_host']); ?>"
        class="home<?php echo ($active['front'] ? ' active' : ''); ?>" rel="home">
-        <span class="text">Manti.by</span>
+        <img src="/templates/default/images/logo.png" />
+        <span class="text">
+            Manti.by
+        </span>
     </a>
     <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"<?php echo ($active['blog'] ? ' class="active"' : ''); ?> rel="bookmark">
         <?php echo T('Music'); ?>
     </a>
     <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"<?php echo ($active['gallery'] ? ' class="active"' : ''); ?> rel="bookmark">
-        <?php echo T('Photo'); ?>
+        <?php echo T('Gallery'); ?>
     </a>
     <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"<?php echo ($active['about'] ? ' class="active"' : ''); ?> rel="author">
         <?php echo T('About'); ?>

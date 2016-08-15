@@ -74,7 +74,7 @@
             player_api = player_audio.get(0),
             player_link = player.find('.now-playing a'),
             player_image = player.find('.now-playing img'),
-            player_title = player.find('.now-playing span'),
+            player_title = player.find('.now-playing span.title-wrapper'),
             player_source = window.player_source,
             player_default_id = window.player_default_id;
 
@@ -84,9 +84,9 @@
             var favicon = $('link[rel=icon]');
 
             if (getCookie('player_is_playing') == 1) {
-                favicon.attr('href', '/templates/default/images/favicon-play.png');
-            } else {
                 favicon.attr('href', '/templates/default/images/favicon.png');
+            } else {
+                favicon.attr('href', '/templates/default/images/favicon-pause.png');
             }
         };
 
@@ -132,12 +132,13 @@
         };
 
         $.fn.animatePlayerTitle = function() {
-            var title = $('#player .now-playing span'),
-                overflow = 38 + title.width() - title.outerWidth();
+            var overflow = player_link.width() - player_title.outerWidth();
 
             if (overflow < 0) {
-                title.animate({ left: overflow }, 2500, function () {
-                    title.animate({ left: 38 }, 2500);
+                player_title.animate({ left: overflow }, 2500, function () {
+                    setTimeout(function() {
+                        player_title.animate({ left: 38 }, 2500);
+                    }, 2500);
                 });
             }
         };

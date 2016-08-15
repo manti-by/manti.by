@@ -83,8 +83,10 @@
 
     <div class="now-playing">
         <a href="#">
-            <img src="#" width="33" height="33" />
-            <span></span>
+            <span class="image-wrapper">
+                <img src="#" width="33" height="33" />
+            </span>
+            <span class="title-wrapper"></span>
         </a>
     </div>
 

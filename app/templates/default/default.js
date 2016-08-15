@@ -58,8 +58,13 @@
         $('.slider-item:not(.active) .wrap').live('click', function(e) {
             e.preventDefault();
 
-            $('.slider-item.active').removeClass('active').animate({ width : 100, opacity: 0.7 }, 400);
-            $(this).parent('.slider-item').addClass('active').animate({ width: 774, opacity: 1 }, 400);
+            $('.slider-item.active')
+                .removeClass('active')
+                .animate({ width : 100, opacity: 0.7 }, 400);
+
+            $(this).parent('.slider-item')
+                .addClass('active')
+                .animate({ width: 782, opacity: 1 }, 400);
 
             return false;
         });
