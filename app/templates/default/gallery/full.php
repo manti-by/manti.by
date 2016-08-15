@@ -57,14 +57,20 @@
     <?php endif; ?>
 
     <div class="favorite">
-        <a id="image-<?php echo $options['data']->favorite->id; ?>" href="<?php echo $options['data']->favorite->link; ?>" class="thumbnail" data-image-id="<?php echo $options['data']->favorite->id; ?>">
-            <img src="<?php echo $options['data']->favorite->link; ?>" width="1000" alt="Favorite image from <?php echo $options['data']->name; ?> gallery" />
+        <a id="image-<?php echo $options['data']->favorite->id; ?>"
+           href="<?php echo $options['data']->favorite->link; ?>"
+           class="preview"
+           data-image-id="<?php echo $options['data']->favorite->id; ?>">
+            <img src="<?php echo $options['data']->favorite->link; ?>" width="1000"
+                 alt="Favorite image from <?php echo $options['data']->name; ?> gallery" />
         </a>
     </div>
-    <div class="thumbnails gallery-full">
+    <div class="preview gallery-full">
         <?php foreach ($options['data']->originals as $original) : ?>
-            <a id="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>" class="thumbnail" data-image-id="<?php echo $original->id; ?>">
-                <img src="<?php echo $original->thumbnail; ?>" 
+            <a id="image-<?php echo $original->id; ?>" href="<?php echo $original->link; ?>"
+               class="preview"
+               data-image-id="<?php echo $original->id; ?>">
+                <img src="<?php echo $original->preview; ?>"
                      alt="<?php echo $options['data']->name; ?> gallery image #<?php echo $original->id; ?>" />
             </a>
         <?php endforeach; ?>

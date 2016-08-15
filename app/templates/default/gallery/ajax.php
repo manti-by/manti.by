@@ -48,10 +48,12 @@
      */
 ?>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function() {
+        var image_wrapper = $('#image-wrapper');
+
         // Bind click to thumbnails
-        $('.thumbnail').live('click', function(e) {
-            e.preventDefault();
+        $('.preview').live('click', function(event) {
+            event.preventDefault();
 
             // Show loader and get original link
             $.fn.loaderShow();
@@ -110,11 +112,11 @@
                     $.fn.loaderHide();
                 }
             }
-        }
+        };
 
         buildImageBlock = function(image_block, rel_id) {
             // Remove old image
-            $('#image-wrapper').remove();
+            image_wrapper.remove();
 
             // Popup blocks
             var close_pointer = $('<div class="close"></div>').bind('click', $('#image-wrapper').remove());
@@ -123,12 +125,16 @@
             var wrapper = $('<div id="image-wrapper"></div>');
 
             // Build block wrapper and append to contents
-            wrapper.append(close_pointer).append(prev_pointer).append(image_block).append(next_pointer);
-            $('#content').append(wrapper);
+            wrapper.append(close_pointer)
+                .append(prev_pointer)
+                .append(image_block)
+                .append(next_pointer);
+
+            $('body').append(wrapper);
 
             // Hide loader
             $.fn.loaderHide();
-        }
+        };
 
         nextImage = function(event) {
             event.preventDefault();
@@ -141,7 +147,7 @@
             );
 
             return false;
-        }
+        };
 
         prevImage = function(event) {
             event.preventDefault();
@@ -154,7 +160,7 @@
             );
 
             return false;
-        }
+        };
 
         // Check anchor
         var anchor = window.location.hash.substring(1);
@@ -162,7 +168,7 @@
 
         // Add escape action
         $(document).bind('keydown', function(e) {
-            if (e.which == 27) $('#image-wrapper').remove();
+            if (e.which == 27) image_wrapper.remove();
         });
     });
 </script>

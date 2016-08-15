@@ -93,7 +93,7 @@ aside .wrapper { padding: 0; background: transparent; }
 main { min-height: 490px; margin-top: 60px; }
 
 .post-item { margin-bottom: 20px; }
-.post-item h3 { margin-bottom: 6px; padding-bottom: 8px; font-size: 18pt; }
+.post-item h3 { margin-bottom: 5px; padding-bottom: 10px; font-size: 18pt; }
 .post-item h3 a { color: inherit; }
 .post-item .teaser { padding-bottom: 15px; font-size: 13pt; }
 .post-item .cover { float: left; width: 350px; height: 350px; }
@@ -180,11 +180,11 @@ footer #copy { float: right; }
     font-size: 80px; border-right: 3px solid white; color: white; background: black;  }
 #page-404 .right-column { padding: 100px 40px; font-size: 16px;  }
 
-#gallery h2 { margin: 0 0 8px 0; padding: 0 0 4px 3px; }
+#gallery h2 { margin: 0 0 5px 0; padding: 0 0 0 3px; }
 #gallery h3, #search h3 { margin-bottom: 8px; padding-bottom: 6px; font-size: 18pt; }
 #gallery h3 a, #search h3 a { color: inherit; }
 
-#gallery .gallery-item { }
+#gallery .gallery-item { margin-bottom: 20px; }
 
 .gallery-item .thumbnail { display: block; float: left; width: 100px; height: 100px; margin: 0; padding: 5px; }
 .gallery-item .thumbnail:hover { background: #EEE; }
@@ -197,10 +197,9 @@ footer #copy { float: right; }
 
 
 #gallery .gallery-full { display: flex; flex-flow: row wrap; justify-content: space-between; margin-bottom: 30px; }
-#gallery .gallery-full .thumbnail { width: 105px; height: 105px; margin-bottom: 5px; overflow: hidden; }
-#gallery .gallery-full .thumbnail img { min-width: 100%; max-width: 100%; }
+#gallery .gallery-full .preview { margin-bottom: 3px; }
 
-#gallery .favorite a { display: inline-block; height: 300px; overflow: hidden; margin: 0; }
+#gallery .favorite a { display: inline-block; height: 300px; overflow: hidden; margin: 0 0 3px 0; }
 #gallery .favorite a img { position: relative; bottom: 50%; }
 
 #featured { padding-bottom: 20px; }
@@ -251,6 +250,8 @@ footer #copy { float: right; }
 #popular-list li a { text-decoration: none; font-size: 11px; }
 
 #gallery { padding-bottom: 50px; }
+#frontpage #gallery { padding-bottom: 0; }
+
 #gallery .popular { overflow: hidden; text-align: right; margin: 0; padding: 5px; }
 #gallery .popular:hover { background: #EEE; }
 #gallery .popular a { display: block; height: 210px; overflow: hidden; }

@@ -140,6 +140,7 @@
                 if (count($gallery->originals)) {
                     foreach($gallery->originals as $original) {
                         // Update image link and path
+                        $original->gallery_id = $gallery->id;
                         $original->link = Application::$config['http_host'] . substr($original->source, 1);
                         $original->preview = Application::$config['http_host'] . substr(str_replace('originals', 'preview', $original->source), 1);
                         $original->thumbnail = Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1);
