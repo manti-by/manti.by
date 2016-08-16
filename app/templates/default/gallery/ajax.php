@@ -95,6 +95,10 @@
                     // Build block
                     buildImageBlock(this, response.data.id);
 
+                    // Move image to screen center
+                    var shift = ($(document).height() - image_block.height()) / 2;
+                    if (shift > 0) image_block.css('top', shift + 'px');
+
                     // Bind next click
                     $(this).bind('click', nextImage);
 
