@@ -60,6 +60,10 @@
         public function route($options) {
             $action = isset($options[1]) ? $options[1] : 0;
             switch($action) {
+                case '-h':
+                case '--help':
+                    $this->helpAction();
+                    break;
                 case '-d':
                 case '--dailystats':
                     $this->dailystatsAction();
@@ -107,8 +111,6 @@
                 case '--update':
                     $this->updateGalleryFilesAction();
                     break;
-                case '-h':
-                case '--help':
                 default:
                     $this->helpAction();
             }

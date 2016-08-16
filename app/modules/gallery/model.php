@@ -368,7 +368,7 @@
                         System::RESIZE_WITH_RATIO
                     );
 
-                    echo 'Resized ' . $source . NL;
+                    // echo 'Resized ' . $source . NL;
 
                     // Check result
                     if ($result) {

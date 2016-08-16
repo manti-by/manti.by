@@ -258,7 +258,6 @@
                     } elseif ($mode == System::RESIZE_HEAD_ON || $mode == System::RESIZE_FACE_DETECT) {
                         $dwidth  = $width;
                         $dheight = $width * $sheight / $swidth;
-                        $is_check_face = ($sheight > $swidth) && ($dwidth > $dheight);
                     } else {
                         $dwidth  = $width;
                         $dheight = $height;
@@ -300,7 +299,11 @@
                         $dest = imagecrop($dest,
                             array('x' => 0, 'y' => 0, 'width' => $width, 'height' => $height));
                     } elseif ($mode == System::RESIZE_FACE_DETECT) {
-                        $is_check_face && $face_rectangle = System::getFaceRectangle($sname);
+                        if ($sheight > $swidth) {
+                            echo 'Try to detect face at image ' . $sname . NL;
+                            $face_rectangle = System::getFaceRectangle($sname);
+                        }
+
                         if (isset($face_rectangle['y'])) {
                             echo 'Face detected at ' . $face_rectangle['x'] . ':' . $face_rectangle['y'] . NL;
                             $shift = $face_rectangle['y'] + ($face_rectangle['height'] / 2) - $dheight;
