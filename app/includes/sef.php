@@ -123,7 +123,7 @@
          */
         public static function init() {
             // Get config
-            if (!Application::$config['sef_enabled']) return;
+            if (!Application::$config['sef_enabled'] || php_sapi_name() == 'cli') return;
 
             // Get global config
             $database = Database::getInstance();
