@@ -94,7 +94,7 @@
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
     # Add watermark to gallery images
-    RewriteCond %{REQUEST_URI} content/gallery/originals/(.*) [NC]
+    RewriteCond %{REQUEST_URI} content/gallery/fullhd/(.*) [NC]
     RewriteRule ^(.*)$ watermark.php [NC]
 
     # If the requested path and file is not /index.php and the request

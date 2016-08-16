@@ -70,15 +70,15 @@
                 $in_use[] = $original->id;
             ?>
 
-            <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $original->gallery_id); ?>#image-<?php echo $original->id; ?>" class="thumbnail">
-                <img src="<?php echo Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1); ?>" width="100" height="100"  alt="Latest image from gallery" />
+            <a href="<?php echo $original->gallery_link; ?>#image-<?php echo $original->id; ?>" class="thumbnail">
+                <img src="<?php echo $original->thumbnail; ?>" width="100" height="100"  alt="Latest image from gallery" />
             </a>
         <?php endforeach; ?>
     </div>
 
     <div class="popular fl gallery-item">
-        <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $popular_image->gallery_id); ?>#image-<?php echo $popular_image->id; ?>">
-            <img src="<?php echo Application::$config['http_host'] . substr(str_replace('originals', 'fullhd', $original->source), 1); ?>" alt="Popular image from gallery" width="673" />
+        <a href="<?php echo $popular_image->gallery_link; ?>#image-<?php echo $popular_image->id; ?>">
+            <img src="<?php echo $popular_image->fullhd; ?>" alt="Popular image from gallery" width="673" />
         </a>
     </div>
     <div class="cls"></div>

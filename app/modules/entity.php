@@ -46,4 +46,11 @@
      * @author Alexander Chaika
      * @since 0.2RC1
      */
-    class Entity extends Application { }
+    class Entity extends Application {
+
+        protected function __construct($object) {
+            foreach ($object as $key => $value) {
+                $this->$key = $value;
+            }
+        }
+    }

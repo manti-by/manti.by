@@ -88,12 +88,12 @@
         buildImage = function(response) {
             if (response.result == 'success') {
                 // Create image block
-                var image_block = $('<img src="' + response.fullhd + '" class="original resizible black-shadow" data-image-id="' + response.id + '" />');
+                var image_block = $('<img src="' + response.data.fullhd + '" class="original resizible black-shadow" data-image-id="' + response.data.id + '" />');
 
                 // Wait while loading and bind click and track
                 image_block.load(function() {
                     // Build block
-                    buildImageBlock(this, response.id);
+                    buildImageBlock(this, response.data.id);
 
                     // Bind next click
                     $(this).bind('click', nextImage);
@@ -101,7 +101,7 @@
                     // Ping view counter
                     $.post(
                         '<?php echo Sef::getSef('index.php?module=file&action=track'); ?>',
-                        { id : response.id }
+                        { id : response.data.id }
                     );
                 });
             } else {

@@ -59,6 +59,11 @@
         private $link_path;
 
         /**
+         * @var string $entity_path path to entity
+         */
+        private $entity_path;
+
+        /**
          * File model constructor
          */
         public function __construct() {
@@ -66,6 +71,7 @@
 
             $this->file_path = realpath(ROOT_PATH . DS . Application::$config['gallery_path']);
             $this->link_path = Application::$config['http_host'] . Application::$config['gallery_path'];
+            $this->entity_path = realpath(ROOT_PATH . DS . 'modules' . DS . 'gallery' . DS . 'entity.php');
         }
 
         /**
@@ -435,7 +441,7 @@
          */
         public function getLatestImages($limit = 100) {
             $this->database->query("CALL GET_LATEST_IMAGES($limit)");
-            return $this->database->getObjectsArray();
+            return self::normalizeImageObjects($this->database->getObjectsArray());
         }
 
         /**
@@ -445,7 +451,20 @@
          */
         public function getPopularImages($limit = 100) {
             $this->database->query("CALL GET_POPULAR_IMAGES($limit)");
-            return $this->database->getObjectsArray();
+            return self::normalizeImageObjects($this->database->getObjectsArray());
+        }
+
+        /**
+         * Convert array of stdClass to ImageEntity list
+         * @param array $images
+         * @return array $images
+         */
+        private static function normalizeImageObjects($images) {
+            $result = array();
+            foreach ($images as $i) {
+                $result[] = new GalleryEntity($i);
+            }
+            return $result;
         }
 
         /**

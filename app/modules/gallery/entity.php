@@ -39,7 +39,7 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Image Entity class
+     * Gallery Entity class
      * @name $database
      * @package M2 Micro Framework
      * @subpackage Modules
@@ -47,7 +47,7 @@
      * @since 0.5.2
      */
     
-    class ImageEntity extends Entity {
+    class GalleryEntity extends Entity {
 
         /**
          * @var int $id
@@ -60,36 +60,53 @@
         public $gallery_id;
 
         /**
-         * @var string $email user email
+         * @var string $gallery_link
          */
-        private $email;
+        public $gallery_link;
 
         /**
-         * @var string $password pass hash
+         * @var string $source
          */
-        private $password;
+        public $source;
 
         /**
-         * @var string $group user group name
+         * @var string $original
          */
-        private $group;
+        public $original;
 
         /**
-         * @var bool $is_loaded is user profile loaded
+         * @var string $thumbnail
          */
-        private $is_loaded = false;
+        public $thumbnail;
 
         /**
-         * @var object $instance self pointer
+         * @var string $preview
          */
-        protected static $instance = null;
+        public $preview;
 
         /**
-         * Singleton protection
-         * @param int $id user ID for load
+         * @var string $fullhd
          */
-        protected function __construct($object) {
-            // Get db handler
-            $this->database = Database::getInstance();
+        public $fullhd;
+
+
+        public function __construct($object) {
+            parent::__construct($object);
+
+            if ($this->gallery_id) {
+                $this->gallery_link = Sef::getSef('index.php?module=gallery&action=show&id=' . $this->gallery_id);
+            }
+            if ($this->source) {
+                $this->original = $this->getLink('original');
+                $this->thumbnail = $this->getLink('thumbnails');
+                $this->preview = $this->getLink('preview');
+                $this->fullhd = $this->getLink('fullhd');
+            }
+        }
+
+        public function getLink($type = 'original') {
+            return $type != 'original' ?
+                Application::$config['http_host'] . substr(str_replace('originals', $type, $this->source), 1) :
+                Application::$config['http_host'] . substr($this->source, 1);
         }
     }

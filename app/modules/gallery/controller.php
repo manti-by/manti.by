@@ -216,9 +216,7 @@
             if ($result = $this->model->nextImage($options['id'])) {
                 $options['data'] = array(
                     'result'   => 'success',
-                    'id'       => $result->id,
-                    'original' => Application::$config['http_host'] . substr($result->source, 1),
-                    'fullhd'   => Application::$config['http_host'] . substr(str_replace('originals', 'fullhd', $result->source), 1),
+                    'data'     => new GalleryEntity($result)
                 );
             } else {
                 $error = $this->getLastFromStack();
@@ -244,8 +242,7 @@
             if ($result = $this->model->prevImage($options['id'])) {
                 $options['data'] = array(
                     'result'   => 'success',
-                    'id'       => $result->id,
-                    'original' => Application::$config['http_host'] . substr($result->source, 1)
+                    'data'     => new GalleryEntity($result)
                 );
             } else {
                 $error = $this->getLastFromStack();
