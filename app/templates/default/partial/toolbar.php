@@ -75,11 +75,11 @@
     </a>
     
     <div id="search">
-        <form action="<?php echo Sef::getSef('index.php?module=search'); ?>" method="post">
+        <form action="<?php echo Sef::getSef('index.php?module=search'); ?>" method="get">
             <input type="text" id="query" name="q" value="" placeholder="<?php echo T('Search'); ?>..."
-                   class="autocomplete hidden"
+                   class="autocomplete hidden" autocomplete="Off"
                    data-source="<?php echo Sef::getSef('index.php?module=search&action=autocomplete'); ?>" />
-            <input type="submit" id="go" name="go" value=" " />
+            <input type="submit" id="go" value=" " />
         </form>
     </div>
 </nav>

@@ -85,10 +85,19 @@
             $(this).next('.spoiler').toggle(400);
         });
 
-        $('#query').autocomplete({
+        var q = $('#query');
+        q.autocomplete({
             selectmode  : 'url',
             autosize    : false,
             minsymbols  : 2
+        });
+
+        $('#go').click(function(event) {
+            if (!q.val()) {
+                event.preventDefault();
+                q.fadeIn(400);
+                return false;
+            }
         });
     });
 })(jQuery);

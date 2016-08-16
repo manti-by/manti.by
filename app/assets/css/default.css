@@ -189,7 +189,10 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 .file-control li { list-style: none; margin: 0; padding: 0; }
 
 .autocomplete-result { position: absolute; min-width: 120px; border: 1px solid #CCC;
-    background: white; box-shadow: 3px 3px 3px #999; z-index: 1000; }
+    background: white; box-shadow: 1px 1px 3px 0 rgba(0,0,0,0.2); z-index: 1000; }
 .autocomplete-result ul { display: block; margin: 5px; padding: 0; }
-.autocomplete-result ul li { display: block; margin: 0; padding: 2px 0; border: none; background: white; cursor: pointer; }
+.autocomplete-result ul li { display: block; margin: 0; padding: 2px 0; text-align: left; border: none;
+    background: white; cursor: pointer; }
 .autocomplete-result ul li:hover { color: #ff721d; }
+.autocomplete-result ul li a { width: auto; padding: 0; margin: 3px 2px 3px 0; }
+.autocomplete-result ul li a:hover { border-bottom: 0; }
