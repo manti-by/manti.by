@@ -302,7 +302,7 @@
                 $message = $message['level'] . ': ' . $message['message'] . ' (' . $message['debug'] . ')';
             }
 
-            $filename = realpath(ROOT_PATH . DS . self::$config['error_log']);
+            $filename = realpath(self::$config['error_log']);
             $string = '[' . date('D M d H:i:s Y') . '] ' . $message . NL;
 
             if (is_writable($filename)) {

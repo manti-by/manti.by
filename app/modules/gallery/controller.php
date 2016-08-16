@@ -217,7 +217,8 @@
                 $options['data'] = array(
                     'result'   => 'success',
                     'id'       => $result->id,
-                    'original' => Application::$config['http_host'] . substr($result->source, 1)
+                    'original' => Application::$config['http_host'] . substr($result->source, 1),
+                    'fullhd'   => Application::$config['http_host'] . substr(str_replace('originals', 'fullhd', $result->source), 1),
                 );
             } else {
                 $error = $this->getLastFromStack();

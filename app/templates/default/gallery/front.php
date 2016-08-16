@@ -78,7 +78,7 @@
 
     <div class="popular fl gallery-item">
         <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $popular_image->gallery_id); ?>#image-<?php echo $popular_image->id; ?>">
-            <img src="<?php echo  Application::$config['http_host'] . substr($popular_image->source, 1); ?>" alt="Popular image from gallery" width="673" />
+            <img src="<?php echo Application::$config['http_host'] . substr(str_replace('originals', 'fullhd', $original->source), 1); ?>" alt="Popular image from gallery" width="673" />
         </a>
     </div>
     <div class="cls"></div>

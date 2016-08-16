@@ -38,7 +38,10 @@
 
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
-    /**
+    use OpenCV\Image as Image;
+    use OpenCV\Histogram as Histogram;
+
+/**
      * Class for system operations
      * NOTICE: This class implemented as Singleton
      * @name $system
@@ -52,7 +55,8 @@
         const RESIZE_WITH_RATIO = 0; // Resize with aspect ratio
         const RESIZE_WITH_CROP  = 1; // Resize to square and crop excess
         const RESIZE_HEAD_ON    = 2; // Resize and crop excess header and footer
-        const RESIZE_EXACT      = 3; // Resize to exact size
+        const RESIZE_FACE_DETECT= 3; // Resize and crop with face detection
+        const RESIZE_EXACT      = 4; // Resize to exact size
 
         /**
          * @var object $instance self pointer
@@ -230,6 +234,7 @@
 
             try {
                 // Check if dest dimensions larger than source
+                $is_check_face = false;
                 if (($width < $swidth) || ($height < $sheight)) {
                     if ($mode == System::RESIZE_WITH_RATIO) { // save aspect ratio
                         $ratiox = $swidth / $width;
@@ -250,9 +255,10 @@
                             $dwidth  = $width;
                             $dheight = $width;
                         }
-                    } elseif ($mode == System::RESIZE_HEAD_ON) {
+                    } elseif ($mode == System::RESIZE_HEAD_ON || $mode == System::RESIZE_FACE_DETECT) {
                         $dwidth  = $width;
                         $dheight = $width * $sheight / $swidth;
+                        $is_check_face = ($sheight > $swidth) && ($dwidth > $dheight);
                     } else {
                         $dwidth  = $width;
                         $dheight = $height;
@@ -288,6 +294,20 @@
                         }
                     } elseif ($mode == System::RESIZE_HEAD_ON) {
                         $shift = ($height - $dheight) / 2;
+                        call_user_func($function, $dest, $source, 0, $shift, 0, 0,
+                            (int)$dwidth, (int)$dheight, $swidth, $sheight);
+
+                        $dest = imagecrop($dest,
+                            array('x' => 0, 'y' => 0, 'width' => $width, 'height' => $height));
+                    } elseif ($mode == System::RESIZE_FACE_DETECT) {
+                        $is_check_face && $face_rectangle = System::getFaceRectangle($sname);
+                        if (isset($face_rectangle['y'])) {
+                            echo 'Face detected at ' . $face_rectangle['x'] . ':' . $face_rectangle['y'] . NL;
+                            $shift = $face_rectangle['y'] + ($face_rectangle['height'] / 2) - $dheight;
+                            $shift = $shift > 0 ? $shift : 0;
+                        } else {
+                            $shift = ($height - $dheight) / 2;
+                        }
                         call_user_func($function, $dest, $source, 0, $shift, 0, 0,
                             (int)$dwidth, (int)$dheight, $swidth, $sheight);
 
@@ -431,7 +451,7 @@
 
         /**
          * Get domain parts
-         * @return array $domain parts
+         * @return array|false $domain parts
          */
         public function getDomainParts() {
             // Check domain
@@ -543,5 +563,26 @@
             $sizes = 'BKMGTP';
             $factor = (int)floor((strlen($bytes) - 1) / 3);
             return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . $sizes[$factor];
+        }
+
+        public static function sortBySquare($a, $b)
+        {
+            if ($a['width'] * $a['height'] == $b['width'] * $b['height']) {
+                return 0;
+            }
+            return $a['width'] * $a['height'] > $b['width'] * $b['height'] ? 1 : -1;
+        }
+
+        /**
+         * Face detection tool using OpenCV library
+         * @param string $image
+         * @return array $result
+         */
+        public static function getFaceRectangle($image) {
+            $i = Image::load($image, Image::LOAD_IMAGE_COLOR);
+            $result = $i->haarDetectObjects("/usr/share/opencv/haarcascades/haarcascade_frontalface_default.xml");
+
+            usort($result, array('self', 'sortBySquare'));
+            return reset($result);
         }
     }

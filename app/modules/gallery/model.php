@@ -142,6 +142,7 @@
                         // Update image link and path
                         $original->gallery_id = $gallery->id;
                         $original->link = Application::$config['http_host'] . substr($original->source, 1);
+                        $original->fullhd = Application::$config['http_host'] . substr(str_replace('originals', 'fullhd', $original->source), 1);
                         $original->preview = Application::$config['http_host'] . substr(str_replace('originals', 'preview', $original->source), 1);
                         $original->thumbnail = Application::$config['http_host'] . substr(str_replace('originals', 'thumbnails', $original->source), 1);
 
@@ -289,6 +290,22 @@
                     }
                 }
 
+                $fullhdpath = $this->file_path . DS . 'fullhd' . strrchr($pathinfo['dirname'], '/');
+                $fullhdname = $fullhdpath . DS . $pathinfo['basename'];
+
+                // Check directory path and try to create it
+                if (!file_exists($fullhdpath)) {
+                    if (!mkdir($fullhdpath)) {
+                        $message = T('Could not create preview directory');
+                        $this->_throw($message);
+                        $resized[] = array(
+                            'source' => $fullhdpath,
+                            'status' => $message
+                        );
+                        continue;
+                    }
+                }
+
                 // Remove old thumbnail and preview
                 $is_thumb_exists = file_exists($thumbname);
                 if ($is_thumb_exists && !$is_update) {
@@ -297,6 +314,10 @@
                 $is_preview_exists = file_exists($previewname);
                 if ($is_preview_exists && !$is_update) {
                     unlink($previewname);
+                }
+                $is_fullhd_exists = file_exists($fullhdname);
+                if ($is_fullhd_exists && !$is_update) {
+                    unlink($fullhdname);
                 }
 
                 // And try to create new
@@ -322,8 +343,26 @@
                         $previewname,
                         Application::$config['preview_width'],
                         Application::$config['preview_height'],
-                        System::RESIZE_HEAD_ON
+                        System::RESIZE_FACE_DETECT
                     );
+
+                    if (!$result) {
+                        $message = $this->getLastFromStack();
+                        $resized[] = array(
+                            'source' => $source,
+                            'status' => $message['message']
+                        );
+                    }
+
+                    $result = System::getInstance()->resize(
+                        $source,
+                        $fullhdname,
+                        Application::$config['fullhd_width'],
+                        Application::$config['fullhd_height'],
+                        System::RESIZE_WITH_RATIO
+                    );
+
+                    echo 'Resized ' . $source . NL;
 
                     // Check result
                     if ($result) {

@@ -39,40 +39,57 @@
     defined('M2_MICRO') or die('Direct Access to this location is not allowed.');
 
     /**
-     * Gallery item template
-     * @name $blog-item
+     * Image Entity class
+     * @name $database
      * @package M2 Micro Framework
-     * @subpackage Template
+     * @subpackage Modules
      * @author Alexander Chaika
-     * @since 0.2RC1
+     * @since 0.5.2
      */
+    
+    class ImageEntity extends Entity {
 
-    $count = 0;
-?>
-<div class="gallery-item">
-    <h3 class="with-full-link">
-        <a href="<?php echo Sef::getSef('index.php?module=gallery&action=show&id=' . $options['data']->id); ?>">
-            <?php echo $options['data']->name; ?>
-        </a>
-    </h3>
+        /**
+         * @var int $id
+         */
+        public $id;
 
-    <?php if (!empty($options['data']->description)) : ?>
-        <div class="description">
-            <?php echo $options['data']->description; ?>
-        </div>
-    <?php endif; ?>
+        /**
+         * @var int $gallery_id
+         */
+        public $gallery_id;
 
-    <div class="preview-list">
-        <?php foreach ($options['data']->originals as $original) : ?>
-            <?php
-                // Check preview count
-                if ($count >= Application::$config['preview_count']) break;
-                else $count++;
-            ?>
+        /**
+         * @var string $email user email
+         */
+        private $email;
 
-            <a id="image-<?php echo $original->id; ?>" href="<?php echo $original->fullhd; ?>" class="preview" data-image-id="<?php echo $original->id; ?>">
-                <img src="<?php echo $original->preview; ?>" alt="<?php echo $options['data']->name; ?> gallery image #<?php echo $original->id; ?>" />
-            </a>
-        <?php endforeach; ?>
-    </div>
-</div>
+        /**
+         * @var string $password pass hash
+         */
+        private $password;
+
+        /**
+         * @var string $group user group name
+         */
+        private $group;
+
+        /**
+         * @var bool $is_loaded is user profile loaded
+         */
+        private $is_loaded = false;
+
+        /**
+         * @var object $instance self pointer
+         */
+        protected static $instance = null;
+
+        /**
+         * Singleton protection
+         * @param int $id user ID for load
+         */
+        protected function __construct($object) {
+            // Get db handler
+            $this->database = Database::getInstance();
+        }
+    }
