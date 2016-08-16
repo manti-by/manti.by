@@ -37,6 +37,12 @@ sudo echo "extension=opencv.so" >> /etc/php5/mods-available/opencv.ini
 sudo ln -s /etc/php5/mods-available/opencv.ini /etc/php5/cli/conf.d/20-opencv.ini
 sudo ln -s /etc/php5/mods-available/opencv.ini /etc/php5/apache2/conf.d/20-opencv.ini
 
+header "Update browcap extension"
+sudo cp $ROOT_PATH/confs/browscap.ini /usr/local/share/
+sudo echo "browscap=/usr/local/share/browscap.ini" >> /etc/php5/mods-available/browscap.ini
+sudo ln -s /etc/php5/mods-available/browscap.ini /etc/php5/cli/conf.d/20-browscap.ini
+sudo ln -s /etc/php5/mods-available/browscap.ini /etc/php5/apache2/conf.d/20-browscap.ini
+
 header "Supress libdc1394 error"
 sudo ln -s /dev/null /dev/raw1394
 
