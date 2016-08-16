@@ -14,7 +14,7 @@ header "Install base lamp stack"
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -q -y apache2 mysql-server php5 memcached libopencv-dev
 
 header "Install required libraries"
-sudo apt-get install -y libapache2-mod-php5 libmcrypt4 unzip
+sudo apt-get install -y libapache2-mod-php5 libmcrypt4 zip unzip
 
 header "Install Apache and PHP addons"
 sudo apt-get install -y php5-common php5-cli php5-dev php5-mysql php5-gd php5-mcrypt php5-curl php-pear php5-xdebug php5-memcache
