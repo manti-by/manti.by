@@ -1,11 +1,17 @@
 #.gitignore
 
 # Ignore local config and content pathes
-app/includes/config.ini
-app/content/*
+/app/includes/config.ini
+/app/content/*
 
 # Remove sitemap
-app/sitemap.xml
+/app/sitemap.xml
 
 # Remove vagrant instance folder
-.vagrant/
+/.vagrant/
+
+/build/
+
+/tests/test.jpg
+/tests/test_canny.jpg
+/tests/test_sobel.jpg

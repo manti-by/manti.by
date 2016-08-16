@@ -10,16 +10,16 @@ database (used MySQLi), sending emails, upload files, resize images and etc.
 CMS have an MVC structure with modules and have simple object behaviour
 which will be very simple to understand app logic for each level of developers.
 
-Author: Alexander Manti <manti.by@gmail.com>
+Author: Alex Manti <manti.by@gmail.com>
 
-Source link: https://github.com/manti-by/M2_micro/
+Source link: https://github.com/manti-by/m2/
 
-Current version: 0.4.1
+Current version: 0.5.2
 
 Requirements:
 
 - Basic: PHP 5.3+ (GD, CURL, Browscap), MySQL 5.0+ with MySQLi PHP driver, Memcache.
-- Advanced: CURL and Browscap extentions needed for stats module.
+- Advanced: CURL extension needed for stats module.
 
 
 Vagrant setup
@@ -27,7 +27,7 @@ Vagrant setup
 
 1. Clone source code from github:
 
-    $ git clone https://github.com/manti-by/M2_micro.git ./src
+    $ git clone https://github.com/manti-by/m2.git ./src
 
 2. Create "log" directory:
 
