@@ -333,7 +333,7 @@
                         $thumbname,
                         Application::$config['thumb_width'],
                         Application::$config['thumb_height'],
-                        System::RESIZE_WITH_CROP
+                        System::RESIZE_FACE_DETECT
                     );
 
                     if (!$result) {
@@ -368,7 +368,7 @@
                         System::RESIZE_WITH_RATIO
                     );
 
-                    // echo 'Resized ' . $source . NL;
+                    echo 'Resized ' . $source . NL;
 
                     // Check result
                     if ($result) {

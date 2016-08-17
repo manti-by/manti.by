@@ -229,23 +229,20 @@
 
             // Check resource
             if (!$swidth || !$sheight) {
-                return $this->_throw('Please check preview image settings');
+                return $this->_throw('Please check image settings');
             }
 
             try {
-                // Check if dest dimensions larger than source
-                $is_check_face = false;
+                // Check if dest dimensions smaller than source
+                $ratio = $swidth / $sheight;
                 if (($width < $swidth) || ($height < $sheight)) {
                     if ($mode == System::RESIZE_WITH_RATIO) { // save aspect ratio
-                        $ratiox = $swidth / $width;
-                        $ratioy = $sheight / $height;
-
-                        if ($ratiox < $ratioy) {
-                            $dwidth  = $swidth / $ratioy;
-                            $dheight = $height;
-                        } else {
+                        if ($swidth > $sheight) {
                             $dwidth  = $width;
-                            $dheight = $sheight / $ratiox;
+                            $dheight = $width / $ratio;
+                        } else {
+                            $dwidth  = $height * $ratio;
+                            $dheight = $height;
                         }
                     } elseif ($mode == System::RESIZE_WITH_CROP) {
                         if ($swidth > $sheight) {
@@ -256,8 +253,21 @@
                             $dheight = $width;
                         }
                     } elseif ($mode == System::RESIZE_HEAD_ON || $mode == System::RESIZE_FACE_DETECT) {
-                        $dwidth  = $width;
-                        $dheight = $width * $sheight / $swidth;
+                        if ($width > $height) {
+                            $dwidth = $width;
+                            $dheight = $width / $ratio;
+                        } elseif ($width == $height) {
+                            if ($swidth < $sheight) {
+                                $dwidth  = $width;
+                                $dheight = $width / $ratio;
+                            } else {
+                                $dwidth  = $height * $ratio;
+                                $dheight = $height;
+                            }
+                        } else {
+                            $dwidth = $height * $ratio;
+                            $dheight = $height;
+                        }
                     } else {
                         $dwidth  = $width;
                         $dheight = $height;
@@ -291,34 +301,39 @@
                             call_user_func($function, $dest, $source, 0, 0, 0, $shift,
                                 (int)$dwidth, (int)$dheight, $swidth, $swidth);
                         }
-                    } elseif ($mode == System::RESIZE_HEAD_ON) {
-                        $shift = ($height - $dheight) / 2;
-                        call_user_func($function, $dest, $source, 0, $shift, 0, 0,
-                            (int)$dwidth, (int)$dheight, $swidth, $sheight);
-
-                        $dest = imagecrop($dest,
-                            array('x' => 0, 'y' => 0, 'width' => $width, 'height' => $height));
-                    } elseif ($mode == System::RESIZE_FACE_DETECT) {
-                        if ($sheight > $swidth) {
-                            echo 'Try to detect face at image ' . $sname . NL;
+                    } elseif ($mode == System::RESIZE_HEAD_ON || $mode == System::RESIZE_FACE_DETECT) {
+                        $shift_x = $shift_y = 0;
+                        if ($mode == System::RESIZE_FACE_DETECT) {
                             $face_rectangle = System::getFaceRectangle($sname);
                         }
-
                         if (isset($face_rectangle['y'])) {
                             echo 'Face detected at ' . $face_rectangle['x'] . ':' . $face_rectangle['y'] . NL;
-                            $shift = $face_rectangle['y'] + ($face_rectangle['height'] / 2) - $dheight;
-                            $shift = $shift > 0 ? $shift : 0;
+
+                            if ($sheight > $swidth) {
+                                $shift_y = $face_rectangle['y'] + ($face_rectangle['height'] / 2) - $sheight;
+                                $shift_y = $shift_y > 0 ? (int)($shift_y * ($dheight / $sheight)) : 0;
+                            } else {
+                                $shift_x = $face_rectangle['x'] + ($face_rectangle['width'] / 2) - $swidth;
+                                $shift_x = $shift_x > 0 ? (int)($shift_x * ($dwidth / $swidth)) : 0;
+                            }
                         } else {
-                            $shift = ($height - $dheight) / 2;
+                            if ($sheight > $swidth) {
+                                $shift_y = (int)(($height - $sheight) / 2) * ($dheight / $sheight);
+                                $shift_y = $shift_y > 0 ? $shift_y : 0;
+                            } else {
+                                $shift_x = (int)(($width - $swidth) / 2) * ($dwidth / $swidth);
+                                $shift_x = $shift_x > 0 ? $shift_x : 0;
+                            }
                         }
-                        call_user_func($function, $dest, $source, 0, $shift, 0, 0,
+
+                        call_user_func($function, $dest, $source, 0, 0, $shift_x, $shift_y,
                             (int)$dwidth, (int)$dheight, $swidth, $sheight);
 
                         $dest = imagecrop($dest,
                             array('x' => 0, 'y' => 0, 'width' => $width, 'height' => $height));
                     } else {
                         call_user_func($function, $dest, $source, 0, 0, 0, 0,
-                            (int)$dwidth, (int)$dheight, $swidth, $swidth);
+                            (int)$dwidth, (int)$dheight, $swidth, $sheight);
                     }
 
                     // Destination file
