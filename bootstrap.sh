@@ -32,6 +32,15 @@ cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..
 sudo make -j7
 sudo make install
 
+header "Install OpenCV PHP library"
+cd $ROOT_PATH
+git submodule init && git submodule update
+cd $ROOT_PATH/OpenCV-for-PHP
+phpize
+./configure
+make
+sudo make install
+
 header "Enable PHP extension"
 sudo echo "extension=opencv.so" >> /etc/php5/mods-available/opencv.ini
 sudo ln -s /etc/php5/mods-available/opencv.ini /etc/php5/cli/conf.d/20-opencv.ini
