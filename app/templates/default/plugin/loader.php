@@ -48,17 +48,6 @@
      */
 
 ?>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $.fn.loaderShow = function() {
-            $('#loader').show();
-        }
-
-        $.fn.loaderHide = function() {
-            $('#loader').hide();
-        }
-    });
-</script>
 <div id="loader">
     <div></div>
 </div>

@@ -48,19 +48,4 @@
      */
 
 ?>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $(window).scroll(function() {
-            if ($(window).scrollTop() > $(window).height()) {
-                $('#gototop').fadeIn(400);
-            } else {
-                $('#gototop').fadeOut(400);
-            }
-        });
-
-        $('#gototop').bind('click', function() {
-            $('html, body').animate({ scrollTop : 0 });
-        });
-    });
-</script>
 <a id="gototop" href="#gototop"></a>

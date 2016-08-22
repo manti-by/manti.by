@@ -35,7 +35,61 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-audio { display: inline; width: 410px; margin-left: -40px; transform: scale(0.8); }
-.preview { width: 330px; overflow: hidden; }
+/**
+ * Default template js file
+ * @package M2 Micro Framework
+ * @subpackage Template
+ * @author Alexander Chaika
+ */
 
-#gallery .thumbnail { padding-right: 2px; }
+
+function setCookie(name, value, exdays) {
+    var exdate = new Date();
+    exdate.setDate(exdate.getDate() + exdays);
+    var value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+    document.cookie = name + "=" + value;
+}
+
+function getCookie(name) {
+    var value = document.cookie;
+    var start = value.indexOf(" " + name + "=");
+
+    if (start == -1) {
+        start = value.indexOf(name + "=");
+    }
+
+    if (start == -1) {
+        value = null;
+    } else {
+        start = value.indexOf("=", start) + 1;
+        var end = value.indexOf(";", start);
+
+        if (end == -1) {
+            end = value.length;
+        }
+        value = unescape(value.substring(start,end));
+    }
+
+    return value;
+}
+
+function secondsToTime(time) {
+    var hours = Math.floor(time / 3600);
+    hours = hours > 9 ? hours : '0' + hours;
+    time -= hours * 3600;
+
+    var minutes = Math.floor(time / 60);
+    minutes = minutes > 9 ? minutes : '0' + minutes;
+    time -= minutes * 60;
+
+    var seconds = parseInt(time % 60, 10);
+    seconds = seconds > 9 ? seconds : '0' + seconds;
+
+    return hours + ':' + minutes + ':' + seconds;
+}
+
+$(document).ready(function() {
+
+});
+
+

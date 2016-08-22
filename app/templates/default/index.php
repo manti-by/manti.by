@@ -59,21 +59,15 @@
 
         <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,700&subset=cyrillic" rel="stylesheet" />
 
-        <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/default.css" />
-        <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/style.css" />
-        <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/print.css" media="print" />
-
         <link rel="icon" type="image/png" href="<?php echo Application::$config['http_host']; ?>/templates/default/images/favicon.png">
 
-        <?php if (preg_match('/MSIE/i', $_SERVER['HTTP_USER_AGENT'])) : ?>
-            <!--[if IE]>
-                <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/templates/default/ie.css" />
-            <![endif]-->
-        <?php endif; ?>
+        <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/reset.css" />
+        <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/app.css" />
+        <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/print.css" media="print" />
 
         <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-        <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/default.js"></script>
-        <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/templates/default/default.js"></script>
+        <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/library.js"></script>
+        <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/app.js"></script>
     </head>
     <body>
         <script type="text/javascript">

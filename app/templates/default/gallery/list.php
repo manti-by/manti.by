@@ -50,5 +50,3 @@
 <div id="gallery">
     <?php echo $options['data']; ?>
 </div>
-
-<?php echo $this->getContents('gallery', 'ajax'); ?>

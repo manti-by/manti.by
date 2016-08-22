@@ -56,7 +56,7 @@
     window.player_source = <?php echo $player_source; ?>;
     window.player_default_id = <?php echo $player_default_id; ?>;
 </script>
-<script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/templates/default/player.js"></script>
+<script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/player.js"></script>
 <div id="player" class="player">
     <audio preload="auto" class="hidden"></audio>
 
