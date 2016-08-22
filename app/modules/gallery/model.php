@@ -242,6 +242,12 @@
         public function rebuildThumbnails($is_update = false) {
             $resized = $db_files = array();
 
+            // Add support for memory profiling
+            if (function_exists('memprof_enable') && Application::$config['memprof_enable']) {
+                memprof_enable();
+                echo 'Memory profiler enabled' . NL;
+            }
+
             // Get all registered images
             $this->database->query("CALL GET_FILES('gallery', 1000);");
             if ($this->database->checkResult()) {
@@ -369,6 +375,15 @@
                     );
 
                     echo 'Resized ' . $source . NL;
+
+                    // Add support for memory profiling
+                    if (function_exists('memprof_dump_pprof') && Application::$config['memprof_enable']) {
+                        $memprof_name = sprintf(Application::$config['memprof_file_name'], (int)microtime(true));
+                        $memprof_file = fopen($memprof_name, 'w');
+                        memprof_dump_pprof($memprof_file);
+                        fclose($memprof_file);
+                        echo 'Dump memory usage data to ' . $memprof_name . NL;
+                    }
 
                     // Check result
                     if ($result) {

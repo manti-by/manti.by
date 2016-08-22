@@ -87,10 +87,12 @@ memcache_suffix = ru
 cache_enabled = 0
 view_cache_enabled = 0
 
-[geolocation]
-ipinfo_key = "example"
-
 [stats]
 nginx_log = "../../log/access.log"
 batch_start = "2013-04-06"
 batch_end = "2013-04-16"
+
+[miscellaneous]
+ipinfo_key = "example"
+memprof_enable = 0
+memprof_file_name = "../../log/memprof_%d.heap"
