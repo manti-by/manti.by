@@ -88,8 +88,4 @@ function secondsToTime(time) {
     return hours + ':' + minutes + ':' + seconds;
 }
 
-$(document).ready(function() {
-
-});
-
 

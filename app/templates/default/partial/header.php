@@ -64,22 +64,22 @@
             Manti.by
         </span>
     </a>
+
+    <div id="search">
+        <form action="<?php echo Sef::getSef('index.php?module=search'); ?>" method="get">
+            <input type="text" id="query" name="q" value="" placeholder="<?php echo T('Search'); ?>..."
+                   class="autocomplete" autocomplete="Off"
+                   data-source="<?php echo Sef::getSef('index.php?module=search&action=autocomplete'); ?>" />
+            <input type="submit" id="go" value=" " />
+        </form>
+    </div>
+
     <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"<?php echo ($active['blog'] ? ' class="active"' : ''); ?> rel="bookmark">
         <?php echo T('Music'); ?>
     </a>
     <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"<?php echo ($active['gallery'] ? ' class="active"' : ''); ?> rel="bookmark">
         <?php echo T('Gallery'); ?>
     </a>
-    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"<?php echo ($active['about'] ? ' class="active"' : ''); ?> rel="author">
-        <?php echo T('About'); ?>
-    </a>
-    
-    <div id="search">
-        <form action="<?php echo Sef::getSef('index.php?module=search'); ?>" method="get">
-            <input type="text" id="query" name="q" value="" placeholder="<?php echo T('Search'); ?>..."
-                   class="autocomplete hidden" autocomplete="Off"
-                   data-source="<?php echo Sef::getSef('index.php?module=search&action=autocomplete'); ?>" />
-            <input type="submit" id="go" value=" " />
-        </form>
-    </div>
+
+    <?php echo $this->getContents('partial', 'mobilemenu', $options); ?>
 </nav>

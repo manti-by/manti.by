@@ -59,8 +59,12 @@
 
         // Mobile menu
         $('#mobile-menu-button').click(function(event) {
+            event.preventDefault();
+
             var offset = window.innerWidth - event.pageX - 25;
             $('#mobile-menu').css('right', offset + 'px').toggleClass('hidden');
+
+            return false;
         });
 
         // Slider
@@ -106,16 +110,11 @@
             minsymbols  : 2
         });
 
-        $('#go').click(function(event) {
-            if (!query.val()) {
-                event.preventDefault();
-
-                query.width > 0 ?
-                    query.animate({ width: 250, opacity: 1}, 600) :
-                    query.animate({ width: 0, opacity: 0}, 600);
-
-                return false;
-            }
+        var search = $('#search');
+        $('#search-link').click(function(event) {
+            search.width() == 0 ?
+                search.animate({ width: 250, opacity: 1}, 600) :
+                search.animate({ width: 0, opacity: 0}, 600);
         });
 
         // Go to top button

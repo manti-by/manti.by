@@ -57,17 +57,19 @@
 ?>
 <div id="mobile-menu-button">&#xE5D4;</div>
 <nav id="mobile-menu" class="hidden">
-    <a href="<?php echo ($active['home'] ? '#' : Application::$config['http_host']); ?>"
-       class="home<?php echo ($active['front'] ? ' active' : ''); ?>" rel="home">
-        <?php echo T('Home'); ?>
-    </a>
-    <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"<?php echo ($active['blog'] ? ' class="active"' : ''); ?> rel="bookmark">
-        <?php echo T('Music'); ?>
-    </a>
-    <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"<?php echo ($active['gallery'] ? ' class="active"' : ''); ?> rel="bookmark">
-        <?php echo T('Photo'); ?>
-    </a>
     <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"<?php echo ($active['about'] ? ' class="active"' : ''); ?> rel="author">
         <?php echo T('About'); ?>
+    </a>
+    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=2'); ?>" rel="author">
+        <?php echo T('My job'); ?>
+    </a>
+    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=16'); ?>" rel="license">
+        <?php echo T('Copyrights'); ?>
+    </a>
+    <a href="<?php echo Sef::getSef('index.php?module=sitemap'); ?>" rel="index">
+        <?php echo T('Sitemap'); ?>
+    </a>
+    <a href="mailto:manti.by@gmail.com">
+        <?php echo T('Contact'); ?>
     </a>
 </nav>

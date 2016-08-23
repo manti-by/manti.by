@@ -114,14 +114,13 @@
         <aside class="hidden">
             <div class="wrapper">
                 <?php echo $this->getContents('plugin', 'player'); ?>
-                <?php echo $this->getContents('partial', 'mobilemenu', $options); ?>
                 <div class="cls"></div>
             </div>
         </aside>
 
         <header>
             <div class="wrapper">
-                <?php echo $this->getContents('partial', 'toolbar', $options); ?>
+                <?php echo $this->getContents('partial', 'header', $options); ?>
             </div>
         </header>
 
