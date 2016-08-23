@@ -95,7 +95,7 @@ header nav a.home span { margin-left: 5px; }
 
 #search .autocomplete-result { width: 250px; }
 
-aside { position: fixed; top: 0; width: 100%; margin: 0 auto; border-bottom: 1px solid #EEE;
+aside { position: fixed; bottom: 0; width: 100%; margin: 0 auto; border-top: 1px solid #EEE;
     background: #FFF; z-index: 1000; }
 aside .wrapper { padding: 0; background: transparent; }
 
@@ -380,7 +380,9 @@ footer #copy { float: right; }
 .player .high-definition:hover, .player .high-definition.active { color: #b40303; border-color: #b40303;
     text-decoration: none; }
 
-#player .now-playing { width: 235px; margin: 0 0 0 30px; }
+#player .now-playing { width: 230px; margin: 0 0 0 30px; }
+#player .close { top: 7px; right: -48px; color: #999; cursor: pointer; }
+#player .close i { font-size: 16pt; }
 
 .player.inline { position: relative; height: 24px; padding: 3px; width: 330px;
     background: #DEDEDE; border-radius: 4px; }

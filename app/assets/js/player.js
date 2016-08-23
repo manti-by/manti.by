@@ -94,20 +94,10 @@
             console.log('checkPlayerVisibility');
 
             var aside = $('aside'),
-                header = $('header');
+                footer = $('footer');
 
             if (getCookie('player_is_playing') == 1 && aside.hasClass('hidden')) {
-                aside.css('top', '-40px').removeClass('hidden').animate({ top: 0 }, 800);
-                header.animate({ opacity: 0 }, 400, function() {
-                    header.addClass('hidden');
-                });
-            } else {
-                if (getCookie('player_is_playing') != 1) {
-                    header.removeClass('hidden').animate({opacity: 1}, 400);
-                    aside.animate({top: -40}, 800, function () {
-                        aside.addClass('hidden');
-                    });
-                }
+                aside.css('bottom', -40).removeClass('hidden').animate({ bottom: 0 }, 800);
             }
         };
 
@@ -437,6 +427,17 @@
             $.fn.checkFaviconState();
             $.fn.checkPlayerVisibility();
             $.fn.loaderHide();
+        });
+
+        player.find('.close').bind('click', function() {
+            var aside = $('aside');
+
+            aside.animate({ bottom: -40 }, 800, function () {
+                aside.addClass('hidden');
+            });
+
+            setCookie('player_is_playing', 0);
+            player_api.pause();
         });
 
         // Progress bars moving behaviour

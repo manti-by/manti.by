@@ -90,5 +90,7 @@
         </a>
     </div>
 
+    <div class="close"><i class="material-icons">close</i></div>
+
     <div class="cls"></div>
 </div>
