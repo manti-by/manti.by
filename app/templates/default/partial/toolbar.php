@@ -59,7 +59,7 @@
 <nav>
     <a href="<?php echo ($active['home'] ? '#' : Application::$config['http_host']); ?>"
        class="home<?php echo ($active['front'] ? ' active' : ''); ?>" rel="home">
-        <img src="/templates/default/images/logo.png" />
+        <img src="/assets/images/logo.png" />
         <span class="text">
             Manti.by
         </span>

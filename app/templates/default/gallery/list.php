@@ -50,3 +50,4 @@
 <div id="gallery">
     <?php echo $options['data']; ?>
 </div>
+<script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/gallery.js"></script>

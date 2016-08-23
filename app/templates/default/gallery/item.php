@@ -76,4 +76,3 @@
         <?php endforeach; ?>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/gallery.js"></script>
