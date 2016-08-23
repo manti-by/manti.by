@@ -48,8 +48,8 @@
      */
 
     $active = array(
-        'about'     => ($options['module'] == 'blog' && $options['id'] != '14' ? true : false),
-        'resume'    => ($options['module'] == 'blog' && $options['id'] != '2' ? true : false),
+        'about'     => ($options['module'] == 'blog' && $options['id'] == '14' ? true : false),
+        'resume'    => ($options['module'] == 'blog' && $options['id'] == '2' ? true : false),
         'copyrights'=> ($options['module'] == 'blog' && $options['id'] == '16' ? true : false),
         'sitemap'   => ($options['module'] == 'sitemap' ? true : false)
     );
