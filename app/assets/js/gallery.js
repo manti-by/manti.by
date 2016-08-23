@@ -47,6 +47,8 @@
     'use strict';
 
     $(document).ready(function() {
+        var current_image_id = 0;
+
         // Build image overlay
         $.fn.buildImage = function(id, link) {
             // Remove old image
@@ -57,7 +59,7 @@
             $.fn.loaderShow();
 
             // Try to loading image
-            var image = $('<img src="' + link + '" class="original resizible black-shadow" data-image-id="' + id+ '" />');
+            var image = $('<img src="' + link + '" class="original resizible black-shadow" data-image-id="' + id + '" />');
 
             image.load(function() {
                 var close_pointer = $('<div class="close"><i class="material-icons">close</i></div>'),
@@ -66,6 +68,7 @@
                     wrapper = $('<div id="image-wrapper"></div>');
 
                 // Bind actions
+                image.bind('click', $.fn.nextImage);
                 next_pointer.bind('click', $.fn.nextImage);
                 prev_pointer.bind('click', $.fn.prevImage);
                 close_pointer.bind('click', image_wrapper.remove());
@@ -106,6 +109,7 @@
 
         $.fn.imageLoaded = function(response) {
             if (response.result == 'success') {
+                current_image_id = response.data.id;
                 $.fn.buildImage(response.data.id, response.data.fullhd);
             } else {
                 if (response.message) {
@@ -117,22 +121,22 @@
             }
         };
 
-        $.fn.nextImage = function(event) {
-            event.preventDefault();
+        $.fn.nextImage = function(event, id) {
+            !id && event.preventDefault();
 
             // Show loader and get next image
             $.fn.loaderShow();
-            $.post('index.php?module=gallery&action=next', { id : $(this).data('image-id') }, $.fn.imageLoaded);
+            $.post('index.php?module=gallery&action=next', { id : id ? id : $(this).data('image-id') }, $.fn.imageLoaded);
 
             return false;
         };
 
-        $.fn.prevImage = function(event) {
-            event.preventDefault();
+        $.fn.prevImage = function(event, id) {
+            !id && event.preventDefault();
 
             // Show loader and get next image
             $.fn.loaderShow();
-            $.post('index.php?module=gallery&action=prev', { id : $(this).data('image-id') }, $.fn.imageLoaded);
+            $.post('index.php?module=gallery&action=prev', { id : id ? id : $(this).data('image-id') }, $.fn.imageLoaded);
 
             return false;
         };
@@ -149,6 +153,17 @@
             $.fn.buildImage(id, link);
 
             return false;
+        });
+
+        $(document).bind('keydown', function(event) {
+            var image_wrapper = $('#image-wrapper');
+
+            if (event.which == 32) {
+                image_wrapper.find('.next').click();
+            }
+            if (event.which == 8) {
+                image_wrapper.find('.prev').click()
+            }
         });
 
         // Check anchor
