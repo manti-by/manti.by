@@ -99,15 +99,12 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
 
 .form_notice { display: block; padding: 3px 0 10px 133px; }
 
-.error-message { min-height: 36px; line-height: 36px; color: red; padding-left: 36px;
-    background: url('../images/icon-error-32x32.png') no-repeat top left; }
-.success-message { min-height: 36px; line-height: 36px; padding-left: 36px;
-    background: url('../images/icon-success-32x32.png') no-repeat top left; }
+.error-message { min-height: 36px; line-height: 36px; color: red; padding-left: 36px; }
+.success-message { min-height: 36px; line-height: 36px; padding-left: 36px; }
 
-.close { background: url('../images/icon-close-48x48.png') no-repeat center center; }
-.prev { background: url('../images/icon-prev-48x48.png') no-repeat center center; }
-.next { background: url('../images/icon-next-48x48.png') no-repeat center center; }
-.close, .prev, .next { opacity: 0.7; }
+.close, .prev, .next { color: #FFF; opacity: 0.7; }
+.close i { font-size: 30pt; }
+.prev i, .next i { font-size: 38pt; }
 .close:hover, .prev:hover, .next:hover { opacity: 1; }
 
 .form-error { display: none; color: red; font-size: 11px; padding-left: 5px; position: absolute; width: 250px;

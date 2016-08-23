@@ -48,4 +48,6 @@
      */
 
 ?>
-<a id="gototop" href="#gototop"></a>
+<a id="gototop" href="#gototop">
+    <i class="material-icons">expand_less</i>
+</a>

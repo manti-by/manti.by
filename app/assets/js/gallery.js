@@ -60,10 +60,15 @@
             var image = $('<img src="' + link + '" class="original resizible black-shadow" data-image-id="' + id+ '" />');
 
             image.load(function() {
-                var close_pointer = $('<div class="close"></div>').bind('click', image_wrapper.remove()),
-                    next_pointer = $('<div class="next" data-image-id="' + id + '"></div>').bind('click', $.fn.nextImage),
-                    prev_pointer = $('<div class="prev" data-image-id="' + id + '"></div>').bind('click', $.fn.prevImage),
+                var close_pointer = $('<div class="close"><i class="material-icons">close</i></div>'),
+                    next_pointer = $('<div class="next" data-image-id="' + id + '"><i class="material-icons">chevron_right</i></div>'),
+                    prev_pointer = $('<div class="prev" data-image-id="' + id + '"><i class="material-icons">chevron_left</i></div>'),
                     wrapper = $('<div id="image-wrapper"></div>');
+
+                // Bind actions
+                next_pointer.bind('click', $.fn.nextImage);
+                prev_pointer.bind('click', $.fn.prevImage);
+                close_pointer.bind('click', image_wrapper.remove());
 
                 // Build block wrapper and append to contents
                 wrapper.append(close_pointer)

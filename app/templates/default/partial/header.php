@@ -48,36 +48,39 @@
      */
 
     $active = array(
-        'home'      => ($options['module'] == 'front' ? true : false),
-        'blog'      => ($options['module'] == 'blog' && $options['id'] != '14'  ? true : false),
-        'gallery'   => ($options['module'] == 'gallery' ? true : false),
-        'about'     => ($options['module'] == 'blog' && $options['id'] == '14' ? true : false)
+        'blog'      => ($options['module'] == 'blog' && !in_array($options['id'], array('2', '14', '16')) ? true : false),
+        'gallery'   => ($options['module'] == 'gallery' ? true : false)
     );
 
 ?>
 <script type="text/javascript" src="<?php echo Application::$config['http_host']; ?>/assets/js/autocomplete.jquery.js"></script>
+
+<div id="search">
+    <form action="<?php echo Sef::getSef('index.php?module=search'); ?>" method="get">
+        <input type="text" id="query" name="q" value="" placeholder="<?php echo T('Search'); ?>..."
+               class="autocomplete" autocomplete="Off"
+               data-source="<?php echo Sef::getSef('index.php?module=search&action=autocomplete'); ?>" />
+        <button type="submit" id="go">
+            <i class="material-icons">search</i>
+        </button>
+    </form>
+</div>
+
 <nav>
     <a href="<?php echo ($active['home'] ? '#' : Application::$config['http_host']); ?>"
-       class="home<?php echo ($active['front'] ? ' active' : ''); ?>" rel="home">
+       class="home" rel="home">
         <img src="/assets/images/logo.png" />
         <span class="text">
             Manti.by
         </span>
     </a>
 
-    <div id="search">
-        <form action="<?php echo Sef::getSef('index.php?module=search'); ?>" method="get">
-            <input type="text" id="query" name="q" value="" placeholder="<?php echo T('Search'); ?>..."
-                   class="autocomplete" autocomplete="Off"
-                   data-source="<?php echo Sef::getSef('index.php?module=search&action=autocomplete'); ?>" />
-            <input type="submit" id="go" value=" " />
-        </form>
-    </div>
-
     <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"<?php echo ($active['blog'] ? ' class="active"' : ''); ?> rel="bookmark">
+        <i class="material-icons">play_arrow</i>
         <?php echo T('Music'); ?>
     </a>
     <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"<?php echo ($active['gallery'] ? ' class="active"' : ''); ?> rel="bookmark">
+        <i class="material-icons">image</i>
         <?php echo T('Gallery'); ?>
     </a>
 

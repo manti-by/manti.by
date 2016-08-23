@@ -52,20 +52,37 @@
             $('#message').fadeOut(400);
         }, 5000);
 
+
         // Hide div block by click
         $('.hide_this').click(function() {
             $(this).parent('div').fadeOut(400);
         });
 
+
         // Mobile menu
+        var mobile_menu = $('#mobile-menu');
+
         $('#mobile-menu-button').click(function(event) {
             event.preventDefault();
 
-            var offset = window.innerWidth - event.pageX - 25;
-            $('#mobile-menu').css('right', offset + 'px').toggleClass('hidden');
+            var mobile_menu = $('#mobile-menu'),
+                offset = window.innerWidth - event.pageX - 25;
+
+            mobile_menu.css('right', offset + 'px').toggleClass('hidden');
 
             return false;
         });
+
+        $(document).bind('click', function() {
+            mobile_menu.addClass('hidden');
+        });
+
+        $(document).bind('keydown', function(event) {
+            if (event.which == 27) {
+                mobile_menu.addClass('hidden');
+            }
+        });
+
 
         // Slider
         $('.slider-item.active').width(735).css('opacity', 1);
@@ -84,6 +101,7 @@
             return false;
         });
 
+
         // Tracklist
         $('.info .show-tracklist').live('click', function() {
             var post = $(this).closest('.post-item');
@@ -97,10 +115,12 @@
             post.find('.info').fadeIn();
         });
 
+
         // Sitemap
         $('#sitemap').find('.open-spoiler').live('click', function() {
             $(this).next('.spoiler').toggle(400);
         });
+
 
         // Search
         var query = $('#query');
@@ -112,23 +132,25 @@
 
         var search = $('#search');
         $('#search-link').click(function(event) {
-            search.width() == 0 ?
-                search.animate({ width: 250, opacity: 1}, 600) :
-                search.animate({ width: 0, opacity: 0}, 600);
+            search.fadeToggle(400);
         });
 
+
         // Go to top button
+        var go_to_top = $('#gototop');
+
         $(window).scroll(function() {
             if ($(window).scrollTop() > $(window).height()) {
-                $('#gototop').fadeIn(400);
+                go_to_top.fadeIn(400);
             } else {
-                $('#gototop').fadeOut(400);
+                go_to_top.fadeOut(400);
             }
         });
 
-        $('#gototop').bind('click', function() {
+        go_to_top.bind('click', function() {
             $('html, body').animate({ scrollTop : 0 });
         });
+
 
         // Loader
         $.fn.loaderShow = function() {
@@ -138,6 +160,7 @@
         $.fn.loaderHide = function() {
             $('#loader').hide();
         };
+
 
         // Popup message
         var popup = $('#popup');

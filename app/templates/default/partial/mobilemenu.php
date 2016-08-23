@@ -48,26 +48,31 @@
      */
 
     $active = array(
-        'home'      => ($options['module'] == 'front' ? true : false),
-        'blog'      => ($options['module'] == 'blog' && $options['id'] != '14'  ? true : false),
-        'gallery'   => ($options['module'] == 'gallery' ? true : false),
-        'about'     => ($options['module'] == 'blog' && $options['id'] == '14' ? true : false)
+        'about'     => ($options['module'] == 'blog' && $options['id'] != '14' ? true : false),
+        'resume'    => ($options['module'] == 'blog' && $options['id'] != '2' ? true : false),
+        'copyrights'=> ($options['module'] == 'blog' && $options['id'] == '16' ? true : false),
+        'sitemap'   => ($options['module'] == 'sitemap' ? true : false)
     );
 
 ?>
-<div id="mobile-menu-button">&#xE5D4;</div>
+<div id="mobile-menu-button">
+    <i class="material-icons">more_vert</i>
+</div>
 <nav id="mobile-menu" class="hidden">
     <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>"<?php echo ($active['about'] ? ' class="active"' : ''); ?> rel="author">
         <?php echo T('About'); ?>
     </a>
-    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=2'); ?>" rel="author">
+    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=2'); ?>"<?php echo ($active['resume'] ? ' class="active"' : ''); ?> rel="author">
         <?php echo T('My job'); ?>
     </a>
-    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=16'); ?>" rel="license">
+    <a href="<?php echo Sef::getSef('index.php?module=sitemap'); ?>"<?php echo ($active['sitemap'] ? ' class="active"' : ''); ?> rel="index">
+        <?php echo T('Sitemap'); ?>
+    </a>
+    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=16'); ?>"<?php echo ($active['copyrights'] ? ' class="active"' : ''); ?> rel="license">
         <?php echo T('Copyrights'); ?>
     </a>
-    <a href="<?php echo Sef::getSef('index.php?module=sitemap'); ?>" rel="index">
-        <?php echo T('Sitemap'); ?>
+    <a id="search-link" href="#search">
+        <?php echo T('Search'); ?>
     </a>
     <a href="mailto:manti.by@gmail.com">
         <?php echo T('Contact'); ?>
