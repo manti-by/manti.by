@@ -49,7 +49,19 @@
     $options['context'] = 'full';
     $user = UserEntity::getInstance();
 ?>
-<div class="post-item-full">
+<div class="post-item post-item-full">
+
+    <?php if (json_decode($options['data']->covers)) : ?>
+        <div class="cover">
+            <?php if ($options['context'] == 'short') : ?>
+            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>">
+                <?php endif; ?>
+                <?php echo File::getHtml($options['data']->covers, FileEntity::TYPE_COVERS); ?>
+                <?php if ($options['context'] == 'short') : ?>
+            </a>
+        <?php endif; ?>
+        </div>
+    <?php endif; ?>
 
     <h1>
         <?php echo $options['data']->name . (!empty($options['data']->genre) ? ' /' . $options['data']->genre.  '/' : ''); ?>
@@ -71,23 +83,17 @@
     </div>
 
     <?php echo $this->getContents('blog', 'music-block', $options); ?>
-
-    <?php if ($options['data']->tracklist) : ?>
-        <div class="tracklist">
-            <h2><?php echo T('Tracklist'); ?></h2>
-            <?php echo nl2br($options['data']->tracklist); ?>
-        </div>
-    <?php endif; ?>
-
-    <?php if (json_decode($options['data']->relations)) : ?>
-        <div class="relations">
-            <h2><?php echo T('Similar posts'); ?></h2>
-            <?php echo Relations::getHtml($options['data']->relations); ?>
-            <div class="cls"></div>
-        </div>
-    <?php endif; ?>
-
 </div>
+
+<?php if (json_decode($options['data']->relations)) : ?>
+    <div class="relations">
+        <h2><?php echo T('Similar posts'); ?></h2>
+        <div class="relation-wrapper">
+            <?php echo Relations::getHtml($options['data']->relations); ?>
+        </div>
+    </div>
+<?php endif; ?>
+
 <script type="text/javascript">
     $(document).ready(function() {
         $.get('<?php echo Sef::getSef('index.php?module=blog&action=track&id=' . $options['data']->id)?>');

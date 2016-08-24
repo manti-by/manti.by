@@ -50,7 +50,7 @@
 <?php if ($options['data']->is_music == 1) : ?>
     <div id="music-block-<?php echo $options['data']->id; ?>" class="music-block">
 
-        <?php if (json_decode($options['data']->covers)) : ?>
+        <?php if (json_decode($options['data']->covers) && $options['context'] == 'short') : ?>
             <div class="cover">
                 <?php if ($options['context'] == 'short') : ?>
                     <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=' . $options['data']->id); ?>">
@@ -122,7 +122,7 @@
                     <?php echo File::getHtml($options['data']->release, FileEntity::TYPE_RELEASE); ?>
                 <?php endif; ?>
 
-                <?php if ($options['data']->tracklist && $options['context'] == 'short') : ?>
+                <?php if ($options['data']->tracklist) : ?>
                     <a href="#show-tracklist" class="show-tracklist">
                         <?php echo T('Tracklist'); ?>
                     </a>
@@ -131,7 +131,7 @@
 
         </div>
 
-        <?php if ($options['data']->tracklist && $options['context'] == 'short') : ?>
+        <?php if ($options['data']->tracklist) : ?>
             <div class="tracklist hidden">
                 <div class="content">
                     <?php echo nl2br($options['data']->tracklist); ?>

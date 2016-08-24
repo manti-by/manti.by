@@ -57,9 +57,9 @@
         <meta name="keywords" content="<?php echo Model::getModel('tag')->getMetakeysString(); ?>" />
         <meta name="yandex-verification" content="6765012bcd05fac2" />
 
-        <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,700&subset=cyrillic" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,600,700&subset=cyrillic" rel="stylesheet" />
 
-        <link rel="icon" type="image/png" href="<?php echo Application::$config['http_host']; ?>/templates/default/images/favicon.png">
+        <link rel="icon" type="image/png" href="<?php echo Application::$config['http_host']; ?>/assets/images/favicon.png">
 
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/reset.css" />
         <link type="text/css" rel="stylesheet" href="<?php echo Application::$config['http_host']; ?>/assets/css/app.css" />

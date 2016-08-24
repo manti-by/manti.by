@@ -142,10 +142,14 @@
             $relations = json_decode($json);
             if (is_array($relations)) {
                 foreach ($relations as $relation) {
-                    $result .= '<a href="' . Sef::getSef('index.php?module=blog&action=show&id=' . $relation->id) . '" class="relation">';
-                    $result .= '<img src="' . Application::$config['http_host'] . substr($relation->source, 1) . '" class="small-cover" alt="' . $relation->name . ' cover" />';
-                    $result .= '<div class="title">' .$relation->name . '</div>';
+                    $result .= '<div class="relation">';
+                    $result .= '<a href="' . Sef::getSef('index.php?module=blog&action=show&id=' . $relation->id) . '" class="preview">';
+                    $result .= '<img src="' . Application::$config['http_host'] . substr($relation->source, 1) . '" alt="' . $relation->name . ' cover" />';
                     $result .= '</a>';
+                    $result .= '<a href="' . Sef::getSef('index.php?module=blog&action=show&id=' . $relation->id) . '" class="title">';
+                    $result .= $relation->name . ' /' . $relation->genre . '/';
+                    $result .= '</a>';
+                    $result .= '</div>';
                 }
             } else {
                 return self::getInstance()->_throw(T('Incorect JSON data for relations'), MESSAGE);

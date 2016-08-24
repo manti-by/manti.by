@@ -84,9 +84,9 @@
             var favicon = $('link[rel=icon]');
 
             if (getCookie('player_is_playing') == 1) {
-                favicon.attr('href', '/templates/default/images/favicon.png');
+                favicon.attr('href', '/assets/images/favicon.png');
             } else {
-                favicon.attr('href', '/templates/default/images/favicon-pause.png');
+                favicon.attr('href', '/assets/images/favicon-pause.png');
             }
         };
 
@@ -110,7 +110,7 @@
             if (getCookie('player_is_playing') == 1) {
                 $('#player .play, #player-' + player_id + ' .play').removeClass('play').addClass('pause');
             } else {
-                $('#player .play, #player-' + player_id + ' .pause').removeClass('pause').addClass('play');
+                $('#player .pause, #player-' + player_id + ' .pause').removeClass('pause').addClass('play');
             }
         };
 
@@ -171,8 +171,6 @@
                 current_player = $('#player-'+ player_id),
                 position, width;
 
-            console.log('updatePlayerProgress for player #' + player_id);
-
             // Skip if not loaded
             if (player_audio.get(0).readyState === 0) return;
 
@@ -213,8 +211,6 @@
                 current_player = $('#player-'+ player_id),
                 width;
 
-            console.log('updatePlayerVolume for player #' + player_id);
-
             // Update volume label
             player_volume_label.html(volume);
             current_player.find('.volume .progress-line-label span').html(volume);
@@ -229,8 +225,6 @@
 
         // Progressbar control
         $.fn.updateProgressbarMoving = function(event) {
-            console.log('updateProgressbarMoving');
-
             // Update progressbar
             var value_px = event.clientX - $(this).offset().left;
             $(this).find('.progress-line-active').width(value_px);

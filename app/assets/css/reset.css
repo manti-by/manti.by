@@ -51,7 +51,7 @@ body { background: white; font-family: Arial, Tahoma, Verdana; font-size: 12pt; 
 h1, h2 { font-family: Arial, Tahoma, Verdana; }
 h1, h2, h3, h4, h5, h6 { border-bottom: 1px solid #EAEAEA; }
 
-h1, h2 { font-size: 20pt; margin: 3px 0 15px 0; padding: 0 0 8px 0; font-weight: normal; }
+h1, h2 { font-size: 20pt; margin: 3px 0 5px 0; padding: 0 0 8px 0; font-weight: normal; }
 h3 { font-size: 18pt; margin: 0 0 3px 0; font-weight: normal; }
 h4 { font-size: 14pt; margin: 0 0; }
 h5 { font-size: 12pt; margin: 0 0; }

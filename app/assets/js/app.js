@@ -68,7 +68,7 @@
             var mobile_menu = $('#mobile-menu'),
                 offset = window.innerWidth - event.pageX - 25;
 
-            mobile_menu.css('right', offset + 'px').toggleClass('hidden');
+            mobile_menu.css('right', offset).toggleClass('hidden');
 
             return false;
         });
