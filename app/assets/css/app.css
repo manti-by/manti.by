@@ -114,7 +114,7 @@ main { min-height: 490px; margin-top: 10px; }
 .post-item h3 a { color: inherit; }
 .post-item .teaser { padding-bottom: 15px; font-size: 13pt; }
 .post-item .cover { float: left; width: 350px; }
-.post-item .cover img { width: 350px; border: 1px solid #EEE; }
+.post-item .cover img { width: 350px; }
 .post-item .music-block { padding-bottom: 20px; }
 
 .post-item .info,
