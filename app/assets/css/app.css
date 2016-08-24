@@ -203,7 +203,7 @@ main { min-height: 490px; margin-top: 10px; }
 .right-sidebar #instagram-profile { margin-top: 5px; color: #666; }
 
 footer { margin: 30px 0 20px 0; color: #666; }
-footer nav { font-size: 11pt; font-weight: 500; }
+footer nav { font-size: 11pt; font-weight: 400; }
 footer a { padding-right: 20px; text-transform: uppercase; color: #b40303; }
 footer a:hover, #footer a:active { text-decoration: underline; }
 footer #copy { float: right; }
