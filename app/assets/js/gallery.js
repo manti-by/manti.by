@@ -89,7 +89,7 @@
                 if (shift_y > 0) image.css('top', shift_y);
 
                 // Ping view counter
-                $.post('index.php?module=file&action=track', { id : id });
+                $.post('/index.php?module=file&action=track', { id : id });
 
                 // Hide loader
                 $.fn.loaderHide();
@@ -126,7 +126,7 @@
 
             // Show loader and get next image
             $.fn.loaderShow();
-            $.post('index.php?module=gallery&action=next', { id : id ? id : $(this).data('image-id') }, $.fn.imageLoaded);
+            $.post('/index.php?module=gallery&action=next', { id : id ? id : $(this).data('image-id') }, $.fn.imageLoaded);
 
             return false;
         };
@@ -136,7 +136,7 @@
 
             // Show loader and get next image
             $.fn.loaderShow();
-            $.post('index.php?module=gallery&action=prev', { id : id ? id : $(this).data('image-id') }, $.fn.imageLoaded);
+            $.post('/index.php?module=gallery&action=prev', { id : id ? id : $(this).data('image-id') }, $.fn.imageLoaded);
 
             return false;
         };
