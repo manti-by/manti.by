@@ -49,7 +49,7 @@
     $options['context'] = 'full';
     $user = UserEntity::getInstance();
 ?>
-<div class="post-item post-item-full">
+<div class="post-item <?php if ($options['data']->is_music == 1) { ?>post-item-full<?php } else { ?>blog-post<?php }; ?>">
 
     <?php if (json_decode($options['data']->covers)) : ?>
         <div class="cover">
