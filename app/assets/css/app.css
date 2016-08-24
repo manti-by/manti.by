@@ -165,8 +165,8 @@ main { min-height: 490px; margin-top: 10px; }
 .relation .title { display: block; margin-top: 10px; color: #999; }
 .relation .preview {  display: block; height: 183px; overflow: hidden; opacity: 0.7; }
 .relation .preview:hover { opacity: 1; -webkit-transition: 0.3s linear; transition: 0.3s linear; }
-.relation .preview img { position: relative; display: inline-block; bottom: 75px; min-width: 100%; }
-.relation .preview img:hover { min-width: 104%; margin-left: -2%;
+.relation .preview img { position: relative; display: inline-block; bottom: 75px; max-width: 100%; }
+.relation .preview img:hover { max-width: 104%; margin-left: -2%;
     -webkit-transition: 0.3s linear; transition: 0.3s linear; }
 
 .main-sidebar { float: left; width: 700px; padding-bottom: 40px; }
