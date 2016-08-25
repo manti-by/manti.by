@@ -1,0 +1,10 @@
+DROP PROCEDURE IF EXISTS `GET_GALLERY_ITEMS`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `GET_GALLERY_ITEMS`(IN `_path` varchar(255))
+BEGIN
+    SELECT *
+    FROM `files`
+    WHERE `source` LIKE CONCAT('%', _path, '%');
+END
+;;
+DELIMITER ;

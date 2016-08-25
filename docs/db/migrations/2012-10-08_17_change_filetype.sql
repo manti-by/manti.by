@@ -1,0 +1,2 @@
+ALTER TABLE `files`
+    MODIFY COLUMN `type` varchar(32) NULL DEFAULT NULL AFTER `id`;

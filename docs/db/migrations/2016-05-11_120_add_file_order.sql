@@ -1,0 +1,2 @@
+ALTER TABLE `files`
+    ADD COLUMN `order`  int(11) UNSIGNED NULL DEFAULT 0 AFTER `viewed`;
