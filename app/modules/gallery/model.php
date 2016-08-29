@@ -184,49 +184,45 @@
             $fileModel = Model::getModel('file');
             $galleries = $fileModel->getDirList($this->file_path . DS . 'originals', true);
             foreach ($galleries as $path => $data) {
+                echo 'Check files for gallery ' . $path . NL;
+
                 // Create gallery DB entry
                 $dir_name = substr(strrchr($path, '/'), 1);
                 $dir_name = $this->database->escape($dir_name);
-                
-                // Test mode
-                //if ($dir_name != 'autumn-15') continue;
-                
+
                 $this->database->query("CALL UPSERT_GALLERY(0, '" . $this->database->escape($path) . "', '" . ucfirst($dir_name) . "',  '" . strtolower($dir_name) . "', '', '');");
                 $gallery_id = $this->database->getField();
 
                 // Parse files from directory
                 foreach ($fileModel->getDirList($path) as $source => $fileinfo) {
-                    // If file exists
-                    if (realpath(ROOT_PATH . DS . $source)) {
-                        // And not already stored in DB
-                        if (!in_array($source, $db_files)) {
-                            // Add record to files table
-                            if ($file_id = $fileModel->add(array('source'=> $source, 'type' => 'gallery',))) {
-                                // And add linkage to gallery
-                                $this->database->query("CALL UPSERT_GALLERY_FILES(" . $gallery_id . ", " . $file_id . ");");
-                                if ($this->database->getField()) {
-                                    $file_list[] = array(
-                                        'source' => $source,
-                                        'status' => T('Stored in DB')
-                                    );
-                                } else {
-                                    // @todo Add error handler for file dublicates
-                                    $message = $this->getLastFromStack();
-                                    $file_list[] = array(
-                                        'source' => $source,
-                                        'status' => $message['message']
-                                    );
-                                }
+                    $source = './content/' . substr($source, strpos($source, 'gallery'));
+                    if (!in_array($source, $db_files)) {
+                        echo 'Add file to DB ' . $source . NL;
+
+                        // Add record to files table
+                        if ($file_id = $fileModel->add(array('source'=> $source, 'type' => 'gallery',))) {
+                            // And add linkage to gallery
+                            $this->database->query("CALL UPSERT_GALLERY_FILES(" . $gallery_id . ", " . $file_id . ");");
+                            if ($this->database->getField()) {
+                                $file_list[] = array(
+                                    'source' => $source,
+                                    'status' => T('Stored in DB')
+                                );
                             } else {
+                                // @todo Add error handler for file dublicates
                                 $message = $this->getLastFromStack();
                                 $file_list[] = array(
                                     'source' => $source,
                                     'status' => $message['message']
                                 );
                             }
+                        } else {
+                            $message = $this->getLastFromStack();
+                            $file_list[] = array(
+                                'source' => $source,
+                                'status' => $message['message']
+                            );
                         }
-                    } else {
-                        // @TODO: remove not existed files from DB
                     }
                 }
             }
@@ -315,14 +311,10 @@
         public function rebuildThumbnails($is_update = false) {
             $resized = $db_files = array();
 
-            // Add support for memory profiling
-            if (function_exists('memprof_enable') && Application::$config['memprof_enable']) {
-                memprof_enable();
-                echo 'Memory profiler enabled' . NL;
-            }
+            System::memprofStart();
 
             // Get all registered images
-            $this->database->query("CALL GET_FILES('gallery', 1000);");
+            $this->database->query("CALL GET_FILES('gallery', 10000);");
             if ($this->database->checkResult()) {
                 $db_files = $this->database->getPairs('id', 'source');
             }
@@ -381,7 +373,7 @@
                 // Check directory path and try to create it
                 if (!file_exists($fullhdpath)) {
                     if (!mkdir($fullhdpath)) {
-                        $message = T('Could not create preview directory');
+                        $message = T('Could not create fullhd directory');
                         $this->_throw($message);
                         $resized[] = array(
                             'source' => $fullhdpath,
@@ -406,7 +398,7 @@
                 }
 
                 // And try to create new
-                if (!($is_update && $is_thumb_exists && $is_preview_exists)) {
+                if (!$is_update || !($is_thumb_exists && $is_preview_exists && $is_fullhd_exists)) {
                     $result = System::getInstance()->resize(
                         $source,
                         $thumbname,
@@ -449,14 +441,7 @@
 
                     echo 'Resized ' . $source . NL;
 
-                    // Add support for memory profiling
-                    if (function_exists('memprof_dump_pprof') && Application::$config['memprof_enable']) {
-                        $memprof_name = sprintf(Application::$config['memprof_file_name'], (int)microtime(true));
-                        $memprof_file = fopen($memprof_name, 'w');
-                        memprof_dump_pprof($memprof_file);
-                        fclose($memprof_file);
-                        echo 'Dump memory usage data to ' . $memprof_name . NL;
-                    }
+                    System::memprofDump();
 
                     // Check result
                     if ($result) {

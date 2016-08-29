@@ -603,4 +603,27 @@
             usort($result, array('self', 'sortBySquare'));
             return reset($result);
         }
+
+        /**
+         * Add support for memory profiling
+         */
+        public static function memprofStart() {
+            if (function_exists('memprof_enable') && Application::$config['memprof_enable']) {
+                memprof_enable();
+                echo 'Memory profiler enabled' . NL;
+            }
+        }
+
+        /**
+         * Add support for memory profiling
+         */
+        public static function memprofDump() {
+            if (function_exists('memprof_dump_pprof') && Application::$config['memprof_enable']) {
+                $memprof_name = sprintf(Application::$config['memprof_file_name'], (int)microtime(true));
+                $memprof_file = fopen($memprof_name, 'w');
+                memprof_dump_pprof($memprof_file);
+                fclose($memprof_file);
+                echo 'Dump memory usage data to ' . $memprof_name . NL;
+            }
+        }
     }

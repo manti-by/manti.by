@@ -165,7 +165,9 @@
                 $source = str_replace('//' , '/', $source);
 
                 // Create or update file
-                $this->database->query("CALL UPSERT_FILE('".$type."', '".$options['name']."','".$options['description']."','".$source."',".$fstat['size'].",'".md5_file($options['source'])."');");
+                $name = isset($options['name']) ? $options['name'] : '';
+                $description = isset($options['description']) ? $options['description'] : '';
+                $this->database->query("CALL UPSERT_FILE('".$type."', '".$name."','".$description."','".$source."',".$fstat['size'].",'".md5_file($options['source'])."');");
                 return $this->database->getField();
             } else {
                 return $this->_throw(T('File does not exist'), ERROR);

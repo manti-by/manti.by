@@ -103,6 +103,10 @@
                 case '--thumbs':
                     $this->rebuildThumbnailsAction();
                     break;
+                case '-tu':
+                case '--thumbs-update':
+                    $this->rebuildThumbnailsAction(true);
+                    break;
                 case '-cf':
                 case '--clean-files':
                     $this->removeUnusedGalleryFilesAction();
