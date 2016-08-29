@@ -174,7 +174,7 @@
             $file_list = $db_files = array();
 
             // Get already stored files from DB
-            $this->database->query("CALL GET_FILES('gallery', 0);");
+            $this->database->query("CALL GET_FILES('gallery', 100000);");
             if ($this->database->checkResult()) {
                 $db_files = $this->database->getPairs('id', 'source');
             }
@@ -225,6 +225,79 @@
                                 );
                             }
                         }
+                    } else {
+                        // @TODO: remove not existed files from DB
+                    }
+                }
+            }
+
+            return $file_list;
+        }
+
+        /**
+         * Delete unused gallery entries from FS
+         * @return array list of all deleted images
+         */
+        public function removeUnusedFiles() {
+            $file_list = $db_files = array();
+
+            // Get already stored files from DB
+            $this->database->query("CALL GET_FILES('gallery', 100000);");
+            if ($this->database->checkResult()) {
+                $db_files = $this->database->getPairs('id', 'source');
+            }
+
+            // Get all gallery images
+            clearstatcache();
+            $fileModel = Model::getModel('file');
+            $galleries = $fileModel->getDirList($this->file_path . DS . 'originals', true);
+            foreach ($galleries as $path => $data) {
+                foreach ($fileModel->getDirList($path) as $source => $fileinfo) {
+                    $check = './content/' . substr($source, strpos($source, 'gallery'));
+                    if (!in_array($check, $db_files)) {
+                        try {
+                            unlink($source);
+                        } catch (Exception $e) {
+                            $file_list[] = array(
+                                'source' => $source,
+                                'status' => $e->getMessage()
+                            );
+                        }
+
+                        try {
+                            $check = str_replace('originals', 'thumbnails', $source);
+                            unlink($check);
+                        } catch (Exception $e) {
+                            $file_list[] = array(
+                                'source' => $check,
+                                'status' => $e->getMessage()
+                            );
+                        }
+
+                        try {
+                            $check = str_replace('originals', 'preview', $source);
+                            unlink($check);
+                        } catch (Exception $e) {
+                            $file_list[] = array(
+                                'source' => $check,
+                                'status' => $e->getMessage()
+                            );
+                        }
+
+                        try {
+                            $check = str_replace('originals', 'fullhd', $source);
+                            unlink($check);
+                        } catch (Exception $e) {
+                            $file_list[] = array(
+                                'source' => $check,
+                                'status' => $e->getMessage()
+                            );
+                        }
+
+                        $file_list[] = array(
+                            'source' => $source,
+                            'status' => T('Removed from FS')
+                        );
                     } else {
                         // @TODO: remove not existed files from DB
                     }

@@ -354,6 +354,8 @@
 
             player_api.volume = player_volume / 100;
 
+            setCookie('player_is_playing', 0);
+
             player_id = player_id ? parseInt(player_id) : parseInt(player_source[0]['id']);
             $.fn.reloadPlayer(player_id);
 

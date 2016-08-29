@@ -103,6 +103,10 @@
                 case '--thumbs':
                     $this->rebuildThumbnailsAction();
                     break;
+                case '-cf':
+                case '--clean-files':
+                    $this->removeUnusedGalleryFilesAction();
+                    break;
                 case '-s':
                 case '--sitemap':
                     $this->generateSitemapAction();
@@ -296,6 +300,19 @@
             }
 
             $this->_output = 'Rebuild thumbnails action complete.';
+        }
+
+        /**
+         * Remove unused gallery entries
+         */
+        protected function removeUnusedGalleryFilesAction() {
+            // Rollback latest migrations
+            if (!Model::getModel('gallery')->removeUnusedFiles()) {
+                $this->_output = M2::error();
+                return;
+            }
+
+            $this->_output = 'Remove unused gallery files action complete.';
         }
 
         /**

@@ -88,8 +88,7 @@ header nav a.home span { margin-left: 5px; }
     font-size: 18pt; cursor: pointer; }
 #mobile-menu { position: fixed; top: 52px; min-width: 150px; padding: 4px 0; border: 1px solid #EEE; background: #FFF;
     box-shadow: 1px 1px 3px 0 rgba(0,0,0,0.2); }
-#mobile-menu a { display: block; width: 175px; margin: 0 4px; padding: 8px 4px; color: #999;
-    border-bottom: 1px solid #EEE; }
+#mobile-menu a { display: block; width: 175px; margin: 0 4px; padding: 8px 4px; color: #999; border-bottom: none; }
 #mobile-menu a:hover, #mobile-menu a.active { color: #999; text-decoration: none; background-color: #EFEFEF; }
 #mobile-menu a:last-child { border-bottom: none; }
 
@@ -110,6 +109,7 @@ aside .wrapper { padding: 0; background: transparent; }
 main { min-height: 490px; margin-top: 10px; }
 
 .post-item { margin-bottom: 20px; }
+.post-item li { padding-bottom: 5px; line-height: 15pt; }
 .post-item h3 { margin-bottom: 5px; padding-bottom: 10px; font-size: 18pt; }
 .post-item h3 a { color: inherit; }
 .post-item .teaser { padding-bottom: 15px; font-size: 13pt; }
@@ -135,7 +135,6 @@ main { min-height: 490px; margin-top: 10px; }
 .post-item .tracklist { }
 
 .post-item-full { position: relative; height: 550px; margin-top: 10px; padding: 0; overflow: hidden; }
-.post-item-full li { padding-bottom: 10px; line-height: 15pt; }
 .post-item-full .description { padding-bottom: 15px; }
 .post-item-full .description i { padding-bottom: 10px; }
 .post-item-full .cover { float: left; width: 550px !important;  margin-right: 20px; }
@@ -163,11 +162,11 @@ main { min-height: 490px; margin-top: 10px; }
 
 .relation { width: 327px; }
 .relation .title { display: block; margin-top: 10px; color: #999; }
-.relation .preview {  display: block; height: 183px; overflow: hidden; opacity: 0.7; }
-.relation .preview:hover { opacity: 1; -webkit-transition: 0.3s linear; transition: 0.3s linear; }
+.relation .preview {  display: block; height: 183px; overflow: hidden; }
+.relation .preview:hover { opacity: 1; -webkit-transition: 0.4s linear; transition: 0.4s linear; }
 .relation .preview img { position: relative; display: inline-block; bottom: 75px; max-width: 100%; }
 .relation .preview img:hover { max-width: 104%; margin-left: -2%;
-    -webkit-transition: 0.3s linear; transition: 0.3s linear; }
+    -webkit-transition: 0.4s linear; transition: 0.4s linear; }
 
 .main-sidebar { float: left; width: 700px; padding-bottom: 40px; }
 .right-sidebar { float: right; width: 280px; }
