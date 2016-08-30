@@ -99,9 +99,9 @@ header nav a.home span.text { margin-top: 5px; }
 
 #search .autocomplete-result { width: 250px; }
 
-aside { position: fixed; bottom: 0; width: 100%; margin: 0 auto; border-top: 1px solid #CCC;
+aside { position: fixed; width: 100%; margin: 0 auto; border-top: 1px solid #CCC;
     background: #FFF; z-index: 1000; }
-aside .wrapper { padding: 0; background: transparent; }
+aside .wrapper { padding: 3px 0; background: transparent; }
 
 #language { margin-bottom: 15px; }
 #language img { position: relative; top: 3px; }

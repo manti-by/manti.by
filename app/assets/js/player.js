@@ -97,7 +97,15 @@
                 footer = $('footer');
 
             if (getCookie('player_is_playing') == 1 && aside.hasClass('hidden')) {
-                aside.css('bottom', -40).removeClass('hidden').animate({ bottom: 0 }, 800);
+                if ($(window).width() > 1024) {
+                    aside.css('bottom', -46)
+                        .removeClass('hidden')
+                        .animate({ bottom: 0 }, 800);
+                } else {
+                    aside.css('top', -46)
+                        .removeClass('hidden')
+                        .animate({ top: 0 }, 800);
+                }
             }
         };
 
@@ -428,9 +436,15 @@
         player.find('.close').bind('click', function() {
             var aside = $('aside');
 
-            aside.animate({ bottom: -40 }, 800, function () {
-                aside.addClass('hidden');
-            });
+            if ($(window).width() > 1024) {
+                aside.animate({ bottom: -46 }, 800, function () {
+                    aside.addClass('hidden');
+                });
+            } else {
+                aside.animate({ top: -46 }, 800, function () {
+                    aside.addClass('hidden');
+                });
+            }
 
             setCookie('player_is_playing', 0);
             player_api.pause();
