@@ -94,6 +94,14 @@
                 // Hide loader
                 $.fn.loaderHide();
 
+                // Move image on resize
+                $(window).bind('resize', function () {
+                    shift_x = ($(window).width() - image.width()) / 2;
+                    shift_y = ($(window).height() - image.height()) / 2;
+                    if (shift_x > 0) image.css('left', shift_x);
+                    if (shift_y > 0) image.css('top', shift_y);
+                });
+
                 // Hide image wrapper on click and escape
                 $(document).bind('click', function() {
                     wrapper.remove();

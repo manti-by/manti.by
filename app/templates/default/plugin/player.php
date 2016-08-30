@@ -78,7 +78,9 @@
             <div class="progress-line-label"><span>70</span>%</div>
         </div>
 
-        <div class="high-definition">HD</div>
+        <div class="high-definition">
+            <i class="material-icons">hd</i>
+        </div>
     </div>
 
     <div class="now-playing">

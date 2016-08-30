@@ -69,7 +69,9 @@
 <nav>
     <a href="<?php echo ($active['home'] ? '#' : Application::$config['http_host']); ?>"
        class="home" rel="home">
-        <img src="/assets/images/logo.png" />
+        <span class="icon">
+            <i class="material-icons">settings_input_svideo</i>
+        </span>
         <span class="text">
             Manti.by
         </span>

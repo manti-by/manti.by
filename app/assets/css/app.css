@@ -59,7 +59,10 @@ audio { width: 330px; transform: scale(0.8); }
     font-size: 18px !important; text-transform: uppercase;
     background: #b40303 url(../images/red-button.png) repeat-x top left  !important; }
 
-header { width: 100%; margin: 0 auto 20px auto; border-bottom: 1px solid #CCC;
+#loader div { position: relative; top: 48%; margin: 0 auto; width: 75px; height: 30px; border-radius: 15px;
+    background: #FFF url(../images/loader.gif) no-repeat 49% 49%; }
+
+header { width: 100%; margin: 0 auto 20px auto; border-bottom: 1px solid #EEE;
     background: #FFF; z-index: 1000; }
 header .wrapper { padding: 0; background: transparent; text-align: right; }
 
@@ -79,10 +82,12 @@ header nav a i { position: relative; top: 5px; }
 header nav a:hover,
 header nav a.active { color: #b40303; text-decoration: none; border-bottom: 2px solid #b40303; }
 
-header nav a.home { position: absolute; left: 0; width: 200px; margin-top: 3px; padding-top: 0;
-    font-size: 20pt; color: #262626; border: none; }
-header nav a.home img { position: relative; top: 6px; }
-header nav a.home span { margin-left: 5px; }
+header nav a.home { position: absolute; left: 0; width: 200px; margin-top: 4px; padding-top: 0;
+    font-size: 20pt; color: #333; border: none; }
+
+header nav a.home span { display: inline-block; margin-right: 2px; }
+header nav a.home span.icon { position: relative; top: -3px; margin-top: 0; }
+header nav a.home span.text { margin-top: 5px; }
 
 #mobile-menu-button { font-family: 'Material Icons'; width: 15px; padding: 14px 0 0 0; float: right; color: #999;
     font-size: 18pt; cursor: pointer; }
@@ -390,10 +395,8 @@ footer #copy { float: right; }
 .player .now-playing a span.title-wrapper { display: inline-block; position: absolute; top: 8px; left: 38px;
     white-space: nowrap; color: #999; z-index: 10; }
 
-.player .high-definition { margin: 3px; padding: 0 2px; border: 1px solid #999; border-radius: 1px;
-    cursor: pointer; text-decoration: line-through; font-size: 14px; color: #999; }
-.player .high-definition:hover, .player .high-definition.active { color: #b40303; border-color: #b40303;
-    text-decoration: none; }
+.player .high-definition { cursor: pointer; text-decoration: line-through; color: #999; }
+.player .high-definition:hover, .player .high-definition.active { color: #b40303; text-decoration: none; }
 
 #player .now-playing { width: 230px; margin: 0 0 0 21px; }
 #player .close { top: 7px; right: -48px; color: #999; cursor: pointer; }
