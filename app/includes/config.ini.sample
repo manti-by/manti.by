@@ -1,0 +1,98 @@
+; configuration of M2 Micro
+[general settings]
+http_host =
+doc_root =
+mail_from = "manti.by@gmail.com"
+secret = secret
+new_pass_length = 10
+default_module = front
+date_format = "M d, Y"
+template = default
+language = en
+gzip = 0
+
+[text defaults]
+not_found_ru = "Оооой( Страница, которую вы искали не существует."
+not_found_en = "Oooops( The page you are requested does not exists."
+site_title_ru = "Мой блог"
+site_title_en = "My blog"
+metakeys_ru = "Мой, Новый, Блог"
+metakeys_en = "My, New, Blog"
+metadesc_ru = "Это мой новый блог"
+metadesc_en = "This is my new blog"
+copyright_ru = "При использовании материалов с данного сайта, обязательна ссылка на автора и сайт первоисточник!"
+copyright_en = "When using content from this site you must link it to the author and original source!"
+
+[sef config]
+sef_enabled = 0
+sef_suffix = "/"
+sef_max_alias_length = 64
+
+[error handlers]
+show_debug_panel = 0
+default_error_level = 2
+log_write_level = 6
+message_level = 6
+debug_level_max = 3
+debug_level_skip = 2
+error_log = "../../log/app_error.log"
+
+[content]
+allowed_file_extensions = "png,jpg,mp3,zip"
+
+[music releases in blog module]
+preview_path = "./content/preview"
+release_path = "./content/release"
+covers_path = "./content/covers"
+
+[gallery]
+gallery_path = "./content/gallery"
+preview_count = 12
+front_count = 6
+preview_width = 328
+preview_height = 183
+thumb_width = 100
+thumb_height = 100
+fullhd_width = 1920
+fullhd_height = 1080
+watermark = "./content/images/watermark.png"
+
+[blog]
+teaser_length = 250
+metadesc_length = 250
+cover_width = 350
+cover_height = 350
+posts_per_page = 10
+tag_line_length = 40
+
+[frontpage]
+featured_count = 3
+popular_count = 5
+content_count = 2
+frontpage_count = 12
+
+[database]
+db_path = "127.0.0.1"
+db_port = 3306
+db_user = root
+db_pass =
+db_base = manti
+db_prefix =
+db_encoding = utf8
+
+[cache]
+memcache_host = "127.0.0.1"
+memcache_port = 11211
+memcache_suffix = ru
+cache_enabled = 0
+view_cache_enabled = 0
+
+[stats]
+nginx_log = "../../log/access.log"
+batch_start = "2013-04-06"
+batch_end = "2013-04-16"
+
+[miscellaneous]
+ipinfo_key = "example"
+memprof_enable = 0
+memprof_file_name = "../../log/memprof_%d.heap"

@@ -1,0 +1,3 @@
+[submodule "OpenCV-for-PHP"]
+	path = OpenCV-for-PHP
+	url = git@github.com:mgdm/OpenCV-for-PHP.git

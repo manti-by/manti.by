@@ -1,0 +1,111 @@
+    ##
+    # M2 Micro Framework - a micro PHP 5 framework
+    #
+    # @author      Alexander Chaika <marco.manti@gmail.com>
+    # @copyright   2012 Alexander Chaika
+    # @link        https://github.com/marco-manti/M2_micro
+    # @version     0.3
+    # @package     M2 Micro Framework
+    # @license     https://raw.github.com/marco-manti/M2_micro/manti-by-dev/NEW-BSD-LICENSE
+    #
+    # NEW BSD LICENSE
+    #
+    # All rights reserved.
+    #
+    # Redistribution and use in source and binary forms, with or without
+    # modification, are permitted provided that the following conditions are met:
+    #  * Redistributions of source code must retain the above copyright
+    # notice, this list of conditions and the following disclaimer.
+    #  * Redistributions in binary form must reproduce the above copyright
+    # notice, this list of conditions and the following disclaimer in the
+    # documentation and/or other materials provided with the distribution.
+    #  * Neither the name of the "M2 Micro Framework" nor "manti.by" nor the
+    # names of its contributors may be used to endorse or promote products
+    # derived from this software without specific prior written permission.
+    #
+    # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+    # ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    # WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+    # DISCLAIMED. IN NO EVENT SHALL COPYRIGHT HOLDER BE LIABLE FOR ANY
+    # DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+    # (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+    # LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+    # ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+    # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    #
+
+    ##
+    # @package M2 Micro Framework
+    # @subpackage Main
+    # @author Alexander Chaika
+    # @since 0.3RC4
+    #
+
+    ##
+    # READ THIS COMPLETELY IF YOU CHOOSE TO USE THIS FILE!
+    #
+    # The line just below this section: 'Options +FollowSymLinks' may cause problems
+    # with some server configurations.  It is required for use of mod_rewrite, but may already
+    # be set by your server administrator in a way that dissallows changing it in
+    # your .htaccess file.  If using it causes your server to error out, comment it out (add # to
+    # beginning of line), reload your site in your browser and test your sef url's.  If they work,
+    # it has been set by your server administrator and you do not need it set here.
+    #
+
+    ## Can be commented out if causes errors, see notes above.
+    Options +FollowSymLinks
+
+    ## Mod_rewrite in use.
+    RewriteEngine On
+
+    ##
+    # Begin - Rewrite rules to block out some common exploits.
+    # If you experience problems on your site block out the operations listed below
+    # This attempts to block the most common type of exploit `attempts` to M2 Micro Framework
+    #
+    # Block out any script trying to base64_encode data within the URL.
+    RewriteCond %{QUERY_STRING} base64_encode[^(]*\([^)]*\) [OR]
+    # Block out any script that includes a <script> tag in URL.
+    RewriteCond %{QUERY_STRING} (<|%3C)([^s]*s)+cript.*(>|%3E) [NC,OR]
+    # Block out any script trying to set a PHP GLOBALS variable via URL.
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    # Block out any script trying to modify a _REQUEST variable via URL.
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2})
+    # Return 403 Forbidden header and show the content of the root homepage
+    RewriteRule .* index.php [F]
+    #
+
+    ## Begin - Custom redirects
+    #
+    # If you need to redirect some pages, or set a canonical non-www to
+    # www redirect (or vice versa), place that code here. Ensure those
+    # redirects use the correct RewriteRule syntax and the [R=301,L] flags.
+    #
+
+    ##
+    # Uncomment following line if your webserver's URL
+    # is not directly related to physical file paths.
+    # RewriteBase /
+
+    ##
+    # M2 Micro Framework core SEF Section.
+    #
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Add watermark to gallery images
+    RewriteCond %{REQUEST_URI} content/gallery/fullhd/(.*) [NC]
+    RewriteRule ^(.*)$ watermark.php [NC]
+
+    # If the requested path and file is not /index.php and the request
+    # has not already been internally rewritten to the index.php script
+    RewriteCond %{REQUEST_URI} !^/index\.php
+
+    # And the requested path and file doesn't directly match a physical file
+    RewriteCond %{REQUEST_FILENAME} !-f
+
+    # And the requested path and file doesn't directly match a physical folder
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Internally rewrite the request to the index.php script
+    RewriteRule .* index.php [L]
