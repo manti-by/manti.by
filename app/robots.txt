@@ -1,5 +1,5 @@
 User-agent: Yandex
-Host: manti.by
+Host: m53.by
 
 User-agent: *
 Disallow: /includes/
@@ -8,4 +8,4 @@ Disallow: /modules/
 Disallow: /templates/
 Disallow: /user/
 
-Sitemap: http://manti.by/sitemap.xml
+Sitemap: http://m53.by/sitemap.xml

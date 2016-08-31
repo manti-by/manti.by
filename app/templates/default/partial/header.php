@@ -70,21 +70,14 @@
     <a href="<?php echo ($active['home'] ? '#' : Application::$config['http_host']); ?>"
        class="home" rel="home">
         <span class="icon">
-            <i class="material-icons">settings_input_svideo</i>
+            <i class="material-icons">group_work</i>
         </span>
         <span class="text">
-            Manti.by
+            M53
         </span>
     </a>
 
     <a href="<?php echo Sef::getSef('index.php?module=blog'); ?>"<?php echo ($active['blog'] ? ' class="active"' : ''); ?> rel="bookmark">
-        <i class="material-icons">play_arrow</i>
-        <?php echo T('Music'); ?>
+        <?php echo T('About'); ?>
     </a>
-    <a href="<?php echo Sef::getSef('index.php?module=gallery'); ?>"<?php echo ($active['gallery'] ? ' class="active"' : ''); ?> rel="bookmark">
-        <i class="material-icons">image</i>
-        <?php echo T('Gallery'); ?>
-    </a>
-
-    <?php echo $this->getContents('partial', 'mobilemenu', $options); ?>
 </nav>

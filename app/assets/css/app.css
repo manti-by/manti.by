@@ -57,10 +57,10 @@ audio { width: 330px; transform: scale(0.8); }
 
 .red-button { border: 1px solid #CCC; border-radius: 2px; box-shadow: 3px 3px 3px #AAA; color: white;
     font-size: 18px !important; text-transform: uppercase;
-    background: #b40303 url(../images/red-button.png) repeat-x top left  !important; }
+    background: #b40303 url(../img/red-button.png) repeat-x top left  !important; }
 
 #loader div { position: relative; top: 48%; margin: 0 auto; width: 75px; height: 30px; border-radius: 15px;
-    background: #FFF url(../images/loader.gif) no-repeat 49% 49%; }
+    background: #FFF url(../img/loader.gif) no-repeat 49% 49%; }
 
 header { width: 100%; margin: 0 auto 20px auto; border-bottom: 1px solid #EEE;
     background: #FFF; z-index: 1000; }
@@ -301,7 +301,7 @@ footer #copy { float: right; }
 #gallery .latest { width: 327px; }
 
 #image-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    text-align: center; vertical-align: middle; background: url(../images/black-bg-50.png); }
+    text-align: center; vertical-align: middle; background: url(../img/black-bg-50.png); }
 #image-wrapper img { position: absolute; top: 2%; left: 2%; margin: 0 auto; max-width: 96%; max-height: 96%;
     box-shadow: 3px 5px 10px #333; }
 .original, .next, .prev, .close { cursor: pointer; }
@@ -360,7 +360,7 @@ footer #copy { float: right; }
 .player div { display: inline-block; vertical-align: top; }
 
 .player .button { width: 16px; height: 16px; margin: 0 1px; cursor: pointer;
-    background: url(../images/shape-player.png) no-repeat; opacity: 0.9; }
+    background: url(../img/shape-player.png) no-repeat; opacity: 0.9; }
 .player .button:hover { opacity: 1; }
 
 .player .play { background-position: 0 0; width: 24px; height: 24px; }

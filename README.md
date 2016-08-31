@@ -14,12 +14,11 @@ Author: Alex Manti <manti.by@gmail.com>
 
 Source link: https://github.com/manti-by/m2/
 
-Current version: 0.5.2
+Current version: 0.7
 
 Requirements:
 
-- Basic: PHP 5.3+ (GD, CURL, Browscap), MySQL 5.0+ with MySQLi PHP driver, Memcache.
-- Advanced: CURL extension needed for stats module.
+- Basic: PHP 5.5+ (GD, CURL, Browscap), MySQL 5.0+ with MySQLi PHP driver, Memcache.
 
 
 Vagrant setup

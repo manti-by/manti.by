@@ -73,7 +73,7 @@ textarea { min-width: 300px; height: 120px; font-size: 12px; font-family: Arial;
 
 input[type="button"],
 input[type="submit"] { padding: 3px 24px; margin: 2px 2px 2px 0; min-width: 0;
-    cursor: pointer;  font-size: 12px; background: #EEE url(../images/button.png) repeat-x; }
+    cursor: pointer;  font-size: 12px; background: #EEE url(../img/button.png) repeat-x; }
 
 input[type="checkbox"] { width: auto; min-width: 0; }
 
@@ -85,7 +85,7 @@ td { vertical-align: top; border-bottom: 1px solid #CCC; }
 
 a.button { padding: 2px 9px; width: auto; font-size: 12px;
     text-decoration: none; border: 1px solid #CCC; color: black;
-    background: #EEE url(../images/button.png) repeat-x; }
+    background: #EEE url(../img/button.png) repeat-x; }
 
 .accordion { cursor: pointer; }
 
@@ -157,18 +157,18 @@ a.button { padding: 2px 9px; width: auto; font-size: 12px;
     background: white; border: 1px solid #CCC; }
 
 #popup { display: none; position: fixed; min-width: 400px; margin-left: -200px; padding: 15px; top: 200px; left: 50%;
-    box-shadow: 3px 3px 3px #999; background: url(../images/black-bg-75.png); z-index: 1000; }
+    box-shadow: 3px 3px 3px #999; background: url(../img/black-bg-75.png); z-index: 1000; }
 #popup .content { padding: 15px; border: 1px solid #CCC; background: #FFF; font-size: 14px; }
 
 .popup { position: absolute;  min-width: 400px; padding: 15px; box-shadow: 3px 3px 3px #999;
-    background: url(../images/black-bg-75.png); }
+    background: url(../img/black-bg-75.png); }
 .popup .content { padding: 15px; border: 1px solid #CCC; background: #FFF; }
 
 #message { position: fixed; top: 0; left: 50%; width: 1000px; margin-left: -500px; }
 
 #loader { position: fixed; width: 100%; height: 100%; top: 0; left: 0;
-    background: url(../images/white-bg-50.png); z-index: 10000; }
-#loader div { width: 100%; height: 100%; background: url(../images/loader.gif) no-repeat center center; }
+    background: url(../img/white-bg-50.png); z-index: 10000; }
+#loader div { width: 100%; height: 100%; background: url(../img/loader.gif) no-repeat center center; }
 
 .tag-control { display: inline-block; }
 .tag-control .tag-input { height: 17px; }

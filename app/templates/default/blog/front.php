@@ -49,16 +49,6 @@
      */
 ?>
 <div id="frontpage">
-    <?php
-        $data = array('data' => $options['data']['featured']);
-        echo $this->getContents('blog', 'featured', $data);
-
-        $data = array('data' => array(
-            'gallery_latest'  => $options['data']['gallery_latest'],
-            'gallery_popular' => $options['data']['gallery_popular']
-        ));
-        echo $this->getContents('gallery', 'front', $data);
-    ?>
 
     <div class="main-sidebar">
         <?php
@@ -68,13 +58,8 @@
     </div>
 
     <div class="right-sidebar">
-        <div id="forthcoming">
-            <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=43'); ?>"><?php echo T('Forthcoming'); ?></a>
-        </div>
         <?php echo $this->getContents('plugin', 'tags'); ?>
         <?php echo $this->getContents('plugin', 'latest'); ?>
-        <?php echo $this->getContents('plugin', 'galleries'); ?>
-        <?php echo $this->getContents('plugin', 'instagram'); ?>
     </div>
 
     <div class="cls"></div>

@@ -52,19 +52,13 @@
     <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=14'); ?>" rel="author">
         <?php echo T('About'); ?>
     </a>
-    <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=2'); ?>" rel="author">
-        <?php echo T('My job'); ?>
-    </a>
     <a href="<?php echo Sef::getSef('index.php?module=blog&action=show&id=16'); ?>" rel="license">
         <?php echo T('Copyrights'); ?>
     </a>
     <a href="<?php echo Sef::getSef('index.php?module=sitemap'); ?>" rel="index">
         <?php echo T('Sitemap'); ?>
     </a>
-    <a href="mailto:manti.by@gmail.com">
-        <?php echo T('Contact'); ?>
-    </a>
     <div id="copy">
-        Alex Manti&copy; <?php echo date('Y'); ?>
+        M53&copy; <?php echo date('Y'); ?>
     </div>
 </nav>
