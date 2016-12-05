@@ -421,6 +421,11 @@ footer #copy { float: right; }
 .player.inline .progressbar.volume .progress-line { width: 40px; }
 .player.inline .progressbar.volume .progress-line-label { width: 30px; text-align: right; }
 
+.coub { margin: 12px 0 0 20px; }
+.coub a { font-size: 12pt; font-weight: 400; text-decoration: none; }
+.coub a .text { position: relative; top: -7px; }
+.coub a .image { margin-left: 3px; opacity: 0.55; }
+
 /** Element Z position **/
 header #search { z-index: 1000; }
 #loader { z-index: 10000; }
