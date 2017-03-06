@@ -160,12 +160,14 @@
                     preg_match($regex, $line, $matches);
 
                     // Check date and calculate counters
-                    $date = date('Y-m-d', strtotime($matches[2]));
-                    if ($date >= $start_date && $date < $end_date) {
-                        if (array_key_exists($matches[3], $result) && !empty($matches[3])) {
-                            $result[$matches[3]]++;
-                        } else {
-                            $result[$matches[3]] = 1;
+                    if (isset($matches[2])) {
+                        $date = date('Y-m-d', strtotime($matches[2]));
+                        if ($date >= $start_date && $date < $end_date) {
+                            if (array_key_exists($matches[3], $result) && !empty($matches[3])) {
+                                $result[$matches[3]]++;
+                            } else {
+                                $result[$matches[3]] = 1;
+                            }
                         }
                     }
                 }

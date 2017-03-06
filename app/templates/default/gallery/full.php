@@ -61,7 +61,7 @@
            href="<?php echo $options['data']->favorite->fullhd; ?>"
            class="preview"
            data-image-id="<?php echo $options['data']->favorite->id; ?>">
-            <img src="<?php echo $options['data']->favorite->fullhd; ?>" width="1000"
+            <img src="<?php echo $options['data']->favorite->fullhd; ?>"
                  alt="Favorite image from <?php echo $options['data']->name; ?> gallery" />
         </a>
     </div>

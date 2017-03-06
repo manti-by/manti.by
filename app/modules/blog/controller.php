@@ -74,7 +74,6 @@
             } else {
                 $options['show_only_music'] = 1;
                 $options['data'] = $this->model->getPosts(Application::$config['posts_per_page'], $options['page']);
-                $options['title'] = T('Blog');
             }
 
             // Append meta info
