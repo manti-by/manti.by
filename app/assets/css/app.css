@@ -235,13 +235,13 @@ footer #copy { float: right; }
     -webkit-transition: 0.3s linear; transition: 0.3s linear; }
 
 #gallery .gallery-full { display: flex; flex-flow: row wrap; justify-content: space-between; margin-bottom: 30px; }
-#gallery .gallery-full .preview { width: 328px; height: 183px; margin: 0 0 8px 0; padding: 0; overflow: hidden; }
+#gallery .gallery-full .preview { width: 32.8%; margin: 0 0 8px 0; padding: 0; overflow: hidden; }
 #gallery .gallery-full .preview img { display: inline-block; min-width: 100%; vertical-align: middle; }
 #gallery .gallery-full .preview img:hover { min-width: 104%; margin-left: -2%;
     -webkit-transition: 0.3s linear; transition: 0.3s linear; }
 
 #gallery .favorite a { display: inline-block; height: 300px; overflow: hidden; margin: 0 0 3px 0; }
-#gallery .favorite a img { position: relative; bottom: 33%; }
+#gallery .favorite a img { position: relative; max-width: 100%; bottom: 33%; }
 
 #featured { padding-bottom: 20px; }
 #featured #slider { display: inline; list-style: none; padding: 0; }

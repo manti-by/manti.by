@@ -3,3 +3,55 @@ and (min-device-width : 768px)
 and (max-device-width : 1024px) {
     aside { position: fixed; top: -46px; bottom: auto; border-top: none; border-bottom: 1px solid #CCC; }
 }
+
+@media only screen
+and (min-device-width : 1200px)
+and (max-device-width : 1600px) {
+    .wrapper {
+        width: 1200px;
+    }
+
+    .main-sidebar {
+        width: 900px;
+    }
+
+    .post-item .cover {
+        width: 450px;
+    }
+
+    .post-item .cover img {
+        width: 450px;
+    }
+
+    .post-item .info,
+    .post-item .tracklist {
+        width: 400px;
+        height: 450px;
+        margin-left: 24px;
+    }
+
+    .post-item .tracklist .content {
+        height: 450px;
+    }
+
+    .relation {
+        width: 32.8%;
+    }
+
+    .relation .preview img {
+        min-width: 100%;
+    }
+
+    .gallery-item .preview {
+        width: 32.8%;
+        height: auto;
+    }
+
+    #gallery .favorite a {
+        height: 400px;
+    }
+
+    #gallery .favorite a img {
+        max-width: 100%;
+    }
+}

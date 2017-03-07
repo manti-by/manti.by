@@ -568,7 +568,7 @@
 
             // Return only ISO2
             $result = explode(';', $result);
-            return $result[3] == '-' ? 'XX' : $result[3];
+            return isset($result[3]) && $result[3] == '-' ? 'XX' : $result[3];
         }
 
         /**
