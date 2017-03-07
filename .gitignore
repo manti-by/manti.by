@@ -1,16 +1,12 @@
 #.gitignore
 
-# Ignore local config and content pathes
-/app/includes/config.ini
-/app/content/*
+/OpenCV-for-PHP/
 
-# Remove sitemap
+/app/includes/config.ini
+/app/content/
+
 /app/sitemap.xml
 
-# Remove vagrant instance folder
-/.vagrant/
-
-/build/
-
-/tests/images/*.jpg
-/app/content/
+/deploy/build/
+/deploy/.vagrant/
+/deploy/utils/tests/images/
