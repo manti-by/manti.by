@@ -75,6 +75,12 @@
         <?php echo $this->getContents('plugin', 'latest'); ?>
         <?php echo $this->getContents('plugin', 'galleries'); ?>
         <?php echo $this->getContents('plugin', 'instagram'); ?>
+        <div class="coub">
+            <a href="https://coub.com/manti.by">
+                <span class="text">Кубики</span>
+                <span class="image"><img src="/content/images/coub.png"></span>
+            </a>
+        </div>
     </div>
 
     <div class="cls"></div>
