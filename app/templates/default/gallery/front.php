@@ -59,27 +59,27 @@
             <?php echo T('Latest shots from gallery'); ?>
         </a>
     </h2>
-    <div class="flexbox">
-        <div class="latest gallery-item">
-            <?php foreach ($options['data']['gallery_latest'] as $original) : ?>
-                <?php
-                    // Check preview count
-                    if ($count >= Application::$config['front_count']) break;
-                    else $count++;
+    <div class="latest fl gallery-item">
+        <?php foreach ($options['data']['gallery_latest'] as $original) : ?>
+            <?php                
+                // Check preview count
+                if ($count >= Application::$config['front_count']) break;
+                else $count++;
 
-                    // Add used id
-                    $in_use[] = $original->id;
-                ?>
+                // Add used id
+                $in_use[] = $original->id;
+            ?>
 
-                <a href="<?php echo $original->gallery_link; ?>#image-<?php echo $original->id; ?>" class="thumbnail">
-                    <img src="<?php echo $original->thumbnail; ?>" alt="Latest image from gallery" />
-                </a>
-            <?php endforeach; ?>
-        </div>
-        <div class="popular gallery-item">
-            <a href="<?php echo $popular_image->gallery_link; ?>#image-<?php echo $popular_image->id; ?>">
-                <img src="<?php echo $popular_image->fullhd; ?>" alt="Popular image from gallery" />
+            <a href="<?php echo $original->gallery_link; ?>#image-<?php echo $original->id; ?>" class="thumbnail">
+                <img src="<?php echo $original->thumbnail; ?>" width="100" height="100"  alt="Latest image from gallery" />
             </a>
-        </div>
+        <?php endforeach; ?>
     </div>
+
+    <div class="popular fl gallery-item">
+        <a href="<?php echo $popular_image->gallery_link; ?>#image-<?php echo $popular_image->id; ?>">
+            <img src="<?php echo $popular_image->fullhd; ?>" alt="Popular image from gallery" width="673" />
+        </a>
+    </div>
+    <div class="cls"></div>
 </div>
