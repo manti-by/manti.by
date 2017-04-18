@@ -27,6 +27,10 @@ SECRET_KEY = '9(+8&f)43k--m$cq1#kcwy$%o4hlj9remnlybh+-*gl6_*10*k'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
+# Load Celery
+import djcelery
+djcelery.setup_loader()
+
 
 # Application definition
 
@@ -36,6 +40,8 @@ INSTALLED_APPS = [
     'profiles',
 
     'taggit',
+    'djcelery',
+    'djkombu',
     'grappelli',
     'simple_rest',
     'sorl.thumbnail',
@@ -171,3 +177,9 @@ COMPRESS_OUTPUT_DIR = 'cache'
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',  'compressor.filters.cssmin.CSSMinFilter']
 
+
+# Celery settings
+
+CELERY_ALWAYS_EAGER = False
+CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
+BROKER_BACKEND = 'djkombu.transport.DatabaseTransport'

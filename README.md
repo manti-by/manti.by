@@ -45,4 +45,18 @@ Vagrant setup
     You can create "clean" database from migrations in ./src/database/. 
     For this you should use "Database migration tool", which you can find 
     in ./src/scripts directory, to run it simply call: $ ./db-migrate.sh
+    
 
+Setup Redis
+-----------
+
+    wget http://redis.googlecode.com/files/redis-2.6.9.tar.gz
+    tar -zxvf redis-2.6.9.tar.gz
+
+    cd redis-2.6.9
+    sudo make
+    sudo make test
+    sudo make install
+    
+    cd utils
+    sudo ./install_server.sh
