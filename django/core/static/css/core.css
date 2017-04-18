@@ -1,0 +1,201 @@
+/*** Globals ***/
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #333;
+    background: #f4f4f4;
+}
+
+h1, h2, h3 {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    font-size: 2.5em;
+    font-weight: 600;
+}
+
+h2 {
+    margin-bottom: 8px;
+    padding-bottom: 7px;
+    font-size: 2em;
+}
+
+h3 {
+    margin-bottom: 4px;
+    padding-bottom: 3px;
+    font-size: 1.5em;
+}
+
+a {
+    text-decoration: none;
+    color: #eb1c23;
+    border-bottom: 1px dotted transparent;
+}
+
+a:hover {
+    border-bottom: 1px dotted #eb1c23;
+}
+
+p {
+    padding-bottom: 7px;
+    line-height: 1.4;
+}
+
+form {
+    margin: 20px auto;
+}
+
+form.narrow {
+    width: 500px;
+}
+
+form label {
+    display: block;
+    padding-bottom: 5px;
+}
+
+form input,
+form textarea {
+    display: block;
+    width: calc(100% - 20px);
+    margin-bottom: 5px;
+    padding: 3px 10px;
+    font-size: 1.2em;
+    border: 1px solid #CCC;
+}
+
+form textarea {
+    min-height: 100px;
+}
+
+form .buttons {
+    padding-top: 5px;
+}
+
+button {
+    margin-right: 5px;
+    padding: 7px 30px;
+    font-size: 1em;
+    color: #FFF;
+    background: #eb1c23;
+    border: none;
+    cursor: pointer;
+}
+
+button[type=reset] {
+    color: #666;
+    background: #CCC;
+}
+
+.hidden {
+    display: none;
+}
+
+.red {
+    color: #eb1c23;
+}
+
+.bg-red {
+    background: #eb1c23;
+}
+
+.shadow {
+    border-left: 1px solid #EEE;
+    border-top: 1px solid #EEE;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.notice {
+    font-size: 80%;
+    color: #999;
+}
+
+
+/*** Header section ***/
+
+header {
+    position: fixed;
+    top: 0;
+    height: 35px;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 5000;
+
+    transform: translate3d(0, -100%, 0);
+    transition: transform .2s linear, background 1s ease, height .5s ease;
+}
+
+header.visible {
+    border-bottom: 1px solid #EEE;
+    transform: translateZ(0);
+}
+
+header a,
+header a:hover {
+    border-bottom: 0;
+}
+
+
+/*** Main section ***/
+
+main {
+    position: relative;
+    margin-top: 64px;
+}
+
+
+/*** Footer section ***/
+
+footer.mdl-mini-footer {
+    padding: 16px;
+    color: #CCC;
+    background: #333;
+}
+
+footer a {
+    color: #CCC;
+}
+
+footer a:hover {
+    border-bottom: 1px dotted #CCC;
+}
+
+footer nav a {
+    display: inline-block;
+    margin-right: 15px;
+}
+
+
+/*** Page containers ***/
+
+.container {
+    margin: 0 auto 32px auto;
+    max-width: 1000px;
+    width: calc(100% - 20px);
+}
+
+.static-page {
+    padding: 30px;
+}
+
+.profile .notice {
+    position: relative;
+    top: -16px;
+}
+
+.http-codes .description {
+    white-space: initial;
+}
+
+.my-sites .last-check {
+    text-transform: capitalize;
+}
+
+.time {
+    margin: 16px 0;
+    font-size: 90%;
+    color: #999;
+}

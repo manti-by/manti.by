@@ -1,0 +1,14 @@
+{% load i18n %}
+
+<div class="mdl-mini-footer--left-section">
+    <ul class="mdl-mini-footer--link-list">
+        <li><a href="{% url 'index' %}">{% trans 'Homepage' %}</a></li>
+        <li><a href="{% url 'codes' %}">{% trans 'HTTP Status Codes' %}</a></li>
+    </ul>
+</div>
+
+<div class="mdl-mini-footer--right-section">
+    <ul class="mdl-mini-footer--link-list">
+        <li><a href="{% url 'admin:index' %}">{% trans 'Admin Panel' %}</a></li>
+    </ul>
+</div>

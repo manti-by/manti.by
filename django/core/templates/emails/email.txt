@@ -1,0 +1,5 @@
+Subject: {{email.subject}}
+Created: {{email.created}}
+E-mail:  {{email.email}}
+Message:
+{{email.message}}

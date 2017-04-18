@@ -1,0 +1,68 @@
+from __future__ import absolute_import, unicode_literals
+
+
+DEBUG = True
+
+COMPRESS_ENABLED = False
+
+ALLOWED_HOSTS = ['127.0.0.1']
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'nostromo',
+        'USER': 'nostromo',
+        'PASSWORD': 'pa55word',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': '/home/manti/www/nostromo/tmp/app.log',
+        },
+        'console': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+        },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            'include_html': True
+        },
+        'null': {
+            'level': 'ERROR',
+            'class': 'logging.NullHandler',
+        },
+    },
+    'loggers': {
+        'app': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django': {
+            'handlers': ['console'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+        'django.db.backends': {
+            'handlers': ['null'],
+            'propagate': False,
+            'level':'ERROR',
+        },
+    },
+}

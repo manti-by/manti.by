@@ -1,0 +1,31 @@
+{% load i18n %}
+
+<div class="mdl-layout__header-row">
+    <span class="mdl-layout-title">
+         <a href="{% url 'index' %}" class="homepage mdl-navigation__link">
+             <i class="material-icons">settings_backup_restore</i>
+             <span>PingService</span>
+         </a>
+    </span>
+    <div class="mdl-layout-spacer"></div>
+
+    <div class="navigation-container">
+        <nav class="mdl-navigation">
+            {% if user.is_authenticated %}
+                <a href="{% url 'index' %}" class="mdl-navigation__link">
+                    {% trans 'Sites' %}
+                </a>
+                <a href="{% url 'profile' %}" class="mdl-navigation__link">
+                    {% trans 'Profile' %}
+                </a>
+                <a href="{% url 'logout' %}" class="mdl-navigation__link">
+                    {% trans 'Logout' %}
+                </a>
+            {% else %}
+                <a href="{% url 'login' %}" class="mdl-navigation__link">
+                    {% trans 'Login' %}
+                </a>
+            {% endif %}
+        </nav>
+    </div>
+</div>

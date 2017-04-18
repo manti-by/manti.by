@@ -1,0 +1,39 @@
+{% extends 'common/layout.html' %}
+
+{% load static i18n %}
+
+{% block content %}
+    <div class="container resizer">
+        <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--2-offset-desktop mdl-cell--8-col mdl-cell--1-offset-tablet
+                        mdl-cell--6-col-tablet mdl-cell--4-col-phone">
+                <form class="profile" action="{% url 'profile' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h3>{% trans 'Your profile' %}</h3>
+                    <div class="error-holder">{{ error }}</div>
+
+                    <div class="image">
+                        <img src="{{ profile.image }}">
+                    </div>
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="file" id="image" name="image">
+                        <label class="mdl-textfield__label" for="image"></label>
+                    </div>
+                    <div class="notice">
+                        *{% trans 'To update your profile image, please upload new one' %}.
+                    </div>
+
+                    <div class="mdl-textfield mdl-js-textfield">
+                        <input class="mdl-textfield__input" type="text" id="email" name="email" value="{{ profile.email }}">
+                        <label class="mdl-textfield__label" for="email">{% trans 'Email' %}</label>
+                    </div>
+                    <div class="buttons">
+                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                            {% trans 'Update' %}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

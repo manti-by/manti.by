@@ -1,0 +1,60 @@
+{% extends 'common/layout.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Your Sites' %}{% endblock %}
+
+{% block content %}
+    <div class="container resizer">
+        <h1>{% trans 'Your Sites' %}</h1>
+        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp my-sites" width="100%">
+            <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">{% trans 'Name' %}</th>
+                    <th class="mdl-data-table__cell--non-numeric">{% trans 'Url' %}</th>
+                    <th>{% trans 'Avg load time' %}, {% trans 'ms' %}</th>
+                    <th>{% trans 'Availability, %' %}</th>
+                    <th>{% trans 'Errors' %}</th>
+                    <th class="mdl-data-table__cell--non-numeric">{% trans 'Last error' %}</th>
+                    <th class="mdl-data-table__cell--non-numeric">{% trans 'Last check' %}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for site in sites %}
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">{{ site.name }}</td>
+                    <td class="mdl-data-table__cell--non-numeric">
+                        <a href="{{ site.url }}">{{ site.url }}</a>
+                    </td>
+                    <td>{{ site.avg_load_time|floatformat:2 }}</td>
+                    <td>{{ site.avg_availability|floatformat:2 }}</td>
+                    <td>{{ site.errors_count }}</td>
+                    <td class="mdl-data-table__cell--non-numeric">
+                        {% if site.last_error %}
+                            <strong>{{ site.last_error.status }}</strong> -
+                            {{ site.last_error.created|date:"M d H:m" }}<br>
+                            {% trans 'Downtime' %}: {{ site.last_error.downtime }}
+                        {% endif %}
+                    </td>
+                    <td class="mdl-data-table__cell--non-numeric last-check">{{ site.last_check }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="time">,
+            {% trans 'server' %}: {{ server_time|date:'H:i' }},
+            {% trans 'last check' %}: {{ last_check.created|date:'d M H:i' }}.
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(function() {
+                var now = $.format.date(new Date(), "HH:mm");
+                $('.time').prepend('{% trans 'Local time' %}: ' + now);
+            });
+        })(jQuery);
+    </script>
+{% endblock %}

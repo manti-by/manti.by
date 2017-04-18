@@ -1,0 +1,60 @@
+{% load static compress %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %}Title{% endblock %}</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" sizes="192x192" href="{% static 'img/favicon/android-desktop.png' %}">
+
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <meta name="apple-mobile-web-app-title" content="iOS Title">
+        <link rel="apple-touch-icon-precomposed" href="{% static 'img/favicon/ios-desktop.png' %}">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto:300,400,700&subset=cyrillic" />
+        <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.grey-blue.min.css" />
+
+        {% compress css %}
+            <link rel="stylesheet" type="text/css" href="{% static 'css/core.css' %}" />
+            {% block styles %}{% endblock %}
+        {% endcompress %}
+    </head>
+    <body>
+        <div class="mdl-layout mdl-layout--fixed-header mdl-js-layout mdl-color--grey-100">
+            <header class="mdl-layout__header mdl-layout__header--scroll mdl-color--grey-100 mdl-color-text--grey-800 visible">
+                {% block header %}
+                    {% include 'common/header.html' %}
+                {% endblock %}
+            </header>
+            <main class="mdl-layout__content">
+                {% block content %}
+                    404 Not Found
+                {% endblock %}
+
+                <footer class="mdl-mini-footer">
+                    {% block footer %}
+                        {% include 'common/footer.html' %}
+                    {% endblock %}
+                </footer>
+            </main>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+        <script defer src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+
+        {% compress js %}
+            <script type="text/javascript" src="{% static 'js/libs/jquery.dateformat.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/widgets/header.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/widgets/resizer.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
+            {% block scripts %}{% endblock %}
+        {% endcompress %}
+    </body>
+</html>

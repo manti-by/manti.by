@@ -1,0 +1,33 @@
+{% extends 'common/layout.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'HTTP Status Codes' %}{% endblock %}
+
+{% block content %}
+    <div class="container resizer">
+        <h1>{% trans 'HTTP Status Codes' %}</h1>
+        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp http-codes" width="100%">
+            <thead>
+                <tr>
+                    <th>{% trans 'Code' %}</th>
+                    <th class="mdl-data-table__cell--non-numeric">{% trans 'Message' %}</th>
+                    <th class="mdl-data-table__cell--non-numeric">{% trans 'Description' %}</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for code, data in code_list %}
+                <tr>
+                    <td>{{ code }}</td>
+                    <td class="mdl-data-table__cell--non-numeric">
+                        {{ data.message }}
+                    </td>
+                    <td class="mdl-data-table__cell--non-numeric">
+                        <div class="description">{{ data.description }}</div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
