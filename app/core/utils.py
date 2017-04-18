@@ -18,16 +18,28 @@ def get_name(instance, filename, type):
     return instance.__class__.__name__.lower() + '/' + type + '/' + unique_str() + ext
 
 
-def image_name(instance, filename):
-    return get_name(instance, filename, 'image')
+def original_name(instance, filename):
+    return get_name(instance, filename, 'original')
 
 
 def preview_name(instance, filename):
     return get_name(instance, filename, 'preview')
 
 
+def gallery_name(instance, filename):
+    return get_name(instance, filename, 'gallery')
+
+
 def thumb_name(instance, filename):
     return get_name(instance, filename, 'thumb')
+
+
+def release_name(instance, filename):
+    return get_name(instance, filename, 'release')
+
+
+def cover_name(instance, filename):
+    return get_name(instance, filename, 'cover')
 
 
 ZERO = timedelta(0)

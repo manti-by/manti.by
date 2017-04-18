@@ -1,0 +1,20 @@
+{% extends 'common/layout.html' %}
+
+{% load i18n %}
+
+{% block title %}{% trans 'Homepage' %}{% endblock %}
+
+{% block content %}
+    <div class="container resizer">
+        <h1>{% trans 'Homepage' %}</h1>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(function() {
+            });
+        })(jQuery);
+    </script>
+{% endblock %}

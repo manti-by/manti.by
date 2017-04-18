@@ -33,7 +33,6 @@ SECRET_KEY = '9(+8&f)43k--m$cq1#kcwy$%o4hlj9remnlybh+-*gl6_*10*k'
 INSTALLED_APPS = [
     'api',
     'core',
-    'ping',
     'profiles',
 
     'taggit',
@@ -150,8 +149,9 @@ LOGIN_URL = '/profiles/login/'
 
 # Sorl thumbnailer settings
 
-THUMB_SIZE = '50x50'
-PREVIEW_SIZE = '300x300'
+THUMB_SIZE = '100x100'
+PREVIEW_SIZE = '328x183'
+GALLERY_SIZE = '1920x1280'
 THUMBNAIL_FORMAT = 'PNG'
 
 
