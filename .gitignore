@@ -3,6 +3,8 @@
 /php/includes/config.ini
 /php/content/
 
+/app/content/
+/app/static/
 /app/core/settings/local.py
 
 *.pyc

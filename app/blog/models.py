@@ -22,8 +22,8 @@ class Post(SlugifyMixin, BaseModel, models.Model):
     description = models.TextField()
 
     release = models.FileField(max_length=255, null=True,
-                              blank=True, upload_to=release_name,
-                              verbose_name=_('Release File'))
+                               blank=True, upload_to=release_name,
+                               verbose_name=_('Release File'))
 
     cover = models.ImageField(max_length=255, null=True,
                               blank=True, upload_to=cover_name,
@@ -39,9 +39,14 @@ class Post(SlugifyMixin, BaseModel, models.Model):
     tags = TaggableManager()
     related = models.ForeignKey('self', null=True, blank=True)
 
+    converted = models.IntegerField(blank=True, default=0)
+
+    def __str__(self):
+        return self.title
+
 
 @receiver(post_save, sender=Post, dispatch_uid='convert_release')
 def convert_release(sender, instance, **kwargs):
-    convert_to_mp3_preview.delay(instance.release)
-    convert_to_ogg_preview.delay(instance.release)
-    convert_to_ogg_release.delay(instance.release)
+    convert_to_mp3_preview.delay(instance.id)
+    convert_to_ogg_preview.delay(instance.id)
+    convert_to_ogg_release.delay(instance.id)

@@ -13,12 +13,12 @@ sudo apt-get update && sudo apt-get upgrade -y
 
 header "Install required libraries"
 sudo apt-get install -y git python-pip python-dev python-six postgresql libpq-dev
-if [ $TARGET -eq 'remote' ]; then
+if [ "$TARGET" == "remote" ]; then
     sudo apt-get install -y nginx supervisor memcached
 fi
 
 header "Install python packages"
-if [ $TARGET -eq 'local' ]; then
+if [ "$TARGET" == "local" ]; then
     virtualenv --no-site-packages --prompt="$PROJECT_NAME-venv-" $LOCAL_PATH/venv
     pip install -r $LOCAL_PATH/src/requirements.txt
 else
@@ -35,14 +35,14 @@ sudo -u postgres psql -c "ALTER ROLE $PROJECT_NAME SET timezone TO 'UTC';"
 sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE $PROJECT_NAME TO $PROJECT_NAME;"
 
 header "Create local settings"
-if [ $TARGET -eq 'local' ]; then
+if [ "$TARGET" == "local" ]; then
     cp $LOCAL_PATH/src/app/core/settings/local.py.example $LOCAL_PATH/src/app/core/settings/local.py
 else
     cp $REMOTE_PATH/src/app/core/settings/local.py.example $REMOTE_PATH/src/app/core/settings/local.py
 fi
 
 header "Migrate, collect static files, create admin user"
-if [ $TARGET -eq 'local' ]; then
+if [ "$TARGET" == "local" ]; then
     python $LOCAL_PATH/venv/bin/python $LOCAL_PATH/src/app/manage.py migrate
     echo "    from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | $LOCAL_PATH/venv/bin/python $LOCAL_PATH/src/app/manage.py shell
     echo "    To run app call >> venv/bin/python src/app/manage.py runserver 0.0.0.0:8000"

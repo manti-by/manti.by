@@ -15,7 +15,7 @@ def unique_str():
 
 def get_name(instance, filename, type):
     name, ext = splitext(filename)
-    return instance.__class__.__name__.lower() + '/' + type + '/' + unique_str() + ext
+    return '%s/%s/%s%s' % (instance.__class__.__name__.lower(), type, unique_str, ext)
 
 
 def original_name(instance, filename):
@@ -35,11 +35,13 @@ def thumb_name(instance, filename):
 
 
 def release_name(instance, filename):
-    return get_name(instance, filename, 'release')
+    name, ext = splitext(filename)
+    return 'release/%s%s' % (name, ext)
 
 
 def cover_name(instance, filename):
-    return get_name(instance, filename, 'cover')
+    name, ext = splitext(filename)
+    return 'covers/%s%s' % (name, ext)
 
 
 ZERO = timedelta(0)

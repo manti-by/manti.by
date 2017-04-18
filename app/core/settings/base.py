@@ -36,6 +36,7 @@ djcelery.setup_loader()
 
 INSTALLED_APPS = [
     'api',
+    'blog',
     'core',
     'profiles',
 
@@ -144,8 +145,8 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'content')
+MEDIA_URL = '/content/'
 
 
 # Login redirect url
@@ -180,6 +181,12 @@ COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',  'co
 
 # Celery settings
 
+BROKER_URL = 'redis://localhost:6379/0'
+
 CELERY_ALWAYS_EAGER = False
+CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
 CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-BROKER_BACKEND = 'djkombu.transport.DatabaseTransport'
+
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
