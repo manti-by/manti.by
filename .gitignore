@@ -1,12 +1,9 @@
 #.gitignore
 
-/OpenCV-for-PHP/
+/php/includes/config.ini
+/php/content/
 
-/app/includes/config.ini
-/app/content/
+/app/core/settings/local.py
 
-/app/sitemap.xml
-
-/deploy/build/
-/deploy/.vagrant/
-/deploy/utils/tests/images/
+*.pyc
+*~
