@@ -5,32 +5,44 @@ import subprocess
 from celery.task import task
 
 
-def convert(command, post_id, is_preview=False, is_ogg=False):
+MP3_PREVIEW = 'mp3_preview'
+OGG_PREVIEW = 'ogg_preview'
+OGG_RELEASE = 'ogg_release'
+
+
+def convert(format, post_id, type=''):
     from blog.models import Post
     post = Post.objects.get(pk=post_id)
     result = filename = str(post.release.file)
-    if is_preview:
+
+    if type in (MP3_PREVIEW, OGG_PREVIEW):
         result = result.replace('release', 'preview')
-    if is_ogg:
+    if type in (OGG_RELEASE, OGG_PREVIEW):
         result = result.replace('mp3', 'ogg')
-    subprocess.call(command % (filename, result), shell=True)
-    post.converted += 1
+
+    format.append(result)
+    command = ['ffmpeg', '-y', '-nostats', '-loglevel', '0', '-i', filename] + format
+    subprocess.call(command)
+
+    setattr(post, '%s_ready' % type, True)
     post.save()
 
 
 @task
 def convert_to_mp3_preview(post_id):
-    command = 'ffmpeg -y -i %s -acodec libmp3lame -t 1800 -ac 1 -ab 96k -ar 44100 -af "afade=t=out:st=1770:d=30" %s'
-    convert(command, post_id, True, False)
+    format = ['-acodec', 'libmp3lame', '-t', '1800', '-ac', '1', '-ab', '96k',
+              '-ar', '44100', '-af', '"afade=t=out:st=1770:d=30"']
+    convert(format, post_id, MP3_PREVIEW)
 
 
 @task
 def convert_to_ogg_preview(post_id):
-    command = 'ffmpeg -y -i %s -acodec libvorbis -t 1800 -ac 1 -ab 96k -af "afade=t=out:st=1770:d=30" %s'
-    convert(command, post_id, True, True)
+    command = ['-acodec', 'libvorbis', '-t', '1800', '-ac', '1', '-ab', '96k',
+               '-af', '"afade=t=out:st=1770:d=30"']
+    convert(command, post_id, OGG_PREVIEW)
 
 
 @task
 def convert_to_ogg_release(post_id):
-    command = 'ffmpeg -y -i %s -acodec libvorbis -ab 320k %s'
-    convert(command, post_id, False, True)
+    command = ['-acodec', 'libvorbis', '-ab', '320k']
+    convert(command, post_id, OGG_RELEASE)

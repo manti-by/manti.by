@@ -39,7 +39,9 @@ class Post(SlugifyMixin, BaseModel, models.Model):
     tags = TaggableManager()
     related = models.ForeignKey('self', null=True, blank=True)
 
-    converted = models.IntegerField(blank=True, default=0)
+    mp3_preview_ready = models.BooleanField(blank=True, default=False)
+    ogg_preview_ready = models.BooleanField(blank=True, default=False)
+    ogg_release_ready = models.BooleanField(blank=True, default=False)
 
     def __str__(self):
         return self.title
@@ -47,6 +49,11 @@ class Post(SlugifyMixin, BaseModel, models.Model):
 
 @receiver(post_save, sender=Post, dispatch_uid='convert_release')
 def convert_release(sender, instance, **kwargs):
-    convert_to_mp3_preview.delay(instance.id)
-    convert_to_ogg_preview.delay(instance.id)
-    convert_to_ogg_release.delay(instance.id)
+    if not instance.release:
+        return
+    if not instance.mp3_preview_ready:
+        convert_to_mp3_preview.delay(instance.id)
+    if not instance.ogg_preview_ready:
+        convert_to_ogg_preview.delay(instance.id)
+    if not instance.ogg_release_ready:
+        convert_to_ogg_release.delay(instance.id)
