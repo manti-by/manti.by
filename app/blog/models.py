@@ -36,8 +36,8 @@ class Post(SlugifyMixin, BaseModel, models.Model):
     length = models.CharField(max_length=16, blank=True)
     tracklist = models.TextField(blank=True)
 
-    tags = TaggableManager()
-    related = models.ForeignKey('self', null=True, blank=True)
+    tags = TaggableManager(blank=True)
+    related = models.ManyToManyField('self', null=True, blank=True)
 
     mp3_preview_ready = models.BooleanField(blank=True, default=False)
     ogg_preview_ready = models.BooleanField(blank=True, default=False)
@@ -45,6 +45,12 @@ class Post(SlugifyMixin, BaseModel, models.Model):
 
     def __str__(self):
         return self.title
+
+    @property
+    def ready(self):
+        return self.mp3_preview_ready \
+           and self.ogg_preview_ready \
+           and self.ogg_release_ready
 
 
 @receiver(post_save, sender=Post, dispatch_uid='convert_release')
