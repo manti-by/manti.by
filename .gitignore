@@ -6,6 +6,7 @@
 /app/content/
 /app/static/
 /app/core/settings/local.py
+/app/celeryev.pid
 
 *.pyc
 *~
