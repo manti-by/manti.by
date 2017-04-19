@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'api',
     'blog',
     'core',
+    'gallery',
     'profiles',
 
     'taggit',
@@ -159,7 +160,6 @@ LOGIN_URL = '/profiles/login/'
 THUMB_SIZE = '100x100'
 PREVIEW_SIZE = '328x183'
 GALLERY_SIZE = '1920x1280'
-THUMBNAIL_FORMAT = 'PNG'
 
 
 # Email settings

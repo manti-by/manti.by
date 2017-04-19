@@ -15,7 +15,7 @@ def unique_str():
 
 def get_name(instance, filename, type):
     name, ext = splitext(filename)
-    return '%s/%s/%s%s' % (instance.__class__.__name__.lower(), type, unique_str, ext)
+    return '%s/%s/%s%s' % (instance.__class__.__name__.lower(), type, unique_str(), ext)
 
 
 def original_name(instance, filename):
