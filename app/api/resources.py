@@ -1,24 +1,29 @@
+import json
+
 from django.http import JsonResponse
 from simple_rest import Resource
 
 from api.utils import resource_wrapper
-from profiles.models import Profile
+from gallery.models import Image
 
 
-class ApiResource(Resource):
+class ImageResource(Resource):
 
     @resource_wrapper
-    def get(self, request):
-        if request.GET.get('latest'):
-            latest = Profile.objects.all().order_by('-created')
-            if latest.count():
-                data = latest[0].as_dict()
-            else:
-                return JsonResponse({'status': 204,
-                                     'message': 'No data'}, status=200)
-        else:
-            data = []
-            for s in Profile.objects.all()[:20]:
-                data.append(s.as_dict())
-        return JsonResponse({'status': 200,
-                             'data': data}, status=200)
+    def post(self, request):
+        try:
+            data = json.loads(request.POST.get('data'))
+            if len(data):
+                for item in data:
+                    try:
+                        image = Image.objects.get(pk=item['id'])
+                        image.order = item['order']
+                        image.save()
+                        item['result'] = 'Updated'
+                    except Exception as e:
+                        item['result'] = e
+                return JsonResponse({'status': 200, 'data': data}, status=200)
+        except Exception as e:
+            pass
+        return JsonResponse({'status': 204,
+                             'message': 'No data'}, status=200)

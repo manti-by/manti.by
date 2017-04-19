@@ -11,7 +11,6 @@ ecdsa>=0.13
 sorl-thumbnail==12.4a1
 requests>=2.12.5,<2.13.1
 django_appconf>=1.0.2
-django-grappelli>=2.8,<2.9
 django-simple-rest>=1.4,<1.5
 django-taggit==0.21.3
 django_compressor>=2.1,<2.2

@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'taggit',
     'djcelery',
     'djkombu',
-    'grappelli',
     'simple_rest',
     'sorl.thumbnail',
     'compressor',

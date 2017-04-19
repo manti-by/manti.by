@@ -28,7 +28,6 @@ class BaseModel(models.Model):
             return self.created.strftime('%b %d')
 
     class Meta:
-
         abstract = True
 
 

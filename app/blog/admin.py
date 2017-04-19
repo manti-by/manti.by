@@ -23,11 +23,11 @@ class PostAdmin(admin.ModelAdmin):
             'fields': ('title', 'slug', 'meta', 'summary', 'description')
         }),
         (_('Music params'), {
-            'classes': ('grp-collapse grp-closed',),
+            'classes': ('collapse',),
             'fields': ('is_music', 'catnum', 'genre', 'quality', 'length', 'tracklist')
         }),
         (_('Files'), {
-            'classes': ('grp-collapse grp-closed',),
+            'classes': ('collapse',),
             'fields': ('cover', 'release', 'mp3_preview_ready', 'ogg_preview_ready', 'ogg_release_ready'),
         })
     )
