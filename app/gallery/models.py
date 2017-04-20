@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 
 from taggit.managers import TaggableManager
 
@@ -9,9 +10,11 @@ from core.models import BaseModel
 from core.mixins import SlugifyMixin, ImageMixin
 
 
+@python_2_unicode_compatible
 class Gallery(SlugifyMixin, BaseModel, models.Model):
 
     name = models.CharField(max_length=255)
+
     order = models.IntegerField(blank=True, default=0)
     tags = TaggableManager(blank=True)
 
@@ -26,6 +29,7 @@ class Gallery(SlugifyMixin, BaseModel, models.Model):
 class Image(ImageMixin, BaseModel, models.Model):
 
     gallery = models.ForeignKey(Gallery, null=True, blank=True, related_name='images')
+
     order = models.IntegerField(blank=True, default=0)
     tags = TaggableManager(blank=True)
 

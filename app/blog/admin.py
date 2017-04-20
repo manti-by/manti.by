@@ -13,14 +13,23 @@ from blog.models import Post
 class PostAdmin(admin.ModelAdmin):
 
     formfield_overrides = {
-        models.TextField: {'widget': Textarea(attrs={'rows': 4, 'cols': 20})},
+        models.TextField: {'widget': Textarea(attrs={'rows': 4, 'cols': 40})},
     }
 
-    list_display = ('thumb_image', 'title', 'is_music', 'catnum', 'genre', 'ready', 'created')
+    list_display = ('thumb_image', 'name', 'is_music', 'catnum', 'genre', 'ready', 'created')
 
     fieldsets = (
-        (_('Info'), {
-            'fields': ('title', 'slug', 'meta', 'summary', 'description')
+        (_('Base Info'), {
+            'fields': ('name_ru', 'name_en', 'slug')
+        }),
+        (_('Meta Description'), {
+            'fields': ('meta_ru', 'meta_en')
+        }),
+        (_('Summary'), {
+            'fields': ('summary_ru', 'summary_en')
+        }),
+        (_('Description'), {
+            'fields': ('description_ru', 'description_en')
         }),
         (_('Music params'), {
             'classes': ('collapse',),

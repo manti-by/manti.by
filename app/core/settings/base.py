@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'simple_rest',
     'sorl.thumbnail',
     'compressor',
+    'modeltranslation',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -115,8 +116,9 @@ CACHES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en'
+LANGUAGE_CODE = 'ru'
 LANGUAGES = (
+    ('ru', 'Russian'),
     ('en', 'English'),
 )
 

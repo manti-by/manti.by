@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
@@ -13,9 +14,10 @@ from core.utils import release_name, cover_name
 from blog.tasks import convert_to_mp3_preview, convert_to_ogg_preview, convert_to_ogg_release
 
 
+@python_2_unicode_compatible
 class Post(SlugifyMixin, BaseModel, models.Model):
 
-    title = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
 
     meta = models.TextField()
     summary = models.TextField()
@@ -37,14 +39,14 @@ class Post(SlugifyMixin, BaseModel, models.Model):
     tracklist = models.TextField(blank=True)
 
     tags = TaggableManager(blank=True)
-    related = models.ManyToManyField('self', null=True, blank=True)
+    related = models.ManyToManyField('self', blank=True)
 
     mp3_preview_ready = models.BooleanField(blank=True, default=False)
     ogg_preview_ready = models.BooleanField(blank=True, default=False)
     ogg_release_ready = models.BooleanField(blank=True, default=False)
 
     def __str__(self):
-        return self.title
+        return self.name
 
     @property
     def ready(self):
