@@ -1,7 +1,7 @@
 from __future__ import absolute_import, unicode_literals
 
 from django.conf import settings
-from django.conf.urls import url
+from django.conf.urls import include, url
 from django.contrib import admin
 
 from core import views as core_views
@@ -11,12 +11,20 @@ from profiles.views import profile_page, login_page, logout_page
 
 urlpatterns = [
     url(r'^$', core_views.index, name='index'),
+    url(r'^sitemap$', core_views.sitemap, name='sitemap'),
+
     url(r'^about$', core_views.static, {'page': 'about'}, name='about'),
     url(r'^resume$', core_views.static, {'page': 'resume'}, name='resume'),
     url(r'^copyrights$', core_views.static, {'page': 'copyrights'}, name='copyrights'),
 
     # API urls
     url(r'^api/images/?$', ImageResource.as_view()),
+
+    # Blog urls
+    url(r'^blog/', include('blog.urls')),
+
+    # Gallery urls
+    url(r'^gallery/', include('gallery.urls')),
 
     # Profile urls
     url(r'^profiles/?$', profile_page, name='profile'),

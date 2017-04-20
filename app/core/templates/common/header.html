@@ -1,31 +1,43 @@
 {% load i18n %}
 
-<div class="mdl-layout__header-row">
-    <span class="mdl-layout-title">
-         <a href="{% url 'index' %}" class="homepage mdl-navigation__link">
-             <i class="material-icons">settings_backup_restore</i>
-             <span>PingService</span>
-         </a>
-    </span>
-    <div class="mdl-layout-spacer"></div>
-
-    <div class="navigation-container">
-        <nav class="mdl-navigation">
-            {% if user.is_authenticated %}
-                <a href="{% url 'index' %}" class="mdl-navigation__link">
-                    {% trans 'Sites' %}
-                </a>
-                <a href="{% url 'profile' %}" class="mdl-navigation__link">
-                    {% trans 'Profile' %}
-                </a>
-                <a href="{% url 'logout' %}" class="mdl-navigation__link">
-                    {% trans 'Logout' %}
-                </a>
-            {% else %}
-                <a href="{% url 'login' %}" class="mdl-navigation__link">
-                    {% trans 'Login' %}
-                </a>
-            {% endif %}
-        </nav>
-    </div>
+<div id="search">
+    <form action="/" method="get">
+        <input type="text" id="query" name="q" value="" placeholder="{% trans 'Search' %}..."
+               class="autocomplete" autocomplete="Off"
+               data-source="/" />
+        <button type="submit" id="go">
+            <i class="material-icons">search</i>
+        </button>
+    </form>
 </div>
+
+<nav>
+    <a href="{% url 'index' %}" class="home" rel="home">
+        <span class="icon">
+            <i class="material-icons">settings_input_svideo</i>
+        </span>
+        <span class="text">
+            Manti.by
+        </span>
+    </a>
+    <a href="{% url 'post_list' %}" rel="bookmark">
+        <i class="material-icons">play_arrow</i>
+        {% trans 'Music' %}
+    </a>
+    <a href="{% url 'gallery_list' %}" rel="bookmark">
+        <i class="material-icons">image</i>
+        {% trans 'Gallery' %}
+    </a>
+    <div id="mobile-menu-button">
+        <i class="material-icons">more_vert</i>
+    </div>
+</nav>
+
+<nav id="mobile-menu" class="hidden">
+    <a href="{% url 'about' %}">{% trans 'About' %}</a>
+    <a href="{% url 'resume' %}">{% trans 'My job' %}</a>
+    <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>
+    <a href="{% url 'sitemap' %}" rel="index">{% trans 'Sitemap' %}</a>
+    <a id="search-link" href="#search">{% trans 'Search' %}</a>
+    <a href="mailto:manti.by@gmail.com">{% trans 'Contact' %}</a>
+</nav>

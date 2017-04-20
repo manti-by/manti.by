@@ -1,14 +1,12 @@
 {% load i18n %}
 
-<div class="mdl-mini-footer--left-section">
-    <ul class="mdl-mini-footer--link-list">
-        <li><a href="{% url 'index' %}">{% trans 'Homepage' %}</a></li>
-        <li><a href="{% url 'codes' %}">{% trans 'HTTP Status Codes' %}</a></li>
-    </ul>
-</div>
-
-<div class="mdl-mini-footer--right-section">
-    <ul class="mdl-mini-footer--link-list">
-        <li><a href="{% url 'admin:index' %}">{% trans 'Admin Panel' %}</a></li>
-    </ul>
-</div>
+<nav>
+    <a href="{% url 'about' %}">{% trans 'About' %}</a>
+    <a href="{% url 'resume' %}">{% trans 'My job' %}</a>
+    <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>
+    <a href="{% url 'sitemap' %}" rel="index">{% trans 'Sitemap' %}</a>
+    <a href="mailto:manti.by@gmail.com">{% trans 'Contact' %}</a>
+    <div id="copy">
+        Alex Manti&copy; 2006 - {% now 'Y' %}
+    </div>
+</nav>
