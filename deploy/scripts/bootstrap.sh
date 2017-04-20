@@ -52,10 +52,12 @@ else
     echo "    from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'admin')" | $REMOTE_PATH/venv/bin/python $REMOTE_PATH/src/app/manage.py shell
 
     header "Update server configs"
-    sudo ln -s $REMOTE_PATH/src/deploy/confs/nginx.conf /etc/nginx/sites-available/$PROJECT_NAME.conf
-    sudo ln -s $REMOTE_PATH/src/deploy/confs/supervisor.conf /etc/supervisor/conf.d/$PROJECT_NAME.conf
+    sudo ln -s $REMOTE_PATH/src/deploy/confs/nginx.conf /etc/nginx/sites-enabled/$PROJECT_NAME.conf
     sudo service nginx restart
-    sudo supervisorctl restart $PROJECT_NAME
+
+    sudo ln -s $REMOTE_PATH/src/deploy/confs/supervisor.conf /etc/supervisor/conf.d/$PROJECT_NAME.conf
+    sudo supervisorctl update
+    sudo supervisorctl start $PROJECT_NAME
 fi
 
 header "All operations have done"
