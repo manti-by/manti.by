@@ -5,7 +5,21 @@
 {% block title %}{% trans 'Gallery' %}{% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="gallery container">
         <h1>{% trans 'Gallery' %}</h1>
+        <div class="list">
+            {% for gallery in gallery_list %}
+                <div class="item">
+                    <h2><a href="{{ gallery.get_absolute_url }}">{{ gallery.name }}</a></h2>
+                    <div class="images">
+                        {% for image in gallery.images.all|slice:":6" %}
+                            <a href="{{ image.gallery_image.url }}" class="gallery-image">
+                                <img src="{{ image.preview_image.url }}">
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

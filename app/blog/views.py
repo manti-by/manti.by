@@ -5,7 +5,7 @@ from blog.models import Post
 
 
 def index(request):
-    item_list = Post.objects.all().order_by('-created')[:6]
+    item_list = Post.objects.order_by('-created')[:6]
     return render_to_response('blog/list.html', {'item_list': item_list})
 
 

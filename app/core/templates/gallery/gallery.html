@@ -5,7 +5,16 @@
 {% block title %}{% trans 'Gallery View' %}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1>{% trans 'Gallery View' %}</h1>
+    <div class="gallery container">
+        <div class="item">
+            <h1><a href="{{ gallery.get_absolute_url }}">{{ gallery.name }}</a></h1>
+            <div class="images">
+                {% for image in gallery.images.all %}
+                    <a href="{{ image.gallery_image.url }}" class="gallery-image">
+                        <img src="{{ image.preview_image.url }}">
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock %}

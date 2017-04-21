@@ -1,0 +1,208 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-21 12:32+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: blog/admin.py:22
+msgid "Base Info"
+msgstr "Основная информация"
+
+#: blog/admin.py:25
+msgid "Meta Description"
+msgstr "Мета описание"
+
+#: blog/admin.py:28
+msgid "Summary"
+msgstr "Краткое описание"
+
+#: blog/admin.py:31
+msgid "Description"
+msgstr "Описание"
+
+#: blog/admin.py:34
+msgid "Music params"
+msgstr "Музыкальные параметры"
+
+#: blog/admin.py:38 gallery/admin.py:33
+msgid "Files"
+msgstr "Файлы"
+
+#: blog/admin.py:49 core/mixins.py:19 gallery/admin.py:48 gallery/models.py:45
+msgid "Image"
+msgstr "Изображение"
+
+#: blog/models.py:28
+msgid "Release File"
+msgstr "Файл релиза"
+
+#: blog/models.py:32
+msgid "Cover Image"
+msgstr "Обложка"
+
+#: core/mixins.py:14
+msgid ""
+"You can select only base image, all others will be generated automatically"
+msgstr ""
+
+#: core/mixins.py:21
+msgid "Thumbnail Image"
+msgstr "Уменьшенное изображение"
+
+#: core/mixins.py:22
+msgid "Preview Image"
+msgstr "Изображение предпросмотра"
+
+#: core/mixins.py:23
+msgid "Gallery Image"
+msgstr "Изображение галереи"
+
+#: core/mixins.py:48
+msgid "Slug"
+msgstr "Ссылка"
+
+#: core/models.py:14
+msgid "Created, UTC"
+msgstr "Создано, UTC"
+
+#: core/settings/base.py:124
+msgid "Russian"
+msgstr "Русский"
+
+#: core/settings/base.py:125
+msgid "English"
+msgstr "English"
+
+#: core/templates/blog/list.html:5 core/templates/blog/list.html:9
+msgid "Blog"
+msgstr "Блог"
+
+#: core/templates/blog/post.html:5 core/templates/blog/post.html:9
+msgid "Blog Post"
+msgstr "Новость"
+
+#: core/templates/common/footer.html:4 core/templates/common/header.html:44
+#: core/templates/static/about.html:5 core/templates/static/about.html:9
+msgid "About"
+msgstr "Обо мне"
+
+#: core/templates/common/footer.html:5 core/templates/common/header.html:45
+msgid "My job"
+msgstr "Резюме"
+
+#: core/templates/common/footer.html:6 core/templates/common/header.html:46
+#: core/templates/static/copyrights.html:5
+#: core/templates/static/copyrights.html:9
+msgid "Copyrights"
+msgstr "Авторские права"
+
+#: core/templates/common/footer.html:7 core/templates/common/header.html:47
+#: core/templates/sitemap.html:5 core/templates/sitemap.html:9
+msgid "Sitemap"
+msgstr "Карта сайта"
+
+#: core/templates/common/footer.html:8 core/templates/common/header.html:48
+msgid "Contact"
+msgstr "Контакты"
+
+#: core/templates/common/header.html:5 core/templates/common/header.html:49
+msgid "Search"
+msgstr "Поиск"
+
+#: core/templates/common/header.html:25
+msgid "Music"
+msgstr "Музыка"
+
+#: core/templates/common/header.html:29 core/templates/gallery/list.html:5
+#: core/templates/gallery/list.html:9 gallery/models.py:29
+msgid "Gallery"
+msgstr "Галлерея"
+
+#: core/templates/gallery/gallery.html:5
+msgid "Gallery View"
+msgstr "Галлерея"
+
+#: core/templates/index.html:5
+msgid "Homepage"
+msgstr "Домашняя страница"
+
+#: core/templates/index.html:10
+msgid "Latest shots from gallery"
+msgstr "Свежие изображения из галлереи"
+
+#: core/templates/index.html:14
+msgid "Latest image from gallery"
+msgstr "Свежее изображение из галлереи"
+
+#: core/templates/index.html:20
+msgid "Popular image from gallery"
+msgstr "Популярное изображение из галлереи"
+
+#: core/templates/profiles/login.html:12
+msgid "Please login or register"
+msgstr "Пожалуйста войдите или зарегистрируйтесь"
+
+#: core/templates/profiles/login.html:14
+msgid "Your profile will be created automatically, if necessary"
+msgstr "Ваш профиль будет создан автоматически, при необходимости"
+
+#: core/templates/profiles/login.html:19
+#: core/templates/profiles/profile.html:28
+msgid "Email"
+msgstr "Email"
+
+#: core/templates/profiles/login.html:23
+msgid "Password"
+msgstr "Пароль"
+
+#: core/templates/profiles/login.html:27
+msgid "Let Me In"
+msgstr "Впустите меня"
+
+#: core/templates/profiles/profile.html:12
+msgid "Your profile"
+msgstr "Ваш профиль"
+
+#: core/templates/profiles/profile.html:23
+msgid "To update your profile image, please upload new one"
+msgstr "Чтобы обновить ваше изображение профиля, просто загрузите новое"
+
+#: core/templates/profiles/profile.html:32
+msgid "Update"
+msgstr "Обновить"
+
+#: core/templates/static/resume.html:5 core/templates/static/resume.html:9
+msgid "Resume"
+msgstr "Резюме"
+
+#: gallery/admin.py:30
+msgid "Info"
+msgstr "Информация"
+
+#: gallery/admin.py:37
+msgid "Other"
+msgstr "Остальное"
+
+#: gallery/models.py:30
+msgid "Gallery List"
+msgstr "Галлерея"
+
+#: gallery/models.py:46
+msgid "Image List"
+msgstr "Изображения"

@@ -12,6 +12,7 @@ from profiles.views import profile_page, login_page, logout_page
 urlpatterns = [
     url(r'^$', core_views.index, name='index'),
     url(r'^sitemap$', core_views.sitemap, name='sitemap'),
+    url(r'^language$', core_views.language, name='language'),
 
     url(r'^about$', core_views.static, {'page': 'about'}, name='about'),
     url(r'^resume$', core_views.static, {'page': 'resume'}, name='resume'),

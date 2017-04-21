@@ -6,7 +6,9 @@
         var cropper = $('.resizer'),
             height = $(window).height() - ($('header').height() + $('footer').height() + 64);
 
-        cropper.css('min-height', height);
+        if (cropper.get(0)) {
+            cropper.css('min-height', height);
+        }
     };
 
 })(jQuery);

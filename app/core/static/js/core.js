@@ -2,12 +2,10 @@
 
     'use strict';
 
+    // Init global widgets
     $(document).ready(function() {
-        // Floating header
         $.fn.initFloatingHeader();
-
-        // Full screen page resizer
-        $.fn.initPageResizer();
+        $.fn.initLanguageSwitcher();
     });
 
 })(jQuery);

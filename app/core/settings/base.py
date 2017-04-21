@@ -66,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'core.middleware.language.LocaleMiddleware'
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -83,6 +84,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.common.global_template_vars'
             ],
         },
     },
@@ -117,9 +119,10 @@ CACHES = {
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = 'ru'
+ugettext = lambda s: s
 LANGUAGES = (
-    ('ru', 'Russian'),
-    ('en', 'English'),
+    ('ru', ugettext('Russian')),
+    ('en', ugettext('English')),
 )
 
 LOCALE_PATHS = (

@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<div id="search">
+<div class="search hidden">
     <form action="/" method="get">
         <input type="text" id="query" name="q" value="" placeholder="{% trans 'Search' %}..."
                class="autocomplete" autocomplete="Off"
@@ -28,16 +28,23 @@
         <i class="material-icons">image</i>
         {% trans 'Gallery' %}
     </a>
-    <div id="mobile-menu-button">
+    <div class="language-menu">
+        {% for lang in LANGUAGES %}
+            {% if lang.0 != ACTIVE_LANGUAGE %}
+                <span class="language" data-id="{{ lang.0 }}">{{ lang.1 }}</span>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="mobile-menu-button">
         <i class="material-icons">more_vert</i>
     </div>
 </nav>
 
-<nav id="mobile-menu" class="hidden">
+<nav class="mobile-menu hidden">
     <a href="{% url 'about' %}">{% trans 'About' %}</a>
     <a href="{% url 'resume' %}">{% trans 'My job' %}</a>
     <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>
     <a href="{% url 'sitemap' %}" rel="index">{% trans 'Sitemap' %}</a>
-    <a id="search-link" href="#search">{% trans 'Search' %}</a>
     <a href="mailto:manti.by@gmail.com">{% trans 'Contact' %}</a>
+    <span class="search-button">{% trans 'Search' %}</span>
 </nav>

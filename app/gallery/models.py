@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -21,11 +22,15 @@ class Gallery(SlugifyMixin, BaseModel, models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('gallery', args=[self.slug])
+
     class Meta:
         verbose_name = _('Gallery')
         verbose_name_plural = _('Gallery List')
 
 
+@python_2_unicode_compatible
 class Image(ImageMixin, BaseModel, models.Model):
 
     gallery = models.ForeignKey(Gallery, null=True, blank=True, related_name='images')
