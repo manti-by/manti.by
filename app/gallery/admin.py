@@ -8,8 +8,13 @@ from gallery.models import Gallery, Image
 
 @admin.register(Gallery)
 class GalleryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'order', 'created')
+
+    list_display = ('name', 'order', 'images_count', 'created')
     ordering = ('order',)
+
+    def images_count(self, obj):
+        return obj.images.count()
+    images_count.short_description = _('Images count')
 
     class Media:
         js = ('js/libs/jquery-ui-1.12.1/jquery-ui.js',

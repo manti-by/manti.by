@@ -4,21 +4,25 @@ from django.http import JsonResponse
 from simple_rest import Resource
 
 from api.utils import resource_wrapper
-from gallery.models import Image
+from gallery.models import Gallery, Image
 
 
-class ImageResource(Resource):
+class OrderableResource(Resource):
 
     @resource_wrapper
     def post(self, request):
         try:
+            object_type = request.POST.get('type', 'image').strip()
             data = json.loads(request.POST.get('data'))
             if len(data):
                 for item in data:
                     try:
-                        image = Image.objects.get(pk=item['id'])
-                        image.order = item['order']
-                        image.save()
+                        if object_type == 'gallery':
+                            obj = Gallery.objects.get(pk=item['id'])
+                        else:
+                            obj = Image.objects.get(pk=item['id'])
+                        obj.order = item['order']
+                        obj.save()
                         item['result'] = 'Updated'
                     except Exception as e:
                         item['result'] = e

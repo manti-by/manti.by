@@ -4,8 +4,16 @@
 
     $(document).ready(function() {
         var table = $('#result_list').find('tbody'),
+            type = $('body').attr('class'),
             counter, data;
 
+        // Clean type
+        type = type.replace('app-gallery', '')
+            .replace('change-list', '')
+            .replace('model-', '')
+            .replace(' ', '');
+
+        // Make table sortable
         table.sortable({
             update: function(event, ui) {
                 counter = 0;
@@ -23,7 +31,10 @@
                 });
 
                 // Send result to DB
-                $.post('/api/images/', { data: JSON.stringify(data) }, function(response) {
+                $.post('/api/orderable/', {
+                    type: type,
+                    data: JSON.stringify(data)
+                }, function(response) {
                     console.log(response);
                 });
             }

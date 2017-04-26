@@ -5,7 +5,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from core import views as core_views
-from api.resources import ImageResource
+from api.resources import OrderableResource
 from profiles.views import profile_page, login_page, logout_page
 
 
@@ -19,7 +19,7 @@ urlpatterns = [
     url(r'^copyrights$', core_views.static, {'page': 'copyrights'}, name='copyrights'),
 
     # API urls
-    url(r'^api/images/?$', ImageResource.as_view()),
+    url(r'^api/orderable/?$', OrderableResource.as_view()),
 
     # Blog urls
     url(r'^blog/', include('blog.urls')),
