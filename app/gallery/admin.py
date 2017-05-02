@@ -27,7 +27,7 @@ class GalleryAdmin(admin.ModelAdmin):
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
 
-    list_display = ('image', 'gallery', 'order', 'created')
+    list_display = ('image', 'gallery', 'order', 'ready', 'created')
     list_filter = ('gallery',)
     ordering = ('order',)
 
@@ -37,11 +37,12 @@ class ImageAdmin(admin.ModelAdmin):
         }),
         (_('Files'), {
             'classes': ('collapse',),
-            'fields': ('original_image', 'thumbnail_image', 'preview_image', 'gallery_image')
+            'fields': ('original_image', 'thumbnail_image', 'thumbnail_ready',
+                       'preview_image', 'preview_ready', 'gallery_image', 'gallery_ready')
         }),
         (_('Other'), {
             'classes': ('collapse',),
-            'fields': ('order', 'created'),
+            'fields': ('phash', 'order', 'created'),
         })
     )
 

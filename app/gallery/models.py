@@ -4,6 +4,8 @@ from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 from PIL import Image as PILImage
 from imagehash import phash
@@ -11,6 +13,7 @@ from taggit.managers import TaggableManager
 
 from core.models import BaseModel
 from core.mixins import SlugifyMixin, ImageMixin
+from gallery.tasks import generate_thumbnails, generate_phash
 
 
 @python_2_unicode_compatible
@@ -44,12 +47,32 @@ class Image(ImageMixin, BaseModel, models.Model):
     def __str__(self):
         return 'Gallery #%s - Image#%d' % (self.gallery.name, self.id)
 
-    def save(self, *args, **kwargs):
+    def generate_phash(self):
         image = PILImage.open(self.original_image)
-        self.hash = phash(image)
-        super(Image, self).save(*args, **kwargs)
+        self.phash = phash(image)
+        self.save()
+
+    def save(self, *args, **kwargs):
+        if not self.thumbnail_image:
+            self.thumbnail_ready = False
+        if not self.preview_image:
+            self.preview_ready = False
+        if not self.gallery_image:
+            self.gallery_ready = False
+        super(Image, self).save()
 
     class Meta:
         verbose_name = _('Image')
         verbose_name_plural = _('Image List')
 
+
+@receiver(post_save, sender=Image, dispatch_uid='generate_image_thumbnails')
+def generate_image_thumbnails(sender, instance, **kwargs):
+    if not instance.ready:
+        generate_thumbnails.delay(instance.id)
+
+
+@receiver(post_save, sender=Image, dispatch_uid='generate_image_phash')
+def generate_image_phash(sender, instance, **kwargs):
+    if not instance.phash:
+        generate_phash.delay(instance.id)

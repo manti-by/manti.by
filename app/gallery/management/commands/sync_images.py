@@ -12,7 +12,7 @@ from gallery.models import Gallery, Image
 
 
 class Command(BaseCommand):
-    help = 'Import bearings from CSV file'
+    help = 'Sync gallery images'
 
     def handle(self, *args, **options):
         checked = added = 0
