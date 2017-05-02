@@ -1,0 +1,823 @@
+original_id,alias,name,teaser,description,metakeys,metadesc,is_music,catnum,genre,length,quality,tracklist,release,cover,relations,created,viewed,timestamp
+1,insomnia,Insomnia,"Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...","Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...","Insomnia,Noise,Ambient,Easy Listening,Light Synthetic Compilation,MNT001","Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...",1,MNT001,"Noise, ambient",79:31,LAME 192kbps 44100Hz,"1. Http - Звезды небесные
+2. I/dex - Zeel
+3. Pole 3 - Silbefisch
+4. Deep-z - Returning (Dedicated to Fula)
+5. I/dex - Ksren
+6. Plastikman - Disconnect    
+7. Akvalangist - Adpcm
+8. Fax - 20w
+9. David Alvarado - Aire  
+10. Fax - Aslip
+11. Deluge - Departure
+12. Pole 3 - Uberfahrt
+13. Taylor Deupree - Snow-Sand",./content/release/M01_Manti_Insomnia_mix.mp3,./content/covers/insomnia.jpg,"3,4,5",2005-08-08 00:00:00,67,2017-04-29 10:29:15
+2,resume,Моё резюме,"Кратко о себе, основные сведения, профессиональные знания и навыки.","<img src=""/content/images/side.jpg"" class=""post-image"" alt=""Manti""/>
+<p>
+    <i>
+        - А как ты начал изучать электронику?
+        <br />
+        - Как-то лет в 12 я нашел старый трансформатор, слегка его перемотал и включил. Энергосистема опознала нового
+        радиотехника и приветливо моргнула всем домом. Вот так и начал...
+    </i>
+</p>
+<p>
+    <strong>Кратко о себе</strong>:
+</p>
+<p>
+    Высшее техническое образование по специальности инженер-программист со специализацией информационные и интернет
+    технологии.
+</p>
+<p>
+    Коммуникабельность, умение работать в команде, технический английский, грамотная речь, эмоциональная выдержка,
+    большой опыт общения с клиентами (от пенсионеров до высоких должностных лиц), крепкое здоровье, без вредных превычек.
+</p>
+<p>
+    Без проблем работаю как на windows платформе, так и на linux платформах. Неплохо владею пакетом Adobe Photoshop.
+</p>
+<p><strong>Основные сведения</strong>:</p>
+<ul>
+    <li>
+        Более чем 10-летний практический (6-летний коммерческий) опыт разработки web-приложений от стадии постановки
+        задачи до запуска работающего проекта.
+    </li>
+    <li>
+        Высоконагруженные приложения со сложной архитектурой и пропускной способностью более чем 5000rps.
+        Горизонтальное и вертикальное масштабирование.
+    </li>
+    <li>
+        Знание, понимание и практическое использование ООП, шаблоны проектирования.
+    </li>
+    <li>
+        Грамотное оформление кода (иерархия, описание, комментарии), умение читать и понимать чужой код, в т.ч.
+        ""плохой"", асинхронный и декомпилированный.
+    </li>
+    <li>
+        Оптимизация существующего кода: Python, PHP, JS, MySQL (Join/Union/Proc), HTML/CSS (контексты, шаблонизация,
+        анимация), кеширование на различных уровнях MVC (Memcached, Filecache). Интерфейсы и прототипирование,
+        составление технической документации по проекту.
+    </li>
+    <li>
+        Администрирование и запуск серверов: LAMP (Ubuntu, Centos), WAMP (Windows Server). Apache/Nginx + Python,
+        PHP (uWSGI, Gunicorn, Mod FCGI, CLI) + Memcache/Redis + MySQL/PostgreSQL/MongoDB, высокий уровень
+        владения bash/sh.
+    </li>
+    <li>
+        Зависимости - Pip/Composer/NPM, отладка и профилирование кода - xDebug, системы контроля версий - SVN/GIT/Mercurial,
+        ветвление, слияние, откаты и т.п.
+    </li>
+</ul>
+<p><strong>Профессиональные знания и навыки</strong>:</p>
+<ul>
+    <li>
+        Языки программирования: PHP 9+ лет, JS 9+ лет , Python 4+ лет, MySQL 7+ лет, HTML5/CSS3, NodeJS, NoSQL/MongoDB,
+        Ruby On Rails, .NET MVC.
+    </li>
+    <li>
+        Сервисы: Google/Facebook/Yandex API, Salesforce, Authorize.net, Sailthru, Mandrill/Mailchimp, SOAP/REST, OAuth.
+    </li>
+    <li>
+        Библиотеки: Django, Yii, YUI/AlloyUI, React, jQuery, Angular, Zend, Doctrine, Slim, Rails, Magento, Wordpress,
+        OpenCart и др.
+    </li>
+    <li>
+        Участие в проектах: Artspace.com, Architizer.com, Aprenita.com, AHALife.com, eTouches.com, Blismobile.com,
+        LYF.com, DealOn.com, CityHint.com, 3Key.com, NOICentral.com и другие.
+    </li>
+</ul>
+<p>
+    Образцы исходного кода можно посмотреть здесь:
+    <a href=""https://github.com/manti-by"" target=""_blank"">https://github.com/manti-by</a>
+    <p>
+        <a href=""#print"" onClick=""window.print();"" class=""print"">Распечатать эту страницу</a>
+    </p>
+</p>","For IT,Other","Кратко о себе, основные сведения, профессиональные знания и навыки.",0,,,,,,,,,2013-01-01 15:32:50,297,2017-05-01 19:48:49
+3,synthetic,Synthetic,"На мой взгляд, самая сложная, но и самая интересная моя амбиент работа. Интеллектуальный и качественный саунд в дополнении к немецким и чешским военным разработкам )))","На мой взгляд, самая сложная, но и самая интересная моя амбиент работа. Интеллектуальный и качественный саунд в дополнении к немецким и чешским военным разработкам )))","Synthetic,Ambient,Chillout,Light Synthetic Compilation,MNT007","На мой взгляд, самая сложная, но и самая интересная моя амбиент работа. Интеллектуальный и качественный саунд в дополнении к немецким и чешским военным разработкам )))",1,MNT007,"Ambient, Chillout",59:40,LAME 192kbps 44100Hz,"1. Falter - Nachtflug
+2. H.u.v.a - Distances
+3. H.u.v.a. - Acces to the long fields
+4. Biosphere (Hia) - Gas street basin  
+5. Fax - Deja vu
+6. Telefon Tel Aviv - TTV
+7. Lator - B-4 talk (Promo version)
+8. Shuttle 358 - Floops
+9. Solarise speek
+10. Vladislav Delay - He lived deeply  
+11. Monolake - Indigo    ",./content/release/M07_Manti_Synthetic_mix.mp3,./content/covers/synthetic.jpg,"1,4,5",2007-09-16 00:00:00,93,2017-04-29 10:13:53
+4,plastic-toy,Plastic toy,"Третий микс из серии ""light synthetic compilation"". Смесь амбиента, нойза и даб техно!!! Многие из треков связаны ""по-три"", тем самым усложняя и украшая ""шумовую"" картину. Сет для любителей ненапряжных битов и шумов, все медлено и запутанно.","Третий микс из серии ""light synthetic compilation"". Смесь амбиента, нойза и даб техно!!! Многие из треков связаны ""по-три"", тем самым усложняя и украшая ""шумовую"" картину. Сет для любителей ненапряжных битов и шумов, все медлено и запутанно.","Plastic toy,Ambient,Chillout,Light Synthetic Compilation,MNT017","Третий микс из серии ""light synthetic compilation"". Смесь амбиента, нойза и даб техно!!! Многие из треков связаны ""по-три"", тем самым усложняя и украшая ""шумовую"" картину. Сет для любителей ненапряжных битов и шумов, все медлено и запутанно.",1,MNT017,"Ambient, Chillout",49:01,LAME 320kbps 44100Hz,"1. Biosphere - Kobresia
+2. Lowtec - A2 untitled
+3. I/dex - Drafts
+4. Pole-3 - Rondell zwei
+5. Minilogue - Stations II
+6. Ike - Cluster funk
+7. Intrusion - Tswana dub (Brendon Moeller vs Beat Pharmacy dub)
+8. Harmash - Hibernatoria08
+9. Apparat - Wooden (Anders Ilar remix)
+10. Minilogue - City lights
+11. Dolby - He0r
+12. Harmash - Hibernatoria05
+13. Minilogue - Cow, crickets and clay",./content/release/M17_Manti_Plastic_toy_mix.mp3,./content/covers/plastic-toy.jpg,"1,3,5",2009-05-07 00:00:00,61,2017-05-01 13:46:19
+5,solaris,Solaris,"Четвертый микс из серии <a href=""/tag/lsc/"">Light Synthetic Compilation</a>. Почти год я собирал и отфильтровывал материал с ""исключительным"" звучанием.
+","Четвертый микс из серии <a href=""/tag/lsc/"">Light Synthetic Compilation</a>. Почти год я собирал и отфильтровывал материал с ""исключительным"" звучанием.
+По традиции сет построен по любимой схеме ""два+три"" (одновременно звучит более двух треков), тем самым усложняя и украшая ""шумовую"" картину.
+Сет так назван не случайно, интро  - саундтрек к голливудской версии фильма ""Солярис"" Стивена Содерберга.
+Слушайте, медитируйте, наслаждайтесь...","Solaris,Ambient,Chillout,Light Synthetic Compilation,MNT021",Четвертый микс из серии "light synthetic compilation". Почти год я собирал и отфильтровывал материал с "исключительным" звучанием. ,1,MNT021,"Ambient, Chillout",52:44,LAME 320kbps 44100Hz,"1. Cliff Martinez - We don't have to think like that anymore
+2. Cliff Martinez - First sleep
+3. Alva Noto - Xerrox monophaser 1
+4. Indo - Pneuma
+5. Avec.Berre - Stepdrop
+6. Ilpo Vaisanen - Autioitu 1
+7. Kassian Troyer - Plant shift
+8. Valliam – In samsara
+9. Clint Mansell - Stay with me
+10. Astrum - Saturn
+11. Pinch meets Pavel Ambiont - Poison/Remedy
+12. Alva Noto - Xerrox phaser acat 1",./content/release/M21_Manti_Solaris_mix.mp3,./content/covers/solaris.jpg,"1,3,4",2010-04-18 00:00:00,72,2017-04-29 08:27:27
+6,stockholm-syndrome,Stockholm syndrome,"Очень не стандартный для меня микс, как по компиляции, так и по технике. Специально не затачивался по мое ДР, но так уж получилось, что микс был закончен именно в этот день, знаменательно.","Очень не стандартный для меня микс, как по компиляции, так и по технике. Специально не затачивался по мое ДР, но так уж получилось, что микс был закончен именно в этот день, знаменательно.
+Воодушевила меня на создание такого микса команда GusGus, так что любителям их творчества посвящается...","Featured,Stockholm syndrome,Tech House,Deep House,MNT031","Очень не стандартный для меня микс, как по компиляции, так и по технике",1,MNT031,"Tech House, Deep House",1:18:34,LAME 320kbps 44100Hz,"0. Intro - Crimea
+1. Tube & Berger - Come Together (Original Mix)
+2. Markus Fix - I'll House You (Original Mix)
+3. Tiefschwarz feat. Cassy - Find me
+4. Oxia - Housewife (feat. Miss Kittin)
+5. Royksopp - Tricky Tricky (Beyond Deep remix)
+6. Aki Bergen - Dont call me artist
+7. Sian - East of eden (Original mix)
+8. Popsled and Magit Cacoon - Higher point (Original mix)
+9. Oxia, Simon Mattson - Harmonie (Simon Mattson Remix)
+10. Dusty Kid - Cowboys
+11. Swayzak - Make up your mind
+12. Terry Lee Brown Junior - Bohemian life
+13. Agoria, Carl Craig and La Scalars - Speechless (Radio Slave remix)",./content/release/M31_Manti_Stockholm_syndrome_mix.mp3,./content/covers/stockholm-syndrome.jpg,"8,24,25",2012-09-09 00:00:00,112,2017-04-15 00:31:17
+8,autoreply,Autoreply promo,"Весенний промо микс на тему дип хауза. Очень долгожданный микс для меня, после длительного драмового запоя, хотя и записался довольно спонтанно.","Весенний промо микс на тему дип хауза. Очень долгожданный микс для меня, после длительного драмового запоя, хотя и записался довольно спонтанно.","Deep House,Autoreply,MNT027","Весенний промо микс на тему дип хауза. Очень долгожданный микс для меня, после длительного драмового запоя.",1,MNT027,Deep House,58:54,LAME 320kbps 44100Hz,"0. Intro - Tokyo
+1. Fish Go Deep - Deep like
+2. Brawther - Spaceman funk (Deep club mix)
+3. Ion Ludwig - L'Sable
+4. Dublee - Touch (Sweetbutter mix)
+5. Oscar Barila and Maiki - Above the clouds
+6. Ben Rourke - Tahiti
+7. Nikola Gala - I don't stop
+8. The Timewriter - Superschall (M.In remix)
+9. Oscar Barila - Tampa
+10. Jussi Pekka - Stream horse (Motorcitysoul remix)
+11. Thomas Bjerring - Republique",./content/release/M27_Manti_Autoreply_mix_(Spring-Summer-12_promo).mp3,./content/covers/autoreply.jpg,"6,24,25",2012-05-02 00:00:00,158,2017-04-24 02:40:54
+9,katana,Katana,"Этот сет является очень чистой эссенцией <a href=""/tag/neurostep/"">техничного драма</a>. Компилился долго и упорно, в итоге получилось довольно качественно.","Этот сет является очень чистой эссенцией <a href=""/tag/neurostep/"">техничного драма</a>. Компилился долго и упорно, в итоге получилось довольно качественно.","Techstep,Drum and Bass,MNT025,Featured,Neurostep",Этот сет является очень чистой эссенцией техничного драма.,1,MNT025,"Techstep, Neurostep",57:32,LAME 320kbps 44100Hz,"0. Sunchase - Asphalt
+1. Amoss - Flex
+2. Alix Perez - Behind time
+3. Trinity - Harvester
+4. Paperclip - Blueprints
+5. Enei - No Fear (feat. Riya)
+6 Need for mirrors - Skip rope
+7. Enei - Cracker (Jubei remix)
+8. Optiv & BTK - Inception
+9. Ulterior Motive - Seven Segments
+10. Dub Phizix - Four (feat. Skeptical)
+11. Nickbee - Carpe diem
+12. Malk - My crazy baby
+13. Parhelia - Spaceship named Andromeda",./content/release/M25_Manti_Katana_mix.mp3,./content/covers/katana.jpg,"18,33,34",2011-12-05 00:00:00,122,2017-04-24 21:34:53
+10,hobh-one,"Дом разбитых сердец, начало","Для всех тех, кто страдает...","Для всех тех, кто страдает...",Дом разбитых сердец,"Для всех тех, кто страдает...",1,MNT003,"Ambient, Lounge",64:54,LAME 192kbps 44100Hz,"1. Telepopmusik - 6p_6q_=h_4n
+2. Amon Tobin - Mighty micro people
+3. Manmademan - Breeze
+4. Nuclear Ramjet - Near earth project
+5. Telefon Tel Aviv - When it happens, it moves all by itself
+6. Imogen Heap - Hide & seek 
+7. Halou - Ill carri you
+8. marco_manti - Music for Lilou 
+9. Linkin Park - My December (Alter-Native mastering) 
+10. switch (depeche mode)
+11. Junkie XL - We become one
+12. Planet Funk feat. Sally Doherty - Dusk
+13. 2Raumwohnung - Wir erinnern uns nicht
+14. Daft Punk - Something about us
+15. A-ha - Summer moved on",./content/release/M03_Manti_HOBH_01_Nachalo.mp3,./content/covers/hobh-1.jpg,"11,12,13",2006-12-11 00:00:00,84,2017-04-25 14:26:26
+11,hobh-two,"Дом разбитых сердец II, пепел","Вторая часть работы под общим названием ""Дом разбитых сердец"". Главная особенность данной компиляции в том, что абсолютно все треки - музыка ""наших"" исполнителей, это можно без труда заметить по треклисту. Вся музыка собиралась годами и тщательно фильтровалась. ","Вторая часть работы под общим названием ""Дом разбитых сердец"". Главная особенность данной компиляции в том, что абсолютно все треки - музыка ""наших"" исполнителей, это можно без труда заметить по треклисту. Вся музыка собиралась годами и тщательно фильтровалась. ",Дом разбитых сердец,Вторая часть работы под общим названием "Дом разбитых сердец".,1,MNT015,"Indie, Lounge ",60:32,LAME 320kbps 44100Hz,"1. Tokio - Когда ты плачешь 
+2. Дельфин - Весна
+3. Без билета - Ромашка
+4. Земфира - Прости меня моя любовь
+5. Гришковец - Извини
+6. Ленинград - У меня есть все
+7. Грин грей - Осень
+8. 5'nizza - Сюрная
+9. Океан ельзи - Вiдпусти
+10. Дельфин - Любовь
+11. T9 - Ода нашей любви
+12. Party makers - Новая любовь
+13. Нагано - Голос андеграунда
+14. Krec - Искра",./content/release/M15_Manti_HOBH_02_Pepel.mp3,./content/covers/hobh-2.jpg,"10,12,13",2009-02-23 00:00:00,84,2017-04-29 16:24:41
+12,hobh-three,"Дом разбитых сердец III, такая Lite","Только тогда рождаются такие сеты, когда по-настоящему больно...","Только тогда рождаются такие сеты, когда по-настоящему больно...",Дом разбитых сердец,"Только тогда рождаются такие сеты, когда по-настоящему больно...",1,MNT019,"Rock, Alternative",58:25,LAME 320kbps 44100Hz,"1. Radiohead - Street spirit
+2. Blink 182 - I miss you
+3. Khoiba - That reason
+4. Royksopp - Vision one 
+5. Planet Funk - Ultraviolet days
+6. Depeche Mode - Freelove
+7. Red Hot Chili Peppers - Scar tissue
+8. Coldplay - Clocks
+9. Sum 41 - Pieces
+10. Three Days Grays - Home
+11. Linkin Park - In the end
+12. The Cardigans - Erase and rewind
+13. Air - How does it make you feel",./content/release/M19_Manti_HOBH_03_So_lite.mp3,./content/covers/hobh-3.jpg,"10,11,13",2009-10-14 00:00:00,86,2017-04-29 16:24:55
+13,hobh-four,"Дом разбитых сердец 4, южные сны","Опять с разбитым сердцем, опять все болит, ноет и плачет… Не собирался компиляцию эту выпускать, по крайней мере так быстро, но так уж сошлись звезды.","Опять с разбитым сердцем, опять все болит, ноет и плачет… Не собирался компиляцию эту выпускать, по крайней мере так быстро, но так уж сошлись звезды, да и много чего накипело, поэтому высказался так, как смог. Многое мне очень близко в этих словах: «кое что между строк, кое что в кавычках». Спасибо парням, которые их пишут. Не относитесь серьезно к качеству, технике и другим бездушным параметрам, просто слушайте, если вам это близко.",Дом разбитых сердец,"Опять с разбитым сердцем, опять все болит, ноет и плачет… ",1,MNT022,Hip-Hop,43:12,LAME 320kbps 44100Hz,"1. Guf feat. Princip – Заходит луна
+2. Баста – Любовь без памяти
+3. Krec feat. Maestro A-Sid – Весна
+4. Каста – Встреча
+5. Смоки Мо – Герман и Патрик
+6. Дельфин – Надежда
+7. Guf feat. Ба – Дома
+8. Krec – Другие берега
+9. Лельфин – Любовь
+10. Михей и Джуманжи – Сука любовь
+11. Krec – Южные сны",./content/release/M22_Manti_HOBH_04_Yuzhnye_sny.mp3,./content/covers/hobh-4.jpg,"10,11,12",2010-05-18 00:00:00,100,2017-04-29 16:24:31
+14,about,Обо мне,"Родился и вырос в г.Новополоцке (Беларусь). Сейчас живу в Минске.
+Закончил музыкальную школу по классу фортепиано (11 лет!!!). Из них 6 лет отбомбил в ударной группе духового оркестра.","<img src=""/content/images/cut.jpg"" class=""post-image"" alt=""Manti""/>
+<p>
+    <i>
+        Я творю только тогда, когда приходит муза. Если сидеть и специально выдавливать из себя, то и результат
+        получится соответствующий...
+    </i>
+</p>
+<p>
+    Я родился и вырос в СССР, г.Новополоцк (Беларусь). Сейчас живу в Минске.
+</p>
+<p>
+    Закончил музыкальную школу по классу фортепиано, 6 лет отбомбил в ударной группе духового оркестра.
+</p>
+<p>
+    Потом университет ПГУ, программное обеспечение информационных и интернет технологий, т.е. я - программист,
+    чем и зарабатываю себе на жизнь.
+</p>
+<p>
+    Интерес к музыке возник где-то в году '98. Сначала это было как у большинства моих друзей - Дельфин и Земфира,
+    а потом меня понесло в другую от всех сторону - Freestylers, Bonfunk MC's, потом The Prodigy, Scooter,
+    Chemical Brothers и т.д.
+</p>
+<p>
+    По сути люблю Deep, Noise, Drum, Minimal и еще кучу других направлений и стилей, также и играю, почти все, что
+    нравится.
+</p>
+<p>
+    Поворотные музыкальные моменты в жизни - Richie Hawtin, Lator, а с утра Слава Финист. Отсюда и началась
+    эпопея с теч хаузом и минималом. Дальше был Бес (Dj Bes) на пару с Noisia. Немаловажными в формировании вкуса были
+    поездки на КаZАнтип в '05, '06 и '09 годах.
+</p>
+<p>
+    Позже был лес, Olien, Goa Gil - так я познакомился и заинтересовался психоделикой. После чего и родился двойник
+    Janaca Express, который в последствии был отыгран ""в живую"" в лесу.
+</p>
+<p>
+    Долгое время очень интересовал драм, а точнее Techstep и Neurofunk. Два основных фактора, повлиявших на это -
+    первых 56 релизов лэйбла ""Subtitles"" и творчество монстра даркстепа - Current Value. На данный момент это
+    направление не потеряно, а развивается параллельно в подземных лабораториях.
+</p>
+<p>
+    Последние годы все больше возвращаюсь в чиллаут и хип-хоп. Хауз и его техничное направлению вместе с исконным
+    техно и минималом, переехал практически полностью на винил. Иногда и сних пыль сдуваю и пополняю коллекцию чем-то
+    свежим.
+</p>
+<p>
+    На новый 12-й год сделал себе подарок - собрал комплект трактора, чему был несказанно рад. Сейчас и использую
+    преимущественно его.
+</p>
+<p>
+    <strong>Люблю</strong>: Виниловые пластинки, рупорный аналоговый звук, полноформатные фотоаппараты, Sony и Adidas.
+</p>
+<p>
+    <strong>Ненавижу</strong>: Телефон и беспорядок.
+</p>
+<p>
+    <strong>Рекомендую</strong>: Стивен Содерберг, Трудности перевода, Пол Экман.
+</p>
+<p>
+    <strong>Интересуюсь</strong>: Музыка, акустика, фотография, космос.
+</p>
+<p>
+    <strong>Знаю</strong>: Несколько языков программирования, нотную грамоту и сольфеджио.
+</p>
+<p>
+    <strong>Умею</strong>: Есть два понятия - хочу и мне лень, а про то что я не умею пока, мне расскажет гугл.
+</p>","About,Other,For promouters","Родился и вырос в г.Новополоцке (Беларусь). Сейчас живу в Минске.
+Закончил музыкальную школу по классу фортепиано (11 лет!!!).",0,,,,,,,,,2013-01-01 15:32:50,367,2017-04-28 01:54:36
+16,copyrights,Правила и Копирайт,"При использовании материалов с данного сайта, обязательна ссылка на сайт, автора и первоисточник!","<p>
+    <strong>При использовании материалов с данного сайта, обязательна ссылка на сайт, автора и первоисточник.</strong>
+</p>
+<p>
+    Информация для правообладателей
+</p>
+<p>
+    Если Вы являетесь правообладателем какого-либо материала, ссылка (либо ссылки) на который размещена на этом сайте,
+    и не хотели бы чтобы данная информация распространялась пользователями без Вашего на то согласия, то мы будем
+    рады оказать Вам содействие, удалив соответствующие ссылки.
+</p>
+<p>
+    Для этого необходимо, чтобы вы прислали нам письмо (в электронном виде) в котором указали нам следующую информацию:
+<ol>
+    <li>Документальное подтверждение ваших прав на материал, защищенный авторским правом:
+        <ul>
+            <li>
+                Отсканированный документ с печатью, либо
+            </li>
+            <li>
+                Email с официального почтового домена компании правообладателя, либо
+            </li>
+            <li>
+                Иная контактная информация, позволяющая однозначно идентифицировать вас, как правообладателя данного
+                материала.
+            </li>
+        </ul>
+    </li>
+    <li>
+        Текст который Вы желаете разместить в сопровождении удаляемой информации. В нем вы можете указать где, и на
+        каких условиях можно получить информацию, ссылки на которую были удалены, а так же ваши контактные данные, для
+        того чтобы пользователи могли получить от вас всю интересующую их информацию относительно данного материала.
+    </li>
+    <li>
+        Прямые ссылки на страницы сайта, которые содержат ссылки на данные, которые необходимо удалить. Ссылки должны
+        иметь вид http://manti.by/xxxx/ либо подобный.
+    </li>
+</ol>
+<p>
+    После этого, в течении 48 часов, мы удалим интересующие Вас ссылки с сайта.
+</p>
+<p>
+    <strong>ВНИМАНИЕ!!!</strong>
+</p>
+<p>
+    Мы оставляем за собой право публикации на сайте любой информации присланной нам по почте через форму обратной
+    связи.
+</p>
+<p>
+    Мы не осуществляем контроль за действиями пользователей, которые могут повторно размещать ссылки на
+    информацию, являющуюся объектом вашего авторского права. Любая информация на форуме, размещается автоматически, без
+    какого либо контроля с чьей либо стороны, что соответствует общепринятой мировой практике размещения информации в
+    сети интернет. Однако, мы в любом случае рассмотрим все Ваши запросы, относительно ссылок на информацию, нарушающую
+    Ваши права.
+</p>
+<p>
+    Согласно закону об Авторском и Смежном правах, ссылка на любые данные (информационное сообщение),
+    сама по себе, не является объектом авторского права. Таким образом, не стоит присылать письма содержащие угрозы либо
+    требования, как не имеющие под собой реальных оснований.
+</p>","Other,Copyrights","При использовании материалов с данного сайта, обязательна ссылка на сайт, автора и первоисточник!",0,,,,,,,,,2013-01-01 15:32:50,128,2017-04-28 01:48:50
+17,bar-launge,Bar La'unge live,"Приятное сочетание лаунжа, драма, айсид джаза.","Приятное сочетание лаунжа, драма, айсид джаза.","Acid Jazz,Lounge,Ambient,Bar La'unge,Chillout,MNT008,Drum and Bass","Приятное сочетание лаунжа, драма, айсид джаза.",1,MNT008,"Lounge, Acid Jazz",67:34,LAME 192kbps 44100Hz,"1. Groove Armada - Suntoucher
+2. Lemon Jelly - 95 aka make things right  
+3. One Self - Unfamilar places
+4. Dj Dobry Chlopak - Waco (Pono pele)
+5. Bebel Gilberto - Aganju (John Beltram mix)    
+6. Copabossa - Mihna (Namorada mix)
+7. Jehro - All I want  
+8. Ohm G & Bruno - One  
+9. Linn & Freddie - Live 4 love  
+10. Aural Float - Still here  
+11. LTJ Bukem - Journey inward
+12. Nookie - Natural experience
+13. Macoto - Where are you going?
+14. Vice versa - Still don't it
+15. Telepopmusik - Yesterday was a lie",./content/release/M08_Manti_Bar_Launge_mix.mp3,./content/covers/bar-launge.jpg,"10,11,28",2007-10-27 00:00:00,71,2017-04-23 23:52:48
+18,basstech,Special mix for Basstech,"Сет записан специально для программы BASSTECH (novoeradio.by/basstech). Все треки сведены ""вживую"" в гостях у Ильи (Dj Hotei), за что ему большое спасибо.","Сет записан специально для программы BASSTECH (<a href=""http://novoeradio.by/basstech"">novoeradio.by/basstech</a>). Все треки сведены ""вживую"" в гостях у Ильи (Dj Hotei), за что ему большое спасибо.
+
+Переделки: до – подправил трек ""Im gonna bite you"", заменил конец и перенес его в середину, и подправил трек ""GITS"", приклеив в начале и в конце ОРИГИНАЛЬНЫЙ саундтрек к аниме ""Ghost in the shell""; после записи единственным усовершенствованием был мастеринг (Izotope Ozone, L2).
+
+Практически все треки представляют собой классический нейрофанк, часть треков европейский (Noisia, Spor), часть российский (Marqus, Paperclip).","Neurofunk,Technoid,Drum and Bass,Basstech,MNT018","Сет записан специально для программы BASSTECH (novoeradio.by/basstech). Все треки сведены ""вживую"" в гостях у Ильи (Dj Hotei), за что ему большое спасибо.",1,MNT018,"Neurofunk, Technoid",58:42,LAME 320kbps 44100Hz,"1. Engage - Im gonna bite you
+2. Marqus - Angel  
+3. Bes & Flame - Eurofunk  
+4. Noisia - Exorcism
+5. Skynet - Carbon shock (Noisia remix)      
+6. Noisia - Block control  
+7. Hightech - GITS  
+8. Marqus - Mirage  
+9. Paperclip - Shogun  
+10. Paperclip - Bearing death  
+11. Spor - Supernova  
+12. Noisia, Maldini and Vegas - Meditation
+13. Quadrant - Rage and rapture  ",./content/release/M18_Manti_Special_mix_for_Basstech_(novoeradio.by).mp3,./content/covers/basstech.jpg,"19,33,34",2009-05-21 00:00:00,80,2017-04-29 11:10:12
+19,basstech-2,Mix for Basstech part 2,"Второй выход на программе BASSTECH (novoeradio.by/basstech). Все треки сведены ""вживую"", правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет есть и его можно слушать. ","Второй выход на программе BASSTECH (<a href=""http://novoeradio.by/basstech"">novoeradio.by/basstech</a>). Все треки сведены ""вживую"", правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет есть и его можно слушать. 
+
+Большинство треков ""отечественного"" производителя, представляющие собой Русский нейрофанк, от диповых и лайтовых направлений, до самых жирных и безкомпромисных. Есть и немного техноида, для любителей прямой и сумашедшей бочки...","Neurofunk,Technoid,Drum and Bass,Basstech,MNT020","Второй выход на программе BASSTECH. Все треки сведены вживую, правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет ",1,MNT020,"Neurofunk, Technoid",56:18,LAME 320kbps 44100Hz,"1. Strauss - Also sprach Zarathustra op.30 (Introduction)
+2. Miditacia - Power station  
+3. Miditacia - Anomalies  
+4. Brainfuzz - Scope  
+5. Hedj & Proktah - Rhino    
+6. Receptor - Rhyno    
+7. Marqus - Paranoik  
+8. Rregula and Dementia - Fortress  
+9. Isotop feat Shots and Kaiza - Kartago
+10. Dereck - Apollo    
+11. Nickbee - Iodine  
+12. Paperclip - Infinite drift  
+13. Receptor - Kurchatov      
+14. Telefon tel aviv - Fahrenheit fair enough (Prefuse 73 bonus beats remix)",./content/release/M20_Manti_Mix_for_Basstech_(novoeradio.by).mp3,./content/covers/basstech-2.jpg,"18,31,33",2010-02-04 00:00:00,70,2017-04-29 11:02:27
+20,chillhouse-live,Chillhouse live,Практически классический хаус с некоторыми примесями дипа и теч ноток. Записан "вживую" в клубе ХХ век. ,Практически классический хаус с некоторыми примесями дипа и теч ноток. Записан "вживую" в клубе ХХ век. ,"Deep House,Tech House,Chillhouse,Live,MNT012",Практически классический хаус с некоторыми примесями дипа и теч ноток. Записан "вживую" в клубе ХХ век. ,1,MNT012,"Deep House, Tech House",68:44,LAME 320kbps 44100Hz,,./content/release/M12_Manti_Chillhouse_live.mp3,./content/covers/chillhouse.jpg,"22,25,40",2008-11-08 00:00:00,54,2017-04-24 23:02:53
+21,emofunk-,Emofunk (Christmas rave) live,"Предновогодний рэйв с участием: Boro&Moff, Izo, Ipomea, valCool, Enegy.
+Было ТРИ литра водки и много-много трупов... ","Предновогодний рэйв с участием: Boro&Moff, Izo, Ipomea, valCool, Enegy.
+Было ТРИ литра водки и много-много трупов... ","Neurofunk,Technoid,Drum and Bass,Live,MNT014","Предновогодний рэйв с участием: Boro&Moff, Izo, Ipomea, valCool, Enegy.
+Было ТРИ литра водки и много-много трупов... ",1,MNT014,"Neurofunk, Technoid",51:11,LAME 320kbps 44100Hz,,./content/release/M14_Manti_Emofunk_live.mp3,./content/covers/christmas-rave.jpg,"9,18,19",2008-12-27 00:00:00,71,2017-04-24 05:23:28
+22,cote-d-azur,Cote d'Azur promo,"Летний, летний микс, который лучше слушать стоя на песке и вдыхая запах соленого морского воздуха. Многое навеяно летней погодой, оупенами и людьми, которые меня окружали все это время.","Летний, летний микс, который лучше слушать стоя на песке и вдыхая запах соленого морского воздуха. Многое навеяно летней погодой, оупенами и людьми, которые меня окружали все это время.
+
+По сути своей является сборкой лучших треков из двух моих различных компилов за летний период. Так что слушаем и наслаждаемся.","Tech House,Funky House,Cote d'Azur,Promo,MNT030","Летний, летний микс, который лучше слушать стоя на песке и вдыхая запах соленого морского воздуха.",1,MNT030,Tech House,1:00:38,LAME 320kbps 44100Hz,"1. Strict Border - Reboot Me (Hermanez remix) - Suara
+2. Danny Serrano & Westboy - Bubblegun - Suara
+3. Juliet Sikora, Tube & Berger - Jam Word Up (Original mix) - Kittball
+4. MSMS - Hold it (Original mix) - Plastic city
+5. Marco Bailey - Rubber band - Bedrock
+6. Piek - Burn Baby Burn (Siwell Remix) - Sphera
+7. Taster Peter, Phunx - Jack This Tune (Mario Ochoa remix) - Bitten
+8. Tiger Stripes - Give You Up - Toolroom
+9. Richard Grey - You are my high (Federico Scavo remix) - Tiger
+10. Marco Bailey - Jungle laps - Bedrock
+11. Oscar Barila and Maiki - Debbie white (Simone Tavazzi remix) - Kostbar
+12. Andrew Bayer - Gaff's Eulogy - Anjunadeep",./content/release/M30_Manti_Cote_d-Azur_(Summer-Autumn-12_promo).mp3,./content/covers/cote-d-azur.jpg,"6,20,40",2012-08-25 00:00:00,125,2017-04-24 06:55:48
+23,all-she-wants-is,All she wants is (SCSI device),"Одна из первых и очень старых работ, сделанная под впечатлением и польско-немецких техно отцов...","Одна из первых и очень старых работ, сделанная под впечатлением и польско-немецких техно отцов...","Tech House,Deep House,All she wants is,MNT002","Одна из первых и очень старых работ, сделанная под впечатлением и польско-немецких техно отцов...",1,MNT002,"Tech House, Deep House",1:11:39,LAME 320kbps 44100Hz,,./content/release/M02_Manti_All_she_wants_is_mix_(SCSI_device).mp3,./content/covers/all-she-wants.jpg,"6,8,20",2005-10-12 00:00:00,64,2017-04-25 00:50:26
+24,iris,"IRIS, it's all about me promo","Очень длительная и кропотливая работа, как технически, так и идейно. Выдержана в классическом стиле deep house, с привнесением ноток Tech House и Deep House.","Очень длительная и кропотливая работа, как технически, так и идейно. Выдержана в классическом стиле deep house, с привнесением ноток Tech House и Deep House.","Deep House,Tech House,IRIS,It's all about me,MNT004,Promo","Очень длительная и кропотливая работа, как технически, так и идейно. Выдержана в классическом стиле deep house, с привнесением ноток Tech House и De",1,MNT004,"Deep House, Tech House",1:00:15,LAME 320kbps 44100Hz,"1. Lator - Rolling children  
+2. Acos CoolKAs feat. Metropoliz - Friends (Vocal mix)
+3. Brooks - Pink Sigarettes (Ajazz mix)
+4. Raz Ohara - This'a beautiful day (Mathias Schaffhauser mix)  
+5. Jussipekka - Breeze
+6. Gamat 3000 - Whispering  
+7. Phunk Diggaz - Whispers  
+8. Terry Lee Brown Jr. - Bad house music (Dub'98)  
+9. Plank 15 - Strings of life  
+10. Lator - Clown fish (kaZantip mix)  ",./content/release/M04_Manti_Iris_mix_(Spring-Summer-07_promo).mp3,./content/covers/iris.jpg,"6,8,23",2007-02-18 00:00:00,80,2017-04-23 11:39:59
+25,hi-pass,Hi-Pass live,"Сладкий летний микс на популярные минимальные темы. 
+","Сладкий летний микс на популярные минимальные темы. 
+
+Рассвет в июне: ""... у нас было два пакета травы, 75 таблеток мискалина, 5 упаковок кислоты, пол солонки кокаина и бесконечное множество транквилизаторов всех сортов и расцветок, а также текила, ром, ящик пива, пинта чистого эфира и амил нитрат..."" Хантера С. Томпсон.","Tech House,Minimal Techno,Hi-Pass,MNT005",Сладкий летний микс на популярные минимальные темы. ,1,MNT005,"Tech House, Minimal Techno",53:22,LAME 160kbps 44100Hz,,./content/release/M05_Manti_Hi-Pass_live.mp3,./content/covers/hi-pass.jpg,"6,8,23",2007-06-05 00:00:00,85,2017-04-29 11:16:56
+26,janaca-express,Janaca express part 01,"Микс, состоящий из двух частей, какждая из которых отличается как эмоционально, так технически и стилистически. В то же время весь материал поддерживает идею трансовой приходелической музыки, хотя и не так глубоко, как классический псай.","Микс, состоящий из двух частей, какждая из которых отличается как эмоционально, так технически и стилистически. В то же время весь материал поддерживает идею трансовой приходелической музыки, хотя и не так глубоко, как классический псай.
+
+Будет особенно интесно тем, кто не любит классический, довольно жестокий псай, но в то же время интересуется довольно быстрыми формами (около 145bpm).","Goa Trance,Psy Trance,MNT006,Janaca Express","Микс, состоящий из двух частей, какждая из которых отличается как эмоционально, так технически и стилистически. В то же время весь матери",1,MNT006,"Goa Trance, Psy Trance",1:00:39,LAME 192kbps 44100Hz,"1. Silicon Sound feat. Psychotrop - Departure
+2. Silent Sphere - Violet visions  
+3. Electro Sun - High cue  
+4. Astrix - Tweaky  
+5. Psypsiq Jicuri - A rain of hope in the galaxy  
+6. Xerox & Illumination - Temporary insanity  
+7. Astrix - Techno widows  
+8. Delerious - Dynamic force
+9. Astrix feat. Michele Adamson - Closer to heaven  ",./content/release/M06_Manti_Janaca_express_mix_01.mp3,./content/covers/janaca.jpg,"27,28,30",2007-09-10 00:00:00,65,2017-04-24 22:26:48
+27,janaca-express-01,Janaca express part 02,Вторая часть моего трипа в зазеркалье...,Вторая часть моего трипа в зазеркалье...,"Goa Trance,Psy Trance,MNT009,Janaca Express",Вторая часть моего трипа в зазеркалье...,1,MNT009,"Goa Trance, Psy Trance",59:38,LAME 192kbps 44100Hz,"1. Intro - Tristan  
+2. Quantum feat. Keren Porat - Janaca express
+3. Rocky vs. Galactika - Global air (Monster edit)  
+4. Zen Mechanics - Vurt  
+5. Space Vision - Mascer jedi
+6. Lucy - Flash damage
+7. Insomnia - The real thing  
+8. Magoon - Future
+9. Sangeet - Distorted dream
+10. Vibe Tribe - Kick the bass  ",./content/release/M09_Manti_Janaca_express_mix_02.mp3,./content/covers/janaca.jpg,"26,28,30",2007-10-27 00:00:00,60,2017-04-30 01:11:13
+28,marrakesh,Marrakesh,"Воcточное тепло, пряности и ритмы. Смесь индастриала и медитаций на вольные темы...","Воcточное тепло, пряности и ритмы. Смесь индастриала и медитаций на вольные темы...","Ambient,Chillout,Easy Listening,Marrakesh,MNT010","Воcточное тепло, пряности и ритмы. Смесь индастриала и медитаций на вольные темы...",1,MNT010,"Chillout, Ambient",56:48,LAME 192kbps 44100Hz,"1. Deepac Ram - Between thoughts
+2. Trianglesun - Budha
+3. Enamoured - Mooli
+4. Pete Vicary - D-maddix
+5. Monsoon Day - Spice trail
+6. Muslimgauze - Hussein Mahmood Jeeb Tehar Gass  
+7. Slack Baba - Drink more tea (Herbal mix)  
+8. Enrico Experience - Bine el barah quel liom
+9. Vibrasphere - San Pedro  ",./content/release/M10_Manti_Marrakesh_mix.mp3,./content/covers/marrakesh.jpg,"10,12,17",2008-01-07 00:00:00,61,2017-04-13 04:34:34
+29,helloween-live,Helloween live,"Первый опыт работы с дрымдыбасом, с его довольно агрессивным и жестким направлением neurofunk. Технически не все так гладко, но, по-моему, компиляция сглаживает эти огрехи...","Первый опыт работы с дрымдыбасом, с его довольно агрессивным и жестким направлением neurofunk. Технически не все так гладко, но, по-моему, компиляция сглаживает эти огрехи...
+
+Сподвигли меня на этот эксперимент с дрымдыбасом, \""случайно\"" скачанные первые 56 релизов лэйбла SUBTITLES)))","Neurofunk,Drum and Bass,MNT011,Helloween live","Первый опыт работы с дрымдыбасом, с его довольно агрессивным и жестким направлением neurofunk. Технически не все так гладко, но, по-моему, ком",1,MNT011,"Neurofunk, Technoid",36:01,LAME 320kbps 44100Hz,,./content/release/M11_Manti_Helloween_party_live.mp3,./content/covers/helloween.jpg,"9,18,21",2008-10-31 00:00:00,92,2017-04-24 23:43:16
+30,janaca-express-live,Janaca Express live,"Живая версия двух частей гоа трипа Janaca Express, записанного в прошлом году...","Живая версия двух частей гоа трипа Janaca Express, записанного в прошлом году...","Goa Trance,Psy Trance,Janaca Express,Live,MNT013","Живая версия двух частей гоа трипа Janaca Express, записанного в прошлом году...",1,MNT013,"Goa Trance, Psy Trance",1:04:26,LAME 320kbps 44100Hz,"1. Silicon Sound feat. Psychotrop - Departure
+2. Silent Sphere - Violet visions 
+3. Electro Sun - High cue 
+4. Astrix - Tweaky 
+5. Psypsiq Jicuri - A rain of hope in the galaxy 
+6. Xerox & Illumination - Temporary insanity 
+7. Astrix - Techno widows 
+8. Delerious - Dynamic force
+9. Astrix feat. Michele Adamson - Closer to heaven",./content/release/M13_Manti_Janaca_express_live.mp3,./content/covers/janaca.jpg,"26,27,28",2008-11-08 00:00:00,104,2017-04-29 12:38:27
+31,killing-machine,Killing machine,"Мрачнейший микс в моей жизни, даже вся серия гоа и рядом не стояла по жестокости. Записан микс был после долгих экспериментов в клубах, над теми кому \""побарабану\"".","Мрачнейший микс в моей жизни, даже вся серия гоа и рядом не стояла по жестокости. Записан микс был после долгих экспериментов в клубах, над теми кому \""побарабану\"". Технически - лапата, пару мест просто захлебывались от количества звука.
+
+Микс был записан в домашних условиях, причем разные куски в разных программах. Использовал практически весь спектр своего софта:
+Samplitude: intro, duomix и конечный мастеринг.
+Ableton: darkstep\'овая часть.
+Tracktor: technoid\'ная часть.","Darkstep,Technoid,Drum and Bass,Killing machine,MNT016","Мрачнейший микс в моей жизни, даже вся серия гоа и рядом не стояла по жестокости. Записан микс был после долгих экспериментов в клубах, на",1,MNT016,"Darkstep, Technoid",49:55,LAME 320kbps 44100Hz,"1. Intro - Red or blue (Matrix)
+2. Current Value & Donny - Nightmare man  
+3. Limewax - One of them (Current Value remix)    
+4. Counterstrike - Stardurst
+5. Limewax - Cracking core (Technical Itch vip mix)
+6. Prozac & Ethex - The game
+7. Current Value - Stomache
+8. Dying Punks & Current Value - Love all the people    
+9. Paperclip - Simple access  
+10. Limewax vs. Phobos feat. SPL - He will find us (Duomix)
+11. Oceanlab - Clear blue water (Current Value remix)    ",./content/release/M16_Manti_Killing_machine_mix.mp3,./content/covers/killing-machine.jpg,"18,19,33",2009-03-15 00:00:00,71,2017-04-25 00:17:12
+32,trauma,Trauma ,"Этот сет, как никакой другой выстрадан физически и придуман в травматологическом отделении больницы моего родного города, после жесткого падения на горных лыжах.","Этот сет, как никакой другой выстрадан физически и придуман в травматологическом отделении больницы моего родного города, после жесткого падения на горных лыжах.
+
+Практически полностью сет скомпилен в больнице, позже собран одной (целой) рукой при помощи ACID Pro от компании Sony и пары стандартных примочек: Ozone, GCO, Elephant и т.п.
+
+Сет передает всю ту широкую гамму ощущений, которые можно испытать в наших государственных больницах...","Neurofunk,Technoid,Drum and Bass,MNT023,Trauma,Techstep","Этот сет, как никакой другой выстрадан физически и придуман в травматологическом отделении больницы моего родного города, после жестко",1,MNT023,"Neurofunk, Technoid",53:29,LAME 320kbps 44100Hz,"1. Real - When the dream\'s done
+2. Cliffhanga - Centipede
+3. Paperclip & Malk - Detective  
+4. Paperclip & Flame - Bad illumination
+5. EBK - Soma
+6. Black Sun Empire - Kempi (feat. Nymfo)    
+7. Unknown Error - Dark wars  
+8. Receptor & Engage - Wi-fi waves  
+9. Black Sun Empire - Wasteland (feat. SPL)    
+10. Flame - Prehistoric (vip mix)  
+11. Katharsys & Gancher - Sky from beyond  
+12. Pyro - Restless (Katharsys remix)
+13. Nphonix & Enei - Quicksilver    
+13. Receptor - Princess  ",./content/release/M23_Manti_Trauma_mix.mp3,./content/covers/trauma.jpg,"18,31,33",2011-03-03 00:00:00,91,2017-04-29 08:36:03
+33,renaissance,Renaissance promo,"Утром всегда встает солнце...
+Сет - логическое продолжение предыдущей работы, под названием <a href=""/blog/trauma/"">Trauma</a>. В целом не стал перечить себе и нарушать свои традиции - все технично, хороший мастеринг, в начале пожирнее, в конце побыстрее... ","Утром всегда встает солнце...
+Сет - логическое продолжение предыдущей работы, под названием <a href=""/blog/trauma/"">Trauma<a>. В целом не стал перечить себе и нарушать свои традиции - все технично, хороший мастеринг, в начале пожирнее, в конце побыстрее... ","Neurofunk,Technoid,Drum and Bass,Renaissance,Promo,MNT024,Techstep","Утром всегда встает солнце...
+Сет - логическое продолжение предыдущей работы, под названием Trauma. В целом не стал перечить себе и нарушат",1,MNT024,"Neurofunk, Technoid",1:02:53,LAME 320kbps 44100Hz,"1. Gravediggazz - Trippin (intro)
+2. Allied - N-sphere  
+3. Asphexia - Profusion  
+4. Inside Info - Metronome
+5. Encode - None  
+6. Malk - Made in sikness
+7. Nphonix - False flag    
+8. Receptor - Lullaby  
+9. Int Company - Uppi    
+10. Redject - 7th sorrow
+11. Hector - Suddenly (tribute to E.Letov)  
+12. Sintax - Metro    
+13. Switch Technique - Metro
+14. Bop - As is",./content/release/M24_Manti_Renaissanse_(Winter-Spring-12_promo).mp3,./content/covers/renaissanse.jpg,"9,18,32",2011-05-30 00:00:00,114,2017-04-29 10:36:08
+34,exception,Exception,"Этот сет является продолжением серии <a href=""/tag/neurostep/"">минималистичных нейро миксов</a>, продолжением работы под названием <a href=""/blog/katana/"">Katana</a>.","Этот сет является продолжением серии <a href=""/tag/neurostep/"">минималистичных нейро миксов</a>, продолжением работы под названием <a href=""/blog/katana/"">Katana</a>.
+Одна из первых работ полностью записанная в живую на моем тракторе (Traktor Pro + X1 + TA6), немного была подмастерена, но в целом осталась довольно живой.
+Правда, часть свежих треков не вошла в микс, но они попадут в следующий, который уже понемногу собирается.","Techstep,Neurostep,Drum and Bass,Exception,MNT026","Этот сет является продолжением серии минималистичных нейро миксов, продолжением работы под названием Katana.",1,MNT026,"Techstep, Neurostep",51:35,LAME 320kbps 44100Hz,"1. Mortem - Monoveler
+2. Icicle - Alien Groove
+3. Paimon - Hellraiser  
+4. Science Fiction - Abyss  
+5. Mortem - Get Close
+6. June Miller - Snapcase
+7. Alix Perez - Exemption
+8. Kabuki & Savine - Backup
+9. The Countamen & Alley Cat - Payload (Konflict remix)
+10. Science Fiction - Bystander effect  
+11. Nickbee & Malc - Cosmos
+12. Icicle, Distance - Exhale",./content/release/M26_Manti_Exception_mix.mp3,./content/covers/exception.jpg,"9,19,33",2012-04-25 00:00:00,114,2017-04-29 10:42:20
+35,progress,Progress R-7A,"Я не особо люблю Брейкс, но когда эта музыка сопровождается прогрессив атмосферой - получаются просто бесподобные вещи.","Я не особо люблю Брейкс, но когда эта музыка сопровождается прогрессив атмосферой - получаются просто бесподобные вещи.","Breaks,Athmospheric,Progress,MNT028,Progressive","Я не особо люблю Брейкс, но когда эта музыка сопровождается прогрессив атмосферой - получаются просто бесподобные вещи.",1,MNT028,Progressive breaks,56:18,LAME 320kbps 44100Hz,"1. Abdomen Burst - Lullaby (Original Mix)
+2. Jamie Stevens - The Night Before (Momu Remix)
+3. Rhino Drum - Underground Sound (Fretwell Remix) 
+4. Neo - Aura (Cosmonaut-Rework)
+5. Pilot - Dilema (Plastic Shell Remix)
+6. Pete Gawtry - It\'s Life (Wrecked Angle Remix)
+7. Plastic Shell - Hard Way (Original Mix) 
+8. Cosmonaut feat. Мумий Троль - Иди, я буду
+9. Shiloh - Dream On (Original Mix)
+10. Pinkbox Special - Nice Guys Finish Last (Original Mix)",./content/release/M28_Manti_Progress_R-7A_mix.mp3,./content/covers/progress_r-7a.jpg,,2012-06-01 00:00:00,114,2017-04-24 07:38:20
+36,enzo-cafe,Enzo cafe live,"Живой микс для Enzo cafe (Минск, Беларусь)","Живой микс для Enzo cafe (Минск, Беларусь)","Tech House,Deep House,Live,Enzo cafe,MNT029","Живой микс для Enzo cafe (Минск, Беларусь)",1,MNT029,"Tech House, Deep House",1:01:13,LAME 320kbps 44100Hz,"1. La Fleur - Ten Fingers (Original Mix) 
+2. Boss Axis - Cologne (Rodriguez Jr. remix)
+3. Tiefschwarz - I can\'t resist (feat. Dave Aju)
+4. Sebo K - Mr. Duke (Alternative version)
+5. Martin Landsky - Morning Caffeine (Organ Dub)
+6. Bambook feat. Arkanna - Off the system (Beat Factory remix)
+7. FCODE - Mixture (original mix)  
+8. Noir & Chris Minus - Sleep no more (vocal mix)
+9. Tojami Sessions - Tetra
+10. Strict Border - Pianist In The Zoo
+11. Strict Border - Rendevouz
+12. MSMS - Juice",./content/release/M29_Manti_Enzo_Cafe_live.mp3,./content/covers/enzo.jpg,"6,8,24",2012-06-30 00:00:00,130,2017-04-29 10:49:19
+37,stockholm-syndrome-backset,Stockholm syndrome - Backset,Продолжение работы над собой. Второй микс из серии <a href="/tag/stockholm/">Stockholm syndrome</a>.,Продолжение работы над собой. Второй микс из серии <a href="/tag/stockholm/">Stockholm syndrome</a>. Первую работу можно найти здесь <a href="/stockholm-syndrome/">Manti - Stockholm syndrome</a>.,"Tech House,Deep House,Stockholm syndrome,MNT032",Продолжение работы над собой. Второй микс из серии "Stockholm syndrome".,1,MNT032,"Tech House, Deep House",1:00:01,LAME 320kbps 44100Hz,"1. Tube & Berger & Milan Euringer - Lovebreak (Original mix)
+2. Shades Of Gray - Crazee
+3. Layo & Bushwaka feat. Kim Ann Foxman - Cant hurt you (Original mix)
+4. Marc Romboy - More Muzik (Original mix)
+5. Darling Farah - Body (Jimmy Edgar remix)
+6. Tom Novy - Walking On the Moog (caTekk Remix)
+7. Kink - E79
+8. Norm - Foco (Paul Jey remix)
+9. Takt Tick - Gloomy Dawn (Original mix)
+10. Danny Daze and Matches - If this
+11. Vas Floyd - Deep house soul (Vas Floyd & Mr Jones strings mix)
+12. Terry Lee Brown Junior - Delightful encounter",./content/release/M32_Manti_Stockholm_syndrome_Backset.mp3,./content/covers/stockholm-syndrome-backset.jpg,"6,8,36",2012-11-27 00:00:00,115,2017-04-29 12:28:56
+38,reach,Reach out of the Sun,"Странные весенние настроения и куча различных событий в личной, и не только, жизни привели к созданию этой компиляции.","Странные весенние настроения и куча различных событий в личной, и не только, жизни привели к созданию этой компиляции.
+Данная работа, что-то среднее между сериями <a href=""/blog/hobh-two/"">Дом разбитых сердец</a> и <a href=""/blog/synthetic/"">Synthetic</a>, с первым по-большей части эмоционально, а со вторым по звуку и общей атмосфере...","Ambient,Chillout,Light Synthetic Compilation,MNT033","Странные весенние настроения и куча различных событий в личной, и не только, жизни привели к созданию этой компиляции.",1,MNT033,"Ambient, Chillout",1:05:37,LAME 320kbps 44100Hz,"1. Idex - Arc 07
+2. Kriipis Tulo - The deep of the night
+3. Apparat - Black water
+4. June Miller - Coming Closer
+5. Ishome - Earth
+6. Digital Mystery Tour - The Blooming  
+7. Late - Dreams are    
+8. Monoceros - Monocrom    
+9. Oak - Otaku
+10. Monokle - Warm control
+11. Electrosoul system - Morning Forest
+12. Synkro - Spirals
+13. Nanobyte - Lost time
+14. Monolake - Television tower    ",./content/release/M33_Manti_Reach_out_to_the_sun.mp3,./content/covers/reach-out-of-the-sun.jpg,"3,10,11",2013-03-05 00:00:00,170,2017-04-19 16:20:45
+39,nlp,Топливо для танка (НЛП),"Пожалуй единственная на данный момент Hip-Hop компиляция в чистом виде, сборник моих любимых треков.","Пожалуй единственная на данный момент Hip-Hop компиляция в чистом виде, сборник моих любимых треков.","Hip-Hop,Rap,NLP,Exclusive,MNTE01","Пожалуй единственная на данный момент Hip-Hop компиляция в чистом виде, сборник моих любимых треков.",1,MNTE01,"Rap, Hip-Hop",1:13:57,LAME 320kbps 44100Hz,"1. Jahmal TGK - Моя Свобода
+2. Витя АК47 feat. Купэ - В тепле 2 яйца
+3. РоМД a.k.a. Рэм Дигга - Кто бы это мог быть
+4. РоМД a.k.a. Рэм Дигга - Виниловый Рома (Скит)
+5. NINTENDO - Криминал
+6. Jahmal TGK - Лада плывёт
+7. TRIAGRUTRIKA feat. АК47, Восточный Округ, Лёша Маэстро (WB) - Всем
+8. КРП a.k.a. Купэ feat. Гуф - Oрел или решка
+9. Баста и Guf - Если бы+ (Scratch DJ Mixoid)
+10. CENTR - Хип-хоп
+11. Guf - Metropolitan mail
+12. Кровосток - Сдавать говно
+13. Slim - Под пальмами
+14. РоМД a.k.a. Рэм Дигга - Мутки
+15. CENTR - Сосулька (скит)
+16. Витя АК & Tip & Зевс - Че такого
+17. TRIAGRUTRIKA feat. Витя АК - Чемодан лавэ
+18. Баста и Guf - Не всё потеряно пока (Scratch DJ Tactics)
+19. Guf feat. Ба - Дома
+20. TRIAGRUTRIKA feat. Лёша Маэстро (WB), Ramzes (ОДБР) - Мой город не спит",./content/release/ME01_Manti_NLP_compilation.mp3,./content/covers/nlp.jpg,13,2011-10-12 00:00:00,127,2017-04-23 12:11:29
+40,my-friend-friday,My friend Friday,Спонтанный пятничный микс...,Спонтанный пятничный микс...,"Tech House,Deep House,My friend Friday,Exclusive",Спонтанный пятничный микс...,1,MNTE02,"Tech House, Deep House",37:15,LAME 320kbps 44100Hz,"1. Milton Jackson - Breathe (David Labeij remix)
+2. Lee Van Dowski - Not A Remix (Original mix)
+3. DJ Smilk, Juan Ddd - Dollar bills
+4. The Messenger - Preachin\' Out
+5. Luca M & Just2 - Peak Week (Original mix)
+6. Per Hammar, Frida Fralk - Get that
+7. Oscar Barila - Yoda (Original mix)
+8. Tube & Berger - Fog Head (Louis Osbourne & Jamie Anderson remix)",./content/release/ME02_Manti_My_Friend_Friday.mp3,./content/covers/friday.jpg,"6,8,25",2013-01-18 00:00:00,141,2017-04-30 17:38:28
+41,alice,Alice in Wonderland,"Этот сет описывает настроения и чувства, которые преследуют меня в каждом моем путешествии в зазеркалье, к людям в белых халатах...","Этот сет описывает настроения и чувства, которые преследуют меня в каждом моем путешествии в зазеркалье, к людям в белых халатах...","Neurofunk,Drum and Bass,Alice in Wonderland,MNT034,Techstep","Этот сет описывает настроения и чувства, которые преследуют меня в каждом моем путешествии в зазеркалье, к людям в белых халатах...",1,MNT034,"Neurofunk, Techstep",55:12,LAME 320kbps 44100Hz,"1. Christopher Young - Portrait of Mr. Boogie
+2. Agressor Bunx & Neutral Point - Revelation
+3. Maztek - Limber
+4. Redco - Ion
+5. EastColors - Murderer
+6. Dextems - Forsaken
+7. BSE, Bulletproof & State of Mind - Roulette (Gridlok remix)
+8. Noisia & The Upbeats - Dustup
+9. Cruk - Punisher (Original mix)
+10. Nouwa - I can faster (Original mix)
+11. Break - Condenser
+12. Paperclip - Whom I belong
+13. Synkro - Acceptance",./content/release/M34_Manti_Alice_in_Wonderland.mp3,./content/covers/alice.jpg,"9,18,33",2013-04-11 13:30:03,150,2017-04-28 17:57:42
+42,silence,Aweary silence,"Интеллигентный и красивый вокальный хаус для тех кто любит помягче)
+Всех с наступающим летом!","Интеллигентный и красивый вокальный хаус для тех кто любит помягче)
+Всех с наступающим летом!","Featured,Aweary silence,Intelligent house,Deep House,MNT035","Интеллигентный и красивый вокальный хаус для тех кто любит помягче)
+Всех с наступающим летом!",1,MNT035,"Intelligent House, Deep House",1:01:37,LAME 320kbps 44100Hz,"0. Intro - Aweary silence
+1. Kolombo - Don't be shy (Original mix)
+2. Maxxi Soundsystem feat. Name One - Regrets we have no use for (Original mix)
+3. Dana Bergquist & Peder G - Survive (Original mix)
+4. Jimmy Vlach - Just walking (Original mix)
+5. Nora En Pure - You make me float (Calippo remix)
+6. Agoria - Baboul hair cuttin (Gui Boratto remix)
+7. GusGus - Over
+8. P.A.C.O. And Tube & Berger - Greyjoy (Original mix)
+9. Terry Grant, MSMS - The killing kind (Original mix)
+10. Kasper Bjorke feat. Laid Back - Bohemian soul (Adana Twins On a Cloudy Day remix)
+11. Tube & Berger - Long roads (Original mix)
+12. Phaeleh feat. Anneka - Memories",./content/release/M35_Manti_Aweary_silence.mp3,./content/covers/silence.jpg,"6,8,24",2013-05-18 17:11:01,166,2017-04-28 15:40:21
+43,forthcoming,Forthcoming releses,,<iframe width="100%" height="600" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/91987194&amp;color=ff5500&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false"></iframe>,"Forthcoming,Other",forthcoming,0,,,,,,,,,2013-05-20 14:31:55,129,2017-04-21 08:48:12
+44,zeppelin,Zeppelin,Интересная работа для любителей минималистичного и шумного техно звучания на "ватных" скоростях.,"Интересная работа для любителей минималистичного и шумного техно звучания на ""ватных"" скоростях.
+Работа продолжает серию экспериментальных миксов из серии <a href=""http://manti.by/tag/lsc/"">Light Synthetic Compilation</a>.","Light Synthetic Compilation,Chillout,Dub Techno,MNT036",Интересная работа для любителей минималистичного и шумного техно звучания на "ватных" скоростях.,1,MNT036,"Dub Techno, Chillout",57:55,LAME 320kbps 44100Hz,"1. Orson Throb - Silent cloud
+2. CV313 - Subtraktive
+3. STL - A beautiful mind
+4. Orson Throb - Im from the space
+5. Zzzzra - Mecanographie phase 1
+6. Echospace feat. The Howard Street Rhythm Section - Spatial dimension
+7. Deepchord - Grand bend
+8. Dolby - He0r
+9. Orson Throb - For my people
+10. Echospace - Sonorous (CV313s Midst of something beautiful mix)",./content/release/M36_Manti_Zeppelin.mp3,./content/covers/zeppelin.jpg,"3,4,8",2013-08-27 17:43:56,118,2017-04-21 19:44:16
+45,power-rangers,Power rangers,"Наверное самый мой веселый микс. Собран из лучших драмовых треков с которыми мне удалось повстречаться за последние 5 лет. 
+Никакой жести, только лето и позитив...","Наверное самый мой веселый микс. Собран из лучших драмовых треков с которыми мне удалось повстречаться за последние 5 лет. 
+Никакой жести, только лето и позитив...","Drum and Bass,Jump Up,Power rangers,Exclusive,Ragga Jungle,Featured","Наверное самый мой веселый микс. Собран из лучших драмовых треков с которыми мне удалось повстречаться за последние 5 лет. 
+Никакой жес",1,MNTEX003,"Drum and Bass, Jump Up",51:20,LAME 320kbps 44100Hz,"1. Brookes Brothers - Tear you down
+2. Artificial Intelligence Ft. Steo - You can dream
+3. Metrik - Moving on
+4. Sonic & Silver - Rocket launcher (VIP remix)
+5. Capital Cities - Safe & sound (NuLogic remix)
+6. State Of Mind feat. 3pm - Somebody stop me (Smooth remix)
+7. Benny Page feat. UK Apache - Nuttah story
+8. Aphrodite - Stalker
+9. L Plus - The Price
+10. Danny Bird - We can have it all (Sigma remix)
+11. Skeets feat. Jeston Langland - This moment (Darwin remix)
+12. Rawtekk - Snowflakes (Original mix)",./content/release/ME03_Manti_Power_rangers.mp3,./content/covers/power-rangers.jpg,"9,18,41",2014-01-15 16:52:33,124,2017-04-28 17:25:47
+46,space,Space is Ours,"Когда я слышу такую музыку, – ответила она, – мне бывает трудно поверить, что мир материален, что есть только вот это, – взмахом руки она указала на кубрик и все те материальные объекты, которые их окружали...","Когда я слышу такую музыку, – ответила она, – мне бывает трудно поверить, что мир материален, что есть только вот это, – взмахом руки она указала на кубрик и все те материальные объекты, которые их окружали. – Потому что есть что-то, чего мы не знаем, но что запечатлевается в музыке. Это все-таки есть. Это можно почувствовать.","Neurofunk,Drum and Bass,Space is Ours,MNT037,Techstep,Promo","Когда я слышу такую музыку, – ответила она, – мне бывает трудно поверить, что мир материален, что есть только вот это...",1,MNT037,"Neurofunk, Techstep",58:51,LAME 320kbps 44100Hz,"1. Sub Mass - Dog eat dog
+2. Nscape - Lost head
+3. Dextems - The voyager (original mix)
+4. Nphonix & Counterstrike - Maverick
+5. D_iolax - Optics (Original mix)
+6. Villem - Ascent (with Fields And Mako)
+7. Inward Phase - Vicious march
+8. Teddy Killerz - Violence
+9. Nphonix & Paimon & Place 2b - Deadly funk
+10. Teddy Killerz & Jade - Blackout (feat. 2Shy)
+11. Paperclip - Jupiter in danger (Original mix)
+12. Dextems - Arctic sound
+13. Emperor - She said
+14. B Cloud - Aside a bustle (Original mix)",./content/release/M37_Manti_Space_is_ours.mp3,./content/covers/space-is-ours.jpg,"33,41,45",2014-02-09 13:06:29,134,2017-04-15 07:58:07
+47,lets-go-dancing,Let's go dancing,Красивый и мелодичный сет с большим количеством красивого вокала.,Красивый и мелодичный сет с большим количеством красивого вокала.,"Featured,Tech House,Deep House,MNT038,Promo",Красивый и мелодичный сет с большим количеством красивого вокала.,1,MNT038,"Tech House, Deep House",53:49,LAME 320kbps 44100Hz,"1. Gui Boratto - Too late (Original mix)
+2. Pleasurekraft, Jaceo, Vedic - Chloroformd (Original mix)
+3. John Tejada - Elsewhere (Original mix)
+4. Mr. V & Chris Minus - The end (Original Mix)
+5. Noir, Lomez, Atnarko feat. Symbol - Lost again (Raw club cut)
+6. Kolombo, Sammy W & Alex E - Play ur chick! (Original mix)
+7. Mahmut Orhan - Without you (Aytac Kart remix)
+8. Osunlade - Dionne (Original mix)
+9. John Tejada - We can pretend (Original mix)
+10 Tiga, Audion - Let's go dancing (Maya Jane Coles Dancing in the deep remix)
+11 Dave DK - Nakai pop (Ambient Version)",./content/release/M38_Manti_Lets_go_dancing.mp3,./content/covers/lets-go-dancing.jpg,"6,8,42",2014-02-15 02:51:17,128,2017-04-28 14:37:21
+48,predator,Predator,Злой и очень мощный нейро сет. Только самое лучшее и жирное...,Злой и очень мощный нейро сет. Только самое лучшее и жирное...,"Neurofunk,Drum and Bass,Predator,Techstep,MNT039","Злой и очень мощный нейро сет. Только самое лучшее и жирное...
+NeurofunkDrum and BassSpace is Ours
+MNT037TechstepPromo",1,MNT039,"Neurofunk, Techstep",53:20,LAME 320kbps 44100Hz,"1. Sunchase & Max NRG - Algebra
+2. Agressor Bunx - Armageddon
+3. Emperor & Mefjus - Void main void
+4. Phace - The set up
+5. Misanthrop - Greed Of gain
+6. Ulterior Motive - Gang rule
+7. Audio & Meth - Alone
+8. InsideInfo & Mefjus - Mythos
+9. Heamy - Destroy it (Original mix)
+10. Emperor - Precursor (Mefjus remix)
+11. Dextems - Tunnels
+12. Optiv & BTK - Feelings
+13. Phaeleh - So far away",./content/release/M39_Manti_Predator.mp3,./content/covers/predator.jpg,"41,45,46",2014-09-11 08:21:09,108,2017-04-28 02:01:25
+49,prohibition,Сухой закон,"Вторая работа в стиле. Думал уже не соберу, но любовь к хип-хопу не прошла.","Вторая работа в стиле. Думал уже не соберу, но любовь к хип-хопу не прошла.","Hip-Hop,Rap,NLP,Exclusive,MNTE04","Вторая работа в стиле. Думал уже не соберу, но любовь к хип-хопу не прошла.",1,MNTE04,"Rap, Hip-Hop",1:13:32,LAME 320kbps 44100Hz,"1. Vibe TGK - Новая Тема
+2. 9Грамм - Как Они Смотрят (при уч. Грубый Ниоткуда)
+3. Guf - Фанзона
+4. Словетский - Москва
+5. ГРОТ - Алкотестер
+6. Tony-Gun - Шум Гам
+7. Guf - Распорядок дня
+8. Bonus RPK - Serce Polski
+9. Витя АК - Все МС
+10. Триагрутрика - Свободный Стиль
+11. Честер (Небро) - Пол страны
+12. Brick Bazuka - Не кино (фит Типси Тип)
+13. Guf - О лени (фит ОУ74)
+14. Murovei - На улицах будущего
+15. Рэм Дигга - Давай сделаем так
+16. Кровосток - Весна
+17. Баста и Словетский - Пойдем покурим на лоджию
+18. Дельфин - Любовь
+20. Murovei - Теплый дождь
+21. Jahmal TGK - Капелька Добра
+22. Ассаи - Иду за тобой",./content/release/ME04_Manti_Prohibition.mp3,./content/covers/prohibition.jpg,"12,13,39",2014-09-11 08:35:30,120,2017-04-28 14:03:15
+50,before,Before I go to sllep,"В некотором смысле юбилейный, 40-ой сэт из серии <a href=""http://manti.by/tag/neurostep/"">минималистичного драма</a>.","В некотором смысле юбилейный, 40-ой сэт из серии <a href=""http://manti.by/tag/neurostep/"">минималистичного драма</a>.
+Практически никакой жести, все очень технично и тонко...","Techstep,Drum and Bass,Neurofunk,MNT040,Neurostep","В некотором смысле юбилейный, 40-ой сэт из серии минималистичного драма. Практически никакой жести, все очень технично и тонко...",1,MNT040,"Techstep, Neurofunk",53:38,LAME 320kbps 44100Hz,"1. DLR, Hydro, Mako & Villem - The formula
+2. Mob Tactics - Savages (Original mix)
+3. Dabs & Safire feat. Mc Lowqui - Hideout
+4. Emperor - Begin (feat. Georgia Yates)
+5. Dimension - Jet Black (Original mix)
+6. Noel - Defence
+7. KROT - Rusty pipe
+8. D iolax - Space vortex
+9. Rune Kaiza Elok - Lynks
+10. Agnostetics - Dark mind
+11. D Iolax - The forgotten tribe
+12. Breekda & Dark Soul - Sea
+13. Kije - Without you (feat. Jently)",./content/release/M40_Manti_Before_I_go_to_sleep.mp3,./content/covers/before.jpg,"9,34,48",2015-04-20 09:23:50,97,2017-04-28 16:15:32
+51,new-horizons,New horizons,"Иногда, очень простые и безобидные поступки открывают нам, до этого момента невидимые, новые горизонты...","Иногда, очень простые и безобидные поступки открывают нам, до этого момента невидимые, новые горизонты, после чего еще больше хочется жить и радоваться этому.","Ambient,Chillout,Noise,Light Synthetic Compilation,MNT041","Иногда, очень простые и безобидные поступки открывают нам, до этого момента невидимые, новые горизонты, после чего еще больше хочется жи",1,MNT041,"Ambient, Chillout",1:14:11,LAME 320kbps 44100Hz,"1. Burial - Forgive
+2. Baikal - Seagulls In The Sky
+3. ODESZA - How Did I Get Here
+4. Vanilla - Summer
+5. Sunchase - You what
+6. Mister Lies – Cleam
+7. I-dex - Coral
+8. Volfworks - Over The Love
+9. M-Koda - Whole Surface
+10. Aircolor - Hesea
+11. Echo 6 - Escaped From The Ice
+12. Meg Myers - Desire (Hucci remix)
+14. I-dex - Glacier
+13. Bones - Autumn Leaves
+15. Krusseldorf - Reboot Jam
+16. Synkro - Body Close (feat. Lyves)
+17. Jan Amit - Ages
+18. Bronchusevenmx - Murder
+19. Synkro - Changes",./content/release/M41_Manti_New_horizons.mp3,./content/covers/new-horizons.jpg,"4,28,38",2015-12-02 06:11:32,73,2017-04-28 04:12:40
+52,phantom,Phantom shield,The greatest pleasure in life is doing what others say you can not.,The greatest pleasure in life is doing what others say you can not.,"Techstep,Drum and Bass,Neurofunk,MNT042,Neurostep",The greatest pleasure in life is doing what others say you can not...,1,MNT042,"Techstep, Neurofunk",57:49,LAME 320kbps 44100Hz,"1. Miles - Sense data
+2. Mark System - Final approach
+3. L-Side - Dreadlocks
+4. Kaset - Nectar
+5. Ben Soundscape, Superior Selectionz - Revenge
+6. Icicle - Lost hours
+7. Detail - Lost
+8. Bredren - Red Powder (Arkaik remix)
+9. DLR - Tugboat
+10. Chromatic - Inertia
+11. Ulterior Motive - Featherweight
+12. Kantyze - Alien origins
+13. Skeptical - Imperial
+14. Simstah - Subliminal
+15. Mista - Elephant juice",./content/release/M42_Manti_Phantom_shield.mp3,./content/covers/phantom.jpg,"9,34,50",2016-01-23 17:10:55,82,2017-04-28 16:52:57
+53,february,Февраль,Странные три месяца странной зимы заставили о многом подумать и расставить все на свои места. ,"Странные три месяца странной зимы заставили о многом подумать и расставить все на свои места. 
+Очень многое в текстах напомнило о себе, о других и другом..","Hip-Hop,Rap,NLP,MNTE05,Exclusive,Featured",Странные три месяца странной зимы заставили о многом подумать и расставить все на свои места. ,1,MNTE05,"Rap, Hip-Hop",1:14:45,LAME 320kbps 44100Hz,"1. Jahmal feat. VibeTGK - Я Убираюсь
+2. АК 47 feat. Ноггано - Моя игра
+3. Noize Mc - Тыщатыщ
+4. Триагрутрика - Гелик
+5. Guf - Наугад (scratch by DJ Shved)
+6. Скриптонит feat. Юрик Четверг, Truwer - Сука тащит нас на дно
+7. Баста и Смоки Мо - Жить достойно
+8. Рэм Дигга feat. Баста - Другой
+9. Krec - Моно
+10. Витя АК - Еду в Ленинград
+11. Баста и Смоки Мо - Амадей (skit)
+12. 9 ГРАММ feat. DJ Wide - Po-Hoo-You
+13. Raga - Амфетамины до добра не доведут
+14. Триагрутрика - Олдскуловая сага
+15. АК-47 feat. Триагрутрика - Откуда ты приехал
+16. Krec - Буря и гром
+17. Смоки Мо - Горсть лепестков
+18. Krec - Февраль
+19. Баста feat. Тати - Хочу к тебе
+20. Скриптонит - Это любовь",./content/release/ME05_Manti_February.mp3,./content/covers/february.jpg,"13,39,49",2016-03-21 21:31:32,107,2017-05-01 23:39:42
+54,100m,100 метров за 4 секунды,<iframe width="700" height="400" src="https://www.youtube.com/embed/iHT0klJXC7Y" frameborder="0" allowfullscreen></iframe>,<iframe width="700" height="400" src="https://www.youtube.com/embed/iHT0klJXC7Y" frameborder="0" allowfullscreen></iframe>,,"100 метров за 4 секунды, 1 мая 2016, 100 метров, Минск, Crank Team",2,,,,,,,,,2016-05-11 13:18:59,37,2017-04-27 23:25:59
+55,litl,LITL,LITL - recursive acronym for "I Love Terry Lee". For all who loves this musician as I love it.,LITL - recursive acronym for "I Love Terry Lee". For all who loves this musician as I love it.,"Tech House,Deep House,Cycles Series,MR001,Replay",LITL - recursive acronym for "I Love Terry Lee". For all who loves this musician as I love it.,1,MR001,"Tech House, Deep House",58:38,LAME 320kbps 44100Hz,"All tracks written by Terry Lee Brown Junior
+
+1. Smugglers
+2. Gitane
+3. Electric avenue
+4. Soul digits
+5. Baltimore (Dub mix)
+6. Under pressure
+7. Home
+8. Chatterbox
+9. Bohemian life (Dub mix)
+10. Delightful encounter",./content/release/MR01_Manti_LITL.mp3,./content/covers/litl.jpg,"6,42,47",2016-10-17 14:32:52,21,2017-04-20 03:12:40
+56,shining,Shining,"Поэтому сквозь солнце, светят звезды...","Поэтому сквозь солнце, светят звезды...","Ambient,Chillout,Featured,Light Synthetic Compilation,MNT043","Поэтому сквозь солнце, светят звезды...",1,MNT041,"Ambient, Chillout",1:05:14,LAME 320kbps 44100Hz,"Скоро появится, все вопросы сюда manti.by@gmail.com",./content/release/M43_Manti_Shining.mp3,./content/covers/shining.jpg,"10,38,51",2017-04-12 04:14:16,25,2017-05-01 21:04:31

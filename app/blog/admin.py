@@ -16,7 +16,7 @@ class PostAdmin(admin.ModelAdmin):
         models.TextField: {'widget': Textarea(attrs={'rows': 4, 'cols': 40})},
     }
 
-    list_display = ('thumb_image', 'name', 'is_music', 'catnum', 'genre', 'ready', 'created')
+    list_display = ('thumb_image', 'name', 'is_music', 'catnum', 'genre', 'is_ready', 'created')
 
     fieldsets = (
         (_('Base Info'), {
@@ -47,3 +47,8 @@ class PostAdmin(admin.ModelAdmin):
             image = obj.cover.url
         return mark_safe('<img src="%s" width="50" />' % image)
     thumb_image.short_description = _('Image')
+
+    def is_ready(self, obj):
+        return obj.ready
+    is_ready.boolean = True
+    is_ready.short_description = _('Ready')

@@ -39,11 +39,14 @@ class Post(SlugifyMixin, BaseModel, models.Model):
     tracklist = models.TextField(blank=True)
 
     tags = TaggableManager(blank=True)
+    viewed = models.IntegerField(blank=True, default=0)
     related = models.ManyToManyField('self', blank=True)
 
     mp3_preview_ready = models.BooleanField(blank=True, default=False)
     ogg_preview_ready = models.BooleanField(blank=True, default=False)
     ogg_release_ready = models.BooleanField(blank=True, default=False)
+
+    original_id = models.IntegerField(blank=True, default=0)  # Temporary field
 
     def __str__(self):
         return self.name
