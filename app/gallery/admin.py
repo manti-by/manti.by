@@ -27,7 +27,7 @@ class GalleryAdmin(admin.ModelAdmin):
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
 
-    list_display = ('image', 'gallery', 'order', 'ready', 'created')
+    list_display = ('image', 'gallery', 'order', 'is_ready', 'created')
     list_filter = ('gallery',)
     ordering = ('order',)
 
@@ -52,6 +52,11 @@ class ImageAdmin(admin.ModelAdmin):
             image = obj.thumbnail_image.url
         return mark_safe('<img src="%s" width="50" />' % image)
     image.short_description = _('Image')
+
+    def is_ready(self, obj):
+        return obj.ready
+    is_ready.boolean = True
+    is_ready.short_description = _('Ready')
 
     class Media:
         js = ('js/libs/jquery-ui-1.12.1/jquery-ui.js',

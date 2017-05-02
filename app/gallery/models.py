@@ -52,15 +52,6 @@ class Image(ImageMixin, BaseModel, models.Model):
         self.phash = phash(image)
         self.save()
 
-    def save(self, *args, **kwargs):
-        if not self.thumbnail_image:
-            self.thumbnail_ready = False
-        if not self.preview_image:
-            self.preview_ready = False
-        if not self.gallery_image:
-            self.gallery_ready = False
-        super(Image, self).save()
-
     class Meta:
         verbose_name = _('Image')
         verbose_name_plural = _('Image List')
