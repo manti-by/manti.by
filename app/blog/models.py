@@ -6,12 +6,21 @@ from django.utils.encoding import python_2_unicode_compatible
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from taggit.models import TaggedItemBase
 from taggit.managers import TaggableManager
 
 from core.models import BaseModel
 from core.mixins import SlugifyMixin
 from core.utils import release_name, cover_name
 from blog.tasks import convert_to_mp3_preview, convert_to_ogg_preview, convert_to_ogg_release
+
+
+class GenresProxy(TaggedItemBase):
+    content_object = models.ForeignKey('Post')
+
+
+class TagsProxy(TaggedItemBase):
+    content_object = models.ForeignKey('Post')
 
 
 @python_2_unicode_compatible
@@ -33,12 +42,16 @@ class Post(SlugifyMixin, BaseModel, models.Model):
 
     is_music = models.BooleanField(blank=True, default=False)
     catnum = models.CharField(max_length=16, blank=True)
-    genre = models.CharField(max_length=32, blank=True)
     quality = models.CharField(max_length=255, blank=True)
     length = models.CharField(max_length=16, blank=True)
     tracklist = models.TextField(blank=True)
 
-    tags = TaggableManager(blank=True)
+    genre = TaggableManager(blank=True, through=GenresProxy)
+    genre.rel.related_name = '+'
+
+    tags = TaggableManager(blank=True, through=TagsProxy)
+    tags.rel.related_name = '+'
+
     viewed = models.IntegerField(blank=True, default=0)
     related = models.ManyToManyField('self', blank=True)
 

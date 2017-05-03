@@ -13,10 +13,10 @@ from blog.models import Post
 class PostAdmin(admin.ModelAdmin):
 
     formfield_overrides = {
-        models.TextField: {'widget': Textarea(attrs={'rows': 4, 'cols': 40})},
+        models.TextField: {'widget': Textarea(attrs={'rows': 4, 'cols': 80})},
     }
 
-    list_display = ('thumb_image', 'name', 'is_music', 'catnum', 'genre', 'is_ready', 'created')
+    list_display = ('thumb_image', 'name', 'is_music', 'catnum', 'is_ready', 'created')
 
     fieldsets = (
         (_('Base Info'), {
@@ -31,6 +31,9 @@ class PostAdmin(admin.ModelAdmin):
         (_('Description'), {
             'fields': ('description_ru', 'description_en')
         }),
+        (_('Tags'), {
+            'fields': ('genre', 'tags')
+        }),
         (_('Music params'), {
             'classes': ('collapse',),
             'fields': ('is_music', 'catnum', 'genre', 'quality', 'length', 'tracklist')
@@ -40,6 +43,9 @@ class PostAdmin(admin.ModelAdmin):
             'fields': ('cover', 'release', 'mp3_preview_ready', 'ogg_preview_ready', 'ogg_release_ready'),
         })
     )
+
+    def get_queryset(self, request):
+        return super(PostAdmin, self).get_queryset(request).prefetch_related('genre', 'tags')
 
     def thumb_image(self, obj):
         image = static_file('img/no-image.png')

@@ -12,7 +12,7 @@ OGG_RELEASE = 'ogg_release'
 
 def convert(format, post_id, type=''):
     from blog.models import Post
-    post = Post.objects.get(pk=post_id)
+    post = Post.objects.get(id=post_id)
     result = filename = str(post.release.file)
 
     if type in (MP3_PREVIEW, OGG_PREVIEW):
