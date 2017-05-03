@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-21 12:32+0000\n"
+"POT-Creation-Date: 2017-05-03 13:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,43 +34,55 @@ msgid "Description"
 msgstr ""
 
 #: blog/admin.py:34
+msgid "Tags"
+msgstr ""
+
+#: blog/admin.py:37
 msgid "Music params"
 msgstr ""
 
-#: blog/admin.py:38 gallery/admin.py:33
+#: blog/admin.py:41 gallery/admin.py:38
 msgid "Files"
 msgstr ""
 
-#: blog/admin.py:49 core/mixins.py:19 gallery/admin.py:48 gallery/models.py:45
+#: blog/admin.py:55 core/mixins.py:22 gallery/admin.py:54 gallery/models.py:56
 msgid "Image"
 msgstr ""
 
-#: blog/models.py:28
+#: blog/admin.py:60 gallery/admin.py:59
+msgid "Ready"
+msgstr ""
+
+#: blog/models.py:37
 msgid "Release File"
 msgstr ""
 
-#: blog/models.py:32
+#: blog/models.py:41
 msgid "Cover Image"
 msgstr ""
 
-#: core/mixins.py:14
+#: core/mixins.py:17
 msgid ""
 "You can select only base image, all others will be generated automatically"
 msgstr ""
 
-#: core/mixins.py:21
+#: core/mixins.py:24
 msgid "Thumbnail Image"
 msgstr ""
 
-#: core/mixins.py:22
+#: core/mixins.py:25
 msgid "Preview Image"
 msgstr ""
 
-#: core/mixins.py:23
+#: core/mixins.py:26
 msgid "Gallery Image"
 msgstr ""
 
-#: core/mixins.py:48
+#: core/mixins.py:36
+msgid "Can't generate thumbnails, original image is not loaded"
+msgstr ""
+
+#: core/mixins.py:58
 msgid "Slug"
 msgstr ""
 
@@ -127,7 +139,7 @@ msgid "Music"
 msgstr ""
 
 #: core/templates/common/header.html:29 core/templates/gallery/list.html:5
-#: core/templates/gallery/list.html:9 gallery/models.py:29
+#: core/templates/gallery/list.html:9 gallery/models.py:34
 msgid "Gallery"
 msgstr ""
 
@@ -188,18 +200,22 @@ msgstr ""
 msgid "Resume"
 msgstr ""
 
-#: gallery/admin.py:30
+#: gallery/admin.py:17
+msgid "Images count"
+msgstr ""
+
+#: gallery/admin.py:35
 msgid "Info"
 msgstr ""
 
-#: gallery/admin.py:37
+#: gallery/admin.py:43
 msgid "Other"
 msgstr ""
 
-#: gallery/models.py:30
+#: gallery/models.py:35
 msgid "Gallery List"
 msgstr ""
 
-#: gallery/models.py:46
+#: gallery/models.py:57
 msgid "Image List"
 msgstr ""

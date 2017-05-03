@@ -1,0 +1,107 @@
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    border-bottom: 1px solid #EEE;
+    background: #FFF;
+    z-index: 1000;
+    transform: translate3d(0, -100%, 0);
+    transition: transform .2s linear, background 1s ease, height .5s ease;
+}
+
+header.visible {
+    transform: translateZ(0);
+}
+
+header nav {
+    position: relative;
+    padding: 1em 0 1.2em 0;
+    font-size: 1.1em;
+}
+
+header nav a,
+header nav i {
+    color: #666;
+}
+
+header nav .link-item {
+    margin-right: 1em;
+}
+
+header nav .material-icons {
+    position: relative;
+    top: 0.2em;
+    font-size: 1.2em;
+}
+
+header .mobile-menu-button {
+    width: 15px;
+}
+
+header .mobile-menu {
+    position: fixed;
+    top: 52px;
+    min-width: 150px;
+    padding: 4px 0;
+    border: 1px solid #EEE;
+    background: #FFF;
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
+}
+
+header .mobile-menu a {
+    display: block;
+    width: 175px;
+    margin: 0 4px;
+    padding: 8px 4px;
+    color: #999;
+    border-bottom: none;
+}
+
+header .mobile-menu a:hover,
+header .mobile-menu a.active {
+    color: #999;
+    text-decoration: none;
+    background-color: #EFEFEF;
+}
+
+header .mobile-menu a:last-child {
+    border-bottom: none;
+}
+
+aside {
+    position: fixed;
+    width: 100%;
+    margin: 0 auto;
+    border-top: 1px solid #CCC;
+    background: #FFF;
+    z-index: 1000;
+}
+
+main {
+    min-height: 490px;
+    margin-top: 5em;
+}
+
+footer {
+    margin: 30px 0 20px 0;
+    color: #666;
+}
+
+footer nav {
+    font-size: 11pt;
+    font-weight: 400;
+}
+
+footer a {
+    padding-right: 20px;
+    text-transform: uppercase;
+    color: #b40303;
+}
+
+footer a:hover, #footer a:active {
+    text-decoration: underline;
+}
+
+footer #copy {
+    float: right;
+}

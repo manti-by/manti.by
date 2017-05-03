@@ -1,0 +1,15 @@
+.gallery {
+    margin-bottom: 2em;
+}
+
+.gallery .featured a {
+    display: block;
+    width: 100%;
+    overflow: hidden;
+}
+
+.gallery .featured a img {
+    min-width: 100%;
+    max-width: 100%;
+}
+

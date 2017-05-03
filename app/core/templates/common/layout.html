@@ -22,14 +22,16 @@
         <meta name="yandex-verification" content="6765012bcd05fac2" />
 
         <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,600,700&subset=cyrillic"
-              rel="stylesheet" />
+              rel="stylesheet">
 
         <link rel="icon" type="image/png" href="{% static 'img/favicon/favicon.png' %}">
 
         {% compress css %}
-            <link type="text/css" rel="stylesheet" href="{% static 'css/reset.css' %}" />
-            <link type="text/css" rel="stylesheet" href="{% static 'css/core.css' %}" />
-            <link type="text/css" rel="stylesheet" href="{% static 'css/print.css' %}" media="print" />
+            <link type="text/css" rel="stylesheet" href="{% static 'css/reset.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/core.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
+            {% block styles %}{% endblock %}
         {% endcompress %}
     </head>
     <body>
@@ -39,25 +41,15 @@
             <div class="wrapper"></div>
         </aside>
 
-        <header>
-            <div class="wrapper">
-                {% include 'common/header.html' %}
-            </div>
-        </header>
+        {% include 'common/header.html' %}
 
         <main>
-            <div class="wrapper">
-                {% block content %}
-                    404 Not Found
-                {% endblock %}
-            </div>
+            {% block content %}
+                404 Not Found
+            {% endblock %}
         </main>
 
-        <footer>
-            <div class="wrapper">
-                {% include 'common/footer.html' %}
-            </div>
-        </footer>
+        {% include 'common/footer.html' %}
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         {% compress js %}

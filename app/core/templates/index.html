@@ -1,34 +1,44 @@
 {% extends 'common/layout.html' %}
 
-{% load i18n %}
+{% load static i18n %}
 
 {% block title %}{% trans 'Homepage' %}{% endblock %}
 
 {% block content %}
-    <div class="homepage container">
+    <div class="home container">
+        <div class="posts featured">
+            {% for item in featured_posts %}
+                {% include 'blog/list-item.html' %}
+            {% endfor %}
+        </div>
         <div class="gallery">
             <h2><a href="{% url 'gallery_list' %}">{% trans 'Latest shots from gallery' %}</a></h2>
-            <div class="latest_images">
+            <div class="latest">
                 {% for image in latest_images %}
                     <a href="{{ image.gallery.get_absolute_url }}#image-{{ image.pk }}" class="thumbnail">
                         <img src="{{ image.thumbnail_image.url }}" alt="{% trans 'Latest image from gallery' %}">
                     </a>
                 {% endfor %}
             </div>
-            <div class="featured_image">
+            <div class="featured">
                 <a href="{{ featured_image.gallery.get_absolute_url }}#image-{{ featured_image.pk }}">
                     <img src="{{ featured_image.gallery_image.url }}" alt="{% trans 'Popular image from gallery' %}">
                 </a>
             </div>
         </div>
+        <div class="posts">
+            {% for item in latest_posts %}
+                {% include 'blog/list-item.html' %}
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
 
+{% block styles %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/gallery/home.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list-item.css' %}" />
+{% endblock %}
+
 {% block scripts %}
-    <script type="text/javascript">
-        (function($) {
-            $(document).ready(function() {
-            });
-        })(jQuery);
-    </script>
+    <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
 {% endblock %}

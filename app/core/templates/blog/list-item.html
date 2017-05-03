@@ -1,0 +1,49 @@
+{% load i18n %}
+
+<div class="post">
+    <div class="flex">
+        <div class="image">
+            <a href="{% url 'post' item.slug %}">
+                <img src="{{ item.cover.url }}">
+            </a>
+        </div>
+        <div class="info">
+            <h2>
+                <a href="{% url 'post' item.slug %}">
+                    {{ item.name }}
+                </a>
+            </h2>
+            <div class="summary">{{ item.summary|safe }}</div>
+            <div class="created">
+                <strong>{% trans 'Created' %}</strong>:
+                {{ item.created }}
+            </div>
+            <div class="genre">
+                <strong>{% trans 'Genre' %}</strong>:
+                {% for t in item.genre.all %}
+                    <span class="tag">{{ t.name }}</span>
+                {% endfor %}
+            </div>
+            <div class="length">
+                <strong>{% trans 'Length' %}</strong>:
+                {{ item.length }}</div>
+            <div class="player"></div>
+            <div class="tags">
+                <strong>{% trans 'Tags' %}</strong>:
+                {% for t in item.tags.all %}
+                    <span class="tag">{{ t.name }}</span>
+                {% endfor %}
+            </div>
+            <div class="links">
+                <a href="{{ item.release.url }}">{% trans 'Download' %}</a>
+                <span class="link show-tracklist">{% trans 'Tracklist' %}</span>
+            </div>
+        </div>
+        <div class="tracklist hidden">
+            {{ item.tracklist|safe }}
+            <div class="links">
+                <span class="link hide-tracklist">{% trans 'Hide Tracklist' %}</span>
+            </div>
+        </div>
+    </div>
+</div>

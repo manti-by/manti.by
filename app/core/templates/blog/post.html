@@ -2,10 +2,46 @@
 
 {% load i18n %}
 
-{% block title %}{% trans 'Blog Post' %}{% endblock %}
+{% block title %}{{ item.name }}{% endblock %}
+{% block meta %}{{ item.meta }}{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h1>{% trans 'Blog Post' %}</h1>
+    <div class="post container">
+        <div class="image">
+            <img src="{{ item.cover.url }}">
+        </div>
+        <div class="info">
+            <h1>{{ item.name }}</h1>
+            <p>{{ item.description }}</p>
+            <p>{% trans 'Created' %}: {{ item.created }}</p>
+            <p>{% trans 'Catalog No' %}: {{ item.catnum }}</p>
+            <p>{% trans 'Quality' %}: {{ item.quality }}</p>
+            <p>{% trans 'Length' %}: {{ item.length }}</p>
+            <p>{% trans 'Genre' %}:
+                {% for t in item.genre.all %}
+                    {{ t.name }}
+                {% endfor %}
+            </p>
+            <p>{% trans 'Tags' %}:
+                {% for t in item.tags.all %}
+                    {{ t.name }}
+                {% endfor %}
+            </p>
+        </div>
+        <div class="tracklist hidden">{{ item.tracklist }}</div>
+        <div class="link">
+            <a href="{{ item.release.url }}">{% trans 'Download' %}</a>
+            <span class="link">{% trans 'Tracklist' %}</span>
+        </div>
+        <div class="related">
+            {% for r in item.related.all %}
+                <div class="item">
+                    <a href="{% url 'post' r.slug %}">
+                        <img src="{{ r.cover.url }}">
+                        {{ r.name }}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}

@@ -1,11 +1,22 @@
 {% extends 'common/layout.html' %}
 
-{% load i18n %}
+{% load static i18n %}
 
 {% block title %}{% trans 'Blog' %}{% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="blog container">
         <h1>{% trans 'Blog' %}</h1>
+        {% for item in item_list %}
+            {% include 'blog/list-item.html' %}
+        {% endfor %}
     </div>
+{% endblock %}
+
+{% block styles %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list-item.css' %}">
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
 {% endblock %}

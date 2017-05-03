@@ -1,12 +1,13 @@
 {% load i18n %}
 
-<nav>
-    <a href="{% url 'about' %}">{% trans 'About' %}</a>
-    <a href="{% url 'resume' %}">{% trans 'My job' %}</a>
-    <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>
-    <a href="{% url 'sitemap' %}" rel="index">{% trans 'Sitemap' %}</a>
-    <a href="mailto:manti.by@gmail.com">{% trans 'Contact' %}</a>
-    <div id="copy">
-        Alex Manti&copy; 2006 - {% now 'Y' %}
-    </div>
-</nav>
+<footer>
+    <nav class="container">
+        <a href="{% url 'about' %}">{% trans 'About' %}</a>
+        <a href="{% url 'resume' %}">{% trans 'My job' %}</a>
+        <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>
+        <a href="mailto:manti.by@gmail.com">{% trans 'Contact' %}</a>
+        <div id="copy">
+            Alex Manti&copy; 2006 - {% now 'Y' %}
+        </div>
+    </nav>
+</footer>
