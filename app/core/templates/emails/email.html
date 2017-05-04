@@ -1,59 +1,61 @@
+{% load i18n %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>{{ email.subject }}</title>
-    <style>
+    <style type="text/css">
         body {
+            width: 100%;
             padding: 0;
             margin: 0;
-            font: 12px Tahoma;
-            width: 100%
+            font-family: Arial, Tahoma, Verdana;
+            font-size: 18px;
+            background: #EEE;
         }
 
         #container {
             width: 60%;
-            padding: 20px 20%
+            margin: 10px auto;
+            padding: 20px;
+            background: #FFF;
         }
 
         h1 {
-            font-size: 16px;
+            font-size: 24px;
             padding: 0;
-            margin: 0
+            margin: 0 0 8px 0;
         }
 
-        time {
-            color: blue;
+        .row {
+            margin-bottom: 8px;
         }
 
-        table {
-            background: #eee;
-            margin-top: 10px;
-        }
-
-        th {
-            background: #ccc;
-            padding: 2px 10px;
-        }
-
-        td {
-            background: #fff;
-            padding: 2px 10px;
+        .created {
+            color: #999;
+            text-align: right;
+            font-size: 12px;
         }
     </style>
 </head>
 <body>
     <div id="container">
         <h1>{{ email.subject }} </h1>
-        <time>{{ email.created }}</time>
-        <p>From: {{ email.email }}</p>
-        <table>
-            <tr>
-                <th>Message:</th>
-                <td>{{ email.message }}</td>
-            </tr>
-        </table>
+        <div class="row"><strong>From</strong>:
+            {% if email.name %}
+                {{ email.name }} &lt;{{ email.email }}&gt;
+            {% else %}
+                {{ email.email }}
+            {% endif %}
+        </div>
+        <div class="row"><strong>Message</strong>:</div>
+        <div class="row">{{ email.message }}</div>
+        <div class="created">
+            <a href="{% url 'admin:core_email_change' email.id %}">{% trans 'Show email' %}</a>
+            <div>{{ email.created }}</div>
+        </div>
     </div>
 </body>
 </html>
