@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-03 13:15+0000\n"
+"POT-Creation-Date: 2017-05-11 14:19+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,28 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
 "%100>=11 && n%100<=14)? 2 : 3);\n"
+
+#: api/resources.py:31
+#, fuzzy
+#| msgid "Update"
+msgid "Updated"
+msgstr "Обновить"
+
+#: api/resources.py:38
+msgid "No data"
+msgstr "Нет данных"
+
+#: api/resources.py:52
+msgid "Contact request from manti.by"
+msgstr "Запрос на контакт с manti.by"
+
+#: api/resources.py:57
+msgid "Thanks for subscribing, we'll get in touch soon"
+msgstr "Спасибо за подписку, мы скоро свяжемся"
+
+#: api/resources.py:61
+msgid "Can't save contact info, please try later"
+msgstr "Не могу сохранить данные, пожалуйста попробуйте позже"
 
 #: blog/admin.py:22
 msgid "Base Info"
@@ -36,9 +58,10 @@ msgstr "Краткое описание"
 msgid "Description"
 msgstr "Описание"
 
-#: blog/admin.py:34
+#: blog/admin.py:34 core/templates/blog/list-item.html:32
+#: core/templates/blog/post.html:37
 msgid "Tags"
-msgstr ""
+msgstr "Тэги"
 
 #: blog/admin.py:37
 msgid "Music params"
@@ -54,7 +77,7 @@ msgstr "Изображение"
 
 #: blog/admin.py:60 gallery/admin.py:59
 msgid "Ready"
-msgstr ""
+msgstr "Готово"
 
 #: blog/models.py:37
 msgid "Release File"
@@ -93,58 +116,100 @@ msgstr "Ссылка"
 msgid "Created, UTC"
 msgstr "Создано, UTC"
 
-#: core/settings/base.py:124
+#: core/settings/base.py:126
 msgid "Russian"
 msgstr "Русский"
 
-#: core/settings/base.py:125
+#: core/settings/base.py:127
 msgid "English"
 msgstr "English"
+
+#: core/templates/blog/list-item.html:18 core/templates/blog/post.html:28
+#: core/templates/emails/email.html:65
+#, fuzzy
+#| msgid "Created, UTC"
+msgid "Created"
+msgstr "Создано, UTC"
+
+#: core/templates/blog/list-item.html:22 core/templates/blog/post.html:32
+msgid "Genre"
+msgstr "Жанр"
+
+#: core/templates/blog/list-item.html:28 core/templates/blog/post.html:31
+msgid "Length"
+msgstr "Продолжительность"
+
+#: core/templates/blog/list-item.html:38 core/templates/blog/post.html:45
+msgid "Download"
+msgstr "Скачать"
+
+#: core/templates/blog/list-item.html:39 core/templates/blog/post.html:46
+msgid "Tracklist"
+msgstr "Трэклист"
+
+#: core/templates/blog/list-item.html:45
+msgid "Hide Tracklist"
+msgstr "Скрыть треклист"
 
 #: core/templates/blog/list.html:5 core/templates/blog/list.html:9
 msgid "Blog"
 msgstr "Блог"
 
-#: core/templates/blog/post.html:5 core/templates/blog/post.html:9
-msgid "Blog Post"
-msgstr "Новость"
+#: core/templates/blog/post.html:29
+msgid "Catalog No"
+msgstr "Каталоговый №"
 
-#: core/templates/common/footer.html:4 core/templates/common/header.html:44
+#: core/templates/blog/post.html:30
+msgid "Quality"
+msgstr "Качество"
+
+#: core/templates/common/footer.html:5 core/templates/common/header.html:40
 #: core/templates/static/about.html:5 core/templates/static/about.html:9
 msgid "About"
 msgstr "Обо мне"
 
-#: core/templates/common/footer.html:5 core/templates/common/header.html:45
+#: core/templates/common/footer.html:6 core/templates/common/header.html:41
 msgid "My job"
 msgstr "Резюме"
 
-#: core/templates/common/footer.html:6 core/templates/common/header.html:46
+#: core/templates/common/footer.html:7 core/templates/common/header.html:42
 #: core/templates/static/copyrights.html:5
 #: core/templates/static/copyrights.html:9
 msgid "Copyrights"
 msgstr "Авторские права"
 
-#: core/templates/common/footer.html:7 core/templates/common/header.html:47
-#: core/templates/sitemap.html:5 core/templates/sitemap.html:9
-msgid "Sitemap"
-msgstr "Карта сайта"
-
-#: core/templates/common/footer.html:8 core/templates/common/header.html:48
+#: core/templates/common/footer.html:8 core/templates/common/header.html:43
 msgid "Contact"
 msgstr "Контакты"
 
-#: core/templates/common/header.html:5 core/templates/common/header.html:49
-msgid "Search"
-msgstr "Поиск"
-
-#: core/templates/common/header.html:25
+#: core/templates/common/header.html:19
 msgid "Music"
 msgstr "Музыка"
 
-#: core/templates/common/header.html:29 core/templates/gallery/list.html:5
+#: core/templates/common/header.html:23 core/templates/gallery/list.html:5
 #: core/templates/gallery/list.html:9 gallery/models.py:34
 msgid "Gallery"
 msgstr "Галлерея"
+
+#: core/templates/common/header.html:44
+msgid "Search"
+msgstr "Поиск"
+
+#: core/templates/emails/email.html:52
+msgid "From"
+msgstr "От"
+
+#: core/templates/emails/email.html:59
+msgid "Message"
+msgstr "Сообщение"
+
+#: core/templates/emails/email.html:63
+msgid "View this message in"
+msgstr "Показать сообщение в"
+
+#: core/templates/emails/email.html:64
+msgid "browser"
+msgstr "браузере"
 
 #: core/templates/gallery/gallery.html:5
 msgid "Gallery View"
@@ -154,15 +219,15 @@ msgstr "Галлерея"
 msgid "Homepage"
 msgstr "Домашняя страница"
 
-#: core/templates/index.html:10
+#: core/templates/index.html:15
 msgid "Latest shots from gallery"
 msgstr "Свежие изображения из галлереи"
 
-#: core/templates/index.html:14
+#: core/templates/index.html:19
 msgid "Latest image from gallery"
 msgstr "Свежее изображение из галлереи"
 
-#: core/templates/index.html:20
+#: core/templates/index.html:25
 msgid "Popular image from gallery"
 msgstr "Популярное изображение из галлереи"
 
@@ -203,6 +268,14 @@ msgstr "Обновить"
 msgid "Resume"
 msgstr "Резюме"
 
+#: core/templates/static/resume.html:172
+msgid "Code samples"
+msgstr "Пример кода"
+
+#: core/templates/static/resume.html:175
+msgid "Print this page"
+msgstr "Распечатать эту страницу"
+
 #: gallery/admin.py:17
 #, fuzzy
 #| msgid "Image List"
@@ -224,3 +297,9 @@ msgstr "Галлерея"
 #: gallery/models.py:57
 msgid "Image List"
 msgstr "Изображения"
+
+#~ msgid "Blog Post"
+#~ msgstr "Новость"
+
+#~ msgid "Sitemap"
+#~ msgstr "Карта сайта"
