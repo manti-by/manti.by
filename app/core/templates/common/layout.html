@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>{% block title %}{% endblock %}</title>
+        <title>{% block title %}{{ META_TITLE }}{% endblock %}</title>
 
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,11 +15,18 @@
         <!-- Add to homescreen for Safari on iOS -->
         <meta name="apple-mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-status-bar-style" content="black">
-        <meta name="apple-mobile-web-app-title" content="iOS Title">
+        <meta name="apple-mobile-web-app-title" content="{% block ios-title %}{{ META_TITLE }}{% endblock %}">
         <link rel="apple-touch-icon-precomposed" href="{% static 'img/favicon/ios-desktop.png' %}">
 
-        <meta name="description" content="{% block meta %}{% endblock %}" />
+        <meta name="description" content="{% block meta %}{{ META_DESCRIPTION }}{% endblock %}" />
         <meta name="yandex-verification" content="6765012bcd05fac2" />
+
+        {% block open-graph %}
+            <meta property="og:type" content="website">
+            <meta property="og:title" content="{{ META_TITLE }}">
+            <meta property="og:description" content="{{ META_DESCRIPTION }}">
+            <meta property="og:image" content="{% static 'img/favicon.png' %}">
+        {% endblock %}
 
         <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,600,700&subset=cyrillic"
               rel="stylesheet">

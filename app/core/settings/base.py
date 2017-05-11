@@ -92,6 +92,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
+BASE_URL = 'https://manti.by'
+
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -170,12 +172,16 @@ THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
 
 # Email settings
 
-CONTACT_EMAIL = ['manti.by@gmail.com']
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 25
+DEFAULT_FROM_EMAIL = ''
+DEFAULT_TO_EMAIL = ''
 
 
 # Allowed hosts
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['manti.by', '127.0.0.1']
 
 
 # Static compressor settings
@@ -196,3 +202,9 @@ CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
+
+
+# Meta tags info
+
+META_TITLE = "Official blog of Alex Manti"
+META_DESCRIPTION = "Official blog of Alex Manti"

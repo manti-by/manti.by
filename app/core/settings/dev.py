@@ -11,9 +11,6 @@ DEBUG = True
 SECRET_KEY = '9(+8&f)43k--m$cq1#kcwy$%o4hlj9remnlybh+-*gl6_*10*k'
 
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 DATABASES = {

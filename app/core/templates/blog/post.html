@@ -2,8 +2,20 @@
 
 {% load i18n %}
 
-{% block title %}{{ item.name }}{% endblock %}
+{% block title %}{{ item.name }} - {{ META_TITLE }}{% endblock %}
+{% block ios-title %}{{ item.name }} - {{ META_TITLE }}{% endblock %}
+
 {% block meta %}{{ item.meta }}{% endblock %}
+
+{% block open-graph %}
+    <meta property="og:type" content="music.song">
+    <meta property="og:title" content="Manti - {{ item.name }}">
+    <meta property="og:image" content="{{ BASE_URL }}{{ item.cover.url }}">
+    <meta property="og:url" content="{{ BASE_URL }}{% url 'post' item.slug %}">
+    <meta property="og:site_name" content="{{ META_TITLE }}">
+    <meta property="og:audio" content="{{ BASE_URL }}{{ item.release.url }}">
+    <meta property="og:audio:type" content="audio/mpeg">
+{% endblock %}
 
 {% block content %}
     <div class="post container">

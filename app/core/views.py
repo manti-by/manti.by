@@ -4,6 +4,7 @@ from django.http import HttpResponse, Http404, HttpResponseNotAllowed
 from django.shortcuts import render
 from django.utils import translation
 
+from core.models import Email
 from blog.models import Post
 from gallery.models import Image
 
@@ -26,17 +27,18 @@ def index(request):
         raise Http404
 
 
-def sitemap(request):
+def static(request, page):
     try:
-        return render(request, 'sitemap.html')
+        return render(request, 'static/%s.html' % page)
     except Exception as e:
         logger.exception(e)
         raise Http404
 
 
-def static(request, page):
+def email(request, email_id):
     try:
-        return render(request, 'static/%s.html' % page)
+        e = Email.objects.get(id=email_id)
+        return render(request, 'emails/email.html', {'email': e})
     except Exception as e:
         logger.exception(e)
         raise Http404
