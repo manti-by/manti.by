@@ -1,6 +1,7 @@
 body {
     font-family: 'Roboto', Arial, Tahoma, Verdana, sans-serif;
     font-size: 16px;
+    line-height: 1;
     color: #333;
     background: #FAFAFA;
 }
@@ -23,6 +24,35 @@ h2 {
     font-size: 1.5em;
 }
 
+p {
+    margin: 1em 0;
+    line-height: 1.2;
+}
+
+strong {
+    font-weight: 500;
+}
+
+cite {
+    font-style: italic;
+}
+
+ul,
+ol {
+    margin-left: 1em;
+    list-style-type: circle;
+}
+
+ol {
+    list-style-type: decimal;
+}
+
+ul li,
+ol li {
+    margin: 0.5em 0;
+    line-height: 1.2;
+}
+
 .hidden {
     display: none;
 }
@@ -35,4 +65,9 @@ h2 {
 .container {
     width: 1000px;
     margin: 0 auto;
+}
+
+.static .image {
+    float: right;
+    margin: 0 0 1em 1em;
 }
