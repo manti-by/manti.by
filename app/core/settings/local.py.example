@@ -10,8 +10,8 @@ ALLOWED_HOSTS = ['127.0.0.1']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'nostromo',
-        'USER': 'nostromo',
+        'NAME': 'manti',
+        'USER': 'manti',
         'PASSWORD': 'pa55word',
         'HOST': 'localhost',
         'PORT': '',
@@ -32,7 +32,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': '/home/manti/www/nostromo/tmp/app.log',
+            'filename': '/home/manti/www/manti.by/log/app.log',
         },
         'console': {
             'level': 'ERROR',
