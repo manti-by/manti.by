@@ -37,8 +37,7 @@ class ImageAdmin(admin.ModelAdmin):
         }),
         (_('Files'), {
             'classes': ('collapse',),
-            'fields': ('original_image', 'thumbnail_image', 'thumbnail_ready',
-                       'preview_image', 'preview_ready', 'gallery_image', 'gallery_ready')
+            'fields': ('original_image', 'thumbnail_image', 'preview_image', 'gallery_image')
         }),
         (_('Other'), {
             'classes': ('collapse',),
