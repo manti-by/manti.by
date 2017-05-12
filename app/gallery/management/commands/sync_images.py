@@ -18,7 +18,7 @@ class Command(BaseCommand):
         checked = added = 0
         images = Image.objects.values_list('phash', flat=True)
         galleries = Gallery.objects.values_list('slug', flat=True)
-        gallery_path = os.path.join(settings.MEDIA_ROOT, 'gallery')
+        gallery_path = os.path.join(settings.MEDIA_ROOT, 'gallery', 'originals')
         for root, dirs, f in os.walk(gallery_path):
             for dir in dirs:
                 if dir not in galleries:
