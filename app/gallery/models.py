@@ -12,8 +12,9 @@ from imagehash import phash
 from taggit.managers import TaggableManager
 
 from core.models import BaseModel
-from core.mixins import SlugifyMixin, ImageMixin
-from gallery.tasks import generate_thumbnails, generate_phash
+from core.mixins import SlugifyMixin
+from core.utils import original_name
+from gallery.tasks import generate_phash
 
 
 @python_2_unicode_compatible
@@ -36,8 +37,9 @@ class Gallery(SlugifyMixin, BaseModel, models.Model):
 
 
 @python_2_unicode_compatible
-class Image(ImageMixin, BaseModel, models.Model):
+class Image(BaseModel, models.Model):
 
+    original_image = models.ImageField(upload_to=original_name, blank=True, null=True, verbose_name=_('Image'))
     phash = models.CharField(blank=True, null=True, max_length=255)
     gallery = models.ForeignKey(Gallery, null=True, blank=True, related_name='images')
 
@@ -55,12 +57,6 @@ class Image(ImageMixin, BaseModel, models.Model):
     class Meta:
         verbose_name = _('Image')
         verbose_name_plural = _('Image List')
-
-
-@receiver(post_save, sender=Image, dispatch_uid='generate_image_thumbnails')
-def generate_image_thumbnails(sender, instance, **kwargs):
-    if not instance.ready:
-        generate_thumbnails.delay(instance.id)
 
 
 @receiver(post_save, sender=Image, dispatch_uid='generate_image_phash')
