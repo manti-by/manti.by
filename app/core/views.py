@@ -14,9 +14,9 @@ logger = logging.getLogger('app')
 
 def index(request):
     try:
-        featured_image = Image.objects.filter(tags__name='featured')[0]
+        featured_image = Image.objects.filter(tags__name__iexact='featured')[0]
         latest_images = Image.objects.exclude(pk=featured_image.pk).order_by('-created')[:6]
-        featured_posts = Post.objects.filter(tags__name='featured')[:3]
+        featured_posts = Post.objects.filter(tags__name__iexact='featured')[:3]
         latest_posts = Post.objects.exclude(pk__in=[p.pk for p in featured_posts]).order_by('-created')[:6]
         return render(request, 'index.html', {'featured_image': featured_image,
                                               'latest_images': latest_images,
