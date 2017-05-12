@@ -92,7 +92,6 @@ ol li {
     line-height: 1.2;
     color: #666;
     border-bottom: 1px dotted #999;
-    cursor: pointer;
 }
 
 .tag:hover {

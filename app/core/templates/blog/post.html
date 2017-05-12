@@ -48,7 +48,7 @@
                 <div class="tags">
                     <strong>{% trans 'Tags' %}</strong>:
                     {% for t in item.tags.all %}
-                        <span class="tag">{{ t.name }}</span>
+                        <a href="{% url 'blog' %}?tag={{ t.slug }}" class="tag">{{ t.name }}</a>
                     {% endfor %}
                 </div>
                 <div class="links">

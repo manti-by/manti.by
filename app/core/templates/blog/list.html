@@ -6,7 +6,13 @@
 
 {% block content %}
     <div class="blog container">
-        <h1>{% trans 'Blog' %}</h1>
+        <h1>
+            {% if tag %}
+            {% trans 'Search by tag' %} <span class="tag">{{ tag }}</span>
+        {% else %}
+            {% trans 'Blog' %}
+        {% endif %}
+        </h1>
         {% for item in item_list %}
             {% include 'blog/list-item.html' %}
         {% endfor %}
