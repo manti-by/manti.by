@@ -10,19 +10,13 @@
         <div class="info">
             <h2>
                 <a href="{% url 'post' item.slug %}">
-                    {{ item.name }}
+                    {{ item.name }} /{{ item.genre.all|join:", " }}/
                 </a>
             </h2>
             <div class="summary">{{ item.summary|safe }}</div>
             <div class="created">
                 <strong>{% trans 'Created' %}</strong>:
-                {{ item.created }}
-            </div>
-            <div class="genre">
-                <strong>{% trans 'Genre' %}</strong>:
-                {% for t in item.genre.all %}
-                    <span class="tag">{{ t.name }}</span>
-                {% endfor %}
+                {{ item.created|date:"d b Y" }}
             </div>
             <div class="length">
                 <strong>{% trans 'Length' %}</strong>:
@@ -35,12 +29,19 @@
                 {% endfor %}
             </div>
             <div class="links">
-                <a href="{{ item.release.url }}">{% trans 'Download' %}</a>
                 <span class="link show-tracklist">{% trans 'Tracklist' %}</span>
+                <a href="{{ item.release.url }}" class="download">{% trans 'Download' %}</a>
             </div>
         </div>
         <div class="tracklist hidden">
-            {{ item.tracklist|safe }}
+            <h2>
+                <a href="{% url 'post' item.slug %}">
+                    {{ item.name }}
+                </a>
+            </h2>
+            <div class="tracks">
+                {{ item.tracklist|safe }}
+            </div>
             <div class="links">
                 <span class="link hide-tracklist">{% trans 'Hide Tracklist' %}</span>
             </div>

@@ -13,17 +13,17 @@
         </div>
         <div class="gallery">
             <h2><a href="{% url 'gallery_list' %}">{% trans 'Latest shots from gallery' %}</a></h2>
-            <div class="latest">
-                {% for image in latest_images %}
-                    <a href="{{ image.gallery.get_absolute_url }}#image-{{ image.pk }}" class="thumbnail">
-                        <img src="{{ image.thumbnail_image.url }}" alt="{% trans 'Latest image from gallery' %}">
-                    </a>
-                {% endfor %}
-            </div>
             <div class="featured">
                 <a href="{{ featured_image.gallery.get_absolute_url }}#image-{{ featured_image.pk }}">
                     <img src="{{ featured_image.gallery_image.url }}" alt="{% trans 'Popular image from gallery' %}">
                 </a>
+                <div class="latest">
+                    {% for image in latest_images %}
+                        <a href="{{ image.gallery.get_absolute_url }}#image-{{ image.pk }}" class="thumbnail">
+                            <img src="{{ image.thumbnail_image.url }}" alt="{% trans 'Latest image from gallery' %}">
+                        </a>
+                    {% endfor %}
+                </div>
             </div>
         </div>
         <div class="posts">

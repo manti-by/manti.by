@@ -1,6 +1,6 @@
 {% extends 'common/layout.html' %}
 
-{% load i18n %}
+{% load static i18n %}
 
 {% block title %}{{ item.name }} - {{ META_TITLE }}{% endblock %}
 {% block ios-title %}{{ item.name }} - {{ META_TITLE }}{% endblock %}
@@ -19,41 +19,71 @@
 
 {% block content %}
     <div class="post container">
-        <div class="image">
-            <img src="{{ item.cover.url }}">
+        <div class="flex">
+            <div class="image">
+                <img src="{{ item.cover.url }}">
+            </div>
+            <div class="info">
+                <h1>{{ item.name }}</h1>
+                <div class="description">{{ item.description|safe }}</div>
+                <div class="created">
+                    <strong>{% trans 'Created' %}</strong>:
+                    {{ item.created }}
+                </div>
+                <div class="catnum">
+                    <strong>{% trans 'Catalog No' %}</strong>:
+                    {{ item.catnum }}
+                </div>
+                <div class="quality">
+                    <strong>{% trans 'Quality' %}</strong>:
+                    {{ item.quality }}
+                </div>
+                <div class="length">
+                    <strong>{% trans 'Length' %}</strong>:
+                    {{ item.length }}</div>
+                <div class="genre">
+                    <strong>{% trans 'Genre' %}</strong>:
+                    {{ item.genre.all|join:", " }}
+                </div>
+                <div class="tags">
+                    <strong>{% trans 'Tags' %}</strong>:
+                    {% for t in item.tags.all %}
+                        <span class="tag">{{ t.name }}</span>
+                    {% endfor %}
+                </div>
+                <div class="links">
+                    <span class="link show-tracklist">{% trans 'Tracklist' %}</span>
+                    <a href="{{ item.release.url }}" class="download">{% trans 'Download' %}</a>
+                </div>
+            </div>
+            <div class="tracklist hidden">
+                <h1>{{ item.name }}</h1>
+                <div class="tracks">
+                    {{ item.tracklist|safe }}
+                </div>
+                <div class="links">
+                    <span class="link hide-tracklist">{% trans 'Hide Tracklist' %}</span>
+                </div>
+            </div>
         </div>
-        <div class="info">
-            <h1>{{ item.name }}</h1>
-            <p>{{ item.description }}</p>
-            <p>{% trans 'Created' %}: {{ item.created }}</p>
-            <p>{% trans 'Catalog No' %}: {{ item.catnum }}</p>
-            <p>{% trans 'Quality' %}: {{ item.quality }}</p>
-            <p>{% trans 'Length' %}: {{ item.length }}</p>
-            <p>{% trans 'Genre' %}:
-                {% for t in item.genre.all %}
-                    {{ t.name }}
-                {% endfor %}
-            </p>
-            <p>{% trans 'Tags' %}:
-                {% for t in item.tags.all %}
-                    {{ t.name }}
-                {% endfor %}
-            </p>
-        </div>
-        <div class="tracklist hidden">{{ item.tracklist }}</div>
-        <div class="link">
-            <a href="{{ item.release.url }}">{% trans 'Download' %}</a>
-            <span class="link">{% trans 'Tracklist' %}</span>
-        </div>
-        <div class="related">
-            {% for r in item.related.all %}
+        <h2>{% trans 'Related posts' %}</h2>
+        <div class="related flex">
+            {% for r in item.related.all|slice:":3" %}
                 <div class="item">
                     <a href="{% url 'post' r.slug %}">
                         <img src="{{ r.cover.url }}">
-                        {{ r.name }}
+                        <span class="name">{{ r.name }} /{{ r.genre.all|join:", " }}/</span>
                     </a>
                 </div>
             {% endfor %}
         </div>
     </div>
+{% endblock %}
+
+{% block styles %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/blog/post.css' %}">
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
 {% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-11 14:19+0000\n"
+"POT-Creation-Date: 2017-05-12 10:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,8 +53,8 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: blog/admin.py:34 core/templates/blog/list-item.html:32
-#: core/templates/blog/post.html:37
+#: blog/admin.py:34 core/templates/blog/list-item.html:26
+#: core/templates/blog/post.html:49
 msgid "Tags"
 msgstr ""
 
@@ -66,11 +66,11 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
-#: blog/admin.py:55 core/mixins.py:22 gallery/admin.py:54 gallery/models.py:56
+#: blog/admin.py:55 core/mixins.py:22 gallery/admin.py:53 gallery/models.py:56
 msgid "Image"
 msgstr ""
 
-#: blog/admin.py:60 gallery/admin.py:59
+#: blog/admin.py:60 gallery/admin.py:58
 msgid "Ready"
 msgstr ""
 
@@ -119,28 +119,24 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: core/templates/blog/list-item.html:18 core/templates/blog/post.html:28
+#: core/templates/blog/list-item.html:18 core/templates/blog/post.html:30
 #: core/templates/emails/email.html:65
 msgid "Created"
 msgstr ""
 
-#: core/templates/blog/list-item.html:22 core/templates/blog/post.html:32
-msgid "Genre"
-msgstr ""
-
-#: core/templates/blog/list-item.html:28 core/templates/blog/post.html:31
+#: core/templates/blog/list-item.html:22 core/templates/blog/post.html:42
 msgid "Length"
 msgstr ""
 
-#: core/templates/blog/list-item.html:38 core/templates/blog/post.html:45
-msgid "Download"
-msgstr ""
-
-#: core/templates/blog/list-item.html:39 core/templates/blog/post.html:46
+#: core/templates/blog/list-item.html:32 core/templates/blog/post.html:55
 msgid "Tracklist"
 msgstr ""
 
-#: core/templates/blog/list-item.html:45
+#: core/templates/blog/list-item.html:33 core/templates/blog/post.html:56
+msgid "Download"
+msgstr ""
+
+#: core/templates/blog/list-item.html:46 core/templates/blog/post.html:65
 msgid "Hide Tracklist"
 msgstr ""
 
@@ -148,12 +144,20 @@ msgstr ""
 msgid "Blog"
 msgstr ""
 
-#: core/templates/blog/post.html:29
+#: core/templates/blog/post.html:34
 msgid "Catalog No"
 msgstr ""
 
-#: core/templates/blog/post.html:30
+#: core/templates/blog/post.html:38
 msgid "Quality"
+msgstr ""
+
+#: core/templates/blog/post.html:45
+msgid "Genre"
+msgstr ""
+
+#: core/templates/blog/post.html:69
+msgid "Related posts"
 msgstr ""
 
 #: core/templates/common/footer.html:5 core/templates/common/header.html:40
@@ -216,12 +220,12 @@ msgstr ""
 msgid "Latest shots from gallery"
 msgstr ""
 
-#: core/templates/index.html:19
-msgid "Latest image from gallery"
+#: core/templates/index.html:18
+msgid "Popular image from gallery"
 msgstr ""
 
-#: core/templates/index.html:25
-msgid "Popular image from gallery"
+#: core/templates/index.html:23
+msgid "Latest image from gallery"
 msgstr ""
 
 #: core/templates/profiles/login.html:12
@@ -277,7 +281,7 @@ msgstr ""
 msgid "Info"
 msgstr ""
 
-#: gallery/admin.py:43
+#: gallery/admin.py:42
 msgid "Other"
 msgstr ""
 

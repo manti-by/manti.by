@@ -35,9 +35,9 @@
 
         {% compress css %}
             <link type="text/css" rel="stylesheet" href="{% static 'css/reset.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/core.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/layout.css' %}">
             {% block styles %}{% endblock %}
         {% endcompress %}
     </head>
