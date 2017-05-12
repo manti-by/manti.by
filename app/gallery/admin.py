@@ -27,17 +27,13 @@ class GalleryAdmin(admin.ModelAdmin):
 @admin.register(Image)
 class ImageAdmin(admin.ModelAdmin):
 
-    list_display = ('image', 'gallery', 'order', 'is_ready', 'created')
+    list_display = ('image', 'gallery', 'order', 'created')
     list_filter = ('gallery',)
     ordering = ('order',)
 
     fieldsets = (
         (_('Info'), {
-            'fields': ('gallery', 'tags')
-        }),
-        (_('Files'), {
-            'classes': ('collapse',),
-            'fields': ('original_image', 'thumbnail_image', 'preview_image', 'gallery_image')
+            'fields': ('gallery', 'original_image', 'tags')
         }),
         (_('Other'), {
             'classes': ('collapse',),
@@ -47,8 +43,8 @@ class ImageAdmin(admin.ModelAdmin):
 
     def image(self, obj):
         image = static_file('img/no-image.png')
-        if obj.thumbnail_image:
-            image = obj.thumbnail_image.url
+        if obj.original_image:
+            image = obj.original_image.url
         return mark_safe('<img src="%s" width="50" />' % image)
     image.short_description = _('Image')
 
