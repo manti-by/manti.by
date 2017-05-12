@@ -163,10 +163,7 @@ LOGIN_URL = '/profiles/login/'
 
 # Sorl thumbnailer settings
 
-THUMB_SIZE = '100x100'
-PREVIEW_SIZE = '328x183'
-GALLERY_SIZE = '1920x1280'
-
+TEMPLATE_DEBUG = False
 THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
 
 

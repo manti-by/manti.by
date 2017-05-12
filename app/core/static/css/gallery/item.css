@@ -1,0 +1,17 @@
+.gallery .item .images {
+    display: flex;
+    justify-content: flex-start;
+    flex-flow: row wrap;
+}
+
+.gallery .item .preview {
+    display: inline-block;
+    height: 183px;
+    margin: 0 0.5em 0.5em 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+.gallery .item .preview:nth-child(3n) {
+    margin-right: 0;
+}

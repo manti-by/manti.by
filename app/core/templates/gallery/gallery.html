@@ -1,6 +1,6 @@
 {% extends 'common/layout.html' %}
 
-{% load i18n %}
+{% load static i18n thumbnail %}
 
 {% block title %}{% trans 'Gallery View' %}{% endblock %}
 
@@ -10,11 +10,20 @@
             <h1><a href="{{ gallery.get_absolute_url }}">{{ gallery.name }}</a></h1>
             <div class="images">
                 {% for image in gallery.images.all %}
-                    <a href="{{ image.gallery_image.url }}" class="gallery-image">
-                        <img src="{{ image.preview_image.url }}">
-                    </a>
+                    {% thumbnail image.original_image "1920x1280" as display %}
+                        <a href="{{ display.url }}" data-id="{{ image.id }}"
+                           class="preview {% if display.image|is_portrait %}portrait{% else %}landscape{% endif %}">
+                            {% thumbnail image.original_image "325" as preview %}
+                                <img src="{{ preview.url }}" alt="#" title="{% trans 'Preview #' %}{{ image.id }}">
+                            {% endthumbnail %}
+                        </a>
+                    {% endthumbnail %}
                 {% endfor %}
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block styles %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/gallery/item.css' %}">
 {% endblock %}
