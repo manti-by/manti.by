@@ -34,7 +34,7 @@ class Command(BaseCommand):
                         checked += 1
                         if file_phash not in images:
                             image = Image(phash=file_phash, gallery=gallery)
-                            image.original_image.name = file_name
+                            image.original_image.name = file_name.replace(settings.MEDIA_ROOT, '')
                             image.save()
                             added += 1
         self.stdout.write('Checked %d images, added %d' % (checked, added))
