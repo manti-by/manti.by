@@ -3,6 +3,8 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.staticfiles.templatetags.staticfiles import static as static_file
 
+from sorl.thumbnail import get_thumbnail
+
 from gallery.models import Gallery, Image
 
 
@@ -44,8 +46,8 @@ class ImageAdmin(admin.ModelAdmin):
     def image(self, obj):
         image = static_file('img/no-image.png')
         if obj.original_image:
-            image = obj.original_image.url
-        return mark_safe('<img src="%s" width="50" />' % image)
+            image = get_thumbnail(obj.original_image, "100x100", crop='center', quality=60)
+        return mark_safe('<img src="%s" width="50" />' % image.url)
     image.short_description = _('Image')
 
     def is_ready(self, obj):
