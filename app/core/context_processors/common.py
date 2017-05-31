@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 def global_template_vars(request):
     return {
+        'DEBUG': settings.DEBUG,
         'ACTIVE_LANGUAGE': request.LANGUAGE_CODE,
         'LANGUAGES': settings.LANGUAGES,
         'ABSOLUTE_URL': request.build_absolute_uri(),

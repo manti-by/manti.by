@@ -1,4 +1,4 @@
-{% extends 'common/layout.html' %}
+{% extends 'base.html' %}
 
 {% load static i18n thumbnail %}
 
@@ -6,13 +6,13 @@
 
 {% block content %}
     <div class="home container">
-        <div class="posts featured">
+        <div class="posts featured flex">
             {% for item in featured_posts %}
-                {% include 'blog/list-item.html' %}
+                {% include 'blog/featured-item.html' %}
             {% endfor %}
         </div>
         <div class="gallery">
-            <h2><a href="{% url 'gallery_list' %}">{% trans 'Latest shots from gallery' %}</a></h2>
+            <h2><a href="{% url 'gallery_list' %}">{% trans 'Shots from Gallery' %}</a></h2>
             <div class="featured">
                 {% if featured_image %}
                     <a href="{{ featured_image.gallery.get_absolute_url }}#image-{{ featured_image.pk }}">
@@ -37,10 +37,14 @@
                 </div>
             </div>
         </div>
-        <div class="posts">
-            {% for item in latest_posts %}
-                {% include 'blog/list-item.html' %}
-            {% endfor %}
+        <div class="flex">
+            <div class="posts">
+                {% for item in latest_posts %}
+                    {% include 'blog/list-item.html' %}
+                {% endfor %}
+            </div>
+            <div class="sidebar">
+            </div>
         </div>
     </div>
 {% endblock %}
@@ -48,6 +52,7 @@
 {% block styles %}
     <link type="text/css" rel="stylesheet" href="{% static 'css/gallery/home.css' %}" />
     <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list-item.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured-item.css' %}" />
 {% endblock %}
 
 {% block scripts %}

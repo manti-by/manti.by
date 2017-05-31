@@ -1,12 +1,16 @@
-{% extends 'common/layout.html' %}
+{% extends 'base.html' %}
 
 {% load static i18n thumbnail %}
 
 {% block title %}{% trans 'Gallery' %}{% endblock %}
 
+{% block breadcrumbs %}
+    <span class="spacer">&gt;</span>
+    {% trans 'Gallery' %}
+{% endblock %}
+
 {% block content %}
     <div class="gallery container">
-        <h1>{% trans 'Gallery' %}</h1>
         <div class="list">
             {% for gallery in gallery_list %}
                 <div class="item">

@@ -2,6 +2,10 @@
     margin-bottom: 3em;
 }
 
+.post:last-child {
+    margin-bottom: 0;
+}
+
 .post .image,
 .post .info,
 .post .tracklist {
@@ -45,7 +49,8 @@
 }
 
 .post .info h2 {
-    font-size: 1.8em;
+    font-size: 1.1em;
+    font-weight: 500;
 }
 
 .post .info strong {
@@ -59,12 +64,12 @@
 
 .post .info .download {
     margin-left: 0.25em;
-    font-size: 1.1em;
+    font-size: 1em;
 }
 
 .post .info .show-tracklist,
 .post .tracklist .hide-tracklist {
-    font-size: 1.1em;
+    font-size: 1em;
     color: #b40303;
     cursor: pointer;
 }

@@ -1,13 +1,19 @@
-{% extends 'common/layout.html' %}
+{% extends 'base.html' %}
 
 {% load static i18n thumbnail %}
 
 {% block title %}{% trans 'Gallery View' %}{% endblock %}
 
+{% block breadcrumbs %}
+    <span class="spacer">&gt;</span>
+    <a href="{% url 'gallery_list' %}">{% trans 'Gallery' %}</a>
+    <span class="spacer">&gt;</span>
+    {{ gallery.name }}
+{% endblock %}
+
 {% block content %}
     <div class="gallery container">
         <div class="item">
-            <h1><a href="{{ gallery.get_absolute_url }}">{{ gallery.name }}</a></h1>
             <div class="images">
                 {% for image in gallery.images.all %}
                     {% thumbnail image.original_image "1920x1280" as display %}

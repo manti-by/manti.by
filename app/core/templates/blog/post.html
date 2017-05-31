@@ -1,4 +1,4 @@
-{% extends 'common/layout.html' %}
+{% extends 'base.html' %}
 
 {% load static i18n %}
 
@@ -15,6 +15,13 @@
     <meta property="og:site_name" content="{{ META_TITLE }}">
     <meta property="og:audio" content="{{ BASE_URL }}{{ item.release.url }}">
     <meta property="og:audio:type" content="audio/mpeg">
+{% endblock %}
+
+{% block breadcrumbs %}
+    <span class="spacer">&gt;</span>
+    <a href="{% url 'blog' %}">{% trans 'Music' %}</a>
+    <span class="spacer">&gt;</span>
+    {{ item.name }}
 {% endblock %}
 
 {% block content %}

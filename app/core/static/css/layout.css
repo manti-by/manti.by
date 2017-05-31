@@ -55,7 +55,7 @@ header .mobile-menu {
     padding: 4px 0;
     border: 1px solid #EEE;
     background: #FFF;
-    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 header .mobile-menu.open {
@@ -91,6 +91,19 @@ header .mobile-menu a:last-child {
     border-bottom: none;
 }
 
+header .breadcrumbs {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+header .breadcrumbs a {
+    color: #666;
+}
+
+header .breadcrumbs .spacer {
+    margin-right: 0.25em;
+}
+
 aside {
     position: fixed;
     width: 100%;
@@ -102,16 +115,17 @@ aside {
 
 main {
     min-height: 490px;
-    margin-top: 5em;
+    margin-top: 5.5em;
 }
 
 footer {
-    margin: 30px 0 20px 0;
+    margin: 5em 0 2em 0;
     color: #666;
+    font-size: 0.9rem;
 }
 
 footer a {
-    padding-right: 20px;
+    padding-right: 1em;
     text-transform: uppercase;
     color: #b40303;
 }

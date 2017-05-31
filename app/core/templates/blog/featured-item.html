@@ -1,0 +1,22 @@
+{% load i18n %}
+
+<div class="post">
+    <div class="image">
+        <a href="{% url 'post' item.slug %}">
+            <img src="{{ item.cover.url }}">
+        </a>
+    </div>
+    <div class="info">
+        <h2>
+            <a href="{% url 'post' item.slug %}">
+                {{ item.name }}
+            </a>
+        </h2>
+        <div class="genre">
+            {{ item.genre.all|join:", " }}
+        </div>
+        <div class="created">
+            {{ item.human_date }}
+        </div>
+    </div>
+</div>

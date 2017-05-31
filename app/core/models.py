@@ -25,7 +25,7 @@ class BaseModel(models.Model):
         elif delta.total_seconds() < 60 * 60 * 24 * 7:
             return '%sd ago' % str(int(delta.total_seconds() / (60 * 60 * 24)))
         else:
-            return self.created.strftime('%b %d')
+            return self.created.strftime('%d %b %Y')
 
     class Meta:
         abstract = True
