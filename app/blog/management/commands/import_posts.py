@@ -30,7 +30,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         relations = []
         created = related = 0
-        file_path = os.path.join(settings.BASE_DIR, '..', 'docs', 'Posts.csv')
+        file_path = os.path.join(settings.BASE_DIR, '..', 'docs', 'posts.csv')
 
         # Clean DB
         if options['delete']:

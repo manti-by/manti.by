@@ -14,11 +14,17 @@
         <div class="gallery">
             <h2><a href="{% url 'gallery_list' %}">{% trans 'Latest shots from gallery' %}</a></h2>
             <div class="featured">
-                <a href="{{ featured_image.gallery.get_absolute_url }}#image-{{ featured_image.pk }}">
-                    {% thumbnail featured_image.original_image "x1080" as im %}
-                        <img src="{{ im.url }}" alt="#" title="{% trans 'Popular image from gallery' %}">
-                    {% endthumbnail %}
-                </a>
+                {% if featured_image %}
+                    <a href="{{ featured_image.gallery.get_absolute_url }}#image-{{ featured_image.pk }}">
+                        {% thumbnail featured_image.original_image "x1080" as im %}
+                            <img src="{{ im.url }}" alt="#" title="{% trans 'Popular image from gallery' %}">
+                        {% endthumbnail %}
+                    </a>
+                {% else %}
+                    <a href="{% url 'gallery_list' %}">
+                        <img src="{% static 'img/featured.jpg' %}" alt="#" title="{% trans 'Popular image from gallery' %}">
+                    </a>
+                {% endif %}
                 <div class="latest">
                     {% for image in latest_images %}
                         {% thumbnail image.original_image "x100" as im %}

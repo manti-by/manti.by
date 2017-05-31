@@ -15,13 +15,20 @@ header.visible {
 
 header nav {
     position: relative;
-    padding: 1em 0 1.2em 0;
-    font-size: 1.1em;
+    padding: 0.9em 0 1.1em 0;
+    font-size: 1em;
 }
 
-header nav a,
-header nav i {
-    color: #666;
+header nav i,
+header nav .text {
+    color: #696969;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+header nav .text:hover {
+    border-bottom: 1px dotted #696969;
 }
 
 header nav .link-item {
@@ -30,16 +37,19 @@ header nav .link-item {
 
 header nav .material-icons {
     position: relative;
-    top: 0.2em;
-    font-size: 1.2em;
+    top: 3px;
+    font-size: 1em;
 }
 
 header .mobile-menu-button {
-    width: 15px;
+    width: 1em;
+    margin-left: 0.5em;
+    cursor: pointer;
 }
 
 header .mobile-menu {
     position: fixed;
+    display: none;
     top: 52px;
     min-width: 150px;
     padding: 4px 0;
@@ -48,17 +58,30 @@ header .mobile-menu {
     box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
-header .mobile-menu a {
+header .mobile-menu.open {
+    display: block;
+}
+
+header .mobile-menu a,
+header .mobile-menu .search-button {
     display: block;
     width: 175px;
-    margin: 0 4px;
-    padding: 8px 4px;
+    margin: 0 0.25em;
+    padding: 0.5em 0.25em;
     color: #999;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
     border-bottom: none;
 }
 
+header .mobile-menu .search-button {
+    cursor: pointer;
+}
+
 header .mobile-menu a:hover,
-header .mobile-menu a.active {
+header .mobile-menu a.active,
+header .mobile-menu .search-button:hover {
     color: #999;
     text-decoration: none;
     background-color: #EFEFEF;

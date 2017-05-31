@@ -41,12 +41,12 @@ Installation
 
 5. Create database, if necessary:
 
-        $ sudo -u postgres bash -c "psql -c \"CREATE DATABASE manti;\""
-        $ sudo -u postgres bash -c "psql -c \"CREATE USER manti WITH PASSWORD 'pa55word';\""
-        $ sudo -u postgres bash -c "psql -c \"ALTER ROLE manti SET client_encoding TO 'utf8';\""
-        $ sudo -u postgres bash -c "psql -c \"ALTER ROLE manti SET default_transaction_isolation TO 'read committed';\""
-        $ sudo -u postgres bash -c "psql -c \"ALTER ROLE manti SET timezone TO 'UTC';\""
-        $ sudo -u postgres bash -c "psql -c \"GRANT ALL PRIVILEGES ON DATABASE manti TO manti;\""
+        $ sudo -u postgres psql -c "CREATE DATABASE manti;"
+        $ sudo -u postgres psql -c "CREATE USER manti WITH PASSWORD 'pa55word';"
+        $ sudo -u postgres psql -c "ALTER ROLE manti SET client_encoding TO 'utf8';cd"
+        $ sudo -u postgres psql -c "ALTER ROLE manti SET default_transaction_isolation TO 'read committed';"
+        $ sudo -u postgres psql -c "ALTER ROLE manti SET timezone TO 'UTC';"
+        $ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE manti TO manti;"
 
 
 6. Create local config file:

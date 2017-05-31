@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load static i18n %}
 
 <header class="visible">
     <nav class="container">
@@ -16,17 +16,17 @@
             <div class="right">
                 <a href="{% url 'blog' %}" rel="bookmark" class="link-item">
                     <i class="material-icons">play_arrow</i>
-                    {% trans 'Music' %}
+                    <span class="text">{% trans 'Music' %}</span>
                 </a>
                 <a href="{% url 'gallery_list' %}" rel="bookmark" class="link-item">
                     <i class="material-icons">image</i>
-                    {% trans 'Gallery' %}
+                    <span class="text">{% trans 'Gallery' %}</span>
                 </a>
                 <span class="language-menu" class="link-item">
                     {% for lang in LANGUAGES %}
                         {% if lang.0 != ACTIVE_LANGUAGE %}
                             <i class="material-icons">language</i>
-                            <span class="language" data-id="{{ lang.0 }}">{{ lang.1 }}</span>
+                            <span class="language text" data-id="{{ lang.0 }}">{{ lang.1 }}</span>
                         {% endif %}
                     {% endfor %}
                 </span>
@@ -36,7 +36,7 @@
             </div>
         </div>
     </nav>
-    <nav class="mobile-menu hidden">
+    <nav class="mobile-menu">
         <a href="{% url 'about' %}">{% trans 'About' %}</a>
         <a href="{% url 'resume' %}">{% trans 'My job' %}</a>
         <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>

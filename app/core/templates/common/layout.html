@@ -28,7 +28,7 @@
             <meta property="og:image" content="{% static 'img/favicon.png' %}">
         {% endblock %}
 
-        <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,600,700&subset=cyrillic"
+        <link href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,600,700|OpenSans:300,400,500,600,700&subset=cyrillic"
               rel="stylesheet">
 
         <link rel="icon" type="image/png" href="{% static 'img/favicon/favicon.png' %}">
@@ -60,6 +60,7 @@
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         {% compress js %}
+            <script type="text/javascript" src="{% static 'js/widgets/menu.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/widgets/header.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/widgets/language.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/libs/common.js' %}"></script>
