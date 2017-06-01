@@ -1,6 +1,7 @@
-.gallery {
+.home .gallery {
     margin: 1.5em 0 3.5em 0;
 }
+
 .home .gallery h2 {
     position: relative;
     top: 1em;
@@ -67,6 +68,7 @@
 .home .post .tracklist .tracks {
     height: 307px;
 }
+
 .home .sidebar {
-    width: 30%;
+    width: 27%;
 }

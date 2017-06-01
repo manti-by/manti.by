@@ -19,7 +19,7 @@
                     {% thumbnail image.original_image "1920x1280" as display %}
                         <a href="{{ display.url }}" data-id="{{ image.id }}"
                            class="preview {% if display.image|is_portrait %}portrait{% else %}landscape{% endif %}">
-                            {% thumbnail image.original_image "325" as preview %}
+                            {% thumbnail image.original_image "400" as preview %}
                                 <img src="{{ preview.url }}" alt="#" title="{% trans 'Preview #' %}{{ image.id }}">
                             {% endthumbnail %}
                         </a>

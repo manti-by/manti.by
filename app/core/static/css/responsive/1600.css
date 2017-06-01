@@ -1,0 +1,23 @@
+@media only screen and (min-width: 1600px) {
+    .container {
+        width: 1200px;
+    }
+
+    .home .sidebar {
+        width: 25%;
+    }
+
+    .home .post .image,
+    .home .post .info,
+    .home .post .tracklist {
+        min-height: 413px;
+    }
+
+    .featured .post .image {
+        min-height: 260px;
+    }
+
+    .featured .post .info {
+        min-height: 0;
+    }
+}
