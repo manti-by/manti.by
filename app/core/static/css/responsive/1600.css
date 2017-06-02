@@ -3,21 +3,29 @@
         width: 1200px;
     }
 
-    .home .sidebar {
-        width: 25%;
+    .static {
+        width: 1092px;
     }
 
-    .home .post .image,
-    .home .post .info,
-    .home .post .tracklist {
+    .home .gallery .featured > a {
+        height: 370px;
+    }
+
+    .home .main .posts .post .image,
+    .home .main .posts .post .info,
+    .home .main .posts .post .tracklist {
         min-height: 413px;
     }
 
-    .featured .post .image {
+    .home .main .sidebar {
+        width: 25%;
+    }
+
+    .home .featured .post .image {
         min-height: 260px;
     }
 
-    .featured .post .info {
+    .home .featured .post .info {
         min-height: 0;
     }
 }

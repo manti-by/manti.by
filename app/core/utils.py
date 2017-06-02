@@ -5,6 +5,10 @@ from threading import Thread
 from datetime import tzinfo, timedelta
 from os.path import splitext
 
+from django.conf import settings
+
+from instagram.client import InstagramAPI
+
 
 logger = logging.getLogger('app')
 
@@ -17,6 +21,16 @@ def get_name(instance, filename, type):
     name, ext = splitext(filename)
     return '%s/%s/%s%s' % (instance.__class__.__name__.lower(), type, unique_str(), ext)
 
+
+def get_instagram_photos(limit=10):
+    try:
+        api = InstagramAPI(access_token=settings.INSTAGRAM_ACCESS_TOKEN,
+                           client_secret=settings.INSTAGRAM_CLIENT_SECRET)
+        recent_media, next_ = api.user_recent_media(user_id='self', count=limit)
+        return recent_media
+    except Exception as e:
+        logger.error(e)
+    return []
 
 def original_name(instance, filename):
     return get_name(instance, filename, 'original')

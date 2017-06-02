@@ -6,13 +6,16 @@
 
 {% block content %}
     <div class="home container">
-        <div class="posts featured flex">
-            {% for item in featured_posts %}
-                {% include 'blog/featured-item.html' %}
-            {% endfor %}
+        <div class="posts">
+            <h2>{% trans 'Featured' %}</h2>
+            <div class="featured flex">
+                {% for item in featured_posts %}
+                    {% include 'blog/featured-item.html' %}
+                {% endfor %}
+            </div>
         </div>
         <div class="gallery">
-            <h2><a href="{% url 'gallery_list' %}">{% trans 'Shots from Gallery' %}</a></h2>
+            <h2>{% trans 'Gallery' %}</h2>
             <div class="featured">
                 {% if featured_image %}
                     <a href="{{ featured_image.gallery.get_absolute_url }}#image-{{ featured_image.pk }}">
@@ -37,7 +40,8 @@
                 </div>
             </div>
         </div>
-        <div class="flex">
+        <h2>{% trans 'Latest posts' %}</h2>
+        <div class="main flex">
             <div class="posts">
                 {% for item in latest_posts %}
                     {% include 'blog/list-item.html' %}
@@ -60,13 +64,23 @@
                         {% endfor %}
                     </ul>
                 </div>
+                <div class="instagram panel">
+                    <h3>{% trans 'Instagram' %}</h3>
+                    <ul>
+                        {% for i in instagram_photos %}
+                            <li><a href="{{ i.link }}"><img src="{{ media.images.thumbnail.url }}" /></a></li>
+                        {% endfor %}
+                    </ul>
+                    {% trans 'Profile' %}:
+                    <a href="https://www.instagram.com/manti_by/">@manti_by</a>
+                </div>
             </div>
         </div>
     </div>
 {% endblock %}
 
 {% block styles %}
-    <link type="text/css" rel="stylesheet" href="{% static 'css/gallery/home.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'css/index.css' %}" />
     <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list-item.css' %}" />
     <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured-item.css' %}" />
 {% endblock %}

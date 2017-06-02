@@ -205,3 +205,11 @@ CELERY_RESULT_SERIALIZER = 'json'
 
 META_TITLE = "Official blog of Alex Manti"
 META_DESCRIPTION = "Official blog of Alex Manti"
+
+
+# Instagram settings
+
+INSTAGRAM_USER_ID = ''
+INSTAGRAM_CLIENT_ID = ''
+INSTAGRAM_ACCESS_TOKEN = ''
+INSTAGRAM_CLIENT_SECRET = ''

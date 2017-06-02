@@ -5,8 +5,8 @@
 }
 
 .gallery .item .preview {
-    display: inline-block;
-    height: 183px;
+    width: 32%;
+    max-height: 225px;
     margin: 0 0.5em 0.5em 0;
     text-align: center;
     overflow: hidden;

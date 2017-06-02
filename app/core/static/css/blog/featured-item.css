@@ -1,11 +1,11 @@
 .featured .post {
     position: relative;
     width: 32%;
-    margin-bottom: 1em;
+    margin-bottom: 0;
 }
 
 .featured .post:last-child {
-    margin-bottom: 1em;
+    margin-bottom: 0;
 }
 
 .featured .post .image {
@@ -28,24 +28,41 @@
     width: 100%;
     min-height: 0;
     margin: 0;
-    padding: 1em 0 0.5em 0;
     font-size: 1em;
-    text-align: center;
+}
+
+
+.featured .post .info .wrap {
+    position: relative;
+    top: -1em;
+    margin: 0 1em;
+    padding: 1em 0 0.5em 0;
     background: #FFF;
 }
 
-.featured .post .info h2 {
+.featured .post .info h3 {
+    margin: 0 0 0.25rem 1rem;
     font-size: 1em;
     font-weight: 500;
+    text-align: left;
     text-transform: uppercase;
 }
 
+.featured .post .info h3 a {
+    color: #333;
+}
+
 .featured .post .info .genre {
+    margin-left: 1rem;
     font-size: 0.85em;
+    font-weight: normal;
+    color: #666;
 }
 
 .featured .post .info .created {
+    margin-left: 1rem;
     margin-top: 0.5em;
     font-size: 0.85em;
+    text-transform: uppercase;
     color: #999;
 }
