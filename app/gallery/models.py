@@ -36,6 +36,12 @@ class Gallery(SlugifyMixin, BaseModel, models.Model):
         verbose_name_plural = _('Gallery List')
 
 
+class ImageManager(models.Manager):
+
+    def ordered(self):
+        return self.get_queryset().order_by('order')
+
+
 @python_2_unicode_compatible
 class Image(BaseModel, models.Model):
 
@@ -45,6 +51,8 @@ class Image(BaseModel, models.Model):
 
     order = models.IntegerField(blank=True, default=0)
     tags = TaggableManager(blank=True)
+
+    objects = ImageManager()
 
     def __str__(self):
         return 'Gallery #%s - Image#%d' % (self.gallery.name, self.id)

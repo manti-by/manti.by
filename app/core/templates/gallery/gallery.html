@@ -14,11 +14,11 @@
 {% block content %}
     <div class="gallery container">
         <div class="item">
-            <div class="images">
-                {% for image in gallery.images.all %}
+            <div class="images {% if user.is_superuser %}orderable{% endif %}">
+                {% for image in gallery.images.ordered %}
                     {% thumbnail image.original_image "1920x1280" as display %}
                         <a href="{{ display.url }}" data-id="{{ image.id }}"
-                           class="preview {% if display.image|is_portrait %}portrait{% else %}landscape{% endif %}">
+                           class="preview {% if display.image|is_portrait %}portrait{% else %}landscape{% endif %} {% if user.is_superuser %}orderable-item{% endif %}">
                             {% thumbnail image.original_image "600" as preview %}
                                 <img src="{{ preview.url }}" alt="#" title="{% trans 'Preview #' %}{{ image.id }}">
                             {% endthumbnail %}
@@ -33,3 +33,10 @@
 {% block styles %}
     <link type="text/css" rel="stylesheet" href="{% static 'css/gallery/item.css' %}">
 {% endblock %}
+
+{% if user.is_superuser %}
+    {% block scripts %}
+        <script type="text/javascript" src="{% static 'js/libs/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/widgets/orderable.js' %}"></script>
+    {% endblock %}
+{% endif %}

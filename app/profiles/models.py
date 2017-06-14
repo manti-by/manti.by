@@ -1,20 +1,20 @@
-import logging
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from django.utils.translation import ugettext_lazy as _
 
 from core.models import BaseModel
-from core.mixins import ImageMixin
-
-logger = logging.getLogger('app')
+from core.utils import profile_image_name
 
 
 class ProfileException(Exception):
     pass
 
 
-class Profile(ImageMixin, BaseModel, models.Model):
+class Profile(BaseModel, models.Model):
+
+    original_image = models.ImageField(upload_to=profile_image_name, blank=True, null=True,
+                                       verbose_name=_('Profile Image'))
 
     user = models.OneToOneField(
         User,
@@ -26,35 +26,13 @@ class Profile(ImageMixin, BaseModel, models.Model):
     def __str__(self):
         return self.user.email
 
-    def as_dict(self):
+    @property
+    def image(self):
         if self.image:
-            image_url = self.image.url
-        else:
-            image_url = static('img/user.png')
-        return {'id': self.user.id, 'email': self.user.email, 'image': image_url}
+            return self.original_image.url
+        return static('img/user.png')
 
-    @staticmethod
-    def get_logged(request):
-        if not request.user.is_authenticated:
-            return None
-        try:
-            if not request.user.profile:
-                profile = Profile(user=request.user)
-                profile.save()
-            return request.user.profile
-        except Exception as e:
-            logger.error(e)
-        raise ProfileException('Can\'t create user profile')
-
-    @staticmethod
-    def get_or_create(email, password):
-        try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
-            user = User.objects.create_user(email, email, password)
-            user.save()
-            profile = Profile(user=user)
-            profile.save()
-        if user.check_password(password):
-            return user.profile
-        raise ProfileException('Invalid password')
+    def as_dict(self):
+        return {'id': self.user.id,
+                'email': self.user.email,
+                'image': self.image}

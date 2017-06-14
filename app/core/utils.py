@@ -17,11 +17,6 @@ def unique_str():
     return str(''.join([str(random.randint(0, 9)) for _ in range(16)]))
 
 
-def get_name(instance, filename, type):
-    name, ext = splitext(filename)
-    return '%s/%s/%s%s' % (instance.__class__.__name__.lower(), type, unique_str(), ext)
-
-
 def get_instagram_photos(limit=10):
     try:
         api = InstagramAPI(access_token=settings.INSTAGRAM_ACCESS_TOKEN,
@@ -31,6 +26,16 @@ def get_instagram_photos(limit=10):
     except Exception as e:
         logger.error(e)
     return []
+
+
+def get_name(instance, filename, typename):
+    name, ext = splitext(filename)
+    return '%s/%s/%s%s' % (instance.__class__.__name__.lower(), typename, unique_str(), ext)
+
+
+def profile_image_name(instance, filename):
+    return get_name(instance, filename, instance.id)
+
 
 def original_name(instance, filename):
     return get_name(instance, filename, 'original')

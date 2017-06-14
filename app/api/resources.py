@@ -16,6 +16,9 @@ class OrderableResource(Resource):
 
     @resource_wrapper
     def post(self, request):
+        if not request.user.is_superuser:
+            return JsonResponse({'status': 403,
+                                 'message': _('Forbidden')}, status=200)
         try:
             object_type = request.POST.get('type', 'image').strip()
             data = json.loads(request.POST.get('data'))
