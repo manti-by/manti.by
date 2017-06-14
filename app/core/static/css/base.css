@@ -62,6 +62,31 @@ ol li {
     line-height: 1.2;
 }
 
+input,
+textarea {
+    min-width: 300px;
+    padding: 0.25em;
+    font-size: 1rem;
+    font-weight: 400;
+    border: 1px solid #CCC;
+    background: #FFF;
+}
+
+input[type=text],
+input[type=email],
+input[type=password] {
+    font-size: 1.2rem;
+}
+
+button {
+    padding: 0.5em 2em;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000;
+    border: 1px solid #CCC;
+    background: #CCC;
+}
+
 .hidden {
     display: none;
 }
@@ -156,9 +181,30 @@ header nav .material-icons {
     font-size: 1em;
 }
 
+header nav .user {
+    position: relative;
+    top: 0.4em;
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    margin: 0 0 0 0.5em;
+    border-radius: 0.75em;
+    background: #CCC;
+    overflow: hidden;
+}
+
+header nav .user a {
+    display: inline-block;
+}
+
+header nav .user a img {
+    min-width: 100%;
+    max-width: 100%;
+}
+
 header .mobile-menu-button {
     width: 1em;
-    margin-left: 0.5em;
+    margin-left: 0.25em;
     cursor: pointer;
 }
 

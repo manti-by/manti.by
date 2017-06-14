@@ -34,7 +34,7 @@ def get_name(instance, filename, typename):
 
 
 def profile_image_name(instance, filename):
-    return get_name(instance, filename, instance.id)
+    return get_name(instance, filename, instance.user.id)
 
 
 def original_name(instance, filename):

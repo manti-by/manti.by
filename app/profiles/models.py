@@ -7,10 +7,6 @@ from core.models import BaseModel
 from core.utils import profile_image_name
 
 
-class ProfileException(Exception):
-    pass
-
-
 class Profile(BaseModel, models.Model):
 
     original_image = models.ImageField(upload_to=profile_image_name, blank=True, null=True,
@@ -28,11 +24,6 @@ class Profile(BaseModel, models.Model):
 
     @property
     def image(self):
-        if self.image:
+        if self.original_image:
             return self.original_image.url
-        return static('img/user.png')
-
-    def as_dict(self):
-        return {'id': self.user.id,
-                'email': self.user.email,
-                'image': self.image}
+        return static('img/no-image.png')

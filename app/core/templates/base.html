@@ -117,6 +117,13 @@
                                 {% endif %}
                             {% endfor %}
                         </span>
+                        {% if user.is_authenticated %}
+                            <span class="user">
+                                <a href="{% url 'profile' %}">
+                                    <img src="{{ user.profile.image }}" />
+                                </a>
+                            </span>
+                        {% endif %}
                         <span class="mobile-menu-button">
                             <i class="material-icons">more_vert</i>
                         </span>
@@ -129,6 +136,11 @@
                 <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>
                 <a href="mailto:manti.by@gmail.com">{% trans 'Contact' %}</a>
                 <span class="search-button">{% trans 'Search' %}</span>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+                {% else %}
+                    <a href="{% url 'login' %}">{% trans 'Login' %}</a>
+                {% endif %}
             </nav>
         </header>
 

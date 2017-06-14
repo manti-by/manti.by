@@ -6,7 +6,6 @@ from django.contrib import admin
 
 from core import views as core_views
 from api.resources import OrderableResource
-from profiles.views import profile_page, login_page, logout_page
 
 
 urlpatterns = [
@@ -28,9 +27,7 @@ urlpatterns = [
     url(r'^gallery/', include('gallery.urls')),
 
     # Profile urls
-    url(r'^profiles/?$', profile_page, name='profile'),
-    url(r'^profiles/login/?$', login_page, name='login'),
-    url(r'^profiles/logout/?$', logout_page, name='logout'),
+    url(r'^profile/', include('profiles.urls')),
 
     # Admin urls
     url(r'^dashboard/', admin.site.urls),
