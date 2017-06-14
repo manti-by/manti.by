@@ -1,5 +1,9 @@
 .home {
+}
 
+header.home .homelink {
+    position: relative;
+    left: -1.5em;
 }
 
 .home h2 {

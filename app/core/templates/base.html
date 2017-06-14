@@ -86,11 +86,11 @@
             <div class="wrapper"></div>
         </aside>
 
-        <header class="visible">
+        <header class="visible {% if is_home %}home{% endif %}">
             <nav class="container">
                 <div class="flex">
                     <div class="left">
-                        <a href="{% url 'index' %}" class="home" rel="home">
+                        <a href="{% url 'index' %}" class="homelink" rel="home">
                             <span class="icon">
                                 <i class="material-icons">settings_input_svideo</i>
                             </span>

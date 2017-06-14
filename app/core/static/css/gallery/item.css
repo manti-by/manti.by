@@ -1,3 +1,7 @@
+.gallery .item {
+    padding-top: 1em;
+}
+
 .gallery .item .images {
     display: flex;
     justify-content: flex-start;
@@ -5,13 +9,13 @@
 }
 
 .gallery .item .preview {
-    width: 32%;
-    max-height: 225px;
-    margin: 0 0.5em 0.5em 0;
+    width: 49.5%;
+    max-height: 335px;
+    margin: 0 1% 0.65em 0;
     text-align: center;
     overflow: hidden;
 }
 
-.gallery .item .preview:nth-child(3n) {
+.gallery .item .preview:nth-child(2n) {
     margin-right: 0;
 }

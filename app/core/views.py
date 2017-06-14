@@ -25,7 +25,8 @@ def index(request):
         return render(request, 'index.html', {'featured_image': featured_image,
                                               'latest_images': latest_images,
                                               'featured_posts': featured_posts,
-                                              'latest_posts': latest_posts})
+                                              'latest_posts': latest_posts,
+                                              'is_home': True})
     except Exception as e:
         logger.exception(e)
         raise Http404

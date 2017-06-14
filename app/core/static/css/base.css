@@ -247,9 +247,10 @@ main .sidebar .panel h3 {
 }
 
 main .sidebar .panel li {
+    list-style-image: url(../svg/ic_radio_button_unchecked_grey_8px.svg);
 }
 
-main .sidebar .panel a {
+main .sidebar .panel li a {
     color: #999;
     font-size: 0.85rem;
 }
