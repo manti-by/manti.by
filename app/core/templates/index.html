@@ -47,34 +47,7 @@
                     {% include 'blog/list-item.html' %}
                 {% endfor %}
             </div>
-            <div class="sidebar">
-                <div class="tags panel">
-                    <h3>{% trans 'Popular tags' %}</h3>
-                    <ul>
-                        {% for t in tags %}
-                            <li><a href="{% url 'blog' %}?tag={{ t.slug }}">{{ t.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="galleries panel">
-                    <h3>{% trans 'Latest posts' %}</h3>
-                    <ul>
-                        {% for p in posts %}
-                            <li><a href="{% url 'post' p.slug %}">{{ p.name }}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                <div class="instagram panel">
-                    <h3>{% trans 'Instagram' %}</h3>
-                    <ul>
-                        {% for i in instagram_photos %}
-                            <li><a href="{{ i.link }}"><img src="{{ media.images.thumbnail.url }}" /></a></li>
-                        {% endfor %}
-                    </ul>
-                    {% trans 'Profile' %}:
-                    <a href="https://www.instagram.com/manti_by/">@manti_by</a>
-                </div>
-            </div>
+            {% include 'sidebar.html' %}
         </div>
     </div>
 {% endblock %}

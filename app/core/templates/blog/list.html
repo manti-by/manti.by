@@ -17,16 +17,20 @@
 {% endblock %}
 
 {% block content %}
-    <div class="blog container">
-        {% for item in item_list %}
-            {% include 'blog/list-item.html' %}
-        {% empty %}
-            <div class="notice">{% trans 'Nothin to show' %}(</div>
-        {% endfor %}
+    <div class="blog container flex">
+        <div class="posts">
+            {% for item in item_list %}
+                {% include 'blog/list-item.html' %}
+            {% empty %}
+                <div class="notice">{% trans 'Nothin to show' %}(</div>
+            {% endfor %}
+        </div>
+        {% include 'sidebar.html' %}
     </div>
 {% endblock %}
 
 {% block styles %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list-item.css' %}">
 {% endblock %}
 

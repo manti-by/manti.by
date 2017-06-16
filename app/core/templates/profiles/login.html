@@ -6,7 +6,7 @@
 {% block ios-title %}{% trans 'Login Page' %}{% endblock %}
 
 {% block content %}
-    <div class="login container">
+    <div class="login container resizer">
         <form action="{% url 'login' %}" method="POST">
             {% csrf_token %}
             <h2>{% trans 'Please login or register' %}</h2>
@@ -37,4 +37,8 @@
 
 {% block styles %}
     <link type="text/css" rel="stylesheet" href="{% static 'css/profiles/login.css' %}">
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/widgets/resizer.js' %}"></script>
 {% endblock %}

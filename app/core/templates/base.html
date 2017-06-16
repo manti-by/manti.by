@@ -36,7 +36,7 @@
         {% compress css %}
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/reset.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}" media="print">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
             {% block styles %}{% endblock %}
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}">
@@ -102,19 +102,16 @@
                     </div>
                     <div class="right">
                         <a href="{% url 'blog' %}" rel="bookmark" class="link-item">
-                            <i class="material-icons">play_arrow</i>
                             <span class="text">{% trans 'Music' %}</span>
                         </a>
                         <a href="{% url 'gallery_list' %}" rel="bookmark" class="link-item">
-                            <i class="material-icons">image</i>
                             <span class="text">{% trans 'Gallery' %}</span>
                         </a>
-                        <span class="language-menu" class="link-item">
+                        <span class="language" class="link-item">
                             {% for lang in LANGUAGES %}
-                                {% if lang.0 != ACTIVE_LANGUAGE %}
-                                    <i class="material-icons">language</i>
-                                    <span class="language text" data-id="{{ lang.0 }}">{{ lang.1 }}</span>
-                                {% endif %}
+                                <span class="item text {% if lang.0 != ACTIVE_LANGUAGE %}passive{% endif %}"
+                                      data-id="{{ lang.0 }}">{{ lang.0 }}</span>
+                                <span class="item spacer">/</span>
                             {% endfor %}
                         </span>
                         {% if user.is_authenticated %}

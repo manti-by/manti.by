@@ -3,7 +3,7 @@
     'use strict';
 
     $.fn.initLanguageSwitcher = function() {
-        var language = $('.language');
+        var language = $('.language .item.passive');
 
         language.on('click', function () {
             $.ajax({

@@ -102,18 +102,20 @@ button {
 }
 
 .static {
-    width: 892px;
-    padding: 2em 3em;
+    width: 856px;
+    margin-top: 5em;
+    padding: 2.5em 4em;
     background: #FFF;
+}
+
+.static p,
+.static li {
+    line-height: 1.4;
 }
 
 .static .image {
     float: right;
     margin: 0 0 1em 1em;
-}
-
-.language {
-    cursor: pointer;
 }
 
 .print a {
@@ -163,7 +165,7 @@ header nav i,
 header nav .text {
     color: #696969;
     font-size: 0.85rem;
-    font-weight: 500;
+    font-weight: 400;
     text-transform: uppercase;
 }
 
@@ -172,7 +174,8 @@ header nav .text:hover {
 }
 
 header nav .link-item {
-    margin-right: 1em;
+    display: inline-block;
+    min-width: 126px;
 }
 
 header nav .material-icons {
@@ -181,20 +184,57 @@ header nav .material-icons {
     font-size: 1em;
 }
 
+header .language {
+    margin: 0 2em 0 0;
+}
+
+header .language .item.text {
+    font-weight: 500;
+}
+
+header .language .item.text:hover {
+    font-weight: 500;
+    border-bottom: 0;
+}
+
+header .language .item.text.passive {
+    font-weight: 400;
+    cursor: pointer;
+}
+
+header .language .item.text.passive:hover {
+    border-bottom: 1px dotted #CCC;
+}
+
+header .language .item.spacer {
+    color: #CCC;
+    margin: 0 0.25em;
+    border: none;
+    cursor: auto;
+}
+
+header .language .item.spacer:last-child {
+    display: none;
+}
+
 header nav .user {
     position: relative;
-    top: 0.4em;
     display: inline-block;
+    height: 1em;
     width: 1.5em;
-    height: 1.5em;
     margin: 0 0 0 0.5em;
-    border-radius: 0.75em;
-    background: #CCC;
-    overflow: hidden;
+    overflow: visible;
 }
 
 header nav .user a {
+    position: absolute;
+    top: -0.1em;
     display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 0.75em;
+    background: #CCC;
+    overflow: hidden;
 }
 
 header nav .user a img {
@@ -280,25 +320,34 @@ main {
 }
 
 main .sidebar .panel {
-    margin-bottom: 1em;
-    padding: 1.5em;
-    background: #FFF;
+    margin-bottom: 2em;
+    padding: 0;
+    text-align: right;
 }
 
 main .sidebar .panel h3 {
     color: #696969;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 0.85rem;
     text-transform: uppercase;
 }
 
 main .sidebar .panel li {
-    list-style-image: url(../svg/ic_radio_button_unchecked_grey_8px.svg);
+    list-style: none;
 }
 
 main .sidebar .panel li a {
     color: #999;
     font-size: 0.85rem;
+}
+
+main .sidebar .panel li a:hover {
+    border-bottom: 1px dotted #999;
+}
+
+main .sidebar .instagram {
+    font-size: 0.85em;
+    color: #696969  ;
 }
 
 footer {

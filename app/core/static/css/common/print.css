@@ -4,6 +4,11 @@
     margin: 0;
 }
 
+.static,
+.container {
+    margin-top: 1em !important;
+}
+
 aside, header, footer, .right-sidebar, .print {
     display: none !important;
 }

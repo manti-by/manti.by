@@ -5,7 +5,7 @@
 {% block title %}{% trans 'Your Profile' %}{% endblock %}
 
 {% block content %}
-    <div class="profile container">
+    <div class="profile container resizer">
         <form action="{% url 'profile' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <h2>{% trans 'Your profile' %}</h2>
@@ -48,4 +48,11 @@
 
 {% block styles %}
     <link type="text/css" rel="stylesheet" href="{% static 'css/profiles/profile.css' %}">
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/widgets/resizer.js' %}"></script>
+    <script type="text/javascript">
+
+    </script>
 {% endblock %}
