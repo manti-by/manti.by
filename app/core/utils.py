@@ -1,13 +1,14 @@
-import logging
+import json
 import random
+import logging
+import requests
 
 from threading import Thread
 from datetime import tzinfo, timedelta
 from os.path import splitext
 
 from django.conf import settings
-
-from instagram.client import InstagramAPI
+from django.core.cache import cache
 
 
 logger = logging.getLogger('app')
@@ -17,15 +18,26 @@ def unique_str():
     return str(''.join([str(random.randint(0, 9)) for _ in range(16)]))
 
 
-def get_instagram_photos(limit=10):
+def get_instagram_photos(limit=6):
+    recent_media = []
+    cached_data = cache.get('instagram_photos')
+    if cached_data is not None:
+        return cached_data
     try:
-        api = InstagramAPI(access_token=settings.INSTAGRAM_ACCESS_TOKEN,
-                           client_secret=settings.INSTAGRAM_CLIENT_SECRET)
-        recent_media, next_ = api.user_recent_media(user_id='self', count=limit)
-        return recent_media
+        url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=%s' \
+              % settings.INSTAGRAM_ACCESS_TOKEN
+        request = requests.get(url)
+        if request.status_code == 200:
+            data = json.loads(request.content)
+            for item in data['data']:
+                recent_media.append({
+                    'link': item['link'],
+                    'image': item['images']['thumbnail']['url']
+                })
+        cache.set('instagram_photos', recent_media[:limit])
     except Exception as e:
         logger.error(e)
-    return []
+    return recent_media[:limit]
 
 
 def get_name(instance, filename, typename):

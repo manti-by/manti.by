@@ -28,7 +28,7 @@
                         <img src="{% static 'img/featured.jpg' %}" alt="#" title="{% trans 'Popular image from gallery' %}">
                     </a>
                 {% endif %}
-                <div class="latest">
+                <div class="latest flex">
                     {% for image in latest_images %}
                         {% thumbnail image.original_image "x100" as im %}
                             <a href="{{ image.gallery.get_absolute_url }}#image-{{ image.pk }}"

@@ -19,12 +19,14 @@
     </div>
     <div class="instagram panel">
         <h3>{% trans 'Instagram' %}</h3>
-        <ul>
+        <ul class="flex">
             {% for i in instagram_photos %}
-                <li><a href="{{ i.link }}"><img src="{{ media.images.thumbnail.url }}" /></a></li>
+                <li><a href="{{ i.link }}"><img src="{{ i.image }}" /></a></li>
             {% endfor %}
         </ul>
-        {% trans 'Profile' %}:
-        <a href="https://www.instagram.com/manti_by/">@manti_by</a>
+        <div class="profile">
+            {% trans 'Profile' %}:
+            <a href="https://www.instagram.com/manti_by/">@manti_by</a>
+        </div>
     </div>
 </div>

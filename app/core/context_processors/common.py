@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from blog.models import Post
 from taggit.models import Tag
+from core.utils import get_instagram_photos
 
 
 def global_template_vars(request):
@@ -16,5 +17,6 @@ def global_template_vars(request):
         'BASE_URL': settings.BASE_URL,
         'user': request.user,
         'tags': Tag.objects.all()[:10],
-        'posts': Post.objects.all()[:10]
+        'posts': Post.objects.all()[:10],
+        'instagram_photos': get_instagram_photos()
     }
