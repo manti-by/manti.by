@@ -74,20 +74,16 @@
             </div>
         </div>
         <h2>{% trans 'Related posts' %}</h2>
-        <div class="related flex">
-            {% for r in item.related.all|slice:":3" %}
-                <div class="item">
-                    <a href="{% url 'post' r.slug %}">
-                        <img src="{{ r.cover.url }}">
-                        <span class="name">{{ r.name }} /{{ r.genre.all|join:", " }}/</span>
-                    </a>
-                </div>
+        <div class="featured flex">
+            {% for item in item.related.all|slice:":3" %}
+                {% include 'blog/featured-item.html' %}
             {% endfor %}
         </div>
     </div>
 {% endblock %}
 
 {% block styles %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured-item.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'css/blog/post.css' %}">
 {% endblock %}
 

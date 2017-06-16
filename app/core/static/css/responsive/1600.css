@@ -21,11 +21,11 @@
         width: 25%;
     }
 
-    .home .featured .post .image {
+    .featured .post .image {
         min-height: 260px;
     }
 
-    .home .featured .post .info {
+    .featured .post .info {
         min-height: 0;
     }
 }
