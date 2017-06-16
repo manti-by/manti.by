@@ -17,3 +17,8 @@
 .gallery .list .preview:nth-child(3n) {
     margin-right: 0;
 }
+
+.gallery .item .preview img {
+    min-width: 100%;
+    max-width: 100%;
+}

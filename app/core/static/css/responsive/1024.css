@@ -1,0 +1,54 @@
+@media only screen and (max-width: 1024px) {
+    .container {
+        width: 1000px;
+    }
+
+    .static {
+        width: 756px;
+    }
+
+    header nav .link-item {
+        min-width: 91px;
+    }
+
+    header nav .language {
+        margin-right: 0;
+    }
+
+    header.home .homelink {
+        left: 0;
+    }
+
+    .home .gallery .featured > a {
+        height: 320px;
+    }
+
+    .home .main .posts .post .image,
+    .home .main .posts .post .info,
+    .home .main .posts .post .tracklist {
+        min-height: 481px;
+    }
+
+    .home .main {
+        display: block;
+    }
+
+    .home .main .posts,
+    .home .main .sidebar {
+        width: 100%;
+    }
+
+    .home .main .sidebar {
+        margin-top: 2em;
+    }
+
+    .home .main .sidebar .panel {
+        margin-bottom: 0.5em;
+        text-align: left;
+        opacity: 1;
+    }
+
+    .home .main .sidebar li {
+        display: inline-block;
+    }
+}

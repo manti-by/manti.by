@@ -91,6 +91,10 @@ button {
     display: none;
 }
 
+.mobile-visible {
+    display: none !important;
+}
+
 .flex {
     display: flex;
     justify-content: space-between;
@@ -323,6 +327,12 @@ main .sidebar .panel {
     margin-bottom: 2em;
     padding: 0;
     text-align: right;
+    opacity: 0.8;
+    transition: opacity 0.4s;
+}
+
+main .sidebar .panel:hover {
+    opacity: 1;
 }
 
 main .sidebar .panel h3 {

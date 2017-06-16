@@ -1,0 +1,125 @@
+@media only screen and (max-width: 767px) {
+
+    .mobile-hidden {
+        display: none !important;
+    }
+
+    .mobile-visible {
+        display: block !important;
+    }
+
+    h1 {
+        padding: 0;
+        margin-bottom: 0;
+    }
+
+    .static,
+    .container {
+        width: 95%;
+        margin: 0 2.5%;
+    }
+
+    .static {
+        padding: 0.5em 0;
+        background: transparent;
+    }
+
+    .static .image {
+        float: none;
+        margin: 1em 0;
+        width: 100%;
+    }
+
+    main {
+        margin-top: 4.5em;
+    }
+
+    .home h2 {
+        left: -0.15em;
+        font-size: 4em;
+    }
+
+    .home .posts .featured {
+        display: block;
+    }
+
+    .home .posts .featured .post {
+        width: 100%;
+    }
+
+    .home .gallery .featured > a {
+        height: auto;
+    }
+
+    .home .gallery .featured .latest {
+        position: relative;
+        left: 0;
+        bottom: 0;
+    }
+
+    .home .gallery .featured .latest .thumbnail {
+        flex-basis: 100%;
+    }
+
+    .home .main .posts,
+    .home .main .sidebar {
+        width: 100%;
+    }
+
+    .gallery .list .preview,
+    .gallery .item .preview {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .gallery .list .preview:nth-child(n+4) {
+        display: none;
+    }
+
+    .post .flex {
+        display: block;
+    }
+
+    .post .image,
+    .post .info,
+    .post .tracklist {
+        width: 100%;
+        min-height: 0;
+        margin-bottom: 1em;
+    }
+
+    .post .image a {
+        position: relative;
+    }
+
+    .post .links {
+        position: relative;
+    }
+
+    .featured .post .image {
+        margin-bottom: 0;
+    }
+
+    .featured .post .image a {
+        position: absolute;
+    }
+
+    .home .main .posts .post h2 {
+        margin-left: 0.2em;
+    }
+
+    .home .main .posts .post .image,
+    .home .main .posts .post .info,
+    .home .main .posts .post .tracklist {
+        min-height: 0;
+    }
+
+    footer {
+        margin: 2em 0 1em;
+    }
+
+    footer #copy {
+        float: none;
+        text-align: center;
+    }
+}

@@ -40,6 +40,9 @@
             <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
             {% block styles %}{% endblock %}
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/481.css' %}">
         {% endcompress %}
     </head>
     <body>
@@ -101,10 +104,10 @@
                         <span class="breadcrumbs">{% block breadcrumbs %}{% endblock %}</span>
                     </div>
                     <div class="right">
-                        <a href="{% url 'blog' %}" rel="bookmark" class="link-item">
+                        <a href="{% url 'blog' %}" rel="bookmark" class="link-item mobile-hidden">
                             <span class="text">{% trans 'Music' %}</span>
                         </a>
-                        <a href="{% url 'gallery_list' %}" rel="bookmark" class="link-item">
+                        <a href="{% url 'gallery_list' %}" rel="bookmark" class="link-item mobile-hidden">
                             <span class="text">{% trans 'Gallery' %}</span>
                         </a>
                         <span class="language" class="link-item">
@@ -128,6 +131,12 @@
                 </div>
             </nav>
             <nav class="mobile-menu">
+                <a href="{% url 'blog' %}" class="mobile-visible">
+                    {% trans 'Music' %}
+                </a>
+                <a href="{% url 'gallery_list' %}" class="mobile-visible">
+                    {% trans 'Gallery' %}
+                </a>
                 <a href="{% url 'about' %}">{% trans 'About' %}</a>
                 <a href="{% url 'resume' %}">{% trans 'My job' %}</a>
                 <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>
@@ -149,10 +158,10 @@
 
         <footer>
             <nav class="container">
-                <a href="{% url 'about' %}">{% trans 'About' %}</a>
-                <a href="{% url 'resume' %}">{% trans 'My job' %}</a>
-                <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>
-                <a href="mailto:manti.by@gmail.com">{% trans 'Contact' %}</a>
+                <a href="{% url 'about' %}" class="mobile-hidden">{% trans 'About' %}</a>
+                <a href="{% url 'resume' %}" class="mobile-hidden">{% trans 'My job' %}</a>
+                <a href="{% url 'copyrights' %}" class="mobile-hidden">{% trans 'Copyrights' %}</a>
+                <a href="mailto:manti.by@gmail.com" class="mobile-hidden">{% trans 'Contact' %}</a>
                 <div id="copy">
                     Alex Manti&copy; 2006 - {% now 'Y' %}
                 </div>
