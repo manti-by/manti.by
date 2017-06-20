@@ -47,8 +47,4 @@
         text-align: left;
         opacity: 1;
     }
-
-    main .sidebar li {
-        display: inline-block;
-    }
 }

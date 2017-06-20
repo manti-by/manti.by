@@ -324,67 +324,55 @@ main {
     margin-top: 4em;
 }
 
+main .sidebar {
+    margin-top: 2em;
+}
+
 main .sidebar .panel {
-    margin-bottom: 2em;
-    padding: 0;
-    text-align: right;
-    opacity: 0.8;
-    transition: opacity 0.4s;
+    margin-bottom: 1.5em;
 }
 
-main .sidebar .panel:hover {
-    opacity: 1;
-}
-
-main .sidebar .panel h3 {
+main .sidebar h3 {
     color: #696969;
     font-weight: 400;
     font-size: 0.85rem;
     text-transform: uppercase;
 }
 
-main .sidebar .panel li {
+main .sidebar ul {
+    margin-left: 0;
+    justify-content: flex-start;
+}
+
+main .sidebar li {
+    display: inline-block;
+    margin: 0.2em 0;
     list-style: none;
 }
 
-main .sidebar .panel li a {
+main .sidebar li a {
     color: #999;
     font-size: 0.85rem;
 }
 
-main .sidebar .panel li a:hover {
-    border-bottom: 1px dotted #999;
+main .sidebar li a:after {
+    content: ', ';
 }
 
-main .sidebar .instagram {
-    font-size: 0.85em;
-    color: #696969  ;
-}
-
-main .sidebar .instagram ul {
-    margin-top: 1em;
+main .sidebar li:last-child a:after {
+    content: '';
 }
 
 main .sidebar .instagram li {
-    flex-basis: 49%;
-    margin: 0 0 0.25em 0;
+    margin: 0.2em;
 }
 
-main .sidebar .instagram li a {
-    display: block;
-}
-
-main .sidebar .instagram li a:hover {
-        border: none;
-}
-
-main .sidebar .instagram img {
-    min-width: 100%;
-    max-width: 100%;
+main .sidebar .instagram li a:after {
+    content: '';
 }
 
 main .sidebar .instagram .profile {
-    margin-left: 1em;
+    margin-left: 0;
 }
 
 footer {

@@ -1,6 +1,3 @@
-.home {
-}
-
 header.home .homelink {
     position: relative;
     left: -1.5em;
@@ -91,8 +88,4 @@ header.home .homelink {
 
 .home .main .posts .post .tracklist .tracks {
     height: 307px;
-}
-
-.home .main .sidebar {
-    width: 27%;
 }

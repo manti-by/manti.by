@@ -6,9 +6,9 @@
 
 {% block content %}
     <div class="home container">
-        <div class="posts">
+        <div class="featured posts">
             <h2>{% trans 'Featured' %}</h2>
-            <div class="featured flex">
+            <div class="flex">
                 {% for item in featured_posts %}
                     {% include 'blog/featured-item.html' %}
                 {% endfor %}
