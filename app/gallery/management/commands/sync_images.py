@@ -30,7 +30,7 @@ class Command(BaseCommand):
                     for file in files:
                         file_name = os.path.join(dir_root, file)
                         file_image = PILImage.open(file_name)
-                        file_phash = phash(file_image)
+                        file_phash = str(phash(file_image))
                         checked += 1
                         if file_phash not in images:
                             image = Image(phash=file_phash, gallery=gallery)
