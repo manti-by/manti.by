@@ -8,7 +8,8 @@
     <div class="container static resume">
         <h1>{% trans 'Resume' %}</h1>
         <div class="description">
-            <img src="{% static 'img/side.jpg' %}" class="image" alt="Manti">
+            <img src="{% static 'img/side.jpg' %}" class="image mobile-hidden" alt="Manti">
+            <img src="{% static 'img/side-mobile.jpg' %}" class="image mobile-visible" alt="Manti">
             {% if ACTIVE_LANGUAGE == 'ru' %}
                 <p>
                     <cite>

@@ -34,13 +34,47 @@
         margin-top: 4.5em;
     }
 
+    main .sidebar .panel {
+        margin-bottom: 1.5em;
+    }
+
+    main .sidebar ul {
+        margin-left: 0;
+    }
+
+    main .sidebar ul li {
+        margin: 0.2em 0;
+    }
+
+    main .sidebar li a:after {
+        content: ', ';
+    }
+
+    main .sidebar li:last-child a:after {
+        content: '';
+    }
+
     main .sidebar .instagram li {
         flex-basis: 32%;
+    }
+
+    main .sidebar .instagram li a:after {
+        content: '';
+    }
+
+    main .sidebar .instagram .profile {
+        margin-left: 0;
     }
 
     .home h2 {
         left: -0.15em;
         font-size: 4em;
+    }
+
+    .post h2 {
+        top: 0;
+        left: -0.15em;
+        font-size: 3em;
     }
 
     .home .posts .featured {
@@ -49,6 +83,10 @@
 
     .home .posts .featured .post {
         width: 100%;
+    }
+
+    .home .gallery {
+        margin-bottom: 1em;
     }
 
     .home .gallery .featured > a {
@@ -64,7 +102,8 @@
     .home .gallery .featured .latest .thumbnail {
         flex-basis: 32%;
         max-width: 100%;
-        margin: 0 0 0.5em 0;
+        margin: 0 0 0.3em 0;
+        box-shadow: none;
     }
 
     .home .main .posts,
@@ -72,18 +111,32 @@
         width: 100%;
     }
 
+    .gallery .item {
+        padding-top: 0;
+    }
+
     .gallery .list .preview,
     .gallery .item .preview {
         width: 100%;
-        margin-right: 0;
+        margin: 0 0 0.3em 0;
     }
 
     .gallery .list .preview:nth-child(n+4) {
         display: none;
     }
 
+    .post .featured {
+        margin-left: 0;
+    }
+
     .post .flex {
-        display: block;
+        padding-top: 0;
+        margin-bottom: 0;
+    }
+
+    .post .flex .post {
+        width: auto;
+        flex-basis: 100%;
     }
 
     .post .image,

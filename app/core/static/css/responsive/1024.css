@@ -33,22 +33,22 @@
         display: block;
     }
 
-    .home .main .posts,
-    .home .main .sidebar {
+    main .posts,
+    main .sidebar {
         width: 100%;
     }
 
-    .home .main .sidebar {
+    main .sidebar {
         margin-top: 2em;
     }
 
-    .home .main .sidebar .panel {
+    main .sidebar .panel {
         margin-bottom: 0.5em;
         text-align: left;
         opacity: 1;
     }
 
-    .home .main .sidebar li {
+    main .sidebar li {
         display: inline-block;
     }
 }
