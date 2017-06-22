@@ -11,7 +11,7 @@
 .post .tracklist {
     position: relative;
     width: 48%;
-    min-height: 447px;
+    min-height: 403px;
 }
 
 .post .image {
@@ -37,7 +37,14 @@
     bottom: 0;
 }
 
-.post .info h2,
+.post h2 {
+    margin-bottom: 0.5em;
+    padding-top: 0;
+    font-size: 1.1em;
+    font-weight: 500;
+}
+
+.post h2,
 .post .info .summary,
 .post .info .created,
 .post .info .genre,
@@ -46,11 +53,6 @@
 .post .info .tags {
     padding-top: 0;
     margin-bottom: 0.5em;
-}
-
-.post .info h2 {
-    font-size: 1.1em;
-    font-weight: 500;
 }
 
 .post .info strong {
@@ -77,7 +79,7 @@
 .post .tracklist .tracks {
     white-space: pre-line;
     line-height: 1.1;
-    height: 400px;
+    height: 343px;
     overflow-y: auto;
 }
 

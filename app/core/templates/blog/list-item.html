@@ -36,11 +36,11 @@
         <div class="tracklist hidden">
             <h2>
                 <a href="{% url 'post' item.slug %}">
-                    {{ item.name }}
+                    {{ item.name }} /{{ item.genre.all|join:", " }}/
                 </a>
             </h2>
             <div class="tracks">
-                {{ item.tracklist|safe }}
+                {{ item.tracklist.strip|safe }}
             </div>
             <div class="links">
                 <span class="link hide-tracklist">{% trans 'Hide Tracklist' %}</span>

@@ -26,12 +26,13 @@
 
 {% block content %}
     <div class="post container">
+        <h1 class="mobile-visible">{{ item.name }}</h1>
         <div class="flex">
             <div class="image">
                 <img src="{{ item.cover.url }}">
             </div>
             <div class="info">
-                <h1>{{ item.name }}</h1>
+                <h1 class="mobile-hidden">{{ item.name }}</h1>
                 <div class="description">{{ item.description|safe }}</div>
                 <div class="created">
                     <strong>{% trans 'Created' %}</strong>:
@@ -66,14 +67,14 @@
             <div class="tracklist hidden">
                 <h1>{{ item.name }}</h1>
                 <div class="tracks">
-                    {{ item.tracklist|safe }}
+                    {{ item.tracklist.strip|safe }}
                 </div>
                 <div class="links">
                     <span class="link hide-tracklist">{% trans 'Hide Tracklist' %}</span>
                 </div>
             </div>
         </div>
-        <h2>{% trans 'Related posts' %}</h2>
+        <h2 class="featured">{% trans 'Related posts' %}</h2>
         <div class="featured flex">
             {% for item in item.related.all|slice:":3" %}
                 {% include 'blog/featured-item.html' %}

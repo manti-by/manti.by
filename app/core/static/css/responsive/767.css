@@ -8,9 +8,17 @@
         display: block !important;
     }
 
-    h1 {
-        padding: 0;
+    h1,
+    .post h1 {
+        padding: 0 0 0.3em 0;
         margin-bottom: 0;
+        font-size: 1.5em;
+    }
+
+    h2 {
+        padding: 0 0 0.3em 0;
+        margin-bottom: 0;
+        font-size: 1.5em;
     }
 
     .static,
@@ -20,13 +28,13 @@
     }
 
     .static {
-        padding: 0.5em 0;
+        padding: 0;
         background: transparent;
     }
 
     .static .image {
         float: none;
-        margin: 1em 0;
+        margin: 0 0 1em 0;
         width: 100%;
     }
 
@@ -93,7 +101,16 @@
     .post h2 {
         top: 0;
         left: -0.15em;
+        font-size: 1.2em;
+        font-weight: 400;
+    }
+
+    .post h2.featured {
         font-size: 3em;
+    }
+
+    .post .info strong {
+        font-weight: 500;
     }
 
     .home .posts .featured {

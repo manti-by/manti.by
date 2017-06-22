@@ -17,6 +17,15 @@
 {% endblock %}
 
 {% block content %}
+    <h1 class="mobile-visible container">
+        {% if tag %}
+            <a href="{% url 'blog' %}">{% trans 'Music' %}</a>
+            <span class="spacer">&gt;</span>
+            {% trans 'Tag' %}<span class="tag">{{ tag }}</span>
+        {% else %}
+            {% trans 'Music' %}
+        {% endif %}
+    </h1>
     <div class="blog container flex">
         <div class="posts">
             {% for item in item_list %}

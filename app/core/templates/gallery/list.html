@@ -16,7 +16,7 @@
                 <div class="item">
                     <h2><a href="{{ gallery.get_absolute_url }}">{{ gallery.name }}</a></h2>
                     <div class="images">
-                        {% for image in gallery.images.all|slice:":6" %}
+                        {% for image in gallery.images.ordered|slice:":6" %}
                             {% thumbnail image.original_image "1920x1280" as display %}
                                 <a href="{{ display.url }}" data-id="{{ image.id }}"
                                    class="preview {% if display.image|is_portrait %}portrait{% else %}landscape{% endif %}">

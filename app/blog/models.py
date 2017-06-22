@@ -23,6 +23,12 @@ class TagsProxy(TaggedItemBase):
     content_object = models.ForeignKey('Post')
 
 
+class PostManager(models.Manager):
+
+    def ordered(self):
+        return self.get_queryset().order_by('-created')
+
+
 @python_2_unicode_compatible
 class Post(SlugifyMixin, BaseModel, models.Model):
 
@@ -60,6 +66,8 @@ class Post(SlugifyMixin, BaseModel, models.Model):
     ogg_release_ready = models.BooleanField(blank=True, default=False)
 
     original_id = models.IntegerField(blank=True, default=0)  # Temporary field
+
+    objects = PostManager()
 
     def __str__(self):
         return self.name

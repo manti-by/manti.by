@@ -12,6 +12,11 @@
 {% endblock %}
 
 {% block content %}
+    <h1 class="mobile-visible container">
+        <a href="{% url 'gallery_list' %}">{% trans 'Gallery' %}</a>
+        <span class="spacer">&gt;</span>
+        {{ gallery.name }}
+    </h1>
     <div class="gallery container">
         <div class="item">
             <div class="images {% if user.is_superuser %}orderable{% endif %}">

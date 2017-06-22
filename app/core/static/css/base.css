@@ -333,10 +333,11 @@ main .sidebar .panel {
 }
 
 main .sidebar h3 {
-    color: #696969;
+    margin-bottom: 1em;
     font-weight: 400;
     font-size: 0.85rem;
     text-transform: uppercase;
+    color: #696969;
 }
 
 main .sidebar ul {

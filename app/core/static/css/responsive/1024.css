@@ -4,7 +4,7 @@
     }
 
     .static {
-        width: 756px;
+        width: 856px;
     }
 
     header nav .link-item {
@@ -46,5 +46,58 @@
         margin-bottom: 0.5em;
         text-align: left;
         opacity: 1;
+    }
+
+    .post .image,
+    .post .info,
+    .post .tracklist {
+        min-height: 480px;
+    }
+
+    .post .featured {
+        margin-left: 2rem;
+    }
+
+    .gallery .list .item .preview {
+        max-height: 183px;
+    }
+
+    .gallery .item .preview {
+        max-height: 278px;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (orientation: portrait) {
+    .static,
+    .container {
+        width: 85%;
+        margin: 0 2.5%;
+        padding: 1em 5%;
+    }
+
+    .home .main .posts .post .image,
+    .home .main .posts .post .info,
+    .home .main .posts .post .tracklist {
+        min-height: 350px;
+    }
+
+    .post .image,
+    .post .info,
+    .post .tracklist {
+        min-height: 350px;
+    }
+
+    .gallery .list .item .preview {
+        width: 49%;
+        margin: 0 1% 0.4em 0;
+    }
+
+    .gallery .list .item .preview:nth-child(even) {
+        margin-right: 0;
+    }
+
+    .gallery .item .preview {
+        max-height: 203px;
+        margin-bottom: 0.4em;
     }
 }
