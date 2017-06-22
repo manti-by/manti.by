@@ -25,6 +25,7 @@
     .container {
         width: 95%;
         margin: 0 2.5%;
+        padding: 0.25em 0;
     }
 
     .static {
@@ -36,6 +37,10 @@
         float: none;
         margin: 0 0 1em 0;
         width: 100%;
+    }
+
+    header nav.container {
+        padding: 0.9em 0 1.1em 0;
     }
 
     main {
@@ -159,6 +164,11 @@
 
     .gallery .list .preview:nth-child(n+4) {
         display: none;
+    }
+
+    .gallery .list .item .preview {
+        width: 100%;
+        margin: 0 0 0.4em 0;
     }
 
     .post .featured {
