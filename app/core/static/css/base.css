@@ -310,15 +310,6 @@ header .breadcrumbs .spacer {
     margin-right: 0.25em;
 }
 
-aside {
-    position: fixed;
-    width: 100%;
-    margin: 0 auto;
-    border-top: 1px solid #CCC;
-    background: #FFF;
-    z-index: 1000;
-}
-
 main {
     min-height: 490px;
     margin-top: 4em;

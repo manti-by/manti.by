@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<footer>
+    <nav class="container">
+        <a href="{% url 'about' %}" class="mobile-hidden">{% trans 'About' %}</a>
+        <a href="{% url 'resume' %}" class="mobile-hidden">{% trans 'My job' %}</a>
+        <a href="{% url 'copyrights' %}" class="mobile-hidden">{% trans 'Copyrights' %}</a>
+        <a href="mailto:manti.by@gmail.com" class="mobile-hidden">{% trans 'Contact' %}</a>
+        <div id="copy">
+            Alex Manti&copy; 2006 - {% now 'Y' %}
+        </div>
+    </nav>
+</footer>

@@ -1,0 +1,41 @@
+{% load static %}
+
+<aside id="player" class="player visible">
+    <audio preload="auto" class="hidden"></audio>
+
+    <div class="container flex">
+        <div class="controls flex">
+            <div class="button prev-track"></div>
+            <div class="button play"></div>
+            <div class="button next-track"></div>
+
+            <div class="progressbar position">
+                <div class="progress-line"></div>
+                <div class="progress-line-loaded"></div>
+                <div class="progress-line-active"></div>
+                <div class="progress-line-label"><span>0</span></div>
+            </div>
+
+            <div class="progressbar volume">
+                <div class="progress-line"></div>
+                <div class="progress-line-active"></div>
+                <div class="progress-line-label"><span>70</span>%</div>
+            </div>
+
+            <div class="high-definition">
+                <i class="material-icons">hd</i>
+            </div>
+        </div>
+
+        <div class="now-playing">
+            <a href="#">
+                <span class="image-wrapper">
+                    <img src="{% static 'img/no-image.png' %}" width="33" height="33" />
+                </span>
+                <span class="title-wrapper"></span>
+            </a>
+        </div>
+
+        <div class="close"><i class="material-icons">close</i></div>
+    </div>
+</aside>

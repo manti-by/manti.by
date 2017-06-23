@@ -46,109 +46,11 @@
         {% endcompress %}
     </head>
     <body>
-        {% if not DEBUG %}
-            <script type="text/javascript">
-                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        {% include 'common/metrics.html' %}
 
-                ga('create', 'UA-39793152-1', 'manti.by');
-                ga('send', 'pageview');
-            </script>
+        {% include 'common/player.html' %}
 
-            <script type="text/javascript">
-                (function (d, w, c) {
-                    (w[c] = w[c] || []).push(function() {
-                        try {
-                            w.yaCounter20835088 = new Ya.Metrika({
-                                id:20835088,
-                                clickmap:true,
-                                trackLinks:true,
-                                accurateTrackBounce:true
-                            });
-                        } catch(e) {}
-                    });
-
-                    var n = d.getElementsByTagName("script")[0],
-                        s = d.createElement("script"),
-                        f = function () { n.parentNode.insertBefore(s, n); };
-                    s.type = "text/javascript";
-                    s.async = true;
-                    s.src = (d.location.protocol === "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js";
-
-                    if (w.opera === "[object Opera]") {
-                        d.addEventListener("DOMContentLoaded", f, false);
-                    } else { f(); }
-                })(document, window, "yandex_metrika_callbacks");
-            </script>
-            <noscript><div><img src="//mc.yandex.ru/watch/20835088" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-        {% endif %}
-
-        <aside class="hidden">
-            <div class="wrapper"></div>
-        </aside>
-
-        <header class="visible {% if is_home %}home{% endif %}">
-            <nav class="container">
-                <div class="flex">
-                    <div class="left">
-                        <a href="{% url 'index' %}" class="homelink" rel="home">
-                            <span class="icon">
-                                <i class="material-icons">settings_input_svideo</i>
-                            </span>
-                            <span class="text">
-                                Manti.by
-                            </span>
-                        </a>
-                        <span class="breadcrumbs mobile-hidden">{% block breadcrumbs %}{% endblock %}</span>
-                    </div>
-                    <div class="right">
-                        <a href="{% url 'blog' %}" rel="bookmark" class="link-item mobile-hidden">
-                            <span class="text">{% trans 'Music' %}</span>
-                        </a>
-                        <a href="{% url 'gallery_list' %}" rel="bookmark" class="link-item mobile-hidden">
-                            <span class="text">{% trans 'Gallery' %}</span>
-                        </a>
-                        <span class="language" class="link-item">
-                            {% for lang in LANGUAGES %}
-                                <a class="item text {% if lang.0 != ACTIVE_LANGUAGE %}passive{% endif %}"
-                                      data-id="{{ lang.0 }}">{{ lang.0 }}</a>
-                                <span class="item spacer">/</span>
-                            {% endfor %}
-                        </span>
-                        {% if user.is_authenticated %}
-                            <span class="user">
-                                <a href="{% url 'profile' %}">
-                                    <img src="{{ user.profile.image }}" />
-                                </a>
-                            </span>
-                        {% endif %}
-                        <span class="mobile-menu-button">
-                            <i class="material-icons">more_vert</i>
-                        </span>
-                    </div>
-                </div>
-            </nav>
-            <nav class="mobile-menu">
-                <a href="{% url 'blog' %}" class="mobile-visible">
-                    {% trans 'Music' %}
-                </a>
-                <a href="{% url 'gallery_list' %}" class="mobile-visible">
-                    {% trans 'Gallery' %}
-                </a>
-                <a href="{% url 'about' %}">{% trans 'About' %}</a>
-                <a href="{% url 'resume' %}">{% trans 'My job' %}</a>
-                <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>
-                <a href="mailto:manti.by@gmail.com">{% trans 'Contact' %}</a>
-                <span class="search-button">{% trans 'Search' %}</span>
-                {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
-                {% else %}
-                    <a href="{% url 'login' %}">{% trans 'Login' %}</a>
-                {% endif %}
-            </nav>
-        </header>
+        {% include 'common/header.html' %}
 
         <main>
             {% block content %}
@@ -156,22 +58,13 @@
             {% endblock %}
         </main>
 
-        <footer>
-            <nav class="container">
-                <a href="{% url 'about' %}" class="mobile-hidden">{% trans 'About' %}</a>
-                <a href="{% url 'resume' %}" class="mobile-hidden">{% trans 'My job' %}</a>
-                <a href="{% url 'copyrights' %}" class="mobile-hidden">{% trans 'Copyrights' %}</a>
-                <a href="mailto:manti.by@gmail.com" class="mobile-hidden">{% trans 'Contact' %}</a>
-                <div id="copy">
-                    Alex Manti&copy; 2006 - {% now 'Y' %}
-                </div>
-            </nav>
-        </footer>
+        {% include 'common/footer.html' %}
 
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         {% compress js %}
             <script type="text/javascript" src="{% static 'js/widgets/menu.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/widgets/header.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/widgets/player.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/widgets/language.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/libs/common.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
@@ -182,9 +75,9 @@
         {
             "@context" : "http://schema.org",
             "@type" : "MusicGroup",
-            "name" : "Manti",
-            "url" : "http://manti.by",
-            "logo": "http://manti.by/content/images/logo.jpg",
+            "name" : "{{ META_TITLE }}",
+            "url" : "{{ BASE_URL }}",
+            "logo": "{{ BASE_URL }}{% static 'img/favicon.png' %}",
             "sameAs" : [
                 "https://soundcloud.com/manti_by",
                 "https://twitter.com/manti_by",
