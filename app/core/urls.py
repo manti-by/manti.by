@@ -5,8 +5,7 @@ from django.conf.urls import include, url
 from django.contrib import admin
 
 from core import views as core_views
-from api.resources import OrderableResource
-
+from api.resources import OrderableResource, PostResource
 
 urlpatterns = [
     url(r'^$', core_views.index, name='index'),
@@ -18,6 +17,7 @@ urlpatterns = [
     url(r'^copyrights$', core_views.static, {'page': 'copyrights'}, name='copyrights'),
 
     # API urls
+    url(r'^api/posts/?$', PostResource.as_view()),
     url(r'^api/orderable/?$', OrderableResource.as_view()),
 
     # Blog urls

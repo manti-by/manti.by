@@ -1,6 +1,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 from django.db.models.signals import post_save
@@ -77,6 +78,42 @@ class Post(SlugifyMixin, BaseModel, models.Model):
         return self.mp3_preview_ready \
            and self.ogg_preview_ready \
            and self.ogg_release_ready
+
+    @property
+    def url(self):
+        return reverse('post', kwargs={'slug': self.slug})
+
+    @property
+    def release_mp3_url(self):
+        return self.release.url
+
+    @property
+    def preview_mp3_url(self):
+        return self.release.url.replace('release', 'preview')
+
+    @property
+    def release_ogg_url(self):
+        return self.release.url.replace('mp3', 'ogg')
+
+    @property
+    def preview_ogg_url(self):
+        return self.release.url.replace('release', 'preview').replace('mp3', 'ogg')
+
+    def as_dict(self):
+        return {
+            'id': self.id,
+            'url': self.url,
+            'name': self.name,
+            'cover': self.cover.url,
+            'release': {
+                'mp3': self.release_mp3_url,
+                'ogg': self.release_ogg_url
+            },
+            'preview': {
+                'mp3': self.preview_mp3_url,
+                'ogg': self.preview_ogg_url
+            },
+        }
 
 
 @receiver(post_save, sender=Post, dispatch_uid='convert_release')

@@ -53,6 +53,19 @@
                     <strong>{% trans 'Genre' %}</strong>:
                     {{ item.genre.all|join:", " }}
                 </div>
+                <div class="preview">
+                    <div id="player-{{ item.id }}" class="player inline" data-id="{{ item.id }}">
+                        <div class="button play"></div>
+                        <div class="progressbar position">
+                            <div class="progress-line"></div>
+                            <div class="progress-line-loaded"></div>
+                            <div class="progress-line-active"></div>
+                            <div class="progress-line-label">
+                                <span>00:00:00</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="tags">
                     <strong>{% trans 'Tags' %}</strong>:
                     {% for t in item.tags.all %}

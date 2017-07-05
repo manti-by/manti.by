@@ -7,6 +7,7 @@ from simple_rest import Resource
 
 from api.utils import resource_wrapper
 from core.models import Email
+from blog.models import Post
 from gallery.models import Gallery, Image
 
 logger = logging.getLogger('app')
@@ -62,3 +63,20 @@ class ContactResource(Resource):
             logger.error(e.message)
             return JsonResponse({'status': 500,
                                  'message': _('Can\'t save contact info, please try later')}, status=200)
+
+
+class PostResource(Resource):
+
+    @resource_wrapper
+    def get(self, request):
+        try:
+            result = []
+            for p in Post.objects.ordered().filter(is_music=True):
+                result.append(p.as_dict())
+
+            return JsonResponse({'status': 200,
+                                 'data': result}, status=200)
+        except Exception as e:
+            logger.error(e.message)
+            return JsonResponse({'status': 500,
+                                 'message': _('Can\'t load posts, please try later')}, status=200)

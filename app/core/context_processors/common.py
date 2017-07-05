@@ -1,8 +1,9 @@
+import json
+
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
 from blog.models import Post
-from taggit.models import Tag
 from core.utils import get_instagram_photos
 
 

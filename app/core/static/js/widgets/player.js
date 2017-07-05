@@ -13,14 +13,19 @@
         _data: [],
         _player: null,
         _active_id: 0,
+
         _volume: 70,
+        _position: 0,
+        _duration: 0,
 
         init: function(data) {
+            this._is_debug && console.log('Init');
+
             this._data = data;
             this._player = $('#player');
 
-            this._player.api =  this._player.audio.get(0);
             this._player.audio = this._player.find('audio');
+            this._player.api =  this._player.audio.get(0);
 
             this._player.link = this._player.find('.now-playing a');
             this._player.image = this._player.find('.now-playing img');
@@ -52,34 +57,39 @@
             var self = this;
 
             self._player.audio.on('canplay', function() {
+                self._duration = self._player.api.duration;
                 if (self._player._is_playing) {
                     self._player.api.play();
                 }
             });
 
             self._player.audio.on('ended', function() {
-                self._player.next();
+                self.next();
             });
 
-            $('.player .play').on('click', function(event) {
+            $('.player .play').on('click', function() {
                 var id = $(this).closest('.player').data('id');
 
                 if (self._active_id !== id) {
-
+                    if (self._get_data(id)) {
+                        self._active_id = id;
+                    } else {
+                        console.error('Audio #' + id + ' not found');
+                    }
                 }
-                self._player.play();
+                self.play();
             });
 
-            $('.player .pause').on('click', function (event) {
-                self._player.pause();
+            $('.player .pause').on('click', function () {
+                self.pause();
             });
 
             $('.player .next-track').on('click', function () {
-                self._player.next();
+                self.next();
             });
 
             $('.player .prev-track').on('click', function () {
-                self._player.prev();
+                self.prev();
             });
 
             $('.player .high-definition').on('click', function () {
@@ -103,7 +113,7 @@
 
             self._player.find('.close').bind('click', function() {
                 $('aside').removeClass('visible');
-                self._player.api.pause();
+                self.pause();
             });
 
             var progress_bar = $('.player .progressbar');
@@ -132,17 +142,17 @@
             for (var i = 0; i < this._data.length; i++) {
                 switch(option) {
                     case 'next':
-                        if (typeof this._data[i + 1] !== 'undefined') {
-                            return this._data[i + 1];
+                        if (typeof this._data[i+1] !== 'undefined') {
+                            return this._data[i+1];
                         } else {
                             return this._data[0];
                         }
                         break;
                     case 'prev':
-                        if (typeof this._data[i - 1] !== 'undefined') {
-                            return this._data[i - 1];
+                        if (typeof this._data[i-1] !== 'undefined') {
+                            return this._data[i-1];
                         } else {
-                            return this._data[this._data.length - 1];
+                            return this._data[this._data.length-1];
                         }
                         break;
                     case 'current':
@@ -208,7 +218,7 @@
 
 
             // Update buffered state
-            var buffered = this._player.api.buffered.end(0) / this._player.api.duration;
+            var buffered = this._player.api.buffered.end(0) / this._duration;
 
             width = buffered * player_progress_line.width();
             player_progress_line_loaded.width(width);
@@ -220,16 +230,13 @@
         updateVolumePosition: function() {
             var player_volume_line = this._player.find('.volume .progress-line'),
                 player_volume_line_active = this._player.find('.volume .progress-line-active'),
-                player_volume_label = this._player.find('.volume .progress-line-label span');
-
-            var current_player = $('#player-'+ this._active_id),
+                player_volume_label = this._player.find('.volume .progress-line-label span'),
+                current_player = $('#player-'+ this._active_id),
                 width;
 
-            // Update volume label
             player_volume_label.html(this._volume);
             current_player.find('.volume .progress-line-label span').html(this._volume);
 
-            // Update volume width
             width = this._volume * player_volume_line.width() / 100;
             player_volume_line_active.width(width);
 
@@ -241,26 +248,25 @@
         updatePosition: function(element, event) {
             this._is_debug && console.log('updatePosition');
 
-            var value_px = event.clientX - element.offset().left;
-            element.find('.progress-line-active').width(value_px);
+            var active_width = element.find('.progress-line-active').width(),
+                loaded_width = element.find('.progress-line-loaded').width(),
+                pixels_value = event.clientX - element.offset().left,
+                percent_value = parseInt(active_width / pixels_value * 100);
 
-            var max_length = element.find('.progress-line-active').width();
-
-            if (element.find('.progress-line-active').width() > element.find('.progress-line-loaded').width()) {
-                max_length = element.find('.progress-line-loaded').width();
-            }
-
-            var value_pc = parseInt(max_length / $(this).find('.progress-line').width() * 100);
-
-            if ($(this).hasClass('position')) {
-                this._player.api.currentTime = this._player.api.duration * value_pc / 100;
-                this.updateProgressPosition();
-            }
-
-            if ($(this).hasClass('volume')) {
-                this._volume = value_pc;
-                this._player.api.volume = value_pc / 100;
+            if (element.hasClass('volume')) {
+                this._volume = percent_value;
+                this._player.api.volume = percent_value / 100;
                 this.updateVolumePosition();
+            }
+
+            if (element.hasClass('position')) {
+                if (active_width > loaded_width) {
+                    percent_value = parseInt(loaded_width / pixels_value * 100);
+                }
+
+                this._position = percent_value;
+                this._player.api.currentTime = this._duration * percent_value / 100;
+                this.updateProgressPosition();
             }
         },
 
@@ -319,11 +325,11 @@
             }
 
             var data = this._get_data('current'),
-                quality = this._is_hd ? 'hd' : 'web',
-                format = this._is_mp3 ? 'mp3' : 'web';
+                quality = this._is_hd ? 'release' : 'preview',
+                format = this._is_mp3 ? 'mp3' : 'ogg';
 
             this._player.title.html(data['name']);
-            this._player.link.attr('href', data['link']);
+            this._player.link.attr('href', data['url']);
             this._player.image.attr('src', data['cover']);
             this._player.audio.attr('src', data[quality][format]);
 
@@ -333,14 +339,13 @@
 
 
         update: function() {
-            this._is_debug && console.log('Update');
+            this._is_debug && window.show_updates && console.log('Update');
 
             if (this._is_playing) {
                 this.show();
+                this.updateFaviconState();
+                this.updateProgressPosition();
             }
-
-            this.updateFaviconState();
-            this.updatePlayerProgress();
         },
 
         play: function() {
