@@ -1,31 +1,59 @@
-setCookie = function(name, value, exdays) {
-    var exdate = new Date(), cookie;
+(function($) {
 
-    exdate.setDate(exdate.getDate() + exdays);
-    cookie = encodeURIComponent(value);
-    cookie += ((exdays === null) ? "" : "; expires=" + exdate.toUTCString());
-    document.cookie = name + "=" + cookie;
-};
+    'use strict';
 
-getCookie = function(name) {
-    var value = document.cookie;
-    var start = value.indexOf(" " + name + "=");
+    $.fn.setCookie = function (name, value, expire) {
+        var expire_date = new Date();
 
-    if (start === -1) {
-        start = value.indexOf(name + "=");
-    }
+        expire_date.setDate(expire_date.getDate() + expire);
+        value = encodeURIComponent(value) +
+            (expire === null ? '' : '; expires=' + expire_date.toUTCString());
 
-    if (start === -1) {
-        value = null;
-    } else {
-        start = value.indexOf("=", start) + 1;
-        var end = value.indexOf(";", start);
+        document.cookie = name + '=' + value;
+    };
 
-        if (end === -1) {
-            end = value.length;
+    $.fn.getCookie = function(name, default_value) {
+        var value = document.cookie,
+            start = value.indexOf(' ' + name + '='), end;
+
+        if (start === -1) {
+            start = value.indexOf(name + '=');
         }
-        value = decodeURIComponent(value.substring(start,end));
-    }
 
-    return value;
-};
+        if (start === -1) {
+            value = default_value;
+        } else {
+            start = value.indexOf('=', start) + 1;
+            end = value.indexOf(';', start);
+
+            if (end === -1) {
+                end = value.length;
+            }
+            value = decodeURIComponent(value.substring(start, end));
+        }
+
+        return value;
+    };
+
+    $.fn.secondsToTime = function(time) {
+        var hours = Math.floor(time / 3600);
+        hours = hours > 9 ? hours : '0' + hours;
+        time -= hours * 3600;
+
+        var minutes = Math.floor(time / 60);
+        minutes = minutes > 9 ? minutes : '0' + minutes;
+        time -= minutes * 60;
+
+        var seconds = parseInt(time % 60, 10);
+        seconds = seconds > 9 ? seconds : '0' + seconds;
+
+        return hours + ':' + minutes + ':' + seconds;
+    };
+
+    $.fn.loaderShow = function() {
+    };
+
+    $.fn.loaderHide = function() {
+    };
+
+})(jQuery);

@@ -4,14 +4,19 @@
 
 
     $.player = {
-        _is_debug: true,
-        _is_mp3_support: -1,
-        _is_playing: false,
 
+        _is_debug: true,
+        _is_playing: false,
+        _is_hd: false,
+        _is_mp3: -1,
+
+        _data: [],
         _player: null,
         _active_id: 0,
+        _volume: 70,
 
-        init: function() {
+        init: function(data) {
+            this._data = data;
             this._player = $('#player');
 
             this._player.api =  this._player.audio.get(0);
@@ -20,24 +25,143 @@
             this._player.link = this._player.find('.now-playing a');
             this._player.image = this._player.find('.now-playing img');
             this._player.title = this._player.find('.now-playing span.title-wrapper');
+
+            this._volume = $.fn.getCookie('volume', 70);
+            this._is_hd = $.fn.getCookie('is-hd', false);
+
+            this._check_mp3_support();
+            this._bind_events();
         },
 
-        canPlayMp3: function () {
+
+        _check_mp3_support: function () {
             this._is_debug && console.log('Check mp3 support');
 
-            var is_mp3_support = -1;
-            if (this._is_mp3_support > -1) {
-                return true;
-            } else {
+            if (this._is_mp3 === -1) {
                 var audio  = document.createElement('audio');
-                if (typeof audio.canPlayType === "function" && audio.canPlayType("audio/mpeg") !== "") {
-                    this._is_mp3_support = 1;
-                    return true;
+                if (typeof audio.canPlayType === 'function' && audio.canPlayType('audio/mpeg') !== '') {
+                    this._is_mp3 = 1;
                 } else {
-                    this._is_mp3_support = 0;
-                    return false;
+                    this._is_mp3 = 0;
                 }
             }
+        },
+
+
+        _bind_events: function() {
+            var self = this;
+
+            self._player.audio.on('canplay', function() {
+                if (self._player._is_playing) {
+                    self._player.api.play();
+                }
+            });
+
+            self._player.audio.on('ended', function() {
+                self._player.next();
+            });
+
+            $('.player .play').on('click', function(event) {
+                var id = $(this).closest('.player').data('id');
+
+                if (self._active_id !== id) {
+
+                }
+                self._player.play();
+            });
+
+            $('.player .pause').on('click', function (event) {
+                self._player.pause();
+            });
+
+            $('.player .next-track').on('click', function () {
+                self._player.next();
+            });
+
+            $('.player .prev-track').on('click', function () {
+                self._player.prev();
+            });
+
+            $('.player .high-definition').on('click', function () {
+                self._is_debug && console.log('Change quality');
+
+                self.reset();
+
+                if (self._is_hd === 1) {
+                    self._is_hd = 0;
+                    $.fn.setCookie('is-hd', 0);
+                } else {
+                    self._is_hd = 1;
+                    $.fn.setCookie('is-hd', 1);
+
+                    $('#player .high-definition, ' +
+                      '#player-'+ self._active_id +' .high-definition').addClass('active');
+                }
+
+                self.reload();
+            });
+
+            self._player.find('.close').bind('click', function() {
+                $('aside').removeClass('visible');
+                self._player.api.pause();
+            });
+
+            var progress_bar = $('.player .progressbar');
+
+            progress_bar.on('click', function (event) {
+                self.updatePosition($(this), event);
+            });
+
+            progress_bar.on('mousedown', function () {
+                $(this).data('active', true);
+            });
+
+            progress_bar.on('mousemove', function (event) {
+                if ($(this).data('active') === true) {
+                    self.updatePosition($(this), event);
+                }
+            });
+
+            progress_bar.on('mouseup', function () {
+                $(this).data('active', false);
+            });
+        },
+
+
+        _get_data: function (option) {
+            for (var i = 0; i < this._data.length; i++) {
+                switch(option) {
+                    case 'next':
+                        if (typeof this._data[i + 1] !== 'undefined') {
+                            return this._data[i + 1];
+                        } else {
+                            return this._data[0];
+                        }
+                        break;
+                    case 'prev':
+                        if (typeof this._data[i - 1] !== 'undefined') {
+                            return this._data[i - 1];
+                        } else {
+                            return this._data[this._data.length - 1];
+                        }
+                        break;
+                    case 'current':
+                        if (this._data[i].id === this._active_id) {
+                            return this._data[i];
+                        }
+                        break;
+                    default:
+                        if (this._data[i].id === parseInt(option)) {
+                            return this._data[i];
+                        }
+                        break;
+                }
+            }
+
+            if (option !== 'current')
+                return this._get_data('current');
+
+            return null;
         },
 
         updateFaviconState: function () {
@@ -51,22 +175,127 @@
             }
         },
 
+
+        updateProgressPosition: function () {
+            this._is_debug && console.log('updatePlayerProgress');
+
+            var player_progress_line = this._player.find('.position .progress-line'),
+                player_progress_line_active = this._player.find('.position .progress-line-active'),
+                player_progress_line_loaded = this._player.find('.position .progress-line-loaded'),
+                player_progress_label = this._player.find('.position .progress-line-label span');
+
+            var current_player = $('#player-'+ this._active_id),
+                position, width;
+
+            // Skip if not plaing or not loaded
+            if (this._is_playing === true || this._player.audio.get(0).readyState === 0) return;
+
+
+            // Update active progress line
+            position = this._player.api.currentTime / this._player.api.duration * 100;
+            width = position * player_progress_line.width() / 100;
+            player_progress_line_active.width(width);
+
+            width = position * current_player.find('.position .progress-line').width() / 100;
+            current_player.find('.position .progress-line-active').width(width);
+
+
+            // Update current player timestamps
+            var timestamp = $.fn.secondsToTime(this._player.api.currentTime);
+
+            player_progress_label.html(timestamp);
+            current_player.find('.position .progress-line-label span').html(timestamp);
+
+
+            // Update buffered state
+            var buffered = this._player.api.buffered.end(0) / this._player.api.duration;
+
+            width = buffered * player_progress_line.width();
+            player_progress_line_loaded.width(width);
+
+            width = buffered * current_player.find('.position .progress-line').width();
+            current_player.find('.position .progress-line-loaded').width(width);
+        },
+
+        updateVolumePosition: function() {
+            var player_volume_line = this._player.find('.volume .progress-line'),
+                player_volume_line_active = this._player.find('.volume .progress-line-active'),
+                player_volume_label = this._player.find('.volume .progress-line-label span');
+
+            var current_player = $('#player-'+ this._active_id),
+                width;
+
+            // Update volume label
+            player_volume_label.html(this._volume);
+            current_player.find('.volume .progress-line-label span').html(this._volume);
+
+            // Update volume width
+            width = this._volume * player_volume_line.width() / 100;
+            player_volume_line_active.width(width);
+
+            width = this._volume * current_player.find('.volume .progress-line').width() / 100;
+            current_player.find('.volume .progress-line-active').width(width);
+        },
+
+
+        updatePosition: function(element, event) {
+            this._is_debug && console.log('updatePosition');
+
+            var value_px = event.clientX - element.offset().left;
+            element.find('.progress-line-active').width(value_px);
+
+            var max_length = element.find('.progress-line-active').width();
+
+            if (element.find('.progress-line-active').width() > element.find('.progress-line-loaded').width()) {
+                max_length = element.find('.progress-line-loaded').width();
+            }
+
+            var value_pc = parseInt(max_length / $(this).find('.progress-line').width() * 100);
+
+            if ($(this).hasClass('position')) {
+                this._player.api.currentTime = this._player.api.duration * value_pc / 100;
+                this.updateProgressPosition();
+            }
+
+            if ($(this).hasClass('volume')) {
+                this._volume = value_pc;
+                this._player.api.volume = value_pc / 100;
+                this.updateVolumePosition();
+            }
+        },
+
+
+        resetPlayers: function() {
+            this._is_debug && console.log('resetPlayers');
+
+            $('.player').removeClass('active');
+            $('.player .pause').removeClass('pause').addClass('play');
+            $('.player .position .progress-line-label span').html('00:00:00');
+            $('.player .position .progress-line-loaded').width(0);
+            $('.player .position .progress-line-active').width(0);
+            $('.player .high-definition').removeClass('active');
+        },
+
+
         updateActivePlayer: function() {
             this._is_debug && console.log('setActivePLayer');
 
-            $('.player').removeClass('active');
-            $('#player, #player-'+ this._actuve_id).addClass('active');
+            this.resetPlayers();
 
+            $('#player, #player-'+ this._active_id).addClass('active');
             if (this._is_playing) {
-                $('#player .play, #player-' + this._actuve_id + ' .play')
+                $('#player .play, #player-' + this._active_id + ' .play')
                     .removeClass('play').addClass('pause');
             } else {
-                $('#player .pause, #player-' + this._actuve_id + ' .pause')
+                $('#player .pause, #player-' + this._active_id + ' .pause')
                     .removeClass('pause').addClass('play');
             }
         },
 
+
         animatePlayerTitle: function() {
+            this._is_debug && console.log('animatePlayerTitle');
+
             var link = this._player.link,
                 title = this._player.title,
                 overflow = link.width() - title.outerWidth();
@@ -80,104 +309,28 @@
             }
         },
 
-        resetPlayers: function() {
-            $('.player .pause').removeClass('pause').addClass('play');
-            $('.player .position .progress-line-label span').html('00:00:00');
-            $('.player .position .progress-line-loaded').width(0);
-            $('.player .position .progress-line-active').width(0);
+
+        reload: function() {
+            this._is_debug && console.log('Reload #' + this._active_id);
+
+            $.fn.loaderShow();
+            if (typeof this._player.api.pause !== 'undefined') {
+                this._player.api.pause();
+            }
+
+            var data = this._get_data('current'),
+                quality = this._is_hd ? 'hd' : 'web',
+                format = this._is_mp3 ? 'mp3' : 'web';
+
+            this._player.title.html(data['name']);
+            this._player.link.attr('href', data['link']);
+            this._player.image.attr('src', data['cover']);
+            this._player.audio.attr('src', data[quality][format]);
+
+            this._player.api.load();
+            $.fn.loaderHide();
         },
 
-        bindEvents: function() {
-
-            player_audio.bind('canplay', function() {
-                $.fn.updatePlayerProgress();
-                $.fn.updatePlayerVolume();
-            });
-
-            // End action
-            player_audio.bind('ended', function() {
-                player.find('.next-track').click();
-            });
-
-            $('.player .play').on('click', function (event) {
-                $.fn.playPause(event, false);
-            });
-
-            $('.player .pause').on('click', function (event) {
-                $.fn.playPause(event, true);
-            });
-
-            $('.player .next-track').on('click', function (event) {
-                $.fn.changeTrack(event, false);
-            });
-
-            $('.player .prev-track').on('click', function (event) {
-                $.fn.changeTrack(event, true);
-            });
-
-            $('.player .high-definition').on('click', function () {
-                console.log('Change quality');
-
-                var current_player_id = $(this).closest('.player').data('release-id');
-
-                // Check main player
-                if (!current_player_id) {
-                    current_player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id;
-                }
-
-                $.fn.resetAllPlayers();
-                $.fn.loaderShow();
-
-                if (getCookie('player_use_hd') === 1) {
-                    setCookie('player_use_hd', 0);
-                } else {
-                    setCookie('player_use_hd', 1);
-                }
-
-                $.fn.reloadPlayer(current_player_id);
-                $.fn.checkActivePLayer(current_player_id);
-                $.fn.checkFaviconState();
-                $.fn.checkPlayerVisibility();
-                $.fn.loaderHide();
-            });
-
-            player.find('.close').bind('click', function() {
-                var aside = $('aside');
-
-                if ($(window).width() > 1024) {
-                    aside.animate({ bottom: -46 }, 800, function () {
-                        aside.addClass('hidden');
-                    });
-                } else {
-                    aside.animate({ top: -46 }, 800, function () {
-                        aside.addClass('hidden');
-                    });
-                }
-
-                setCookie('player_is_playing', 0);
-                player_api.pause();
-            });
-
-            var player_progress_bars = $('.player .progressbar');
-
-            player_progress_bars.on('click', function (event) {
-                $(this).updateProgressbarMoving(event);
-            });
-
-            player_progress_bars.on('mousedown', function (event) {
-                $(this).data('active', true);
-            });
-
-            player_progress_bars.on('mousemove', function (event) {
-                if ($(this).data('active') === true) {
-                    $(this).updateProgressbarMoving(event);
-                }
-            });
-
-            player_progress_bars.on('mouseup', function (event) {
-                $(this).data('active', false);
-            });
-        },
 
         update: function() {
             this._is_debug && console.log('Update');
@@ -187,14 +340,51 @@
             }
 
             this.updateFaviconState();
+            this.updatePlayerProgress();
         },
 
         play: function() {
             this._is_debug && console.log('Play');
+
+            this.show();
+            this._is_playing = true;
+            this._player.api.play();
+        },
+
+        pause: function() {
+            this._is_debug && console.log('Pause');
+
+            this._is_playing = false;
+            this._player.api.pause();
         },
 
         stop: function() {
             this._is_debug && console.log('Stop');
+
+            this._is_playing = false;
+            this._player.api.stop();
+        },
+
+        next: function() {
+            this._is_debug && console.log('Next');
+
+            var data = this._get_data('next');
+
+            this._active_id = data['id'];
+            this.reload();
+
+            this.updateActivePlayer();
+        },
+
+        prev: function() {
+            this._is_debug && console.log('Prev');
+
+            var data = this._get_data('prev');
+
+            this._active_id = data['id'];
+            this.reload();
+
+            this.updateActivePlayer();
         },
 
         show: function() {
@@ -205,272 +395,11 @@
         },
 
         hide: function() {
-            this._is_debug && console.log('hide');
+            this._is_debug && console.log('Hide');
 
             var aside = $('aside');
             aside.removeClass('visible');
         }
 
     };
-
-    $(document).ready(function() {
-
-        // Update source function
-        var player = $('#player'),
-            player_audio = player.find('audio'),
-            player_api = player_audio.get(0),
-            player_link = player.find('.now-playing a'),
-            player_image = player.find('.now-playing img'),
-            player_title = player.find('.now-playing span.title-wrapper'),
-            player_source = window.player_source,
-            player_default_id = window.player_default_id;
-
-
-
-        $.fn.updateSource = function(id) {
-            console.log('updateSource with #' + id);
-
-            // Search source by ID
-            var quality, is_mp3;
-
-            for (var i = 0; i < player_source.length; i++) {
-                if (player_source[i].id === id) {
-                    // Update cookie
-                    setCookie('player_id', id);
-
-                    // Check quality
-                    quality = getCookie('player_use_hd') === 1 ? 'hd' : 'web';
-                    is_mp3  = $.fn.canPlayMp3() ? 'mp3' : 'web';
-
-                    // Update player
-                    player.attr('data-release-id', id);
-                    player_link.attr('href', player_source[i]['link']);
-                    player_image.attr('src', player_source[i]['cover']);
-                    player_audio.attr('src', player_source[i][quality][is_mp3]);
-                    player_title.html(player_source[i]['name']);
-
-                    return;
-                }
-            }
-        };
-
-        // Update players progress bars
-        $.fn.updatePlayerProgress = function () {
-            var player_progress_line = player.find('.position .progress-line'),
-                player_progress_line_active = player.find('.position .progress-line-active'),
-                player_progress_line_loaded = player.find('.position .progress-line-loaded'),
-                player_progress_label = player.find('.position .progress-line-label span');
-
-            var player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id,
-                current_player = $('#player-'+ player_id),
-                position, width;
-
-            // Skip if not loaded
-            if (player_audio.get(0).readyState === 0) return;
-
-            // Update active progress line
-            position = player_api.currentTime / player_api.duration * 100;
-            width = position * player_progress_line.width() / 100;
-            player_progress_line_active.width(width);
-
-            width = position * current_player.find('.position .progress-line').width() / 100;
-            current_player.find('.position .progress-line-active').width(width);
-
-            // Update current player timestamps
-            var timestamp = secondsToTime(player_api.currentTime);
-
-            player_progress_label.html(timestamp);
-            current_player.find('.position .progress-line-label span').html(timestamp);
-
-            // Update buffered state
-            var buffered = player_api.buffered.end(0) / player_api.duration;
-
-            width = buffered * player_progress_line.width();
-            player_progress_line_loaded.width(width);
-
-            width = buffered * current_player.find('.position .progress-line').width();
-            current_player.find('.position .progress-line-loaded').width(width);
-
-            setCookie('player_position', position);
-        };
-
-        // Update players volume bars
-        $.fn.updatePlayerVolume = function() {
-            var player_volume_line = player.find('.volume .progress-line'),
-                player_volume_line_active = player.find('.volume .progress-line-active'),
-                player_volume_label = player.find('.volume .progress-line-label span');
-
-            var volume = getCookie('player_volume') ? getCookie('player_volume') : 70,
-                player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id,
-                current_player = $('#player-'+ player_id),
-                width;
-
-            // Update volume label
-            player_volume_label.html(volume);
-            current_player.find('.volume .progress-line-label span').html(volume);
-
-            // Update volume width
-            width = volume * player_volume_line.width() / 100;
-            player_volume_line_active.width(width);
-
-            width = volume * current_player.find('.volume .progress-line').width() / 100;
-            current_player.find('.volume .progress-line-active').width(width);
-        };
-
-        // Progressbar control
-        $.fn.updateProgressbarMoving = function(event) {
-            // Update progressbar
-            var value_px = event.clientX - $(this).offset().left;
-            $(this).find('.progress-line-active').width(value_px);
-
-            // Update counter
-            var max_length = $(this).find('.progress-line-active').width();
-            if ($(this).find('.progress-line-active').width() > $(this).find('.progress-line-loaded').width()) {
-                max_length = $(this).find('.progress-line-loaded').width();
-            }
-
-            var value_pc = parseInt(max_length / $(this).find('.progress-line').width() * 100);
-
-            // Update control progress
-            if ($(this).hasClass('position')) {
-                player_api.currentTime = player_api.duration * value_pc / 100;
-                setCookie('player_position', value_pc);
-                $.fn.updatePlayerProgress();
-            }
-
-            // Update control volume
-            if ($(this).hasClass('volume')) {
-                player_api.volume = value_pc / 100;
-                setCookie('player_volume', value_pc);
-                $.fn.updatePlayerVolume();
-            }
-        };
-
-        $.fn.reloadPlayer = function(player_id) {
-            console.log('reloadPlayer with #' + player_id);
-
-            $.fn.loaderShow();
-
-            // Restart player with new source
-            if (typeof player_api.pause != 'undefined') {
-                player_api.pause();
-            }
-
-            $.fn.updateSource(player_id);
-            player_api.load();
-
-            var player_position = getCookie('player_position') ? getCookie('player_position') : 0;
-            if (player_position && player_api.duration) {
-                player_api.currentTime = player_api.duration * player_position / 100;
-            }
-
-            if (getCookie('player_is_playing') == 1) {
-                player_api.play();
-            }
-
-            if (getCookie('player_use_hd') == 1) {
-                $('#player .high-definition, #player-'+ player_id +' .high-definition').addClass('active');
-            }
-
-            $.fn.loaderHide();
-        };
-
-        $.fn.playPause = function(event, is_pause) {
-            if (is_pause) {
-                console.log('Pause action');
-            } else {
-                console.log('Play action');
-            }
-
-            var player_id = $(event.currentTarget).closest('.player').data('release-id'),
-                cookie_player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id;
-
-            if (player_api.readyState == 0 || player_id != cookie_player_id) {
-                setCookie('player_position', 0);
-                setCookie('player_is_playing', 1);
-
-                $.fn.resetAllPlayers();
-                $.fn.reloadPlayer(player_id);
-            } else {
-                if (is_pause) {
-                    setCookie('player_is_playing', 0);
-                    player_api.pause();
-                } else {
-                    setCookie('player_is_playing', 1);
-                    player_api.play();
-                }
-            }
-
-            $.fn.checkActivePLayer(player_id);
-            $.fn.checkFaviconState();
-            $.fn.checkPlayerVisibility();
-        };
-
-        $.fn.changeTrack = function (event, prev) {
-            if (prev) {
-                console.log('Prev action');
-            } else {
-                console.log('Next action');
-            }
-
-            var player_id = $(event.currentTarget).closest('.player').data('release-id');
-
-            // Check main player
-            if (!player_id) {
-                player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id;
-            }
-
-            $.fn.resetAllPlayers();
-
-            setCookie('player_position', 0);
-
-            for (var i = 0; i < player_source.length; i++) {
-                if (player_source[i].id == player_id) {
-                    break;
-                }
-            }
-
-            if (prev) {
-                player_id = i > 0 ? player_source[i - 1].id : player_source[player_source.length - 1].id;
-            } else {
-                player_id = typeof player_source[i + 1] != 'undefined' ? player_source[i + 1].id : player_source[0].id;
-            }
-
-            $.fn.reloadPlayer(player_id);
-            $.fn.checkActivePLayer(player_id);
-            $.fn.checkFaviconState();
-            $.fn.checkPlayerVisibility();
-        };
-
-        $.fn.initPlayer = function() {
-            var player_volume = getCookie('player_volume') ? getCookie('player_volume') : 70,
-                player_id = getCookie('player_id') ? getCookie('player_id') : player_default_id;
-
-            player_api.volume = player_volume / 100;
-
-            setCookie('player_is_playing', 0);
-
-            player_id = player_id ? parseInt(player_id) : parseInt(player_source[0]['id']);
-            $.fn.reloadPlayer(player_id);
-
-            $.fn.checkActivePLayer(player_id);
-            $.fn.checkFaviconState();
-            $.fn.checkPlayerVisibility();
-        };
-
-        // Init player source links
-        $.fn.initPlayer();
-
-        // Set on load update position
-
-        // Update position progressbar
-        setInterval(function() {
-            $.fn.updatePlayerProgress();
-        }, 1000);
-
-        // Scroll player title
-        setInterval(function() {
-            $.fn.animatePlayerTitle();
-        }, 14000);
-    });
 })(jQuery);
