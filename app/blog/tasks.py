@@ -10,21 +10,21 @@ OGG_PREVIEW = 'ogg_preview'
 OGG_RELEASE = 'ogg_release'
 
 
-def convert(ffmpeg_format, post_id, type=''):
+def convert(ffmpeg_format, post_id, output_type=''):
     from blog.models import Post
     post = Post.objects.get(id=post_id)
     result = filename = str(post.release.file)
 
-    if type in (MP3_PREVIEW, OGG_PREVIEW):
+    if output_type in (MP3_PREVIEW, OGG_PREVIEW):
         result = result.replace('release', 'preview')
-    if type in (OGG_RELEASE, OGG_PREVIEW):
+    if output_type in (OGG_RELEASE, OGG_PREVIEW):
         result = result.replace('mp3', 'ogg')
 
     ffmpeg_format.append(result)
     command = ['ffmpeg', '-y', '-nostats', '-loglevel', '0', '-i', filename] + ffmpeg_format
     subprocess.call(command)
 
-    setattr(post, '%s_ready' % type, True)
+    setattr(post, '%s_ready' % output_type, True)
     post.save()
 
 
