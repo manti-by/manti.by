@@ -99,11 +99,16 @@ class Post(SlugifyMixin, BaseModel, models.Model):
     def preview_ogg_url(self):
         return self.release.url.replace('release', 'preview').replace('mp3', 'ogg')
 
+    @property
+    def title(self):
+        return '%s /%s/' % (self.name, ', '.join(self.genre.values_list('name', flat=True)))
+
     def as_dict(self):
         return {
             'id': self.id,
             'url': self.url,
             'name': self.name,
+            'title': self.title,
             'cover': self.cover.url,
             'release': {
                 'mp3': self.release_mp3_url,

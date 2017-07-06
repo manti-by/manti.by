@@ -64,6 +64,7 @@
     padding-top: 0.5em;
     font-size: 0.8em;
     text-align: center;
+    color: #696969;
 }
 
 
@@ -93,13 +94,11 @@
 }
 
 #player .next-track {
-    background-position: -0px -64px;
-    margin-top: 4px;
+    background-position: -0px -72px;
 }
 
 #player .prev-track {
     background-position: -0px -48px;
-    margin-top: 4px;
 }
 
 #player .position {
@@ -108,7 +107,6 @@
 
 #player .volume {
     width: 15%;
-    margin-top: 3px;
 }
 
 #player .volume .progress-line {
@@ -116,19 +114,19 @@
 
 #player .volume-label {
     margin: 0 0.2rem;
-    padding-top: 0.5em;
+    padding-top: 0.4em;
     font-size: 0.8em;
     text-align: center;
+    color: #696969;
 }
 
 #player .now-playing {
-    width: calc(27% - 3em);
+    width: calc(27% - 1.5em);
     padding: 0;
-    margin: 0 1em 0 2em;
+    margin: 0 0.5em 0 1em;
     text-align: left;
-    font-size: 0.8em;
+    font-weight: 300;
     overflow: hidden;
-    color: #ECECEC;
 }
 
 #player .now-playing a {
@@ -150,9 +148,9 @@
     display: inline-block;
     position: absolute;
     top: 8px;
-    left: 38px;
+    left: 42px;
     white-space: nowrap;
-    color: #999;
+    color: #696969;
     z-index: 10;
 }
 
@@ -175,5 +173,7 @@
 }
 
 #player .close i {
-    font-size: 0.9em;
+    position: relative;
+    top: 0.5rem;
+    font-size: 1em;
 }

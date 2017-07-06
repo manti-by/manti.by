@@ -187,21 +187,8 @@
             return this._get_data('first');
         },
 
-        updateFaviconState: function () {
-            this._is_debug && console.log('updateFaviconState');
-
-            var favicon = $('link[rel=icon]');
-            if (this._is_playing) {
-                favicon.attr('href', '/static/img/favicon.png');
-            } else {
-                favicon.attr('href', '/static/img/favicon-pause.png');
-            }
-        },
-
 
         updateProgressPosition: function () {
-            this._is_debug && console.log('updatePlayerProgress');
-
             var player_progress_line = this._player.find('.position .progress-line'),
                 player_progress_line_active = this._player.find('.position .progress-line-active'),
                 player_progress_line_loaded = this._player.find('.position .progress-line-loaded'),
@@ -256,8 +243,6 @@
 
 
         updatePosition: function(element, event) {
-            this._is_debug && console.log('updatePosition');
-
             var active_width = element.find('.progress-line-active').width(),
                 loaded_width = element.find('.progress-line-loaded').width(),
                 pixels_value = event.clientX - element.offset().left,
@@ -296,8 +281,6 @@
         updateActivePlayer: function() {
             this._is_debug && console.log('setActivePLayer');
 
-            this.resetPlayers();
-
             $('#player, #player-'+ this._active_id).addClass('active');
             if (this._is_playing) {
                 $('#player .play, #player-' + this._active_id + ' .play')
@@ -310,8 +293,6 @@
 
 
         animatePlayerTitle: function() {
-            this._is_debug && console.log('animatePlayerTitle');
-
             var link = this._player.link,
                 title = this._player.title,
                 overflow = link.width() - title.outerWidth();
@@ -319,7 +300,7 @@
             if (overflow < 0) {
                 title.animate({ left: overflow }, 2500, function () {
                     setTimeout(function() {
-                        title.animate({ left: 38 }, 2500);
+                        title.animate({ left: 42 }, 2500);
                     }, 2500);
                 });
             }
@@ -339,7 +320,7 @@
                 format = this._is_mp3 ? 'mp3' : 'ogg';
 
             this._player.data('id', this._active_id);
-            this._player.title.html(data['name']);
+            this._player.title.html(data['title']);
             this._player.link.attr('href', data['url']);
             this._player.image.attr('src', data['cover']);
             this._player.audio.attr('src', data[quality][format]);
@@ -350,11 +331,7 @@
 
 
         update: function() {
-            this._is_debug && window.show_updates && console.log('Update');
-
             if (this._is_playing) {
-                this.show();
-                this.updateFaviconState();
                 this.updateProgressPosition();
             }
         },
@@ -390,6 +367,7 @@
             this._active_id = data['id'];
             this.reload();
 
+            this.resetPlayers();
             this.updateActivePlayer();
         },
 
@@ -401,6 +379,7 @@
             this._active_id = data['id'];
             this.reload();
 
+            this.resetPlayers();
             this.updateActivePlayer();
         },
 
