@@ -49,10 +49,13 @@
 .post .info .created,
 .post .info .genre,
 .post .info .length,
-.post .info .player,
 .post .info .tags {
     padding-top: 0;
     margin-bottom: 0.5em;
+}
+
+.post .info .preview {
+    margin: 1em 0;
 }
 
 .post .info strong {
