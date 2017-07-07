@@ -11,7 +11,7 @@
                 method: 'POST',
                 data: {
                     language: $(this).data('id'),
-                    csrfmiddlewaretoken: getCookie('csrftoken')
+                    csrfmiddlewaretoken: $.fn.getCookie('csrftoken')
                 },
                 complete: function(jqXHR, status) {
                     if (status === 'success') {
