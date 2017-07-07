@@ -50,7 +50,8 @@ def profile_image_name(instance, filename):
 
 
 def original_name(instance, filename):
-    return get_name(instance, filename, 'original')
+    name, ext = splitext(filename)
+    return 'gallery/%s/%s%s' % (instance.gallery.slug, name, ext)
 
 
 def preview_name(instance, filename):
