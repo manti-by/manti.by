@@ -64,7 +64,7 @@
 
             self._player.audio.on('canplay', function() {
                 self._duration = self._player.api.duration;
-                if (self._player._is_playing) {
+                if (self._is_playing) {
                     self._player.api.play();
                 }
             });
@@ -81,18 +81,15 @@
                         if (self._get_data(id)) {
                             self._active_id = id;
                             self.reload();
-                            return;
                         } else {
                             console.error('Audio #' + id + ' not found');
                         }
                     }
-
                     self.play();
-                    $(this).removeClass('play').addClass('pause');
                 } else {
-                     self.pause();
-                    $(this).removeClass('pause').addClass('play');
+                    self.pause();
                 }
+                self.updateActivePlayer();
             });
 
             $('.player .next-track').on('click', function () {
@@ -105,8 +102,6 @@
 
             $('.player .high-definition').on('click', function () {
                 self._is_debug && console.log('Change quality');
-
-                self.resetPlayers();
 
                 if (self._is_hd === 1) {
                     self._is_hd = 0;
@@ -155,17 +150,21 @@
             for (var i = 0; i < this._data.length; i++) {
                 switch(option) {
                     case 'next':
-                        if (typeof this._data[i+1] !== 'undefined') {
-                            return this._data[i+1];
-                        } else {
-                            return this._data[0];
+                        if (this._data[i].id === this._active_id) {
+                            if (typeof this._data[i + 1] !== 'undefined') {
+                                return this._data[i + 1];
+                            } else {
+                                return this._data[0];
+                            }
                         }
                         break;
                     case 'prev':
-                        if (typeof this._data[i-1] !== 'undefined') {
-                            return this._data[i-1];
-                        } else {
-                            return this._data[this._data.length-1];
+                        if (this._data[i].id === this._active_id) {
+                            if (typeof this._data[i - 1] !== 'undefined') {
+                                return this._data[i - 1];
+                            } else {
+                                return this._data[this._data.length - 1];
+                            }
                         }
                         break;
                     case 'current':
@@ -270,7 +269,7 @@
             this._is_debug && console.log('resetPlayers');
 
             $('.player').removeClass('active');
-            $('.player .pause').removeClass('pause').addClass('play');
+            $('.player .play-pause').removeClass('pause').addClass('play');
             $('.player .position .progress-line-label span').html('00:00:00');
             $('.player .position .progress-line-loaded').width(0);
             $('.player .position .progress-line-active').width(0);
@@ -281,13 +280,13 @@
         updateActivePlayer: function() {
             this._is_debug && console.log('setActivePLayer');
 
+            var play_button = $('#player .play-pause, #player-' + this._active_id + ' .play-pause');
+
             $('#player, #player-'+ this._active_id).addClass('active');
             if (this._is_playing) {
-                $('#player .play, #player-' + this._active_id + ' .play')
-                    .removeClass('play').addClass('pause');
+                play_button.removeClass('play').addClass('pause');
             } else {
-                $('#player .pause, #player-' + this._active_id + ' .pause')
-                    .removeClass('pause').addClass('play');
+                play_button.removeClass('pause').addClass('play');
             }
         },
 
