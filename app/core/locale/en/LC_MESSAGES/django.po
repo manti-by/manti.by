@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-07 10:28+0000\n"
+"POT-Creation-Date: 2017-07-07 15:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -128,6 +128,51 @@ msgstr ""
 msgid "English"
 msgstr ""
 
+#: core/templates/base.html:74 core/templates/base.html:101
+#: core/templates/blog/list.html:10 core/templates/blog/list.html:15
+#: core/templates/blog/list.html:22 core/templates/blog/list.html:26
+#: core/templates/blog/post.html:22
+msgid "Music"
+msgstr ""
+
+#: core/templates/base.html:77 core/templates/base.html:104
+#: core/templates/gallery/gallery.html:9 core/templates/gallery/gallery.html:16
+#: core/templates/gallery/list.html:5 core/templates/gallery/list.html:9
+#: core/templates/index.html:18 gallery/models.py:35
+msgid "Gallery"
+msgstr ""
+
+#: core/templates/base.html:106 core/templates/base.html:127
+#: core/templates/static/about.html:5 core/templates/static/about.html:9
+msgid "About"
+msgstr ""
+
+#: core/templates/base.html:107 core/templates/base.html:128
+msgid "My job"
+msgstr ""
+
+#: core/templates/base.html:108 core/templates/base.html:129
+#: core/templates/static/copyrights.html:5
+#: core/templates/static/copyrights.html:9
+msgid "Copyrights"
+msgstr ""
+
+#: core/templates/base.html:109 core/templates/base.html:130
+msgid "Contact"
+msgstr ""
+
+#: core/templates/base.html:110
+msgid "Search"
+msgstr ""
+
+#: core/templates/base.html:112
+msgid "Logout"
+msgstr ""
+
+#: core/templates/base.html:114
+msgid "Login"
+msgstr ""
+
 #: core/templates/blog/list-item.html:18 core/templates/blog/post.html:38
 #: core/templates/emails/email.html:65
 msgid "Created"
@@ -151,13 +196,6 @@ msgstr ""
 
 #: core/templates/blog/list.html:5
 msgid "Blog"
-msgstr ""
-
-#: core/templates/blog/list.html:10 core/templates/blog/list.html:15
-#: core/templates/blog/list.html:22 core/templates/blog/list.html:26
-#: core/templates/blog/post.html:22 core/templates/common/header.html:19
-#: core/templates/common/header.html:46
-msgid "Music"
 msgstr ""
 
 #: core/templates/blog/list.html:12 core/templates/blog/list.html:24
@@ -184,44 +222,6 @@ msgstr ""
 msgid "Related posts"
 msgstr ""
 
-#: core/templates/common/footer.html:5 core/templates/common/header.html:51
-#: core/templates/static/about.html:5 core/templates/static/about.html:9
-msgid "About"
-msgstr ""
-
-#: core/templates/common/footer.html:6 core/templates/common/header.html:52
-msgid "My job"
-msgstr ""
-
-#: core/templates/common/footer.html:7 core/templates/common/header.html:53
-#: core/templates/static/copyrights.html:5
-#: core/templates/static/copyrights.html:9
-msgid "Copyrights"
-msgstr ""
-
-#: core/templates/common/footer.html:8 core/templates/common/header.html:54
-msgid "Contact"
-msgstr ""
-
-#: core/templates/common/header.html:22 core/templates/common/header.html:49
-#: core/templates/gallery/gallery.html:9 core/templates/gallery/gallery.html:16
-#: core/templates/gallery/list.html:5 core/templates/gallery/list.html:9
-#: core/templates/index.html:18 gallery/models.py:35
-msgid "Gallery"
-msgstr ""
-
-#: core/templates/common/header.html:55
-msgid "Search"
-msgstr ""
-
-#: core/templates/common/header.html:57
-msgid "Logout"
-msgstr ""
-
-#: core/templates/common/header.html:59
-msgid "Login"
-msgstr ""
-
 #: core/templates/common/sidebar.html:5
 msgid "Popular tags"
 msgstr ""
@@ -236,6 +236,14 @@ msgstr ""
 
 #: core/templates/common/sidebar.html:28
 msgid "Profile"
+msgstr ""
+
+#: core/templates/common/sidebar.html:34
+msgid "Twitter"
+msgstr ""
+
+#: core/templates/common/sidebar.html:38
+msgid "Coub"
 msgstr ""
 
 #: core/templates/emails/email.html:52
@@ -304,9 +312,6 @@ msgid "Let Me In"
 msgstr ""
 
 #: core/templates/profiles/profile.html:5
-msgid "Your Profile"
-msgstr ""
-
 #: core/templates/profiles/profile.html:11
 msgid "Your profile"
 msgstr ""
