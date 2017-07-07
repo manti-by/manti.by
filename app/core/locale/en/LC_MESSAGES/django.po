@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-12 10:11+0000\n"
+"POT-Creation-Date: 2017-07-07 10:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,24 +17,32 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: api/resources.py:31
+#: api/resources.py:22
+msgid "Forbidden"
+msgstr ""
+
+#: api/resources.py:35
 msgid "Updated"
 msgstr ""
 
-#: api/resources.py:38
+#: api/resources.py:42
 msgid "No data"
 msgstr ""
 
-#: api/resources.py:52
+#: api/resources.py:56
 msgid "Contact request from manti.by"
 msgstr ""
 
-#: api/resources.py:57
+#: api/resources.py:61
 msgid "Thanks for subscribing, we'll get in touch soon"
 msgstr ""
 
-#: api/resources.py:61
+#: api/resources.py:65
 msgid "Can't save contact info, please try later"
+msgstr ""
+
+#: api/resources.py:82
+msgid "Can't load posts, please try later"
 msgstr ""
 
 #: blog/admin.py:22
@@ -53,8 +61,8 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
-#: blog/admin.py:34 core/templates/blog/list-item.html:26
-#: core/templates/blog/post.html:49
+#: blog/admin.py:34 core/templates/blog/list-item.html:39
+#: core/templates/blog/post.html:70
 msgid "Tags"
 msgstr ""
 
@@ -62,23 +70,24 @@ msgstr ""
 msgid "Music params"
 msgstr ""
 
-#: blog/admin.py:41 gallery/admin.py:38
+#: blog/admin.py:41
 msgid "Files"
 msgstr ""
 
-#: blog/admin.py:55 core/mixins.py:22 gallery/admin.py:53 gallery/models.py:56
+#: blog/admin.py:55 core/mixins.py:22 core/templates/profiles/profile.html:34
+#: gallery/admin.py:54 gallery/models.py:48 gallery/models.py:66
 msgid "Image"
 msgstr ""
 
-#: blog/admin.py:60 gallery/admin.py:58
+#: blog/admin.py:60 gallery/admin.py:59
 msgid "Ready"
 msgstr ""
 
-#: blog/models.py:37
+#: blog/models.py:44
 msgid "Release File"
 msgstr ""
 
-#: blog/models.py:41
+#: blog/models.py:48
 msgid "Cover Image"
 msgstr ""
 
@@ -119,77 +128,114 @@ msgstr ""
 msgid "English"
 msgstr ""
 
-#: core/templates/blog/list-item.html:18 core/templates/blog/post.html:30
+#: core/templates/blog/list-item.html:18 core/templates/blog/post.html:38
 #: core/templates/emails/email.html:65
 msgid "Created"
 msgstr ""
 
-#: core/templates/blog/list-item.html:22 core/templates/blog/post.html:42
+#: core/templates/blog/list-item.html:22 core/templates/blog/post.html:50
 msgid "Length"
 msgstr ""
 
-#: core/templates/blog/list-item.html:32 core/templates/blog/post.html:55
+#: core/templates/blog/list-item.html:45 core/templates/blog/post.html:76
 msgid "Tracklist"
 msgstr ""
 
-#: core/templates/blog/list-item.html:33 core/templates/blog/post.html:56
+#: core/templates/blog/list-item.html:46 core/templates/blog/post.html:77
 msgid "Download"
 msgstr ""
 
-#: core/templates/blog/list-item.html:46 core/templates/blog/post.html:65
+#: core/templates/blog/list-item.html:59 core/templates/blog/post.html:86
 msgid "Hide Tracklist"
 msgstr ""
 
-#: core/templates/blog/list.html:5 core/templates/blog/list.html:9
+#: core/templates/blog/list.html:5
 msgid "Blog"
 msgstr ""
 
-#: core/templates/blog/post.html:34
+#: core/templates/blog/list.html:10 core/templates/blog/list.html:15
+#: core/templates/blog/list.html:22 core/templates/blog/list.html:26
+#: core/templates/blog/post.html:22 core/templates/common/header.html:19
+#: core/templates/common/header.html:46
+msgid "Music"
+msgstr ""
+
+#: core/templates/blog/list.html:12 core/templates/blog/list.html:24
+msgid "Tag"
+msgstr ""
+
+#: core/templates/blog/list.html:34
+msgid "Nothin to show"
+msgstr ""
+
+#: core/templates/blog/post.html:42
 msgid "Catalog No"
 msgstr ""
 
-#: core/templates/blog/post.html:38
+#: core/templates/blog/post.html:46
 msgid "Quality"
 msgstr ""
 
-#: core/templates/blog/post.html:45
+#: core/templates/blog/post.html:53
 msgid "Genre"
 msgstr ""
 
-#: core/templates/blog/post.html:69
+#: core/templates/blog/post.html:90
 msgid "Related posts"
 msgstr ""
 
-#: core/templates/common/footer.html:5 core/templates/common/header.html:40
+#: core/templates/common/footer.html:5 core/templates/common/header.html:51
 #: core/templates/static/about.html:5 core/templates/static/about.html:9
 msgid "About"
 msgstr ""
 
-#: core/templates/common/footer.html:6 core/templates/common/header.html:41
+#: core/templates/common/footer.html:6 core/templates/common/header.html:52
 msgid "My job"
 msgstr ""
 
-#: core/templates/common/footer.html:7 core/templates/common/header.html:42
+#: core/templates/common/footer.html:7 core/templates/common/header.html:53
 #: core/templates/static/copyrights.html:5
 #: core/templates/static/copyrights.html:9
 msgid "Copyrights"
 msgstr ""
 
-#: core/templates/common/footer.html:8 core/templates/common/header.html:43
+#: core/templates/common/footer.html:8 core/templates/common/header.html:54
 msgid "Contact"
 msgstr ""
 
-#: core/templates/common/header.html:19
-msgid "Music"
-msgstr ""
-
-#: core/templates/common/header.html:23 core/templates/gallery/list.html:5
-#: core/templates/gallery/list.html:9 gallery/models.py:34
+#: core/templates/common/header.html:22 core/templates/common/header.html:49
+#: core/templates/gallery/gallery.html:9 core/templates/gallery/gallery.html:16
+#: core/templates/gallery/list.html:5 core/templates/gallery/list.html:9
+#: core/templates/index.html:18 gallery/models.py:35
 msgid "Gallery"
 msgstr ""
 
-#: core/templates/common/header.html:44
+#: core/templates/common/header.html:55
 msgid "Search"
+msgstr ""
+
+#: core/templates/common/header.html:57
+msgid "Logout"
+msgstr ""
+
+#: core/templates/common/header.html:59
+msgid "Login"
+msgstr ""
+
+#: core/templates/common/sidebar.html:5
+msgid "Popular tags"
+msgstr ""
+
+#: core/templates/common/sidebar.html:13 core/templates/index.html:43
+msgid "Latest posts"
+msgstr ""
+
+#: core/templates/common/sidebar.html:21
+msgid "Instagram"
+msgstr ""
+
+#: core/templates/common/sidebar.html:28
+msgid "Profile"
 msgstr ""
 
 #: core/templates/emails/email.html:52
@@ -212,52 +258,68 @@ msgstr ""
 msgid "Gallery View"
 msgstr ""
 
+#: core/templates/gallery/gallery.html:28 core/templates/gallery/list.html:24
+msgid "Preview #"
+msgstr ""
+
 #: core/templates/index.html:5
 msgid "Homepage"
 msgstr ""
 
-#: core/templates/index.html:15
-msgid "Latest shots from gallery"
+#: core/templates/index.html:10
+msgid "Featured"
 msgstr ""
 
-#: core/templates/index.html:18
+#: core/templates/index.html:23 core/templates/index.html:28
 msgid "Popular image from gallery"
 msgstr ""
 
-#: core/templates/index.html:23
+#: core/templates/index.html:36
 msgid "Latest image from gallery"
+msgstr ""
+
+#: core/templates/profiles/login.html:5 core/templates/profiles/login.html:6
+msgid "Login Page"
 msgstr ""
 
 #: core/templates/profiles/login.html:12
 msgid "Please login or register"
 msgstr ""
 
-#: core/templates/profiles/login.html:14
+#: core/templates/profiles/login.html:16
 msgid "Your profile will be created automatically, if necessary"
 msgstr ""
 
-#: core/templates/profiles/login.html:19
-#: core/templates/profiles/profile.html:28
+#: core/templates/profiles/login.html:20
+#: core/templates/profiles/profile.html:29
 msgid "Email"
 msgstr ""
 
-#: core/templates/profiles/login.html:23
+#: core/templates/profiles/login.html:25
 msgid "Password"
 msgstr ""
 
-#: core/templates/profiles/login.html:27
+#: core/templates/profiles/login.html:31
 msgid "Let Me In"
 msgstr ""
 
-#: core/templates/profiles/profile.html:12
+#: core/templates/profiles/profile.html:5
+msgid "Your Profile"
+msgstr ""
+
+#: core/templates/profiles/profile.html:11
 msgid "Your profile"
 msgstr ""
 
-#: core/templates/profiles/profile.html:23
+#: core/templates/profiles/profile.html:18
 msgid "To update your profile image, please upload new one"
 msgstr ""
 
-#: core/templates/profiles/profile.html:32
+#: core/templates/profiles/profile.html:24
+msgid "Username"
+msgstr ""
+
+#: core/templates/profiles/profile.html:40
 msgid "Update"
 msgstr ""
 
@@ -265,30 +327,34 @@ msgstr ""
 msgid "Resume"
 msgstr ""
 
-#: core/templates/static/resume.html:172
+#: core/templates/static/resume.html:173
 msgid "Code samples"
 msgstr ""
 
-#: core/templates/static/resume.html:175
+#: core/templates/static/resume.html:176
 msgid "Print this page"
 msgstr ""
 
-#: gallery/admin.py:17
+#: gallery/admin.py:22
 msgid "Images count"
 msgstr ""
 
-#: gallery/admin.py:35
+#: gallery/admin.py:40
 msgid "Info"
 msgstr ""
 
-#: gallery/admin.py:42
+#: gallery/admin.py:43
 msgid "Other"
 msgstr ""
 
-#: gallery/models.py:35
+#: gallery/models.py:36
 msgid "Gallery List"
 msgstr ""
 
-#: gallery/models.py:57
+#: gallery/models.py:67
 msgid "Image List"
+msgstr ""
+
+#: profiles/models.py:13
+msgid "Profile Image"
 msgstr ""
