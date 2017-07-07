@@ -49,6 +49,8 @@
         {% endcompress %}
     </head>
     <body>
+        <div id="loader"><div></div></div>
+
         {% include 'common/metrics.html' %}
 
         {% include 'common/player.html' %}
@@ -135,6 +137,7 @@
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         {% compress js %}
         <script type="text/javascript" src="{% static 'js/widgets/menu.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/widgets/loader.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/widgets/header.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/widgets/language.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/libs/common.js' %}"></script>
