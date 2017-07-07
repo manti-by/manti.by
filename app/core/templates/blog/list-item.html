@@ -1,6 +1,6 @@
 {% load i18n %}
 
-<div class="post">
+<div class="post" data-id="{{ item.id }}">
     <div class="flex">
         <div class="image">
             <a href="{% url 'post' item.slug %}">

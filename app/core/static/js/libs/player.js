@@ -12,6 +12,7 @@
         _is_mp3: -1,
 
         _data: [],
+        _active: [],
         _player: null,
         _active_id: 0,
 
@@ -23,7 +24,6 @@
             this._is_debug && console.log('Init');
 
             this._data = data;
-            this._active_id = this._get_data('first')['id'];
 
             this._player = $('#player');
             this._player.audio = this._player.find('audio');
@@ -39,8 +39,12 @@
             this._check_mp3_support();
             this._bind_events();
 
-            this._is_hd && this._player.find('.high-definition').addClass('active');
             this.updateVolumePosition();
+            this._is_hd && this._player.find('.high-definition').addClass('active');
+
+            this.updateActivePosts();
+            this._active_id = this._get_data('first')['id'];
+
             this.reload();
         },
 
@@ -142,39 +146,44 @@
         },
 
 
-        _get_data: function (option) {
+        _get_data: function (option, full_data) {
             if (!this._data.length) throw 'Audio data is empty';
 
-            if (option === 'first') return this._data[0];
+            var items = this._active;
+            if (full_data) {
+                items = this._data;
+            }
 
-            for (var i = 0; i < this._data.length; i++) {
+            if (option === 'first') return items[0];
+
+            for (var i = 0; i < items.length; i++) {
                 switch(option) {
                     case 'next':
-                        if (this._data[i].id === this._active_id) {
-                            if (typeof this._data[i + 1] !== 'undefined') {
-                                return this._data[i + 1];
+                        if (items[i].id === this._active_id) {
+                            if (typeof items[i + 1] !== 'undefined') {
+                                return items[i + 1];
                             } else {
-                                return this._data[0];
+                                return items[0];
                             }
                         }
                         break;
                     case 'prev':
-                        if (this._data[i].id === this._active_id) {
-                            if (typeof this._data[i - 1] !== 'undefined') {
-                                return this._data[i - 1];
+                        if (items[i].id === this._active_id) {
+                            if (typeof items[i - 1] !== 'undefined') {
+                                return items[i - 1];
                             } else {
-                                return this._data[this._data.length - 1];
+                                return items[this._active.length - 1];
                             }
                         }
                         break;
                     case 'current':
-                        if (this._data[i].id === this._active_id) {
-                            return this._data[i];
+                        if (items[i].id === this._active_id) {
+                            return items[i];
                         }
                         break;
                     default:
-                        if (this._data[i].id === parseInt(option)) {
-                            return this._data[i];
+                        if (items[i].id === parseInt(option)) {
+                            return items[i];
                         }
                         break;
                 }
@@ -184,6 +193,17 @@
                 return this._get_data('current');
 
             return this._get_data('first');
+        },
+
+        updateActivePosts: function() {
+            var self = this, data, id;
+
+            self._active = [];
+            $.each($('.post'), function() {
+                id = $(this).data('id');
+                data = self._get_data(id, true);
+                self._active.indexOf(data) === -1 && self._active.push(data);
+            });
         },
 
 
@@ -335,6 +355,7 @@
             }
         },
 
+
         play: function() {
             this._is_debug && console.log('Play');
 
@@ -348,6 +369,7 @@
             }
         },
 
+
         pause: function() {
             this._is_debug && console.log('Pause');
 
@@ -357,6 +379,7 @@
                 this._player.api.pause();
             }
         },
+
 
         next: function() {
             this._is_debug && console.log('Next');
@@ -370,6 +393,7 @@
             this.updateActivePlayer();
         },
 
+
         prev: function() {
             this._is_debug && console.log('Prev');
 
@@ -382,12 +406,14 @@
             this.updateActivePlayer();
         },
 
+
         show: function() {
             this._is_debug && console.log('Show');
 
             var aside = $('aside');
             aside.addClass('visible');
         },
+
 
         hide: function() {
             this._is_debug && console.log('Hide');
