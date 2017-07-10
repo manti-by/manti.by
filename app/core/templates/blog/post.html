@@ -36,7 +36,7 @@
                 <div class="description">{{ item.description|safe }}</div>
                 <div class="created">
                     <strong>{% trans 'Created' %}</strong>:
-                    {{ item.created }}
+                    {{ item.created|date:"d b Y" }}
                 </div>
                 <div class="catnum">
                     <strong>{% trans 'Catalog No' %}</strong>:

@@ -14,7 +14,15 @@
         <div class="list">
             {% for gallery in gallery_list %}
                 <div class="item">
-                    <h2><a href="{{ gallery.get_absolute_url }}">{{ gallery.name }}</a></h2>
+                    <a name="{{ gallery.slug }}"></a>
+                    <h2>
+                        <a href="{{ gallery.get_absolute_url }}">
+                            {{ gallery.name }}
+                        </a>
+                        <span class="info">
+                            {{ gallery.images.all|length }} {% trans 'images' %}
+                        </span>
+                    </h2>
                     <div class="images">
                         {% for image in gallery.images.ordered|slice:":6" %}
                             {% thumbnail image.original_image "1920x1280" as display %}

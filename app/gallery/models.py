@@ -17,6 +17,12 @@ from core.utils import original_name
 from gallery.tasks import generate_phash
 
 
+class GalleryManager(models.Manager):
+
+    def ordered(self):
+        return self.get_queryset().order_by('-order')
+
+
 @python_2_unicode_compatible
 class Gallery(SlugifyMixin, BaseModel, models.Model):
 
@@ -25,11 +31,20 @@ class Gallery(SlugifyMixin, BaseModel, models.Model):
     order = models.IntegerField(blank=True, default=0)
     tags = TaggableManager(blank=True)
 
+    objects = GalleryManager()
+
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
         return reverse('gallery', args=[self.slug])
+
+    @property
+    def last_update(self):
+        try:
+            return self.images.order_by('-created')[0].created
+        except Exception as e:
+            return None
 
     class Meta:
         verbose_name = _('Gallery')
@@ -39,7 +54,7 @@ class Gallery(SlugifyMixin, BaseModel, models.Model):
 class ImageManager(models.Manager):
 
     def ordered(self):
-        return self.get_queryset().order_by('order')
+        return self.get_queryset().order_by('-order')
 
 
 @python_2_unicode_compatible

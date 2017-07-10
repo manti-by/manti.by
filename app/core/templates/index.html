@@ -18,7 +18,7 @@
             <h2>{% trans 'Gallery' %}</h2>
             <div class="featured">
                 {% if featured_image %}
-                    <a href="{{ featured_image.gallery.get_absolute_url }}#image-{{ featured_image.pk }}">
+                    <a href="{% url 'gallery_list' %}#{{ featured_image.gallery.slug }}">
                         {% thumbnail featured_image.original_image "x1080" as im %}
                             <img src="{{ im.url }}" alt="#" title="{% trans 'Popular image from gallery' %}">
                         {% endthumbnail %}
@@ -31,7 +31,7 @@
                 <div class="latest flex">
                     {% for image in latest_images %}
                         {% thumbnail image.original_image "x100" as im %}
-                            <a href="{{ image.gallery.get_absolute_url }}#image-{{ image.pk }}"
+                            <a href="{% url 'gallery_list' %}#{{ image.gallery.slug }}"
                                class="thumbnail {% if im.image|is_portrait %}portrait{% else %}landscape{% endif %}">
                                 <img src="{{ im.url }}" alt="#" title="{% trans 'Latest image from gallery' %}">
                             </a>

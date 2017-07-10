@@ -5,7 +5,7 @@ from gallery.models import Gallery
 
 
 def index(request):
-    gallery_list = Gallery.objects.order_by('-order')
+    gallery_list = Gallery.objects.ordered()
     return render(request, 'gallery/list.html', {'gallery_list': gallery_list})
 
 
