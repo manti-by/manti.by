@@ -204,6 +204,8 @@
                 data = self._get_data(id, true);
                 self._active.indexOf(data) === -1 && self._active.push(data);
             });
+
+            if (self._active.length === 0) self._active = self._data;
         },
 
 

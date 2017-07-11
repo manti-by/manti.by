@@ -69,10 +69,18 @@ class PostResource(Resource):
 
     @resource_wrapper
     def get(self, request):
+        start = int(request.GET.get('start', 0))
+        limit = int(request.GET.get('limit', 100))
+        is_music = bool(request.GET.get('is_music', True))
+        return_type = request.GET.get('type', 'json')
         try:
             result = []
-            for p in Post.objects.ordered().filter(is_music=True):
-                result.append(p.as_dict())
+            posts = Post.objects.ordered().filter(is_music=is_music)[start:start+limit]
+            for p in posts:
+                if return_type == 'html':
+                    result.append(p.as_html())
+                else:
+                    result.append(p.as_dict())
 
             return JsonResponse({'status': 200,
                                  'data': result}, status=200)

@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.template.loader import render_to_string
 
 from taggit.models import TaggedItemBase
 from taggit.managers import TaggableManager
@@ -119,6 +120,9 @@ class Post(SlugifyMixin, BaseModel, models.Model):
                 'ogg': self.preview_ogg_url
             },
         }
+
+    def as_html(self):
+        return render_to_string('blog/list-item.html', {'item': self})
 
 
 @receiver(post_save, sender=Post, dispatch_uid='convert_release')

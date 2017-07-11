@@ -44,5 +44,13 @@
 {% endblock %}
 
 {% block scripts %}
+    <script type="text/javascript" src="{% static 'js/widgets/ajax.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(function() {
+                $.fn.initBlogAjax();
+            });
+        })(jQuery);
+    </script>
 {% endblock %}
