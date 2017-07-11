@@ -77,34 +77,7 @@
                 self.next();
             });
 
-            $('.player .play-pause').on('click', function() {
-                var id = $(this).closest('.player').data('id');
-
-                if ($(this).hasClass('play')) {
-                    if (self._active_id !== id) {
-                        if (self._get_data(id)) {
-                            self._active_id = id;
-                            self.reload();
-                        } else {
-                            console.error('Audio #' + id + ' not found');
-                        }
-                    }
-                    self.play();
-                } else {
-                    self.pause();
-                }
-                self.updateActivePlayer();
-            });
-
-            $('.player .next-track').on('click', function () {
-                self.next();
-            });
-
-            $('.player .prev-track').on('click', function () {
-                self.prev();
-            });
-
-            $('.player .high-definition').on('click', function () {
+            self._player.find('.high-definition').on('click', function () {
                 self._is_debug && console.log('Change quality');
 
                 if (self._is_hd === 1) {
@@ -124,23 +97,49 @@
                 self.pause();
             });
 
-            var progress_bar = $('.player .progress-bar');
 
-            progress_bar.on('click', function (event) {
+            $(document).on('click', '.player .play-pause', function() {
+                var id = $(this).closest('.player').data('id');
+
+                if ($(this).hasClass('play')) {
+                    if (self._active_id !== id) {
+                        if (self._get_data(id)) {
+                            self._active_id = id;
+                            self.reload();
+                        } else {
+                            console.error('Audio #' + id + ' not found');
+                        }
+                    }
+                    self.play();
+                } else {
+                    self.pause();
+                }
+                self.updateActivePlayer();
+            });
+
+            $(document).on('click', '.player .next-track', function() {
+                self.next();
+            });
+
+            $(document).on('click', '.player .prev-track', function() {
+                self.prev();
+            });
+
+            $(document).on('click', '.player .progress-bar', function(event) {
                 self.updatePosition($(this), event);
             });
 
-            progress_bar.on('mousedown', function () {
+            $(document).on('mousedown', '.player .progress-bar', function () {
                 $(this).data('active', true);
             });
 
-            progress_bar.on('mousemove', function (event) {
+            $(document).on('mousemove', '.player .progress-bar', function (event) {
                 if ($(this).data('active') === true) {
                     self.updatePosition($(this), event);
                 }
             });
 
-            progress_bar.on('mouseup', function () {
+            $(document).on('mouseup', '.player .progress-bar', function () {
                 $(this).data('active', false);
             });
         },
