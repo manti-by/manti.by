@@ -69,14 +69,17 @@ class PostResource(Resource):
 
     @resource_wrapper
     def get(self, request):
+        tag = request.GET.get('tag', None)
         start = int(request.GET.get('start', 0))
         limit = int(request.GET.get('limit', 100))
         is_music = bool(request.GET.get('is_music', True))
         return_type = request.GET.get('type', 'json')
         try:
             result = []
-            posts = Post.objects.ordered().filter(is_music=is_music)[start:start+limit]
-            for p in posts:
+            posts = Post.objects.ordered().filter(is_music=is_music)
+            if tag is not None:
+                posts = posts.filter(tags__slug=tag)
+            for p in posts[start:start+limit]:
                 if return_type == 'html':
                     result.append(p.as_html())
                 else:
