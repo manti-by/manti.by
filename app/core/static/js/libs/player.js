@@ -69,6 +69,7 @@
             self._player.audio.on('canplay', function() {
                 self._duration = self._player.api.duration;
                 if (self._is_playing) {
+                    self._player.api.currentTime = self._position;
                     self._player.api.play();
                 }
             });
@@ -248,23 +249,16 @@
             var player_volume_line = this._player.find('.volume .progress-line'),
                 player_volume_line_active = this._player.find('.volume .progress-line-active'),
                 player_volume_label = this._player.find('.volume-label span'),
-                current_player = $('#player-'+ this._active_id),
                 width;
 
             player_volume_label.html(this._volume);
-            current_player.find('.volume-label span').html(this._volume);
-
             width = this._volume * player_volume_line.width() / 100;
             player_volume_line_active.width(width);
-
-            width = this._volume * current_player.find('.volume .progress-line').width() / 100;
-            current_player.find('.volume .progress-line-active').width(width);
         },
 
 
         updatePosition: function(element, event) {
-            var active_width = element.find('.progress-line-active').width(),
-                loaded_width = element.find('.progress-line-loaded').width(),
+            var active_width = element.find('.progress-line').width(),
                 pixels_value = event.clientX - element.offset().left,
                 percent_value = parseInt(pixels_value / active_width * 100);
 
@@ -275,8 +269,9 @@
             }
 
             if (element.hasClass('position')) {
-                if (active_width > loaded_width) {
-                    percent_value = parseInt(pixels_value / loaded_width * 100);
+                var loaded_width = element.find('.progress-line-loaded').width();
+                if (pixels_value > loaded_width) {
+                    percent_value = parseInt(loaded_width / active_width * 100);
                 }
 
                 this._position = percent_value;
