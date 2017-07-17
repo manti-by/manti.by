@@ -356,6 +356,7 @@ main .sidebar li:last-child a:after {
 }
 
 main .sidebar .instagram {
+    margin-bottom: 0.5em;
 }
 
 main .sidebar .instagram li {
@@ -366,19 +367,16 @@ main .sidebar .instagram li a:after {
     content: '';
 }
 
-main .sidebar .instagram .profile {
-    margin-left: 0;
-    margin-top: 0.1rem;
+main .sidebar .social a {
+    margin: 0 0.3em;
 }
 
-main .sidebar .social {
-    margin-top: -1.4rem;
-    font-size: 0.85rem;
-    color: #696969;
+main .sidebar .social a img {
+    width: 1.5em;
 }
 
-main .sidebar .social .row {
-    margin: 0.6rem 0;
+main .sidebar .social a img.smaller {
+    width: 1.4em;
 }
 
 

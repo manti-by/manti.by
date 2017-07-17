@@ -1,4 +1,4 @@
-{% load i18n %}
+{% load static i18n %}
 
 <div class="sidebar">
     <div class="tags panel">
@@ -24,19 +24,16 @@
                 <li><a href="{{ i.link }}"><img src="{{ i.image }}" /></a></li>
             {% endfor %}
         </ul>
-        <div class="profile">
-            {% trans 'Profile' %}:
-            <a href="https://www.instagram.com/manti_by/">@manti_by</a>
-        </div>
     </div>
     <div class="social panel">
-        <div class="twitter row">
-            {% trans 'Twitter' %}:
-            <a href="https://twitter.com/manti_by/">@manti_by</a>
-        </div>
-        <div class="coub row">
-            {% trans 'Coub' %}:
-            <a href="http://coub.com/manti.by">@manti.by</a>
-        </div>
+        <a href="https://www.instagram.com/manti_by/" target="_blank">
+            <img src="{% static 'svg/instagram.svg' %}" class="smaller">
+        </a>
+        <a href="https://twitter.com/manti_by/" target="_blank">
+            <img src="{% static 'svg/twitter.svg' %}">
+        </a>
+        <a href="http://coub.com/manti.by" target="_blank">
+            <img src="{% static 'svg/coub.svg' %}">
+        </a>
     </div>
 </div>

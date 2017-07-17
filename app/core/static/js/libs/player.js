@@ -274,8 +274,11 @@
                     percent_value = parseInt(loaded_width / active_width * 100);
                 }
 
-                this._position = percent_value;
+                this._is_playing && this._player.api.pause();
                 this._player.api.currentTime = this._duration * percent_value / 100;
+                this._is_playing && this._player.api.play();
+
+                this._position = percent_value;
                 this.updateProgressPosition();
             }
         },
