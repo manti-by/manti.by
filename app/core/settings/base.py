@@ -120,9 +120,10 @@ CACHES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'by'
 ugettext = lambda s: s
 LANGUAGES = (
+    ('by', ugettext('Belarussian')),
     ('ru', ugettext('Russian')),
     ('en', ugettext('English')),
 )

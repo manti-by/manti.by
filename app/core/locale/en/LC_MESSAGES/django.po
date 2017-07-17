@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-07 15:46+0000\n"
+"POT-Creation-Date: 2017-07-17 11:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Alexander Chaika <manti.by@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
@@ -41,7 +41,7 @@ msgstr ""
 msgid "Can't save contact info, please try later"
 msgstr ""
 
-#: api/resources.py:82
+#: api/resources.py:93
 msgid "Can't load posts, please try later"
 msgstr ""
 
@@ -75,7 +75,7 @@ msgid "Files"
 msgstr ""
 
 #: blog/admin.py:55 core/mixins.py:22 core/templates/profiles/profile.html:34
-#: gallery/admin.py:54 gallery/models.py:48 gallery/models.py:66
+#: gallery/admin.py:54 gallery/models.py:63 gallery/models.py:81
 msgid "Image"
 msgstr ""
 
@@ -83,11 +83,11 @@ msgstr ""
 msgid "Ready"
 msgstr ""
 
-#: blog/models.py:44
+#: blog/models.py:45
 msgid "Release File"
 msgstr ""
 
-#: blog/models.py:48
+#: blog/models.py:49
 msgid "Cover Image"
 msgstr ""
 
@@ -121,10 +121,14 @@ msgid "Created, UTC"
 msgstr ""
 
 #: core/settings/base.py:126
-msgid "Russian"
+msgid "Belorussian"
 msgstr ""
 
 #: core/settings/base.py:127
+msgid "Russian"
+msgstr ""
+
+#: core/settings/base.py:128
 msgid "English"
 msgstr ""
 
@@ -138,7 +142,7 @@ msgstr ""
 #: core/templates/base.html:77 core/templates/base.html:104
 #: core/templates/gallery/gallery.html:9 core/templates/gallery/gallery.html:16
 #: core/templates/gallery/list.html:5 core/templates/gallery/list.html:9
-#: core/templates/index.html:18 gallery/models.py:35
+#: core/templates/index.html:18 gallery/models.py:50
 msgid "Gallery"
 msgstr ""
 
@@ -234,18 +238,6 @@ msgstr ""
 msgid "Instagram"
 msgstr ""
 
-#: core/templates/common/sidebar.html:28
-msgid "Profile"
-msgstr ""
-
-#: core/templates/common/sidebar.html:34
-msgid "Twitter"
-msgstr ""
-
-#: core/templates/common/sidebar.html:38
-msgid "Coub"
-msgstr ""
-
 #: core/templates/emails/email.html:52
 msgid "From"
 msgstr ""
@@ -262,12 +254,12 @@ msgstr ""
 msgid "browser"
 msgstr ""
 
-#: core/templates/gallery/gallery.html:5
-msgid "Gallery View"
+#: core/templates/gallery/gallery.html:28 core/templates/gallery/list.html:32
+msgid "Preview #"
 msgstr ""
 
-#: core/templates/gallery/gallery.html:28 core/templates/gallery/list.html:24
-msgid "Preview #"
+#: core/templates/gallery/list.html:23
+msgid "images"
 msgstr ""
 
 #: core/templates/index.html:5
@@ -332,11 +324,11 @@ msgstr ""
 msgid "Resume"
 msgstr ""
 
-#: core/templates/static/resume.html:173
+#: core/templates/static/resume.html:174
 msgid "Code samples"
 msgstr ""
 
-#: core/templates/static/resume.html:176
+#: core/templates/static/resume.html:177
 msgid "Print this page"
 msgstr ""
 
@@ -352,11 +344,11 @@ msgstr ""
 msgid "Other"
 msgstr ""
 
-#: gallery/models.py:36
+#: gallery/models.py:51
 msgid "Gallery List"
 msgstr ""
 
-#: gallery/models.py:67
+#: gallery/models.py:82
 msgid "Image List"
 msgstr ""
 

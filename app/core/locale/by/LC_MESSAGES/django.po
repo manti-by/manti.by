@@ -1,77 +1,64 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-17 11:57+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Alexander Chaika <manti.by@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"X-Generator: POEditor.com\n"
+"Project-Id-Version: manti.by\n"
+"Language: be\n"
 
 #: api/resources.py:22
 msgid "Forbidden"
-msgstr "Нет доступа"
+msgstr "Забаронена"
 
 #: api/resources.py:35
 msgid "Updated"
-msgstr "Обновить"
+msgstr "Абноўлены"
 
 #: api/resources.py:42
 msgid "No data"
-msgstr "Нет данных"
+msgstr "Няма дадзеных"
 
 #: api/resources.py:56
 msgid "Contact request from manti.by"
-msgstr "Запрос на контакт с manti.by"
+msgstr "Кантакт запыт ад manti.by"
 
 #: api/resources.py:61
 msgid "Thanks for subscribing, we'll get in touch soon"
-msgstr "Спасибо за подписку, мы скоро свяжемся"
+msgstr "Дзякуй за падпісвацца, мы звяжамся ў бліжэйшы час"
 
 #: api/resources.py:65
 msgid "Can't save contact info, please try later"
-msgstr "Не могу сохранить данные, пожалуйста попробуйте позже"
+msgstr "Немагчыма захаваць кантактную інфармацыю, калі ласка, паспрабуйце пазней"
 
 #: api/resources.py:93
 msgid "Can't load posts, please try later"
-msgstr "Не могу сохранить данные, пожалуйста попробуйте позже"
+msgstr "Не ўдаецца загрузіць паведамленні, калі ласка, паспрабуйце пазней"
 
 #: blog/admin.py:22
 msgid "Base Info"
-msgstr "Основная информация"
+msgstr "Базавая інфармацыя"
 
 #: blog/admin.py:25
 msgid "Meta Description"
-msgstr "Мета описание"
+msgstr "Meta Description"
 
 #: blog/admin.py:28
 msgid "Summary"
-msgstr "Краткое описание"
+msgstr "Рэзюмэ"
 
 #: blog/admin.py:31
 msgid "Description"
-msgstr "Описание"
+msgstr "Апісанне"
 
 #: blog/admin.py:34 core/templates/blog/list-item.html:39
 #: core/templates/blog/post.html:70
 msgid "Tags"
-msgstr "Тэги"
+msgstr "Меткі"
 
 #: blog/admin.py:37
 msgid "Music params"
-msgstr "Музыкальные параметры"
+msgstr "Музычныя параметры"
 
 #: blog/admin.py:41
 msgid "Files"
@@ -80,64 +67,59 @@ msgstr "Файлы"
 #: blog/admin.py:55 core/mixins.py:22 core/templates/profiles/profile.html:34
 #: gallery/admin.py:54 gallery/models.py:63 gallery/models.py:81
 msgid "Image"
-msgstr "Изображение"
+msgstr "Малюнак"
 
 #: blog/admin.py:60 gallery/admin.py:59
 msgid "Ready"
-msgstr "Готово"
+msgstr "Гатовы"
 
 #: blog/models.py:45
 msgid "Release File"
-msgstr "Файл релиза"
+msgstr "Выпуск файл"
 
 #: blog/models.py:49
 msgid "Cover Image"
-msgstr "Обложка"
+msgstr "Вокладка выява"
 
 #: core/mixins.py:17
-msgid ""
-"You can select only base image, all others will be generated automatically"
-msgstr ""
-"Вы можете выбрать одно изображение, остальные будут сгенерированы "
-"автоматически"
+msgid "You can select only base image, all others will be generated automatically"
+msgstr "Можна выбраць толькі базавы вобраз, а ўсе астатнія будуць згенераваныя аўтаматычна"
 
 #: core/mixins.py:24
 msgid "Thumbnail Image"
-msgstr "Уменьшенное изображение"
+msgstr "Мініяцюрны малюнак"
 
 #: core/mixins.py:25
 msgid "Preview Image"
-msgstr "Изображение предпросмотра"
+msgstr "Папярэдні прагляд"
 
 #: core/mixins.py:26
 msgid "Gallery Image"
-msgstr "Изображение галереи"
+msgstr "Галерэя малюнкаў"
 
 #: core/mixins.py:36
 msgid "Can't generate thumbnails, original image is not loaded"
-msgstr "Не могу создать превью изображений, оригинал не загружен"
+msgstr "Немагчыма стварыць эскізы, зыходны малюнак не загружаецца"
 
 #: core/mixins.py:58
 msgid "Slug"
-msgstr "Ссылка"
+msgstr "Смоўж"
 
 #: core/models.py:14
 msgid "Created, UTC"
-msgstr "Создано, UTC"
+msgstr "Створаны, UTC"
 
 #: core/settings/base.py:126
-#, fuzzy
-#| msgid "Russian"
-msgid "Belorussian"
-msgstr "Белорусский"
+msgid "Belarussian"
+msgstr "Беларускі"
 
 #: core/settings/base.py:127
 msgid "Russian"
-msgstr "Русский"
+msgstr "Руская"
 
 #: core/settings/base.py:128
 msgid "English"
-msgstr "English"
+msgstr "Англійская"
 
 #: core/templates/base.html:74 core/templates/base.html:101
 #: core/templates/blog/list.html:10 core/templates/blog/list.html:15
@@ -151,59 +133,59 @@ msgstr "Музыка"
 #: core/templates/gallery/list.html:5 core/templates/gallery/list.html:9
 #: core/templates/index.html:18 gallery/models.py:50
 msgid "Gallery"
-msgstr "Галлерея"
+msgstr "Галерэя"
 
 #: core/templates/base.html:106 core/templates/base.html:127
 #: core/templates/static/about.html:5 core/templates/static/about.html:9
 msgid "About"
-msgstr "Обо мне"
+msgstr "аб"
 
 #: core/templates/base.html:107 core/templates/base.html:128
 msgid "My job"
-msgstr "Резюме"
+msgstr "Мая праца"
 
 #: core/templates/base.html:108 core/templates/base.html:129
 #: core/templates/static/copyrights.html:5
 #: core/templates/static/copyrights.html:9
 msgid "Copyrights"
-msgstr "Авторские права"
+msgstr "Аўтарскія правы"
 
 #: core/templates/base.html:109 core/templates/base.html:130
 msgid "Contact"
-msgstr "Контакты"
+msgstr "Кантакт"
 
 #: core/templates/base.html:110
 msgid "Search"
-msgstr "Поиск"
+msgstr "Пошук"
 
 #: core/templates/base.html:112
 msgid "Logout"
-msgstr "Выйти"
+msgstr "Выхад"
 
 #: core/templates/base.html:114
 msgid "Login"
-msgstr "Войти"
+msgstr "Увайсці"
 
 #: core/templates/blog/list-item.html:18 core/templates/blog/post.html:38
 #: core/templates/emails/email.html:65
 msgid "Created"
-msgstr "Создано"
+msgstr "Створаны"
 
 #: core/templates/blog/list-item.html:22 core/templates/blog/post.html:50
 msgid "Length"
-msgstr "Продолжительность"
+msgstr "Працягласць"
 
 #: core/templates/blog/list-item.html:45 core/templates/blog/post.html:76
 msgid "Tracklist"
-msgstr "Трэклист"
+msgstr "Трэкліст"
 
 #: core/templates/blog/list-item.html:46 core/templates/blog/post.html:77
 msgid "Download"
-msgstr "Скачать"
+msgstr "Спампаваць"
 
 #: core/templates/blog/list-item.html:59 core/templates/blog/post.html:86
 msgid "Hide Tracklist"
-msgstr "Скрыть треклист"
+msgstr "Схаваць трэкліст"
 
 #: core/templates/blog/list.html:5
 msgid "Blog"
@@ -211,19 +193,19 @@ msgstr "Блог"
 
 #: core/templates/blog/list.html:12 core/templates/blog/list.html:24
 msgid "Tag"
-msgstr "Тэги"
+msgstr "Метка"
 
 #: core/templates/blog/list.html:34
 msgid "Nothin to show"
-msgstr "Ничего нет"
+msgstr "Nothin паказаць"
 
 #: core/templates/blog/post.html:42
 msgid "Catalog No"
-msgstr "Каталоговый №"
+msgstr "№ па каталогу"
 
 #: core/templates/blog/post.html:46
 msgid "Quality"
-msgstr "Качество"
+msgstr "Якасць"
 
 #: core/templates/blog/post.html:53
 msgid "Genre"
@@ -231,78 +213,76 @@ msgstr "Жанр"
 
 #: core/templates/blog/post.html:90
 msgid "Related posts"
-msgstr "Связанные посты"
+msgstr "Падобныя паведамленні"
 
 #: core/templates/common/sidebar.html:5
 msgid "Popular tags"
-msgstr "Популярные теги"
+msgstr "Папулярныя меткі"
 
 #: core/templates/common/sidebar.html:13 core/templates/index.html:43
 msgid "Latest posts"
-msgstr "Свежие посты"
+msgstr "апошнія паведамленні"
 
 #: core/templates/common/sidebar.html:21
 msgid "Instagram"
-msgstr ""
+msgstr "Instagram"
 
 #: core/templates/emails/email.html:52
 msgid "From"
-msgstr "От"
+msgstr "Ад"
 
 #: core/templates/emails/email.html:59
 msgid "Message"
-msgstr "Сообщение"
+msgstr "Паведамленне"
 
 #: core/templates/emails/email.html:63
 msgid "View this message in"
-msgstr "Показать сообщение в"
+msgstr "Паглядзець гэта паведамленне"
 
 #: core/templates/emails/email.html:64
 msgid "browser"
-msgstr "браузере"
+msgstr "Браўзэр"
 
 #: core/templates/gallery/gallery.html:28 core/templates/gallery/list.html:32
 msgid "Preview #"
-msgstr "Изображение предпросмотра"
+msgstr "Папярэдні прагляд #"
 
 #: core/templates/gallery/list.html:23
-#, fuzzy
-#| msgid "Image"
 msgid "images"
-msgstr "Изображение"
+msgstr "Малюнкаў"
 
 #: core/templates/index.html:5
 msgid "Homepage"
-msgstr "Домашняя страница"
+msgstr "Хатняя старонка"
 
 #: core/templates/index.html:10
 msgid "Featured"
-msgstr "Лучшее"
+msgstr "Рэкамендаваны"
 
 #: core/templates/index.html:23 core/templates/index.html:28
 msgid "Popular image from gallery"
-msgstr "Популярное изображение из галлереи"
+msgstr "Папулярнае малюнак з галерэі"
 
 #: core/templates/index.html:36
 msgid "Latest image from gallery"
-msgstr "Свежее изображение из галлереи"
+msgstr "Апошні малюнак з галерэі"
 
 #: core/templates/profiles/login.html:5 core/templates/profiles/login.html:6
 msgid "Login Page"
-msgstr "Вход на сайт"
+msgstr "Старонка уваходу"
 
 #: core/templates/profiles/login.html:12
 msgid "Please login or register"
-msgstr "Пожалуйста войдите или зарегистрируйтесь"
+msgstr "Калі ласка, увайдзіце або зарэгіструйцеся"
 
 #: core/templates/profiles/login.html:16
 msgid "Your profile will be created automatically, if necessary"
-msgstr "Ваш профиль будет создан автоматически, при необходимости"
+msgstr "Ваш профіль будзе створаны аўтаматычна, пры неабходнасці"
 
 #: core/templates/profiles/login.html:20
 #: core/templates/profiles/profile.html:29
 msgid "Email"
-msgstr "Email"
+msgstr "E-mail"
 
 #: core/templates/profiles/login.html:25
 msgid "Password"
@@ -310,57 +290,58 @@ msgstr "Пароль"
 
 #: core/templates/profiles/login.html:31
 msgid "Let Me In"
-msgstr "Впустите меня"
+msgstr "Let Me In"
 
 #: core/templates/profiles/profile.html:5
 #: core/templates/profiles/profile.html:11
 msgid "Your profile"
-msgstr "Ваш профиль"
+msgstr "Ваш профіль"
 
 #: core/templates/profiles/profile.html:18
 msgid "To update your profile image, please upload new one"
-msgstr "Чтобы обновить ваше изображение профиля, просто загрузите новое"
+msgstr "Каб абнавіць выява профілю, калі ласка, загрузіце новы"
 
 #: core/templates/profiles/profile.html:24
 msgid "Username"
-msgstr "Имя пользователя"
+msgstr "імя карыстальніка"
 
 #: core/templates/profiles/profile.html:40
 msgid "Update"
-msgstr "Обновить"
+msgstr "Аднаўленне"
 
 #: core/templates/static/resume.html:5 core/templates/static/resume.html:9
 msgid "Resume"
-msgstr "Резюме"
+msgstr "рэзюмэ"
 
 #: core/templates/static/resume.html:174
 msgid "Code samples"
-msgstr "Пример кода"
+msgstr "ўзоры кода"
 
 #: core/templates/static/resume.html:177
 msgid "Print this page"
-msgstr "Распечатать эту страницу"
+msgstr "Раздрукаваць гэтую старонку"
 
 #: gallery/admin.py:22
 msgid "Images count"
-msgstr "Изображения"
+msgstr "Колькасць фота"
 
 #: gallery/admin.py:40
 msgid "Info"
-msgstr "Информация"
+msgstr "інфармацыя"
 
 #: gallery/admin.py:43
 msgid "Other"
-msgstr "Остальное"
+msgstr "іншае"
 
 #: gallery/models.py:51
 msgid "Gallery List"
-msgstr "Галлерея"
+msgstr "Спіс галерэяў"
 
 #: gallery/models.py:82
 msgid "Image List"
-msgstr "Изображения"
+msgstr "Спіс малюнкаў"
 
 #: profiles/models.py:13
 msgid "Profile Image"
-msgstr "Изображение предпросмотра"
+msgstr "Малюнак профілю"
+
