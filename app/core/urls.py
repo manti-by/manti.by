@@ -9,7 +9,6 @@ from api.resources import OrderableResource, PostResource
 
 urlpatterns = [
     url(r'^$', core_views.index, name='index'),
-    url(r'^language$', core_views.language, name='language'),
     url(r'^email/(?P<email_id>\d+)/$', core_views.email, name='email'),
 
     url(r'^about$', core_views.static, {'page': 'about'}, name='about'),

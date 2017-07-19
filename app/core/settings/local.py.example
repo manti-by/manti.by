@@ -7,7 +7,15 @@ COMPRESS_ENABLED = False
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'local.manti.by', 'ru.local.manti.by', 'en.local.manti.by']
+
+BASE_URL = 'http://local.manti.by'
+
+LOCALE_URLS = {
+    'by': 'http://local.manti.by',
+    'ru': 'http://ru.local.manti.by',
+    'en': 'http://en.local.manti.by',
+}
 
 DATABASES = {
     'default': {
@@ -31,34 +39,23 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        'file': {
-            'level': 'ERROR',
-            'class': 'logging.FileHandler',
-            'filename': '/home/manti/www/manti.by/log/app.log',
-        },
         'console': {
-            'level': 'ERROR',
+            'level': 'DEBUG',
             'class': 'logging.StreamHandler',
         },
-        'mail_admins': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-            'include_html': True
-        },
         'null': {
-            'level': 'ERROR',
             'class': 'logging.NullHandler',
         },
     },
     'loggers': {
         'app': {
-            'handlers': ['file'],
-            'level': 'ERROR',
+            'handlers': ['console'],
+            'level': 'DEBUG',
             'propagate': True,
         },
         'django': {
             'handlers': ['console'],
-            'level': 'ERROR',
+            'level': 'DEBUG',
             'propagate': True,
         },
         'django.db.backends': {
@@ -70,3 +67,8 @@ LOGGING = {
 }
 
 DEFAULT_FROM_EMAIL = 'admin@manti.by'
+
+INSTAGRAM_USER_ID = 'manti_by'
+INSTAGRAM_CLIENT_ID = ''
+INSTAGRAM_ACCESS_TOKEN = ''
+INSTAGRAM_CLIENT_SECRET = ''

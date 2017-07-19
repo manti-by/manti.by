@@ -1,4 +1,4 @@
-{% load static compress i18n %}
+{% load static compress i18n common_tags %}
 <!DOCTYPE html>
 <html>
     <head>
@@ -78,8 +78,13 @@
                         </a>
                         <span class="language" class="link-item">
                             {% for lang in LANGUAGES %}
-                                <a class="item text {% if lang.0 != ACTIVE_LANGUAGE %}passive{% endif %}"
-                                      data-id="{{ lang.0 }}">{{ lang.0 }}</a>
+                                {% if lang.0 == ACTIVE_LANGUAGE %}
+                                    <span class="item text active">{{ lang.0 }}</span>
+                                {% else %}
+                                    <a href="{% get_locale_domain lang.0 %}" class="item text">
+                                        {{ lang.0 }}
+                                    </a>
+                                {% endif %}
                                 <span class="item spacer">/</span>
                             {% endfor %}
                         </span>

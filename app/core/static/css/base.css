@@ -198,17 +198,17 @@ header .language .item.text {
 }
 
 header .language .item.text:hover {
-    font-weight: 500;
-    border-bottom: 0;
-}
-
-header .language .item.text.passive {
-    font-weight: 400;
-    cursor: pointer;
-}
-
-header .language .item.text.passive:hover {
     border-bottom: 1px dotted #CCC;
+}
+
+header .language .item.text.active {
+    font-weight: 400;
+    color: #CCC;
+    cursor: auto;
+}
+
+header .language .item.text.active:hover  {
+    border-bottom: 0;
 }
 
 header .language .item.spacer {
