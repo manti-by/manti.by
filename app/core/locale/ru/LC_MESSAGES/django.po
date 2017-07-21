@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: manti.by\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-21 12:52+0000\n"
+"POT-Creation-Date: 2017-07-21 13:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander Chaika <manti.by@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -260,8 +260,13 @@ msgid "Preview #"
 msgstr "Изображение предпросмотра"
 
 #: core/templates/gallery/list.html:23
-msgid "images"
-msgstr "изображениий"
+#, fuzzy, python-format
+#| msgid "Cover Image"
+msgid "one image"
+msgid_plural "%(counter)s images"
+msgstr[0] "изображение"
+msgstr[1] "изображения"
+msgstr[2] "изображений"
 
 #: core/templates/index.html:5
 msgid "Homepage"
@@ -356,3 +361,6 @@ msgstr "Изображения"
 #: profiles/models.py:13
 msgid "Profile Image"
 msgstr "Изображение предпросмотра"
+
+#~ msgid "images"
+#~ msgstr "изображениий"
