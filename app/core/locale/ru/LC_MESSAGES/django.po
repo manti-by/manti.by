@@ -1,18 +1,12 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: manti.by\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-17 11:57+0000\n"
+"POT-Creation-Date: 2017-07-21 12:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander Chaika <manti.by@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -128,7 +122,7 @@ msgstr "Создано, UTC"
 #: core/settings/base.py:126
 #, fuzzy
 #| msgid "Russian"
-msgid "Belorussian"
+msgid "Belarussian"
 msgstr "Белорусский"
 
 #: core/settings/base.py:127
@@ -139,48 +133,48 @@ msgstr "Русский"
 msgid "English"
 msgstr "English"
 
-#: core/templates/base.html:74 core/templates/base.html:101
+#: core/templates/base.html:74 core/templates/base.html:106
 #: core/templates/blog/list.html:10 core/templates/blog/list.html:15
 #: core/templates/blog/list.html:22 core/templates/blog/list.html:26
 #: core/templates/blog/post.html:22
 msgid "Music"
 msgstr "Музыка"
 
-#: core/templates/base.html:77 core/templates/base.html:104
+#: core/templates/base.html:77 core/templates/base.html:109
 #: core/templates/gallery/gallery.html:9 core/templates/gallery/gallery.html:16
 #: core/templates/gallery/list.html:5 core/templates/gallery/list.html:9
 #: core/templates/index.html:18 gallery/models.py:50
 msgid "Gallery"
 msgstr "Галлерея"
 
-#: core/templates/base.html:106 core/templates/base.html:127
+#: core/templates/base.html:111 core/templates/base.html:132
 #: core/templates/static/about.html:5 core/templates/static/about.html:9
 msgid "About"
 msgstr "Обо мне"
 
-#: core/templates/base.html:107 core/templates/base.html:128
+#: core/templates/base.html:112 core/templates/base.html:133
 msgid "My job"
 msgstr "Резюме"
 
-#: core/templates/base.html:108 core/templates/base.html:129
+#: core/templates/base.html:113 core/templates/base.html:134
 #: core/templates/static/copyrights.html:5
 #: core/templates/static/copyrights.html:9
 msgid "Copyrights"
 msgstr "Авторские права"
 
-#: core/templates/base.html:109 core/templates/base.html:130
+#: core/templates/base.html:114 core/templates/base.html:135
 msgid "Contact"
 msgstr "Контакты"
 
-#: core/templates/base.html:110
+#: core/templates/base.html:115
 msgid "Search"
 msgstr "Поиск"
 
-#: core/templates/base.html:112
+#: core/templates/base.html:117
 msgid "Logout"
 msgstr "Выйти"
 
-#: core/templates/base.html:114
+#: core/templates/base.html:119
 msgid "Login"
 msgstr "Войти"
 
@@ -211,7 +205,7 @@ msgstr "Блог"
 
 #: core/templates/blog/list.html:12 core/templates/blog/list.html:24
 msgid "Tag"
-msgstr "Тэги"
+msgstr "Метки"
 
 #: core/templates/blog/list.html:34
 msgid "Nothin to show"
@@ -231,15 +225,15 @@ msgstr "Жанр"
 
 #: core/templates/blog/post.html:90
 msgid "Related posts"
-msgstr "Связанные посты"
+msgstr "Связанные статьи"
 
 #: core/templates/common/sidebar.html:5
 msgid "Popular tags"
-msgstr "Популярные теги"
+msgstr "Популярные метки"
 
 #: core/templates/common/sidebar.html:13 core/templates/index.html:43
 msgid "Latest posts"
-msgstr "Свежие посты"
+msgstr "Свежие статьи"
 
 #: core/templates/common/sidebar.html:21
 msgid "Instagram"
@@ -266,10 +260,8 @@ msgid "Preview #"
 msgstr "Изображение предпросмотра"
 
 #: core/templates/gallery/list.html:23
-#, fuzzy
-#| msgid "Image"
 msgid "images"
-msgstr "Изображение"
+msgstr "изображениий"
 
 #: core/templates/index.html:5
 msgid "Homepage"
@@ -333,11 +325,11 @@ msgstr "Обновить"
 msgid "Resume"
 msgstr "Резюме"
 
-#: core/templates/static/resume.html:174
+#: core/templates/static/resume.html:21
 msgid "Code samples"
 msgstr "Пример кода"
 
-#: core/templates/static/resume.html:177
+#: core/templates/static/resume.html:24
 msgid "Print this page"
 msgstr "Распечатать эту страницу"
 
