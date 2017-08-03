@@ -136,6 +136,12 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
+LOCALE_URLS = {
+    'by': 'https://manti.by',
+    'ru': 'https://ru.manti.by',
+    'en': 'https://en.manti.by',
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/

@@ -20,7 +20,7 @@
                             {{ gallery.name }}
                         </a>
                         <span class="info">
-                            {{ gallery.images.all|length }} {% trans 'images' %}
+                            {% blocktrans count counter=gallery.images.all|length %}one image{% plural %}{{ counter }} images{% endblocktrans %}
                         </span>
                     </h2>
                     <div class="images">

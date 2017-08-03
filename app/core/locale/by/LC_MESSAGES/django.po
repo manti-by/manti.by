@@ -1,11 +1,17 @@
 msgid ""
 msgstr ""
+"Project-Id-Version: manti.by\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-08-03 11:13+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Alexander Chaika <manti.by@gmail.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: by\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: POEditor.com\n"
-"Project-Id-Version: manti.by\n"
-"Language: be\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: api/resources.py:22
 msgid "Forbidden"
@@ -21,15 +27,16 @@ msgstr "Няма дадзеных"
 
 #: api/resources.py:56
 msgid "Contact request from manti.by"
-msgstr "Кантакт запыт ад manti.by"
+msgstr "Кантактны запыт ад manti.by"
 
 #: api/resources.py:61
 msgid "Thanks for subscribing, we'll get in touch soon"
-msgstr "Дзякуй за падпісвацца, мы звяжамся ў бліжэйшы час"
+msgstr "Дзякуй за падпіску, мы звяжамся ў бліжэйшы час"
 
 #: api/resources.py:65
 msgid "Can't save contact info, please try later"
-msgstr "Немагчыма захаваць кантактную інфармацыю, калі ласка, паспрабуйце пазней"
+msgstr ""
+"Немагчыма захаваць кантактную інфармацыю, калі ласка, паспрабуйце пазней"
 
 #: api/resources.py:93
 msgid "Can't load posts, please try later"
@@ -82,8 +89,11 @@ msgid "Cover Image"
 msgstr "Вокладка выява"
 
 #: core/mixins.py:17
-msgid "You can select only base image, all others will be generated automatically"
-msgstr "Можна выбраць толькі базавы вобраз, а ўсе астатнія будуць згенераваныя аўтаматычна"
+msgid ""
+"You can select only base image, all others will be generated automatically"
+msgstr ""
+"Можна выбраць толькі базавы вобраз, а ўсе астатнія будуць згенераваныя "
+"аўтаматычна"
 
 #: core/mixins.py:24
 msgid "Thumbnail Image"
@@ -103,7 +113,7 @@ msgstr "Немагчыма стварыць эскізы, зыходны мал�
 
 #: core/mixins.py:58
 msgid "Slug"
-msgstr "Смоўж"
+msgstr "Ссылка"
 
 #: core/models.py:14
 msgid "Created, UTC"
@@ -121,48 +131,48 @@ msgstr "Руская"
 msgid "English"
 msgstr "Англійская"
 
-#: core/templates/base.html:74 core/templates/base.html:101
+#: core/templates/base.html:74 core/templates/base.html:106
 #: core/templates/blog/list.html:10 core/templates/blog/list.html:15
 #: core/templates/blog/list.html:22 core/templates/blog/list.html:26
 #: core/templates/blog/post.html:22
 msgid "Music"
 msgstr "Музыка"
 
-#: core/templates/base.html:77 core/templates/base.html:104
+#: core/templates/base.html:77 core/templates/base.html:109
 #: core/templates/gallery/gallery.html:9 core/templates/gallery/gallery.html:16
 #: core/templates/gallery/list.html:5 core/templates/gallery/list.html:9
 #: core/templates/index.html:18 gallery/models.py:50
 msgid "Gallery"
 msgstr "Галерэя"
 
-#: core/templates/base.html:106 core/templates/base.html:127
+#: core/templates/base.html:111 core/templates/base.html:132
 #: core/templates/static/about.html:5 core/templates/static/about.html:9
 msgid "About"
-msgstr "аб"
+msgstr "Аба мне"
 
-#: core/templates/base.html:107 core/templates/base.html:128
+#: core/templates/base.html:112 core/templates/base.html:133
 msgid "My job"
 msgstr "Мая праца"
 
-#: core/templates/base.html:108 core/templates/base.html:129
+#: core/templates/base.html:113 core/templates/base.html:134
 #: core/templates/static/copyrights.html:5
 #: core/templates/static/copyrights.html:9
 msgid "Copyrights"
 msgstr "Аўтарскія правы"
 
-#: core/templates/base.html:109 core/templates/base.html:130
+#: core/templates/base.html:114 core/templates/base.html:135
 msgid "Contact"
 msgstr "Кантакт"
 
-#: core/templates/base.html:110
+#: core/templates/base.html:115
 msgid "Search"
 msgstr "Пошук"
 
-#: core/templates/base.html:112
+#: core/templates/base.html:117
 msgid "Logout"
 msgstr "Выхад"
 
-#: core/templates/base.html:114
+#: core/templates/base.html:119
 msgid "Login"
 msgstr "Увайсці"
 
@@ -213,7 +223,7 @@ msgstr "Жанр"
 
 #: core/templates/blog/post.html:90
 msgid "Related posts"
-msgstr "Падобныя паведамленні"
+msgstr "Падобныя артыкулы"
 
 #: core/templates/common/sidebar.html:5
 msgid "Popular tags"
@@ -221,7 +231,7 @@ msgstr "Папулярныя меткі"
 
 #: core/templates/common/sidebar.html:13 core/templates/index.html:43
 msgid "Latest posts"
-msgstr "апошнія паведамленні"
+msgstr "Апошнія артыкулы"
 
 #: core/templates/common/sidebar.html:21
 msgid "Instagram"
@@ -241,15 +251,19 @@ msgstr "Паглядзець гэта паведамленне"
 
 #: core/templates/emails/email.html:64
 msgid "browser"
-msgstr "Браўзэр"
+msgstr "браўзэр"
 
 #: core/templates/gallery/gallery.html:28 core/templates/gallery/list.html:32
 msgid "Preview #"
 msgstr "Папярэдні прагляд #"
 
 #: core/templates/gallery/list.html:23
-msgid "images"
-msgstr "Малюнкаў"
+#, python-format
+msgid "one image"
+msgid_plural "%(counter)s images"
+msgstr[0] "адзин малюнак"
+msgstr[1] "%(counter)s малюнка"
+msgstr[2] "%(counter)s малюнкаў"
 
 #: core/templates/index.html:5
 msgid "Homepage"
@@ -303,7 +317,7 @@ msgstr "Каб абнавіць выява профілю, калі ласка, 
 
 #: core/templates/profiles/profile.html:24
 msgid "Username"
-msgstr "імя карыстальніка"
+msgstr "Імя карыстальніка"
 
 #: core/templates/profiles/profile.html:40
 msgid "Update"
@@ -311,13 +325,13 @@ msgstr "Аднаўленне"
 
 #: core/templates/static/resume.html:5 core/templates/static/resume.html:9
 msgid "Resume"
-msgstr "рэзюмэ"
+msgstr "Рэзюмэ"
 
-#: core/templates/static/resume.html:174
+#: core/templates/static/resume.html:21
 msgid "Code samples"
-msgstr "ўзоры кода"
+msgstr "Ўзоры кода"
 
-#: core/templates/static/resume.html:177
+#: core/templates/static/resume.html:24
 msgid "Print this page"
 msgstr "Раздрукаваць гэтую старонку"
 
@@ -327,11 +341,11 @@ msgstr "Колькасць фота"
 
 #: gallery/admin.py:40
 msgid "Info"
-msgstr "інфармацыя"
+msgstr "Інфармацыя"
 
 #: gallery/admin.py:43
 msgid "Other"
-msgstr "іншае"
+msgstr "Іншае"
 
 #: gallery/models.py:51
 msgid "Gallery List"
@@ -344,4 +358,3 @@ msgstr "Спіс малюнкаў"
 #: profiles/models.py:13
 msgid "Profile Image"
 msgstr "Малюнак профілю"
-

@@ -1,8 +1,7 @@
 import logging
 
-from django.http import HttpResponse, Http404, HttpResponseNotAllowed
+from django.http import Http404
 from django.shortcuts import render
-from django.utils import translation
 
 from core.models import Email
 from blog.models import Post
@@ -47,14 +46,3 @@ def email(request, email_id):
     except Exception as e:
         logger.exception(e)
         raise Http404
-
-
-def language(request):
-    if request.method == 'POST':
-        language = request.POST.get('language', None)
-        if language and translation.check_for_language(language):
-            translation.activate(language)
-            response = HttpResponse(status=200)
-            response.set_cookie(translation.LANGUAGE_SESSION_KEY, language)
-            return response
-    raise HttpResponseNotAllowed
