@@ -81,7 +81,7 @@
                                 {% if lang.0 == ACTIVE_LANGUAGE %}
                                     <span class="item text active">{{ lang.0 }}</span>
                                 {% else %}
-                                    <a href="{% get_locale_domain lang.0 %}" class="item text">
+                                    <a href="{% get_locale_domain lang.0 %}{{ request.path }}" class="item text">
                                         {{ lang.0 }}
                                     </a>
                                 {% endif %}

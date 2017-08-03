@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: manti.by\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-21 13:28+0000\n"
+"POT-Creation-Date: 2017-08-03 11:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander Chaika <manti.by@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10,8 +10,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #: api/resources.py:22
 msgid "Forbidden"
@@ -258,13 +258,12 @@ msgid "Preview #"
 msgstr "Папярэдні прагляд #"
 
 #: core/templates/gallery/list.html:23
-#, fuzzy, python-format
-#| msgid "Cover Image"
+#, python-format
 msgid "one image"
 msgid_plural "%(counter)s images"
-msgstr[0] "малюнак"
-msgstr[1] "малюнака"
-msgstr[2] "малюнакаў"
+msgstr[0] "адзин малюнак"
+msgstr[1] "%(counter)s малюнка"
+msgstr[2] "%(counter)s малюнкаў"
 
 #: core/templates/index.html:5
 msgid "Homepage"
@@ -359,6 +358,3 @@ msgstr "Спіс малюнкаў"
 #: profiles/models.py:13
 msgid "Profile Image"
 msgstr "Малюнак профілю"
-
-#~ msgid "images"
-#~ msgstr "Малюнкаў"

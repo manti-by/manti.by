@@ -7,9 +7,9 @@ class LocaleMiddleware(MiddlewareMixin):
 
     def process_request(self, request):
         locale = settings.LANGUAGE_CODE
-        http_host = request.build_absolute_uri(None)[:-1]
+        current_domain = '%s://%s' % ('https' if request.is_secure() else 'http', request.META['HTTP_HOST'])
         for domain_locale, domain in settings.LOCALE_URLS.items():
-            if http_host == domain and translation.check_for_language(domain_locale):
+            if current_domain == domain and translation.check_for_language(domain_locale):
                 locale = domain_locale
                 break
         translation.activate(locale)
