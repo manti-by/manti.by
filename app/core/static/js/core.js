@@ -6,7 +6,6 @@
         // Init global widgets
         $.fn.initHeaderMenu();
         $.fn.initFloatingHeader();
-        $.fn.initLanguageSwitcher();
 
         // Init player
         $.get('/api/posts', function(response) {

@@ -10,15 +10,14 @@
 
     h1,
     .post h1 {
-        padding: 0 0 0.3em 0;
         margin-bottom: 0;
-        font-size: 1.5em;
+        font-size: 3.5em;
+        opacity: 0.07;
     }
 
     h2 {
         padding: 0 0 0.3em 0;
         margin-bottom: 0;
-        font-size: 1.5em;
     }
 
     .static,
@@ -37,6 +36,37 @@
         float: none;
         margin: 0 0 1em 0;
         width: 100%;
+    }
+
+    #player .controls {
+        width: 100%;
+    }
+
+    #player .now-playing {
+        width: 87%;
+        margin: 0;
+    }
+
+    #player .volume,
+    #player .volume-text,
+    #player .volume-label,
+    #player .high-definition {
+        margin: 1.5rem 0 0.7rem 0;
+    }
+
+    #player .volume-text {
+        padding-top: 0.3rem;
+        font-size: 0.8em;
+        color: #696969;
+    }
+
+    #player .volume {
+        width: 55%;
+    }
+
+    #player .close {
+        width: 7%;
+        text-align: center;
     }
 
     header nav.container {
@@ -99,13 +129,14 @@
     }
 
     .home h2 {
-        left: -0.15em;
-        font-size: 4em;
+        left: 0;
+        height: 0.9em;
+        font-size: 3.5em;
     }
 
     .post h2 {
         top: 0;
-        left: -0.15em;
+        left: 0;
         font-size: 1.2em;
         font-weight: 400;
     }
@@ -156,6 +187,10 @@
         padding-top: 0;
     }
 
+    .gallery .list {
+        margin-left: 0;
+    }
+
     .gallery .list .preview,
     .gallery .item .preview {
         width: 100%;
@@ -163,6 +198,16 @@
     }
 
     .gallery .list .preview:nth-child(n+4) {
+        display: none;
+    }
+
+    .gallery .list .item h2 {
+        left: 0;
+        height: 1em;
+        font-size: 3.5em;
+    }
+
+    .gallery .list .item h2 .info {
         display: none;
     }
 
@@ -177,7 +222,7 @@
 
     .post .flex {
         padding-top: 0;
-        margin-bottom: 0;
+        margin: 0;
     }
 
     .post .flex .post {
