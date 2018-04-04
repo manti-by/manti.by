@@ -34,9 +34,9 @@ Installation
 4. Install project dependencies:
 
         $ cd ../
-        $ virtualenv --no-site-packages --prompt="manti-venv-" venv
-        $ source venv/bin/activate
-        $ sudo pip install -r src/requirements.txt
+        $ virtualenv -p python3 --no-site-packages --prompt="manti-" venv
+        $ . venv/bin/activate
+        $ pip install -r src/requirements.txt
 
 
 5. Create database, if necessary:
