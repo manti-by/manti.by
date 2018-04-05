@@ -1,0 +1,9 @@
+[flake8]
+exclude =
+    .git,
+    __pycache__,
+    app/manage.py
+    app/core/settings/
+    deploy/
+max-line-length = 120
+max-complexity = 14

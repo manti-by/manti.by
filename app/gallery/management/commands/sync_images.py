@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import os
 
 from PIL import Image as PILImage

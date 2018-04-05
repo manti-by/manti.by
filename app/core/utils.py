@@ -26,9 +26,9 @@ def get_instagram_photos(limit=6):
     try:
         url = 'https://api.instagram.com/v1/users/self/media/recent/?access_token=%s' \
               % settings.INSTAGRAM_ACCESS_TOKEN
-        request = requests.get(url)
-        if request.status_code == 200:
-            data = json.loads(request.content)
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = json.loads(response.content.decode())
             for item in data['data']:
                 recent_media.append({
                     'link': item['link'],
@@ -90,15 +90,17 @@ class UTC(tzinfo):
     def dst(self, dt):
         return ZERO
 
+
 utc = UTC()
 
 
 def postpone(function):
-  def decorator(*args, **kwargs):
-    t = Thread(target = function, args=args, kwargs=kwargs)
-    t.daemon = True
-    t.start()
-  return decorator
+
+    def decorator(*args, **kwargs):
+        t = Thread(target=function, args=args, kwargs=kwargs)
+        t.daemon = True
+        t.start()
+    return decorator
 
 
 class cached_property(object):

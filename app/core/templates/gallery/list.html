@@ -27,7 +27,7 @@
                         {% for image in gallery.images.ordered|slice:":6" %}
                             {% thumbnail image.original_image "1920x1280" as display %}
                                 <a href="{{ display.url }}" data-id="{{ image.id }}"
-                                   class="preview {% if display.image|is_portrait %}portrait{% else %}landscape{% endif %}">
+                                   class="preview {% if display|is_portrait %}portrait{% else %}landscape{% endif %}">
                                     {% thumbnail image.original_image "400" as preview %}
                                         <img src="{{ preview.url }}" alt="#" title="{% trans 'Preview #' %}{{ image.id }}">
                                     {% endthumbnail %}

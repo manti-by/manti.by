@@ -32,7 +32,7 @@
                     {% for image in latest_images %}
                         {% thumbnail image.original_image "x100" as im %}
                             <a href="{% url 'gallery_list' %}#{{ image.gallery.slug }}"
-                               class="thumbnail {% if im.image|is_portrait %}portrait{% else %}landscape{% endif %}">
+                               class="thumbnail {% if im|is_portrait %}portrait{% else %}landscape{% endif %}">
                                 <img src="{{ im.url }}" alt="#" title="{% trans 'Latest image from gallery' %}">
                             </a>
                         {% endthumbnail %}

@@ -1,6 +1,3 @@
-from __future__ import absolute_import, unicode_literals
-
-
 DEBUG = True
 
 COMPRESS_ENABLED = False
@@ -52,11 +49,13 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
+            'formatter': 'verbose',
         },
         'django': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
+            'formatter': 'simple',
         },
         'django.db.backends': {
             'handlers': ['null'],
@@ -67,8 +66,3 @@ LOGGING = {
 }
 
 DEFAULT_FROM_EMAIL = 'admin@manti.by'
-
-INSTAGRAM_USER_ID = 'manti_by'
-INSTAGRAM_CLIENT_ID = ''
-INSTAGRAM_ACCESS_TOKEN = ''
-INSTAGRAM_CLIENT_SECRET = ''

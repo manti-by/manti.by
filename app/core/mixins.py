@@ -1,6 +1,6 @@
-from unidecode import unidecode
-
 import logging
+
+from unidecode import unidecode
 
 from django.db import models
 from django.conf import settings

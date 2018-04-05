@@ -1,5 +1,3 @@
-import json
-
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 
@@ -19,5 +17,6 @@ def global_template_vars(request):
         'user': request.user,
         'tags': Post.tags.most_common()[:10],
         'posts': Post.objects.ordered()[:10],
-        'instagram_photos': get_instagram_photos()
+        'instagram_photos': get_instagram_photos(),
+        'is_home': False
     }

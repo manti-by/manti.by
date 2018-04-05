@@ -1,5 +1,3 @@
-from __future__ import absolute_import, unicode_literals
-
 from .base import *
 
 
@@ -30,6 +28,16 @@ DATABASES = {
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s|%(asctime)s|%(module)s|%(process)d|%(thread)d|%(message)s',
+            'datefmt': "%d/%b/%Y %H:%M:%S"
+        },
+        'simple': {
+            'format': '%(asctime)s [%(levelname)s] %(message)s',
+            'datefmt': '%H:%M:%S'
+        }
+    },
     'handlers': {
         'file': {
             'level': 'DEBUG',
