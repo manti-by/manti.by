@@ -4,7 +4,7 @@
     }
 
     .static {
-        width: 1056px;
+        width: 1080px;
     }
 
     main .posts {
@@ -31,7 +31,6 @@
     main .sidebar h3 {
         color: #696969;
         font-weight: 400;
-        font-size: 0.85rem;
         text-transform: uppercase;
     }
 
@@ -42,7 +41,6 @@
 
     main .sidebar li a {
         color: #999;
-        font-size: 0.85rem;
     }
 
     main .sidebar li a:after {
