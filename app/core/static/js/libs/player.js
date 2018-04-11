@@ -66,15 +66,13 @@
         _bind_events: function() {
             var self = this;
 
-            self._player.audio.on('canplay', function() {
-                self._duration = self._player.api.duration;
+            self._player.api.addEventListener('canplay', function() {
                 if (self._is_playing) {
-                    self._player.api.currentTime = self._position;
                     self._player.api.play();
                 }
             });
 
-            self._player.audio.on('ended', function() {
+            self._player.api.addEventListener('ended', function() {
                 self.next();
             });
 
@@ -217,9 +215,12 @@
                 current_player = $('#player-'+ this._active_id),
                 position, width, timestamp, buffered;
 
-            // Skip if not plaing or not loaded
+            // Skip if not playing or not loaded
             if (this._is_playing !== true ||
                 this._player.audio.get(0).readyState === AUDIO_NOT_READY) return;
+
+            // Update internals
+            this._duration = this._player.api.duration;
 
             // Update active progress line
             position = this._player.api.currentTime / this._player.api.duration * 100;

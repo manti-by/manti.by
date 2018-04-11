@@ -35,7 +35,7 @@
 .player .progress-bar .progress-line-loaded,
 .player .progress-bar .progress-line-active {
     position: absolute;
-    top: 0.65rem;
+    top: 0.7rem;
     left: 0;
     height: 4px;
 }
@@ -60,9 +60,9 @@
 
 .player .progress-label {
     width: 4em;
-    margin: 0 0.2rem;
+    margin: 0 0.5rem;
     padding-top: 0.5em;
-    font-size: 0.8em;
+    font-size: 0.95em;
     text-align: center;
     color: #696969;
 }
