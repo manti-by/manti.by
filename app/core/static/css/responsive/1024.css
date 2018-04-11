@@ -59,11 +59,15 @@
     }
 
     .gallery .item .preview {
-        max-height: 278px;
+        max-height: 183px;
     }
 }
 
 @media only screen and (max-width: 1024px) and (orientation: portrait) {
+    main {
+        margin-top: 5em;
+    }
+    
     .static,
     .container {
         width: 85%;
@@ -93,7 +97,7 @@
     }
 
     .gallery .item .preview {
-        max-height: 203px;
+        max-height: 118px;
         margin-bottom: 0.4em;
     }
 }

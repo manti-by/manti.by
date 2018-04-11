@@ -194,6 +194,7 @@
     .gallery .list .preview,
     .gallery .item .preview {
         width: 100%;
+        max-height: 219px;
         margin: 0 0 0.3em 0;
     }
 
@@ -271,5 +272,12 @@
     footer #copy {
         float: none;
         text-align: center;
+    }
+}
+
+@media only screen and (max-width: 767px) and (orientation: landscape) {
+    .gallery .item .preview {
+        width: calc(100%  / 2 - 0.2em);
+        max-height: 192px;
     }
 }

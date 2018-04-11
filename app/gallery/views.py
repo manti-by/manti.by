@@ -5,8 +5,8 @@ from gallery.models import Gallery
 
 
 def index(request):
-    gallery_list = Gallery.objects.ordered()
-    return render(request, 'gallery/list.html', {'gallery_list': gallery_list})
+    gallery = Gallery.objects.first()
+    return render(request, 'gallery/single.html', {'gallery': gallery})
 
 
 class GalleryView(DetailView):
