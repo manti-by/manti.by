@@ -44,11 +44,8 @@ strong {
 }
 
 cite {
-    display: block;
-    width: calc(100% - 2em);
-    padding: 1em;
-    clear: left;
-    font-size: 0.9em;
+    display: flex;
+    padding: 1.5em;
     color: #4F4F4F;
     background: #ECECEC;
 }

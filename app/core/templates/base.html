@@ -37,15 +37,15 @@
         <link rel="stylesheet"
               href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,600,700&subset=cyrillic">
         {% compress css %}
-        <link type="text/css" rel="stylesheet" href="{% static 'css/common/reset.css' %}">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
-        {% block styles %}{% endblock %}
-        <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}">
-        <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/481.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/reset.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
+            {% block styles %}{% endblock %}
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/481.css' %}">
         {% endcompress %}
     </head>
     <body>
@@ -111,12 +111,9 @@
                 <a href="{% url 'about' %}">{% trans 'About' %}</a>
                 <a href="{% url 'resume' %}">{% trans 'My job' %}</a>
                 <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>
-                <a href="mailto:manti.by@gmail.com">{% trans 'Contact' %}</a>
                 <span class="search-button">{% trans 'Search' %}</span>
                 {% if user.is_authenticated %}
                     <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
-                {% else %}
-                    <a href="{% url 'login' %}">{% trans 'Login' %}</a>
                 {% endif %}
             </nav>
         </header>
@@ -132,22 +129,21 @@
                 <a href="{% url 'about' %}" class="mobile-hidden">{% trans 'About' %}</a>
                 <a href="{% url 'resume' %}" class="mobile-hidden">{% trans 'My job' %}</a>
                 <a href="{% url 'copyrights' %}" class="mobile-hidden">{% trans 'Copyrights' %}</a>
-                <a href="mailto:manti.by@gmail.com" class="mobile-hidden">{% trans 'Contact' %}</a>
                 <div id="copy">
                     Alex Manti&copy; 2006 - {% now 'Y' %}
                 </div>
             </nav>
         </footer>
 
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         {% compress js %}
-        <script type="text/javascript" src="{% static 'js/widgets/menu.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/widgets/loader.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/widgets/header.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/libs/common.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/libs/player.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
-        {% block scripts %}{% endblock %}
+            <script type="text/javascript" src="{% static 'js/libs/jquery-1.12.4/jquery.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/widgets/menu.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/widgets/loader.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/widgets/header.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/libs/common.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/libs/player.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
+            {% block scripts %}{% endblock %}
         {% endcompress %}
 
         <script type="application/ld+json">
