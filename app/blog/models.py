@@ -1,7 +1,6 @@
 from django.db import models
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.utils.encoding import python_2_unicode_compatible
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
@@ -29,8 +28,7 @@ class PostManager(models.Manager):
         return self.get_queryset().order_by('-created')
 
 
-@python_2_unicode_compatible
-class Post(SlugifyMixin, BaseModel, models.Model):
+class Post(SlugifyMixin, BaseModel):
 
     name = models.CharField(max_length=255)
 

@@ -7,7 +7,7 @@ from core.models import BaseModel
 from core.utils import profile_image_name
 
 
-class Profile(BaseModel, models.Model):
+class Profile(BaseModel):
 
     original_image = models.ImageField(upload_to=profile_image_name, blank=True, null=True,
                                        verbose_name=_('Profile Image'))
