@@ -5,7 +5,7 @@ from gallery.models import Gallery
 
 
 def index(request):
-    gallery = Gallery.objects.first()
+    gallery = Gallery.objects.last()
     return render(request, 'gallery/single.html', {'gallery': gallery})
 
 

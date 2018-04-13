@@ -1,17 +1,18 @@
 from django.conf import settings
 from django.conf.urls import include, url
+from django.views.decorators.cache import cache_page
 from django.contrib import admin
 
 from core import views as core_views
 from api.resources import OrderableResource, PostResource
 
 urlpatterns = [
-    url(r'^$', core_views.index, name='index'),
-    url(r'^email/(?P<email_id>\d+)/$', core_views.email, name='email'),
+    url(r'^$', cache_page(60 * 60 * 24 * 5)(core_views.index), name='index'),
+    url(r'^email/(?P<email_id>\d+)/$', cache_page(60 * 60 * 24 * 30)(core_views.email), name='email'),
 
-    url(r'^about$', core_views.static, {'page': 'about'}, name='about'),
-    url(r'^resume$', core_views.static, {'page': 'resume'}, name='resume'),
-    url(r'^copyrights$', core_views.static, {'page': 'copyrights'}, name='copyrights'),
+    url(r'^about$', cache_page(60 * 60 * 24 * 30)(core_views.static), {'page': 'about'}, name='about'),
+    url(r'^resume$', cache_page(60 * 60 * 24 * 30)(core_views.static), {'page': 'resume'}, name='resume'),
+    url(r'^copyrights$', cache_page(60 * 60 * 24 * 30)(core_views.static), {'page': 'copyrights'}, name='copyrights'),
 
     # API urls
     url(r'^api/posts/?$', PostResource.as_view()),

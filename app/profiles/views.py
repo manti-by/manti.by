@@ -3,6 +3,7 @@ import logging
 from django.http import Http404
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
+from django.views.decorators.cache import cache_page
 from django.contrib.auth import authenticate, login, logout
 
 from profiles.models import Profile
@@ -10,6 +11,7 @@ from profiles.models import Profile
 logger = logging.getLogger('app')
 
 
+@cache_page(60 * 60 * 24 * 5)
 def profile_page(request):
     try:
         if not request.user.is_authenticated:
@@ -29,6 +31,7 @@ def profile_page(request):
         raise Http404
 
 
+@cache_page(60 * 60 * 24 * 5)
 def login_page(request):
     try:
         if request.user.is_authenticated:
@@ -68,6 +71,7 @@ def login_page(request):
     return render(request, 'profiles/login.html', data)
 
 
+@cache_page(60 * 60 * 24 * 5)
 def logout_page(request):
     logout(request)
     return redirect('index')

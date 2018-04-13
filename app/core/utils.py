@@ -1,3 +1,4 @@
+import os
 import json
 import random
 import logging
@@ -5,7 +6,6 @@ import requests
 
 from threading import Thread
 from datetime import tzinfo, timedelta
-from os.path import splitext
 
 from django.conf import settings
 from django.core.cache import cache
@@ -41,7 +41,7 @@ def get_instagram_photos(limit=6):
 
 
 def get_name(instance, filename, typename):
-    name, ext = splitext(filename)
+    name, ext = os.path.splitext(filename)
     return '%s/%s/%s%s' % (instance.__class__.__name__.lower(), typename, unique_str(), ext)
 
 
@@ -50,7 +50,7 @@ def profile_image_name(instance, filename):
 
 
 def original_name(instance, filename):
-    name, ext = splitext(filename)
+    name, ext = os.path.splitext(filename)
     return 'gallery/%s/%s%s' % (instance.gallery.slug, name, ext)
 
 
@@ -67,12 +67,12 @@ def thumb_name(instance, filename):
 
 
 def release_name(instance, filename):
-    name, ext = splitext(filename)
+    name, ext = os.path.splitext(filename)
     return 'release/%s%s' % (name, ext)
 
 
 def cover_name(instance, filename):
-    name, ext = splitext(filename)
+    name, ext = os.path.splitext(filename)
     return 'covers/%s%s' % (name, ext)
 
 
