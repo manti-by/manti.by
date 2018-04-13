@@ -11,8 +11,13 @@
     h1,
     .post h1 {
         margin-bottom: 0;
-        font-size: 3.5em;
-        opacity: 0.07;
+        font-size: 2.5em;
+        opacity: 0.25;
+    }
+
+    h1 .tag {
+        border: none;
+        margin: 0;
     }
 
     h2 {
@@ -131,14 +136,11 @@
     .home h2 {
         left: 0;
         height: 0.9em;
-        font-size: 3.5em;
+        font-size: 2.5em;
     }
 
     .post h2 {
-        top: 0;
-        left: 0;
-        font-size: 1.2em;
-        font-weight: 400;
+        font-size: 1.5em;
     }
 
     .post h2.featured {
@@ -223,7 +225,7 @@
 
     .post .flex {
         padding-top: 0;
-        margin: 0;
+        margin: 0 0 3em 0;
     }
 
     .post .flex .post {
@@ -256,7 +258,8 @@
     }
 
     .home .main .posts .post h2 {
-        margin-left: 0.2em;
+        margin-left: 0;
+        font-size: 1.5em;
     }
 
     .home .main .posts .post .image,

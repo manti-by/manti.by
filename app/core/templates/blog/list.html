@@ -8,8 +8,10 @@
     {% if tag %}
         <span class="spacer">&gt;</span>
         <a href="{% url 'blog' %}">{% trans 'Music' %}</a>
-        <span class="spacer">&gt;</span>
-        {% trans 'Tag' %}<span class="tag">{{ tag }}</span>
+        <span class="mobile-hidden">
+            <span class="spacer">&gt;</span>
+            {% trans 'Tag' %}<span class="tag">{{ tag }}</span>
+        </span>
     {% else %}
         <span class="spacer">&gt;</span>
         {% trans 'Music' %}
@@ -19,11 +21,7 @@
 {% block content %}
     <h1 class="mobile-visible container">
         {% if tag %}
-            <a href="{% url 'blog' %}">{% trans 'Music' %}</a>
-            <span class="spacer">&gt;</span>
-            {% trans 'Tag' %}<span class="tag">{{ tag }}</span>
-        {% else %}
-            {% trans 'Music' %}
+            <span class="tag">{{ tag }}</span>
         {% endif %}
     </h1>
     <div class="blog container flex">
