@@ -21,7 +21,7 @@ Installation
 
 1. Install environment (second line for staging servers):
 
-        $ sudo apt-get install -y git python-pip python-dev python-six    
+        $ sudo apt-get install -y git python3-pip python3-dev python3-six    
         $ sudo apt-get install -y nginx supervisor postgresql libpq-dev
 
 
@@ -43,7 +43,7 @@ Installation
 
         $ sudo -u postgres psql -c "CREATE DATABASE manti;"
         $ sudo -u postgres psql -c "CREATE USER manti WITH PASSWORD 'pa55word';"
-        $ sudo -u postgres psql -c "ALTER ROLE manti SET client_encoding TO 'utf8';cd"
+        $ sudo -u postgres psql -c "ALTER ROLE manti SET client_encoding TO 'utf8';"
         $ sudo -u postgres psql -c "ALTER ROLE manti SET default_transaction_isolation TO 'read committed';"
         $ sudo -u postgres psql -c "ALTER ROLE manti SET timezone TO 'UTC';"
         $ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE manti TO manti;"

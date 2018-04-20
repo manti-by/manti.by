@@ -16,6 +16,7 @@ unidecode>=1.0.22,<1.1.0
 redis>=2.10.6,<2.11.0
 git+https://github.com/manti-by/django-simple-rest.git
 exifread>=2.1.2,<2.2.0
+uwsgi>=2.0.17,<2.1.0
 
 # Dev dependencies
 ipython>=6.3.0
