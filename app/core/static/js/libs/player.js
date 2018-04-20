@@ -44,8 +44,6 @@
 
             this.updateActivePosts();
             this._active_id = this._get_data('first')['id'];
-
-            this.reload();
         },
 
 
