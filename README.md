@@ -65,13 +65,8 @@ Installation
 8. Run local dev server or link configs on staging server and restart:
 
         $ ./manage.py runserver 0.0.0.0:8000
-        $ sudo ln -s ./deploy/confs/nginx.conf /etc/nginx/sites-available/default.conf
+        
+        $ sudo ln -s ./deploy/confs/nginx.conf /etc/nginx/sites-enabled/default.conf
         $ sudo ln -s ./deploy/confs/supervisor.conf /etc/supervisor/conf.d/default.conf
         $ sudo service nginx restart
-        $ sudo supervisorctl restart core
-    
-
-9. Run celery/redis server
-
-        $ ./manage.py celeryd -E
-        $ ./manage.py celerycam
+        $ sudo supervisorctl restart manti:

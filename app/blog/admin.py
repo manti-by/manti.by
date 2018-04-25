@@ -16,20 +16,21 @@ class PostAdmin(admin.ModelAdmin):
         models.TextField: {'widget': Textarea(attrs={'rows': 4, 'cols': 80})},
     }
 
-    list_display = ('thumb_image', 'name', 'is_music', 'catnum', 'is_ready', 'created')
+    list_display = ('thumb_image', 'name', 'is_music', 'catnum',
+                    'is_files_converted', 'is_translations_filled', 'created')
 
     fieldsets = (
         (_('Base Info'), {
-            'fields': ('name_ru', 'name_en', 'slug')
+            'fields': ('name_by', 'name_ru', 'name_en', 'slug')
         }),
         (_('Meta Description'), {
-            'fields': ('meta_ru', 'meta_en')
+            'fields': ('meta_by', 'meta_ru', 'meta_en')
         }),
         (_('Summary'), {
-            'fields': ('summary_ru', 'summary_en')
+            'fields': ('summary_by', 'summary_ru', 'summary_en')
         }),
         (_('Description'), {
-            'fields': ('description_ru', 'description_en')
+            'fields': ('description_by', 'description_ru', 'description_en')
         }),
         (_('Tags'), {
             'fields': ('genre', 'tags')
@@ -54,7 +55,12 @@ class PostAdmin(admin.ModelAdmin):
         return mark_safe('<img src="%s" width="50" />' % image)
     thumb_image.short_description = _('Image')
 
-    def is_ready(self, obj):
-        return obj.ready
-    is_ready.boolean = True
-    is_ready.short_description = _('Ready')
+    def is_files_converted(self, obj):
+        return obj.files_converted
+    is_files_converted.boolean = True
+    is_files_converted.short_description = _('Files Ready')
+
+    def is_translations_filled(self, obj):
+        return obj.translations_filled
+    is_translations_filled.boolean = True
+    is_translations_filled.short_description = _('Translations Ready')

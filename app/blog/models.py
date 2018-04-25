@@ -71,10 +71,18 @@ class Post(SlugifyMixin, BaseModel):
         return self.name
 
     @property
-    def ready(self):
+    def files_converted(self):
         return self.mp3_preview_ready \
            and self.ogg_preview_ready \
            and self.ogg_release_ready
+
+    @property
+    def translations_filled(self):
+        for field in ('name_by', 'name_ru', 'name_en', 'meta_by', 'meta_ru', 'meta_en', 'summary_by',
+                      'summary_ru', 'summary_en', 'description_by', 'description_ru', 'description_en'):
+            if not getattr(self, field):
+                return False
+        return True
 
     @property
     def url(self):
@@ -85,16 +93,32 @@ class Post(SlugifyMixin, BaseModel):
         return self.release.url
 
     @property
+    def release_mp3_file(self):
+        return self.release.file.name
+
+    @property
     def preview_mp3_url(self):
         return self.release.url.replace('release', 'preview')
+
+    @property
+    def preview_mp3_file(self):
+        return self.release.file.name.replace('release', 'preview')
 
     @property
     def release_ogg_url(self):
         return self.release.url.replace('mp3', 'ogg')
 
     @property
+    def release_ogg_file(self):
+        return self.release.file.name.replace('mp3', 'ogg')
+
+    @property
     def preview_ogg_url(self):
         return self.release.url.replace('release', 'preview').replace('mp3', 'ogg')
+
+    @property
+    def preview_ogg_file(self):
+        return self.release.file.name.replace('release', 'preview').replace('mp3', 'ogg')
 
     @property
     def title(self):

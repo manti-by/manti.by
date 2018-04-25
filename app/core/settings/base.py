@@ -24,10 +24,6 @@ SECRET_KEY = '9(+8&f)43k--m$cq1#kcwy$%o4hlj9remnlybh+-*gl6_*10*k'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
-# Load Celery
-import djcelery
-djcelery.setup_loader()
-
 
 # Application definition
 
@@ -39,12 +35,12 @@ INSTALLED_APPS = [
     'profiles',
 
     'taggit',
-    'djcelery',
-    'djkombu',
     'simple_rest',
     'sorl.thumbnail',
     'compressor',
     'modeltranslation',
+    'django_celery_results',
+    'django_celery_beat',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -189,17 +185,14 @@ ALLOWED_HOSTS = ['manti.by', '127.0.0.1']
 
 COMPRESS_OUTPUT_DIR = 'cache'
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
-COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',  'compressor.filters.cssmin.CSSMinFilter']
+COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
+                        'compressor.filters.cssmin.CSSMinFilter']
 
 
 # Celery settings
 
-BROKER_URL = 'redis://localhost:6379/0'
-
-CELERY_ALWAYS_EAGER = False
-CELERY_RESULT_BACKEND = 'djcelery.backends.database:DatabaseBackend'
-CELERYBEAT_SCHEDULER = 'djcelery.schedulers.DatabaseScheduler'
-
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'django-db'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'

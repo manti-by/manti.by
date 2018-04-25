@@ -1,9 +1,8 @@
 #.gitignore
 
-/app/content/
-/app/static/
 /app/core/settings/local.py
-/app/celeryev.pid
+/app/celerybeat-schedule
+/app/celerybeat.pid
 
 *.pyc
 *~
