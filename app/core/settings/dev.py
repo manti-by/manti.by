@@ -56,16 +56,23 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
+            'formatter': 'verbose',
         },
         'django': {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
+            'formatter': 'simple',
+        },
+        'django.template': {
+            'handlers': ['null'],
+            'propagate': False,
+            'level': 'ERROR',
         },
         'django.db.backends': {
-            'handlers': [],
+            'handlers': ['null'],
             'propagate': False,
-            'level':'DEBUG',
+            'level': 'ERROR',
         },
     },
 }
