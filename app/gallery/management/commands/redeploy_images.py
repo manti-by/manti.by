@@ -38,7 +38,7 @@ class Command(BaseCommand):
                         created = datetime.utcnow()
 
                     image = Image(phash=file_phash, gallery=gallery, created=created)
-                    image.original_image.name = file_name.replace(settings.MEDIA_ROOT, '')[1:]
+                    image.original_image.name = file_name.replace(settings.MEDIA_ROOT, '')
                     image.save()
                     self.stdout.write('Saved {}'.format(image.original_image.name))
                     added += 1

@@ -21,16 +21,16 @@ class PostAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (_('Base Info'), {
-            'fields': ('name_by', 'name_ru', 'name_en', 'slug')
+            'fields': ('name_be', 'name_ru', 'name_en', 'slug')
         }),
         (_('Meta Description'), {
-            'fields': ('meta_by', 'meta_ru', 'meta_en')
+            'fields': ('meta_be', 'meta_ru', 'meta_en')
         }),
         (_('Summary'), {
-            'fields': ('summary_by', 'summary_ru', 'summary_en')
+            'fields': ('summary_be', 'summary_ru', 'summary_en')
         }),
         (_('Description'), {
-            'fields': ('description_by', 'description_ru', 'description_en')
+            'fields': ('description_be', 'description_ru', 'description_en')
         }),
         (_('Tags'), {
             'fields': ('genre', 'tags')

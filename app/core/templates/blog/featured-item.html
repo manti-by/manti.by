@@ -17,7 +17,7 @@
                 {{ item.genre.all|join:", " }}
             </div>
             <div class="created">
-                {{ item.human_date }}
+                {{ item.created|date:"d E Y" }}
             </div>
         </div>
     </div>

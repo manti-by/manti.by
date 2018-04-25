@@ -113,10 +113,10 @@ CACHES = {
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'by'
+LANGUAGE_CODE = 'be'
 ugettext = lambda s: s
 LANGUAGES = (
-    ('by', ugettext('Belarussian')),
+    ('be', ugettext('Belarussian')),
     ('ru', ugettext('Russian')),
     ('en', ugettext('English')),
 )
@@ -130,7 +130,7 @@ USE_L10N = True
 USE_TZ = True
 
 LOCALE_URLS = {
-    'by': 'https://manti.by',
+    'be': 'https://manti.by',
     'ru': 'https://ru.manti.by',
     'en': 'https://en.manti.by',
 }
