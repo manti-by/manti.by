@@ -29,12 +29,20 @@
 {% endblock %}
 
 {% block styles %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/gallery/overlay.css' %}">
     <link type="text/css" rel="stylesheet" href="{% static 'css/gallery/item.css' %}">
 {% endblock %}
 
-{% if user.is_superuser %}
-    {% block scripts %}
+{% block scripts %}
+    {% if user.is_superuser %}
         <script type="text/javascript" src="{% static 'js/libs/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/widgets/orderable.js' %}"></script>
-    {% endblock %}
-{% endif %}
+    {% endif %}
+        <script type="text/javascript" src="{% static 'js/libs/gallery.js' %}"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var gallery = $.gallery;
+                gallery.init();
+            });
+        </script>
+{% endblock %}
