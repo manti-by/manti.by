@@ -21,19 +21,19 @@
         <h3>{% trans 'Instagram' %}</h3>
         <ul class="flex">
             {% for i in instagram_photos %}
-                <li><a href="{{ i.link }}"><img src="{{ i.image }}" /></a></li>
+                <li><a href="{{ i.link }}"><img src="{{ i.image }}" alt="{{ i.name }}" /></a></li>
             {% endfor %}
         </ul>
     </div>
     <div class="social panel">
-        <a href="https://www.instagram.com/manti_by/" target="_blank">
-            <img src="{% static 'svg/instagram.svg' %}" class="smaller">
+        <a href="https://www.instagram.com/manti_by/" name="Instagram" target="_blank">
+            <img src="{% static 'svg/instagram.svg' %}" class="smaller" alt="Instagram" />
         </a>
-        <a href="https://twitter.com/manti_by/" target="_blank">
-            <img src="{% static 'svg/twitter.svg' %}">
+        <a href="https://twitter.com/manti_by/" name="Twitter" target="_blank">
+            <img src="{% static 'svg/twitter.svg' %}" alt="Twitter" />
         </a>
-        <a href="http://coub.com/manti.by" target="_blank">
-            <img src="{% static 'svg/coub.svg' %}">
+        <a href="http://coub.com/manti.by" name="Coub" target="_blank">
+            <img src="{% static 'svg/coub.svg' %}" alt="Coub" />
         </a>
     </div>
 </div>

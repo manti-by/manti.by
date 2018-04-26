@@ -7,7 +7,7 @@
 {% block breadcrumbs %}
     {% if tag %}
         <span class="spacer">&gt;</span>
-        <a href="{% url 'blog' %}">{% trans 'Music' %}</a>
+        <a href="{% url 'blog' %}" name="blog">{% trans 'Music' %}</a>
         <span class="mobile-hidden">
             <span class="spacer">&gt;</span>
             {% trans 'Tag' %}<span class="tag">{{ tag }}</span>

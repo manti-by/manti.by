@@ -18,7 +18,7 @@
             <h2>{% trans 'Gallery' %}</h2>
             <div class="featured">
                 {% if featured_image %}
-                    <a href="{% url 'gallery_list' %}#{{ featured_image.gallery.slug }}">
+                    <a href="{% url 'gallery_list' %}">
                         {% thumbnail featured_image.original_image "x1080" as im %}
                             <img src="{{ im.url }}" alt="{% trans 'Popular image from gallery' %}"
                                  title="{% trans 'Popular image from gallery' %}">

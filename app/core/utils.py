@@ -32,7 +32,8 @@ def get_instagram_photos(limit=6):
             for item in data['data']:
                 recent_media.append({
                     'link': item['link'],
-                    'image': item['images']['thumbnail']['url']
+                    'image': item['images']['thumbnail']['url'],
+                    'name': item['caption']['text'].split('\n')[0]
                 })
         cache.set('instagram_photos', recent_media[:limit])
     except Exception as e:

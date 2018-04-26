@@ -10,7 +10,7 @@
     <div class="info">
         <div class="wrap">
             <h3>
-                <a href="{% url 'post' item.slug %}">
+                <a href="{% url 'post' item.slug %}" name="post-{{ item.slug }}">
                     {{ item.name }}
                 </a>
             </h3>

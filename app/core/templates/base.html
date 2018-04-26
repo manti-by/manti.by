@@ -58,7 +58,7 @@
             <nav class="container">
                 <div class="flex">
                     <div class="left">
-                        <a href="{% url 'index' %}" class="homelink" rel="home">
+                        <a href="{% url 'index' %}" name="home" class="homelink" rel="home">
                             <span class="icon">
                                 <i class="material-icons">settings_input_svideo</i>
                             </span>
@@ -69,10 +69,10 @@
                         <span class="breadcrumbs">{% block breadcrumbs %}{% endblock %}</span>
                     </div>
                     <div class="right">
-                        <a href="{% url 'blog' %}" rel="bookmark" class="link-item mobile-hidden">
+                        <a href="{% url 'blog' %}" name="blog" rel="bookmark" class="link-item mobile-hidden">
                             <span class="text">{% trans 'Music' %}</span>
                         </a>
-                        <a href="{% url 'gallery_list' %}" rel="bookmark" class="link-item mobile-hidden">
+                        <a href="{% url 'gallery_list' %}" name="gallery" rel="bookmark" class="link-item mobile-hidden">
                             <span class="text">{% trans 'Gallery' %}</span>
                         </a>
                         <span class="language" class="link-item">
@@ -80,7 +80,7 @@
                                 {% if lang.0 == ACTIVE_LANGUAGE %}
                                     <span class="item text active">{{ lang.0 }}</span>
                                 {% else %}
-                                    <a href="{% get_locale_domain lang.0 %}{{ request.path }}" class="item text">
+                                    <a href="{% get_locale_domain lang.0 %}{{ request.path }}" name="lang-{{ lang.0 }}" class="item text">
                                         {{ lang.0 }}
                                     </a>
                                 {% endif %}
@@ -89,7 +89,7 @@
                         </span>
                         {% if user.is_authenticated %}
                             <span class="user">
-                                <a href="{% url 'profile' %}">
+                                <a href="{% url 'profile' %}" name="profile">
                                     <img src="{{ user.profile.image }}" />
                                 </a>
                             </span>
@@ -101,18 +101,18 @@
                 </div>
             </nav>
             <nav class="mobile-menu">
-                <a href="{% url 'blog' %}" class="mobile-visible">
+                <a href="{% url 'blog' %}" name="blog-mobile" class="mobile-visible">
                     {% trans 'Music' %}
                 </a>
-                <a href="{% url 'gallery_list' %}" class="mobile-visible">
+                <a href="{% url 'gallery_list' %}" name="gallery-mobile" class="mobile-visible">
                     {% trans 'Gallery' %}
                 </a>
-                <a href="{% url 'about' %}">{% trans 'About' %}</a>
-                <a href="{% url 'resume' %}">{% trans 'My job' %}</a>
-                <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>
+                <a href="{% url 'about' %}" name="about">{% trans 'About' %}</a>
+                <a href="{% url 'resume' %}" name="resume">{% trans 'My job' %}</a>
+                <a href="{% url 'copyrights' %}" name="copyrights">{% trans 'Copyrights' %}</a>
                 <span class="search-button">{% trans 'Search' %}</span>
                 {% if user.is_authenticated %}
-                    <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+                    <a href="{% url 'logout' %}" name="logout">{% trans 'Logout' %}</a>
                 {% endif %}
             </nav>
         </header>
@@ -125,9 +125,9 @@
 
         <footer>
             <nav class="container">
-                <a href="{% url 'about' %}" class="mobile-hidden">{% trans 'About' %}</a>
-                <a href="{% url 'resume' %}" class="mobile-hidden">{% trans 'My job' %}</a>
-                <a href="{% url 'copyrights' %}" class="mobile-hidden">{% trans 'Copyrights' %}</a>
+                <a href="{% url 'about' %}" name="about-footer" class="mobile-hidden">{% trans 'About' %}</a>
+                <a href="{% url 'resume' %}" name="resume-footer" class="mobile-hidden">{% trans 'My job' %}</a>
+                <a href="{% url 'copyrights' %}" name="copyrights-footer" class="mobile-hidden">{% trans 'Copyrights' %}</a>
                 <div id="copy">
                     Alex Manti&copy; 2006 - {% now 'Y' %}
                 </div>
