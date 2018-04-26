@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static i18n %}
+{% load static i18n common_tags %}
 
 {% block title %}{{ item.name }} - {{ META_TITLE }}{% endblock %}
 {% block ios-title %}{{ item.name }} - {{ META_TITLE }}{% endblock %}
@@ -31,7 +31,7 @@
         <h1 class="mobile-visible">{{ item.name }}</h1>
         <div class="flex">
             <div class="image">
-                <img src="{{ item.cover.url }}" alt="{{ item.name }}"
+                <img src="{% webp_cover item.cover %}" alt="{{ item.name }}"
                      title="{{ item.name }}">
             </div>
             <div class="info">

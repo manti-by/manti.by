@@ -6,6 +6,7 @@ from django.utils.translation import ugettext_lazy as _
 from simple_rest import Resource
 
 from api.utils import resource_wrapper
+from core.context_processors.common import global_template_vars
 from core.models import Email
 from blog.models import Post
 from gallery.models import Gallery, Image
@@ -70,9 +71,11 @@ class PostResource(Resource):
         posts = Post.objects.ordered().filter(is_music=is_music)
         if tag is not None:
             posts = posts.filter(tags__slug=tag)
+
         for p in posts[start:start+limit]:
             if return_type == 'html':
-                result.append(p.as_html())
+                context = global_template_vars(request)
+                result.append(p.as_html(context))
             else:
                 result.append(p.as_dict())
         return JsonResponse({'status': 200,

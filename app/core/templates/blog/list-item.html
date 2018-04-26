@@ -1,10 +1,10 @@
-{% load i18n %}
+{% load i18n common_tags %}
 
 <div class="post" data-id="{{ item.id }}">
     <div class="flex">
         <div class="image">
             <a href="{% url 'post' item.slug %}" name="post-{{ item.slug }}">
-                <img src="{{ item.cover.url }}" alt="{{ item.name }}"
+                <img src="{% webp_cover item.cover %}" alt="{{ item.name }}"
                      title="{{ item.name }}">
             </a>
         </div>

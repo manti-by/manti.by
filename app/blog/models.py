@@ -79,8 +79,8 @@ class Post(SlugifyMixin, BaseModel):
 
     @property
     def translations_filled(self):
-        for field in ('name_by', 'name_ru', 'name_en', 'meta_by', 'meta_ru', 'meta_en', 'summary_by',
-                      'summary_ru', 'summary_en', 'description_by', 'description_ru', 'description_en'):
+        for field in ('name_be', 'name_ru', 'name_en', 'meta_be', 'meta_ru', 'meta_en', 'summary_be',
+                      'summary_ru', 'summary_en', 'description_be', 'description_ru', 'description_en'):
             if not getattr(self, field):
                 return False
         return True
@@ -142,8 +142,8 @@ class Post(SlugifyMixin, BaseModel):
             },
         }
 
-    def as_html(self):
-        return render_to_string('blog/list-item.html', {'item': self, 'DATE_FORMAT': settings.DATE_FORMAT})
+    def as_html(self, context):
+        return render_to_string('blog/list-item.html', {'item': self, **context})
 
 
 @receiver(post_save, sender=Post, dispatch_uid='convert_release')
