@@ -34,18 +34,17 @@
         <meta property="og:image" content="{% static 'img/share.jpg' %}">
         {% endblock %}
 
-        <link rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family=Material+Icons|Roboto:300,400,500,600,700&subset=cyrillic">
         {% compress css %}
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/reset.css' %}">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/font.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}">
             {% block styles %}{% endblock %}
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/481.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
         {% endcompress %}
     </head>
     <body>

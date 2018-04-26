@@ -32,3 +32,15 @@ main {
 .relation .small-cover {
     display: none;
 }
+
+.print-hidden {
+    display: none;
+}
+
+.print-visible {
+    display: block;
+}
+
+cite {
+    border: 1px solid #CCC;
+}

@@ -6,7 +6,14 @@
 
 {% block content %}
     <div class="container static resume">
-        <h1>{% trans 'Resume' %}</h1>
+        <h1>
+            <span class="print-hidden">
+                {% trans 'Resume' %}
+            </span>
+            <span class="print-visible">
+                {% trans 'Alexander Chaika' %}
+            </span>
+        </h1>
         <div class="description">
             <img src="{% static 'img/side.jpg' %}" class="image mobile-hidden" alt="Manti">
             <img src="{% static 'img/side-mobile.jpg' %}" class="image mobile-visible" alt="Manti">
@@ -20,7 +27,7 @@
             <p>
                 {% trans 'Code samples' %}: <a href="https://github.com/manti-by">https://github.com/manti-by</a>
             <p>
-            <p class="print">
+            <p class="print print-hidden">
                 <a onclick="window.print()">{% trans 'Print this page' %}</a>
             </p>
         </div>
