@@ -14,6 +14,7 @@ def global_template_vars(request):
         'META_TITLE': _(settings.META_TITLE),
         'META_DESCRIPTION': _(settings.META_DESCRIPTION),
         'BASE_URL': settings.BASE_URL,
+        'DATE_FORMAT': settings.DATE_FORMAT,
         'user': request.user,
         'tags': Post.tags.most_common()[:10],
         'posts': Post.objects.ordered()[:10],

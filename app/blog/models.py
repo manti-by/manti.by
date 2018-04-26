@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
+from django.conf import settings
 
 from taggit.models import TaggedItemBase
 from taggit.managers import TaggableManager
@@ -142,7 +143,7 @@ class Post(SlugifyMixin, BaseModel):
         }
 
     def as_html(self):
-        return render_to_string('blog/list-item.html', {'item': self})
+        return render_to_string('blog/list-item.html', {'item': self, 'DATE_FORMAT': settings.DATE_FORMAT})
 
 
 @receiver(post_save, sender=Post, dispatch_uid='convert_release')

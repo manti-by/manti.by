@@ -7,11 +7,12 @@
     font-size: 5em;
     text-transform: uppercase;
     overflow: visible;
-    opacity: 0.1;
+    opacity: 0.3;
 }
 
 .home .posts {
     position: relative;
+    margin-bottom: 1.5em;
 }
 
 .home .spacer {
@@ -22,7 +23,7 @@
 
 .home .gallery {
     position: relative;
-    margin: 0 0 3em 0;
+    margin: 0 0 3.5em 0;
 }
 
 .home .gallery .featured {

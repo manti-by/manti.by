@@ -31,14 +31,15 @@
         <h1 class="mobile-visible">{{ item.name }}</h1>
         <div class="flex">
             <div class="image">
-                <img src="{{ item.cover.url }}">
+                <img src="{{ item.cover.url }}" alt="{{ item.name }}"
+                     title="{{ item.name }}">
             </div>
             <div class="info">
                 <h1 class="mobile-hidden">{{ item.name }}</h1>
                 <div class="description">{{ item.description|safe }}</div>
                 <div class="created">
                     <strong>{% trans 'Created' %}</strong>:
-                    {{ item.created|date:"d b Y" }}
+                    {{ item.created|date:DATE_FORMAT }}
                 </div>
                 <div class="catnum">
                     <strong>{% trans 'Catalog No' %}</strong>:

@@ -3,7 +3,8 @@
 <div class="post" data-id="{{ item.id }}">
     <div class="image">
         <a href="{% url 'post' item.slug %}">
-            <img src="{{ item.cover.url }}">
+            <img src="{{ item.cover.url }}" alt="{{ item.name }}"
+                 title="{{ item.name }}">
         </a>
     </div>
     <div class="info">
@@ -17,7 +18,7 @@
                 {{ item.genre.all|join:", " }}
             </div>
             <div class="created">
-                {{ item.created|date:"d E Y" }}
+                {{ item.created|date:DATE_FORMAT }}
             </div>
         </div>
     </div>

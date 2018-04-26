@@ -1,7 +1,7 @@
 .player {
     position: relative;
     display: flex;
-    padding: 0.25rem;
+    padding: 0.35rem;
     width: 80%;
     border-radius: 0.25rem;
     background: #dedede;
@@ -60,9 +60,9 @@
 
 .player .progress-label {
     width: 4em;
-    margin: 0 0.5rem;
-    padding-top: 0.5em;
-    font-size: 0.95em;
+    margin: 0 0.75rem;
+    padding-top: 0.35em;
+    font-size: 1rem;
     text-align: center;
     color: #696969;
 }
