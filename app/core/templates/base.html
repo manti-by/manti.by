@@ -111,7 +111,7 @@
                     {% trans 'Gallery' %}
                 </a>
                 <a href="{% url 'about' %}" name="about">{% trans 'About' %}</a>
-                <a href="{% url 'resume' %}" name="resume">{% trans 'My job' %}</a>
+                <a href="{% url 'resume' %}" name="resume">{% trans 'Resume' %}</a>
                 <a href="{% url 'copyrights' %}" name="copyrights">{% trans 'Copyrights' %}</a>
                 <span class="search-button">{% trans 'Search' %}</span>
                 {% if user.is_authenticated %}
@@ -129,7 +129,7 @@
         <footer>
             <nav class="container">
                 <a href="{% url 'about' %}" name="about-footer" class="mobile-hidden">{% trans 'About' %}</a>
-                <a href="{% url 'resume' %}" name="resume-footer" class="mobile-hidden">{% trans 'My job' %}</a>
+                <a href="{% url 'resume' %}" name="resume-footer" class="mobile-hidden">{% trans 'Resume' %}</a>
                 <a href="{% url 'copyrights' %}" name="copyrights-footer" class="mobile-hidden">{% trans 'Copyrights' %}</a>
                 <div id="copy">
                     Alex Manti&copy; 2006 - {% now 'Y' %}
