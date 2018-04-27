@@ -1,6 +1,6 @@
 .home .posts {
     position: relative;
-    margin-bottom: 1.5em;
+    margin-bottom: 2.5em;
 }
 
 .home .spacer {
@@ -32,7 +32,8 @@
 
 .home .gallery .featured .latest {
     position: absolute;
-    bottom: -1rem;
+    left: 0.5rem;
+    bottom: -0.5rem;
 }
 
 .home .gallery .featured .latest .thumbnail {

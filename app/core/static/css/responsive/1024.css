@@ -33,16 +33,20 @@
         display: block;
     }
 
-    main .posts,
-    main .sidebar {
+    .main .posts,
+    .main .sidebar {
         width: 100%;
     }
 
-    main .sidebar {
+    .home .posts {
+        margin-bottom: 1.5em;
+    }
+
+    .main .sidebar {
         margin-top: 2em;
     }
 
-    main .sidebar .panel {
+    .main .sidebar .panel {
         margin-bottom: 0.5em;
         text-align: left;
         opacity: 1;
