@@ -21,12 +21,6 @@
         padding: 0;
         text-align: right;
     }
-    
-    main .sidebar h3 {
-        color: #696969;
-        font-weight: 400;
-        text-transform: uppercase;
-    }
 
     main .sidebar li {
         display: block;
@@ -49,7 +43,6 @@
         width: 75%;
         margin-left: 25%;
         margin-bottom: 0.5em;
-        font-size: 0.85em;
         color: #696969;
     }
 
@@ -92,10 +85,6 @@
 
     .featured.posts {
         width: 100%;
-    }
-
-    .featured .post .image {
-        min-height: 260px;
     }
 
     .featured .post .info {

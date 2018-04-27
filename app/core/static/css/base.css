@@ -16,20 +16,34 @@ a:active {
     text-decoration: none;
 }
 
+h1, h2, h3, h4 {
+    padding: 0;
+    margin: 0;
+    text-transform: uppercase;
+    color: #999;
+}
+
 h1 {
-    font-size: 2.5em;
-    padding: 0.4em 0;
-    margin-bottom: 0.4em;
+    font-size: 4.25em;
 }
 
 h2 {
+    margin-bottom: 0.15em;
+    font-size: 3.5em;
+}
+
+h3 {
     font-size: 2em;
-    padding: 0.25em 0;
-    margin-bottom: 0.25em;
+    color: #333;
+}
+
+h4 {
+    font-size: 1.3em;
 }
 
 h1 a,
-h2 a {
+h2 a,
+h3 a {
     color: inherit;
 }
 
@@ -64,7 +78,7 @@ ol {
 ul li,
 ol li {
     margin: 0.5em 0;
-    line-height: 1.3;
+    line-height: 1.4;
 }
 
 input,
@@ -119,11 +133,21 @@ button {
     margin: 0 auto;
 }
 
+.shadow {
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+
 .static {
     width: 856px;
     margin-top: 5em;
     padding: 2.5em 4em;
     background: #FFF;
+}
+
+.static h1 {
+    margin-bottom: 0.5em;
+    font-size: 3em;
+    color: #333;
 }
 
 .static p,
@@ -144,16 +168,14 @@ button {
 
 .tag {
     display: inline-block;
-    margin: 0 0 0.25em 0.25em;
-    line-height: 1.2;
+    margin: 0  0.25em 0.25em 0;
+    line-height: 1.1;
     font-size: 0.95em;
     color: #666;
-    border-bottom: 1px dotted #999;
 }
 
 .tag:hover {
-    color: #000;
-    border-bottom-color: #000;
+    color: #b40303;
 }
 
 .tag:before {
@@ -164,7 +186,6 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    border-bottom: 1px solid #EEE;
     background: #FFF;
     z-index: 1000;
     transform: translate3d(0, -100%, 0);
@@ -334,11 +355,8 @@ main .sidebar .panel {
     margin-bottom: 1.5em;
 }
 
-main .sidebar h3 {
-    margin-bottom: 1em;
-    font-weight: 400;
-    text-transform: uppercase;
-    color: #696969;
+main .sidebar h4 {
+    margin-bottom: 0.5em;
 }
 
 main .sidebar ul {
@@ -417,7 +435,7 @@ footer #copy {
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.5);
-    z-index: 1000;
+    z-index: 5000;
 }
 
 #loader.visible {

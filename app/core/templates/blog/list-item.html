@@ -2,18 +2,18 @@
 
 <div class="post" data-id="{{ item.id }}">
     <div class="flex">
-        <div class="image">
+        <div class="image shadow">
             <a href="{% url 'post' item.slug %}" name="post-{{ item.slug }}">
                 <img src="{% webp_cover item.cover %}" alt="{{ item.name }}"
                      title="{{ item.name }}">
             </a>
         </div>
         <div class="info">
-            <h2>
+            <h3>
                 <a href="{% url 'post' item.slug %}" name="post-{{ item.slug }}">
                     {{ item.name }} /{{ item.genre.all|join:", " }}/
                 </a>
-            </h2>
+            </h3>
             <div class="summary">{{ item.summary|safe }}</div>
             <div class="created">
                 <strong>{% trans 'Created' %}</strong>:

@@ -16,7 +16,7 @@
                 {% for image in gallery.images.ordered %}
                     {% thumbnail image.original_image "1920x1280" as display %}
                         <a href="{{ display.url }}" data-id="{{ image.id }}" name="image-{{ image.id }}"
-                           class="preview {% if display|is_portrait %}portrait{% else %}landscape{% endif %} {% if user.is_superuser %}orderable-item{% endif %}">
+                           class="preview shadow {% if display|is_portrait %}portrait{% else %}landscape{% endif %} {% if user.is_superuser %}orderable-item{% endif %}">
                             {% thumbnail image.original_image "400" as preview %}
                                 <img src="{{ preview.url }}" alt="{% trans 'Image #' %}{{ image.id }}"
                                      title="{% trans 'Image #' %}{{ image.id }}">

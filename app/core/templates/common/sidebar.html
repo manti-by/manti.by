@@ -2,7 +2,7 @@
 
 <div class="sidebar">
     <div class="tags panel">
-        <h3>{% trans 'Popular tags' %}</h3>
+        <h4>{% trans 'Popular tags' %}</h4>
         <ul>
             {% for t in tags %}
                 <li><a href="{% url 'blog' %}?tag={{ t.slug }}">{{ t.name }}</a></li>
@@ -10,7 +10,7 @@
         </ul>
     </div>
     <div class="galleries panel">
-        <h3>{% trans 'Latest posts' %}</h3>
+        <h4>{% trans 'Latest posts' %}</h4>
         <ul>
             {% for p in posts %}
                 <li><a href="{% url 'post' p.slug %}">{{ p.name }}</a></li>
@@ -18,7 +18,7 @@
         </ul>
     </div>
     <div class="instagram panel">
-        <h3>{% trans 'Instagram' %}</h3>
+        <h4>{% trans 'Instagram' %}</h4>
         <ul class="flex">
             {% for i in instagram_photos %}
                 <li><a href="{{ i.link }}"><img src="{{ i.image }}" alt="{{ i.name }}" /></a></li>

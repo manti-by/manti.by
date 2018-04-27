@@ -67,7 +67,7 @@
             $.fn.loaderShow();
 
             view.overlay.find('.original').remove();
-            view.image = $('<img src="' + link + '" class="original resizible black-shadow" />');
+            view.image = $('<img src="' + link + '" class="original resizible shadow" />');
             view.image.on('load', function() {
                 view.current_id = id;
                 view.overlay.append(view.image);
