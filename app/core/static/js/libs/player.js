@@ -6,7 +6,7 @@
 
     $.player = {
 
-        _is_debug: true,
+        _is_debug: false,
         _is_playing: false,
         _is_hd: false,
         _is_mp3: -1,
