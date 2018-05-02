@@ -6,6 +6,7 @@
         // Init global widgets
         $.fn.initHeaderMenu();
         $.fn.initFloatingHeader();
+        $.fn.initLazyImages();
 
         // Init player
         $.get('/api/posts', function(response) {

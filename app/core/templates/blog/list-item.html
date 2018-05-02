@@ -4,8 +4,8 @@
     <div class="flex">
         <div class="image shadow">
             <a href="{% url 'post' item.slug %}" name="post-{{ item.slug }}">
-                <img src="{% webp_cover item.cover %}" alt="{{ item.name }}"
-                     title="{{ item.name }}">
+                <img data-src="{% webp_cover item.cover %}" alt="{{ item.name }}"
+                     title="{{ item.name }}" class="lazy" />
             </a>
         </div>
         <div class="info">
