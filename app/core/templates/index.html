@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static i18n thumbnail %}
+{% load static i18n thumbnail common_tags %}
 
 {% block title %}{% trans 'Homepage' %}{% endblock %}
 
@@ -26,7 +26,7 @@
                     </a>
                 {% else %}
                     <a href="{% url 'gallery_list' %}" name="gallery">
-                        <img data-src="{% static 'img/featured.jpg' %}" alt="{% trans 'Popular image from gallery' %}"
+                        <img data-src="{% webp_static 'img/featured.jpg' %}" alt="{% trans 'Popular image from gallery' %}"
                              title="{% trans 'Popular image from gallery' %}" class="lazy" />
                     </a>
                 {% endif %}

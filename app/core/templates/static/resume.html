@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static i18n %}
+{% load common_tags i18n %}
 
 {% block title %}{% trans 'Resume' %}{% endblock %}
 
@@ -15,8 +15,8 @@
             </span>
         </h1>
         <div class="description">
-            <img src="{% static 'img/side.jpg' %}" class="image mobile-hidden" alt="Manti">
-            <img src="{% static 'img/side-mobile.jpg' %}" class="image mobile-visible" alt="Manti">
+            <img src="{% webp_static 'img/side.jpg' %}" class="image mobile-hidden lazy" alt="Manti">
+            <img src="{% webp_static 'img/side-mobile.jpg' %}" class="image mobile-visible lazy" alt="Manti">
             {% if ACTIVE_LANGUAGE == 'ru' %}
                {% include 'static/partial/resume_ru.html' %}
             {% elif ACTIVE_LANGUAGE == 'en' %}

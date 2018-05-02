@@ -5,6 +5,7 @@ from PIL import Image
 from django import template
 from django.conf import settings
 from django.utils import translation
+from django.templatetags.static import static
 
 register = template.Library()
 
@@ -29,3 +30,19 @@ def webp_cover(context, cover):
         image.save(webp_path, 'WEBP')
 
     return cover.url.replace('.jpg', '.webp')
+
+
+@register.simple_tag(takes_context=True)
+def webp_static(context, static_path):
+    is_supports_webp = context.get('is_supports_webp', False)
+    if not is_supports_webp:
+        return static(static_path)
+
+    full_path = os.path.join(settings.STATICFILES_DIRS[0], static_path)
+    original_ext = os.path.splitext(full_path)[1]
+    webp_path = os.path.splitext(full_path)[0] + '.webp'
+    if not os.path.isfile(full_path):
+        image = Image.open(full_path)
+        image.save(webp_path, 'WEBP')
+
+    return static(static_path.replace(original_ext, '.webp'))

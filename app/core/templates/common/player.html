@@ -1,4 +1,4 @@
-{% load static %}
+{% load common_tags %}
 
 <aside id="player" class="player">
     <audio preload="auto" class="hidden"></audio>
@@ -31,7 +31,7 @@
         <div class="now-playing">
             <a href="#" name="player-cover">
                 <span class="image-wrapper">
-                    <img src="{% static 'img/no-image.png' %}" alt="No image" width="33" height="33" />
+                    <img src="{% webp_static 'img/no-image.png' %}" alt="No image" width="33" height="33" />
                 </span>
                 <span class="title-wrapper"></span>
             </a>
