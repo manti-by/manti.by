@@ -161,7 +161,7 @@
             <script type="text/javascript">
                 if ('serviceWorker' in navigator) {
                     navigator.serviceWorker
-                        .register('{% static 'js/sw.js' %}', {scope: '/'})
+                        .register('/sw.js', {scope: '/'})
                         .catch((err) => console.log(err));
                 }
             </script>
