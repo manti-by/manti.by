@@ -1,7 +1,9 @@
 {
   "name": "Official blog of Alex Manti",
   "short_name": "Manti.by",
-  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#CCCCCC",
+  "theme_color": "#B40303",
   "icons": [
     {
       "src": "img/favicon/favicon-48.png",
@@ -28,8 +30,5 @@
       "sizes": "192x192",
       "type": "image/png"
     }
-  ],
-  "display": "standalone",
-  "background_color": "#CCCCCC",
-  "theme_color": "#B40303"
+  ]
 }
