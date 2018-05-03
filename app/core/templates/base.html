@@ -13,30 +13,23 @@
 
         <!-- Add to homescreen for Chrome on Android -->
         <meta name="mobile-web-app-capable" content="yes" />
-        <link rel="icon" type="{% rel_webp_png %}" sizes="48x48" href="{% webp_static "img/logo/48.png" %}" />
-        <link rel="icon" type="{% rel_webp_png %}" sizes="72x72" href="{% webp_static "img/logo/72.png" %}" />
-        <link rel="icon" type="{% rel_webp_png %}" sizes="96x96" href="{% webp_static "img/logo/96.png" %}" />
-        <link rel="icon" type="{% rel_webp_png %}" sizes="144x144" href="{% webp_static "img/logo/144.png" %}" />
-        <link rel="icon" type="{% rel_webp_png %}" sizes="192x192" href="{% webp_static "img/logo/192.png" %}" />
-        <link rel="icon" type="{% rel_webp_png %}" sizes="256x256" href="{% webp_static "img/logo/256.png" %}" />
-        <link rel="icon" type="{% rel_webp_png %}" sizes="512x512" href="{% webp_static "img/logo/512.png" %}" />
+        <link rel="icon" type="image/png" sizes="48x48" href="{% static "img/logo/48.png" %}" />
+        <link rel="icon" type="image/png" sizes="72x72" href="{% static "img/logo/72.png" %}" />
+        <link rel="icon" type="image/png" sizes="96x96" href="{% static "img/logo/96.png" %}" />
+        <link rel="icon" type="image/png" sizes="144x144" href="{% static "img/logo/144.png" %}" />
+        <link rel="icon" type="image/png" sizes="192x192" href="{% static "img/logo/192.png" %}" />
+        <link rel="icon" type="image/png" sizes="256x256" href="{% static "img/logo/256.png" %}" />
+        <link rel="icon" type="image/png" sizes="512x512" href="{% static "img/logo/512.png" %}" />
 
         <!-- Add to homescreen for Safari on iOS -->
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <link rel="apple-touch-icon" type="{% rel_webp_png %}" sizes="48x48"
-              href="{% webp_static "img/logo/48.png" %}" />
-        <link rel="apple-touch-icon" type="{% rel_webp_png %}" sizes="72x72"
-              href="{% webp_static "img/logo/72.png" %}" />
-        <link rel="apple-touch-icon" type="{% rel_webp_png %}" sizes="96x96"
-              href="{% webp_static "img/logo/96.png" %}" />
-        <link rel="apple-touch-icon" type="{% rel_webp_png %}" sizes="144x144"
-              href="{% webp_static "img/logo/144.png" %}" />
-        <link rel="apple-touch-icon" type="{% rel_webp_png %}" sizes="192x192"
-              href="{% webp_static "img/logo/192.png" %}" />
-        <link rel="apple-touch-icon" type="{% rel_webp_png %}" sizes="256x256"
-              href="{% webp_static "img/logo/256.png" %}" />
-        <link rel="apple-touch-icon" type="{% rel_webp_png %}" sizes="512x512"
-              href="{% webp_static "img/logo/512.png" %}" />
+        <link rel="apple-touch-icon" type="image/png" sizes="48x48" href="{% static "img/logo/48.png" %}" />
+        <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="{% static "img/logo/72.png" %}" />
+        <link rel="apple-touch-icon" type="image/png" sizes="96x96" href="{% static "img/logo/96.png" %}" />
+        <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="{% static "img/logo/144.png" %}" />
+        <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="{% static "img/logo/192.png" %}" />
+        <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="{% static "img/logo/256.png" %}" />
+        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="{% static "img/logo/512.png" %}" />
 
         <meta name="description" content="{% block meta %}{{ META_DESCRIPTION }}{% endblock %}" />
         <meta name="yandex-verification" content="6765012bcd05fac2" />
@@ -53,6 +46,7 @@
             <link type="text/css" rel="stylesheet" href="{% static 'css/font.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/search.css' %}">
             {% block styles %}{% endblock %}
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}">
@@ -114,7 +108,7 @@
                     </div>
                 </div>
             </nav>
-            <nav class="mobile-menu">
+            <nav class="mobile-menu shadow">
                 <a href="{% url 'blog' %}" name="blog-mobile" class="mobile-visible">
                     {% trans 'Music' %}
                 </a>
@@ -124,12 +118,25 @@
                 <a href="{% url 'about' %}" name="about">{% trans 'About' %}</a>
                 <a href="{% url 'resume' %}" name="resume">{% trans 'Resume' %}</a>
                 <a href="{% url 'copyrights' %}" name="copyrights">{% trans 'Copyrights' %}</a>
-                <span class="search-button">{% trans 'Search' %}</span>
+                <span class="open-search">{% trans 'Search' %}</span>
                 {% if user.is_authenticated %}
                     <a href="{% url 'logout' %}" name="logout">{% trans 'Logout' %}</a>
                 {% endif %}
             </nav>
         </header>
+
+        <section id="search" class="shadow">
+            <div class="container">
+                <div class="flex">
+                    <input type="text" />
+                    <div class="submit-search">
+                        <i class="material-icons">search</i>
+                    </div>
+                    <div class="search-result shadow"></div>
+                </div>
+                <div class="close-search"><i class="material-icons">close</i></div>
+            </div>
+        </section>
 
         <main>
             {% block content %}
@@ -154,6 +161,7 @@
             <script type="text/javascript" src="{% static 'js/widgets/menu.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/widgets/loader.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/widgets/header.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/widgets/search.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/libs/common.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/libs/player.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
@@ -173,7 +181,7 @@
             "@type" : "MusicGroup",
             "name" : "{{ META_TITLE }}",
             "url" : "{{ BASE_URL }}",
-            "logo": "{{ BASE_URL }}{% static 'img/favicon/favicon-192.png' %}",
+            "logo": "{{ BASE_URL }}{% static 'img/logo/192.png' %}",
             "sameAs" : [
                 "https://twitter.com/manti_by",
                 "https://instagram.com/manti_by",

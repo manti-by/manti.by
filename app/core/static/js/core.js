@@ -7,6 +7,7 @@
         $.fn.initHeaderMenu();
         $.fn.initFloatingHeader();
         $.fn.initLazyImages();
+        $.fn.initSearch();
 
         // Init player
         $.get('/api/posts', function(response) {

@@ -139,6 +139,8 @@ img.lazy[data-src] {
 }
 
 .shadow {
+    border-left: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
 }
 
@@ -291,10 +293,8 @@ header .mobile-menu {
     display: none;
     top: 52px;
     min-width: 150px;
-    padding: 4px 0;
-    border: 1px solid #EEE;
+    padding: 0.2em 0;
     background: #FFF;
-    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.2);
 }
 
 header .mobile-menu.open {
@@ -302,7 +302,7 @@ header .mobile-menu.open {
 }
 
 header .mobile-menu a,
-header .mobile-menu .search-button {
+header .mobile-menu .open-search {
     display: block;
     width: 175px;
     margin: 0 0.25em;
@@ -314,13 +314,13 @@ header .mobile-menu .search-button {
     border-bottom: none;
 }
 
-header .mobile-menu .search-button {
+header .mobile-menu .open-search {
     cursor: pointer;
 }
 
 header .mobile-menu a:hover,
 header .mobile-menu a.active,
-header .mobile-menu .search-button:hover {
+header .mobile-menu .open-search:hover {
     color: #999;
     text-decoration: none;
     background-color: #EFEFEF;

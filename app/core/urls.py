@@ -4,7 +4,7 @@ from django.views.decorators.cache import cache_page
 from django.contrib import admin
 
 from core import views as core_views
-from api.resources import OrderableResource, PostResource
+from api.resources import OrderableResource, PostResource, SearchResource
 
 urlpatterns = [
     url(r'^$', cache_page(60 * 60 * 24 * 5)(core_views.index), name='index'),
@@ -17,6 +17,7 @@ urlpatterns = [
     # API urls
     url(r'^api/posts/?$', PostResource.as_view()),
     url(r'^api/orderable/?$', OrderableResource.as_view()),
+    url(r'^api/search/?$', SearchResource.as_view()),
 
     # Blog urls
     url(r'^blog/', include('blog.urls')),

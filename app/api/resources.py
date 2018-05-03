@@ -1,6 +1,7 @@
 import json
 import logging
 
+from django.db.models import Q
 from django.http import JsonResponse
 from django.utils.translation import ugettext_lazy as _
 from simple_rest import Resource
@@ -80,3 +81,16 @@ class PostResource(Resource):
                 result.append(p.as_dict())
         return JsonResponse({'status': 200,
                              'data': result}, status=200)
+
+
+class SearchResource(Resource):
+
+    @resource_wrapper
+    def get(self, request):
+        query = request.GET.get('q')
+        queryset = Post.objects.filter(
+            Q(name__icontains=query) | Q(description__icontains=query) | Q(tracklist__icontains=query) |
+            Q(genre__name__icontains=query) | Q(tags__name__icontains=query)
+        ).distinct()
+        return JsonResponse({'status': 200,
+                             'data': [item.as_dict() for item in queryset]}, status=200)
