@@ -1,4 +1,4 @@
-{% load static compress i18n common_tags %}
+{% load static compress thumbnail i18n common_tags %}
 <!DOCTYPE html>
 <html lang="{{ ACTIVE_LANGUAGE }}">
     <head>
@@ -98,7 +98,15 @@
                         {% if user.is_authenticated %}
                             <span class="user">
                                 <a href="{% url 'profile' %}" name="profile">
-                                    <img src="{{ user.profile.image }}" />
+                                    {% if user.profile.original_image %}
+                                        {% thumbnail user.profile.original_image "x24" as im %}
+                                            <img data-src="{{ im.url }}" alt="{{ user.username }}"
+                                                 title="{{ user.username }}" class="lazy" />
+                                        {% endthumbnail %}
+                                    {% else %}
+                                        <img data-src="{% static 'img/no-image.png' %}" alt="{{ user.username }}"
+                                             title="{{ user.username }}" class="lazy" />
+                                    {% endif %}
                                 </a>
                             </span>
                         {% endif %}
@@ -169,7 +177,7 @@
             <script type="text/javascript">
                 if ('serviceWorker' in navigator) {
                     navigator.serviceWorker
-                        .register('/sw.js', {scope: '/'})
+                        .register({% if DEBUG %}'/static/js/sw.js', {scope: '/static/js/'}{% else %}'/sw.js', {scope: '/'}{% endif %})
                         .catch((err) => console.log(err));
                 }
             </script>

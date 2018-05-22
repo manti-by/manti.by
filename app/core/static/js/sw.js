@@ -1,5 +1,5 @@
-const CACHE = 'manti-by';
-const FILES = [
+const CACHE_NAME = 'manti-by';
+const FILE_LIST = [
     '/',
     '/api/posts',
     '/static/svg/loader.svg',
@@ -35,43 +35,53 @@ const FILES = [
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches
-            .open(CACHE)
-            .then((cache) => cache.addAll(FILES))
+            .open(CACHE_NAME)
+            .then((cache) => cache.addAll(FILE_LIST))
             .then(() => self.skipWaiting())
     );
 });
 
 self.addEventListener('activate', (event) => {
-    event.waitUntil(self.clients.claim());
+    let cacheWhitelist = [CACHE_NAME];
+
+    event.waitUntil(
+        caches.keys().then(function (cacheNames) {
+            return Promise.all(
+                cacheNames.map(function (cacheName) {
+                    if (cacheWhitelist.indexOf(cacheName) === -1) {
+                        return caches.delete(cacheName);
+                    }
+                })
+            );
+        })
+    );
 });
 
 self.addEventListener('fetch', function(event) {
-    event.respondWith(networkOrCache(event.request)
-        .catch(() => useFallback()));
+    event.respondWith(
+        caches.match(event.request)
+            .then(function(response) {
+                if (response) {
+                    return response;
+                }
+
+                let fetchRequest = event.request.clone();
+                return fetch(fetchRequest).then(
+                    function(response) {
+                        if (!response || response.status !== 200 || response.type !== 'basic') {
+                            return response;
+                        }
+
+                        let responseToCache = response.clone();
+                        caches.open(CACHE_NAME)
+                            .then(function(cache) {
+                                cache.put(event.request, responseToCache);
+                            });
+
+                        return response;
+                    }
+                )
+            }
+        )
+    );
 });
-
-function networkOrCache(request) {
-    return fetch(request)
-        .then((response) => response.ok ? response : fromCache(request))
-        .catch(() => fromCache(request));
-}
-
-const FALLBACK =
-    '<div>\n' +
-    '    <div>Official blog of Alex Manti</div>\n' +
-    '    <div>You are offline</div>\n' +
-    '    <img src="/static/img/favicon/favicon-192.png" alt="Logo" />\n' +
-    '</div>';
-
-function useFallback() {
-    return Promise.resolve(new Response(FALLBACK, { headers: {
-        'Content-Type': 'text/html; charset=utf-8'
-    }}));
-}
-
-function fromCache(request) {
-    return caches.open(CACHE).then((cache) =>
-        cache.match(request).then((matching) =>
-            matching || Promise.reject('no-match')
-        ));
-}
