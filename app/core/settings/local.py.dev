@@ -1,0 +1,56 @@
+DEBUG = True
+
+COMPRESS_ENABLED = False
+
+TEMPLATE_DEBUG = False
+
+ALLOWED_HOSTS = ['127.0.0.1']
+
+BASE_URL = 'http://127.0.0.1:8012'
+
+LOCALE_URLS = {
+    'by': 'http://127.0.0.1:8012',
+    'ru': 'http://127.0.0.1:8012',
+    'en': 'http://127.0.0.1:8012',
+}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'manti',
+        'USER': 'manti',
+        'PASSWORD': 'pa55word',
+        'HOST': 'localhost',
+        'PORT': '',
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    }
+}
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+        'null': {
+            'class': 'logging.NullHandler',
+        },
+    },
+    'loggers': {
+        'app': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+            'propagate': True,
+            'formatter': 'verbose',
+        },
+    },
+}
+
+DEFAULT_FROM_EMAIL = 'admin@manti.by'
