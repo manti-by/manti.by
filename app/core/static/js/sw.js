@@ -1,7 +1,7 @@
 const CACHE_NAME = 'manti-by';
-const FILE_LIST = [
-    '/',
-    '/api/posts',
+const BASE_DOMAIN = 'https://demo.manti.by';
+
+let FILE_LIST = [
     '/static/svg/loader.svg',
     '/static/svg/instagram.svg',
     '/static/svg/twitter.svg',
@@ -31,6 +31,10 @@ const FILE_LIST = [
     '/content/covers/stockholm-syndrome.webp',
     '/content/preview/M43_Manti_Shining.mp3',
 ];
+
+for (let file of FILE_LIST) {
+    file = BASE_DOMAIN + file;
+}
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
