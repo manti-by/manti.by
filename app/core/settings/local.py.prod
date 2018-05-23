@@ -16,10 +16,10 @@ LOCALE_URLS = {
 }
 
 
-STATIC_URL = 'https://cdn.manti.by/static/'
+STATIC_URL = 'https://manti.by/static/'
 STATIC_ROOT = '/home/manti/www/manti.by/static/'
 
-MEDIA_URL = 'https://cdn.manti.by/content/'
+MEDIA_URL = 'https://manti.by/content/'
 MEDIA_ROOT = '/home/manti/www/manti.by/media/'
 
 DATABASES = {
