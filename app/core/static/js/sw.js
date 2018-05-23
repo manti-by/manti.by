@@ -29,7 +29,6 @@ let FILE_LIST = [
     '/content/covers/silence.webp',
     '/content/covers/shining.webp',
     '/content/covers/stockholm-syndrome.webp',
-    '/content/preview/M43_Manti_Shining.mp3',
 ];
 
 for (let file of FILE_LIST) {
