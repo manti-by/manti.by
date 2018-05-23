@@ -75,6 +75,10 @@ self.addEventListener('fetch', function(event) {
                             return response;
                         }
 
+                        if (response.url.indexOf('dashboard') >= 0) {
+                            return response;
+                        }
+
                         let responseToCache = response.clone();
                         caches.open(CACHE_NAME)
                             .then(function(cache) {
