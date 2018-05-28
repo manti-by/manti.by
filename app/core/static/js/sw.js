@@ -1,4 +1,5 @@
-const CACHE_NAME = 'manti-by';
+const STATIC_CACHE = 'static-cache';
+const DYNAMIC_CACHE = 'dynamic-cache';
 const BASE_DOMAIN = 'https://demo.manti.by';
 
 let FILE_LIST = [
@@ -15,16 +16,10 @@ let FILE_LIST = [
     '/static/img/share.webp',
     '/static/img/side.webp',
     '/static/img/side-mobile.webp',
-    '/static/img/logo/48.webp',
-    '/static/img/logo/72.webp',
-    '/static/img/logo/96.webp',
-    '/static/img/logo/144.webp',
-    '/static/img/logo/192.webp',
-    '/static/img/logo/256.webp',
-    '/static/img/logo/512.webp',
     '/content/covers/february.webp',
     '/content/covers/katana.webp',
     '/content/covers/litl.webp',
+    '/content/covers/last-night.webp',
     '/content/covers/phantom.webp',
     '/content/covers/silence.webp',
     '/content/covers/shining.webp',
@@ -38,14 +33,14 @@ for (let file of FILE_LIST) {
 self.addEventListener('install', (event) => {
     event.waitUntil(
         caches
-            .open(CACHE_NAME)
+            .open(STATIC_CACHE)
             .then((cache) => cache.addAll(FILE_LIST))
             .then(() => self.skipWaiting())
     );
 });
 
 self.addEventListener('activate', (event) => {
-    let cacheWhitelist = [CACHE_NAME];
+    let cacheWhitelist = [STATIC_CACHE];
 
     event.waitUntil(
         caches.keys().then(function (cacheNames) {
@@ -80,7 +75,7 @@ self.addEventListener('fetch', function(event) {
                         }
 
                         let responseToCache = response.clone();
-                        caches.open(CACHE_NAME)
+                        caches.open(DYNAMIC_CACHE)
                             .then(function(cache) {
                                 cache.put(event.request, responseToCache);
                             });

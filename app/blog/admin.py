@@ -35,9 +35,13 @@ class PostAdmin(admin.ModelAdmin):
         (_('Tags'), {
             'fields': ('genre', 'tags')
         }),
+        (_('Related'), {
+            'classes': ('collapse',),
+            'fields': ('related', )
+        }),
         (_('Music params'), {
             'classes': ('collapse',),
-            'fields': ('is_music', 'catnum', 'genre', 'quality', 'length', 'tracklist')
+            'fields': ('is_music', 'catnum', 'quality', 'length', 'tracklist')
         }),
         (_('Files'), {
             'classes': ('collapse',),

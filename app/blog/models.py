@@ -4,7 +4,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
-from django.conf import settings
 
 from taggit.models import TaggedItemBase
 from taggit.managers import TaggableManager
@@ -12,7 +11,12 @@ from taggit.managers import TaggableManager
 from core.models import BaseModel
 from core.mixins import SlugifyMixin
 from core.utils import release_name, cover_name
-from blog.tasks import convert_to_mp3_preview, convert_to_ogg_preview, convert_to_ogg_release
+from blog.utils import flush_blog_caches_for_post, generate_preview_for_post
+
+
+MP3_PREVIEW = 'mp3_preview'
+OGG_PREVIEW = 'ogg_preview'
+OGG_RELEASE = 'ogg_release'
 
 
 class GenresProxy(TaggedItemBase):
@@ -51,10 +55,10 @@ class Post(SlugifyMixin, BaseModel):
     length = models.CharField(max_length=16, blank=True)
     tracklist = models.TextField(blank=True)
 
-    genre = TaggableManager(blank=True, through=GenresProxy)
+    genre = TaggableManager(blank=True, through=GenresProxy, verbose_name=_('Genre'))
     genre.rel.related_name = '+'
 
-    tags = TaggableManager(blank=True, through=TagsProxy)
+    tags = TaggableManager(blank=True, through=TagsProxy, verbose_name=_('Tags'))
     tags.rel.related_name = '+'
 
     viewed = models.IntegerField(blank=True, default=0)
@@ -148,11 +152,5 @@ class Post(SlugifyMixin, BaseModel):
 
 @receiver(post_save, sender=Post, dispatch_uid='convert_release')
 def convert_release(sender, instance, **kwargs):
-    if not instance.release:
-        return
-    if not instance.mp3_preview_ready:
-        convert_to_mp3_preview.delay(instance.id)
-    if not instance.ogg_preview_ready:
-        convert_to_ogg_preview.delay(instance.id)
-    if not instance.ogg_release_ready:
-        convert_to_ogg_release.delay(instance.id)
+    flush_blog_caches_for_post(instance)
+    generate_preview_for_post(instance)
