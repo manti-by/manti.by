@@ -2,7 +2,7 @@
 
     'use strict';
 
-    $.fn.initFloatingHeader = function() {
+    $.initHeader = () => {
         let wnd = $(window),
             header = $('header'),
             prev_y = wnd.scrollTop(),

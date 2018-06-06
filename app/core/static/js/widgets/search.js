@@ -2,7 +2,7 @@
 
     'use strict';
 
-    $.fn.initSearch = () => {
+    $.initSearch = () => {
         let header = $('header'),
             search = $('section'),
             search_input = $('section input'),

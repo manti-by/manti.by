@@ -4,24 +4,24 @@
 
     $(document).ready(function() {
         // Init global widgets
-        $.fn.initHeaderMenu();
-        $.fn.initFloatingHeader();
-        $.fn.initLazyImages();
-        $.fn.initSearch();
+        $.initLoader();
+        $.initLazyImages();
+
+        $.initHeaderMenu();
+        $.initHeader();
+        $.initSearch();
 
         // Init player
         $.get('/api/posts', function(response) {
-            window.player = $.player;
-
             if (response['status'] === 200) {
-                window.player.init(response['data']);
+                $.player.init(response['data']);
 
                 setInterval(function() {
-                    window.player.update();
+                    $.player.update();
                 }, 1000);
 
                 setInterval(function() {
-                    window.player.animatePlayerTitle();
+                    $.player.animatePlayerTitle();
                 }, 14000);
             } else {
                 console.error('Error loading player data');

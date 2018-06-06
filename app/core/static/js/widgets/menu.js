@@ -2,27 +2,27 @@
 
     'use strict';
 
-    $.fn.initHeaderMenu = function() {
-        var menu = $('.mobile-menu'),
+    $.initHeaderMenu = () => {
+        let menu = $('.mobile-menu'),
             button = $('.mobile-menu-button');
 
-        button.on('click', function() {
+        button.on('click', () => {
             if (menu.hasClass('open')) {
                 menu.removeClass('open');
                 return;
             }
 
-            var offset = window.innerWidth - event.pageX - 25;
+            let offset = window.innerWidth - event.pageX - 25;
             menu.css('right', offset).addClass('open');
 
             return false;
         });
 
-        $(document).on('click', function() {
+        $(document).on('click', () => {
             menu.removeClass('open');
         });
 
-        $(document).on('keydown', function(event) {
+        $(document).on('keydown', (event) => {
             if (event.which === 27) {
                 menu.removeClass('open');
             }

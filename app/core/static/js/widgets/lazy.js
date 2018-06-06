@@ -2,19 +2,22 @@
 
     'use strict';
 
-    $.fn.initLazyImages = function() {
+    $.initLazyImages = () => {
         let observer = new IntersectionObserver(changes => {
             for (const change of changes) {
-                $(change.target).attr('src', $(change.target).attr('data-src'));
-                $(change.target).on('load', function() {
-                    $(change.target).removeAttr('data-src');
+                $(change.target).attr('src',
+                    $(change.target).attr('data-src'));
+
+                $(change.target).on('load', () => {
+                    $(change.target).removeAttr('data-src')
+                        .removeClass('lazy');
                 });
 
             }
         });
 
-        $.each($('img.lazy'), function() {
-            observer.observe(this);
+        $.each($('img.lazy'), (index, target) => {
+            observer.observe(target);
         });
     }
 

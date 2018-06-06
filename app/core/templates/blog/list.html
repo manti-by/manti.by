@@ -47,7 +47,7 @@
     <script type="text/javascript">
         (function($) {
             $(document).ready(function() {
-                $.fn.initBlogAjax('{% if tag %}{{ tag.slug }}{% endif %}');
+                $.initBlogAjax('{% if tag %}{{ tag.slug }}{% endif %}');
             });
         })(jQuery);
     </script>
