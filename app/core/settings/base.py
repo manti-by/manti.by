@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'modeltranslation',
     'django_celery_results',
     'django_celery_beat',
+    'silk',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -60,7 +61,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'core.middleware.language.LocaleMiddleware',
-    'core.middleware.response.ResponseMiddleware'
+    'core.middleware.response.ResponseMiddleware',
+    'silk.middleware.SilkyMiddleware'
 ]
 
 ROOT_URLCONF = 'core.urls'
@@ -158,6 +160,7 @@ STATIC_URL = '/static/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'content')
 MEDIA_URL = '/content/'
 
+FILE_UPLOAD_PERMISSIONS = 0o644
 
 # Login redirect url
 

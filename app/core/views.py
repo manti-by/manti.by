@@ -19,8 +19,11 @@ def index(request):
             latest_images = Image.objects.exclude(pk=featured_image.pk).order_by('-created')[:6]
         else:
             latest_images = Image.objects.all().order_by('-created')[:6]
+
         featured_posts = Post.objects.filter(tags__name__iexact='featured')[:3]
-        latest_posts = Post.objects.exclude(pk__in=[p.pk for p in featured_posts]).order_by('-created')[:4]
+        latest_posts = Post.objects.exclude(pk__in=[p.pk for p in featured_posts]) \
+                           .filter(tags__name__iexact='front').order_by('-created')[:4]
+
         return render(request, 'index.html', {'featured_image': featured_image,
                                               'latest_images': latest_images,
                                               'featured_posts': featured_posts,

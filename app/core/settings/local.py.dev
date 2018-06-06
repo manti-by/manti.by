@@ -4,14 +4,18 @@ COMPRESS_ENABLED = False
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'local.manti.by',
+                 'ru.local.manti.by', 'en.local.manti.by']
 
-BASE_URL = 'http://127.0.0.1:8012'
+BASE_URL = 'http://local.manti.by'
+
+STATIC_ROOT = '/home/manti/www/manti.by/static/'
+MEDIA_ROOT = '/home/manti/www/manti.by/content/'
 
 LOCALE_URLS = {
-    'by': 'http://127.0.0.1:8012',
-    'ru': 'http://127.0.0.1:8012',
-    'en': 'http://127.0.0.1:8012',
+    'be': 'http://local.manti.by',
+    'ru': 'http://ru.local.manti.by',
+    'en': 'http://en.local.manti.by',
 }
 
 DATABASES = {
@@ -22,12 +26,6 @@ DATABASES = {
         'PASSWORD': 'pa55word',
         'HOST': 'localhost',
         'PORT': '',
-    }
-}
-
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
     }
 }
 
@@ -54,3 +52,8 @@ LOGGING = {
 }
 
 DEFAULT_FROM_EMAIL = 'admin@manti.by'
+
+INSTAGRAM_USER_ID = ''
+INSTAGRAM_CLIENT_ID = ''
+INSTAGRAM_ACCESS_TOKEN = ''
+INSTAGRAM_CLIENT_SECRET = ''

@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
+from django.conf import settings
 
 from taggit.models import TaggedItemBase
 from taggit.managers import TaggableManager
@@ -11,12 +12,7 @@ from taggit.managers import TaggableManager
 from core.models import BaseModel
 from core.mixins import SlugifyMixin
 from core.utils import release_name, cover_name
-from blog.utils import flush_blog_caches_for_post, generate_preview_for_post
-
-
-MP3_PREVIEW = 'mp3_preview'
-OGG_PREVIEW = 'ogg_preview'
-OGG_RELEASE = 'ogg_release'
+from blog.utils import generate_preview_for_post
 
 
 class GenresProxy(TaggedItemBase):
@@ -152,5 +148,4 @@ class Post(SlugifyMixin, BaseModel):
 
 @receiver(post_save, sender=Post, dispatch_uid='convert_release')
 def convert_release(sender, instance, **kwargs):
-    flush_blog_caches_for_post(instance)
     generate_preview_for_post(instance)
