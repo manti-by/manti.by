@@ -2,8 +2,8 @@
 
     'use strict';
 
-    $.fn.setCookie = function (name, value, expire) {
-        var expire_date = new Date();
+    $.setCookie = (name, value, expire) => {
+        let expire_date = new Date();
 
         expire_date.setDate(expire_date.getDate() + expire);
         value = encodeURIComponent(value) +
@@ -12,8 +12,8 @@
         document.cookie = name + '=' + value;
     };
 
-    $.fn.getCookie = function(name, default_value) {
-        var value = document.cookie,
+    $.getCookie = (name, default_value) => {
+        let value = document.cookie,
             start = value.indexOf(' ' + name + '='), end;
 
         if (start === -1) {
@@ -35,25 +35,19 @@
         return value;
     };
 
-    $.fn.secondsToTime = function(time) {
-        var hours = Math.floor(time / 3600);
+    $.secondsToTime = (time) => {
+        let hours = Math.floor(time / 3600);
         hours = hours > 9 ? hours : '0' + hours;
         time -= hours * 3600;
 
-        var minutes = Math.floor(time / 60);
+        let minutes = Math.floor(time / 60);
         minutes = minutes > 9 ? minutes : '0' + minutes;
         time -= minutes * 60;
 
-        var seconds = parseInt(time % 60, 10);
+        let seconds = parseInt(time % 60, 10);
         seconds = seconds > 9 ? seconds : '0' + seconds;
 
         return hours + ':' + minutes + ':' + seconds;
-    };
-
-    $.fn.loaderShow = function() {
-    };
-
-    $.fn.loaderHide = function() {
     };
 
 })(jQuery);

@@ -2,7 +2,7 @@
 
     'use strict';
 
-    $(document).ready(function() {
+    $(document).ready(() => {
         // Init global widgets
         $.initLoader();
         $.initLazyImages();
@@ -12,7 +12,7 @@
         $.initSearch();
 
         // Init player
-        $.get('/api/posts', function(response) {
+        $.get('/api/posts', (response) => {
             if (response['status'] === 200) {
                 $.player.init(response['data']);
 

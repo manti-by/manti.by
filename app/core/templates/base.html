@@ -165,6 +165,9 @@
 
         {% compress js %}
             <script type="text/javascript" src="{% static 'js/libs/jquery-3.3.1/jquery.min.js' %}"></script>
+            <script type="text/javascript">
+                const DEBUG = {% if DEBUG %}true{% else %}false{% endif %};
+            </script>
             <script type="text/javascript" src="{% static 'js/widgets/lazy.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/widgets/menu.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/widgets/loader.js' %}"></script>

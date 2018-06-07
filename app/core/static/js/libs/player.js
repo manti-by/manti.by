@@ -2,160 +2,154 @@
 
     'use strict';
 
-    var AUDIO_NOT_READY = 0, AUDIO_LOADED = 4;
+    let AUDIO_NOT_READY = 0, AUDIO_LOADED = 4;
 
-    $.player = {
+    class Player {
 
-        _is_debug: false,
-        _is_playing: false,
-        _is_hd: false,
-        _is_mp3: -1,
+        constructor() {
+            this.data = [];
+            this.active = [];
+            this.is_mp3 = -1;
+            this.is_debug = DEBUG;
+            this.is_playing = false;
 
-        _data: [],
-        _active: [],
-        _player: null,
-        _active_id: 0,
+            this.volume = 70;
+            this.position = 0;
+            this.duration = 0;
+        }
 
-        _volume: 70,
-        _position: 0,
-        _duration: 0,
+        init(data) {
+            this.is_debug && console.log('Init');
 
-        init: function(data) {
-            this._is_debug && console.log('Init');
+            this.data = data;
 
-            this._data = data;
+            this.player = $('#player');
+            this.player.audio = this.player.find('audio');
+            this.player.api =  this.player.audio.get(0);
 
-            this._player = $('#player');
-            this._player.audio = this._player.find('audio');
-            this._player.api =  this._player.audio.get(0);
+            this.player.link = this.player.find('.now-playing a');
+            this.player.image = this.player.find('.now-playing img');
+            this.player.title = this.player.find('.now-playing span.title-wrapper');
 
-            this._player.link = this._player.find('.now-playing a');
-            this._player.image = this._player.find('.now-playing img');
-            this._player.title = this._player.find('.now-playing span.title-wrapper');
-
-            this._volume = $.fn.getCookie('volume', 70);
-            this._is_hd = $.fn.getCookie('is-hd', false);
-
-            this._check_mp3_support();
-            this._bind_events();
+            this.volume = $.getCookie('volume', 70);
+            this.is_hd = $.getCookie('is-hd', false);
 
             this.updateVolumePosition();
-            this._is_hd && this._player.find('.high-definition').addClass('active');
+            this.is_hd && this.player.find('.high-definition').addClass('active');
 
             this.updateActivePosts();
-            this._active_id = this._get_data('first')['id'];
-        },
+            this.active_id = this.getData('first')['id'];
 
+            this.checkMpegSupport();
+            this.bind();
+        };
 
-        _check_mp3_support: function () {
-            this._is_debug && console.log('Check mp3 support');
+        checkMpegSupport() {
+            this.is_debug && console.log('Check mp3 support');
 
-            if (this._is_mp3 === -1) {
-                var audio  = document.createElement('audio');
+            if (this.is_mp3 === -1) {
+                let audio = document.createElement('audio');
                 if (typeof audio.canPlayType === 'function' && audio.canPlayType('audio/mpeg') !== '') {
-                    this._is_mp3 = 1;
+                    this.is_mp3 = 1;
                 } else {
-                    this._is_mp3 = 0;
+                    this.is_mp3 = 0;
                 }
             }
-        },
+        };
 
-
-        _bind_events: function() {
-            var self = this;
-
-            self._player.api.addEventListener('canplay', function() {
-                if (self._is_playing) {
-                    self._player.api.play();
+        bind() {
+            this.player.api.addEventListener('canplay', () => {
+                if (this.is_playing) {
+                    this.player.api.play();
                 }
             });
 
-            self._player.api.addEventListener('ended', function() {
-                self.next();
+            this.player.api.addEventListener('ended', () => {
+                this.next();
             });
 
-            self._player.find('.high-definition').on('click', function () {
-                self._is_debug && console.log('Change quality');
+            this.player.find('.high-definition').on('click', () => {
+                this.is_debug && console.log('Change quality');
 
-                if (self._is_hd === 1) {
-                    self._is_hd = 0;
-                    self._player.find('.high-definition').removeClass('active');
+                if (this.is_hd === 1) {
+                    this.is_hd = 0;
+                    this.player.find('.high-definition').removeClass('active');
                 } else {
-                    self._is_hd = 1;
-                    self._player.find('.high-definition').addClass('active');
+                    this.is_hd = 1;
+                    this.player.find('.high-definition').addClass('active');
                 }
 
-                $.fn.setCookie('is-hd', self._is_hd);
-                self.reload();
+                $.setCookie('is-hd', this.is_hd);
+                this.reload();
             });
 
-            self._player.find('.close').bind('click', function() {
+            this.player.find('.close').bind('click', () => {
                 $('aside').removeClass('visible');
-                self.pause();
+                this.pause();
             });
 
 
-            $(document).on('click', '.player .play-pause', function() {
-                var id = $(this).closest('.player').data('id');
+            $(document).on('click', '.player .play-pause', (e) => {
+                let target = e.currentTarget,
+                    id = $(target).closest('.player').data('id');
 
-                if ($(this).hasClass('play')) {
-                    if (self._active_id !== id) {
-                        if (self._get_data(id)) {
-                            self._active_id = id;
-                            self.reload();
+                if ($(target).hasClass('play')) {
+                    if (this.active_id !== id) {
+                        if (this.getData(id)) {
+                            this.active_id = id;
+                            this.reload();
                         } else {
-                            console.error('Audio #' + id + ' not found');
+                            console.error('Audio this.' + id + ' not found');
                         }
                     }
-                    self.play();
+                    this.play();
                 } else {
-                    self.pause();
+                    this.pause();
                 }
-                self.updateActivePlayer();
+                this.updateActivePlayer();
             });
 
-            $(document).on('click', '.player .next-track', function() {
-                self.next();
+            $(document).on('click', '.player .next-track', () => {
+                this.next();
             });
 
-            $(document).on('click', '.player .prev-track', function() {
-                self.prev();
+            $(document).on('click', '.player .prev-track', () => {
+                this.prev();
             });
 
-            $(document).on('click', '.player .progress-bar', function(event) {
-                self.updatePosition($(this), event);
+            $(document).on('click', '.player .progress-bar', (e) => {
+                this.updatePosition($(e.currentTarget), e);
             });
 
-            $(document).on('mousedown', '.player .progress-bar', function () {
-                $(this).data('active', true);
+            $(document).on('mousedown', '.player .progress-bar', (e) => {
+                $(e.currentTarget).data('active', true);
             });
 
-            $(document).on('mousemove', '.player .progress-bar', function (event) {
-                if ($(this).data('active') === true) {
-                    self.updatePosition($(this), event);
+            $(document).on('mousemove', '.player .progress-bar', (e) => {
+                if ($(e.currentTarget).data('active') === true) {
+                    this.updatePosition($(e.currentTarget), e);
                 }
             });
 
-            $(document).on('mouseup', '.player .progress-bar', function () {
-                $(this).data('active', false);
+            $(document).on('mouseup', '.player .progress-bar', (e) => {
+                $(e.currentTarget).data('active', false);
             });
-        },
+        };
 
+        getData(option, full_data) {
+            if (!this.data.length) throw 'Audio data is empty';
 
-        _get_data: function (option, full_data) {
-            if (!this._data.length) throw 'Audio data is empty';
-
-            var items = this._active;
+            let items = this.active;
             if (full_data) {
-                items = this._data;
+                items = this.data;
             }
 
             if (option === 'first') return items[0];
 
-            for (var i = 0; i < items.length; i++) {
+            for (let i = 0; i < items.length; i++) {
                 switch(option) {
                     case 'next':
-                        if (items[i].id === this._active_id) {
+                        if (items[i].id === this.active_id) {
                             if (typeof items[i + 1] !== 'undefined') {
                                 return items[i + 1];
                             } else {
@@ -164,16 +158,16 @@
                         }
                         break;
                     case 'prev':
-                        if (items[i].id === this._active_id) {
+                        if (items[i].id === this.active_id) {
                             if (typeof items[i - 1] !== 'undefined') {
                                 return items[i - 1];
                             } else {
-                                return items[this._active.length - 1];
+                                return items[this.active.length - 1];
                             }
                         }
                         break;
                     case 'current':
-                        if (items[i].id === this._active_id) {
+                        if (items[i].id === this.active_id) {
                             return items[i];
                         }
                         break;
@@ -186,42 +180,41 @@
             }
 
             if (option !== 'current')
-                return this._get_data('current');
+                return this.getData('current');
 
-            return this._get_data('first');
-        },
+            return this.getData('first');
+        };
 
-        updateActivePosts: function() {
-            var self = this, data, id;
+        updateActivePosts() {
+            let self = this, data, id;
 
-            self._active = [];
-            $.each($('.post'), function() {
-                id = $(this).data('id');
-                data = self._get_data(id, true);
-                self._active.indexOf(data) === -1 && self._active.push(data);
+            this.active = [];
+            $.each($('.post'), (index, element) => {
+                id = $(element).data('id');
+                data = self.getData(id, true);
+                this.active.indexOf(data) === -1 && this.active.push(data);
             });
 
-            if (self._active.length === 0) self._active = self._data;
-        },
+            if (this.active.length === 0) this.active = this.data;
+        };
 
-
-        updateProgressPosition: function () {
-            var player_progress_line = this._player.find('.position .progress-line'),
-                player_progress_line_active = this._player.find('.position .progress-line-active'),
-                player_progress_line_loaded = this._player.find('.position .progress-line-loaded'),
-                player_progress_label = this._player.find('.progress-label span'),
-                current_player = $('#player-'+ this._active_id),
+        updateProgressPosition() {
+            let player_progress_line = this.player.find('.position .progress-line'),
+                player_progress_line_active = this.player.find('.position .progress-line-active'),
+                player_progress_line_loaded = this.player.find('.position .progress-line-loaded'),
+                player_progress_label = this.player.find('.progress-label span'),
+                current_player = $('#player-'+ this.active_id),
                 position, width, timestamp, buffered;
 
             // Skip if not playing or not loaded
-            if (this._is_playing !== true ||
-                this._player.audio.get(0).readyState === AUDIO_NOT_READY) return;
+            if (this.is_playing !== true ||
+                this.player.audio.get(0).readyState === AUDIO_NOT_READY) return;
 
             // Update internals
-            this._duration = this._player.api.duration;
+            this.duration = this.player.api.duration;
 
             // Update active progress line
-            position = this._player.api.currentTime / this._player.api.duration * 100;
+            position = this.player.api.currentTime / this.player.api.duration * 100;
             width = position * player_progress_line.width() / 100;
             player_progress_line_active.width(width);
 
@@ -229,62 +222,57 @@
             current_player.find('.position .progress-line-active').width(width);
 
             // Update current player timestamps
-            timestamp = $.fn.secondsToTime(this._player.api.currentTime);
+            timestamp = $.secondsToTime(this.player.api.currentTime);
 
             player_progress_label.html(timestamp);
             current_player.find('.progress-label span').html(timestamp);
 
             // Update buffered state
-            buffered = this._player.api.buffered.end(0) / this._duration;
+            buffered = this.player.api.buffered.end(0) / this.duration;
 
             width = buffered * player_progress_line.width();
             player_progress_line_loaded.width(width);
 
             width = buffered * current_player.find('.position .progress-line').width();
             current_player.find('.position .progress-line-loaded').width(width);
-        },
+        };
 
-        updateVolumePosition: function() {
-            var player_volume_line = this._player.find('.volume .progress-line'),
-                player_volume_line_active = this._player.find('.volume .progress-line-active'),
-                player_volume_label = this._player.find('.volume-label span'),
+        updateVolumePosition() {
+            let player_volume_line = this.player.find('.volume .progress-line'),
+                player_volume_line_active = this.player.find('.volume .progress-line-active'),
+                player_volume_label = this.player.find('.volume-label span'),
                 width;
 
-            player_volume_label.html(this._volume);
-            width = this._volume * player_volume_line.width() / 100;
+            player_volume_label.html(this.volume);
+            width = this.volume * player_volume_line.width() / 100;
             player_volume_line_active.width(width);
-        },
+        };
 
-
-        updatePosition: function(element, event) {
-            var active_width = element.find('.progress-line').width(),
+        updatePosition(element, event) {
+            let active_width = element.find('.progress-line').width(),
                 pixels_value = event.clientX - element.offset().left,
-                percent_value = parseInt(pixels_value / active_width * 100);
+                percent_value = Math.floor(pixels_value / active_width * 100);
 
             if (element.hasClass('volume')) {
-                this._volume = percent_value;
-                this._player.api.volume = percent_value / 100;
+                this.volume = percent_value;
+                this.player.api.volume = percent_value / 100;
                 this.updateVolumePosition();
             }
 
             if (element.hasClass('position')) {
-                var loaded_width = element.find('.progress-line-loaded').width();
+                let loaded_width = element.find('.progress-line-loaded').width();
                 if (pixels_value > loaded_width) {
-                    percent_value = parseInt(loaded_width / active_width * 100);
+                    percent_value = Math.floor(loaded_width / active_width * 100);
                 }
 
-                this._is_playing && this._player.api.pause();
-                this._player.api.currentTime = this._duration * percent_value / 100;
-                this._is_playing && this._player.api.play();
-
-                this._position = percent_value;
+                this.player.api.currentTime = this.duration * percent_value / 100;
+                this.position = percent_value;
                 this.updateProgressPosition();
             }
-        },
+        };
 
-
-        resetPlayers: function() {
-            this._is_debug && console.log('resetPlayers');
+        resetPlayers() {
+            this.is_debug && console.log('resetPlayers');
 
             $('.player').removeClass('active');
             $('.player .play-pause').removeClass('pause').addClass('play');
@@ -292,133 +280,121 @@
             $('.player .position .progress-line-loaded').width(0);
             $('.player .position .progress-line-active').width(0);
             $('.player .high-definition').removeClass('active');
-        },
+        };
 
+        updateActivePlayer() {
+            this.is_debug && console.log('setActivePLayer');
 
-        updateActivePlayer: function() {
-            this._is_debug && console.log('setActivePLayer');
+            let play_button = $('#player .play-pause, #player-' + this.active_id + ' .play-pause');
 
-            var play_button = $('#player .play-pause, #player-' + this._active_id + ' .play-pause');
+            this.resetPlayers();
+            $('#player, #player-'+ this.active_id).addClass('active');
 
-            $('#player, #player-'+ this._active_id).addClass('active');
-            if (this._is_playing) {
+            if (this.is_playing) {
                 play_button.removeClass('play').addClass('pause');
             } else {
                 play_button.removeClass('pause').addClass('play');
             }
-        },
+        };
 
-
-        animatePlayerTitle: function() {
-            var link = this._player.link,
-                title = this._player.title,
+        animatePlayerTitle() {
+            let link = this.player.link,
+                title = this.player.title,
                 overflow = link.width() - title.outerWidth();
 
             if (overflow < 0) {
                 title.animate({ left: overflow }, 2500, function () {
-                    setTimeout(function() {
+                    setTimeout(() => {
                         title.animate({ left: 42 }, 2500);
                     }, 2500);
                 });
             }
-        },
+        };
 
+        reload() {
+            this.is_debug && console.log('Reload this.' + this.active_id);
 
-        reload: function() {
-            this._is_debug && console.log('Reload #' + this._active_id);
-
-            $.fn.loaderShow();
-            if (typeof this._player.api.pause !== 'undefined') {
-                this._player.api.pause();
+            $.loaderShow();
+            if (typeof this.player.api.pause !== 'undefined') {
+                this.player.api.pause();
             }
 
-            var data = this._get_data('current'),
-                quality = this._is_hd ? 'release' : 'preview',
-                format = this._is_mp3 ? 'mp3' : 'ogg';
+            let data = this.getData('current'),
+                quality = this.is_hd ? 'release' : 'preview',
+                format = this.is_mp3 ? 'mp3' : 'ogg';
 
-            this._player.data('id', this._active_id);
-            this._player.title.html(data['title']);
-            this._player.link.attr('href', data['url']);
-            this._player.image.attr('src', data['cover']);
-            this._player.audio.attr('src', data[quality][format]);
+            this.player.data('id', this.active_id);
+            this.player.title.html(data['title']);
+            this.player.link.attr('href', data['url']);
+            this.player.image.attr('src', data['cover']);
+            this.player.audio.attr('src', data[quality][format]);
 
-            this._player.api.load();
-            $.fn.loaderHide();
-        },
+            this.player.api.load();
+            $.loaderHide();
+        };
 
-
-        update: function() {
-            if (this._is_playing) {
+        update() {
+            if (this.is_playing) {
                 this.updateProgressPosition();
             }
-        },
+        };
 
-
-        play: function() {
-            this._is_debug && console.log('Play');
+        play() {
+            this.is_debug && console.log('Play');
 
             this.show();
-            this._is_playing = true;
+            this.is_playing = true;
 
-            if (this._player.api.readyState === AUDIO_LOADED) {
-                this._player.api.play();
+            if (this.player.api.readyState === AUDIO_LOADED) {
+                this.player.api.play();
             } else {
-                this._player.api.load();
+                this.player.api.load();
             }
-        },
+        };
 
+        pause() {
+            this.is_debug && console.log('Pause');
 
-        pause: function() {
-            this._is_debug && console.log('Pause');
+            this.is_playing = false;
 
-            this._is_playing = false;
-
-            if (this._player.api.readyState === AUDIO_LOADED) {
-                this._player.api.pause();
+            if (this.player.api.readyState === AUDIO_LOADED) {
+                this.player.api.pause();
             }
-        },
+        };
 
+        next() {
+            this.is_debug && console.log('Next');
 
-        next: function() {
-            this._is_debug && console.log('Next');
+            let data = this.getData('next');
+            this.active_id = data['id'];
 
-            var data = this._get_data('next');
-
-            this._active_id = data['id'];
             this.reload();
-
-            this.resetPlayers();
             this.updateActivePlayer();
-        },
+        };
 
+        prev() {
+            this.is_debug && console.log('Prev');
 
-        prev: function() {
-            this._is_debug && console.log('Prev');
+            let data = this.getData('prev');
+            this.active_id = data['id'];
 
-            var data = this._get_data('prev');
-
-            this._active_id = data['id'];
             this.reload();
-
-            this.resetPlayers();
             this.updateActivePlayer();
-        },
+        };
+
+        show() {
+            this.is_debug && console.log('Show');
+            $('aside').addClass('visible');
+        };
 
 
-        show: function() {
-            this._is_debug && console.log('Show');
+        hide() {
+            this.is_debug && console.log('Hide');
+            $('aside').removeClass('visible');
+        };
 
-            var aside = $('aside');
-            aside.addClass('visible');
-        },
+    }
 
+    $.player = new Player();
 
-        hide: function() {
-            this._is_debug && console.log('Hide');
-
-            var aside = $('aside');
-            aside.removeClass('visible');
-        }
-
-    };
 })(jQuery);
