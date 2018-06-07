@@ -107,8 +107,8 @@ button {
     background: #CCC;
 }
 
-img.lazy[data-src] {
-    opacity: 0;
+img.lazy {
+    background: url(../svg/loader-small.svg) no-repeat center center;
 }
 
 .hidden {

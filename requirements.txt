@@ -24,4 +24,3 @@ uwsgi>=2.0.17,<2.1.0
 # Dev dependencies
 ipython>=6.3.0
 flake8>=3.5.0
-django-silk>=3.0.0

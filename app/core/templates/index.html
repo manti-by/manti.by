@@ -26,7 +26,9 @@
                     </a>
                 {% else %}
                     <a href="{% url 'gallery_list' %}" name="gallery">
-                        <img data-src="{% webp_static 'img/featured.jpg' %}" alt="{% trans 'Popular image from gallery' %}"
+                        <img data-src="{% static 'img/featured.jpg' %}"
+                             data-webp="{% webp_static 'img/featured.jpg' %}"
+                             alt="{% trans 'Popular image from gallery' %}"
                              title="{% trans 'Popular image from gallery' %}" class="lazy" />
                     </a>
                 {% endif %}
