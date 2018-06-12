@@ -41,9 +41,8 @@
     {% endif %}
         <script type="text/javascript" src="{% static 'js/libs/gallery.js' %}"></script>
         <script type="text/javascript">
-            $(document).ready(function() {
-                var gallery = $.gallery;
-                gallery.init();
+            $(document).ready(() => {
+                $.gallery.init();
             });
         </script>
 {% endblock %}
