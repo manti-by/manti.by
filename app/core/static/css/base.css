@@ -107,10 +107,6 @@ button {
     background: #CCC;
 }
 
-img.lazy {
-    background: url(../svg/loader-small.svg) no-repeat center center;
-}
-
 .hidden {
     display: none;
 }
@@ -162,10 +158,12 @@ img.lazy {
     font-size: 1.2rem;
 }
 
-.static .image {
-    float: right;
-    clear: right;
-    margin: 0 0 1em 1em;
+.static .description {
+    flex-wrap: nowrap;
+}
+
+.static .content {
+    margin-right: 2em;
 }
 
 .print a {
@@ -339,7 +337,12 @@ header .breadcrumbs a {
 }
 
 header .breadcrumbs .spacer {
-    margin-right: 0.25em;
+    margin: 0.25em;
+}
+
+header .breadcrumbs .tag {
+    margin: 0;
+    font-size: 1em;
 }
 
 main {

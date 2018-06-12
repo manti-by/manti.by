@@ -56,22 +56,3 @@
     min-height: 100%;
     max-height: 100%;
 }
-
-.home .main .posts .post h2 {
-    height: auto;
-    top: 0;
-    font-size: 1.8em;
-    text-transform: uppercase;
-    z-index: auto;
-    opacity: 1;
-}
-
-.home .main .posts .post .image,
-.home .main .posts .post .info,
-.home .main .posts .post .tracklist {
-    min-height: 356px;
-}
-
-.home .main .posts .post .tracklist .tracks {
-    height: 307px;
-}

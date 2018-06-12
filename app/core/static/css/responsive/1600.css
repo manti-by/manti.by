@@ -36,7 +36,7 @@
     }
 
     main .sidebar li a:hover {
-        border-bottom: 1px dotted #999;
+        color: #b40303;
     }
 
     main .sidebar .instagram {
@@ -75,12 +75,6 @@
 
     .home .gallery .featured > a {
         height: 370px;
-    }
-
-    .home .main .posts .post .image,
-    .home .main .posts .post .info,
-    .home .main .posts .post .tracklist {
-        min-height: 403px;
     }
 
     .featured.posts {

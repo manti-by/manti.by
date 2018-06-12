@@ -7,14 +7,13 @@
 }
 
 .post .image,
-.post .info,
-.post .tracklist {
+.post .data {
     position: relative;
     width: 48%;
-    min-height: 403px;
 }
 
-.post .image {
+.post .data {
+    min-height: 404px;
 }
 
 .post .image a {
@@ -38,7 +37,14 @@
     bottom: 0;
 }
 
-.post h2,
+.post h2 {
+    margin-bottom: 0.5em;
+    padding-top: 0;
+    font-size: 2em;
+    text-transform: uppercase;
+    color: #000;
+}
+
 .post .info .summary,
 .post .info .created,
 .post .info .genre,
@@ -46,13 +52,6 @@
 .post .info .tags {
     margin-bottom: 0.5em;
     font-size: 1.3em;
-}
-
-.post h2 {
-    margin-bottom: 0.5em;
-    padding-top: 0;
-    font-size: 1.8em;
-    text-transform: uppercase;
 }
 
 .post .info .preview {
@@ -87,8 +86,8 @@
 .post .tracklist .tracks {
     white-space: pre-line;
     line-height: 1.3;
-    font-size: 1.3em;
-    height: 343px;
+    font-size: 1.1em;
+    max-height: 315px;
     overflow-y: auto;
 }
 

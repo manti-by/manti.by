@@ -4,9 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
-from django.conf import settings
 
-from taggit.models import TaggedItemBase
+from taggit.models import Tag, TaggedItemBase
 from taggit.managers import TaggableManager
 
 from core.models import BaseModel
@@ -52,10 +51,10 @@ class Post(SlugifyMixin, BaseModel):
     tracklist = models.TextField(blank=True)
 
     genre = TaggableManager(blank=True, through=GenresProxy, verbose_name=_('Genre'))
-    genre.rel.related_name = '+'
+    genre.rel.related_name = 'post_genres'
 
     tags = TaggableManager(blank=True, through=TagsProxy, verbose_name=_('Tags'))
-    tags.rel.related_name = '+'
+    tags.rel.related_name = 'post_tags'
 
     viewed = models.IntegerField(blank=True, default=0)
     related = models.ManyToManyField('self', blank=True)
@@ -124,6 +123,12 @@ class Post(SlugifyMixin, BaseModel):
     @property
     def title(self):
         return '%s /%s/' % (self.name, ', '.join(self.genre.values_list('name', flat=True)))
+
+    @property
+    def most_common_tags(self):
+        for tag in self.tags.exclude(slug='front'):
+            if TagsProxy.objects.filter(tag_id=tag.id).count() > 1:
+                yield tag
 
     def as_dict(self):
         return {

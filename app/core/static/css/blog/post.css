@@ -42,6 +42,10 @@
     font-size: 1.3em;
 }
 
+.post .info h1 {
+    margin-bottom: 0.5em;
+}
+
 .post .info .description {
     line-height: 1.2;
     margin-bottom: 1.5em;
