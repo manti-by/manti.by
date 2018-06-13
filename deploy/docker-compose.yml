@@ -1,0 +1,24 @@
+version: '3.3'
+services:
+  manti-django:
+    image: ubuntu:xenial
+    ports:
+      - "8080:80"
+    links:
+      - manti-postgres
+      - manti-redis
+    volumes:
+      - ../:/code
+      - ../../content:/content
+      - ../../tmp/static:/static
+    command: /code/deploy/bootstrap.sh
+  manti-postgres:
+    image: postgres:9.6
+    volumes:
+      - ./manti.by.dump:/docker-entrypoint-initdb.d/manti.by.dump
+    environment:
+      - POSTGRES_DB=manti
+      - POSTGRES_USER=manti
+      - POSTGRES_PASSWORD=pa55word
+  manti-redis:
+      image: redis:latest
