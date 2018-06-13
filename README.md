@@ -79,6 +79,5 @@ Docker setup
 
 2. Build app image
 
-        $ cd deploy/docker
         $ docker build -t mantiby/mantiby:latest .
         $ docker-compose up

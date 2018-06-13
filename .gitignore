@@ -2,9 +2,11 @@
 
 .scannerwork/
 
-/app/core/settings/local.py
-/app/celerybeat-schedule
-/app/celerybeat.pid
+app/core/settings/local.py
+app/celerybeat-schedule
+app/celerybeat.pid
+app/db.sqlite3
+app/app.log
 
 *.pyc
 *~

@@ -8,7 +8,7 @@ WORKDIR /code
 # Install any needed packages specified in requirements.txt
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y software-properties-common apt-utils
-RUN apt-get install -y build-essential git python3 python3-dev python3-pip python3-venv
+RUN apt-get install -y build-essential git python3 python3-dev python3-pip
 
 RUN pip3 install pip --upgrade
 RUN pip3 install wheel
