@@ -78,7 +78,7 @@ ol {
 
 ul li,
 ol li {
-    margin: 0.5em 0;
+    margin: 0.5em 0 0.5em 0.5em;
     line-height: 1.4;
 }
 

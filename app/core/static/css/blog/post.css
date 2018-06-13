@@ -8,14 +8,10 @@
 }
 
 .post .image,
-.post .info,
-.post .tracklist {
+.post .data {
     position: relative;
     width: 48%;
     min-height: 480px;
-}
-
-.post .image {
 }
 
 .post .image img {

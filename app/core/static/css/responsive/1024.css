@@ -53,8 +53,7 @@
     }
 
     .post .image,
-    .post .info,
-    .post .tracklist {
+    .post .data {
         min-height: 480px;
     }
 
@@ -86,8 +85,7 @@
     }
 
     .post .image,
-    .post .info,
-    .post .tracklist {
+    .post .data {
         min-height: 350px;
     }
 
