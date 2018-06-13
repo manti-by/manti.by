@@ -81,3 +81,4 @@ Docker setup
 
         $ cd deploy/docker
         $ docker build -t mantiby/mantiby:latest .
+        $ docker-compose up

@@ -4,7 +4,6 @@ import random
 import logging
 import requests
 
-from threading import Thread
 from datetime import tzinfo, timedelta
 
 from django.conf import settings

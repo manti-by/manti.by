@@ -5,7 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 
-from taggit.models import Tag, TaggedItemBase
+from taggit.models import TaggedItemBase
 from taggit.managers import TaggableManager
 
 from core.models import BaseModel
