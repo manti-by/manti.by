@@ -1,5 +1,7 @@
 #.gitignore
 
+.scannerwork/
+
 /app/core/settings/local.py
 /app/celerybeat-schedule
 /app/celerybeat.pid

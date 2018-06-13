@@ -70,3 +70,14 @@ Installation
         $ sudo ln -s ./deploy/confs/supervisor.conf /etc/supervisor/conf.d/default.conf
         $ sudo service nginx restart
         $ sudo supervisorctl restart manti:
+
+
+Docker setup
+------------
+
+1. Install docker and docker-compose
+
+2. Build app image
+
+        $ cd deploy/docker
+        $ docker build -t mantiby/mantiby:latest .

@@ -1,21 +1,21 @@
 version: '3.3'
 services:
   manti-django:
-    image: ubuntu:xenial
+    image: mantiby/mantiby:latest
     ports:
-      - "8080:80"
+      - "8000:8000"
     links:
       - manti-postgres
       - manti-redis
     volumes:
-      - ../:/code
-      - ../../content:/content
-      - ../../tmp/static:/static
-    command: /code/deploy/bootstrap.sh
+      - ./:/code
+      - ../content:/content
+      - ../static:/static
+    command: python3 /code/app/manage.py runserver 0.0.0.0:8000 --settings=core.settings.docker
   manti-postgres:
     image: postgres:9.6
     volumes:
-      - ./manti.by.dump:/docker-entrypoint-initdb.d/manti.by.dump
+      - ./deploy/manti.by.sql:/docker-entrypoint-initdb.d/manti.by.sql
     environment:
       - POSTGRES_DB=manti
       - POSTGRES_USER=manti

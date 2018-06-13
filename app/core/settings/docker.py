@@ -8,18 +8,17 @@ COMPRESS_ENABLED = False
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'local.manti.by',
-                 'ru.local.manti.by', 'en.local.manti.by']
+ALLOWED_HOSTS = ['127.0.0.1']
 
-BASE_URL = 'http://local.manti.by'
+BASE_URL = 'http://127.0.0.1:8000'
 
 STATIC_ROOT = '/static/'
 MEDIA_ROOT = '/content/'
 
 LOCALE_URLS = {
-    'be': 'http://local.manti.by',
-    'ru': 'http://ru.local.manti.by',
-    'en': 'http://en.local.manti.by',
+    'be': 'http://127.0.0.1:8000',
+    'ru': 'http://127.0.0.1:8000',
+    'en': 'http://127.0.0.1:8000',
 }
 
 
