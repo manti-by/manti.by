@@ -34,57 +34,59 @@
                 <img src="{% webp_cover item.cover %}" alt="{{ item.name }}"
                      title="{{ item.name }}">
             </div>
-            <div class="info">
-                <h1 class="mobile-hidden">{{ item.name }}</h1>
-                <div class="description">{{ item.description|safe }}</div>
-                <div class="created">
-                    <strong>{% trans 'Created' %}</strong>:
-                    {{ item.created|date:DATE_FORMAT }}
-                </div>
-                <div class="catnum">
-                    <strong>{% trans 'Catalog No' %}</strong>:
-                    {{ item.catnum }}
-                </div>
-                <div class="quality">
-                    <strong>{% trans 'Quality' %}</strong>:
-                    {{ item.quality }}
-                </div>
-                <div class="length">
-                    <strong>{% trans 'Length' %}</strong>:
-                    {{ item.length }}</div>
-                <div class="genre">
-                    <strong>{% trans 'Genre' %}</strong>:
-                    {{ item.genre.all|join:", " }}
-                </div>
-                <div class="preview">
-                    <div id="player-{{ item.id }}" class="player inline" data-id="{{ item.id }}">
-                        <div class="button play-pause play"></div>
-                        <div class="progress-bar position">
-                            <div class="progress-line"></div>
-                            <div class="progress-line-loaded"></div>
-                            <div class="progress-line-active"></div>
-                        </div>
-                        <div class="progress-label">
-                            <span>00:00:00</span>
+            <div class="data">
+                <div class="info">
+                    <h1 class="mobile-hidden">{{ item.name }}</h1>
+                    <div class="description">{{ item.description|safe }}</div>
+                    <div class="created">
+                        <strong>{% trans 'Created' %}</strong>:
+                        {{ item.created|date:DATE_FORMAT }}
+                    </div>
+                    <div class="catnum">
+                        <strong>{% trans 'Catalog No' %}</strong>:
+                        {{ item.catnum }}
+                    </div>
+                    <div class="quality">
+                        <strong>{% trans 'Quality' %}</strong>:
+                        {{ item.quality }}
+                    </div>
+                    <div class="length">
+                        <strong>{% trans 'Length' %}</strong>:
+                        {{ item.length }}</div>
+                    <div class="genre">
+                        <strong>{% trans 'Genre' %}</strong>:
+                        {{ item.genre.all|join:", " }}
+                    </div>
+                    <div class="preview">
+                        <div id="player-{{ item.id }}" class="player inline" data-id="{{ item.id }}">
+                            <div class="button play-pause play"></div>
+                            <div class="progress-bar position">
+                                <div class="progress-line"></div>
+                                <div class="progress-line-loaded"></div>
+                                <div class="progress-line-active"></div>
+                            </div>
+                            <div class="progress-label">
+                                <span>00:00:00</span>
+                            </div>
                         </div>
                     </div>
+                    <div class="tags">
+                        <strong>{% trans 'Tags' %}</strong>:
+                        {% for t in item.most_common_tags %}
+                            <a href="{% url 'blog' %}?tag={{ t.slug }}" class="tag">{{ t.name }}</a>
+                        {% endfor %}
+                    </div>
+                    <div class="links">
+                        <span class="link show-tracklist">{% trans 'Tracklist' %}</span>
+                        <a href="{{ item.release.url }}" class="download">{% trans 'Download' %}</a>
+                    </div>
                 </div>
-                <div class="tags">
-                    <strong>{% trans 'Tags' %}</strong>:
-                    {% for t in item.most_common_tags %}
-                        <a href="{% url 'blog' %}?tag={{ t.slug }}" class="tag">{{ t.name }}</a>
-                    {% endfor %}
-                </div>
-                <div class="links">
-                    <span class="link show-tracklist">{% trans 'Tracklist' %}</span>
-                    <a href="{{ item.release.url }}" class="download">{% trans 'Download' %}</a>
-                </div>
-            </div>
-            <div class="tracklist hidden">
-                <h1>{{ item.name }}</h1>
-                <div class="tracks">{{ item.tracklist.strip|safe }}</div>
-                <div class="links">
-                    <span class="link hide-tracklist">{% trans 'Hide Tracklist' %}</span>
+                <div class="tracklist hidden">
+                    <h1>{{ item.name }}</h1>
+                    <div class="tracks">{{ item.tracklist.strip|safe }}</div>
+                    <div class="links">
+                        <span class="link hide-tracklist">{% trans 'Hide Tracklist' %}</span>
+                    </div>
                 </div>
             </div>
         </div>
