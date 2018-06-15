@@ -99,9 +99,10 @@
                             this.active_id = id;
                             this.reload();
                         } else {
-                            console.error('Audio this.' + id + ' not found');
+                            this.is_debug && console.error('Audio this.' + id + ' not found');
                         }
                     }
+                    !this.player.data('id') && this.reload();
                     this.play();
                 } else {
                     this.pause();
@@ -271,29 +272,22 @@
             }
         };
 
-        resetPlayers() {
-            this.is_debug && console.log('resetPlayers');
-
-            $('.player').removeClass('active');
-            $('.player .play-pause').removeClass('pause').addClass('play');
-            $('.player .position .progress-line-label span').html('00:00:00');
-            $('.player .position .progress-line-loaded').width(0);
-            $('.player .position .progress-line-active').width(0);
-            $('.player .high-definition').removeClass('active');
-        };
-
         updateActivePlayer() {
             this.is_debug && console.log('setActivePLayer');
 
-            let play_button = $('#player .play-pause, #player-' + this.active_id + ' .play-pause');
+            let all_players = $('.player'),
+                all_play_buttons = all_players.find('.play-pause'),
+                active_players = $('#player, #player-'+ this.active_id),
+                play_buttons = active_players.find('.play-pause');
 
-            this.resetPlayers();
-            $('#player, #player-'+ this.active_id).addClass('active');
+            all_players.removeClass('active');
+            all_play_buttons.removeClass('pause').addClass('play');
 
+            active_players.addClass('active');
             if (this.is_playing) {
-                play_button.removeClass('play').addClass('pause');
+                play_buttons.removeClass('play').addClass('pause');
             } else {
-                play_button.removeClass('pause').addClass('play');
+                play_buttons.removeClass('pause').addClass('play');
             }
         };
 
@@ -330,6 +324,11 @@
             this.player.audio.attr('src', data[quality][format]);
 
             this.player.api.load();
+
+            $('.player .position .progress-line-label span').html('00:00:00');
+            $('.player .position .progress-line-loaded').width(0);
+            $('.player .position .progress-line-active').width(0);
+
             $.loaderHide();
         };
 
