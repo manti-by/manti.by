@@ -23,6 +23,12 @@ class Command(BaseCommand):
 
                 post.ogg_preview_ready = os.path.exists(post.preview_ogg_file) \
                     and os.path.getsize(post.preview_ogg_file) > 0
+
+                self.stdout.write('Checked post #%d: %d %d %d' % (post.id,
+                                                                  1 if post.ogg_release_ready else 0,
+                                                                  1 if post.mp3_preview_ready else 0,
+                                                                  1 if post.ogg_preview_ready else 0))
+
                 post.save()
                 checked += 1
             except Exception as e:
