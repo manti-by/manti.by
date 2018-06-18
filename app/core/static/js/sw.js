@@ -1,6 +1,6 @@
 const STATIC_CACHE = 'static-cache';
 const DYNAMIC_CACHE = 'dynamic-cache';
-const BASE_DOMAIN = 'https://demo.manti.by';
+const BASE_DOMAIN = 'https://manti.by';
 
 let FILE_LIST = [
     '/static/svg/loader.svg',
@@ -8,7 +8,7 @@ let FILE_LIST = [
     '/static/svg/twitter.svg',
     '/static/svg/coub.svg',
     '/static/img/black-bg-50.webp',
-    '/static/img/black-bg-50.jpg',
+    '/static/img/black-bg-50.png',
     '/static/img/cut.webp',
     '/static/img/cut.jpg',
     '/static/img/cut-mobile.webp',
@@ -16,9 +16,9 @@ let FILE_LIST = [
     '/static/img/featured.webp',
     '/static/img/featured.jpg',
     '/static/img/no-image.webp',
-    '/static/img/no-image.jpg',
+    '/static/img/no-image.png',
     '/static/img/shape-player.webp',
-    '/static/img/shape-player.jpg',
+    '/static/img/shape-player.png',
     '/static/img/share.webp',
     '/static/img/share.jpg',
     '/static/img/side.webp',
@@ -31,8 +31,8 @@ let FILE_LIST = [
     '/content/covers/katana.jpg',
     '/content/covers/litl.webp',
     '/content/covers/litl.jpg',
-    '/content/covers/spectre.webp',
-    '/content/covers/spectre.jpg',
+    '/content/covers/last-night.webp',
+    '/content/covers/last-night.jpg',
     '/content/covers/phantom.webp',
     '/content/covers/phantom.jpg',
     '/content/covers/silence.webp',
