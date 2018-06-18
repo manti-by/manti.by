@@ -1,0 +1,26 @@
+{% load i18n common_tags %}
+
+<div class="post shadow" data-id="{{ item.id }}">
+    <div class="image">
+        <a href="{% url 'post' item.slug %}">
+            <img data-src="{{ item.cover.url }}"
+                 data-webp="{% webp_cover item.cover %}" alt="{{ item.name }}"
+                 title="{{ item.name }}" class="lazy" />
+        </a>
+    </div>
+    <div class="info">
+        <div class="wrap">
+            <h3>
+                <a href="{% url 'post' item.slug %}" name="post-{{ item.slug }}">
+                    {{ item.name }}
+                </a>
+            </h3>
+            <div class="genre">
+                {{ item.genre.all|join:", " }}
+            </div>
+            <div class="created">
+                {{ item.created|date:DATE_FORMAT }}
+            </div>
+        </div>
+    </div>
+</div>

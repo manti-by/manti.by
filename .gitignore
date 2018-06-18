@@ -1,15 +1,12 @@
 #.gitignore
 
-# Ignore local config and content pathes
-/app/includes/config.ini
-/app/content/*
+.scannerwork/
 
-# Remove sitemap
-/app/sitemap.xml
+app/core/settings/local.py
+app/celerybeat-schedule
+app/celerybeat.pid
+app/db.sqlite3
+app/app.log
 
-# Remove vagrant instance folder
-/.vagrant/
-
-/build/
-
-/tests/images/*.jpg
+*.pyc
+*~

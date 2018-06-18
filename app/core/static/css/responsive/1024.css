@@ -1,0 +1,105 @@
+@media only screen and (max-width: 1024px) {
+    .container {
+        width: 1000px;
+    }
+
+    .static {
+        width: 856px;
+    }
+
+    header nav .link-item {
+        min-width: 91px;
+    }
+
+    header nav .language {
+        margin-right: 0;
+    }
+
+    header.home .homelink {
+        left: 0;
+    }
+
+    .home .gallery .featured > a {
+        height: 320px;
+    }
+
+    .home .main .posts .post .image,
+    .home .main .posts .post .info,
+    .home .main .posts .post .tracklist {
+        min-height: 481px;
+    }
+
+    .home .main {
+        display: block;
+    }
+
+    .main .posts,
+    .main .sidebar {
+        width: 100%;
+    }
+
+    .home .posts {
+        margin-bottom: 1.5em;
+    }
+
+    .main .sidebar {
+        margin-top: 2em;
+    }
+
+    .main .sidebar .panel {
+        margin-bottom: 0.5em;
+        text-align: left;
+        opacity: 1;
+    }
+
+    .post .image,
+    .post .data {
+        min-height: 480px;
+    }
+
+    .gallery .list .item .preview {
+        max-height: 183px;
+    }
+
+    .gallery .item .preview {
+        max-height: 183px;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (orientation: portrait) {
+    main {
+        margin-top: 5em;
+    }
+    
+    .static,
+    .container {
+        width: 85%;
+        margin: 0 2.5%;
+        padding: 1em 5%;
+    }
+
+    .home .main .posts .post .image,
+    .home .main .posts .post .info,
+    .home .main .posts .post .tracklist {
+        min-height: 350px;
+    }
+
+    .post .image,
+    .post .data {
+        min-height: 350px;
+    }
+
+    .gallery .list .item .preview {
+        width: 49%;
+        margin: 0 1% 0.4em 0;
+    }
+
+    .gallery .list .item .preview:nth-child(even) {
+        margin-right: 0;
+    }
+
+    .gallery .item .preview {
+        max-height: 118px;
+        margin-bottom: 0.4em;
+    }
+}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% load i18n common_tags %}
+
+{% block title %}{% trans 'About' %}{% endblock %}
+
+{% block content %}
+    <div class="container static about shadow">
+        <h1>
+            <span class="print-hidden">
+                {% trans 'About' %}
+            </span>
+            <span class="print-visible">
+                {% trans 'Alexander Chaika' %}
+            </span>
+        </h1>
+        <div class="description flex">
+            <div class="content">
+                <img data-src="{% webp_static 'img/cut-mobile.jpg' %}" class="image mobile-visible lazy" alt="Manti">
+                {% if ACTIVE_LANGUAGE == 'ru' %}
+                    {% include 'static/partial/about_ru.html' %}
+                {% elif ACTIVE_LANGUAGE == 'en' %}
+                    {% include 'static/partial/about_en.html' %}
+                {% else %}
+                    {% include 'static/partial/about_by.html' %}
+                {% endif %}
+            </div>
+            <div class="image mobile-hidden">
+                <img data-src="{% webp_static 'img/cut.jpg' %}" class="lazy" alt="Manti">
+            </div>
+        </div>
+    </div>
+{% endblock %}

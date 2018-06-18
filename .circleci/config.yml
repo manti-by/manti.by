@@ -1,0 +1,30 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: mantiby/mantiby:latest
+
+    working_directory: /code
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: |
+            pip3 install -r /code/requirements.txt
+
+      - run:
+          name: Run migrations
+          command: |
+            python3 /code/app/manage.py migrate --settings=core.settings.test
+
+      - run:
+          name: Run flake8
+          command: |
+            flake8 /code/app
+
+      - run:
+          name: Run tests
+          command: |
+            python3 /code/app/manage.py test --settings=core.settings.test

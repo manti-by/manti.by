@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load static i18n thumbnail common_tags %}
+
+{% block title %}{% trans 'Homepage' %}{% endblock %}
+
+{% block content %}
+    <div class="home container">
+        <div class="featured posts">
+            <h2>{% trans 'Featured' %}</h2>
+            <div class="flex">
+                {% for item in featured_posts %}
+                    {% include 'blog/featured-item.html' %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="gallery">
+            <h2>{% trans 'Latest Images' %}</h2>
+            <div class="featured">
+                {% if featured_image %}
+                    <a href="{% url 'gallery_list' %}" name="gallery">
+                        {% thumbnail featured_image.original_image "x1080" as im %}
+                            <img data-src="{{ im.url }}" alt="{% trans 'Popular image from gallery' %}"
+                                 title="{% trans 'Popular image from gallery' %}" class="lazy" />
+                        {% endthumbnail %}
+                    </a>
+                {% else %}
+                    <a href="{% url 'gallery_list' %}" name="gallery">
+                        <img data-src="{% static 'img/featured.jpg' %}"
+                             data-webp="{% webp_static 'img/featured.jpg' %}"
+                             alt="{% trans 'Popular image from gallery' %}"
+                             title="{% trans 'Popular image from gallery' %}" class="lazy" />
+                    </a>
+                {% endif %}
+                <div class="latest flex">
+                    {% for image in latest_images %}
+                        {% thumbnail image.original_image "x100" as im %}
+                            <a href="{% url 'gallery_list' %}" name="gallery"
+                               class="thumbnail {% if im|is_portrait %}portrait{% else %}landscape{% endif %}">
+                                <img data-src="{{ im.url }}" alt="{% trans 'Image #' %}{{ image.id }}"
+                                     title="{% trans 'Image #' %}{{ image.id }}" class="lazy" />
+                            </a>
+                        {% endthumbnail %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <h2>{% trans 'Latest posts' %}</h2>
+        <div class="main flex">
+            <div class="posts">
+                {% for item in latest_posts %}
+                    {% include 'blog/list-item.html' %}
+                {% endfor %}
+            </div>
+            {% include 'common/sidebar.html' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block styles %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/index.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list-item.css' %}" />
+    <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured-item.css' %}" />
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
+{% endblock %}

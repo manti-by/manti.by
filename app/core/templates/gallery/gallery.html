@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% load static i18n thumbnail %}
+
+{% block title %}{{ gallery.name }}{% endblock %}
+
+{% block breadcrumbs %}
+    <span class="spacer">&gt;</span>
+    <a href="{% url 'gallery_list' %}">{% trans 'Gallery' %}</a>
+    <span class="spacer">&gt;</span>
+    {{ gallery.name }}
+{% endblock %}
+
+{% block content %}
+    <h1 class="mobile-visible container">
+        <a href="{% url 'gallery_list' %}">{% trans 'Gallery' %}</a>
+        <span class="spacer">&gt;</span>
+        {{ gallery.name }}
+    </h1>
+    <div class="gallery container">
+        <div class="item">
+            <div class="images {% if user.is_superuser %}orderable{% endif %}">
+                {% for image in gallery.images.ordered %}
+                    {% thumbnail image.original_image "1920x1280" as display %}
+                        <a href="{{ display.url }}" data-id="{{ image.id }}" name="image-{{ image.id }}"
+                           class="preview {% if display.image|is_portrait %}portrait{% else %}landscape{% endif %} {% if user.is_superuser %}orderable-item{% endif %}">
+                            {% thumbnail image.original_image "600" as preview %}
+                                <img src="{{ preview.url }}" alt="{% trans 'Image #' %}{{ image.id }}"
+                                     title="{% trans 'Image #' %}{{ image.id }}">
+                            {% endthumbnail %}
+                        </a>
+                    {% endthumbnail %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block styles %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/gallery/item.css' %}">
+{% endblock %}
+
+{% if user.is_superuser %}
+    {% block scripts %}
+        <script type="text/javascript" src="{% static 'js/libs/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/widgets/orderable.js' %}"></script>
+    {% endblock %}
+{% endif %}

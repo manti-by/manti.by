@@ -1,1 +1,0 @@
-ALTER TABLE `category` ADD COLUMN `alias`  varchar(50) NULL AFTER `name`

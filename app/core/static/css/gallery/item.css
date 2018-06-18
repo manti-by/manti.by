@@ -1,0 +1,26 @@
+.gallery .item {
+    padding-top: 1em;
+}
+
+.gallery .item .images {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row wrap;
+}
+
+.gallery .item .preview {
+    width: calc(100% / 3 - 0.4em);
+    max-height: 219px;
+    margin-bottom: 0.5em;
+    text-align: center;
+    overflow: hidden;
+}
+
+.gallery .item .preview:nth-child(2n) {
+    margin-right: 0;
+}
+
+.gallery .item .preview img {
+    min-width: 100%;
+    max-width: 100%;
+}

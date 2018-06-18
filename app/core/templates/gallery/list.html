@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static i18n thumbnail %}
+
+{% block title %}{% trans 'Gallery' %}{% endblock %}
+
+{% block breadcrumbs %}
+    <span class="spacer">&gt;</span>
+    {% trans 'Gallery' %}
+{% endblock %}
+
+{% block content %}
+    <div class="gallery container">
+        <div class="list">
+            {% for gallery in gallery_list %}
+                <div class="item">
+                    <a name="{{ gallery.slug }}"></a>
+                    <h2>
+                        <a href="{{ gallery.get_absolute_url }}">
+                            {{ gallery.name }}
+                        </a>
+                        <span class="info">
+                            {% blocktrans count counter=gallery.images.all|length %}one image{% plural %}{{ counter }} images{% endblocktrans %}
+                        </span>
+                    </h2>
+                    <div class="images">
+                        {% for image in gallery.images.ordered|slice:":6" %}
+                            {% thumbnail image.original_image "1920x1280" as display %}
+                                <a href="{{ display.url }}" data-id="{{ image.id }}" name="image-{{ image.id }}"
+                                   class="preview {% if display|is_portrait %}portrait{% else %}landscape{% endif %}">
+                                    {% thumbnail image.original_image "400" as preview %}
+                                        <img src="{{ preview.url }}" alt="{% trans 'Image #' %}{{ image.id }}"
+                                             title="{% trans 'Image #' %}{{ image.id }}">
+                                    {% endthumbnail %}
+                                </a>
+                            {% endthumbnail %}
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block styles %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/gallery/list.css' %}">
+{% endblock %}

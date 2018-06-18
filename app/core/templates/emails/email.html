@@ -1,0 +1,69 @@
+{% load i18n %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>{{ email.subject }}</title>
+    <style type="text/css">
+        .email {
+            width: 100%;
+            padding: 10px 0;
+            margin: 0;
+            font-family: Arial, Tahoma, Verdana;
+            font-size: 18px;
+            background: #EEE;
+        }
+
+        .container {
+            width: 60%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 0 10px 0;
+            background: #FFF;
+        }
+
+        h1 {
+            padding: 20px;
+            margin-bottom: 8px;
+            font-size: 24px;
+            font-weight: normal;
+            color: #FFF;
+            background: #3498db;
+        }
+
+        .row {
+            padding: 5px 20px;
+        }
+
+        .footer {
+            padding: 10px 0;
+            color: #999;
+            text-align: center;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email">
+        <div class="container">
+            <h1>{{ email.subject }} </h1>
+            <div class="row"><strong>{% trans 'From' %}</strong>:
+                {% if email.name %}
+                    {{ email.name }} &lt;{{ email.email }}&gt;
+                {% else %}
+                    {{ email.email }}
+                {% endif %}
+            </div>
+            <div class="row"><strong>{% trans 'Message' %}</strong>:</div>
+            <div class="row">{{ email.message|safe }}</div>
+        </div>
+        <div class="row footer">
+            {% trans 'View this message in' %}
+            <a href="{{ BASE_URL }}/{% url 'email' email.id %}">{% trans 'browser' %}</a>.
+            {% trans 'Created' %} {{ email.created }}.
+        </div>
+    </div>
+</body>
+</html>
