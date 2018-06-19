@@ -13,9 +13,9 @@ STATIC_ROOT = '/home/manti/www/manti.by/static/'
 MEDIA_ROOT = '/home/manti/www/manti.by/content/'
 
 LOCALE_URLS = {
-    'be': 'http://local.manti.by',
-    'ru': 'http://ru.local.manti.by',
-    'en': 'http://en.local.manti.by',
+    'be': 'local.manti.by',
+    'ru': 'ru.local.manti.by',
+    'en': 'en.local.manti.by',
 }
 
 DATABASES = {

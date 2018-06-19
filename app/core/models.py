@@ -1,7 +1,6 @@
 from datetime import datetime
 
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from core.utils import utc
@@ -9,7 +8,8 @@ from core.utils import utc
 
 class BaseModel(models.Model):
 
-    created = models.DateTimeField(default=timezone.now, verbose_name=_('Created, UTC'))
+    created = models.DateTimeField(auto_now_add=True, verbose_name=_('Created, UTC'))
+    updated = models.DateTimeField(auto_now=True, verbose_name=_('Updated, UTC'))
 
     @property
     def human_date(self):

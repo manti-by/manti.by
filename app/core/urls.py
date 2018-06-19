@@ -1,10 +1,20 @@
 from django.conf import settings
 from django.conf.urls import include, url
-from django.views.decorators.cache import cache_page
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
+from django.views.decorators.cache import cache_page
 
 from core import views as core_views
 from api.resources import OrderableResource, PostResource, SearchResource
+from core.sitemap import IndexSitemap, BlogSitemap, StaticSitemap
+
+
+sitemaps = {
+    'index': IndexSitemap,
+    'blog': BlogSitemap,
+    'static': StaticSitemap,
+}
+
 
 urlpatterns = [
     url(r'^$', cache_page(60 * 60 * 24 * 5)(core_views.index), name='index'),
@@ -20,7 +30,7 @@ urlpatterns = [
     url(r'^api/search/?$', SearchResource.as_view()),
 
     # Blog urls
-    url(r'^blog/', include('blog.urls')),
+    url(r'^blog/', include('blog.urls'), name='blog'),
 
     # Gallery urls
     url(r'^gallery/', include('gallery.urls')),
@@ -30,6 +40,9 @@ urlpatterns = [
 
     # Admin urls
     url(r'^dashboard/', admin.site.urls),
+
+    # Sitemap
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
 ]
 
 

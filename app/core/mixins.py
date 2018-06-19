@@ -14,44 +14,6 @@ from sorl.thumbnail import get_thumbnail
 
 logger = logging.getLogger('app')
 
-IMAGES_HELP_TEXT = _('You can select only base image, all others will be generated automatically')
-
-
-class ImageMixin(models.Model):
-
-    original_image = models.ImageField(upload_to=original_name, blank=True, null=True, verbose_name=_('Image'))
-
-    thumbnail_image = models.ImageField(upload_to=thumb_name, blank=True, null=True, verbose_name=_('Thumbnail Image'))
-    preview_image = models.ImageField(upload_to=preview_name, blank=True, null=True, verbose_name=_('Preview Image'))
-    gallery_image = models.ImageField(upload_to=gallery_name, blank=True, null=True, verbose_name=_('Gallery Image'))
-
-    @property
-    def ready(self):
-        if self.thumbnail_image and self.preview_image and self.gallery_image:
-            return True
-        return False
-
-    def generate_thumbnails(self):
-        if not self.original_image:
-            logger.error(_('Can\'t generate thumbnails, original image is not loaded'))
-
-        if not self.thumbnail_image:
-            resized = get_thumbnail(self.original_image, settings.THUMB_SIZE, crop='center', quality=65)
-            self.thumbnail_image.save(resized.name, ContentFile(resized.read()), save=True)
-
-        if not self.preview_image:
-            resized = get_thumbnail(self.original_image, settings.PREVIEW_SIZE, quality=80)
-            self.preview_image.save(resized.name, ContentFile(resized.read()), save=True)
-
-        if not self.gallery_image:
-            resized = get_thumbnail(self.original_image, settings.GALLERY_SIZE, quality=100)
-            self.gallery_image.save(resized.name, ContentFile(resized.read()), save=True)
-
-        super(ImageMixin, self).save()
-
-    class Meta:
-        abstract = True
-
 
 class SlugifyMixin(models.Model):
 

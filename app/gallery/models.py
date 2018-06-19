@@ -39,8 +39,8 @@ class Gallery(SlugifyMixin, BaseModel):
     def last_update(self):
         try:
             return self.images.order_by('-created')[0].created
-        except Exception as e:
-            return None
+        except Exception:
+            return self.updated
 
     class Meta:
         verbose_name = _('Gallery')

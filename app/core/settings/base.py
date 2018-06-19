@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
+    'django.contrib.sites',
 ]
 
 MIDDLEWARE = [
@@ -88,6 +90,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 BASE_URL = 'https://manti.by'
 
+SITE_ID = 1
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -131,9 +134,9 @@ USE_L10N = True
 USE_TZ = True
 
 LOCALE_URLS = {
-    'be': 'https://manti.by',
-    'ru': 'https://ru.manti.by',
-    'en': 'https://en.manti.by',
+    'be': 'manti.by',
+    'ru': 'ru.manti.by',
+    'en': 'en.manti.by',
 }
 
 DATE_FORMAT = 'd E Y'

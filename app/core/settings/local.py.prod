@@ -10,9 +10,9 @@ ALLOWED_HOSTS = ['195.201.141.33', 'manti.by',
 BASE_URL = 'https://manti.by'
 
 LOCALE_URLS = {
-    'be': 'https://manti.by',
-    'ru': 'https://ru.manti.by',
-    'en': 'https://en.manti.by',
+    'be': 'manti.by',
+    'ru': 'ru.manti.by',
+    'en': 'en.manti.by',
 }
 
 
