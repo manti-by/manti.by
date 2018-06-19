@@ -82,6 +82,7 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.common.global_template_vars'
             ],
+            'debug': False,
         },
     },
 ]
@@ -170,7 +171,6 @@ LOGIN_URL = '/profiles/login/'
 
 # Sorl thumbnailer settings
 
-TEMPLATE_DEBUG = False
 THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
 
 
