@@ -3,14 +3,9 @@ import logging
 from unidecode import unidecode
 
 from django.db import models
-from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.core.files.base import ContentFile
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
-
-from core.utils import original_name, preview_name, thumb_name, gallery_name
-from sorl.thumbnail import get_thumbnail
 
 logger = logging.getLogger('app')
 
