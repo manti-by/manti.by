@@ -1,47 +1,108 @@
 M2 Micro CMS
 ============
 
+
 About
 -----
 
-This is a CMS with simple functionality, such as interactions with 
-database (used MySQLi), sending emails, upload files, resize images and etc.
-
-CMS have an MVC structure with modules and have simple object behaviour
-which will be very simple to understand app logic for each level of developers.
+Django version of PHP Micro Framework M2.
 
 Author: Alex Manti <manti.by@gmail.com>
 
-Source link: https://github.com/manti-by/m2/
-
-Current version: 0.7
+Source link: https://github.com/manti-by/M2-Blog-Engine
 
 Requirements:
 
-- Basic: PHP 5.5+ (GD, CURL, Browscap), MySQL 5.0+ with MySQLi PHP driver, Memcache.
+    Ubuntu 14/16, Python 3+, PostgreSQL, Memcache, Redis
 
 
-Vagrant setup
--------------
+Setup environment
+-----------------
 
-1. Clone source code from github:
+1. Install base system packages (second line for production servers)
 
-    $ git clone https://github.com/manti-by/m2.git ./src
+        $ sudo apt-get install -y git python3-pip python3-dev python3-six postgresql libpq-dev
+        $ sudo apt-get install -y nginx supervisor 
 
-2. Create "log" directory:
 
-    $ mkdir log
-    $ chmod -R 777 log
+2. Get [FFMpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), compile and install
 
-3. Run Vagrant and await provisioning
+        $ export PATH="$HOME/bin:$PATH" && export PKG_CONFIG_PATH="$HOME/usr/ffmpeg/build/lib/pkgconfig"
+        $ ./configure \
+              --prefix="$HOME/usr/ffmpeg/build" \
+              --pkg-config-flags="--static" \
+              --extra-cflags="-I$HOME/usr/ffmpeg/build/include" \
+              --extra-ldflags="-L$HOME/usr/ffmpeg/build/lib" \
+              --extra-libs="-lpthread -lm" \
+              --bindir="$HOME/bin" \
+              --enable-gpl \
+              --enable-libass \
+              --enable-libfreetype \
+              --enable-libmp3lame \
+              --enable-libtheora \
+              --enable-libvorbis \
+              --enable-nonfree
+        $ make && make install
 
-    $ cd src/
-    $ vagrant up
 
-4. Open browser at http://192.168.1.12
+3. Install [Redis server](https://redis.io/download)
 
-    NOTICE:
-    You can create "clean" database from migrations in ./src/database/. 
-    For this you should use "Database migration tool", which you can find 
-    in ./src/scripts directory, to run it simply call: $ ./db-migrate.sh
 
+Install application
+-------------------
+
+1. Create virtual environment and install project dependencies
+
+        $ cd ../
+        $ virtualenv -p python3 --no-site-packages --prompt="manti-" venv
+        $ . venv/bin/activate
+        $ pip install -r src/requirements.txt
+
+
+2. Create database and appropriate user
+
+        $ sudo -u postgres psql -c "CREATE DATABASE manti;"
+        $ sudo -u postgres psql -c "CREATE USER manti WITH PASSWORD 'pa55word';"
+        $ sudo -u postgres psql -c "ALTER ROLE manti SET client_encoding TO 'utf8';"
+        $ sudo -u postgres psql -c "ALTER ROLE manti SET default_transaction_isolation TO 'read committed';"
+        $ sudo -u postgres psql -c "ALTER ROLE manti SET timezone TO 'UTC';"
+        $ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE manti TO manti;"
+
+
+3. Deploy data to database
+
+        $ sudo -u postgres psql -d manti < deploy/manti.sql
+
+
+4. Create local config file (dev or prod environment)
+
+        $ cp app/core/settings/local.py.dev app/core/settings/local.py
+
+
+5. Migrate, collect static files and create admin user
+
+        $ cd src/app/
+        $ ./manage.py migrate
+        $ ./manage.py collectstatic --no-input
+        $ ./manage.py createsuperuser
+
+
+6. Run local dev server or link configs on prod server and restart
+
+        $ ./manage.py runserver 0.0.0.0:8000
+        
+        $ sudo ln -s ./deploy/confs/nginx.conf /etc/nginx/sites-enabled/default.conf
+        $ sudo ln -s ./deploy/confs/supervisor.conf /etc/supervisor/conf.d/default.conf
+        $ sudo service nginx restart
+        $ sudo supervisorctl restart manti:
+
+
+Docker setup
+------------
+
+1. Install [Docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/)
+
+2. Build app image and run
+
+        $ docker build -t mantiby/mantiby:latest .
+        $ docker-compose up
