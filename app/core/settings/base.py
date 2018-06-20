@@ -39,8 +39,6 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'compressor',
     'modeltranslation',
-    'django_celery_results',
-    'django_celery_beat',
 
     'django.contrib.admin',
     'django.contrib.auth',
