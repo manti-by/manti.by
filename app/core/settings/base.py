@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'compressor',
     'modeltranslation',
+    'django_celery_results',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -198,7 +199,6 @@ COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
 
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_RESULT_BACKEND = 'django-db'
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 
 
 # Meta tags info

@@ -12,6 +12,7 @@ python-memcached>=1.59
 django-taggit>=0.22.2,<0.23.0
 django_compressor>=2.2,<2.3
 django-modeltranslation>=0.12.2,<0.13.0
+django_celery_results>=1.0.0,<1.1.0
 git+https://github.com/manti-by/django-simple-rest.git
 
 requests>=2.18.4,<2.19.0
