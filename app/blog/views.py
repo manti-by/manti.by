@@ -9,7 +9,7 @@ from taggit.models import Tag
 
 def index(request):
     tag = request.GET.get('tag')
-    cache_key = 'blog-%s-%s-%s' % (request.LANGUAGE_CODE, int(request.user.id), tag)
+    cache_key = 'blog-%s-%s-%s' % (request.LANGUAGE_CODE, request.user.id, tag)
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data

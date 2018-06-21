@@ -15,7 +15,7 @@ logger = logging.getLogger('app')
 
 
 def index(request):
-    cache_key = 'index-%s-%s' % (request.LANGUAGE_CODE, int(request.user.id))
+    cache_key = 'index-%s-%s' % (request.LANGUAGE_CODE, request.user.id)
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data
@@ -42,7 +42,7 @@ def index(request):
 
 
 def static(request, page):
-    cache_key = 'static-%s-%s-%s' % (page, request.LANGUAGE_CODE, int(request.user.id))
+    cache_key = 'static-%s-%s-%s' % (page, request.LANGUAGE_CODE, request.user.id)
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data
@@ -55,7 +55,7 @@ def static(request, page):
 
 
 def email(request, email_id):
-    cache_key = 'static-%s-%s-%s' % (email_id, request.LANGUAGE_CODE, int(request.user.id))
+    cache_key = 'static-%s-%s-%s' % (email_id, request.LANGUAGE_CODE, request.user.id)
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data

@@ -6,7 +6,7 @@ from gallery.models import Gallery
 
 
 def index(request):
-    cache_key = 'gallery-%s-%s' % (request.LANGUAGE_CODE, int(request.user.id))
+    cache_key = 'gallery-%s-%s' % (request.LANGUAGE_CODE, request.user.id)
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data
