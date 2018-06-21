@@ -27,7 +27,7 @@
     position: relative;
     width: calc(100% - 24px - 5.2rem);
     margin: 0 0.2rem;
-    color: #999;
+    color: #666;
     cursor: pointer;
 }
 
@@ -64,7 +64,7 @@
     padding-top: 0.35em;
     font-size: 1rem;
     text-align: center;
-    color: #696969;
+    color: #5E5E5E;
 }
 
 
@@ -117,7 +117,7 @@
     padding-top: 0.4em;
     font-size: 0.8em;
     text-align: center;
-    color: #696969;
+    color: #666;
 }
 
 #player .now-playing {
@@ -149,14 +149,14 @@
     top: 8px;
     left: 42px;
     white-space: nowrap;
-    color: #696969;
+    color: #666;
     z-index: 10;
 }
 
 #player .high-definition {
     cursor: pointer;
     text-decoration: line-through;
-    color: #999;
+    color: #666;
 }
 
 #player .high-definition.active {
@@ -167,7 +167,7 @@
 #player .close {
     top: 7px;
     right: -48px;
-    color: #999;
+    color: #666;
     cursor: pointer;
 }
 

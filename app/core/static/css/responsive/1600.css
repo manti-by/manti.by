@@ -28,7 +28,7 @@
     }
 
     main .sidebar li a {
-        color: #999;
+        color: #666;
     }
 
     main .sidebar li a:after {
@@ -43,7 +43,7 @@
         width: 75%;
         margin-left: 25%;
         margin-bottom: 0.5em;
-        color: #696969;
+        color: #666;
     }
 
     main .sidebar .instagram ul {

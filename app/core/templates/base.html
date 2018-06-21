@@ -41,18 +41,12 @@
         <meta property="og:image" content="{% webp_static 'img/share.jpg' %}" />
         {% endblock %}
 
-        {% compress css %}
+        {% compress css inline %}
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/reset.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/font.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/search.css' %}">
-            {% block styles %}{% endblock %}
-            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/481.css' %}">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
         {% endcompress %}
     </head>
     <body>
@@ -136,7 +130,7 @@
         <section id="search" class="shadow">
             <div class="container">
                 <div class="flex">
-                    <input type="text" />
+                    <input type="text" aria-label="Search" />
                     <div class="submit-search">
                         <i class="material-icons">search</i>
                     </div>
@@ -162,6 +156,15 @@
                 </div>
             </nav>
         </footer>
+
+        {% compress css %}
+            {% block styles %}{% endblock %}
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/481.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
+        {% endcompress %}
 
         {% compress js %}
             <script type="text/javascript" src="{% static 'js/libs/jquery-3.3.1/jquery.min.js' %}"></script>
@@ -189,11 +192,11 @@
 
         <script type="application/ld+json">
         {
-            "@context" : "http://schema.org",
+            "@context" : "https://schema.org",
             "@type" : "MusicGroup",
             "name" : "{{ META_TITLE }}",
             "url" : "{{ BASE_URL }}",
-            "logo": "{{ BASE_URL }}{% static 'img/logo/192.png' %}",
+            "logo": "{% static 'img/logo/192.png' %}",
             "sameAs" : [
                 "https://twitter.com/manti_by",
                 "https://instagram.com/manti_by",
