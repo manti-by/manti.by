@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: mantiby/mantiby:latest
 
-    working_directory: /code
+    working_directory: /code/app
 
     steps:
       - checkout

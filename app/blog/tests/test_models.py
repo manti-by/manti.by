@@ -9,7 +9,7 @@ class PostModelTest(TestCase):
     def setUpTestData(cls):
         Post.objects.create(name='Test')
 
-    def test_false_is_false(self):
+    def test_translations(self):
         post = Post.objects.get(id=1)
         self.assertEquals(post.name, 'Test')
         self.assertEquals(post.translations_filled, False)
