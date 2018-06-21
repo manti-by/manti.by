@@ -1,17 +1,14 @@
-from django.views.generic.detail import DetailView
-from django.shortcuts import render, get_object_or_404
+from django.core.cache import cache
+from django.shortcuts import render
 
+from core.utils import update_cache
 from gallery.models import Gallery
 
 
 def index(request):
-    gallery = Gallery.objects.last()
-    return render(request, 'gallery/single.html', {'gallery': gallery})
-
-
-class GalleryView(DetailView):
-    model = Gallery
-    context_object_name = 'gallery'
-
-    def get_object(self, queryset=None):
-        return get_object_or_404(Gallery, slug__iexact=self.kwargs['slug'])
+    cache_key = 'gallery-%s-%s' % (request.LANGUAGE_CODE, request.user.id)
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return cached_data
+    cached_data = render(request, 'gallery/gallery.html', {'gallery': Gallery.objects.last()})
+    return update_cache(cache_key, cached_data)

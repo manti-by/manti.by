@@ -10,7 +10,7 @@ from taggit.managers import TaggableManager
 
 from core.models import BaseModel
 from core.mixins import SlugifyMixin
-from core.utils import original_name
+from core.utils import flush_cache, original_name
 from gallery.tasks import generate_phash
 
 
@@ -81,3 +81,4 @@ class Image(BaseModel):
 def generate_image_phash(sender, instance, **kwargs):
     if not instance.phash:
         generate_phash.delay(instance.id)
+    flush_cache(['index', 'gallery'])

@@ -10,7 +10,7 @@ from taggit.managers import TaggableManager
 
 from core.models import BaseModel
 from core.mixins import SlugifyMixin
-from core.utils import release_name, cover_name
+from core.utils import flush_cache, release_name, cover_name
 from blog.utils import generate_preview_for_post
 
 
@@ -154,3 +154,4 @@ class Post(SlugifyMixin, BaseModel):
 @receiver(post_save, sender=Post, dispatch_uid='convert_release')
 def convert_release(sender, instance, **kwargs):
     generate_preview_for_post(instance)
+    flush_cache(['index', 'blog', 'post'])

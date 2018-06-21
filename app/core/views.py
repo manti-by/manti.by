@@ -2,8 +2,11 @@ import logging
 
 from django.http import Http404
 from django.shortcuts import render
+from django.core.cache import cache
+from django.views.decorators.cache import cache_page
 
 from core.models import Email
+from core.utils import update_cache
 from blog.models import Post
 from gallery.models import Image
 
@@ -12,6 +15,10 @@ logger = logging.getLogger('app')
 
 
 def index(request):
+    cache_key = 'index-%s-%s' % (request.LANGUAGE_CODE, request.user.id)
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return cached_data
     try:
         featured_image = Image.objects.filter(tags__name__iexact='featured')
         if featured_image:
@@ -24,16 +31,17 @@ def index(request):
         latest_posts = Post.objects.exclude(pk__in=[p.pk for p in featured_posts]) \
                            .filter(tags__name__iexact='front').order_by('-created')[:4]
 
-        return render(request, 'index.html', {'featured_image': featured_image,
-                                              'latest_images': latest_images,
-                                              'featured_posts': featured_posts,
-                                              'latest_posts': latest_posts,
-                                              'is_home': True})
+        cached_data = render(request, 'index.html', {'featured_image': featured_image,
+                                                     'latest_images': latest_images,
+                                                     'featured_posts': featured_posts,
+                                                     'latest_posts': latest_posts})
+        return update_cache(cache_key, cached_data)
     except Exception as e:
         logger.exception(e)
         raise Http404
 
 
+@cache_page(60 * 60 * 24 * 30)
 def static(request, page):
     try:
         return render(request, 'static/%s.html' % page)
@@ -42,6 +50,7 @@ def static(request, page):
         raise Http404
 
 
+@cache_page(60 * 60 * 24 * 30)
 def email(request, email_id):
     try:
         e = Email.objects.get(id=email_id)

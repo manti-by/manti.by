@@ -34,10 +34,30 @@ def get_instagram_photos(limit=6):
                     'image': item['images']['thumbnail']['url'],
                     'name': item['caption']['text'].split('\n')[0]
                 })
-        cache.set('instagram_photos', recent_media[:limit])
+        cache.set('instagram_photos', recent_media[:limit], 60 * 60 * 24)
     except Exception as e:
         logger.error(e)
     return recent_media[:limit]
+
+
+def update_cache(cache_key, cached_data, timeout=60 * 60 * 24 * 5):
+    keys = cache.get('keys', [])
+    keys.append(cache_key)
+    cache.set('keys', keys)
+    cache.set(cache_key, cached_data, timeout)
+    return cached_data
+
+
+def flush_cache(prefixes):
+    keys_to_delete = []
+    existing_keys = cache.get('keys', [])
+    for key in existing_keys:
+        for prefix in prefixes:
+            if key.find(prefix) > -1:
+                keys_to_delete.append(key)
+                del existing_keys[key]
+    cache.set('keys', existing_keys)
+    cache.delete_many(keys_to_delete)
 
 
 def get_name(instance, filename, typename):
