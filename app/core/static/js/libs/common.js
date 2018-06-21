@@ -50,4 +50,13 @@
         return hours + ':' + minutes + ':' + seconds;
     };
 
+    $.loadDeferredStyles = () => {
+        let addStylesNode = document.getElementById('deferred-styles'),
+            replacement = document.createElement('div');
+
+        replacement.innerHTML = addStylesNode.textContent;
+        document.body.appendChild(replacement);
+        addStylesNode.parentElement.removeChild(addStylesNode);
+    }
+
 })(jQuery);

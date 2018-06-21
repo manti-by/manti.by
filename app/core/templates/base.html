@@ -8,8 +8,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
-        <link rel="manifest" href="{% static "manifest.json" %}">
         <meta name="theme-color" content="#B40303">
+        <link rel="manifest" href="{% static "manifest.json" %}">
+        <link rel="canonical" href="{{ ABSOLUTE_URL }}">
 
         <!-- Add to homescreen for Chrome on Android -->
         <meta name="mobile-web-app-capable" content="yes">
@@ -40,9 +41,7 @@
         <meta property="og:description" content="{{ META_DESCRIPTION }}">
         <meta property="og:image" content="{% webp_static 'img/share.jpg' %}">
         {% endblock %}
-
         <meta property="og:url" content="{{ ABSOLUTE_URL }}">
-        <link rel="canonical" href="{{ ABSOLUTE_URL }}">
 
         {% compress css inline %}
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/reset.css' %}">
@@ -50,6 +49,7 @@
             <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}">
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/search.css' %}">
+            {% block styles %}{% endblock %}
         {% endcompress %}
     </head>
     <body>
@@ -160,14 +160,15 @@
             </nav>
         </footer>
 
+        <noscript id="deferred-styles">
         {% compress css %}
-            {% block styles %}{% endblock %}
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/481.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
         {% endcompress %}
+        </noscript>
 
         {% compress js %}
             <script type="text/javascript" src="{% static 'js/libs/jquery-3.3.1/jquery.min.js' %}"></script>
@@ -185,10 +186,22 @@
             <script type="text/javascript" src="{% static 'js/core.js' %}"></script>
             {% block scripts %}{% endblock %}
             <script type="text/javascript">
+                // Init Service Worker
                 if ('serviceWorker' in navigator) {
                     navigator.serviceWorker
                         .register({% if DEBUG %}'/static/js/sw.js', {scope: '/static/js/'}{% else %}'/sw.js', {scope: '/'}{% endif %})
                         .catch((err) => console.log(err));
+                }
+
+                // Load deferred styles
+                let raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                      window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+                if (raf) {
+                    raf(() => {
+                        window.setTimeout($.loadDeferredStyles, 0);
+                    });
+                } else {
+                    window.addEventListener('load', $.loadDeferredStyles);
                 }
             </script>
         {% endcompress %}
