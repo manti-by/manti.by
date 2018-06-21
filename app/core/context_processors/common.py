@@ -35,4 +35,5 @@ def global_template_vars(request):
         'instagram_photos': get_instagram_photos(),
         'is_supports_webp': is_supports_webp(request),
         'is_home': False,
+        'is_secure': request.is_secure
     }

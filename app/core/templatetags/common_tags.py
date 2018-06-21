@@ -10,11 +10,12 @@ from django.templatetags.static import static
 register = template.Library()
 
 
-@register.simple_tag(takes_context=False)
-def get_locale_domain(locale):
+@register.simple_tag(takes_context=True)
+def get_locale_domain(context, locale):
     for domain_locale, domain in settings.LOCALE_URLS.items():
         if locale == domain_locale and translation.check_for_language(domain_locale):
-            return domain
+            protocol = 'http' if context.get('is_secure', False) else 'https'
+            return '%s://%s' % (protocol, domain)
     return settings.BASE_URL
 
 
