@@ -32,7 +32,8 @@ class BlogView(DetailView):
     context_object_name = 'item'
 
     def get_object(self, queryset=None):
-        cache_key = 'post-%s-%s' % (self.request.LANGUAGE_CODE, self.request.user.id)
+        cache_key = 'post-%s-%s-%s' % (self.request.LANGUAGE_CODE, self.request.user.id,
+                                       self.kwargs['slug'])
         cached_data = cache.get(cache_key)
         if cached_data:
             return cached_data
