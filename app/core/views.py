@@ -3,7 +3,6 @@ import logging
 from django.http import Http404
 from django.shortcuts import render
 from django.core.cache import cache
-from django.views.decorators.cache import cache_page
 
 from core.models import Email
 from core.utils import update_cache
