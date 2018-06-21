@@ -107,6 +107,15 @@ button {
     background: #CCC;
 }
 
+img {
+    opacity: 1;
+    transition: opacity 0.3s;
+}
+
+img.lazy {
+    opacity: 0;
+}
+
 .hidden {
     display: none;
 }

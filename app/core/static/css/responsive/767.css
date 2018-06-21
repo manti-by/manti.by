@@ -68,17 +68,7 @@
     #player .volume-text,
     #player .volume-label,
     #player .high-definition {
-        margin: 1.5rem 0 0.7rem 0;
-    }
-
-    #player .volume-text {
-        padding-top: 0.3rem;
-        font-size: 0.8em;
-        color: #696969;
-    }
-
-    #player .volume {
-        width: 55%;
+        display: none;
     }
 
     #player .close {
@@ -245,6 +235,10 @@
         font-size: 1.2em;
     }
 
+    .post .info .preview {
+        margin: 1em 0;
+    }
+
     .post .image,
     .post .data {
         width: 100%;
@@ -254,6 +248,10 @@
 
     .post .image a {
         position: relative;
+    }
+
+    .post .tracklist .tracks {
+        margin-bottom: 0.5em;
     }
 
     .post .links {
