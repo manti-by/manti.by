@@ -174,7 +174,7 @@ LOGIN_URL = '/profiles/login/'
 # Sorl thumbnailer settings
 
 THUMBNAIL_KVSTORE = 'sorl.thumbnail.kvstores.redis_kvstore.KVStore'
-
+THUMBNAIL_QUALITY = 85
 
 # Email settings
 

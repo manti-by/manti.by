@@ -11,7 +11,9 @@
             close_button = $('.close-search');
 
         search_input.on('keyup', () => {
-            let q = search_input.val();
+            let q = search_input.val(),
+                esult_items = '';
+
             if (q.length > 2) {
                 $.get('/api/search', {q : q}, (response) => {
                     if (response.status === 200) {
@@ -24,9 +26,9 @@
                                 .html('<ul></ul>');
 
                             for (let item of response.data) {
-                                search_result.find('ul')
-                                    .append('<li><a href="' + item.url + '">' + item.name + '</a></li>');
+                                result_items += '<li><a href="' + item.url + '">' + item.name + '</a></li>'
                             }
+                            search_result.find('ul').append(result_items);
                         }
                     }
                 });
