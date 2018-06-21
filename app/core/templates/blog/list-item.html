@@ -1,6 +1,6 @@
 {% load i18n common_tags %}
 
-<div class="post" data-id="{{ item.id }}">
+<article class="post" data-id="{{ item.id }}">
     <div class="flex">
         <div class="image shadow">
             <a href="{% url 'post' item.slug %}" name="post-{{ item.slug }}">
@@ -57,4 +57,4 @@
             </div>
         </div>
     </div>
-</div>
+</article>

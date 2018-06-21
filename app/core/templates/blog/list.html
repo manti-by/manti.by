@@ -10,11 +10,11 @@
         <a href="{% url 'blog' %}" name="blog">{% trans 'Music' %}</a>
         <span class="mobile-hidden">
             <span class="spacer">&bull;</span>
-            <span class="tag">{{ tag }}</span>
+            <h1><span class="tag">{{ tag }}</span></h1>
         </span>
     {% else %}
         <span class="spacer">&bull;</span>
-        {% trans 'Music' %}
+        <h1>{% trans 'Music' %}</h1>
     {% endif %}
 {% endblock %}
 

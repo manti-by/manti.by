@@ -38,8 +38,8 @@
     font-size: 1.3em;
 }
 
-.post .info h1,
-.post .tracklist h1 {
+.post .info h2,
+.post .tracklist h2 {
     margin-bottom: 0.5em;
 }
 

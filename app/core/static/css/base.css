@@ -24,7 +24,7 @@ h1, h2, h3, h4 {
 }
 
 h1 {
-    font-size: 4.25em;
+    font-size: 3.5em;
 }
 
 h2 {
@@ -345,6 +345,10 @@ header .breadcrumbs a {
     color: #666;
 }
 
+header .breadcrumbs a:hover {
+    color: #b40303;
+}
+
 header .breadcrumbs .spacer {
     margin: 0.25em;
 }
@@ -352,6 +356,18 @@ header .breadcrumbs .spacer {
 header .breadcrumbs .tag {
     margin: 0;
     font-size: 1em;
+}
+
+header .breadcrumbs .tag:hover {
+    color: inherit;
+}
+
+header .breadcrumbs h1 {
+    display: inline;
+    margin: 0;
+    font-size: 1em;
+    text-transform: none;
+    color: #666;
 }
 
 main {

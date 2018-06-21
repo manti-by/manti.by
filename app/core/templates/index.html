@@ -7,7 +7,7 @@
 {% block content %}
     <div class="home container">
         <div class="featured posts">
-            <h2>{% trans 'Featured' %}</h2>
+            <h1>{% trans 'Featured' %}</h1>
             <div class="flex">
                 {% for item in featured_posts %}
                     {% include 'blog/featured-item.html' %}
@@ -47,11 +47,11 @@
         </div>
         <h2>{% trans 'Latest posts' %}</h2>
         <div class="main flex">
-            <div class="posts">
+            <section class="posts">
                 {% for item in latest_posts %}
                     {% include 'blog/list-item.html' %}
                 {% endfor %}
-            </div>
+            </section>
             {% include 'common/sidebar.html' %}
         </div>
     </div>

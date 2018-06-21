@@ -6,11 +6,11 @@
 
 {% block breadcrumbs %}
     <span class="spacer">&bull;</span>
-    {% trans 'Gallery' %}
+    <h1>{% trans 'Gallery' %}</h1>
 {% endblock %}
 
 {% block content %}
-    <div class="gallery container">
+    <article class="gallery container">
         <div class="item">
             <div class="images {% if user.is_superuser %}orderable{% endif %}">
                 {% for image in gallery.images.ordered %}
@@ -27,7 +27,7 @@
                 {% endfor %}
             </div>
         </div>
-    </div>
+    </article>
 {% endblock %}
 
 {% block styles %}
