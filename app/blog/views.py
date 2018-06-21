@@ -9,7 +9,7 @@ from taggit.models import Tag
 
 def index(request):
     tag = request.GET.get('tag')
-    cache_key = 'blog-%s-%s-%s' % (request.LANGUAGE_CODE, request.user.id, tag)
+    cache_key = 'blog-%s-%s-%s' % (request.LANGUAGE_CODE, int(request.user.id), tag)
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data
@@ -32,8 +32,8 @@ class BlogView(DetailView):
     context_object_name = 'item'
 
     def get_object(self, queryset=None):
-        cache_key = 'post-%s-%s-%s' % (self.request.LANGUAGE_CODE, self.request.user.id,
-                                       self.kwargs['slug'])
+        cache_key = 'post-%s-%s-%s' % (self.kwargs['slug'], self.request.LANGUAGE_CODE,
+                                       self.request.user.id)
         cached_data = cache.get(cache_key)
         if cached_data:
             return cached_data

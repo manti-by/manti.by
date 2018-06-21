@@ -154,4 +154,4 @@ class Post(SlugifyMixin, BaseModel):
 @receiver(post_save, sender=Post, dispatch_uid='convert_release')
 def convert_release(sender, instance, **kwargs):
     generate_preview_for_post(instance)
-    flush_cache(['index', 'blog', 'post'])
+    flush_cache(['index', 'blog', 'post-%s' % instance.slug])

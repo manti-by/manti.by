@@ -55,7 +55,7 @@ def flush_cache(prefixes):
         for prefix in prefixes:
             if key.find(prefix) > -1:
                 keys_to_delete.append(key)
-                del existing_keys[key]
+                existing_keys.remove(key)
     cache.set('keys', existing_keys)
     cache.delete_many(keys_to_delete)
 

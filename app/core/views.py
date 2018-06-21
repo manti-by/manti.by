@@ -15,7 +15,7 @@ logger = logging.getLogger('app')
 
 
 def index(request):
-    cache_key = 'index-%s-%s' % (request.LANGUAGE_CODE, request.user.id)
+    cache_key = 'index-%s-%s' % (request.LANGUAGE_CODE, int(request.user.id))
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data
@@ -41,20 +41,28 @@ def index(request):
         raise Http404
 
 
-@cache_page(60 * 60 * 24 * 30)
 def static(request, page):
+    cache_key = 'static-%s-%s-%s' % (page, request.LANGUAGE_CODE, int(request.user.id))
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return cached_data
     try:
-        return render(request, 'static/%s.html' % page)
+        cached_data = render(request, 'static/%s.html' % page)
+        return update_cache(cache_key, cached_data)
     except Exception as e:
         logger.exception(e)
         raise Http404
 
 
-@cache_page(60 * 60 * 24 * 30)
 def email(request, email_id):
+    cache_key = 'static-%s-%s-%s' % (email_id, request.LANGUAGE_CODE, int(request.user.id))
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return cached_data
     try:
-        e = Email.objects.get(id=email_id)
-        return render(request, 'emails/email.html', {'email': e})
+        mail = Email.objects.get(id=email_id)
+        cached_data = render(request, 'emails/email.html', {'email': mail})
+        return update_cache(cache_key, cached_data)
     except Exception as e:
         logger.exception(e)
         raise Http404
