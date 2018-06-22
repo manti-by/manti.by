@@ -21,7 +21,13 @@ def get_locale_domain(context, locale):
 
 @register.simple_tag(takes_context=True)
 def webp_cover(context, cover):
-    if not context.get('is_supports_webp', False):
+    is_supports_webp = context.get('is_supports_webp', False)
+
+    if not cover:
+        return static('img/no-image.png') \
+            if is_supports_webp else static('img/no-image.webp')
+
+    if not is_supports_webp:
         return cover.url
 
     webp_path = os.path.splitext(cover.file.name)[0] + '.webp'

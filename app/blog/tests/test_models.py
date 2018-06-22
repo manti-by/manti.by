@@ -1,4 +1,9 @@
+import os
+import uuid
+import shutil
+
 from django.test import TestCase
+from django.conf import settings
 
 from blog.models import Post
 
@@ -7,9 +12,53 @@ class PostModelTest(TestCase):
 
     @classmethod
     def setUpTestData(cls):
-        Post.objects.create(name='Test')
+        cls.data = {
+            'name': str(uuid.uuid4()),
+            'is_music': False
+        }
+        cls.post = Post.objects.create(**cls.data)
 
-    def test_translations(self):
-        post = Post.objects.get(id=1)
-        self.assertEquals(post.name, 'Test')
-        self.assertEquals(post.translations_filled, False)
+        release_path = os.path.join(settings.MEDIA_ROOT, 'release')
+        if not os.path.exists(release_path):
+            os.mkdir(release_path)
+
+        shutil.copy(
+            os.path.join(settings.STATIC_ROOT, 'test.mp3'),
+            os.path.join(settings.MEDIA_ROOT, 'release', 'test.mp3')
+        )
+
+    def test_get(self):
+        self.assertEquals(self.post.name, self.data['name'])
+        self.assertEquals(self.post.slug, self.data['name'].lower())
+
+        self.assertIsNotNone(self.post.created)
+        self.assertFalse(self.post.translations_filled)
+        self.assertFalse(self.post.files_converted)
+
+    def test_update(self):
+        self.post.is_music = True
+        self.post.save()
+        self.assertTrue(self.post.is_music)
+
+    def test_tags(self):
+        genre = str(uuid.uuid4())
+        self.post.genre.add(genre)
+        tag = str(uuid.uuid4())
+        self.post.tags.add(tag)
+
+        self.assertTrue(genre in self.post.genre.names())
+        self.assertTrue(tag in self.post.tags.names())
+        self.assertEqual('%s /%s/' % (self.data['name'], genre), self.post.title)
+
+    def test_files(self):
+        self.post.release = 'release/test.mp3'
+        self.post.save()
+
+        self.assertIsNotNone(self.post.release_mp3_url)
+        self.assertIsNotNone(self.post.release_mp3_file)
+        self.assertIsNotNone(self.post.preview_mp3_url)
+        self.assertIsNotNone(self.post.preview_mp3_file)
+        self.assertIsNotNone(self.post.release_ogg_url)
+        self.assertIsNotNone(self.post.release_ogg_file)
+        self.assertIsNotNone(self.post.preview_ogg_url)
+        self.assertIsNotNone(self.post.preview_ogg_file)

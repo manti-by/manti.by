@@ -11,9 +11,13 @@
     <meta property="og:type" content="music.song">
     <meta property="og:title" content="Manti - {{ item.name }}">
     <meta property="og:site_name" content="{{ META_TITLE }}">
+    {% if item.cover %}
     <meta property="og:image" content="{{ item.cover.url }}">
+    {% endif %}
+    {% if item.release %}
     <meta property="og:audio" content="{{ item.release.url }}">
     <meta property="og:audio:type" content="audio/mpeg">
+    {% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -75,10 +79,12 @@
                             <a href="{% url 'blog' %}?tag={{ t.slug }}" class="tag">{{ t.name }}</a>
                         {% endfor %}
                     </div>
+                    {% if item.release %}
                     <div class="links">
                         <span class="link show-tracklist">{% trans 'Tracklist' %}</span>
                         <a href="{{ item.release.url }}" class="download">{% trans 'Download' %}</a>
                     </div>
+                    {% endif %}
                 </div>
                 <div class="tracklist hidden">
                     <h2>{{ item.name }}</h2>
