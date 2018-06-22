@@ -22,9 +22,17 @@ jobs:
     working_directory: /code/app
     docker:
       - image: mantiby/mantiby:latest
+    steps:
       - run:
           name: Run flake8
           command: flake8
       - run:
           name: Run tests
           command: python3 manage.py test --settings=core.settings.test
+  workflows:
+  version: 2
+  build_migrate_and_test:
+    jobs:
+      - build
+      - migrate
+      - test
