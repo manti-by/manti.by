@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'core',
     'gallery',
     'profiles',
+    'shortener',
 
     'taggit',
     'simple_rest',

@@ -37,11 +37,14 @@ urlpatterns = [
     # Profile urls
     url(r'^profile/', include('profiles.urls')),
 
+    # URL shortener
+    url(r'^sr/', include('shortener.urls')),
+
     # Admin urls
     url(r'^dashboard/', admin.site.urls),
 
     # Sitemap
-    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap')
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
 ]
 
 
