@@ -66,6 +66,7 @@ Install application
         $ sudo -u postgres psql -c "ALTER ROLE manti SET client_encoding TO 'utf8';"
         $ sudo -u postgres psql -c "ALTER ROLE manti SET default_transaction_isolation TO 'read committed';"
         $ sudo -u postgres psql -c "ALTER ROLE manti SET timezone TO 'UTC';"
+        $ sudo -u postgres psql -c "ALTER ROLE manti CREATEDB;"
         $ sudo -u postgres psql -c "GRANT ALL PRIVILEGES ON DATABASE manti TO manti;"
 
 
