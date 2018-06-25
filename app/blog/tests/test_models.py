@@ -1,4 +1,5 @@
 import os
+import mock
 import uuid
 import shutil
 
@@ -23,7 +24,7 @@ class PostModelTest(TestCase):
             os.mkdir(release_path)
 
         shutil.copy(
-            os.path.join(settings.STATIC_ROOT, 'test.mp3'),
+            os.path.join(settings.STATIC_ROOT, 'test', 'test.mp3'),
             os.path.join(settings.MEDIA_ROOT, 'release', 'test.mp3')
         )
 
@@ -35,10 +36,13 @@ class PostModelTest(TestCase):
         self.assertFalse(self.post.translations_filled)
         self.assertFalse(self.post.files_converted)
 
-    def test_update(self):
+    @mock.patch('blog.models.generate_preview_for_post')
+    def test_update(self, generate_mock):
         self.post.is_music = True
         self.post.save()
+
         self.assertTrue(self.post.is_music)
+        self.assertTrue(generate_mock.called)
 
     def test_tags(self):
         genre = str(uuid.uuid4())
@@ -50,10 +54,12 @@ class PostModelTest(TestCase):
         self.assertTrue(tag in self.post.tags.names())
         self.assertEqual('%s /%s/' % (self.data['name'], genre), self.post.title)
 
-    def test_files(self):
+    @mock.patch('blog.models.generate_preview_for_post')
+    def test_files(self, generate_mock):
         self.post.release = 'release/test.mp3'
         self.post.save()
 
+        self.assertTrue(generate_mock.called)
         self.assertIsNotNone(self.post.release_mp3_url)
         self.assertIsNotNone(self.post.release_mp3_file)
         self.assertIsNotNone(self.post.preview_mp3_url)

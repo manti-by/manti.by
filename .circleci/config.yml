@@ -4,52 +4,25 @@ jobs:
     working_directory: /code
     docker:
       - image: mantiby/mantiby:latest
+      - image: circleci/postgres:9.6.2-alpine
+        environment:
+          POSTGRES_DB: manti
+          POSTGRES_USER: manti
+          POSTGRES_PASSWORD: pa55word
     steps:
       - checkout
       - run:
           name: Install dependencies
-          command: pip3 install -r /code/requirements.txt
-  check:
-    working_directory: /code/app
-    docker:
-      - image: mantiby/mantiby:latest
-    steps:
-      - checkout
+          command: pip3 install -r requirements.txt
       - run:
           name: Run flake8
           command: flake8
-  migrate:
-    working_directory: /code/app
-    docker:
-      - image: mantiby/mantiby:latest
-      - image: circleci/postgres:9.6.2-alpine
-        environment:
-          POSTGRES_DB: manti
-          POSTGRES_USER: manti
-          POSTGRES_PASSWORD: pa55word
-    steps:
-      - checkout
+          working_directory: /code/app
       - run:
           name: Run migrations
           command: python3 manage.py migrate --settings=core.settings.test
-  test:
-    working_directory: /code/app
-    docker:
-      - image: mantiby/mantiby:latest
-      - image: circleci/postgres:9.6.2-alpine
-        environment:
-          POSTGRES_DB: manti
-          POSTGRES_USER: manti
-          POSTGRES_PASSWORD: pa55word
-    steps:
+          working_directory: /code/app
       - run:
           name: Run tests
-          command: python3 manage.py test --settings=core.settings.test
-  workflows:
-  version: 2
-  build_migrate_and_test:
-    jobs:
-      - build
-      - check
-      - migrate
-      - test
+          command: python3 manage.py test -v 2 --settings=core.settings.test
+          working_directory: /code/app

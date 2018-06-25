@@ -22,5 +22,6 @@ httpagentparser>=1.8.1,<1.9.0
 uwsgi>=2.0.17,<2.1.0
 
 # Dev dependencies
+mock>=2.0.0,<2.1.0
 ipython>=6.3.0
 flake8>=3.5.0

@@ -4,14 +4,12 @@ from django.utils.translation import ugettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from PIL import Image as PILImage
-from imagehash import phash
 from taggit.managers import TaggableManager
 
 from core.models import BaseModel
 from core.mixins import SlugifyMixin
 from core.utils import flush_cache, original_name
-from gallery.tasks import generate_phash
+from gallery.utils import generate_image_phash
 
 
 class GalleryManager(models.Manager):
@@ -67,18 +65,12 @@ class Image(BaseModel):
     def __str__(self):
         return 'Gallery #%s - Image#%d' % (self.gallery.name, self.id)
 
-    def generate_phash(self):
-        image = PILImage.open(self.original_image)
-        self.phash = phash(image)
-        self.save()
-
     class Meta:
         verbose_name = _('Image')
         verbose_name_plural = _('Image List')
 
 
-@receiver(post_save, sender=Image, dispatch_uid='generate_image_phash')
-def generate_image_phash(sender, instance, **kwargs):
-    if not instance.phash:
-        generate_phash.delay(instance.id)
+@receiver(post_save, sender=Image, dispatch_uid='calc_image_phash')
+def calc_image_phash(sender, instance, **kwargs):
+    generate_image_phash(instance)
     flush_cache(['index', 'gallery'])

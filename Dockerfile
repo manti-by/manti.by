@@ -1,10 +1,6 @@
 # Use an official ubuntu image
 FROM ubuntu:16.04
 
-# Set the working directory to /app
-ADD ./ /code
-WORKDIR /code
-
 # Install any needed packages specified in requirements.txt
 RUN apt-get update && apt-get upgrade -y
 RUN apt-get install -y software-properties-common apt-utils
@@ -17,3 +13,7 @@ RUN pip3 install --trusted-host pypi.org -r requirements.txt
 
 # Make port 80 available to the world outside this container
 EXPOSE 8000
+
+# Set the working directory to /app
+ADD ./ /code
+WORKDIR /code
