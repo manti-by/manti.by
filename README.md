@@ -56,7 +56,7 @@ Install application
         $ cd ../
         $ virtualenv -p python3 --no-site-packages --prompt="manti-" venv
         $ . venv/bin/activate
-        $ pip install -r src/requirements.txt
+        $ pip install -r src/deploy/requirements.txt
 
 
 2. Create database and appropriate user
@@ -105,5 +105,5 @@ Docker setup
 
 2. Build app image and run
 
-        $ docker build -t mantiby/mantiby:latest .
-        $ docker-compose up
+        $ docker build -f deploy/Dockerfile -t mantiby/mantiby:latest .
+        $ cd deploy/ && docker-compose up

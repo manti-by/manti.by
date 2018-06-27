@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+  manti-postgres:
+    image: postgres:9.6
+    volumes:
+      - ./database/:/docker-entrypoint-initdb.d/
+    environment:
+      - POSTGRES_DB=manti
+      - POSTGRES_USER=manti
+      - POSTGRES_PASSWORD=pa55word
+  manti-redis:
+      image: redis:latest
+  manti-django:
+    image: mantiby/mantiby:latest
+    ports:
+      - "8888:80"
+    links:
+      - manti-postgres
+      - manti-redis
+    volumes:
+      - ../:/srv/manti.by/src/
+      - ../../content/:/srv/manti.by/content/
+      - ../../static/:/srv/manti.by/static/
+      - ../../log/:/var/log/manti.by/
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings.docker
+    tty: true

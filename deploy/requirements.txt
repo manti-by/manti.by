@@ -13,7 +13,7 @@ django-taggit>=0.22.2,<0.23.0
 django_compressor>=2.2,<2.3
 django-modeltranslation>=0.12.2,<0.13.0
 django_celery_results>=1.0.0,<1.1.0
-git+https://github.com/manti-by/django-simple-rest.git
+git+https://github.com/manti-by/django-simple-rest.git@v0.1#egg=simple_rest
 
 requests>=2.18.4,<2.19.0
 unidecode>=1.0.22,<1.1.0

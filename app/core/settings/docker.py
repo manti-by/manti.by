@@ -2,23 +2,24 @@ from .base import *
 
 SECRET_KEY = '9(+8&f)43k--m$cq1#kcwy$%o4hlj9remnlybh+-*gl6_*10*k'
 
-DEBUG = True
+DEBUG = False
 
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1', 'local.manti.by',
+                 'ru.local.manti.by', 'en.local.manti.by']
 
-BASE_URL = 'http://127.0.0.1:8000'
+BASE_URL = 'http://local.manti.by'
 
-STATIC_ROOT = '/static/'
-MEDIA_ROOT = '/content/'
+STATIC_ROOT = '/srv/manti/static'
+MEDIA_ROOT = '/srv/manti/content'
 
 LOCALE_URLS = {
-    'be': 'http://127.0.0.1:8000',
-    'ru': 'http://127.0.0.1:8000',
-    'en': 'http://127.0.0.1:8000',
+    'be': 'local.manti.by',
+    'ru': 'ru.local.manti.by',
+    'en': 'en.local.manti.by',
 }
 
 
@@ -45,6 +46,16 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
+        'file_app': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/manti/app.log',
+        },
+        'file_django': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/manti/django.log',
+        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -55,26 +66,22 @@ LOGGING = {
     },
     'loggers': {
         'app': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
+            'handlers': ['file_app', 'console'],
+            'level': 'WARNING',
             'propagate': True,
             'formatter': 'verbose',
         },
         'django': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
+            'handlers': ['file_django'],
+            'level': 'WARNING',
             'propagate': True,
             'formatter': 'simple',
         },
         'django.template': {
             'handlers': ['null'],
-            'propagate': False,
-            'level': 'ERROR',
         },
         'django.db.backends': {
             'handlers': ['null'],
-            'propagate': False,
-            'level': 'ERROR',
         },
     },
 }
