@@ -25,5 +25,5 @@ jobs:
           working_directory: /code/app
       - run:
           name: Run tests
-          command: python3 manage.py test -v 2 --settings=core.settings.test
+          command: python3 manage.py test --settings=core.settings.test
           working_directory: /code/app

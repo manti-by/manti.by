@@ -4,7 +4,7 @@ import logging
 from django.db.models import Q
 from django.http import JsonResponse
 from django.utils.translation import ugettext_lazy as _
-from simple_rest import Resource
+from djrest.resource import Resource
 
 from api.utils import resource_wrapper
 from core.context_processors.common import global_template_vars

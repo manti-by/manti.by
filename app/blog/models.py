@@ -90,35 +90,43 @@ class Post(SlugifyMixin, BaseModel):
 
     @property
     def release_mp3_url(self):
-        return self.release.url
+        return self.release.url \
+            if self.release else None
 
     @property
     def release_mp3_file(self):
-        return self.release.file.name
+        return self.release.file.name \
+            if self.release else None
 
     @property
     def preview_mp3_url(self):
-        return self.release.url.replace('release', 'preview')
+        return self.release.url.replace('release', 'preview') \
+            if self.release else None
 
     @property
     def preview_mp3_file(self):
-        return self.release.file.name.replace('release', 'preview')
+        return self.release.file.name.replace('release', 'preview') \
+            if self.release else None
 
     @property
     def release_ogg_url(self):
-        return self.release.url.replace('mp3', 'ogg')
+        return self.release.url.replace('mp3', 'ogg') \
+            if self.release else None
 
     @property
     def release_ogg_file(self):
-        return self.release.file.name.replace('mp3', 'ogg')
+        return self.release.file.name.replace('mp3', 'ogg') \
+            if self.release else None
 
     @property
     def preview_ogg_url(self):
-        return self.release.url.replace('release', 'preview').replace('mp3', 'ogg')
+        return self.release.url.replace('release', 'preview').replace('mp3', 'ogg') \
+            if self.release else None
 
     @property
     def preview_ogg_file(self):
-        return self.release.file.name.replace('release', 'preview').replace('mp3', 'ogg')
+        return self.release.file.name.replace('release', 'preview').replace('mp3', 'ogg') \
+            if self.release else None
 
     @property
     def title(self):
@@ -136,7 +144,7 @@ class Post(SlugifyMixin, BaseModel):
             'url': self.url,
             'name': self.name,
             'title': self.title,
-            'cover': self.cover.url,
+            'cover': self.cover.url if self.cover else None,
             'release': {
                 'mp3': self.release_mp3_url,
                 'ogg': self.release_ogg_url
