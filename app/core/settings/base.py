@@ -36,7 +36,6 @@ INSTALLED_APPS = [
     'shortener',
 
     'taggit',
-    'simple_rest',
     'sorl.thumbnail',
     'compressor',
     'modeltranslation',
