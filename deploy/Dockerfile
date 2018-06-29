@@ -20,16 +20,16 @@ RUN apt-get update && apt-get install -y software-properties-common apt-utils \
 RUN pip3 install pip --upgrade
 RUN pip3 install wheel
 
-COPY ./deploy/requirements.txt /etc/manti.by/requirements.txt
+COPY requirements.txt /etc/manti.by/requirements.txt
 RUN pip3 install --trusted-host pypi.org -r /etc/manti.by/requirements.txt
 
 
 # Setup supervisor and nginx
 
-COPY ./deploy/confs/supervisor.docker.conf /etc/manti.by/supervisor.conf
-COPY ./deploy/confs/uwsgi.docker.ini /etc/manti.by/uwsgi.ini
-COPY ./deploy/confs/uwsgi_params /etc/manti.by/uwsgi_params
-COPY ./deploy/confs/nginx.docker.conf /etc/manti.by/nginx.conf
+COPY confs/supervisor.docker.conf /etc/manti.by/supervisor.conf
+COPY confs/uwsgi.docker.ini /etc/manti.by/uwsgi.ini
+COPY confs/uwsgi_params /etc/manti.by/uwsgi_params
+COPY confs/nginx.docker.conf /etc/manti.by/nginx.conf
 
 RUN ln -s /etc/manti.by/supervisor.conf /etc/supervisor/conf.d/manti.by.conf
 RUN ln -s /etc/manti.by/nginx.conf /etc/nginx/sites-enabled/manti.by.conf

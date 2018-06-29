@@ -11,7 +11,7 @@ services:
   manti-redis:
       image: redis:latest
   manti-django:
-    image: mantiby/mantiby:latest
+    image: mantiby/manti.by:latest
     ports:
       - "8888:80"
     links:

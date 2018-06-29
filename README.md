@@ -1,13 +1,13 @@
-M2 Micro CMS
-============
+Manti.by
+========
 
 
 About
 -----
 
-Django version of PHP Micro Framework M2.
+Django version of PHP micro framework M2, custom blog engine for music and photo publishing.
 
-Author: Alex Manti <manti.by@gmail.com>
+Author: Alexander Chaika <manti.by@gmail.com>
 
 Source link: https://github.com/manti-by/M2-Blog-Engine
 
@@ -105,5 +105,6 @@ Docker setup
 
 2. Build app image and run
 
-        $ docker build -f deploy/Dockerfile -t mantiby/mantiby:latest .
-        $ cd deploy/ && docker-compose up
+        $ cd deploy/ 
+        $ docker build -t mantiby/manti.by:latest .
+        $ docker-compose up
