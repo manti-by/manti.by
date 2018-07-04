@@ -10,12 +10,15 @@ services:
       - POSTGRES_PASSWORD=pa55word
   manti-redis:
       image: redis:latest
+  manti-memcached:
+      image: memcached:latest
   manti-django:
     image: mantiby/manti.by:latest
     ports:
       - "8888:80"
     links:
       - manti-postgres
+      - manti-memcached
       - manti-redis
     volumes:
       - ../:/srv/manti.by/src/

@@ -5,11 +5,10 @@ FROM ubuntu:16.04
 
 # Create required dirs
 
-RUN mkdir -p /srv/manti.by/src/
-RUN mkdir -p /srv/manti.by/static/
-RUN mkdir -p /srv/manti.by/content/
-RUN mkdir -p /var/log/manti.by/
+RUN mkdir -p /srv/manti.by/
+RUN mkdir -p /etc/manti.by/
 RUN mkdir -p /run/manti.by/
+RUN mkdir -p /var/log/manti.by/
 
 
 # Install any needed packages specified in requirements.txt
@@ -40,6 +39,13 @@ RUN rm /etc/nginx/sites-enabled/default
 
 WORKDIR /srv/manti.by/src/
 EXPOSE 80
+
+
+# Fix file permissions
+
+RUN chown -R www-data:www-data /srv/manti.by/
+RUN chown -R www-data:www-data /run/manti.by/
+RUN chown -R www-data:www-data /var/log/manti.by/
 
 
 # Start app services

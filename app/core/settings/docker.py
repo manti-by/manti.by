@@ -13,8 +13,8 @@ ALLOWED_HOSTS = ['127.0.0.1', 'local.manti.by',
 
 BASE_URL = 'http://local.manti.by'
 
-STATIC_ROOT = '/srv/manti/static'
-MEDIA_ROOT = '/srv/manti/content'
+STATIC_ROOT = '/srv/manti.by/static'
+MEDIA_ROOT = '/srv/manti.by/content'
 
 LOCALE_URLS = {
     'be': 'local.manti.by',
@@ -38,7 +38,8 @@ CELERY_BROKER_URL = 'redis://manti-redis:6379/0'
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'manti-memcached:11211',
     }
 }
 
@@ -49,12 +50,12 @@ LOGGING = {
         'file_app': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/var/log/manti/app.log',
+            'filename': '/var/log/manti.by/app.log',
         },
         'file_django': {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/var/log/manti/django.log',
+            'filename': '/var/log/manti.by/django.log',
         },
         'console': {
             'level': 'DEBUG',
