@@ -9,7 +9,6 @@ from taggit.managers import TaggableManager
 from core.models import BaseModel
 from core.mixins import SlugifyMixin
 from core.utils import flush_cache, original_name
-from gallery.utils import generate_image_phash
 
 
 class GalleryManager(models.Manager):
@@ -54,7 +53,6 @@ class ImageManager(models.Manager):
 class Image(BaseModel):
 
     original_image = models.ImageField(upload_to=original_name, blank=True, null=True, verbose_name=_('Image'))
-    phash = models.CharField(blank=True, null=True, max_length=255)
     gallery = models.ForeignKey(Gallery, null=True, blank=True, related_name='images')
 
     order = models.IntegerField(blank=True, default=0)
@@ -70,7 +68,6 @@ class Image(BaseModel):
         verbose_name_plural = _('Image List')
 
 
-@receiver(post_save, sender=Image, dispatch_uid='calc_image_phash')
-def calc_image_phash(sender, instance, **kwargs):
-    generate_image_phash(instance)
+@receiver(post_save, sender=Image, dispatch_uid='flush_gallery_cache')
+def flush_gallery_cache(sender, instance, **kwargs):
     flush_cache(['index', 'gallery'])

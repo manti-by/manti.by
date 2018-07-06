@@ -1,8 +1,5 @@
 import subprocess
 
-from PIL import Image as PILImage
-from imagehash import phash
-
 from core.celery import app
 from blog.constants import MP3_PREVIEW, OGG_PREVIEW, OGG_RELEASE
 
@@ -29,7 +26,10 @@ def convert_to_ogg_release(post_id):
 
 def convert_release(ffmpeg_format, post_id, output_type=''):
     from blog.models import Post
-    post = Post.objects.get(id=post_id)
+    try:
+        post = Post.objects.get(id=post_id)
+    except Post.DoesNotExist:
+        return
 
     if output_type == OGG_PREVIEW:
         result = post.preview_ogg_file
@@ -41,13 +41,3 @@ def convert_release(ffmpeg_format, post_id, output_type=''):
     ffmpeg_format.append(result)
     command = ['ffmpeg', '-y', '-nostats', '-loglevel', '0', '-i', post.release_mp3_file] + ffmpeg_format
     subprocess.call(command)
-
-
-@app.task
-def generate_phash(image_id):
-    from gallery.models import Image
-    image = Image.objects.get(pk=image_id)
-    image.phash = phash(
-        PILImage.open(image.original_image)
-    )
-    image.save()
