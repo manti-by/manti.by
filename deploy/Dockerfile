@@ -1,6 +1,6 @@
-# Use an official ubuntu image
+# Use an official python 3.6 image
 
-FROM ubuntu:16.04
+FROM python:3.6
 
 
 # Create required dirs
@@ -13,32 +13,25 @@ RUN mkdir -p /var/log/manti.by/
 
 # Install any needed packages specified in requirements.txt
 
-RUN apt-get update && apt-get install -y software-properties-common apt-utils \
-    build-essential git python3 python3-dev python3-pip nginx supervisor
-
-RUN pip3 install pip --upgrade
-RUN pip3 install wheel
+RUN apt-get update && apt-get install -y supervisor
 
 COPY requirements.txt /etc/manti.by/requirements.txt
-RUN pip3 install --trusted-host pypi.org -r /etc/manti.by/requirements.txt
+RUN pip3 install --trusted-host pypi.org --no-cache-dir -r /etc/manti.by/requirements.txt
 
 
 # Setup supervisor and nginx
 
-COPY confs/supervisor.docker.conf /etc/manti.by/supervisor.conf
-COPY confs/uwsgi.docker.ini /etc/manti.by/uwsgi.ini
-COPY confs/uwsgi_params /etc/manti.by/uwsgi_params
-COPY confs/nginx.docker.conf /etc/manti.by/nginx.conf
-
+COPY confs/docker/supervisor.conf /etc/manti.by/supervisor.conf
+COPY confs/docker/uwsgi.ini /etc/manti.by/uwsgi.ini
+COPY confs/docker/uwsgi_params /etc/manti.by/uwsgi_params
 RUN ln -s /etc/manti.by/supervisor.conf /etc/supervisor/conf.d/manti.by.conf
-RUN ln -s /etc/manti.by/nginx.conf /etc/nginx/sites-enabled/manti.by.conf
-RUN rm /etc/nginx/sites-enabled/default
 
 
-# Expose port 80 and set workir path
+# Expose set workir dir and expose ports
 
 WORKDIR /srv/manti.by/src/
-EXPOSE 80
+EXPOSE 8888
+EXPOSE 5555
 
 
 # Fix file permissions
@@ -50,6 +43,4 @@ RUN chown -R www-data:www-data /var/log/manti.by/
 
 # Start app services
 
-CMD service supervisor start && \
-    service nginx start && \
-    /bin/bash
+CMD supervisord -n

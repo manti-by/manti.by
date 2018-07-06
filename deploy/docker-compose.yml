@@ -15,7 +15,8 @@ services:
   manti-django:
     image: mantiby/manti.by:latest
     ports:
-      - "8888:80"
+      - "8888:8888"
+      - "5555:5555"
     links:
       - manti-postgres
       - manti-memcached
@@ -27,4 +28,3 @@ services:
       - ../../log/:/var/log/manti.by/
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings.docker
-    tty: true
