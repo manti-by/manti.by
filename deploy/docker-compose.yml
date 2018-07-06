@@ -8,10 +8,6 @@ services:
       - POSTGRES_DB=manti
       - POSTGRES_USER=manti
       - POSTGRES_PASSWORD=pa55word
-  manti-redis:
-      image: redis:latest
-  manti-memcached:
-      image: memcached:latest
   manti-django:
     image: mantiby/manti.by:latest
     ports:

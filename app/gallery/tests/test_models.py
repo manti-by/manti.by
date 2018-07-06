@@ -1,5 +1,4 @@
 import os
-import mock
 import uuid
 import shutil
 
@@ -37,11 +36,8 @@ class GalleryModelTest(TestCase):
         self.gallery.save()
         self.assertTrue(self.gallery.order)
 
-    @mock.patch('gallery.models.generate_image_phash')
-    def test_files(self, generate_mock):
+    def test_files(self):
         image = Image(gallery=self.gallery,
                       original_image='gallery/test.jpg')
         image.save()
-
-        self.assertTrue(generate_mock.called)
         self.assertIsNotNone(image.created)
