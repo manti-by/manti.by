@@ -29,17 +29,17 @@ DATABASES = {
         'NAME': 'manti',
         'USER': 'manti',
         'PASSWORD': 'pa55word',
-        'HOST': 'manti-postgres',
+        'HOST': 'manti-by-postgres',
         'PORT': '',
     }
 }
 
-CELERY_BROKER_URL = 'redis://manti-redis:6379/0'
+CELERY_BROKER_URL = 'redis://manti-by-redis:6379/0'
 
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': 'manti-memcached:11211',
+        'LOCATION': 'manti-by-memcached:11211',
     }
 }
 

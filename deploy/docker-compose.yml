@@ -1,26 +1,45 @@
 version: '3.3'
 services:
-  manti-postgres:
+  manti-by-postgres:
     image: postgres:9.6
+    container_name: manti-by-postgres
     volumes:
       - ./database/:/docker-entrypoint-initdb.d/
     environment:
       - POSTGRES_DB=manti
       - POSTGRES_USER=manti
       - POSTGRES_PASSWORD=pa55word
-  manti-django:
-    image: mantiby/manti.by:latest
+  manti-by-redis:
+    image: redis:latest
+    container_name: manti-by-redis
+  manti-by-memcached:
+    image: memcached:latest
+    container_name: manti-by-memcached
+  manti-by-app:
+    image: mantiby/manti.by-app:latest
+    container_name: manti-by-app
     ports:
       - "8888:8888"
       - "5555:5555"
     links:
-      - manti-postgres
-      - manti-memcached
-      - manti-redis
+      - manti-by-postgres
+      - manti-by-memcached
+      - manti-by-redis
     volumes:
       - ../:/srv/manti.by/src/
       - ../../content/:/srv/manti.by/content/
       - ../../static/:/srv/manti.by/static/
+      - ../../log/:/var/log/manti.by/
+    environment:
+      - DJANGO_SETTINGS_MODULE=core.settings.docker
+  manti-by-worker:
+    image: mantiby/manti.by-worker:latest
+    container_name: manti-by-worker
+    links:
+      - manti-by-postgres
+      - manti-by-redis
+    volumes:
+      - ../:/srv/manti.by/src/
       - ../../log/:/var/log/manti.by/
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings.docker

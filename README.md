@@ -106,5 +106,6 @@ Docker setup
 2. Build app image and run
 
         $ cd deploy/ 
-        $ docker build -t mantiby/manti.by:latest .
+        $ docker build -f Dockerfile.app -t mantiby/manti.by-app:latest .
+        $ docker build -f Dockerfile.worker -t mantiby/manti.by-worker:latest .
         $ docker-compose up
