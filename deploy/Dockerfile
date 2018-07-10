@@ -44,22 +44,26 @@ RUN rm -rf /srv/manti.by/ffmpeg/
 
 # Install any needed packages specified in requirements.txt
 
-RUN apt-get install -y supervisor
+RUN apt-get update && apt-get install -y supervisor
 RUN apt-get clean
 
-COPY requirements.app.txt /etc/manti.by/requirements.txt
+COPY requirements.txt /etc/manti.by/requirements.txt
 RUN pip3 install --trusted-host pypi.org --no-cache-dir -r /etc/manti.by/requirements.txt
 
 
-# Setup supervisor and nginx
+# Setup supervisor
 
-COPY docker/supervisor.worker.conf /etc/manti.by/supervisor.conf
+COPY docker/supervisor.conf /etc/manti.by/supervisor.conf
+COPY docker/uwsgi.ini /etc/manti.by/uwsgi.ini
+COPY docker/uwsgi_params /etc/manti.by/uwsgi_params
 RUN ln -s /etc/manti.by/supervisor.conf /etc/supervisor/conf.d/manti.by.conf
 
 
-# Set workdir dir
+# Set working directory and expose ports
 
 WORKDIR /srv/manti.by/src/app/
+EXPOSE 8888
+EXPOSE 5555
 
 
 # Fix file permissions

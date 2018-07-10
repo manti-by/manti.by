@@ -16,7 +16,7 @@ services:
     image: memcached:latest
     container_name: manti-by-memcached
   manti-by-app:
-    image: mantiby/manti.by-app:latest
+    image: mantiby/manti.by:latest
     container_name: manti-by-app
     ports:
       - "8888:8888"
@@ -29,17 +29,6 @@ services:
       - ../:/srv/manti.by/src/
       - ../../content/:/srv/manti.by/content/
       - ../../static/:/srv/manti.by/static/
-      - ../../log/:/var/log/manti.by/
-    environment:
-      - DJANGO_SETTINGS_MODULE=core.settings.docker
-  manti-by-worker:
-    image: mantiby/manti.by-worker:latest
-    container_name: manti-by-worker
-    links:
-      - manti-by-postgres
-      - manti-by-redis
-    volumes:
-      - ../:/srv/manti.by/src/
       - ../../log/:/var/log/manti.by/
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings.docker
