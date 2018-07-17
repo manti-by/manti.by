@@ -7,6 +7,10 @@ About
 
 Django version of PHP micro framework M2, custom blog engine for music and photo publishing.
 
+[![CircleCI](https://circleci.com/gh/manti-by/Manti.by.svg?style=shield)](https://circleci.com/gh/manti-by/Manti.by)
+[![Docker](https://img.shields.io/docker/automated/mantiby/manti.by.svg)](https://hub.docker.com/r/mantiby/manti.by/)
+[![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://raw.githubusercontent.com/manti-by/Manti.by/master/LICENSE)
+
 Author: Alexander Chaika <manti.by@gmail.com>
 
 Source link: https://github.com/manti-by/M2-Blog-Engine

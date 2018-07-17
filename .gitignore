@@ -2,6 +2,7 @@
 
 .scannerwork/
 
+app/.pytest_cache/
 app/core/static/cache/
 app/core/settings/local.py
 app/db.sqlite3

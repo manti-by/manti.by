@@ -1,10 +1,13 @@
-from django.test import TestCase
+import pytest
 
 from shortener.models import Link
 
 
-class LinkModelTest(TestCase):
+class LinkModelTest:
 
+    @pytest.mark.django_db
     def test_create(self):
-        link = Link.objects.create(**{'original_link': 'https://google.com'})
-        self.assertIsNotNone(link.short_link)
+        link = Link.objects.create(**{
+            'original_link': 'https://google.com'
+        })
+        assert link.short_link is not None

@@ -1,32 +1,27 @@
 import json
 import uuid
+import pytest
 
-from django.test import TestCase
-from django.test import Client
 from django.conf import settings
 
 from blog.models import Post
 
 
-class ApiViewsTest(TestCase):
+class ApiViewsTest:
 
     @classmethod
-    def setUpTestData(cls):
+    def setup_class(cls):
         cls.host = settings.LOCALE_URLS[
             settings.LANGUAGE_CODE
         ]
-        cls.client = Client()
-        cls.post = Post.objects.create(name=str(uuid.uuid4()),
-                                       is_music=True)
 
-    def call(self, url):
-        return self.client.get(url, HTTP_HOST=self.host)
+    @pytest.mark.django_db
+    def test_get_posts(self, client):
+        Post.objects.create(name=str(uuid.uuid4()), is_music=True)
+        response = client.get('/api/posts/', HTTP_HOST=self.host)
 
-    def test_get_posts(self):
-        response = self.call('/api/posts/')
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response['Content-Type'], 'application/json')
+        assert response.status_code == 200
+        assert response['Content-Type'] == 'application/json'
 
         response = json.loads(response.content.decode())
-        self.assertEqual(len(response['data']), Post.objects.count())
+        assert len(response['data']), Post.objects.count()

@@ -25,8 +25,8 @@ class Link(BaseModel):
 
     def save(self, *args, **kwargs):
         existed = Link.objects.values_list('short_link', flat=True)
-        short_link = uuid.uuid4().hex[:4]
-        while short_link in existed:
-            short_link = uuid.uuid4().hex[:4]
-        self.short_link = short_link.lower()
+        short_link = uuid.uuid4().hex[:4].lower()
+        while short_link in list(existed):
+            short_link = uuid.uuid4().hex[:4].lower()
+        self.short_link = short_link
         super(BaseModel, self).save(*args, **kwargs)

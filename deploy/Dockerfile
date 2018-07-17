@@ -22,14 +22,14 @@ RUN wget -O ffmpeg-snapshot.tar.bz2 https://ffmpeg.org/releases/ffmpeg-snapshot.
 RUN tar xjvf ffmpeg-snapshot.tar.bz2 -C /srv/manti.by/
 
 WORKDIR /srv/manti.by/ffmpeg/
-RUN export PATH="/bin:$PATH" && export PKG_CONFIG_PATH="/srv/manti.by/ffmpeg/build/lib/pkgconfig"
+RUN export PATH="/home/manti/bin:$PATH" && export PKG_CONFIG_PATH="/home/manti/usr/ffmpeg/build/lib/pkgconfig"
 RUN ./configure \
-      --prefix="/srv/manti.by/ffmpeg/build" \
+      --prefix="/home/manti/usr/ffmpeg/build" \
       --pkg-config-flags="--static" \
-      --extra-cflags="-I/srv/manti.by/ffmpeg/build/include" \
-      --extra-ldflags="-L/srv/manti.by/ffmpeg/build/lib" \
+      --extra-cflags="-I/home/manti/usr/ffmpeg/build/include" \
+      --extra-ldflags="-L/home/manti/usr/ffmpeg/build/lib" \
       --extra-libs="-lpthread -lm" \
-      --bindir="/bin" \
+      --bindir="/home/manti/bin" \
       --enable-gpl \
       --enable-libass \
       --enable-libfreetype \
