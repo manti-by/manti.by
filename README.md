@@ -27,6 +27,9 @@ Setup environment
 
 2. Get [FFMpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), compile and install
 
+        $ sudo apt install -y yasm libass-dev libfreetype6-dev libmp3lame-dev \
+            libtheora-dev libvorbis-dev libx265-dev libfdk-aac-dev
+        
         $ export PATH="$HOME/bin:$PATH" && export PKG_CONFIG_PATH="$HOME/usr/ffmpeg/build/lib/pkgconfig"
         $ ./configure \
               --prefix="$HOME/usr/ffmpeg/build" \
@@ -41,8 +44,10 @@ Setup environment
               --enable-libmp3lame \
               --enable-libtheora \
               --enable-libvorbis \
-              --enable-nonfree
-        $ make && make install
+              --enable-nonfree \
+              --enable-libfdk-aac \
+              --enable-libx265
+        $ make -j2 && make install
 
 
 3. Install [Redis server](https://redis.io/download)

@@ -1,6 +1,7 @@
-from django.views.generic.detail import DetailView
-from django.shortcuts import render, get_object_or_404
+from django.http import Http404
+from django.shortcuts import render
 from django.core.cache import cache
+from django.utils.translation import ugettext_lazy as _
 
 from core.utils import update_cache
 from blog.models import Post
@@ -27,15 +28,18 @@ def index(request):
     return update_cache(cache_key, cached_data)
 
 
-class BlogView(DetailView):
-    model = Post
-    context_object_name = 'item'
+def post(request, slug):
+    cache_key = 'post-%s-%s-%s' % (slug, request.LANGUAGE_CODE,
+                                   request.user.id)
+    cached_data = cache.get(cache_key)
+    if cached_data:
+        return cached_data
+    try:
+        item = Post.objects.get(slug__iexact=slug)
+        template = 'blog/post.html' \
+            if item.is_music else 'blog/simple.html'
 
-    def get_object(self, queryset=None):
-        cache_key = 'post-%s-%s-%s' % (self.kwargs['slug'], self.request.LANGUAGE_CODE,
-                                       self.request.user.id)
-        cached_data = cache.get(cache_key)
-        if cached_data:
-            return cached_data
-        cached_data = get_object_or_404(Post, slug__iexact=self.kwargs['slug'])
+        cached_data = render(request, template, {'item': item})
         return update_cache(cache_key, cached_data)
+    except Post.DoesNotExist:
+        raise Http404(_('Post with slug %s does not exists') % slug)
