@@ -15,7 +15,8 @@ class ViewsTest(TestCase):
             settings.LANGUAGE_CODE
         ]
         cls.client = Client()
-        cls.post = Post.objects.create(name=str(uuid.uuid4()))
+        cls.post = Post.objects.create(name=str(uuid.uuid4()),
+                                       is_music=True)
 
     def call(self, url):
         return self.client.get(url, HTTP_HOST=self.host)
