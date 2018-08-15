@@ -6,7 +6,7 @@
         let menu = $('.mobile-menu'),
             button = $('.mobile-menu-button');
 
-        button.on('click', () => {
+        button.on('click', (event) => {
             if (menu.hasClass('open')) {
                 menu.removeClass('open');
                 return;

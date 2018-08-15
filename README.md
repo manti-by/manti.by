@@ -32,7 +32,7 @@ Setup environment
 2. Get [FFMpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), compile and install
 
         $ sudo apt install -y yasm libass-dev libfreetype6-dev libmp3lame-dev \
-            libtheora-dev libvorbis-dev libx265-dev libfdk-aac-dev
+            libtheora-dev libvorbis-dev libx264-dev libx265-dev libfdk-aac-dev
         
         $ export PATH="$HOME/bin:$PATH" && export PKG_CONFIG_PATH="$HOME/usr/ffmpeg/build/lib/pkgconfig"
         $ ./configure \
@@ -50,6 +50,7 @@ Setup environment
               --enable-libvorbis \
               --enable-nonfree \
               --enable-libfdk-aac \
+              --enable-libx264 \
               --enable-libx265
         $ make -j2 && make install
 
