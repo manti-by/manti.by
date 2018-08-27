@@ -22,21 +22,21 @@ RUN wget -O ffmpeg-snapshot.tar.bz2 https://ffmpeg.org/releases/ffmpeg-snapshot.
 RUN tar xjvf ffmpeg-snapshot.tar.bz2 -C /srv/manti.by/
 
 WORKDIR /srv/manti.by/ffmpeg/
-RUN export PATH="/home/manti/bin:$PATH" && export PKG_CONFIG_PATH="/home/manti/usr/ffmpeg/build/lib/pkgconfig"
+RUN export PATH="/bin:$PATH" && export PKG_CONFIG_PATH="/srv/manti.by/ffmpeg/build/lib/pkgconfig"
 RUN ./configure \
-      --prefix="/home/manti/usr/ffmpeg/build" \
-      --pkg-config-flags="--static" \
-      --extra-cflags="-I/home/manti/usr/ffmpeg/build/include" \
-      --extra-ldflags="-L/home/manti/usr/ffmpeg/build/lib" \
-      --extra-libs="-lpthread -lm" \
-      --bindir="/home/manti/bin" \
-      --enable-gpl \
-      --enable-libass \
-      --enable-libfreetype \
-      --enable-libmp3lame \
-      --enable-libtheora \
-      --enable-libvorbis \
-      --enable-nonfree
+  --prefix="/srv/manti.by/ffmpeg/build" \
+  --pkg-config-flags="--static" \
+  --extra-cflags="-I/srv/manti.by/ffmpeg/build/include" \
+  --extra-ldflags="-L/srv/manti.by/ffmpeg/build/lib" \
+  --extra-libs="-lpthread -lm" \
+  --bindir="bin" \
+  --enable-gpl \
+  --enable-libass \
+  --enable-libfreetype \
+  --enable-libmp3lame \
+  --enable-libtheora \
+  --enable-libvorbis \
+  --enable-nonfree
 
 RUN make && make install
 RUN rm -rf /srv/manti.by/ffmpeg/
@@ -61,7 +61,10 @@ RUN ln -s /etc/manti.by/supervisor.conf /etc/supervisor/conf.d/manti.by.conf
 
 # Set working directory and expose ports
 
-WORKDIR /srv/manti.by/src/app/
+WORKDIR /srv/manti.by/src/
+RUN git init
+RUN git remote add origin https://github.com/manti-by/Manti.by.git
+
 EXPOSE 8888
 EXPOSE 5555
 

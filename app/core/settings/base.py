@@ -196,7 +196,7 @@ COMPRESS_OUTPUT_DIR = 'cache'
 COMPRESS_STORAGE = 'compressor.storage.GzipCompressorFileStorage'
 COMPRESS_CSS_FILTERS = ['compressor.filters.css_default.CssAbsoluteFilter',
                         'compressor.filters.cssmin.CSSMinFilter']
-
+COMPRESS_CSS_HASHING_METHOD = None
 
 # Celery settings
 

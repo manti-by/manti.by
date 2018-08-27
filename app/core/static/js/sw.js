@@ -17,7 +17,6 @@ let FILE_LIST = [
     '/static/img/featured.jpg',
     '/static/img/no-image.webp',
     '/static/img/no-image.png',
-    '/static/img/shape-player.webp',
     '/static/img/shape-player.png',
     '/static/img/share.webp',
     '/static/img/share.jpg',

@@ -3,10 +3,6 @@
     margin-bottom: 3em;
 }
 
-
-.login .info {
-}
-
 .login label,
 .login .row {
     display: block;
@@ -15,7 +11,4 @@
 
 .login label {
     margin-bottom: 0.25em;
-}
-
-.login .buttons {
 }

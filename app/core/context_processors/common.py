@@ -31,7 +31,7 @@ def global_template_vars(request):
         'DATE_FORMAT': settings.DATE_FORMAT,
         'user': request.user,
         'tags': Post.tags.most_common()[:10],
-        'posts': Post.objects.ordered()[:10],
+        'posts': Post.objects.ordered().filter(is_music=True)[:10],
         'instagram_photos': get_instagram_photos(),
         'is_supports_webp': is_supports_webp(request),
         'is_home': False,
