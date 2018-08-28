@@ -60,11 +60,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.http.ConditionalGetMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
     'core.middleware.language.LocaleMiddleware',
     'core.middleware.response.ResponseMiddleware'
 ]
+
+USE_ETAGS = True
 
 ROOT_URLCONF = 'core.urls'
 
