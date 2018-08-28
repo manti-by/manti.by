@@ -44,11 +44,11 @@
         <meta property="og:url" content="{{ ABSOLUTE_URL }}">
 
         {% compress css inline %}
-            <link type="text/css" rel="stylesheet" href="{% static 'css/common/reset.css' %}">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/font.css' %}">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/common/search.css' %}">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/reset.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/font.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/search.css' %}" media="all">
             {% block styles %}{% endblock %}
         {% endcompress %}
     </head>
@@ -165,9 +165,11 @@
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}" media="all">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
         {% endcompress %}
         </noscript>
+        {% compress css inline %}
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
+        {% endcompress %}
 
         {% compress js %}
             <script type="text/javascript" src="{% static 'js/libs/jquery-3.3.1/jquery.min.js' %}"></script>
@@ -204,21 +206,6 @@
                 }
             </script>
         {% endcompress %}
-
-        <script type="application/ld+json">
-        {
-            "@context" : "https://schema.org",
-            "@type" : "MusicGroup",
-            "name" : "{{ META_TITLE }}",
-            "url" : "{{ BASE_URL }}",
-            "logo": "{% static 'img/logo/192.png' %}",
-            "sameAs" : [
-                "https://twitter.com/manti_by",
-                "https://instagram.com/manti_by",
-                "https://vk.com/manti_by",
-                "https://soundcloud.com/manti_by"
-            ]
-        }
-        </script>
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"MusicGroup","name":"{{ META_TITLE }}","url":"{{ BASE_URL }}","logo":"{% static 'img/logo/192.png' %}","sameAs" : ["https://twitter.com/manti_by","https://instagram.com/manti_by","https://vk.com/manti_by","https://soundcloud.com/manti_by"]}</script>
     </body>
 </html>

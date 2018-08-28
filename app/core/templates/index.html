@@ -21,7 +21,8 @@
                     <a href="{% url 'gallery_list' %}" name="gallery">
                         {% thumbnail featured_image.original_image "x1080" as im %}
                             <img data-src="{{ im.url }}" alt="{% trans 'Popular image from gallery' %}"
-                                 title="{% trans 'Popular image from gallery' %}" class="lazy" />
+                                 title="{% trans 'Popular image from gallery' %}" class="lazy"
+                                 width="{{ im.width }}" height="{{ im.height }}" />
                         {% endthumbnail %}
                     </a>
                 {% else %}
@@ -38,7 +39,8 @@
                             <a href="{% url 'gallery_list' %}" name="gallery"
                                class="thumbnail {% if im|is_portrait %}portrait{% else %}landscape{% endif %}">
                                 <img data-src="{{ im.url }}" alt="{% trans 'Image #' %}{{ image.id }}"
-                                     title="{% trans 'Image #' %}{{ image.id }}" class="lazy" />
+                                     title="{% trans 'Image #' %}{{ image.id }}" class="lazy"
+                                     width="{{ im.width }}" height="{{ im.height }}" />
                             </a>
                         {% endthumbnail %}
                     {% endfor %}
