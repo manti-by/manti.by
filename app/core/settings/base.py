@@ -68,8 +68,6 @@ MIDDLEWARE = [
     'core.middleware.response.ResponseMiddleware'
 ]
 
-USE_ETAGS = True
-
 ROOT_URLCONF = 'core.urls'
 
 TEMPLATES = [
@@ -212,8 +210,8 @@ CELERY_RESULT_BACKEND = 'django-db'
 
 # Meta tags info
 
-META_TITLE = "Official blog of Alex Manti"
-META_DESCRIPTION = "Official blog of Alex Manti"
+META_TITLE = "Welcome to official blog of Alex Manti."
+META_DESCRIPTION = "Official blog of Alex Manti. My music, photos and info about me."
 
 
 # Instagram settings

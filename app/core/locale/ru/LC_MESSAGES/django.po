@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: manti.by\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-11 12:49+0000\n"
+"POT-Creation-Date: 2018-08-28 16:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander Chaika <manti.by@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,16 +45,14 @@ msgstr "Краткое описание"
 msgid "Description"
 msgstr "Описание"
 
-#: blog/admin.py:35 blog/models.py:57 core/templates/blog/list-item.html:41
-#: core/templates/blog/post.html:73
+#: blog/admin.py:35 blog/models.py:56 core/templates/blog/list-item.html:42
+#: core/templates/blog/post.html:77
 msgid "Tags"
 msgstr "Тэги"
 
 #: blog/admin.py:38
-#, fuzzy
-#| msgid "Created"
 msgid "Related"
-msgstr "Создано"
+msgstr "Связи"
 
 #: blog/admin.py:42
 msgid "Music params"
@@ -64,8 +62,8 @@ msgstr "Музыкальные параметры"
 msgid "Files"
 msgstr "Файлы"
 
-#: blog/admin.py:60 core/mixins.py:22 core/templates/profiles/profile.html:34
-#: gallery/admin.py:51 gallery/models.py:58 gallery/models.py:76
+#: blog/admin.py:60 core/templates/profiles/profile.html:34 gallery/admin.py:51
+#: gallery/models.py:55 gallery/models.py:67
 msgid "Image"
 msgstr "Изображение"
 
@@ -77,141 +75,129 @@ msgstr "Файлы готовы"
 msgid "Translations Ready"
 msgstr "Переводы готовы"
 
-#: blog/models.py:42
+#: blog/models.py:41
 msgid "Release File"
 msgstr "Файл релиза"
 
-#: blog/models.py:46
+#: blog/models.py:45
 msgid "Cover Image"
 msgstr "Обложка"
 
-#: blog/models.py:54 core/templates/blog/post.html:56
+#: blog/models.py:53 core/templates/blog/post.html:60
 msgid "Genre"
 msgstr "Жанр"
 
-#: core/mixins.py:17
-msgid ""
-"You can select only base image, all others will be generated automatically"
-msgstr ""
-"Вы можете выбрать одно изображение, остальные будут сгенерированы "
-"автоматически"
+#: blog/views.py:45
+#, python-format
+msgid "Post with slug %s does not exists"
+msgstr "Запись со ссылкой %s не найдена"
 
-#: core/mixins.py:24
-msgid "Thumbnail Image"
-msgstr "Уменьшенное изображение"
-
-#: core/mixins.py:25
-msgid "Preview Image"
-msgstr "Изображение предпросмотра"
-
-#: core/mixins.py:26
-msgid "Gallery Image"
-msgstr "Изображение галереи"
-
-#: core/mixins.py:36
-msgid "Can't generate thumbnails, original image is not loaded"
-msgstr "Не могу создать превью изображений, оригинал не загружен"
-
-#: core/mixins.py:58
+#: core/mixins.py:15
 msgid "Slug"
 msgstr "Ссылка"
 
-#: core/models.py:12
+#: core/models.py:11
 msgid "Created, UTC"
 msgstr "Создано, UTC"
 
-#: core/settings/base.py:120
+#: core/models.py:12
+msgid "Updated, UTC"
+msgstr "Обновлено, UTC"
+
+#: core/settings/base.py:130
 msgid "Belarussian"
 msgstr "Беларускі"
 
-#: core/settings/base.py:121
+#: core/settings/base.py:131
 msgid "Russian"
 msgstr "Русский"
 
-#: core/settings/base.py:122
+#: core/settings/base.py:132
 msgid "English"
 msgstr "English"
 
-#: core/templates/base.html:81 core/templates/base.html:121
+#: core/templates/base.html:5 core/templates/base.html:41
+msgid "Welcome to official blog of Alex Manti."
+msgstr "Добро пожаловать в официальный блог Алекса Манти."
+
+#: core/templates/base.html:36 core/templates/base.html:43
+msgid "Official blog of Alex Manti. My music, photos and info about me."
+msgstr "Официальный блог Алекса Манти. Моя музыка, фотографии и информация обо мне."
+
+#: core/templates/base.html:78 core/templates/base.html:118
 #: core/templates/blog/list.html:10 core/templates/blog/list.html:17
-#: core/templates/blog/post.html:22
+#: core/templates/blog/post.html:25
 msgid "Music"
 msgstr "Музыка"
 
-#: core/templates/base.html:84 core/templates/base.html:124
-#: core/templates/gallery/gallery.html:9 core/templates/gallery/gallery.html:16
-#: core/templates/gallery/list.html:5 core/templates/gallery/list.html:9
-#: core/templates/gallery/single.html:5 core/templates/gallery/single.html:9
-#: gallery/models.py:46
+#: core/templates/base.html:81 core/templates/base.html:121
+#: core/templates/gallery/gallery.html:5 core/templates/gallery/gallery.html:9
+#: gallery/models.py:43
 msgid "Gallery"
 msgstr "Галлерея"
 
-#: core/templates/base.html:126 core/templates/base.html:157
+#: core/templates/base.html:123 core/templates/base.html:154
 #: core/templates/static/about.html:5 core/templates/static/about.html:11
 msgid "About"
 msgstr "Обо мне"
 
-#: core/templates/base.html:127 core/templates/base.html:158
+#: core/templates/base.html:124 core/templates/base.html:155
 #: core/templates/static/resume.html:5 core/templates/static/resume.html:11
 msgid "Resume"
 msgstr "Резюме"
 
-#: core/templates/base.html:128 core/templates/base.html:159
+#: core/templates/base.html:125 core/templates/base.html:156
 #: core/templates/static/copyrights.html:5
 #: core/templates/static/copyrights.html:9
 msgid "Copyrights"
 msgstr "Авторские права"
 
-#: core/templates/base.html:129
+#: core/templates/base.html:126
 msgid "Search"
 msgstr "Поиск"
 
-#: core/templates/base.html:131
+#: core/templates/base.html:128
 msgid "Logout"
 msgstr "Выйти"
 
-#: core/templates/blog/list-item.html:20 core/templates/blog/post.html:41
-#: core/templates/emails/email.html:65
+#: core/templates/blog/list-item.html:21 core/templates/blog/post.html:45
+#: core/templates/blog/simple.html:29 core/templates/emails/email.html:65
 msgid "Created"
 msgstr "Создано"
 
-#: core/templates/blog/list-item.html:24 core/templates/blog/post.html:53
+#: core/templates/blog/list-item.html:25 core/templates/blog/post.html:57
 msgid "Length"
 msgstr "Продолжительность"
 
-#: core/templates/blog/list-item.html:47 core/templates/blog/post.html:79
+#: core/templates/blog/list-item.html:48 core/templates/blog/post.html:84
 msgid "Tracklist"
 msgstr "Трэклист"
 
-#: core/templates/blog/list-item.html:48 core/templates/blog/post.html:80
+#: core/templates/blog/list-item.html:49 core/templates/blog/post.html:85
 msgid "Download"
 msgstr "Скачать"
 
-#: core/templates/blog/list-item.html:61 core/templates/blog/post.html:89
+#: core/templates/blog/list-item.html:55 core/templates/blog/post.html:93
 msgid "Hide Tracklist"
 msgstr "Скрыть треклист"
 
-#: core/templates/blog/list.html:5
+#: core/templates/blog/list.html:5 core/templates/blog/simple.html:16
 msgid "Blog"
 msgstr "Блог"
-
-#: core/templates/blog/list.html:13
-msgid "Tag"
-msgstr "Метки"
 
 #: core/templates/blog/list.html:32
 msgid "Nothing to show"
 msgstr "Ничего нет"
 
-#: core/templates/blog/post.html:45
+#: core/templates/blog/post.html:49
 msgid "Catalog No"
 msgstr "Каталоговый №"
 
-#: core/templates/blog/post.html:49
+#: core/templates/blog/post.html:53
 msgid "Quality"
 msgstr "Качество"
 
-#: core/templates/blog/post.html:93
+#: core/templates/blog/post.html:98
 msgid "Related posts"
 msgstr "Связанные статьи"
 
@@ -219,7 +205,7 @@ msgstr "Связанные статьи"
 msgid "Popular tags"
 msgstr "Популярные метки"
 
-#: core/templates/common/sidebar.html:13 core/templates/index.html:48
+#: core/templates/common/sidebar.html:13 core/templates/index.html:50
 msgid "Latest posts"
 msgstr "Свежие статьи"
 
@@ -243,21 +229,11 @@ msgstr "Показать сообщение в"
 msgid "browser"
 msgstr "браузере"
 
-#: core/templates/gallery/gallery.html:28
-#: core/templates/gallery/gallery.html:29 core/templates/gallery/list.html:32
-#: core/templates/gallery/list.html:33 core/templates/gallery/single.html:21
-#: core/templates/gallery/single.html:22 core/templates/index.html:40
-#: core/templates/index.html:41
+#: core/templates/gallery/gallery.html:22
+#: core/templates/gallery/gallery.html:23 core/templates/index.html:41
+#: core/templates/index.html:42
 msgid "Image #"
 msgstr "Изображение"
-
-#: core/templates/gallery/list.html:23
-#, python-format
-msgid "one image"
-msgid_plural "%(counter)s images"
-msgstr[0] "одно изображение"
-msgstr[1] "%(counter)s изображения"
-msgstr[2] "%(counter)s изображений"
 
 #: core/templates/index.html:5
 msgid "Homepage"
@@ -272,7 +248,7 @@ msgid "Latest Images"
 msgstr "Свежие фотографии"
 
 #: core/templates/index.html:23 core/templates/index.html:24
-#: core/templates/index.html:31 core/templates/index.html:32
+#: core/templates/index.html:32 core/templates/index.html:33
 msgid "Popular image from gallery"
 msgstr "Популярное изображение из галлереи"
 
@@ -346,14 +322,22 @@ msgstr "Остальное"
 msgid "Ready"
 msgstr "Готово"
 
-#: gallery/models.py:47
+#: gallery/models.py:44
 msgid "Gallery List"
 msgstr "Галлерея"
 
-#: gallery/models.py:77
+#: gallery/models.py:68
 msgid "Image List"
 msgstr "Изображения"
 
 #: profiles/models.py:13
 msgid "Profile Image"
 msgstr "Изображение предпросмотра"
+
+#: shortener/models.py:13
+msgid "Original Link"
+msgstr "Оригинальная ссылка"
+
+#: shortener/models.py:15
+msgid "Short Link"
+msgstr "Короткая ссылка"

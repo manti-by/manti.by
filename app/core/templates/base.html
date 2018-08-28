@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="{{ ACTIVE_LANGUAGE }}">
     <head>
-        <title>{% block title %}{{ META_TITLE }}{% endblock %}</title>
+        <title>{% block title %}{% endblock %} | {% trans 'Welcome to official blog of Alex Manti.' %}</title>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,13 +32,15 @@
         <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="{% static "img/logo/256.png" %}">
         <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="{% static "img/logo/512.png" %}">
 
-        <meta name="description" content="{% block meta %}{{ META_DESCRIPTION }}{% endblock %}">
+        <meta name="description"
+              content="{% block meta %}{% endblock %} | {% trans 'Official blog of Alex Manti. My music, photos and info about me.' %}">
         <meta name="yandex-verification" content="4c23c3980836ae34" />
 
         {% block open-graph %}
         <meta property="og:type" content="website">
-        <meta property="og:title" content="{{ META_TITLE }}">
-        <meta property="og:description" content="{{ META_DESCRIPTION }}">
+        <meta property="og:title" content="{% trans 'Welcome to official blog of Alex Manti.' %}">
+        <meta property="og:description"
+              content="{% trans 'Official blog of Alex Manti. My music, photos and info about me.' %}">
         <meta property="og:image" content="{% webp_static 'img/share.jpg' %}">
         {% endblock %}
         <meta property="og:url" content="{{ ABSOLUTE_URL }}">
@@ -54,8 +56,6 @@
     </head>
     <body>
         <div id="loader"><div></div></div>
-
-        {% include 'common/metrics.html' %}
 
         {% include 'common/player.html' %}
 
@@ -177,6 +177,34 @@
             <script type="text/javascript">
                 const DEBUG = {% if DEBUG %}true{% else %}false{% endif %};
             </script>
+            {% if not DEBUG %}
+            <script type="text/javascript">
+                (function (d, w, c) {
+                    (w[c] = w[c] || []).push(function() {
+                        try {
+                            w.yaCounter20835088 = new Ya.Metrika({
+                                id: 20835088,
+                                clickmap: true,
+                                trackLinks: true,
+                                accurateTrackBounce: true,
+                                webvisor: true
+                            });
+                        } catch(e) {}
+                    });
+
+                    let n = d.getElementsByTagName("script")[0],
+                        s = d.createElement("script"),
+                        f = function () { n.parentNode.insertBefore(s, n); };
+                    s.type = "text/javascript";
+                    s.async = true;
+                    s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+                    if (w.opera === "[object Opera]") {
+                        d.addEventListener("DOMContentLoaded", f, false);
+                    } else { f(); }
+                })(document, window, "yandex_metrika_callbacks");
+            </script>
+            {% endif %}
             <script type="text/javascript" src="{% static 'js/widgets/lazy.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/widgets/menu.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/widgets/loader.js' %}"></script>
@@ -206,6 +234,9 @@
                 }
             </script>
         {% endcompress %}
+        {% if not DEBUG %}
+            <noscript><div><img src="https://mc.yandex.ru/watch/20835088" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+        {% endif %}
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"MusicGroup","name":"{{ META_TITLE }}","url":"{{ BASE_URL }}","logo":"{% static 'img/logo/192.png' %}","sameAs" : ["https://twitter.com/manti_by","https://instagram.com/manti_by","https://vk.com/manti_by","https://soundcloud.com/manti_by"]}</script>
     </body>
 </html>

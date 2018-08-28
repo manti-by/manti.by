@@ -25,8 +25,6 @@ def global_template_vars(request):
         'ACTIVE_LANGUAGE': request.LANGUAGE_CODE,
         'LANGUAGES': settings.LANGUAGES,
         'ABSOLUTE_URL': request.build_absolute_uri(),
-        'META_TITLE': _(settings.META_TITLE),
-        'META_DESCRIPTION': _(settings.META_DESCRIPTION),
         'BASE_URL': settings.BASE_URL,
         'DATE_FORMAT': settings.DATE_FORMAT,
         'user': request.user,
