@@ -121,8 +121,8 @@ msgstr ""
 
 #: core/templates/base.html:36 core/templates/base.html:43
 msgid ""
-"Official blog of Alex Manti. My music, photos and info about me. Drum and "
-"Bass, House, Tech and Chillout."
+"Official blog of Alex Manti. My music, photos and info about me. "
+"Drum and Bass, House, Tech and Chillout."
 msgstr ""
 
 #: core/templates/base.html:78 core/templates/base.html:118
