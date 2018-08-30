@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: manti.by\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-28 16:45+0000\n"
+"POT-Creation-Date: 2018-08-30 15:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander Chaika <manti.by@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -117,12 +117,16 @@ msgid "English"
 msgstr "English"
 
 #: core/templates/base.html:5 core/templates/base.html:41
-msgid "Welcome to official blog of Alex Manti."
-msgstr "Добро пожаловать в официальный блог Алекса Манти."
+msgid "Drum and Bass, House, Tech and Chillout."
+msgstr "Drum and Bass, House, Tech and Chillout."
 
 #: core/templates/base.html:36 core/templates/base.html:43
-msgid "Official blog of Alex Manti. My music, photos and info about me."
-msgstr "Официальный блог Алекса Манти. Моя музыка, фотографии и информация обо мне."
+msgid ""
+"Official blog of Alex Manti. My music, photos and info about me. Drum and "
+"Bass, House, Tech and Chillout."
+msgstr ""
+"Официальный блог Алекса Манти. Моя музыка, фотографии и информация обо мне."
+"Drum and Bass, House, Tech and Chillout."
 
 #: core/templates/base.html:78 core/templates/base.html:118
 #: core/templates/blog/list.html:10 core/templates/blog/list.html:17
