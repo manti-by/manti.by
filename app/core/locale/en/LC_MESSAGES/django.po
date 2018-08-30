@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: manti.by\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-30 15:06+0000\n"
+"POT-Creation-Date: 2018-08-30 15:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander Chaika <manti.by@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,7 +45,7 @@ msgid "Description"
 msgstr ""
 
 #: blog/admin.py:35 blog/models.py:56 core/templates/blog/list-item.html:42
-#: core/templates/blog/post.html:77
+#: core/templates/blog/post.html:75
 msgid "Tags"
 msgstr ""
 
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Files"
 msgstr ""
 
-#: blog/admin.py:60 core/templates/profiles/profile.html:34 gallery/admin.py:51
+#: blog/admin.py:60 core/templates/profiles/profile.html:35 gallery/admin.py:51
 #: gallery/models.py:55 gallery/models.py:67
 msgid "Image"
 msgstr ""
@@ -82,7 +82,7 @@ msgstr ""
 msgid "Cover Image"
 msgstr ""
 
-#: blog/models.py:53 core/templates/blog/post.html:60
+#: blog/models.py:53 core/templates/blog/post.html:58
 msgid "Genre"
 msgstr ""
 
@@ -116,40 +116,43 @@ msgid "English"
 msgstr ""
 
 #: core/templates/base.html:5 core/templates/base.html:41
-msgid "Drum and Bass, House, Tech and Chillout."
+msgid "Drum and Bass, House, Techno and Chillout."
 msgstr ""
 
 #: core/templates/base.html:36 core/templates/base.html:43
 msgid ""
-"Official blog of Alex Manti. My music, photos and info about me. "
-"Drum and Bass, House, Tech and Chillout."
+"Official blog of Alex Manti. My music, photos and info about me. Drum and "
+"Bass, House, Techno and Chillout."
 msgstr ""
 
 #: core/templates/base.html:78 core/templates/base.html:118
-#: core/templates/blog/list.html:10 core/templates/blog/list.html:17
-#: core/templates/blog/post.html:25
+#: core/templates/blog/list.html:11 core/templates/blog/list.html:18
+#: core/templates/blog/post.html:23
 msgid "Music"
 msgstr ""
 
 #: core/templates/base.html:81 core/templates/base.html:121
-#: core/templates/gallery/gallery.html:5 core/templates/gallery/gallery.html:9
-#: gallery/models.py:43
+#: core/templates/gallery/gallery.html:5 core/templates/gallery/gallery.html:6
+#: core/templates/gallery/gallery.html:10 gallery/models.py:43
 msgid "Gallery"
 msgstr ""
 
 #: core/templates/base.html:123 core/templates/base.html:154
-#: core/templates/static/about.html:5 core/templates/static/about.html:11
+#: core/templates/static/about.html:5 core/templates/static/about.html:6
+#: core/templates/static/about.html:12
 msgid "About"
 msgstr ""
 
 #: core/templates/base.html:124 core/templates/base.html:155
-#: core/templates/static/resume.html:5 core/templates/static/resume.html:11
+#: core/templates/static/resume.html:5 core/templates/static/resume.html:6
+#: core/templates/static/resume.html:12
 msgid "Resume"
 msgstr ""
 
 #: core/templates/base.html:125 core/templates/base.html:156
 #: core/templates/static/copyrights.html:5
-#: core/templates/static/copyrights.html:9
+#: core/templates/static/copyrights.html:6
+#: core/templates/static/copyrights.html:10
 msgid "Copyrights"
 msgstr ""
 
@@ -161,44 +164,45 @@ msgstr ""
 msgid "Logout"
 msgstr ""
 
-#: core/templates/blog/list-item.html:21 core/templates/blog/post.html:45
+#: core/templates/blog/list-item.html:21 core/templates/blog/post.html:43
 #: core/templates/blog/simple.html:29 core/templates/emails/email.html:65
 msgid "Created"
 msgstr ""
 
-#: core/templates/blog/list-item.html:25 core/templates/blog/post.html:57
+#: core/templates/blog/list-item.html:25 core/templates/blog/post.html:55
 msgid "Length"
 msgstr ""
 
-#: core/templates/blog/list-item.html:48 core/templates/blog/post.html:84
+#: core/templates/blog/list-item.html:48 core/templates/blog/post.html:82
 msgid "Tracklist"
 msgstr ""
 
-#: core/templates/blog/list-item.html:49 core/templates/blog/post.html:85
+#: core/templates/blog/list-item.html:49 core/templates/blog/post.html:83
 msgid "Download"
 msgstr ""
 
-#: core/templates/blog/list-item.html:55 core/templates/blog/post.html:93
+#: core/templates/blog/list-item.html:55 core/templates/blog/post.html:91
 msgid "Hide Tracklist"
 msgstr ""
 
-#: core/templates/blog/list.html:5 core/templates/blog/simple.html:16
+#: core/templates/blog/list.html:5 core/templates/blog/list.html:6
+#: core/templates/blog/simple.html:16
 msgid "Blog"
 msgstr ""
 
-#: core/templates/blog/list.html:32
+#: core/templates/blog/list.html:33
 msgid "Nothing to show"
 msgstr ""
 
-#: core/templates/blog/post.html:49
+#: core/templates/blog/post.html:47
 msgid "Catalog No"
 msgstr ""
 
-#: core/templates/blog/post.html:53
+#: core/templates/blog/post.html:51
 msgid "Quality"
 msgstr ""
 
-#: core/templates/blog/post.html:98
+#: core/templates/blog/post.html:96
 msgid "Related posts"
 msgstr ""
 
@@ -206,7 +210,7 @@ msgstr ""
 msgid "Popular tags"
 msgstr ""
 
-#: core/templates/common/sidebar.html:13 core/templates/index.html:50
+#: core/templates/common/sidebar.html:13 core/templates/index.html:51
 msgid "Latest posts"
 msgstr ""
 
@@ -230,26 +234,26 @@ msgstr ""
 msgid "browser"
 msgstr ""
 
-#: core/templates/gallery/gallery.html:22
-#: core/templates/gallery/gallery.html:23 core/templates/index.html:41
-#: core/templates/index.html:42
+#: core/templates/gallery/gallery.html:23
+#: core/templates/gallery/gallery.html:24 core/templates/index.html:42
+#: core/templates/index.html:43
 msgid "Image #"
 msgstr ""
 
-#: core/templates/index.html:5
+#: core/templates/index.html:5 core/templates/index.html:6
 msgid "Homepage"
 msgstr ""
 
-#: core/templates/index.html:10
+#: core/templates/index.html:11
 msgid "Featured"
 msgstr ""
 
-#: core/templates/index.html:18
+#: core/templates/index.html:19
 msgid "Latest Images"
 msgstr ""
 
-#: core/templates/index.html:23 core/templates/index.html:24
-#: core/templates/index.html:32 core/templates/index.html:33
+#: core/templates/index.html:24 core/templates/index.html:25
+#: core/templates/index.html:33 core/templates/index.html:34
 msgid "Popular image from gallery"
 msgstr ""
 
@@ -266,7 +270,7 @@ msgid "Your profile will be created automatically, if necessary"
 msgstr ""
 
 #: core/templates/profiles/login.html:20
-#: core/templates/profiles/profile.html:29
+#: core/templates/profiles/profile.html:30
 msgid "Email"
 msgstr ""
 
@@ -279,31 +283,32 @@ msgid "Let Me In"
 msgstr ""
 
 #: core/templates/profiles/profile.html:5
-#: core/templates/profiles/profile.html:11
+#: core/templates/profiles/profile.html:6
+#: core/templates/profiles/profile.html:12
 msgid "Your profile"
 msgstr ""
 
-#: core/templates/profiles/profile.html:18
+#: core/templates/profiles/profile.html:19
 msgid "To update your profile image, please upload new one"
 msgstr ""
 
-#: core/templates/profiles/profile.html:24
+#: core/templates/profiles/profile.html:25
 msgid "Username"
 msgstr ""
 
-#: core/templates/profiles/profile.html:40
+#: core/templates/profiles/profile.html:41
 msgid "Update"
 msgstr ""
 
-#: core/templates/static/about.html:14 core/templates/static/resume.html:14
+#: core/templates/static/about.html:15 core/templates/static/resume.html:15
 msgid "Alexander Chaika"
 msgstr ""
 
-#: core/templates/static/resume.html:28
+#: core/templates/static/resume.html:29
 msgid "Code samples"
 msgstr ""
 
-#: core/templates/static/resume.html:34
+#: core/templates/static/resume.html:35
 msgid "Print this page"
 msgstr ""
 

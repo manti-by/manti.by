@@ -2,7 +2,8 @@
 
 {% load static i18n %}
 
-{% block title %}{% trans 'Blog' %}{% endblock %}
+{% block title %}{% if tag %}{% trans 'Blog' %}{% else %}{{ tag }}{% endif %}{% endblock %}
+{% block meta %}{% if tag %}{% trans 'Blog' %}{% else %}{{ tag }}{% endif %}{% endblock %}
 
 {% block breadcrumbs %}
     {% if tag %}

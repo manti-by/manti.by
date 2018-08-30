@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="{{ ACTIVE_LANGUAGE }}">
     <head>
-        <title>{% block title %}{% endblock %} | {% trans 'Drum and Bass, House, Tech and Chillout.' %}</title>
+        <title>{% block title %}{% endblock %} | {% trans 'Drum and Bass, House, Techno and Chillout.' %}</title>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,14 +33,14 @@
         <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="{% static "img/logo/512.png" %}">
 
         <meta name="description"
-              content="{% block meta %}{% endblock %} | {% trans 'Official blog of Alex Manti. My music, photos and info about me. Drum and Bass, House, Tech and Chillout.' %}">
+              content="{% block meta %}{% endblock %} | {% trans 'Official blog of Alex Manti. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.' %}">
         <meta name="yandex-verification" content="4c23c3980836ae34" />
 
         {% block open-graph %}
         <meta property="og:type" content="website">
-        <meta property="og:title" content="{% trans 'Drum and Bass, House, Tech and Chillout.' %}">
+        <meta property="og:title" content="{% trans 'Drum and Bass, House, Techno and Chillout.' %}">
         <meta property="og:description"
-              content="{% trans 'Official blog of Alex Manti. My music, photos and info about me. Drum and Bass, House, Tech and Chillout.' %}">
+              content="{% trans 'Official blog of Alex Manti. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.' %}">
         <meta property="og:image" content="{% webp_static 'img/share.jpg' %}">
         {% endblock %}
         <meta property="og:url" content="{{ ABSOLUTE_URL }}">
@@ -235,7 +235,7 @@
             </script>
         {% endcompress %}
         {% if not DEBUG %}
-            <noscript><div><img src="https://mc.yandex.ru/watch/20835088" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+            <noscript><div><img src="https://mc.yandex.ru/watch/20835088" style="position:absolute; left:-9999px;" alt="yandex" /></div></noscript>
         {% endif %}
         <script type="application/ld+json">{"@context":"https://schema.org","@type":"MusicGroup","name":"{{ META_TITLE }}","url":"{{ BASE_URL }}","logo":"{% static 'img/logo/192.png' %}","sameAs" : ["https://twitter.com/manti_by","https://instagram.com/manti_by","https://vk.com/manti_by","https://soundcloud.com/manti_by"]}</script>
     </body>
