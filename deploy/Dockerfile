@@ -54,8 +54,11 @@ RUN pip3 install --trusted-host pypi.org --no-cache-dir -r /etc/manti.by/require
 # Setup supervisor
 
 COPY docker/supervisor.conf /etc/manti.by/supervisor.conf
+COPY docker/supervisord.conf /etc/supervisor/supervisord.conf
+
 COPY docker/uwsgi.ini /etc/manti.by/uwsgi.ini
-COPY docker/uwsgi_params /etc/manti.by/uwsgi_params
+COPY docker/uwsgi-params.conf /etc/manti.by/uwsgi-params.conf
+
 RUN ln -s /etc/manti.by/supervisor.conf /etc/supervisor/conf.d/manti.by.conf
 
 
@@ -65,6 +68,7 @@ WORKDIR /srv/manti.by/src/
 RUN git init
 RUN git remote add origin https://github.com/manti-by/Manti.by.git
 
+EXPOSE 8080
 EXPOSE 8888
 EXPOSE 5555
 
@@ -78,4 +82,4 @@ RUN chown -R www-data:www-data /var/log/manti.by/
 
 # Start app services
 
-CMD supervisord -n
+CMD supervisord -n -c /etc/supervisor/supervisord.conf

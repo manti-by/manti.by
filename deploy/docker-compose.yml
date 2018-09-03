@@ -9,16 +9,23 @@ services:
       - POSTGRES_DB=manti
       - POSTGRES_USER=manti
       - POSTGRES_PASSWORD=pa55word
+    logging:
+      driver: "none"
   manti-by-redis:
     image: redis:latest
     container_name: manti-by-redis
+    logging:
+      driver: "none"
   manti-by-memcached:
     image: memcached:latest
     container_name: manti-by-memcached
+    logging:
+      driver: "none"
   manti-by-app:
     image: mantiby/manti.by:latest
     container_name: manti-by-app
     ports:
+      - "8080:8080"
       - "8888:8888"
       - "5555:5555"
     links:
@@ -27,8 +34,8 @@ services:
       - manti-by-redis
     volumes:
       - ../:/srv/manti.by/src/
-      - ../../content/:/srv/manti.by/content/
-      - ../../static/:/srv/manti.by/static/
       - ../../log/:/var/log/manti.by/
+      - ../../static/:/srv/manti.by/static/
+      - /media/manti/data/Dropbox/Development/Manti.by/content/:/srv/manti.by/content/
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings.docker
