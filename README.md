@@ -5,19 +5,19 @@ Manti.by
 About
 -----
 
-Django version of PHP micro framework M2, custom blog engine for music and photo publishing.
+Django custom blog engine for music and photo publishing.
 
-[![CircleCI](https://circleci.com/gh/manti-by/Manti.by.svg?style=shield)](https://circleci.com/gh/manti-by/Manti.by)
+[![CircleCI](https://circleci.com/gh/manti-by/Manti.by.svg?style=svg&circle-token=251a247a58b266c9154253facca70ce0d8b6e169)](https://circleci.com/gh/manti-by/Manti.by)
 [![Docker](https://img.shields.io/docker/automated/mantiby/manti.by.svg)](https://hub.docker.com/r/mantiby/manti.by/)
 [![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://raw.githubusercontent.com/manti-by/Manti.by/master/LICENSE)
 
 Author: Alexander Chaika <manti.by@gmail.com>
 
-Source link: https://github.com/manti-by/M2-Blog-Engine
+Source link: https://github.com/manti-by/Manti.by
 
 Requirements:
 
-    Ubuntu 14/16, Python 3+, PostgreSQL, Memcache, Redis
+    Ubuntu 16, Python 3+, PostgreSQL, Memcache, Redis
 
 
 Setup environment
@@ -25,14 +25,15 @@ Setup environment
 
 1. Install base system packages (second line for production servers)
 
-        $ sudo apt-get install -y git python3-pip python3-dev python3-six postgresql libpq-dev
-        $ sudo apt-get install -y nginx supervisor 
+        $ sudo apt-get install -y git-core python3-pip python3-dev python3-six postgresql libpq-dev \
+            wget nginx supervisor
 
 
 2. Get [FFMpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), compile and install
 
-        $ sudo apt install -y yasm libass-dev libfreetype6-dev libmp3lame-dev \
-            libtheora-dev libvorbis-dev libx264-dev libx265-dev libfdk-aac-dev
+        $ sudo apt install -y autoconf automake build-essential cmake libtool libass-dev \
+            libfreetype6-dev libmp3lame-dev libtheora-dev libvorbis-dev pkg-config \
+            texinfo zlib1g-dev yasm
         
         $ export PATH="$HOME/bin:$PATH" && export PKG_CONFIG_PATH="$HOME/usr/ffmpeg/build/lib/pkgconfig"
         $ ./configure \
@@ -48,10 +49,7 @@ Setup environment
               --enable-libmp3lame \
               --enable-libtheora \
               --enable-libvorbis \
-              --enable-nonfree \
-              --enable-libfdk-aac \
-              --enable-libx264 \
-              --enable-libx265
+              --enable-nonfree
         $ make -j2 && make install
 
 
