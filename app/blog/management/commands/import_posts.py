@@ -9,7 +9,7 @@ from django.core.management.base import BaseCommand
 
 from blog.models import Post
 
-logger = logging.getLogger('app')
+logger = logging.getLogger()
 
 
 class Command(BaseCommand):

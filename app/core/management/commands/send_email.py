@@ -1,12 +1,14 @@
 import logging
 
+from django.conf import settings
+from django.core.mail import send_mail
 from django.core.management.base import BaseCommand
 from django.template.loader import render_to_string
-from django.core.mail import send_mail
-from django.conf import settings
+from raven.contrib.django.raven_compat.models import client
+
 from core.models import Email
 
-logger = logging.getLogger('app')
+logger = logging.getLogger()
 
 
 class Command(BaseCommand):
@@ -22,4 +24,5 @@ class Command(BaseCommand):
                 email.is_sent = True
                 email.save()
             except Exception as e:
+                client.captureException()
                 logger.error(e)

@@ -5,10 +5,11 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.views.decorators.cache import cache_page
 from django.contrib.auth import authenticate, login, logout
+from raven.contrib.django.raven_compat.models import client
 
 from profiles.models import Profile
 
-logger = logging.getLogger('app')
+logger = logging.getLogger()
 
 
 @cache_page(60 * 60 * 24 * 5)
@@ -27,6 +28,7 @@ def profile_page(request):
                 profile.save()
         return render(request, 'profiles/profile.html', {'profile': profile})
     except Exception as e:
+        client.captureException()
         logger.error(e)
         raise Http404
 
@@ -53,6 +55,8 @@ def login_page(request):
 
             data = {'error': 'Invalid credentials, please check your email and password'}
     except User.DoesNotExist as e:
+        client.captureException()
+
         email = request.POST.get('email')
         password = request.POST.get('password')
         username = email.split('@')[0]
@@ -65,6 +69,7 @@ def login_page(request):
         login(request, user)
         return redirect('profile')
     except Exception as e:
+        client.captureException()
         logger.error(e)
         raise Http404
 

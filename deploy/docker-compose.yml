@@ -36,6 +36,4 @@ services:
       - ../:/srv/manti.by/src/
       - ../../log/:/var/log/manti.by/
       - ../../static/:/srv/manti.by/static/
-      - /media/manti/data/Dropbox/Development/Manti.by/content/:/srv/manti.by/content/
-    environment:
-      - DJANGO_SETTINGS_MODULE=core.settings.docker
+      - ../../content/:/srv/manti.by/content/

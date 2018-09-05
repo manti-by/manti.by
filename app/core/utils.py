@@ -5,12 +5,12 @@ import logging
 import requests
 
 from datetime import tzinfo, timedelta
-
 from django.conf import settings
 from django.core.cache import cache
+from raven.contrib.django.raven_compat.models import client
 
 
-logger = logging.getLogger('app')
+logger = logging.getLogger()
 
 
 def unique_str():
@@ -36,6 +36,7 @@ def get_instagram_photos(limit=6):
                 })
         cache.set('instagram_photos', recent_media[:limit], 60 * 60 * 24)
     except Exception as e:
+        client.captureException()
         logger.error(e)
     return recent_media[:limit]
 

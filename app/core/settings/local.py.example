@@ -1,6 +1,10 @@
+import os
+import raven
+
 from .base import *
 
-SECRET_KEY = '9(+8&f)43k--m$cq1#kcwy$%o4hlj9remnlybh+-*gl6_*10*k'
+
+SECRET_KEY = ''
 
 DEBUG = False
 
@@ -8,20 +12,19 @@ COMPRESS_ENABLED = True
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'manti.local',
-                 'ru.manti.local', 'en.manti.local']
+ALLOWED_HOSTS = ['127.0.0.1', 'manti.loc',
+                 'ru.manti.loc', 'en.manti.loc']
 
-BASE_URL = 'http://manti.local'
+BASE_URL = 'http://manti.loc'
 
 STATIC_ROOT = '/srv/manti.by/static'
 MEDIA_ROOT = '/srv/manti.by/content'
 
 LOCALE_URLS = {
-    'be': 'manti.local',
-    'ru': 'ru.manti.local',
-    'en': 'en.manti.local',
+    'be': 'manti.loc',
+    'ru': 'ru.manti.loc',
+    'en': 'en.manti.loc',
 }
-
 
 DATABASES = {
     'default': {
@@ -66,8 +69,8 @@ LOGGING = {
         },
     },
     'loggers': {
-        'app': {
-            'handlers': ['file_app', 'console'],
+        '': {
+            'handlers': ['console', 'file_app'],
             'level': 'WARNING',
             'propagate': True,
             'formatter': 'verbose',
@@ -87,9 +90,8 @@ LOGGING = {
     },
 }
 
-DEFAULT_FROM_EMAIL = 'admin@manti.by'
+INSTAGRAM_CLIENT_ID = ''
+INSTAGRAM_ACCESS_TOKEN = ''
+INSTAGRAM_CLIENT_SECRET = ''
 
-INSTAGRAM_USER_ID = 'manti_by'
-INSTAGRAM_CLIENT_ID = 'af64a4d7801544968ad3c5379d845e61'
-INSTAGRAM_ACCESS_TOKEN = '192264889.af64a4d.921ede75e39f4f2ea43364934e52710e'
-INSTAGRAM_CLIENT_SECRET = 'a091ae91942b43f79b3f49d6ec57c57a'
+RAVEN_CONFIG['dsn'] = ''

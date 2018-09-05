@@ -10,6 +10,7 @@ from core.models import BaseModel
 
 class Link(BaseModel):
 
+    name = models.CharField(max_length=255)
     original_link = models.URLField(verbose_name=_('Original Link'))
     short_link = models.URLField(unique=True, null=True, blank=True,
                                  verbose_name=_('Short Link'))

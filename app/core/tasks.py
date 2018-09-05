@@ -1,6 +1,8 @@
 import logging
 import subprocess
 
+from raven.contrib.django.raven_compat.models import client
+
 from core.celery import app
 from blog.constants import MP3_PREVIEW, OGG_PREVIEW, OGG_RELEASE
 
@@ -32,6 +34,8 @@ def convert_release(ffmpeg_format, post_id, output_type=''):
     try:
         post = Post.objects.get(id=post_id)
     except Post.DoesNotExist:
+        client.captureException()
+        logger.warning(e)
         return
 
     if output_type == OGG_PREVIEW:

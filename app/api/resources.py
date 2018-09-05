@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.utils.translation import ugettext_lazy as _
 from djrest.resource import Resource
+from raven.contrib.django.raven_compat.models import client
 
 from api.utils import resource_wrapper
 from core.context_processors.common import global_template_vars
@@ -12,7 +13,7 @@ from core.models import Email
 from blog.models import Post
 from gallery.models import Gallery, Image
 
-logger = logging.getLogger('app')
+logger = logging.getLogger()
 
 
 class OrderableResource(Resource):
@@ -36,6 +37,7 @@ class OrderableResource(Resource):
                     obj.save()
                     item['result'] = _('Updated')
                 except Exception as e:
+                    client.captureException()
                     item['result'] = e
             return JsonResponse({'status': 200, 'data': data}, status=200)
 

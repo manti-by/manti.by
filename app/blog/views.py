@@ -2,6 +2,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.core.cache import cache
 from django.utils.translation import ugettext_lazy as _
+from raven.contrib.django.raven_compat.models import client
 
 from core.utils import update_cache
 from blog.models import Post
@@ -20,6 +21,7 @@ def index(request):
             tag = Tag.objects.get(slug__iexact=tag)
             item_list = Post.objects.filter(tags__slug=tag.slug).order_by('-created')[:6]
         except Tag.DoesNotExist as e:
+            client.captureException()
             item_list = []
     else:
         item_list = Post.objects.order_by('-created')[:6]
@@ -42,4 +44,5 @@ def post(request, slug):
         cached_data = render(request, template, {'item': item})
         return update_cache(cache_key, cached_data)
     except Post.DoesNotExist:
+        client.captureException()
         raise Http404(_('Post with slug %s does not exists') % slug)

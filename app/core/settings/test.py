@@ -1,14 +1,8 @@
 import os
+import raven
 
 from .base import *
 
-DEBUG = False
-
-COMPRESS_ENABLED = True
-
-TEMPLATE_DEBUG = False
-
-SECRET_KEY = '9(+8&f)43k--m$cq1#kcwy$%o4hlj9remnlybh+-*gl6_*10*k'
 
 STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 MEDIA_ROOT = '/tmp/'

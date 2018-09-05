@@ -7,7 +7,7 @@ FROM python:3.6
 
 RUN mkdir -p /srv/manti.by/
 RUN mkdir -p /etc/manti.by/
-RUN mkdir -p /run/manti.by/
+RUN mkdir -p /var/run/manti.by/
 RUN mkdir -p /var/log/manti.by/
 
 
@@ -48,18 +48,17 @@ RUN apt-get update && apt-get install -y supervisor
 RUN apt-get clean
 
 COPY requirements.txt /etc/manti.by/requirements.txt
-RUN pip3 install --trusted-host pypi.org --no-cache-dir -r /etc/manti.by/requirements.txt
+RUN pip install --upgrade pip
+RUN pip install --trusted-host pypi.org --no-cache-dir -r /etc/manti.by/requirements.txt
 
 
 # Setup supervisor
 
-COPY docker/supervisor.conf /etc/manti.by/supervisor.conf
-COPY docker/supervisord.conf /etc/supervisor/supervisord.conf
+COPY confs/supervisord.conf /etc/supervisor/supervisord.conf
+COPY confs/supervisor.conf /etc/supervisor/conf.d/manti.by.conf
 
-COPY docker/uwsgi.ini /etc/manti.by/uwsgi.ini
-COPY docker/uwsgi-params.conf /etc/manti.by/uwsgi-params.conf
-
-RUN ln -s /etc/manti.by/supervisor.conf /etc/supervisor/conf.d/manti.by.conf
+COPY confs/uwsgi.ini /etc/manti.by/uwsgi.ini
+COPY confs/uwsgi-params.conf /etc/manti.by/uwsgi-params.conf
 
 
 # Set working directory and expose ports
@@ -76,8 +75,9 @@ EXPOSE 5555
 # Fix file permissions
 
 RUN chown -R www-data:www-data /srv/manti.by/
-RUN chown -R www-data:www-data /run/manti.by/
 RUN chown -R www-data:www-data /var/log/manti.by/
+RUN chown -R www-data:www-data /var/log/supervisor/
+RUN chown -R www-data:www-data /var/run/
 
 
 # Start app services

@@ -12,17 +12,20 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import raven
+
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 BASE_DIR = os.path.dirname(PROJECT_DIR)
 
+SECRET_KEY = ''
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '9(+8&f)43k--m$cq1#kcwy$%o4hlj9remnlybh+-*gl6_*10*k'
+DEBUG = False
 
+COMPRESS_ENABLED = True
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
+TEMPLATE_DEBUG = False
 
 
 # Application definition
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'compressor',
     'modeltranslation',
     'django_celery_results',
+    'raven.contrib.django.raven_compat',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -185,13 +189,14 @@ THUMBNAIL_QUALITY = 85
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
-DEFAULT_FROM_EMAIL = ''
+
+DEFAULT_FROM_EMAIL = 'admin@manti.by'
 DEFAULT_TO_EMAIL = ''
 
 
 # Allowed hosts
 
-ALLOWED_HOSTS = ['manti.by', '127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Static compressor settings
@@ -220,3 +225,11 @@ INSTAGRAM_USER_ID = ''
 INSTAGRAM_CLIENT_ID = ''
 INSTAGRAM_ACCESS_TOKEN = ''
 INSTAGRAM_CLIENT_SECRET = ''
+
+
+# Sentry integration
+
+RAVEN_CONFIG = {
+    'dsn': '',
+    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+}

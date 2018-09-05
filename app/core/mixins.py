@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
-logger = logging.getLogger('app')
+logger = logging.getLogger()
 
 
 class SlugifyMixin(models.Model):
