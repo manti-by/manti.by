@@ -22,7 +22,7 @@ server {
         }
     }
 
-    location /static/(css|js|img|svg)/ {
+    location /static/(cache|css|fonts|img|js|svg)/ {
         deny all;
     }
 
@@ -65,6 +65,9 @@ server {
     location /dashboard {
         expires    off;
         add_header Cache-Control 'private';
+
+        uwsgi_pass  manti-by;
+        include     /home/manti/www/manti/manti.by/src/deploy/confs/uwsgi-params.conf;
     }
 
     location / {

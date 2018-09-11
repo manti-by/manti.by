@@ -35,12 +35,8 @@ class ImageAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (_('Info'), {
-            'fields': ('gallery', 'original_image', 'tags')
+            'fields': ('gallery', 'original_image', 'tags', 'order')
         }),
-        (_('Other'), {
-            'classes': ('collapse',),
-            'fields': ('phash', 'order', 'created'),
-        })
     )
 
     def image(self, obj):
