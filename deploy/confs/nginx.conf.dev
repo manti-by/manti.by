@@ -13,7 +13,7 @@ server {
     error_log    /home/manti/www/manti/manti.by/log/nginx_error.log;
 
     location /static/ {
-        alias       /home/manti/www/manti/manti.by/static/;
+        alias       /home/manti/www/manti/manti.by/src/app/core/static/;
 
         if ($request_filename ~ "^.*/(.+\.(jpe?g|png|gif|svg|json|webp|js|css|woff2))$") {
             expires max;

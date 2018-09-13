@@ -33,7 +33,7 @@ def convert_release(ffmpeg_format, post_id, output_type=''):
     from blog.models import Post
     try:
         post = Post.objects.get(id=post_id)
-    except Post.DoesNotExist:
+    except Post.DoesNotExist as e:
         client.captureException()
         logger.warning(e)
         return

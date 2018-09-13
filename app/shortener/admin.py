@@ -6,5 +6,5 @@ from shortener.models import Link
 @admin.register(Link)
 class LinkAdmin(admin.ModelAdmin):
 
-    list_display = ('link', 'original_link', 'created')
-    ordering = ('created',)
+    list_display = ('name', 'link', 'original_link', 'created')
+    ordering = ('-created',)

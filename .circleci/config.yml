@@ -4,17 +4,11 @@ jobs:
     working_directory: /srv/manti.by/src
     docker:
       - image: mantiby/manti.by:latest
-      - image: circleci/postgres:9.6.2-alpine
-        environment:
-          POSTGRES_DB: manti
-          POSTGRES_USER: manti
-          POSTGRES_PASSWORD: pa55word
     steps:
       - checkout
       - run:
           name: Install base dependencies
-          command: |
-            pip3 install -r requirements.txt
+          command: pip install -r requirements.txt
           working_directory: /srv/manti.by/src/deploy
       - run:
           name: Run flake8
@@ -22,7 +16,7 @@ jobs:
           working_directory: /srv/manti.by/src/app
       - run:
           name: Run migrations
-          command: python3 manage.py migrate --settings=core.settings.test
+          command: python manage.py migrate --settings=core.settings.test
           working_directory: /srv/manti.by/src/app
       - run: mkdir -p /srv/manti.by/src/content/preview
       - run: mkdir -p /srv/manti.by/src/content/release
