@@ -50,7 +50,7 @@
                 </div>
             </div>
             <div class="tracklist hidden">
-                <div class="tracks">{{ item.tracklist.strip|safe }}</div>
+                <div class="tracks">{{ item.tracklist.strip|linebreaksbr }}</div>
                 <div class="links">
                     <span class="link hide-tracklist">{% trans 'Hide Tracklist' %}</span>
                 </div>

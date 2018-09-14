@@ -9,10 +9,23 @@
     <div class="home container">
         <div class="featured posts">
             <h1>{% trans 'Featured' %}</h1>
-            <div class="flex">
+            <div id="featured-slider" class="flex mobile-slider">
                 {% for item in featured_posts %}
                     {% include 'blog/featured-item.html' %}
                 {% endfor %}
+                <div class="controls">
+                    <div class="prev button">
+                        <i class="material-icons">chevron_left</i>
+                    </div>
+                    <ul>
+                    {% for item in featured_posts %}
+                        <li {% if forloop.first %}class="active"{% endif %}>&bullet;</li>
+                    {% endfor %}
+                    </ul>
+                    <div class="next button">
+                        <i class="material-icons">chevron_right</i>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="gallery">
@@ -64,8 +77,18 @@
     <link type="text/css" rel="stylesheet" href="{% static 'css/index.css' %}" media="all">
     <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list-item.css' %}" media="all">
     <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured-item.css' %}" media="all">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/common/mobile-slider.css' %}" media="all">
 {% endblock %}
 
 {% block scripts %}
     <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/widgets/mobile-slider.js' %}"></script>
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(() => {
+                $.initTracklist();
+                $.initMobileSlider();
+            });
+        })(jQuery);
+    </script>
 {% endblock %}

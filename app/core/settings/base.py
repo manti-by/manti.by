@@ -98,6 +98,8 @@ WSGI_APPLICATION = 'core.wsgi.application'
 
 BASE_URL = 'https://manti.by'
 
+SESSION_COOKIE_DOMAIN = '.manti.by'
+
 SITE_ID = 1
 
 # Database

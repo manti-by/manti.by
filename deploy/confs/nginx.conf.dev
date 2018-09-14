@@ -20,6 +20,10 @@ server {
             access_log off;
             add_header Cache-Control 'public';
         }
+
+        if ($request_filename ~ "^.*/(.+\.(eot|ttf|woff|woff2))$") {
+            add_header Access-Control-Allow-Origin *;
+        }
     }
 
     location /static/(cache|css|fonts|img|js|svg)/ {
@@ -46,7 +50,7 @@ server {
     }
 
     location /robots.txt {
-        alias /home/manti/www/manti/manti.by/static/robots.txt;
+        alias /home/manti/www/manti/manti.by/src/app/core/static/robots.txt;
 
         expires 30d;
         access_log off;
@@ -54,7 +58,7 @@ server {
     }
 
     location /sw.js {
-        alias /home/manti/www/manti/manti.by/static/js/sw.js;
+        alias /home/manti/www/manti/manti.by/src/app/core/static/js/sw.js;
 
         expires 1d;
         access_log off;

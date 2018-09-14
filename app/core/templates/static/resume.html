@@ -6,37 +6,39 @@
 {% block meta %}{% trans 'Resume' %}{% endblock %}
 
 {% block content %}
-    <article class="container static resume shadow">
-        <h1>
-            <span class="print-hidden">
-                {% trans 'Resume' %}
-            </span>
-            <span class="print-visible">
-                {% trans 'Alexander Chaika' %}
-            </span>
-        </h1>
-        <div class="description flex">
-            <div class="content">
-                <img data-src="{% webp_static 'img/side-mobile.jpg' %}" class="image mobile-visible lazy" alt="Manti">
-                {% if ACTIVE_LANGUAGE == 'ru' %}
-                   {% include 'static/partial/resume_ru.html' %}
-                {% elif ACTIVE_LANGUAGE == 'en' %}
-                   {% include 'static/partial/resume_en.html' %}
-                {% else %}
-                    {% include 'static/partial/resume_by.html' %}
-                {% endif %}
-                <p>
-                    {% trans 'Code samples' %}:
-                    <a href="https://github.com/manti-by" name="GitHub">
-                        https://github.com/manti-by
-                    </a>
-                <p>
-                <p class="print print-hidden">
-                    <a onclick="window.print()">{% trans 'Print this page' %}</a>
-                </p>
-            </div>
-            <div class="image mobile-hidden">
-                <img data-src="{% webp_static 'img/side.jpg' %}" class="lazy" alt="Manti">
+    <article class="container resume shadow">
+        <div class="static">
+            <h1>
+                <span class="print-hidden">
+                    {% trans 'Resume' %}
+                </span>
+                <span class="print-visible">
+                    {% trans 'Alexander Chaika' %}
+                </span>
+            </h1>
+            <div class="description flex">
+                <div class="content">
+                    <img data-src="{% webp_static 'img/side-mobile.jpg' %}" class="image mobile-visible lazy" alt="Manti">
+                    {% if ACTIVE_LANGUAGE == 'ru' %}
+                       {% include 'static/partial/resume_ru.html' %}
+                    {% elif ACTIVE_LANGUAGE == 'en' %}
+                       {% include 'static/partial/resume_en.html' %}
+                    {% else %}
+                        {% include 'static/partial/resume_by.html' %}
+                    {% endif %}
+                    <p>
+                        {% trans 'Code samples' %}:
+                        <a href="https://github.com/manti-by" name="GitHub">
+                            https://github.com/manti-by
+                        </a>
+                    <p>
+                    <p class="print print-hidden">
+                        <a onclick="window.print()">{% trans 'Print this page' %}</a>
+                    </p>
+                </div>
+                <div class="image mobile-hidden">
+                    <img data-src="{% webp_static 'img/side.jpg' %}" class="lazy" alt="Manti">
+                </div>
             </div>
         </div>
     </article>

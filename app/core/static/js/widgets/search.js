@@ -25,6 +25,7 @@
                                 .css('left', search_input.position().left)
                                 .html('<ul></ul>');
 
+                            let result_items = '';
                             for (let item of response.data) {
                                 result_items += '<li><a href="' + item.url + '">' + item.name + '</a></li>'
                             }

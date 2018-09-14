@@ -10,7 +10,6 @@ stop:
 destroy:
 	@docker-compose -f deploy/docker-compose.yml down
 
-
 bash:
 	docker exec -it manti-by-app bash
 
@@ -29,3 +28,6 @@ psql:
 pg_dump:
 	docker exec -it manti-by-postgres pg_dump -U manti -d manti > deploy/database/manti.sql
 	sudo chown -R ${USER}:${GROUP} deploy/database/
+
+uwsgi-restart:
+	docker exec -it manti-by-app supervisorctl restart manti:uwsgi

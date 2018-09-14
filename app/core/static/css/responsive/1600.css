@@ -1,12 +1,4 @@
 @media only screen and (min-width: 1600px) {
-    .container {
-        width: 1200px;
-    }
-
-    .static {
-        width: 1080px;
-    }
-
     main .posts {
         width: 70%;
     }

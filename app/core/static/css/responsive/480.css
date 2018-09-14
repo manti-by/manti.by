@@ -1,4 +1,4 @@
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 480px) {
 
     .mobile-hidden {
         display: none !important;
@@ -10,6 +10,7 @@
 
     h1 {
         margin-bottom: 0;
+        padding: 0 0 0.3em 0;
         font-size: 2.5em;
     }
 
@@ -19,8 +20,8 @@
     }
 
     h2 {
-        padding: 0 0 0.3em 0;
         margin-bottom: 0;
+        padding: 0 0 0.3em 0;
         font-size: 2em;
     }
 
@@ -99,68 +100,12 @@
         margin-top: 4.5em;
     }
 
-    main .sidebar .panel {
-        margin-bottom: 1.5em;
-    }
-
-    main .sidebar ul {
-        margin-left: 0;
-    }
-
-    main .sidebar ul li {
-        margin: 0.2em 0;
-    }
-
-    main .sidebar li a:after {
-        content: ', ';
-    }
-
-    main .sidebar li:last-child a:after {
-        content: '';
-    }
-
-    main .sidebar .instagram ul {
-        justify-content: space-between;
-    }
-
-    main .sidebar .instagram li {
-        flex-basis: calc(100% / 3 - 0.2em);
-        margin: 0.2em 0;
-    }
-
-    main .sidebar .instagram li:nth-child(3n+3) {
-        margin-right: 0;
-    }
-
-    main .sidebar .instagram li a {
-        display: block;
-    }
-
-    main .sidebar .instagram li a img {
-        display: block;
-        min-width: 100%;
-        max-width: 100%;
-    }
-
-    main .sidebar .instagram li a:after {
-        content: '';
-    }
-
-    main .sidebar .instagram .profile {
-        margin-left: 0;
-    }
-
     .post .info strong {
         font-weight: 500;
     }
 
     .home .gallery {
         margin-bottom: 1em;
-    }
-
-    .home .gallery .featured > a {
-        display: inline-block;
-        height:  auto;
     }
 
     .home .gallery .featured .latest {
@@ -254,16 +199,6 @@
         margin: 1em 0;
     }
 
-    .post .info .show-tracklist,
-    .post .tracklist .hide-tracklist,
-    .post .info .download {
-        font-size: 1.2em;
-    }
-
-    .post .info .download {
-        margin-left: 0.5em;
-    }
-
     .featured .post .image {
         margin-bottom: 0;
     }
@@ -316,7 +251,7 @@
     }
 }
 
-@media only screen and (max-width: 767px) and (orientation: landscape) {
+@media only screen and (max-width: 480px) and (orientation: landscape) {
     .gallery .item .preview {
         width: calc(100%  / 2 - 0.2em);
         max-height: 192px;

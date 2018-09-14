@@ -86,7 +86,7 @@
                 </div>
                 <div class="tracklist hidden">
                     <h2>{{ item.name }}</h2>
-                    <div class="tracks">{{ item.tracklist.strip|safe }}</div>
+                    <div class="tracks">{{ item.tracklist.strip|linebreaksbr }}</div>
                     <div class="links">
                         <span class="link hide-tracklist">{% trans 'Hide Tracklist' %}</span>
                     </div>
@@ -109,4 +109,11 @@
 
 {% block scripts %}
     <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
+    <script type="text/javascript">
+        (function($) {
+            $(document).ready(() => {
+                $.initTracklist();
+            });
+        })(jQuery);
+    </script>
 {% endblock %}

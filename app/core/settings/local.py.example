@@ -6,9 +6,9 @@ from .base import *
 
 SECRET_KEY = ''
 
-DEBUG = False
+DEBUG = True
 
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 
 TEMPLATE_DEBUG = False
 
@@ -17,7 +17,12 @@ ALLOWED_HOSTS = ['127.0.0.1', 'manti.loc',
 
 BASE_URL = 'http://manti.loc'
 
+SESSION_COOKIE_DOMAIN = '.manti.loc'
+
+STATIC_URL = 'https://manti.loc/static/'
 STATIC_ROOT = '/srv/manti.by/static'
+
+MEDIA_URL = 'https://manti.loc/content/'
 MEDIA_ROOT = '/srv/manti.by/content'
 
 LOCALE_URLS = {

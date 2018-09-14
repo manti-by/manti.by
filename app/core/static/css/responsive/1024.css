@@ -1,12 +1,8 @@
 @media only screen and (max-width: 1024px) {
     .container {
-        width: 1000px;
+        width: 98%;
     }
-
-    .static {
-        width: 856px;
-    }
-
+    
     header nav .link-item {
         min-width: 91px;
     }
@@ -23,10 +19,22 @@
         height: 320px;
     }
 
-    .home .main .posts .post .image,
-    .home .main .posts .post .info,
-    .home .main .posts .post .tracklist {
-        min-height: 481px;
+    .home .post .image,
+    .home .post .info,
+    .home .post .tracklist {
+        min-height: 398px;
+    }
+
+    .featured .post .image {
+        width: 100%;
+        min-height: 220px;
+    }
+    
+    .home .featured .post .info,
+    .home .featured .post .data,
+    .home .featured .post .tracklist {
+        min-height: 0;
+        margin-bottom: 0;
     }
 
     .home .main {
@@ -78,9 +86,9 @@
         padding: 1em 5%;
     }
 
-    .home .main .posts .post .image,
-    .home .main .posts .post .info,
-    .home .main .posts .post .tracklist {
+    .home .post .image,
+    .home .post .info,
+    .home .post .tracklist {
         min-height: 350px;
     }
 

@@ -2,8 +2,8 @@
 
 {% load static i18n %}
 
-{% block title %}{% if tag %}{% trans 'Blog' %}{% else %}{{ tag }}{% endif %}{% endblock %}
-{% block meta %}{% if tag %}{% trans 'Blog' %}{% else %}{{ tag }}{% endif %}{% endblock %}
+{% block title %}{% if tag %}{{ tag }}{% else %}{% trans 'Blog' %}{% endif %}{% endblock %}
+{% block meta %}{% if tag %}{{ tag }}{% else %}{% trans 'Blog' %}{% endif %}{% endblock %}
 
 {% block breadcrumbs %}
     {% if tag %}
@@ -47,8 +47,9 @@
     <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
     <script type="text/javascript">
         (function($) {
-            $(document).ready(function() {
+            $(document).ready(() => {
                 $.initBlogAjax('{% if tag %}{{ tag.slug }}{% endif %}');
+                $.initTracklist();
             });
         })(jQuery);
     </script>

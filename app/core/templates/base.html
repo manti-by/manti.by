@@ -165,6 +165,7 @@
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/480.css' %}" media="all">
         {% endcompress %}
         </noscript>
         {% compress css inline %}
@@ -172,7 +173,8 @@
         {% endcompress %}
 
         {% compress js %}
-            <script type="text/javascript" src="{% static 'js/libs/jquery-3.3.1/jquery.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/libs/jquery-2.2.4/jquery.min.js' %}"></script>
+            <script type="text/javascript" src="{% static 'js/libs/jquery-mobile-1.4.5/jquery.mobile.min.js' %}"></script>
             <script type="text/javascript" src="{% static 'js/libs/jquery-browser-0.1.0/jquery.browser.min.js' %}"></script>
             <script type="text/javascript">
                 const DEBUG = {% if DEBUG %}true{% else %}false{% endif %};

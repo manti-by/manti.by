@@ -21,8 +21,7 @@
                             {% thumbnail image.original_image "400" as preview %}
                                 <img data-src="{{ preview.url }}" class="lazy"
                                      alt="{% trans 'Image #' %}{{ image.id }}"
-                                     title="{% trans 'Image #' %}{{ image.id }}"
-                                     width="{{ preview.width }}" height="{{ preview.height }}">
+                                     title="{% trans 'Image #' %}{{ image.id }}">
                             {% endthumbnail %}
                         </a>
                     {% endthumbnail %}
