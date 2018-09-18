@@ -18,7 +18,7 @@
                     {% thumbnail image.original_image "1920x1280" as display %}
                         <a href="{{ display.url }}" data-id="{{ image.id }}" name="image-{{ image.id }}"
                            class="preview shadow {% if display|is_portrait %}portrait{% else %}landscape{% endif %} {% if user.is_superuser %}orderable-item{% endif %}">
-                            {% thumbnail image.original_image "400" as preview %}
+                            {% thumbnail image.original_image "600" as preview %}
                                 <img data-src="{{ preview.url }}" class="lazy"
                                      alt="{% trans 'Image #' %}{{ image.id }}"
                                      title="{% trans 'Image #' %}{{ image.id }}">

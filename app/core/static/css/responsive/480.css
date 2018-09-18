@@ -115,7 +115,7 @@
     }
 
     .home .gallery .featured .latest .thumbnail {
-        flex-basis: 32.5%;
+        flex-basis: 49.5%;
         max-width: 100%;
         margin: 0 0 0.3em 0;
         box-shadow: none;

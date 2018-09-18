@@ -1,4 +1,4 @@
-(function($) {
+(($) => {
 
     'use strict';
 
@@ -12,6 +12,6 @@
         $.loaderHide = () =>  {
             loader.removeClass('visible');
         };
-    };
+    }
 
 })(jQuery);

@@ -9,12 +9,14 @@
     <div class="home container">
         <div class="featured posts">
             <h1>{% trans 'Featured' %}</h1>
-            <div id="featured-slider" class="flex mobile-slider">
-                {% for item in featured_posts %}
-                    {% include 'blog/featured-item.html' %}
-                {% endfor %}
+            <div id="featured-slider" class="mobile-slider">
+                <div class="flex content">
+                    {% for item in featured_posts %}
+                        {% include 'blog/featured-item.html' %}
+                    {% endfor %}
+                </div>
                 <div class="controls">
-                    <div class="prev button">
+                    <div class="prev button hidden">
                         <i class="material-icons">chevron_left</i>
                     </div>
                     <ul>
@@ -35,8 +37,7 @@
                     <a href="{% url 'gallery_list' %}" name="gallery">
                         {% thumbnail featured_image.original_image "x1080" as im %}
                             <img data-src="{{ im.url }}" alt="{% trans 'Popular image from gallery' %}"
-                                 title="{% trans 'Popular image from gallery' %}" class="lazy"
-                                 width="{{ im.width }}" height="{{ im.height }}" />
+                                 title="{% trans 'Popular image from gallery' %}" class="lazy" />
                         {% endthumbnail %}
                     </a>
                 {% else %}
@@ -49,12 +50,11 @@
                 {% endif %}
                 <div class="latest flex">
                     {% for image in latest_images %}
-                        {% thumbnail image.original_image "x100" as im %}
+                        {% thumbnail image.original_image "x200" as im %}
                             <a href="{% url 'gallery_list' %}" name="gallery"
                                class="thumbnail {% if im|is_portrait %}portrait{% else %}landscape{% endif %}">
                                 <img data-src="{{ im.url }}" alt="{% trans 'Image #' %}{{ image.id }}"
-                                     title="{% trans 'Image #' %}{{ image.id }}" class="lazy"
-                                     width="{{ im.width }}" height="{{ im.height }}" />
+                                     title="{% trans 'Image #' %}{{ image.id }}" class="lazy" />
                             </a>
                         {% endthumbnail %}
                     {% endfor %}
@@ -81,12 +81,17 @@
 {% endblock %}
 
 {% block scripts %}
+    <script type="text/javascript" src="{% static 'js/libs/jquery-touchswipe-1.6.19/jquery.touchswipe.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/widgets/mobile-slider.js' %}"></script>
     <script type="text/javascript">
         (function($) {
             $(document).ready(() => {
                 $.initTracklist();
+                $.initMobileSlider();
+            });
+
+            $(window).on('resize', () => {
                 $.initMobileSlider();
             });
         })(jQuery);

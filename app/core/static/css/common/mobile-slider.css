@@ -1,15 +1,15 @@
 .mobile-slider {
     position: relative;
-    touch-action: none;
-    overflow: visible;
-    padding-bottom: 1.5em;
 }
 
+.mobile-slider .content {
+    position: relative;
+    top:  0;
+} 
+
 .mobile-slider .controls {
-    position: absolute;
-    bottom: 0;
     display: none;
-    width: calc(100% / 3);
+    padding: 0.5em 0;
 }
 
 .mobile-slider .controls ul {
@@ -34,19 +34,24 @@
 .mobile-slider .controls .prev,
 .mobile-slider .controls .next {
     position: absolute;
-    bottom: 150px;
+    bottom: 47%;
     color: #FFF;
     cursor: pointer;
 }
 
 .mobile-slider .controls .next {
-    left: 90%;
+    left: 95%;
 }
 
 @media only screen and (max-width: 767px) {
    .mobile-slider {
-        width: 311%;
         flex-wrap: nowrap;
+        width: 100%;
+        overflow: hidden;
+   }
+
+   .mobile-slider .content {
+        width: 312%;
    }
 
     .mobile-slider .controls {

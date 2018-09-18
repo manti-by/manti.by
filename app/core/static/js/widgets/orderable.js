@@ -1,12 +1,11 @@
-(function ($) {
+(($) => {
 
     'use strict';
 
-    $(document).ready(function() {
-        var items = $('.orderable'),
+    $.initOrderable = () => {
+        let items = $('.orderable'),
             counter, data, length;
 
-        // Make table sortable
         items.sortable({
             update: function(event, ui) {
                 counter = 0;
@@ -28,6 +27,6 @@
                 });
             }
         });
-    });
+    };
 
 })(jQuery);

@@ -167,6 +167,7 @@
         position: relative;
         left: 0;
         bottom: 0;
+        height: auto;
     }
 
     .home .gallery .featured .latest .thumbnail {
@@ -192,7 +193,7 @@
     .gallery .list .preview,
     .gallery .item .preview {
         width: 100%;
-        max-height: 219px;
+        max-height: 350px;
         margin: 0 0 0.3em 0;
     }
 
@@ -247,7 +248,7 @@
     .post .info .tags,
     .post .tracklist .tracks {
         margin-bottom: 0.5em;
-        font-size: 1.1em;
+        font-size: 1.3em;
     }
 
     .post .info .preview {
@@ -287,7 +288,7 @@
     }
 
     .home .featured .post .image {
-        min-height: 200px;
+        min-height: 350px;
         margin-bottom: 0;
     }
 
@@ -319,6 +320,6 @@
 @media only screen and (max-width: 767px) and (orientation: landscape) {
     .gallery .item .preview {
         width: calc(100%  / 2 - 0.2em);
-        max-height: 192px;
+        max-height: 176px;
     }
 }

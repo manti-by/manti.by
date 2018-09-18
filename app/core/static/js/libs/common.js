@@ -1,4 +1,4 @@
-(function($) {
+(($) => {
 
     'use strict';
 
@@ -57,6 +57,6 @@
         replacement.innerHTML = addStylesNode.textContent;
         document.body.appendChild(replacement);
         addStylesNode.parentElement.removeChild(addStylesNode);
-    }
+    };
 
 })(jQuery);

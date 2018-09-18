@@ -53,4 +53,11 @@
 
 {% block scripts %}
     <script type="text/javascript" src="{% static 'js/widgets/resizer.js' %}"></script>
+    <script type="text/javascript">
+        (($) => {
+            $(document).ready(() => {
+                $.initResizer();
+            });
+        })(jQuery);
+    </script>
 {% endblock %}

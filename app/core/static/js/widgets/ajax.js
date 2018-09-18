@@ -1,4 +1,4 @@
-(function($) {
+(($) => {
 
     'use strict';
 
@@ -26,7 +26,7 @@
                             $.player.updateActivePosts();
                             if (response['data'].length) locked = false;
                         } else {
-                            console.error(response['message']);
+                            DEBUG && console.error(response['message']);
                         }
 
                         $.loaderHide();

@@ -19,10 +19,15 @@
         height: 320px;
     }
 
+
+    .home .gallery .featured .latest {
+        height: 100px;
+    }
+
     .home .post .image,
     .home .post .info,
     .home .post .tracklist {
-        min-height: 398px;
+        min-height: 367px;
     }
 
     .featured .post .image {
@@ -60,9 +65,35 @@
         opacity: 1;
     }
 
+    .post h1, 
+    .post h2 {
+        margin-bottom: 0.15em;
+        font-size: 2.5em;
+    }
+
     .post .image,
     .post .data {
-        min-height: 470px;
+        min-height: 450px;
+    }
+
+    .post .info .description,
+    .post .info .created,
+    .post .info .catnum,
+    .post .info .quality,
+    .post .info .genre,
+    .post .info .length,
+    .post .info .preview,
+    .post .info .tags {
+        margin-bottom: 0.5em;
+        font-size: 1.3em;
+    }
+
+    .post .info .description {
+        margin-bottom: 1em;
+    }
+
+    .post .info .tags {
+        margin-bottom: 1.5em;
     }
 
     .gallery .list .item .preview {
@@ -70,7 +101,7 @@
     }
 
     .gallery .item .preview {
-        max-height: 183px;
+        max-height: 172px;
     }
 }
 
@@ -78,18 +109,17 @@
     main {
         margin-top: 5em;
     }
-    
-    .static,
-    .container {
-        width: 85%;
-        margin: 0 2.5%;
-        padding: 1em 5%;
-    }
 
     .home .post .image,
     .home .post .info,
     .home .post .tracklist {
-        min-height: 350px;
+        min-height: 180px;
+    }
+
+    .post h1, 
+    .post h2 {
+        margin-bottom: 0.15em;
+        font-size: 2em;
     }
 
     .post .image,
