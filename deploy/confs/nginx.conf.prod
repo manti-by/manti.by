@@ -38,9 +38,13 @@ server {
             access_log off;
             add_header Cache-Control 'public';
         }
+
+	if ($request_filename ~ "^.*/(.+\.(eot|ttf|woff|woff2))$") {
+            add_header Access-Control-Allow-Origin *;
+        }
     }
 
-    location /static/(css|js|img|svg)/ {
+    location /static/(css|js|img|svg|fonts)/ {
         deny all;
     }
 
@@ -89,11 +93,14 @@ server {
         uwsgi_pass  manti-by;
         include     /home/manti/www/manti.by/src/deploy/confs/uwsgi-params.conf;
     }
+
+    ssl_certificate /etc/letsencrypt/live/manti.by/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/manti.by/privkey.pem; # managed by Certbot
 }
 
 server {
     listen 80;
-    server_name flower.manti.local;
+    server_name flower.manti.by;
 
     location / {
         proxy_pass  http://127.0.0.1:5555;
@@ -106,7 +113,7 @@ server {
 
 server {
     listen 80;
-    server_name deluge.manti.local;
+    server_name deluge.manti.by;
 
     location / {
         proxy_pass http://127.0.0.1:8888/;

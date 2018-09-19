@@ -35,5 +35,5 @@ services:
     volumes:
       - ../:/srv/manti.by/src/
       - ../../log/:/var/log/manti.by/
-      - ../../static/:/srv/manti.by/static/
-      - ../../content/:/srv/manti.by/content/
+      - /mnt/nostromo/static/:/srv/manti.by/static/
+      - /mnt/nostromo/content/:/srv/manti.by/content/
