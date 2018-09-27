@@ -10,14 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import raven
 
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-BASE_DIR = os.path.dirname(PROJECT_DIR)
 
 SECRET_KEY = ''
 
@@ -139,7 +136,7 @@ LANGUAGES = (
 )
 
 LOCALE_PATHS = (
-    os.path.join(BASE_DIR, 'core', 'locale'),
+    os.path.join(PROJECT_DIR, 'locale'),
 )
 TIME_ZONE = 'UTC'
 USE_I18N = True
@@ -168,10 +165,10 @@ STATICFILES_DIRS = [
     os.path.join(PROJECT_DIR, 'static'),
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 STATIC_URL = '/static/'
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'content')
+MEDIA_ROOT = os.path.join(PROJECT_DIR, 'content')
 MEDIA_URL = '/content/'
 
 FILE_UPLOAD_PERMISSIONS = 0o644
@@ -233,7 +230,8 @@ INSTAGRAM_CLIENT_SECRET = ''
 
 # Sentry integration
 
+ROOT_DIR = os.path.dirname((os.path.dirname(PROJECT_DIR)))
 RAVEN_CONFIG = {
     'dsn': '',
-    'release': raven.fetch_git_sha(os.path.abspath(os.pardir)),
+    'release': raven.fetch_git_sha(ROOT_DIR),
 }

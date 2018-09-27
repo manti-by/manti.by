@@ -31,3 +31,9 @@ pg_dump:
 
 uwsgi-restart:
 	docker exec -it manti-by-app supervisorctl restart manti:uwsgi
+
+migrate:
+	docker exec -it manti-by-app python app/manage.py migrate
+
+static:
+	docker exec -it manti-by-app python app/manage.py collectstatic --no-input

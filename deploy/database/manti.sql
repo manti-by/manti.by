@@ -2,11 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.13
--- Dumped by pg_dump version 9.5.13
+-- Dumped from database version 9.6.9
+-- Dumped by pg_dump version 9.6.9
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -771,7 +772,6 @@ CREATE TABLE public.gallery_image (
     original_image character varying(100),
     "order" integer NOT NULL,
     gallery_id integer,
-    phash character varying(255),
     updated timestamp with time zone NOT NULL
 );
 
@@ -822,7 +822,8 @@ CREATE TABLE public.shortener_link (
     created timestamp with time zone NOT NULL,
     updated timestamp with time zone NOT NULL,
     original_link character varying(200) NOT NULL,
-    short_link character varying(200)
+    short_link character varying(200),
+    name character varying(255)
 );
 
 
@@ -931,161 +932,161 @@ CREATE TABLE public.thumbnail_kvstore (
 ALTER TABLE public.thumbnail_kvstore OWNER TO manti;
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_group ALTER COLUMN id SET DEFAULT nextval('public.auth_group_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: auth_group_permissions id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_group_permissions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: auth_permission id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_permission ALTER COLUMN id SET DEFAULT nextval('public.auth_permission_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: auth_user id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user ALTER COLUMN id SET DEFAULT nextval('public.auth_user_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: auth_user_groups id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user_groups ALTER COLUMN id SET DEFAULT nextval('public.auth_user_groups_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: auth_user_user_permissions id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('public.auth_user_user_permissions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: blog_genresproxy id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_genresproxy ALTER COLUMN id SET DEFAULT nextval('public.blog_genresproxy_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: blog_post id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_post ALTER COLUMN id SET DEFAULT nextval('public.blog_post_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: blog_post_related id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_post_related ALTER COLUMN id SET DEFAULT nextval('public.blog_post_related_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: blog_tagsproxy id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_tagsproxy ALTER COLUMN id SET DEFAULT nextval('public.blog_tagsproxy_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: celery_taskmeta id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.celery_taskmeta ALTER COLUMN id SET DEFAULT nextval('public.celery_taskmeta_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: celery_tasksetmeta id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.celery_tasksetmeta ALTER COLUMN id SET DEFAULT nextval('public.celery_tasksetmeta_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: core_email id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.core_email ALTER COLUMN id SET DEFAULT nextval('public.core_email_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: django_admin_log id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_admin_log ALTER COLUMN id SET DEFAULT nextval('public.django_admin_log_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: django_celery_results_taskresult id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_celery_results_taskresult ALTER COLUMN id SET DEFAULT nextval('public.django_celery_results_taskresult_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: django_content_type id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_content_type ALTER COLUMN id SET DEFAULT nextval('public.django_content_type_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: django_migrations id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_migrations ALTER COLUMN id SET DEFAULT nextval('public.django_migrations_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: django_site id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_site ALTER COLUMN id SET DEFAULT nextval('public.django_site_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: gallery_gallery id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.gallery_gallery ALTER COLUMN id SET DEFAULT nextval('public.gallery_gallery_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: gallery_image id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.gallery_image ALTER COLUMN id SET DEFAULT nextval('public.gallery_image_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: shortener_link id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.shortener_link ALTER COLUMN id SET DEFAULT nextval('public.shortener_link_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: taggit_tag id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.taggit_tag ALTER COLUMN id SET DEFAULT nextval('public.taggit_tag_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: manti
+-- Name: taggit_taggeditem id; Type: DEFAULT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.taggit_taggeditem ALTER COLUMN id SET DEFAULT nextval('public.taggit_taggeditem_id_seq'::regclass);
@@ -1255,7 +1256,7 @@ SELECT pg_catalog.setval('public.auth_permission_id_seq', 114, true);
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$36000$Impb9AFV4BFs$4HDC51m4ebxTRm0ALvie7zsnp9z+UZlTP1+/gVL1vFs=	2018-06-25 12:10:13.807166+02	t	manti			manti.by@gmail.com	t	t	2017-04-18 14:22:42.684202+02
+1	pbkdf2_sha256$36000$Impb9AFV4BFs$4HDC51m4ebxTRm0ALvie7zsnp9z+UZlTP1+/gVL1vFs=	2018-09-13 14:29:58.874471+00	t	manti			manti.by@gmail.com	t	t	2017-04-18 12:22:42.684202+00
 \.
 
 
@@ -1413,56 +1414,56 @@ SELECT pg_catalog.setval('public.blog_genresproxy_id_seq', 352, true);
 --
 
 COPY public.blog_post (id, created, slug, name, meta, summary, description, release, cover, is_music, catnum, quality, length, tracklist, mp3_preview_ready, ogg_preview_ready, ogg_release_ready, description_en, description_ru, meta_en, meta_ru, name_en, name_ru, summary_en, summary_ru, viewed, original_id, description_be, meta_be, name_be, summary_be, updated) FROM stdin;
-576	2009-03-15 01:00:00+01	killing-machine	Killing machine	Змрачнейшы мікс ў маім жыцці, нават уся серыя Гоа і побач не стаяла па жорсткасці.	Змрачнейшы мікс ў маім жыцці, нават уся серыя Гоа і побач не стаяла па жорсткасці.	Змрачнейшы мікс ў маім жыцці, нават уся серыя Гоа і побач не стаяла па жорсткасці. Запісаны мікс быў пасля доўгіх эксперыментаў у клубах, над тымі каму "не важна". Тэхнічна - "рыдлёўка", пару месцаў проста захлыналіся ад колькасці гуку.\r\nМікс быў запісаны ў хатніх умовах, прычым розныя кавалкі ў розных праграмах. Выкарыстаў практычна ўвесь спектр свайго софту: Samplitude, Ableton, Tracktor.	release/M16_Manti_Killing_machine_mix.mp3	covers/killing-machine.jpg	t	MNT016	LAME 320kbps 44100Hz	49:55	1. Intro - Red or blue (Matrix)\r\n2. Current Value & Donny - Nightmare man  \r\n3. Limewax - One of them (Current Value remix)    \r\n4. Counterstrike - Stardurst\r\n5. Limewax - Cracking core (Technical Itch vip mix)\r\n6. Prozac & Ethex - The game\r\n7. Current Value - Stomache\r\n8. Dying Punks & Current Value - Love all the people    \r\n9. Paperclip - Simple access  \r\n10. Limewax vs. Phobos feat. SPL - He will find us (Duomix)\r\n11. Oceanlab - Clear blue water (Current Value remix)	t	t	t	The darkest mix in my life, even the whole series of Goa and nearby did not stand for cruelty. Recorded mix was after a lot of experiments in clubs, over those who "not important". Technically - "shovel", a couple of places just choked with the amount of sound.\r\nMix was recorded at home, with different pieces in different programs. I used almost the whole range of my software: Samplitude, Ableton, Tracktor.	Мрачнейший микс в моей жизни, даже вся серия Гоа и рядом не стояла по жестокости. Записан микс был после долгих экспериментов в клубах, над теми кому "побарабану". Технически - "лопата", пару мест просто захлебывались от количества звука.\r\nМикс был записан в домашних условиях, причем разные куски в разных программах. Использовал практически весь спектр своего софта: Samplitude, Ableton, Tracktor.	The darkest mix in my life, even the whole series of Goa and nearby did not stand for cruelty.	Мрачнейший микс в моей жизни, даже вся серия Гоа и рядом не стояла по жестокости.	Killing machine	Killing machine	The darkest mix in my life, even the whole series of Goa and nearby did not stand for cruelty.	Мрачнейший микс в моей жизни, даже вся серия Гоа и рядом не стояла по жестокости.	71	31	Змрачнейшы мікс ў маім жыцці, нават уся серыя Гоа і побач не стаяла па жорсткасці. Запісаны мікс быў пасля доўгіх эксперыментаў у клубах, над тымі каму "не важна". Тэхнічна - "рыдлёўка", пару месцаў проста захлыналіся ад колькасці гуку.\r\nМікс быў запісаны ў хатніх умовах, прычым розныя кавалкі ў розных праграмах. Выкарыстаў практычна ўвесь спектр свайго софту: Samplitude, Ableton, Tracktor.	Змрачнейшы мікс ў маім жыцці, нават уся серыя Гоа і побач не стаяла па жорсткасці.	Killing machine	Змрачнейшы мікс ў маім жыцці, нават уся серыя Гоа і побач не стаяла па жорсткасці.	2018-06-20 12:30:40.414174+02
-568	2005-10-12 02:00:00+02	all-she-wants-is	All she wants is (SCSI device)	Адна з першых і вельмі старых прац, зробленая пад уражаннем польска-нямецкіх тэхна бацькоў.	Адна з першых і вельмі старых прац, зробленая пад уражаннем польска-нямецкіх тэхна бацькоў.	Адна з першых і вельмі старых прац, зробленая пад уражаннем польска-нямецкіх тэхна бацькоў.	release/M02_Manti_All_she_wants_is_mix_(SCSI_device).mp3	covers/all-she-wants.jpg	t	MNT002	LAME 320kbps 44100Hz	1:11:39		t	t	t	One of the first and very old works, made under the impression of the Polish-German techno fathers.	Одна из первых и очень старых работ, сделанная под впечатлением польско-немецких техно отцов.	One of the first and very old works, made under the impression of the Polish-German techno fathers.	Одна из первых и очень старых работ, сделанная под впечатлением польско-немецких техно отцов.	All she wants is (SCSI device)	All she wants is (SCSI device)	One of the first and very old works, made under the impression of the Polish-German techno fathers.	Одна из первых и очень старых работ, сделанная под впечатлением польско-немецких техно отцов.	64	23	Адна з першых і вельмі старых прац, зробленая пад уражаннем польска-нямецкіх тэхна бацькоў.	Адна з першых і вельмі старых прац, зробленая пад уражаннем польска-нямецкіх тэхна бацькоў.	All she wants is (SCSI device)	Адна з першых і вельмі старых прац, зробленая пад уражаннем польска-нямецкіх тэхна бацькоў.	2018-06-20 12:30:40.417865+02
-594	2014-09-11 10:35:30+02	prohibition	Сухой закон	Другая праца ў стылі. Думаў ўжо не збяру, але любоў да хіп-хопу не прайшла.	Другая праца ў стылі. Думаў ўжо не збяру, але любоў да хіп-хопу не прайшла.	Другая праца ў стылі. Думаў ўжо не збяру, але любоў да хіп-хопу не прайшла.	release/ME04_Manti_Prohibition.mp3	covers/prohibition.jpg	t	MNTE04	LAME 320kbps 44100Hz	1:13:32	1. Vibe TGK - Новая Тема\r\n2. 9Грамм - Как Они Смотрят (при уч. Грубый Ниоткуда)\r\n3. Guf - Фанзона\r\n4. Словетский - Москва\r\n5. ГРОТ - Алкотестер\r\n6. Tony-Gun - Шум Гам\r\n7. Guf - Распорядок дня\r\n8. Bonus RPK - Serce Polski\r\n9. Витя АК - Все МС\r\n10. Триагрутрика - Свободный Стиль\r\n11. Честер (Небро) - Пол страны\r\n12. Brick Bazuka - Не кино (фит Типси Тип)\r\n13. Guf - О лени (фит ОУ74)\r\n14. Murovei - На улицах будущего\r\n15. Рэм Дигга - Давай сделаем так\r\n16. Кровосток - Весна\r\n17. Баста и Словетский - Пойдем покурим на лоджию\r\n18. Дельфин - Любовь\r\n20. Murovei - Теплый дождь\r\n21. Jahmal TGK - Капелька Добра\r\n22. Ассаи - Иду за тобой	t	t	t	The second work in style. I thought I would not compile it, but my love for hip-hop did not go away.	Вторая работа в стиле. Думал уже не соберу, но любовь к хип-хопу не прошла.	The second work in style. I thought I would not compile it, but my love for hip-hop did not go away.	Вторая работа в стиле. Думал уже не соберу, но любовь к хип-хопу не прошла.	Prohibition	Сухой закон	The second work in style. I thought I would not compile it, but my love for hip-hop did not go away.	Вторая работа в стиле. Думал уже не соберу, но любовь к хип-хопу не прошла.	120	49	Другая праца ў стылі. Думаў ўжо не збяру, але любоў да хіп-хопу не прайшла.	Другая праца ў стылі. Думаў ўжо не збяру, але любоў да хіп-хопу не прайшла.	Сухой закон	Другая праца ў стылі. Думаў ўжо не збяру, але любоў да хіп-хопу не прайшла.	2018-06-20 12:30:40.407122+02
-586	2013-04-11 15:30:03+02	alice	Alice in Wonderland	Гэты сэт апісвае настроі і пачуцці, якія пераследуюць мяне ў кожным маім падарожжы ў залюстаркоўе, да людзей у белых халатах.	Гэты сэт апісвае настроі і пачуцці, якія пераследуюць мяне ў кожным маім падарожжы ў залюстаркоўе, да людзей у белых халатах.	Гэты сэт апісвае настроі і пачуцці, якія пераследуюць мяне ў кожным маім падарожжы ў залюстаркоўе, да людзей у белых халатах.	release/M34_Manti_Alice_in_Wonderland.mp3	covers/alice.jpg	t	MNT034	LAME 320kbps 44100Hz	55:12	1. Christopher Young - Portrait of Mr. Boogie\r\n2. Agressor Bunx & Neutral Point - Revelation\r\n3. Maztek - Limber\r\n4. Redco - Ion\r\n5. EastColors - Murderer\r\n6. Dextems - Forsaken\r\n7. BSE, Bulletproof & State of Mind - Roulette (Gridlok remix)\r\n8. Noisia & The Upbeats - Dustup\r\n9. Cruk - Punisher (Original mix)\r\n10. Nouwa - I can faster (Original mix)\r\n11. Break - Condenser\r\n12. Paperclip - Whom I belong\r\n13. Synkro - Acceptance	t	t	t	This set describes the moods and feelings that haunt me in every my journey through the looking-glass, to people in white gowns.	Этот сет описывает настроения и чувства, которые преследуют меня в каждом моем путешествии в зазеркалье, к людям в белых халатах.	This set describes the moods and feelings that haunt me in every my journey through the looking-glass, to people in white gowns.	Этот сет описывает настроения и чувства, которые преследуют меня в каждом моем путешествии в зазеркалье, к людям в белых халатах.	Alice in Wonderland	Alice in Wonderland	This set describes the moods and feelings that haunt me in every my journey through the looking-glass, to people in white gowns.	Этот сет описывает настроения и чувства, которые преследуют меня в каждом моем путешествии в зазеркалье, к людям в белых халатах.	150	41	Гэты сэт апісвае настроі і пачуцці, якія пераследуюць мяне ў кожным маім падарожжы ў залюстаркоўе, да людзей у белых халатах.	Гэты сэт апісвае настроі і пачуцці, якія пераследуюць мяне ў кожным маім падарожжы ў залюстаркоўе, да людзей у белых халатах.	Alice in Wonderland	Гэты сэт апісвае настроі і пачуцці, якія пераследуюць мяне ў кожным маім падарожжы ў залюстаркоўе, да людзей у белых халатах.	2018-06-20 12:30:40.424661+02
-584	2011-10-12 02:00:00+02	nlp	Паліва для танка (НЛП)	Мабыць адзіная на дадзены момант Hip-Hop кампіляцыя ў чыстым выглядзе, зборнік маіх любімых трэкаў.	Мабыць адзіная на дадзены момант Hip-Hop кампіляцыя ў чыстым выглядзе, зборнік маіх любімых трэкаў.	Мабыць адзіная на дадзены момант Hip-Hop кампіляцыя ў чыстым выглядзе, зборнік маіх любімых трэкаў.	release/ME01_Manti_NLP_compilation.mp3	covers/nlp.jpg	t	MNTE01	LAME 320kbps 44100Hz	1:13:57	1. Jahmal TGK - Моя Свобода\r\n2. Витя АК47 feat. Купэ - В тепле 2 яйца\r\n3. РоМД a.k.a. Рэм Дигга - Кто бы это мог быть\r\n4. РоМД a.k.a. Рэм Дигга - Виниловый Рома (Скит)\r\n5. NINTENDO - Криминал\r\n6. Jahmal TGK - Лада плывёт\r\n7. TRIAGRUTRIKA feat. АК47, Восточный Округ, Лёша Маэстро (WB) - Всем\r\n8. КРП a.k.a. Купэ feat. Гуф - Oрел или решка\r\n9. Баста и Guf - Если бы+ (Scratch DJ Mixoid)\r\n10. CENTR - Хип-хоп\r\n11. Guf - Metropolitan mail\r\n12. Кровосток - Сдавать говно\r\n13. Slim - Под пальмами\r\n14. РоМД a.k.a. Рэм Дигга - Мутки\r\n15. CENTR - Сосулька (скит)\r\n16. Витя АК & Tip & Зевс - Че такого\r\n17. TRIAGRUTRIKA feat. Витя АК - Чемодан лавэ\r\n18. Баста и Guf - Не всё потеряно пока (Scratch DJ Tactics)\r\n19. Guf feat. Ба - Дома\r\n20. TRIAGRUTRIKA feat. Лёша Маэстро (WB), Ramzes (ОДБР) - Мой город не спит	t	t	t	Perhaps the only currently Hip-Hop Compilation in its purest form, a collection of my favorite tracks.	Пожалуй единственная на данный момент Hip-Hop компиляция в чистом виде, сборник моих любимых треков.	Perhaps the only currently Hip-Hop Compilation in its purest form, a collection of my favorite tracks.	Пожалуй единственная на данный момент Hip-Hop компиляция в чистом виде, сборник моих любимых треков.	Fuel for the tank (NLP)	Топливо для танка (НЛП)	Perhaps the only currently Hip-Hop Compilation in its purest form, a collection of my favorite tracks.	Пожалуй единственная на данный момент Hip-Hop компиляция в чистом виде, сборник моих любимых треков.	127	39	Мабыць адзіная на дадзены момант Hip-Hop кампіляцыя ў чыстым выглядзе, зборнік маіх любімых трэкаў.	Мабыць адзіная на дадзены момант Hip-Hop кампіляцыя ў чыстым выглядзе, зборнік маіх любімых трэкаў.	Паліва для танка (НЛП)	Мабыць адзіная на дадзены момант Hip-Hop кампіляцыя ў чыстым выглядзе, зборнік маіх любімых трэкаў.	2018-06-20 12:30:40.431669+02
-596	2015-12-02 07:11:32+01	new-horizons	New horizons	Часам, вельмі простыя і бяскрыўдныя ўчынкі адкрываюць нам, да гэтага моманту нябачныя, новыя гарызонты...	Часам, вельмі простыя і бяскрыўдныя ўчынкі адкрываюць нам, да гэтага моманту нябачныя, новыя гарызонты...	Часам, вельмі простыя і бяскрыўдныя ўчынкі адкрываюць нам, да гэтага моманту нябачныя, новыя гарызонты, пасля чаго яшчэ больш хочацца жыць і радавацца гэтаму.	release/M41_Manti_New_horizons.mp3	covers/new-horizons.jpg	t	MNT041	LAME 320kbps 44100Hz	1:14:11	1. Burial - Forgive\r\n2. Baikal - Seagulls In The Sky\r\n3. ODESZA - How Did I Get Here\r\n4. Vanilla - Summer\r\n5. Sunchase - You what\r\n6. Mister Lies – Cleam\r\n7. I-dex - Coral\r\n8. Volfworks - Over The Love\r\n9. M-Koda - Whole Surface\r\n10. Aircolor - Hesea\r\n11. Echo 6 - Escaped From The Ice\r\n12. Meg Myers - Desire (Hucci remix)\r\n14. I-dex - Glacier\r\n13. Bones - Autumn Leaves\r\n15. Krusseldorf - Reboot Jam\r\n16. Synkro - Body Close (feat. Lyves)\r\n17. Jan Amit - Ages\r\n18. Bronchusevenmx - Murder\r\n19. Synkro - Changes	t	t	t	Sometimes, very simple and innocuous actions reveal to us, until this moment invisible, new horizons, after which we even want to live and enjoy it even more.	Иногда, очень простые и безобидные поступки открывают нам, до этого момента невидимые, новые горизонты, после чего еще больше хочется жить и радоваться этому.	Sometimes, very simple and innocuous actions reveal to us, until this moment invisible, new horizons...	Иногда, очень простые и безобидные поступки открывают нам, до этого момента невидимые, новые горизонты...	New horizons	New horizons	Sometimes, very simple and innocuous actions reveal to us, until this moment invisible, new horizons...	Иногда, очень простые и безобидные поступки открывают нам, до этого момента невидимые, новые горизонты...	73	51	Часам, вельмі простыя і бяскрыўдныя ўчынкі адкрываюць нам, да гэтага моманту нябачныя, новыя гарызонты, пасля чаго яшчэ больш хочацца жыць і радавацца гэтаму.	Часам, вельмі простыя і бяскрыўдныя ўчынкі адкрываюць нам, да гэтага моманту нябачныя, новыя гарызонты...	New horizons	Часам, вельмі простыя і бяскрыўдныя ўчынкі адкрываюць нам, да гэтага моманту нябачныя, новыя гарызонты...	2018-06-20 12:30:40.43511+02
-583	2013-03-05 01:00:00+01	reach	Reach out of the Sun	Дзіўны вясновы настрой і куча розных падзей у асабістым, і не толькі, жыцці, прывялі да стварэння гэтай кампіляцыі.	Дзіўны вясновы настрой і куча розных падзей у асабістым, і не толькі, жыцці, прывялі да стварэння гэтай кампіляцыі.	Дзіўны вясновы настрой і куча розных падзей у асабістым, і не толькі, жыцці, прывялі да стварэння гэтай кампіляцыі.\r\nДадзеная праца, нешта сярэдняе паміж серыямі <a href="/blog/hobh-two/">Дом разбітых сэрцаў</a> і <a href="/blog/synthetic/">Synthetic</a>, з першым большай частцы эмацыйна, а з другім па гуку і агульная атмасфера.	release/M33_Manti_Reach_out_to_the_sun.mp3	covers/reach-out-of-the-sun.jpg	t	MNT033	LAME 320kbps 44100Hz	1:05:37	1. Idex - Arc 07\r\n2. Kriipis Tulo - The deep of the night\r\n3. Apparat - Black water\r\n4. June Miller - Coming Closer\r\n5. Ishome - Earth\r\n6. Digital Mystery Tour - The Blooming  \r\n7. Late - Dreams are    \r\n8. Monoceros - Monocrom    \r\n9. Oak - Otaku\r\n10. Monokle - Warm control\r\n11. Electrosoul system - Morning Forest\r\n12. Synkro - Spirals\r\n13. Nanobyte - Lost time\r\n14. Monolake - Television tower	t	t	t	Strange spring mood and a lot of different events in my personal life, led to the creation of this compilation.\r\nThis work, that somewhere between series <a href="/blog/hobh-two/">House of broken hearts</a> and <a href="/blog/synthetic/">Synthetic</a>, with the first is mostly emotional, and the second for the sound and the overall atmosphere.	Странные весенние настроения и куча различных событий в личной, и не только, жизни привели к созданию этой компиляции.\r\nДанная работа, что-то среднее между сериями <a href="/blog/hobh-two/">Дом разбитых сердец</a> и <a href="/blog/synthetic/">Synthetic</a>, с первым по-большей части эмоционально, а со вторым по звуку и общей атмосфере...	Strange spring mood and a lot of different events in my personal life, led to the creation of this compilation.	Странные весенние настроения и куча различных событий в личной, и не только, жизни, привели к созданию этой компиляции.	Reach out of the Sun	Reach out of the Sun	Strange spring mood and a lot of different events in my personal life, led to the creation of this compilation.	Странные весенние настроения и куча различных событий в личной, и не только, жизни привели к созданию этой компиляции.	170	38	Дзіўны вясновы настрой і куча розных падзей у асабістым, і не толькі, жыцці, прывялі да стварэння гэтай кампіляцыі.\r\nДадзеная праца, нешта сярэдняе паміж серыямі <a href="/blog/hobh-two/">Дом разбітых сэрцаў</a> і <a href="/blog/synthetic/">Synthetic</a>, з першым большай частцы эмацыйна, а з другім па гуку і агульная атмасфера.	Дзіўны вясновы настрой і куча розных падзей у асабістым, і не толькі, жыцці, прывялі да стварэння гэтай кампіляцыі.	Reach out of the Sun	Дзіўны вясновы настрой і куча розных падзей у асабістым, і не толькі, жыцці, прывялі да стварэння гэтай кампіляцыі.	2018-06-20 12:30:40.428014+02
-600	2016-10-17 16:32:52+02	litl	LITL	Litl - рэкурсіўны акронім для "I Love Terry Lee". Для ўсіх, хто любіць гэтага музыку, як люблю яго я.	Litl - рэкурсіўны акронім для "I Love Terry Lee". Для ўсіх, хто любіць гэтага музыку, як люблю яго я.	Litl - рэкурсіўны акронім для "I Love Terry Lee". Для ўсіх, хто любіць гэтага музыку, як люблю яго я.	release/MR01_Manti_LITL.mp3	covers/litl.jpg	t	MR001	LAME 320kbps 44100Hz	58:38	All tracks written by Terry Lee Brown Junior\r\n\r\n1. Smugglers\r\n2. Gitane\r\n3. Electric avenue\r\n4. Soul digits\r\n5. Baltimore (Dub mix)\r\n6. Under pressure\r\n7. Home\r\n8. Chatterbox\r\n9. Bohemian life (Dub mix)\r\n10. Delightful encounter	t	t	t	LITL - recursive acronym for "I Love Terry Lee". For all who loves this musician as I love it.	LITL - рекурсивный акроним для «I Love Terry Lee». Для всех, кто любит этого музыканта, как люблю его я.	LITL - recursive acronym for "I Love Terry Lee". For all who loves this musician as I love it.	LITL - рекурсивный акроним для «I Love Terry Lee». Для всех, кто любит этого музыканта, как люблю его я.	LITL	LITL	LITL - recursive acronym for "I Love Terry Lee". For all who loves this musician as I love it.	LITL - рекурсивный акроним для «I Love Terry Lee». Для всех, кто любит этого музыканта, как люблю его я.	21	55	Litl - рэкурсіўны акронім для "I Love Terry Lee". Для ўсіх, хто любіць гэтага музыку, як люблю яго я.	Litl - рэкурсіўны акронім для "I Love Terry Lee". Для ўсіх, хто любіць гэтага музыку, як люблю яго я.	LITL	Litl - рэкурсіўны акронім для "I Love Terry Lee". Для ўсіх, хто любіць гэтага музыку, як люблю яго я.	2018-06-20 12:30:40.438533+02
-580	2012-06-01 02:00:00+02	progress	Progress R-7A	Я не асоба люблю Брэйкс, але калі гэтая музыка суправаджаецца прагрэсіўнай атмасферай - атрымліваюцца проста цудоўныя рэчы.	Я не асоба люблю Брэйкс, але калі гэтая музыка суправаджаецца прагрэсіўнай атмасферай - атрымліваюцца проста цудоўныя рэчы.	Я не асоба люблю Брэйкс, але калі гэтая музыка суправаджаецца прагрэсіўнай атмасферай - атрымліваюцца проста цудоўныя рэчы.	release/M28_Manti_Progress_R-7A_mix.mp3	covers/progress_r-7a.jpg	t	MNT028	LAME 320kbps 44100Hz	56:18	1. Abdomen Burst - Lullaby (Original Mix)\r\n2. Jamie Stevens - The Night Before (Momu Remix)\r\n3. Rhino Drum - Underground Sound (Fretwell Remix) \r\n4. Neo - Aura (Cosmonaut-Rework)\r\n5. Pilot - Dilema (Plastic Shell Remix)\r\n6. Pete Gawtry - It\\'s Life (Wrecked Angle Remix)\r\n7. Plastic Shell - Hard Way (Original Mix) \r\n8. Cosmonaut feat. Мумий Троль - Иди, я буду\r\n9. Shiloh - Dream On (Original Mix)\r\n10. Pinkbox Special - Nice Guys Finish Last (Original Mix)	t	t	t	I'm not particularly fond of Breaks, but when this music is accompanied by a progressive atmosphere - it turns out simply unmatched things.	Я не особо люблю Брейкс, но когда эта музыка сопровождается прогрессив атмосферой - получаются просто бесподобные вещи.	I'm not particularly fond of Breaks, but when this music is accompanied by a progressive atmosphere - it turns out simply unmatched things.	Я не особо люблю Брейкс, но когда эта музыка сопровождается прогрессив атмосферой - получаются просто бесподобные вещи.	Progress R-7A	Progress R-7A	I'm not particularly fond of Breaks, but when this music is accompanied by a progressive atmosphere - it turns out simply unmatched things.	Я не особо люблю Брейкс, но когда эта музыка сопровождается прогрессив атмосферой - получаются просто бесподобные вещи.	114	35	Я не асоба люблю Брэйкс, але калі гэтая музыка суправаджаецца прагрэсіўнай атмасферай - атрымліваюцца проста цудоўныя рэчы.	Я не асоба люблю Брэйкс, але калі гэтая музыка суправаджаецца прагрэсіўнай атмасферай - атрымліваюцца проста цудоўныя рэчы.	Progress R-7A	Я не асоба люблю Брэйкс, але калі гэтая музыка суправаджаецца прагрэсіўнай атмасферай - атрымліваюцца проста цудоўныя рэчы.	2018-06-20 12:30:40.441924+02
-548	2005-08-08 02:00:00+02	insomnia	Insomnia	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	release/M01_Manti_Insomnia_mix.mp3	covers/insomnia.jpg	t	MNT001	LAME 192kbps 44100Hz	79:31	1. Http - Звезды небесные\r\n2. I/dex - Zeel\r\n3. Pole 3 - Silbefisch\r\n4. Deep-z - Returning (Dedicated to Fula)\r\n5. I/dex - Ksren\r\n6. Plastikman - Disconnect    \r\n7. Akvalangist - Adpcm\r\n8. Fax - 20w\r\n9. David Alvarado - Aire  \r\n10. Fax - Aslip\r\n11. Deluge - Departure\r\n12. Pole 3 - Uberfahrt\r\n13. Taylor Deupree - Snow-Sand	t	t	t	The set from which everything started, was first recorded in 2004, since then nothing has changed, except for the sound quality - the set was re-released in 2007 just for the sake of this goal...	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	The set from which everything started, was first recorded in 2004, since then nothing has changed, except for the sound quality - the set was re-released in 2007 just for the sake of this goal...	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	Insomnia	Insomnia	The set from which everything started, was first recorded in 2004, since then nothing has changed, except for the sound quality - the set was re-released in 2007 just for the sake of this goal...	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	67	1	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	Insomnia	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	2018-06-20 12:30:40.448646+02
-571	2007-09-10 02:00:00+02	janaca-express	Janaca express	Мікс, які складаецца з двух частак, каждая з якіх адрозніваецца як эмацыйна, так тэхнічна і стылістычна.	Мікс, які складаецца з двух частак, каждая з якіх адрозніваецца як эмацыйна, так тэхнічна і стылістычна.	Мікс, які складаецца з двух частак, каждая з якіх адрозніваецца як эмацыйна, так тэхнічна і стылістычна. У той жа час увесь матэрыял падтрымлівае ідэю трансавай псіхадэлічнай музыкі, хоць і не так глыбока, як класічны псай.\r\nБудзе асабліва цікава тым, хто не любіць класічны, даволі жорсткі псай, але ў той жа час цікавіцца даволі хуткімі формамі (каля 145bpm).	release/M06_Manti_Janaca_express_mix_01.mp3	covers/janaca.jpg	t	MNT006	LAME 192kbps 44100Hz	1:00:39	1. Silicon Sound feat. Psychotrop - Departure\r\n2. Silent Sphere - Violet visions  \r\n3. Electro Sun - High cue  \r\n4. Astrix - Tweaky  \r\n5. Psypsiq Jicuri - A rain of hope in the galaxy  \r\n6. Xerox & Illumination - Temporary insanity  \r\n7. Astrix - Techno widows  \r\n8. Delerious - Dynamic force\r\n9. Astrix feat. Michele Adamson - Closer to heaven	t	t	t	Mix, consisting of two parts, each differs emotionally, technically and stylistically. At the same time, all the material supports the idea of Trance music, although not as deep as classical Psy.\r\nIt will be especially interesting for those who do not like classical, rather cruel Psy, but at the same time are interested in fairly fast forms (about 145bpm).	Микс, состоящий из двух частей, каждая из которых отличается как эмоционально, так технически и стилистически. В то же время весь материал поддерживает идею трансовой психоделической музыки, хотя и не так глубоко, как классический псай.\r\nБудет особенно интесно тем, кто не любит классический, довольно жестокий псай, но в то же время интересуется довольно быстрыми формами (около 145bpm).	Mix, consisting of two parts, each differs emotionally, technically and stylistically.	Микс, состоящий из двух частей, какждая из которых отличается как эмоционально, так технически и стилистически.	Janaca express	Janaca express	Mix, consisting of two parts, each differs emotionally, technically and stylistically.	Микс, состоящий из двух частей, какждая из которых отличается как эмоционально, так технически и стилистически.	65	26	Мікс, які складаецца з двух частак, каждая з якіх адрозніваецца як эмацыйна, так тэхнічна і стылістычна. У той жа час увесь матэрыял падтрымлівае ідэю трансавай псіхадэлічнай музыкі, хоць і не так глыбока, як класічны псай.\r\nБудзе асабліва цікава тым, хто не любіць класічны, даволі жорсткі псай, але ў той жа час цікавіцца даволі хуткімі формамі (каля 145bpm).	Мікс, які складаецца з двух частак, каждая з якіх адрозніваецца як эмацыйна, так тэхнічна і стылістычна.	Janaca express	Мікс, які складаецца з двух частак, каждая з якіх адрозніваецца як эмацыйна, так тэхнічна і стылістычна.	2018-06-20 12:30:40.451746+02
-565	2008-11-08 01:00:00+01	chillhouse-live	Chillhouse live	Практычна класічны хаус з некаторымі прымешкамі дып і тэч нотак. Запісаны "ужывую" ў клубе ХХ стагоддзе.	Практычна класічны хаус з некаторымі прымешкамі дып і тэч нотак. Запісаны "ужывую" ў клубе ХХ стагоддзе.	Практычна класічны хаус з некаторымі прымешкамі дып і тэч нотак. Запісаны "ужывую" ў клубе ХХ стагоддзе.	release/M12_Manti_Chillhouse_live.mp3	covers/chillhouse.jpg	t	MNT012	LAME 320kbps 44100Hz	68:44		t	t	t	Almost a classic house with some impurities Deepa and tech notes. Recorded "live" in the club "XX century".	Практически классический хаус с некоторыми примесями дипа и теч ноток. Записан "вживую" в клубе ХХ век.	Almost a classic house with some impurities Deepa and tech notes. Recorded "live" in the club "XX century".	Практически классический хаус с некоторыми примесями дипа и теч ноток. Записан "вживую" в клубе ХХ век.	Chillhouse live	Chillhouse live	Almost a classic house with some impurities Deepa and tech notes. Recorded "live" in the club "XX century".	Практически классический хаус с некоторыми примесями дипа и теч ноток. Записан "вживую" в клубе ХХ век.	54	20	Практычна класічны хаус з некаторымі прымешкамі дып і тэч нотак. Запісаны "ужывую" ў клубе ХХ стагоддзе.	Практычна класічны хаус з некаторымі прымешкамі дып і тэч нотак. Запісаны "ужывую" ў клубе ХХ стагоддзе.	Chillhouse live	Практычна класічны хаус з некаторымі прымешкамі дып і тэч нотак. Запісаны "ужывую" ў клубе ХХ стагоддзе.	2018-06-20 12:30:40.445428+02
-567	2012-08-25 02:00:00+02	cote-d-azur	Cote d'Azur promo	Гадовы, гадовы мікс, які лепш слухаць стоячы на пяску і удыхаючы пах салёнага марскога паветра.	Гадовы, гадовы мікс, які лепш слухаць стоячы на пяску і удыхаючы пах салёнага марскога паветра.	Гадовы, гадовы мікс, які лепш слухаць стоячы на пяску і удыхаючы пах салёнага марскога паветра. Многае навеяна летнім надвор'ем, оўпэнами і людзьмі, якія мяне атачалі ўвесь гэты час.\r\nПа сутнасці сваёй з'яўляецца зборкай лепшых трэкаў з двух маіх розных кампілоў за летні перыяд. Так што слухаем і атрымліваем асалоду.	release/M30_Manti_Cote_d-Azur_(Summer-Autumn-12_promo).mp3	covers/cote-d-azur.jpg	t	MNT030	LAME 320kbps 44100Hz	1:00:38	1. Strict Border - Reboot Me (Hermanez remix) - Suara\r\n2. Danny Serrano & Westboy - Bubblegun - Suara\r\n3. Juliet Sikora, Tube & Berger - Jam Word Up (Original mix) - Kittball\r\n4. MSMS - Hold it (Original mix) - Plastic city\r\n5. Marco Bailey - Rubber band - Bedrock\r\n6. Piek - Burn Baby Burn (Siwell Remix) - Sphera\r\n7. Taster Peter, Phunx - Jack This Tune (Mario Ochoa remix) - Bitten\r\n8. Tiger Stripes - Give You Up - Toolroom\r\n9. Richard Grey - You are my high (Federico Scavo remix) - Tiger\r\n10. Marco Bailey - Jungle laps - Bedrock\r\n11. Oscar Barila and Maiki - Debbie white (Simone Tavazzi remix) - Kostbar\r\n12. Andrew Bayer - Gaff's Eulogy - Anjunadeep	t	t	t	Summer, summer mix, which is better to listen standing on the sand and inhaling the smell of salty sea air. Much is inspired by the summer weather, openairs and people who surrounded me all this time.\r\nIn essence, it is the assembly of the best tracks from my two different compilations for the summer period. So we listen and enjoy.	Летний, летний микс, который лучше слушать стоя на песке и вдыхая запах соленого морского воздуха. Многое навеяно летней погодой, оупенами и людьми, которые меня окружали все это время.\r\nПо сути своей является сборкой лучших треков из двух моих различных компилов за летний период. Так что слушаем и наслаждаемся.	Summer, summer mix, which is better to listen standing on the sand and inhaling the smell of salty sea air.	Летний, летний микс, который лучше слушать стоя на песке и вдыхая запах соленого морского воздуха.	Cote d'Azur promo	Cote d'Azur promo	Summer, summer mix, which is better to listen standing on the sand and inhaling the smell of salty sea air.	Летний, летний микс, который лучше слушать стоя на песке и вдыхая запах соленого морского воздуха.	125	22	Гадовы, гадовы мікс, які лепш слухаць стоячы на пяску і удыхаючы пах салёнага марскога паветра. Многае навеяна летнім надвор'ем, оўпэнами і людзьмі, якія мяне атачалі ўвесь гэты час.\r\nПа сутнасці сваёй з'яўляецца зборкай лепшых трэкаў з двух маіх розных кампілоў за летні перыяд. Так што слухаем і атрымліваем асалоду.	Гадовы, гадовы мікс, які лепш слухаць стоячы на пяску і удыхаючы пах салёнага марскога паветра.	Cote d'Azur promo	Гадовы, гадовы мікс, які лепш слухаць стоячы на пяску і удыхаючы пах салёнага марскога паветра.	2018-06-20 12:30:40.458193+02
-587	2013-05-18 19:11:01+02	silence	Aweary silence	Інтэлігентны і прыгожы вакальны хаус для тых хто любіць мякчэй)\r\nУсіх з надыходзячым летам!	Інтэлігентны і прыгожы вакальны хаус для тых хто любіць мякчэй)\r\nУсіх з надыходзячым летам!	Інтэлігентны і прыгожы вакальны хаус для тых хто любіць мякчэй)\r\nУсіх з надыходзячым летам!	release/M35_Manti_Aweary_silence.mp3	covers/silence.jpg	t	MNT035	LAME 320kbps 44100Hz	1:01:37	0. Intro - Aweary silence\r\n1. Kolombo - Don't be shy (Original mix)\r\n2. Maxxi Soundsystem feat. Name One - Regrets we have no use for (Original mix)\r\n3. Dana Bergquist & Peder G - Survive (Original mix)\r\n4. Jimmy Vlach - Just walking (Original mix)\r\n5. Nora En Pure - You make me float (Calippo remix)\r\n6. Agoria - Baboul hair cuttin (Gui Boratto remix)\r\n7. GusGus - Over\r\n8. P.A.C.O. And Tube & Berger - Greyjoy (Original mix)\r\n9. Terry Grant, MSMS - The killing kind (Original mix)\r\n10. Kasper Bjorke feat. Laid Back - Bohemian soul (Adana Twins On a Cloudy Day remix)\r\n11. Tube & Berger - Long roads (Original mix)\r\n12. Phaeleh feat. Anneka - Memories	t	t	t	Intelligent and beautiful vocal house for those who like to softer)\r\nAll congratulations on the coming summer!	Интеллигентный и красивый вокальный хаус для тех кто любит помягче)\r\nВсех с наступающим летом!	Intelligent and beautiful vocal house for those who like to softer)\r\nAll congratulations on the coming summer!	Интеллигентный и красивый вокальный хаус для тех кто любит помягче)\r\nВсех с наступающим летом!	Aweary silence	Aweary silence	Intelligent and beautiful vocal house for those who like to softer)\r\nAll congratulations on the coming summer!	Интеллигентный и красивый вокальный хаус для тех кто любит помягче)\r\nВсех с наступающим летом!	166	42	Інтэлігентны і прыгожы вакальны хаус для тых хто любіць мякчэй)\r\nУсіх з надыходзячым летам!	Інтэлігентны і прыгожы вакальны хаус для тых хто любіць мякчэй)\r\nУсіх з надыходзячым летам!	Aweary silence	Інтэлігентны і прыгожы вакальны хаус для тых хто любіць мякчэй)\r\nУсіх з надыходзячым летам!	2018-06-20 12:30:40.46222+02
-590	2014-01-15 17:52:33+01	power-rangers	Power rangers	Напэўна самы мой вясёлы мікс. Сабраны з лепшых драмавых трэкаў з якімі мне ўдалося сустрэцца за апошнія 5 гадоў.	Напэўна самы мой вясёлы мікс. Сабраны з лепшых драмавых трэкаў з якімі мне ўдалося сустрэцца за апошнія 5 гадоў.	Напэўна самы мой вясёлы мікс. Сабраны з лепшых драмавых трэкаў з якімі мне ўдалося сустрэцца за апошнія 5 гадоў.\r\nНіякай жэсці, толькі лета і пазітыў ...	release/ME03_Manti_Power_rangers.mp3	covers/power-rangers.jpg	t	MNTEX003	LAME 320kbps 44100Hz	51:20	1. Brookes Brothers - Tear you down\r\n2. Artificial Intelligence Ft. Steo - You can dream\r\n3. Metrik - Moving on\r\n4. Sonic & Silver - Rocket launcher (VIP remix)\r\n5. Capital Cities - Safe & sound (NuLogic remix)\r\n6. State Of Mind feat. 3pm - Somebody stop me (Smooth remix)\r\n7. Benny Page feat. UK Apache - Nuttah story\r\n8. Aphrodite - Stalker\r\n9. L Plus - The Price\r\n10. Danny Bird - We can have it all (Sigma remix)\r\n11. Skeets feat. Jeston Langland - This moment (Darwin remix)\r\n12. Rawtekk - Snowflakes (Original mix)	t	t	t	Probably my most cheerful mix. Compiled from the best tracks that I was able to hear for the last 5 years.\r\nNo hard sound, only summer vibes and positive feelings...	Наверное самый мой веселый микс. Собран из лучших драмовых треков с которыми мне удалось повстречаться за последние 5 лет. \r\nНикакой жести, только лето и позитив...	Probably my most cheerful mix. Compiled from the best tracks that I was able to hear for the last 5 years.	Наверное самый мой веселый микс. Собран из лучших драмовых треков с которыми мне удалось повстречаться за последние 5 лет.	Power rangers	Power rangers	Probably my most cheerful mix. Compiled from the best tracks that I was able to hear for the last 5 years.	Наверное самый мой веселый микс. Собран из лучших драмовых треков с которыми мне удалось повстречаться за последние 5 лет.	124	45	Напэўна самы мой вясёлы мікс. Сабраны з лепшых драмавых трэкаў з якімі мне ўдалося сустрэцца за апошнія 5 гадоў.\r\nНіякай жэсці, толькі лета і пазітыў ...	Напэўна самы мой вясёлы мікс. Сабраны з лепшых драмавых трэкаў з якімі мне ўдалося сустрэцца за апошнія 5 гадоў.	Power rangers	Напэўна самы мой вясёлы мікс. Сабраны з лепшых драмавых трэкаў з якімі мне ўдалося сустрэцца за апошнія 5 гадоў.	2018-06-20 12:30:40.455099+02
-591	2014-02-09 14:06:29+01	space	Space is Ours	Калі я чую такую музыку, - адказала яна, - мне бывае цяжка паверыць, што свет матэрыяльны, што ёсць толькі вось гэта...	Калі я чую такую музыку, - адказала яна, - мне бывае цяжка паверыць, што свет матэрыяльны, што ёсць толькі вось гэта...	Калі я чую такую музыку, - адказала яна, - мне бывае цяжка паверыць, што свет матэрыяльны, што ёсць толькі вось гэта, - узмахам рукі яна паказала на Кубрык і ўсе тыя матэрыяльныя аб'екты, якія іх атачалі. - Таму што ёсць нешта, чаго мы не ведаем, але што захоўваецца ў музыцы. Гэта ўсё ж такі ёсць. Гэта можна адчуць.	release/M37_Manti_Space_is_ours.mp3	covers/space-is-ours.jpg	t	MNT037	LAME 320kbps 44100Hz	58:51	1. Sub Mass - Dog eat dog\r\n2. Nscape - Lost head\r\n3. Dextems - The voyager (original mix)\r\n4. Nphonix & Counterstrike - Maverick\r\n5. D_iolax - Optics (Original mix)\r\n6. Villem - Ascent (with Fields And Mako)\r\n7. Inward Phase - Vicious march\r\n8. Teddy Killerz - Violence\r\n9. Nphonix & Paimon & Place 2b - Deadly funk\r\n10. Teddy Killerz & Jade - Blackout (feat. 2Shy)\r\n11. Paperclip - Jupiter in danger (Original mix)\r\n12. Dextems - Arctic sound\r\n13. Emperor - She said\r\n14. B Cloud - Aside a bustle (Original mix)	t	t	t	When I hear such music, - she answered, - it's hard for me to believe that the world is material, that there is only this, - she pointed to the cockpit and all the material objects that surrounded them with a wave of her hand. - Because there is something that we do not know, but what is imprinted in the music. It's still there. It can be felt.	Когда я слышу такую музыку, – ответила она, – мне бывает трудно поверить, что мир материален, что есть только вот это, – взмахом руки она указала на кубрик и все те материальные объекты, которые их окружали. – Потому что есть что-то, чего мы не знаем, но что запечатлевается в музыке. Это все-таки есть. Это можно почувствовать.	When I hear such music, - she answered, - it's hard for me to believe that the world is material, that there is only this...	Когда я слышу такую музыку, – ответила она, – мне бывает трудно поверить, что мир материален, что есть только вот это...	Space is Ours	Space is Ours	When I hear such music, - she answered, - it's hard for me to believe that the world is material, that there is only this...	Когда я слышу такую музыку, – ответила она, – мне бывает трудно поверить, что мир материален, что есть только вот это...	134	46	Калі я чую такую музыку, - адказала яна, - мне бывае цяжка паверыць, што свет матэрыяльны, што ёсць толькі вось гэта, - узмахам рукі яна паказала на Кубрык і ўсе тыя матэрыяльныя аб'екты, якія іх атачалі. - Таму што ёсць нешта, чаго мы не ведаем, але што захоўваецца ў музыцы. Гэта ўсё ж такі ёсць. Гэта можна адчуць.	Калі я чую такую музыку, - адказала яна, - мне бывае цяжка паверыць, што свет матэрыяльны, што ёсць толькі вось гэта...	Space is Ours	Калі я чую такую музыку, - адказала яна, - мне бывае цяжка паверыць, што свет матэрыяльны, што ёсць толькі вось гэта...	2018-06-20 12:30:40.468316+02
-552	2010-04-18 02:00:00+02	solaris	Solaris	Чацвёрты мікс з серыі Light Synthetic Compilation.	Чацвёрты мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.	Чацвёрты мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>. Амаль год я збіраў і адфільтроўваюць матэрыял з "выключным" гучаннем.\r\nПа традыцыі сэт пабудаваны па любімай схеме "два + тры" (адначасова гучыць больш двух трэкаў), тым самым ўскладняючы і упрыгожваючы "шумавую" карціну.\r\nСэт так названы не выпадкова, інтро - саўндтрэк да галівудскай версіі фільма "Салярыс" Стывена Содэрберга.\r\nСлухайце, медытуйце, атрымлівайце асалоду.	release/M21_Manti_Solaris_mix.mp3	covers/solaris.jpg	t	MNT021	LAME 320kbps 44100Hz	52:44	1. Cliff Martinez - We don't have to think like that anymore\r\n2. Cliff Martinez - First sleep\r\n3. Alva Noto - Xerrox monophaser 1\r\n4. Indo - Pneuma\r\n5. Avec.Berre - Stepdrop\r\n6. Ilpo Vaisanen - Autioitu 1\r\n7. Kassian Troyer - Plant shift\r\n8. Valliam – In samsara\r\n9. Clint Mansell - Stay with me\r\n10. Astrum - Saturn\r\n11. Pinch meets Pavel Ambiont - Poison/Remedy\r\n12. Alva Noto - Xerrox phaser acat 1	t	t	t	The fourth mix from the series <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>. For almost a year I collected and filtered out the material with "exceptional" sound.\r\nBy tradition, the set is built according to the favorite "two + three" scheme (at the same time more than two tracks are played), thereby complicating and decorating the "noise" picture.\r\nSeth is so named not accidentally, intro - the soundtrack to the Hollywood version of the movie "Solaris" by Stephen Soderbergh.\r\nListen, meditate, enjoy.	Четвертый микс из серии <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>. Почти год я собирал и отфильтровывал материал с "исключительным" звучанием.\r\nПо традиции сет построен по любимой схеме "два+три" (одновременно звучит более двух треков), тем самым усложняя и украшая "шумовую" картину.\r\nСет так назван не случайно, интро  - саундтрек к голливудской версии фильма "Солярис" Стивена Содерберга.\r\nСлушайте, медитируйте, наслаждайтесь.	The fourth mix from the series Light Synthetic Compilation.	Четвертый микс из серии Light Synthetic Compilation.	Solaris	Solaris	The fourth mix from the series <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.	Четвертый микс из серии <a href="/tag/lsc/">Light Synthetic Compilation</a>.	72	5	Чацвёрты мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>. Амаль год я збіраў і адфільтроўваюць матэрыял з "выключным" гучаннем.\r\nПа традыцыі сэт пабудаваны па любімай схеме "два + тры" (адначасова гучыць больш двух трэкаў), тым самым ўскладняючы і упрыгожваючы "шумавую" карціну.\r\nСэт так названы не выпадкова, інтро - саўндтрэк да галівудскай версіі фільма "Салярыс" Стывена Содэрберга.\r\nСлухайце, медытуйце, атрымлівайце асалоду.	Чацвёрты мікс з серыі Light Synthetic Compilation.	Solaris	Чацвёрты мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.	2018-06-20 12:30:40.471551+02
-563	2009-05-21 02:00:00+02	basstech	Special mix for Basstech	Сэт запісаны адмыслова для праграмы BASSTECH.	Сэт запісаны адмыслова для праграмы BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>).	Сэт запісаны адмыслова для праграмы BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). Усе трэкі зведзены "ужывую" ў гасцях у Іллі (Dj Hotei), за што яму вялікі дзякуй.\r\nПрактычна ўсе трэкі ўяўляюць сабой класічны нейрафанк, частка трэкаў еўрапейскія (Noisia, Spor), частка расейскія (Marqus, Paperclip).	release/M18_Manti_Special_mix_for_Basstech_(novoeradio.by).mp3	covers/basstech.jpg	t	MNT018	LAME 320kbps 44100Hz	58:42	1. Engage - Im gonna bite you\r\n2. Marqus - Angel  \r\n3. Bes & Flame - Eurofunk  \r\n4. Noisia - Exorcism\r\n5. Skynet - Carbon shock (Noisia remix)      \r\n6. Noisia - Block control  \r\n7. Hightech - GITS  \r\n8. Marqus - Mirage  \r\n9. Paperclip - Shogun  \r\n10. Paperclip - Bearing death  \r\n11. Spor - Supernova  \r\n12. Noisia, Maldini and Vegas - Meditation\r\n13. Quadrant - Rage and rapture	t	t	t	The set was recorded specially for the BASSTECH radio show (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). All tracks are compiled "live" at visit to Ilya (Dj Hotei), for which many thanks to him.\r\nAlmost all tracks are a classical Neurofunk, some tracks are European (Noisia, Spor), part Russian (Marqus, Paperclip).	Сет записан специально для программы BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). Все треки сведены "вживую" в гостях у Ильи (Dj Hotei), за что ему большое спасибо.\r\nПрактически все треки представляют собой классический нейрофанк, часть треков европейский (Noisia, Spor), часть российский (Marqus, Paperclip).	The set was recorded specially for the BASSTECH radio show.	Сет записан специально для программы BASSTECH.	Special mix for Basstech	Special mix for Basstech	The set was recorded specially for the BASSTECH radio show (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>).	Сет записан специально для программы BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>).	80	18	Сэт запісаны адмыслова для праграмы BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). Усе трэкі зведзены "ужывую" ў гасцях у Іллі (Dj Hotei), за што яму вялікі дзякуй.\r\nПрактычна ўсе трэкі ўяўляюць сабой класічны нейрафанк, частка трэкаў еўрапейскія (Noisia, Spor), частка расейскія (Marqus, Paperclip).	Сэт запісаны адмыслова для праграмы BASSTECH.	Special mix for Basstech	Сэт запісаны адмыслова для праграмы BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>).	2018-06-20 12:30:40.465354+02
-578	2011-05-30 02:00:00+02	renaissance	Renaissance promo	Раніцай заўсёды ўстае сонца. Сэт - лагічны працяг папярэдняй працы, пад назвай Trauma.	Раніцай заўсёды ўстае сонца ...\r\nСэт - лагічны працяг папярэдняй працы, пад назвай <a href="/blog/trauma/">Trauma<a>.	Раніцай заўсёды ўстае сонца ...\r\nСэт - лагічны працяг папярэдняй працы, пад назвай <a href="/blog/trauma/">Trauma<a>. У цэлым не стаў  пярэчыць сабе і парушаць свае традыцыі - усё тэхнічна, добры майстарынг, у пачатку патлусцей, у канцы хутчэй.	release/M24_Manti_Renaissanse_(Winter-Spring-12_promo).mp3	covers/renaissanse.jpg	t	MNT024	LAME 320kbps 44100Hz	1:02:53	1. Gravediggazz - Trippin (intro)\r\n2. Allied - N-sphere  \r\n3. Asphexia - Profusion  \r\n4. Inside Info - Metronome\r\n5. Encode - None  \r\n6. Malk - Made in sikness\r\n7. Nphonix - False flag    \r\n8. Receptor - Lullaby  \r\n9. Int Company - Uppi    \r\n10. Redject - 7th sorrow\r\n11. Hector - Suddenly (tribute to E.Letov)  \r\n12. Sintax - Metro    \r\n13. Switch Technique - Metro\r\n14. Bop - As is	t	t	t	In the morning the sun always rises...\r\nSet is a logical continuation of the previous work, called <a href="/blog/trauma/">Trauma<a>. In general, I did not contradict myself and violate my traditions - all technically, good mastering, at the beginning more fat, at the end a bit quickly.	Утром всегда встает солнце...\r\nСет - логическое продолжение предыдущей работы, под названием <a href="/blog/trauma/">Trauma<a>. В целом не стал перечить себе и нарушать свои традиции - все технично, хороший мастеринг, в начале пожирнее, в конце побыстрее.	In the morning the sun always rises. Set is a logical continuation of the previous work, called Trauma.	Утром всегда встает солнце. Сет - логическое продолжение предыдущей работы, под названием Trauma.	Renaissance promo	Renaissance promo	In the morning the sun always rises...\r\nSet is a logical continuation of the previous work, called <a href="/blog/trauma/">Trauma<a>.	Утром всегда встает солнце...\r\nСет - логическое продолжение предыдущей работы, под названием <a href="/blog/trauma/">Trauma</a>.	114	33	Раніцай заўсёды ўстае сонца ...\r\nСэт - лагічны працяг папярэдняй працы, пад назвай <a href="/blog/trauma/">Trauma<a>. У цэлым не стаў  пярэчыць сабе і парушаць свае традыцыі - усё тэхнічна, добры майстарынг, у пачатку патлусцей, у канцы хутчэй.	Раніцай заўсёды ўстае сонца. Сэт - лагічны працяг папярэдняй працы, пад назвай Trauma.	Renaissance promo	Раніцай заўсёды ўстае сонца ...\r\nСэт - лагічны працяг папярэдняй працы, пад назвай <a href="/blog/trauma/">Trauma<a>.	2018-06-20 12:30:40.474399+02
-601	2017-04-12 06:14:16+02	shining	Shining	Таму скрозь сонца, свецяць зоркі...	Таму скрозь сонца, свецяць зоркі...	Таму скрозь сонца, свецяць зоркі...	release/M43_Manti_Shining.mp3	covers/shining.jpg	t	MNT041	LAME 320kbps 44100Hz	1:05:14	1. Sangam - Purple lights\r\n2. Ed Sheeran - I see fire (Kalev remix)\r\n3. Tyoma - 1st\r\n4. Onuka - Time\r\n5. Wildes - Bare\r\n6. Emancipator - Greenland\r\n7. Flume feat. Anthony For Cleopatra - Sleepless\r\n8. Seven Lions and Echos - Cold skin\r\n9. ZES - Do it again\r\n10. CloZee - Closed circle\r\n11. Bop - Blurred Memories (feat. Synkro)\r\n12. Home - Resonance\r\n13. Ishome - Ken Tavr\r\n14. ZD - Breathe\r\n15. Owsey - You're always young in my dreams\r\n16. Skrillex feat. Njomza - Pretty bye bye\r\n17. Different Sleep feat. Soleman - Drive me crazy\r\n18. Koda - The last stand\r\n19. Yume and VarCity - Not alone	t	t	t	Therefore, through the sun, the stars is shining...	Поэтому сквозь солнце, светят звезды...	Therefore, through the sun, the stars is shining...	Поэтому сквозь солнце, светят звезды...	Shining	Shining	Therefore, through the sun, the stars is shining...	Поэтому сквозь солнце, светят звезды...	25	56	Таму скрозь сонца, свецяць зоркі...	Таму скрозь сонца, свецяць зоркі...	Shining	Таму скрозь сонца, свецяць зоркі...	2018-06-20 12:30:40.477284+02
-585	2013-01-18 01:00:00+01	my-friend-friday	My friend Friday	Спантанны пятніцкі мікс.	Спантанны пятніцкі мікс.	Спантанны пятніцкі мікс.	release/ME02_Manti_My_Friend_Friday.mp3	covers/friday.jpg	t	MNTE02	LAME 320kbps 44100Hz	37:15	1. Milton Jackson - Breathe (David Labeij remix)\r\n2. Lee Van Dowski - Not A Remix (Original mix)\r\n3. DJ Smilk, Juan Ddd - Dollar bills\r\n4. The Messenger - Preachin\\' Out\r\n5. Luca M & Just2 - Peak Week (Original mix)\r\n6. Per Hammar, Frida Fralk - Get that\r\n7. Oscar Barila - Yoda (Original mix)\r\n8. Tube & Berger - Fog Head (Louis Osbourne & Jamie Anderson remix)	t	t	t	Spontaneous Friday mix.	Спонтанный пятничный микс.	Spontaneous Friday mix.	Спонтанный пятничный микс.	My friend Friday	My friend Friday	Spontaneous Friday mix.	Спонтанный пятничный микс.	141	40	Спантанны пятніцкі мікс.	Спантанны пятніцкі мікс.	My friend Friday	Спантанны пятніцкі мікс.	2018-06-20 12:30:40.480331+02
-592	2014-02-15 03:51:17+01	lets-go-dancing	Let's go dancing	Красивый и мелодичный сет с большим количеством красивого вокала.	Красивый и мелодичный сет с большим количеством красивого вокала.	Красивый и мелодичный сет с большим количеством красивого вокала.	release/M38_Manti_Lets_go_dancing.mp3	covers/lets-go-dancing.jpg	t	MNT038	LAME 320kbps 44100Hz	53:49	1. Gui Boratto - Too late (Original mix)\r\n2. Pleasurekraft, Jaceo, Vedic - Chloroformd (Original mix)\r\n3. John Tejada - Elsewhere (Original mix)\r\n4. Mr. V & Chris Minus - The end (Original Mix)\r\n5. Noir, Lomez, Atnarko feat. Symbol - Lost again (Raw club cut)\r\n6. Kolombo, Sammy W & Alex E - Play ur chick! (Original mix)\r\n7. Mahmut Orhan - Without you (Aytac Kart remix)\r\n8. Osunlade - Dionne (Original mix)\r\n9. John Tejada - We can pretend (Original mix)\r\n10 Tiga, Audion - Let's go dancing (Maya Jane Coles Dancing in the deep remix)\r\n11 Dave DK - Nakai pop (Ambient Version)	t	t	t	A beautiful and melodic set with lots of beautiful vocals.	Красивый и мелодичный сет с большим количеством красивого вокала.	A beautiful and melodic set with lots of beautiful vocals.	Красивый и мелодичный сет с большим количеством красивого вокала.	Let's go dancing	Let's go dancing	A beautiful and melodic set with lots of beautiful vocals.	Красивый и мелодичный сет с большим количеством красивого вокала.	128	47	Красивый и мелодичный сет с большим количеством красивого вокала.	Красивый и мелодичный сет с большим количеством красивого вокала.	Let's go dancing	Красивый и мелодичный сет с большим количеством красивого вокала.	2018-06-20 12:30:40.486591+02
-582	2012-11-27 01:00:00+01	stockholm-syndrome-backset	Stockholm syndrome - Backset	Працяг працы над сабой. Другі мікс з серыі "Stockholm syndrome".	Працяг працы над сабой. Другі мікс з серыі <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a>.	Працяг працы над сабой. Другі мікс з серыі <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a>. Першую працу можна знайсці тут <a href="/stockholm-syndrome/">Manti - Stockholm syndrome</a>.	release/M32_Manti_Stockholm_syndrome_Backset.mp3	covers/stockholm-syndrome-backset.jpg	t	MNT032	LAME 320kbps 44100Hz	1:00:01	1. Tube & Berger & Milan Euringer - Lovebreak (Original mix)\r\n2. Shades Of Gray - Crazee\r\n3. Layo & Bushwaka feat. Kim Ann Foxman - Cant hurt you (Original mix)\r\n4. Marc Romboy - More Muzik (Original mix)\r\n5. Darling Farah - Body (Jimmy Edgar remix)\r\n6. Tom Novy - Walking On the Moog (caTekk Remix)\r\n7. Kink - E79\r\n8. Norm - Foco (Paul Jey remix)\r\n9. Takt Tick - Gloomy Dawn (Original mix)\r\n10. Danny Daze and Matches - If this\r\n11. Vas Floyd - Deep house soul (Vas Floyd & Mr Jones strings mix)\r\n12. Terry Lee Brown Junior - Delightful encounter	t	t	t	Continuation of work on yourself. The second mix from the <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a> series. The first work can be found here <a href="/stockholm-syndrome/">Manti - Stockholm syndrome</a>.	Продолжение работы над собой. Второй микс из серии <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a>. Первую работу можно найти здесь <a href="/stockholm-syndrome/">Manti - Stockholm syndrome</a>.	Continuation of work on yourself. The second mix from the "Stockholm syndrome" series.	Продолжение работы над собой. Второй микс из серии "Stockholm syndrome".	Stockholm syndrome - Backset	Stockholm syndrome - Backset	Continuation of work on yourself. The second mix from the <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a> series.	Продолжение работы над собой. Второй микс из серии <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a>.	115	37	Працяг працы над сабой. Другі мікс з серыі <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a>. Першую працу можна знайсці тут <a href="/stockholm-syndrome/">Manti - Stockholm syndrome</a>.	Працяг працы над сабой. Другі мікс з серыі "Stockholm syndrome".	Stockholm syndrome - Backset	Працяг працы над сабой. Другі мікс з серыі <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a>.	2018-06-20 12:30:40.531266+02
-581	2012-06-30 02:00:00+02	enzo-cafe	Enzo cafe live	Жывы мікс для Enzo cafe (Мінск, Беларусь)	Жывы мікс для Enzo cafe (Мінск, Беларусь)	Жывы мікс для Enzo cafe (Мінск, Беларусь)	release/M29_Manti_Enzo_Cafe_live.mp3	covers/enzo.jpg	t	MNT029	LAME 320kbps 44100Hz	1:01:13	1. La Fleur - Ten Fingers (Original Mix) \r\n2. Boss Axis - Cologne (Rodriguez Jr. remix)\r\n3. Tiefschwarz - I can\\'t resist (feat. Dave Aju)\r\n4. Sebo K - Mr. Duke (Alternative version)\r\n5. Martin Landsky - Morning Caffeine (Organ Dub)\r\n6. Bambook feat. Arkanna - Off the system (Beat Factory remix)\r\n7. FCODE - Mixture (original mix)  \r\n8. Noir & Chris Minus - Sleep no more (vocal mix)\r\n9. Tojami Sessions - Tetra\r\n10. Strict Border - Pianist In The Zoo\r\n11. Strict Border - Rendevouz\r\n12. MSMS - Juice	t	t	t	Live mix for Enzo cafe (Minsk, Belarus)	Живой микс для Enzo cafe (Минск, Беларусь)	Live mix for Enzo cafe (Minsk, Belarus)	Живой микс для Enzo cafe (Минск, Беларусь)	Enzo cafe live	Enzo cafe live	Live mix for Enzo cafe (Minsk, Belarus)	Живой микс для Enzo cafe (Минск, Беларусь)	130	36	Жывы мікс для Enzo cafe (Мінск, Беларусь)	Жывы мікс для Enzo cafe (Мінск, Беларусь)	Enzo cafe live	Жывы мікс для Enzo cafe (Мінск, Беларусь)	2018-06-20 12:30:40.421258+02
-551	2009-05-07 02:00:00+02	plastic-toy	Plastic toy	Трэці мікс з серыі Light Synthetic Compilation.	Трэці мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>	Трэці мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.\r\nСумесь эмбіенту, нойза і даб тэхна! Многія з трэкаў звязаны "па-тры", тым самым ўскладняючы і упрыгожваючы "шумавую" карціну. Сэт для аматараў ненапряжных бітаў і шумоў\r\nУсе плаўна і заблытана.	release/M17_Manti_Plastic_toy_mix.mp3	covers/plastic-toy.jpg	t	MNT017	LAME 320kbps 44100Hz	49:01	1. Biosphere - Kobresia\r\n2. Lowtec - A2 untitled\r\n3. I/dex - Drafts\r\n4. Pole-3 - Rondell zwei\r\n5. Minilogue - Stations II\r\n6. Ike - Cluster funk\r\n7. Intrusion - Tswana dub (Brendon Moeller vs Beat Pharmacy dub)\r\n8. Harmash - Hibernatoria08\r\n9. Apparat - Wooden (Anders Ilar remix)\r\n10. Minilogue - City lights\r\n11. Dolby - He0r\r\n12. Harmash - Hibernatoria05\r\n13. Minilogue - Cow, crickets and clay	t	t	t	The third mix from the <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a> series.\r\nA compilation of Ambient, Noise and Dub Techno! Many of the tracks are connected "by three", thereby complicating and decorating the "noise" picture. Set for fans of soft bits and noises.\r\nEverything is slow and messed up.	Третий микс из серии <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.\r\nСмесь эмбиента, нойза и даб техно! Многие из треков связаны "по-три", тем самым усложняя и украшая "шумовую" картину. Сет для любителей ненапряжных битов и шумов.\r\nВсе медлено и запутанно.	The third mix from the Light Synthetic Compilation series.	Третий микс из серии "light synthetic compilation". Смесь амбиента, нойза и даб техно!!! Многие из треков связаны "по-три", тем самым усложняя и украшая "шумовую" картину. Сет для любителей ненапряжных битов и шумов, все медлено и запутанно.	Plastic toy	Plastic toy	The third mix from the <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a> series.	Третий микс из серии <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>	61	4	Трэці мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.\r\nСумесь эмбіенту, нойза і даб тэхна! Многія з трэкаў звязаны "па-тры", тым самым ўскладняючы і упрыгожваючы "шумавую" карціну. Сэт для аматараў ненапряжных бітаў і шумоў\r\nУсе плаўна і заблытана.	Трэці мікс з серыі Light Synthetic Compilation.	Plastic toy	Трэці мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>	2018-06-20 12:30:40.483421+02
-593	2014-09-11 10:21:09+02	predator	Predator	Злы і вельмі магутны нейра сэт. Толькі самае лепшае і тлустае.	Злы і вельмі магутны нейра сэт. Толькі самае лепшае і тлустае.	Злы і вельмі магутны нейра сэт. Толькі самае лепшае і тлустае.	release/M39_Manti_Predator.mp3	covers/predator.jpg	t	MNT039	LAME 320kbps 44100Hz	53:20	1. Sunchase & Max NRG - Algebra\r\n2. Agressor Bunx - Armageddon\r\n3. Emperor & Mefjus - Void main void\r\n4. Phace - The set up\r\n5. Misanthrop - Greed Of gain\r\n6. Ulterior Motive - Gang rule\r\n7. Audio & Meth - Alone\r\n8. InsideInfo & Mefjus - Mythos\r\n9. Heamy - Destroy it (Original mix)\r\n10. Emperor - Precursor (Mefjus remix)\r\n11. Dextems - Tunnels\r\n12. Optiv & BTK - Feelings\r\n13. Phaeleh - So far away	t	t	t	An evil and very powerful neuro set. Only the best and fat.	Злой и очень мощный нейро сет. Только самое лучшее и жирное.	An evil and very powerful neuro set. Only the best and fat.	Злой и очень мощный нейро сет. Только самое лучшее и жирное.	Predator	Predator	An evil and very powerful neuro set. Only the best and fat.	Злой и очень мощный нейро сет. Только самое лучшее и жирное.	108	48	Злы і вельмі магутны нейра сэт. Толькі самае лепшае і тлустае.	Злы і вельмі магутны нейра сэт. Толькі самае лепшае і тлустае.	Predator	Злы і вельмі магутны нейра сэт. Толькі самае лепшае і тлустае.	2018-06-20 12:30:40.490349+02
-569	2007-02-18 01:00:00+01	iris	IRIS, it's all about me promo	Вельмі доўгая і карпатлівая праца, як тэхнічна, так і ідэйна.	Вельмі доўгая і карпатлівая праца, як тэхнічна, так і ідэйна.	Вельмі доўгая і карпатлівая праца, як тэхнічна, так і ідэйна. Вытрыманая ў класічным стылі Deep House, з прыўнясеннем нотак Tech House.	release/M04_Manti_Iris_mix_(Spring-Summer-07_promo).mp3	covers/iris.jpg	t	MNT004	LAME 320kbps 44100Hz	1:00:15	1. Lator - Rolling children  \r\n2. Acos CoolKAs feat. Metropoliz - Friends (Vocal mix)\r\n3. Brooks - Pink Sigarettes (Ajazz mix)\r\n4. Raz Ohara - This'a beautiful day (Mathias Schaffhauser mix)  \r\n5. Jussipekka - Breeze\r\n6. Gamat 3000 - Whispering  \r\n7. Phunk Diggaz - Whispers  \r\n8. Terry Lee Brown Jr. - Bad house music (Dub'98)  \r\n9. Plank 15 - Strings of life  \r\n10. Lator - Clown fish (kaZantip mix)	t	t	t	Very long and painstaking work, both technically and ideologically. It is sustained in the classical style of Deep House, with the introduction of notes Tech House.	Очень длительная и кропотливая работа, как технически, так и идейно. Выдержана в классическом стиле deep house, с привнесением ноток Tech House.	Very long and painstaking work, both technically and ideologically.	Очень длительная и кропотливая работа, как технически, так и идейно.	IRIS, it's all about me promo	IRIS, it's all about me promo	Very long and painstaking work, both technically and ideologically.	Очень длительная и кропотливая работа, как технически, так и идейно.	80	24	Вельмі доўгая і карпатлівая праца, як тэхнічна, так і ідэйна. Вытрыманая ў класічным стылі Deep House, з прыўнясеннем нотак Tech House.	Вельмі доўгая і карпатлівая праца, як тэхнічна, так і ідэйна.	IRIS, it's all about me promo	Вельмі доўгая і карпатлівая праца, як тэхнічна, так і ідэйна.	2018-06-20 12:30:40.493213+02
-559	2010-05-18 02:00:00+02	hobh-four	Дом разбитых сердец 4, южные сны	Зноў з пабітым сэрцам, зноў усё баліць, ные і плача. Не збіраўся кампіляцыю гэтую выпускаць, па меншай меры так хутка, але так ужо сышліся зоркі.	Зноў з пабітым сэрцам, зноў усё баліць, ные і плача. Не збіраўся кампіляцыю гэтую выпускаць, па меншай меры так хутка, але так ужо сышліся зоркі.	Зноў з пабітым сэрцам, зноў усё баліць, ные і плача.\r\nНе збіраўся кампіляцыю гэтую выпускаць, па меншай меры так хутка, але так ужо сышліся зоркі, ды і шмат чаго накіпела, таму выказаўся так, як змог.\r\nМногае мне вельмі блізка ў гэтых словах: «што-та паміж радкоў, аб тым што ў двукоссях». Дзякуй хлопцам, якія іх пішуць. Не належыце сур'ёзна да якасці, тэхніцы і іншым бяздушным параметрах, проста слухайце, калі вам гэта блізка.	release/M22_Manti_HOBH_04_Yuzhnye_sny.mp3	covers/hobh-4.jpg	t	MNT022	LAME 320kbps 44100Hz	43:12	1. Guf feat. Princip – Заходит луна\r\n2. Баста – Любовь без памяти\r\n3. Krec feat. Maestro A-Sid – Весна\r\n4. Каста – Встреча\r\n5. Смоки Мо – Герман и Патрик\r\n6. Дельфин – Надежда\r\n7. Guf feat. Ба – Дома\r\n8. Krec – Другие берега\r\n9. Лельфин – Любовь\r\n10. Михей и Джуманжи – Сука любовь\r\n11. Krec – Южные сны	t	t	t	Again with a broken heart, again everything hurts, whines and cries.\r\nI did not intend to release this compilation, at least so quickly, but so the stars came together, and a lot of things boiled up, so I spoke as I could.\r\nMuch is very close to me in these words: "something between the lines, something in quotes." Thanks guys who write them. Do not take seriously the quality, technique and other soulless parameters, just listen if you are close.	Опять с разбитым сердцем, опять все болит, ноет и плачет.\r\nНе собирался компиляцию эту выпускать, по крайней мере так быстро, но так уж сошлись звезды, да и много чего накипело, поэтому высказался так, как смог. \r\nМногое мне очень близко в этих словах: «кое что между строк, кое что в кавычках». Спасибо парням, которые их пишут. Не относитесь серьезно к качеству, технике и другим бездушным параметрам, просто слушайте, если вам это близко.	Again with a broken heart, again everything hurts, whines and cries. I did not intend to release this compilation, at least so quickly, but so the stars came together.	Опять с разбитым сердцем, опять все болит, ноет и плачет. Не собирался компиляцию эту выпускать, по крайней мере так быстро, но так уж сошлись звезды.	House of broken hearts 4, southern dreams	Дом разбитых сердец 4, южные сны	Again with a broken heart, again everything hurts, whines and cries. I did not intend to release this compilation, at least so quickly, but so the stars came together.	Опять с разбитым сердцем, опять все болит, ноет и плачет. Не собирался компиляцию эту выпускать, по крайней мере так быстро, но так уж сошлись звезды.	100	13	Зноў з пабітым сэрцам, зноў усё баліць, ные і плача.\r\nНе збіраўся кампіляцыю гэтую выпускаць, па меншай меры так хутка, але так ужо сышліся зоркі, ды і шмат чаго накіпела, таму выказаўся так, як змог.\r\nМногае мне вельмі блізка ў гэтых словах: «што-та паміж радкоў, аб тым што ў двукоссях». Дзякуй хлопцам, якія іх пішуць. Не належыце сур'ёзна да якасці, тэхніцы і іншым бяздушным параметрах, проста слухайце, калі вам гэта блізка.	Зноў з пабітым сэрцам, зноў усё баліць, ные і плача. Не збіраўся кампіляцыю гэтую выпускаць, па меншай меры так хутка, але так ужо сышліся зоркі.	Дом разбитых сердец 4, южные сны	Зноў з пабітым сэрцам, зноў усё баліць, ные і плача. Не збіраўся кампіляцыю гэтую выпускаць, па меншай меры так хутка, але так ужо сышліся зоркі.	2018-06-20 12:30:40.499401+02
-555	2011-12-05 01:00:00+01	katana	Katana	Гэты сэт з'яўляецца вельмі чыстай эсэнцыяй тэхнічнага драма.	Гэты сэт з'яўляецца вельмі чыстай эсэнцыяй <a href="/blog/?tag=neurostep">тэхнічнага днб</a>. Кампілілся доўга і ўпарта і у выніку атрымалася даволі якасна.	Гэты сэт з'яўляецца вельмі чыстай эсэнцыяй <a href="/blog/?tag=neurostep">тэхнічнага днб</a>. Кампілілся доўга і ўпарта і у выніку атрымалася даволі якасна.	release/M25_Manti_Katana_mix.mp3	covers/katana.jpg	t	MNT025	LAME 320kbps 44100Hz	57:32	0. Sunchase - Asphalt\r\n1. Amoss - Flex\r\n2. Alix Perez - Behind time\r\n3. Trinity - Harvester\r\n4. Paperclip - Blueprints\r\n5. Enei - No Fear (feat. Riya)\r\n6 Need for mirrors - Skip rope\r\n7. Enei - Cracker (Jubei remix)\r\n8. Optiv & BTK - Inception\r\n9. Ulterior Motive - Seven Segments\r\n10. Dub Phizix - Four (feat. Skeptical)\r\n11. Nickbee - Carpe diem\r\n12. Malk - My crazy baby\r\n13. Parhelia - Spaceship named Andromeda	t	t	t	This set is a very pure essence of <a href="/blog/?tag=neurostep">technical dnb</a>. Compiled long and hard and in the end it turned out pretty high quality.	Этот сет является очень чистой эссенцией <a href="/blog/?tag=neurostep">техничного днб</a>. Компилился долго и упорно и в итоге получилось довольно качественно.	This set is a very pure essence of technical dnb.	Этот сет является очень чистой эссенцией техничного драма.	Katana	Katana	This set is a very pure essence of <a href="/blog/?tag=neurostep">technical dnb</a>. Compiled long and hard and in the end it turned out pretty high quality.	Этот сет является очень чистой эссенцией <a href="/blog/?tag=neurostep">техничного днб</a>. Компилился долго и упорно и в итоге получилось довольно качественно.	122	9	Гэты сэт з'яўляецца вельмі чыстай эсэнцыяй <a href="/blog/?tag=neurostep">тэхнічнага днб</a>. Кампілілся доўга і ўпарта і у выніку атрымалася даволі якасна.	Гэты сэт з'яўляецца вельмі чыстай эсэнцыяй тэхнічнага драма.	Katana	Гэты сэт з'яўляецца вельмі чыстай эсэнцыяй <a href="/blog/?tag=neurostep">тэхнічнага днб</a>. Кампілілся доўга і ўпарта і у выніку атрымалася даволі якасна.	2018-06-20 12:30:40.502881+02
-550	2007-09-16 02:00:00+02	synthetic	Synthetic	На мой погляд, самая складаная, але і самая цікавая мая амбиент праца.	На мой погляд, самая складаная, але і самая цікавая мая амбиент праца.	На мой погляд, самая складаная, але і самая цікавая мая амбиент праца. Інтэлектуальны і якасны саўнд ў дадатку да нямецкіх і чэшскім ваенных распрацовак.	release/M07_Manti_Synthetic_mix.mp3	covers/synthetic.jpg	t	MNT007	LAME 192kbps 44100Hz	59:40	1. Falter - Nachtflug\r\n2. H.u.v.a - Distances\r\n3. H.u.v.a. - Acces to the long fields\r\n4. Biosphere (Hia) - Gas street basin  \r\n5. Fax - Deja vu\r\n6. Telefon Tel Aviv - TTV\r\n7. Lator - B-4 talk (Promo version)\r\n8. Shuttle 358 - Floops\r\n9. Solarise speek\r\n10. Vladislav Delay - He lived deeply  \r\n11. Monolake - Indigo	t	t	t	In my opinion, the most difficult, but also the most interesting ambient work. Intellectual and high-quality sound in addition to German and Czech military developments.	На мой взгляд, самая сложная, но и самая интересная моя амбиент работа. Интеллектуальный и качественный саунд в дополнении к немецким и чешским военным разработкам.	In my opinion, the most difficult, but also the most interesting ambient work.	На мой взгляд, самая сложная, но и самая интересная моя амбиент работа.	Synthetic	Synthetic	In my opinion, the most difficult, but also the most interesting ambient work.	На мой взгляд, самая сложная, но и самая интересная моя амбиент работа.	93	3	На мой погляд, самая складаная, але і самая цікавая мая амбиент праца. Інтэлектуальны і якасны саўнд ў дадатку да нямецкіх і чэшскім ваенных распрацовак.	На мой погляд, самая складаная, але і самая цікавая мая амбиент праца.	Synthetic	На мой погляд, самая складаная, але і самая цікавая мая амбиент праца.	2018-06-20 12:30:40.496238+02
-570	2007-06-05 02:00:00+02	hi-pass	Hi-Pass live	Салодкі гадовы мікс на папулярныя мінімальныя тэмы.	Салодкі гадовы мікс на папулярныя мінімальныя тэмы.	- У нас было два пакеты травы, 75 таблетак міскаліна, 5 упаковак кіслаты, пол сальніцы какаіну і бясконцае мноства транквілізатараў ўсіх гатункаў і расфарбовак, а таксама тэкіла, ром, скрыня піва, пінта чыстага эфіру і аміл нітрат.\r\nХантэр С. Томпсан.	release/M05_Manti_Hi-Pass_live.mp3	covers/hi-pass.jpg	t	MNT005	LAME 160kbps 44100Hz	53:22		t	t	t	- We had two bags of grass, seventy-five pellets of mescaline, five sheets of high powered blotter acid, a salt shaker half full of cocaine, and a whole galaxy of multi-colored uppers, downers, screamers, laughers and also a quart of tequila, a quart of rum, a case of Budweiser, a pint of raw ether and two dozen amyls.\r\nHunter S. Thompson.	- У нас было два пакета травы, 75 таблеток мискалина, 5 упаковок кислоты, пол солонки кокаина и бесконечное множество транквилизаторов всех сортов и расцветок, а также текила, ром, ящик пива, пинта чистого эфира и амил нитрат.\r\nХантер С. Томпсон.	Sweet summer mix on the popular minimal themes.	Сладкий летний микс на популярные минимальные темы.	Hi-Pass live	Hi-Pass live	Sweet summer mix on the popular minimal themes.	Сладкий летний микс на популярные минимальные темы.	85	25	- У нас было два пакеты травы, 75 таблетак міскаліна, 5 упаковак кіслаты, пол сальніцы какаіну і бясконцае мноства транквілізатараў ўсіх гатункаў і расфарбовак, а таксама тэкіла, ром, скрыня піва, пінта чыстага эфіру і аміл нітрат.\r\nХантэр С. Томпсан.	Салодкі гадовы мікс на папулярныя мінімальныя тэмы.	Hi-Pass live	Салодкі гадовы мікс на папулярныя мінімальныя тэмы.	2018-06-20 12:30:40.511607+02
-554	2012-05-02 02:00:00+02	autoreply	Autoreply promo	Вясновы прома мікс на тэму дып хаўзу. Вельмі доўгачаканы мікс для мяне, пасля працяглага драмового запою, хоць і запісаўся даволі спантанна.	Вясновы прома мікс на тэму дып хаўзу. Вельмі доўгачаканы мікс для мяне, пасля працяглага драмового запою, хоць і запісаўся даволі спантанна.	Вясновы прома мікс на тэму дып хаўзу. Вельмі доўгачаканы мікс для мяне, пасля працяглага драмового запою, хоць і запісаўся даволі спантанна.	release/M27_Manti_Autoreply_mix_(Spring-Summer-12_promo).mp3	covers/autoreply.jpg	t	MNT027	LAME 320kbps 44100Hz	58:54	0. Intro - Tokyo\r\n1. Fish Go Deep - Deep like\r\n2. Brawther - Spaceman funk (Deep club mix)\r\n3. Ion Ludwig - L'Sable\r\n4. Dublee - Touch (Sweetbutter mix)\r\n5. Oscar Barila and Maiki - Above the clouds\r\n6. Ben Rourke - Tahiti\r\n7. Nikola Gala - I don't stop\r\n8. The Timewriter - Superschall (M.In remix)\r\n9. Oscar Barila - Tampa\r\n10. Jussi Pekka - Stream horse (Motorcitysoul remix)\r\n11. Thomas Bjerring - Republique	t	t	t	Spring promo mix on the topic of Deep House. A very long-awaited mix for me, after a long DnB binge, although I spelled quite spontaneously.	Весенний промо микс на тему дип хауза. Очень долгожданный микс для меня, после длительного драмового запоя, хотя и записался довольно спонтанно.	Spring promo mix on the topic of Deep House. A very long-awaited mix for me, after a long DnB binge, although I spelled quite spontaneously.	Весенний промо микс на тему дип хауза. Очень долгожданный микс для меня, после длительного драмового запоя.	Autoreply promo	Autoreply promo	Spring promo mix on the topic of Deep House. A very long-awaited mix for me, after a long DnB binge, although I spelled quite spontaneously.	Весенний промо микс на тему дип хауза. Очень долгожданный микс для меня, после длительного драмового запоя, хотя и записался довольно спонтанно.	158	8	Вясновы прома мікс на тэму дып хаўзу. Вельмі доўгачаканы мікс для мяне, пасля працяглага драмового запою, хоць і запісаўся даволі спантанна.	Вясновы прома мікс на тэму дып хаўзу. Вельмі доўгачаканы мікс для мяне, пасля працяглага драмового запою, хоць і запісаўся даволі спантанна.	Autoreply promo	Вясновы прома мікс на тэму дып хаўзу. Вельмі доўгачаканы мікс для мяне, пасля працяглага драмового запою, хоць і запісаўся даволі спантанна.	2018-06-20 12:30:40.516634+02
-564	2010-02-04 01:00:00+01	basstech-2	Mix for Basstech part 2	Второй выход на программе BASSTECH. Все треки сведены вживую, правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет	Второй выход на программе BASSTECH (novoeradio.by/basstech). Все треки сведены "вживую", правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет есть и его можно слушать.	Другі выхад на праграме BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). Усе трэкі зведзены "ужывую", праўда на хуткую руку, таму крыху пацярпела якасць, але тым не менш сэт ёсць і яго можна слухаць.\r\nБольшасць трэкаў "айчынага" вытворца, якая ўяўляе сабой Рускі нейрафанк, ад диповых і лайтовых напрамкаў, да самага тоўстых і безкампромісных. Ёсць і трохі техноида, для аматараў прамой і вар'яткай бочкі.	release/M20_Manti_Mix_for_Basstech_(novoeradio.by).mp3	covers/basstech-2.jpg	t	MNT020	LAME 320kbps 44100Hz	56:18	1. Strauss - Also sprach Zarathustra op.30 (Introduction)\r\n2. Miditacia - Power station  \r\n3. Miditacia - Anomalies  \r\n4. Brainfuzz - Scope  \r\n5. Hedj & Proktah - Rhino    \r\n6. Receptor - Rhyno    \r\n7. Marqus - Paranoik  \r\n8. Rregula and Dementia - Fortress  \r\n9. Isotop feat Shots and Kaiza - Kartago\r\n10. Dereck - Apollo    \r\n11. Nickbee - Iodine  \r\n12. Paperclip - Infinite drift  \r\n13. Receptor - Kurchatov      \r\n14. Telefon tel aviv - Fahrenheit fair enough (Prefuse 73 bonus beats remix)	t	t	t	Second set for the BASSTECH radio show (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). All tracks are mixed "live", but on the "quick" hand, so the quality suffered a bit, but nevertheless, there are a set and you can listen to.\r\nMost of the tracks "domestic" manufacturer representing Russian Neurofunk from deep directions to the most heavy and uncompromising. There are a few Technoid notes, for lovers of direct and crazy drums.	Второй выход на программе BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). Все треки сведены "вживую", правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет есть и его можно слушать. \r\nБольшинство треков "отечественного" производителя, представляющие собой Русский нейрофанк, от диповых и лайтовых направлений, до самых жирных и безкомпромисных. Есть и немного техноида, для любителей прямой и сумасшедшей бочки.	Second set for the BASSTECH radio show	Второй выход на программе BASSTECH	Mix for Basstech part 2	Mix for Basstech part 2	Second set for the BASSTECH radio show (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>).	Второй выход на программе BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>).	70	19	Другі выхад на праграме BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). Усе трэкі зведзены "ужывую", праўда на хуткую руку, таму крыху пацярпела якасць, але тым не менш сэт ёсць і яго можна слухаць.\r\nБольшасць трэкаў "айчынага" вытворца, якая ўяўляе сабой Рускі нейрафанк, ад диповых і лайтовых напрамкаў, да самага тоўстых і безкампромісных. Ёсць і трохі техноида, для аматараў прамой і вар'яткай бочкі.	Второй выход на программе BASSTECH. Все треки сведены вживую, правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет	Mix for Basstech part 2	Второй выход на программе BASSTECH (novoeradio.by/basstech). Все треки сведены "вживую", правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет есть и его можно слушать.	2018-06-20 12:30:40.506978+02
-553	2012-09-09 02:00:00+02	stockholm-syndrome	Stockholm syndrome	Вельмі не стандартны для мяне мікс, як па кампіляцыі, так і па тэхніцы.	Вельмі не стандартны для мяне мікс, як па кампіляцыі, так і па тэхніцы. Спецыяльна не востраць па маё ДР, але так ужо атрымалася, што мікс быў скончаны менавіта ў гэты дзень, знамянальна.	Вельмі не стандартны для мяне мікс, як па кампіляцыі, так і па тэхніцы. Спецыяльна не востраць па маё ДР, але так ужо атрымалася, што мікс быў скончаны менавіта ў гэты дзень, знамянальна.\r\nНатхніў мяне на стварэнне такога мікса каманды GusGus, так што аматары іх творчасць прысвячаецца ...	release/M31_Manti_Stockholm_syndrome_mix.mp3	covers/stockholm-syndrome.jpg	t	MNT031	LAME 320kbps 44100Hz	1:18:34	0. Intro - Crimea\r\n1. Tube & Berger - Come Together (Original Mix)\r\n2. Markus Fix - I'll House You (Original Mix)\r\n3. Tiefschwarz feat. Cassy - Find me\r\n4. Oxia - Housewife (feat. Miss Kittin)\r\n5. Royksopp - Tricky Tricky (Beyond Deep remix)\r\n6. Aki Bergen - Dont call me artist\r\n7. Sian - East of eden (Original mix)\r\n8. Popsled and Magit Cacoon - Higher point (Original mix)\r\n9. Oxia, Simon Mattson - Harmonie (Simon Mattson Remix)\r\n10. Dusty Kid - Cowboys\r\n11. Swayzak - Make up your mind\r\n12. Terry Lee Brown Junior - Bohemian life\r\n13. Agoria, Carl Craig and La Scalars - Speechless (Radio Slave remix)	t	t	t	Not very standard for me to mix, as the compilation and technique. I not specifically sharpened on my DR, but it just so happened that the mix has been completed on that day, momentous.\r\nIt inspired me to create this mix team GusGus, so that fans of their work is dedicated to ...	Очень не стандартный для меня микс, как по компиляции, так и по технике. Специально не затачивался по мое ДР, но так уж получилось, что микс был закончен именно в этот день, знаменательно.\r\nВоодушевила меня на создание такого микса команда GusGus, так что любителям их творчества посвящается...	Not very standard for me to mix, as the compilation and technique.	Очень не стандартный для меня микс, как по компиляции, так и по технике.	Stockholm syndrome	Stockholm syndrome	Not very standard for me to mix, as the compilation and technique. I not specifically sharpened on my DR, but it just so happened that the mix has been completed on that day, momentous.	Очень не стандартный для меня микс, как по компиляции, так и по технике. Специально не затачивался по мое ДР, но так уж получилось, что микс был закончен именно в этот день, знаменательно.	112	6	Вельмі не стандартны для мяне мікс, як па кампіляцыі, так і па тэхніцы. Спецыяльна не востраць па маё ДР, але так ужо атрымалася, што мікс быў скончаны менавіта ў гэты дзень, знамянальна.\r\nНатхніў мяне на стварэнне такога мікса каманды GusGus, так што аматары іх творчасць прысвячаецца ...	Вельмі не стандартны для мяне мікс, як па кампіляцыі, так і па тэхніцы.	Stockholm syndrome	Вельмі не стандартны для мяне мікс, як па кампіляцыі, так і па тэхніцы. Спецыяльна не востраць па маё ДР, але так ужо атрымалася, што мікс быў скончаны менавіта ў гэты дзень, знамянальна.	2018-06-20 12:30:40.52359+02
-602	2018-05-25 12:25:07.981184+02	last-night	Last night	Бойся того, что внутри тебя, так как злейший враг любого - он сам.	Бойся того, что внутри тебя, так как злейший враг любого - он сам.	Бойся того, что внутри тебя, так как злейший враг любого - он сам. Для того, чтобы стать лучше, надо научиться слушать себя, понимать и находить компромиссы, порой неприятные и тяжелые.	release/M44_Manti_Last_night.mp3	covers/last-night.jpg	t	MNT044	LAME 320kbps 44100Hz	51:54	1. Ben Salisbury and Geoff Barrow - End Credits (Alt Version)\r\n2. Hans Zimmer and Benjamin Wallfisch - 2049\r\n3. Hans Zimmer and Benjamin Wallfisch - Sea Wall\r\n4. Shuma feat. IDex - To-to-to (Extended)\r\n5. Pye Corner Audio - Resist\r\n6. Deepchord - Roca 9\r\n7. Antrru - Carbon Pad\r\n8. Vacant - High Rise\r\n9. Untold - Discipline\r\n10. Phaeleh - Absence of Light\r\n11. Owsey - Alone in the traffic of this world\r\n12. Vacant - Your Mind\r\n13. Young And Dramatic - Never (Sol remix)\r\n14. Harmash - Through The Dark Woods\r\n15. Phaeleh - Frequency	t	t	t	Fear what's inside of you, since the worst enemy of anyone is himself. In order to become better, you must learn to listen to yourself, understand and find compromises, sometimes unpleasant and difficult.	Бойся того, что внутри тебя, так как злейший враг любого - он сам. Для того, чтобы стать лучше, надо научиться слушать себя, понимать и находить компромиссы, порой неприятные и тяжелые.	Fear what's inside of you, since the worst enemy of anyone is himself.	Бойся того, что внутри тебя, так как злейший враг любого - он сам.	Last night	Last night	Fear what's inside of you, since the worst enemy of anyone is himself.	Бойся того, что внутри тебя, так как злейший враг любого - он сам.	0	0	Бойся таго, што ўнутры цябе, так як люты вораг любога - ён сам. Для таго, каб стаць лепш, трэба навучыцца слухаць сябе, разумець і знаходзіць кампрамісы, часам непрыемныя і цяжкія.	Бойся таго, што ўнутры цябе, так як люты вораг любога - ён сам.	Last night	Бойся таго, што ўнутры цябе, так як люты вораг любога - ён сам.	2018-06-21 09:47:16.576483+02
-575	2008-11-08 01:00:00+01	janaca-express-live	Janaca Express live	Жывая версія двух частак гоа трыпа Janaca Express, запісанага ў 2007 годзе.	Жывая версія двух частак гоа трыпа Janaca Express, запісанага ў 2007 годзе.	Жывая версія двух частак гоа трыпа Janaca Express, запісанага ў 2007 годзе.	release/M13_Manti_Janaca_express_live.mp3	covers/janaca.jpg	t	MNT013	LAME 320kbps 44100Hz	1:04:26	1. Silicon Sound feat. Psychotrop - Departure\r\n2. Silent Sphere - Violet visions \r\n3. Electro Sun - High cue \r\n4. Astrix - Tweaky \r\n5. Psypsiq Jicuri - A rain of hope in the galaxy \r\n6. Xerox & Illumination - Temporary insanity \r\n7. Astrix - Techno widows \r\n8. Delerious - Dynamic force\r\n9. Astrix feat. Michele Adamson - Closer to heaven	t	t	t	A live version of two parts of the Janaca Express trip, recorded in 2007.	Живая версия двух частей гоа трипа Janaca Express, записанного в 2007 году.	A live version of two parts of the Janaca Express trip, recorded in 2007.	Живая версия двух частей гоа трипа Janaca Express, записанного в прошлом году.	Janaca Express live	Janaca Express live	A live version of two parts of the Janaca Express trip, recorded in 2007.	Живая версия двух частей гоа трипа Janaca Express, записанного в прошлом году.	104	30	Жывая версія двух частак гоа трыпа Janaca Express, запісанага ў 2007 годзе.	Жывая версія двух частак гоа трыпа Janaca Express, запісанага ў 2007 годзе.	Janaca Express live	Жывая версія двух частак гоа трыпа Janaca Express, запісанага ў 2007 годзе.	2018-06-20 12:30:40.520471+02
-562	2007-10-27 02:00:00+02	bar-launge	Bar La'unge live	Прыемнае спалучэнне Лаунжа, Драма і Айсид Джаза.	Прыемнае спалучэнне Лаунжа, Драма і Айсид Джаза.	Прыемнае спалучэнне Лаунжа, Драма і Айсид Джаза.	release/M08_Manti_Bar_Launge_mix.mp3	covers/bar-launge.jpg	t	MNT008	LAME 192kbps 44100Hz	67:34	1. Groove Armada - Suntoucher\r\n2. Lemon Jelly - 95 aka make things right  \r\n3. One Self - Unfamilar places\r\n4. Dj Dobry Chlopak - Waco (Pono pele)\r\n5. Bebel Gilberto - Aganju (John Beltram mix)    \r\n6. Copabossa - Mihna (Namorada mix)\r\n7. Jehro - All I want  \r\n8. Ohm G & Bruno - One  \r\n9. Linn & Freddie - Live 4 love  \r\n10. Aural Float - Still here  \r\n11. LTJ Bukem - Journey inward\r\n12. Nookie - Natural experience\r\n13. Macoto - Where are you going?\r\n14. Vice versa - Still don't it\r\n15. Telepopmusik - Yesterday was a lie	t	t	t	A pleasant combination of the Lounge, DnB and Acid Jazz.	Приятное сочетание Лаунжа, Драма и Айсид Джаза.	A pleasant combination of the Lounge, DnB and Acid Jazz.	Приятное сочетание Лаунжа, Драма и Айсид Джаза.	Bar La'unge live	Bar La'unge live	A pleasant combination of the Lounge, DnB and Acid Jazz.	Приятное сочетание Лаунжа, Драма и Айсид Джаза.	71	17	Прыемнае спалучэнне Лаунжа, Драма і Айсид Джаза.	Прыемнае спалучэнне Лаунжа, Драма і Айсид Джаза.	Bar La'unge live	Прыемнае спалучэнне Лаунжа, Драма і Айсид Джаза.	2018-06-20 12:30:40.53557+02
-566	2008-12-27 01:00:00+01	emofunk-	Emofunk (Christmas rave) live	Пераднавагодні рэйв з удзелам: Boro&Moff, Izo, Ipomea, valCool, Enegy.	Пераднавагодні рэйв з удзелам: Boro&Moff, Izo, Ipomea, valCool, Enegy.	Пераднавагодні рэйв з удзелам: Boro&Moff, Izo, Ipomea, valCool, Enegy.\r\nБыло ТРЫ літра гарэлкі і шмат-шмат трупаў.	release/M14_Manti_Emofunk_live.mp3	covers/christmas-rave.jpg	t	MNT014	LAME 320kbps 44100Hz	51:11		t	t	t	New Year Eve rave involving: Boro&Moff, Izo, Ipomea, valCool, Enegy.\r\nThere were three liters of vodka and a lot of corpses.	Предновогодний рэйв с участием: Boro&Moff, Izo, Ipomea, valCool, Enegy.\r\nБыло ТРИ литра водки и много-много трупов.	New Year Eve rave involving: Boro&Moff, Izo, Ipomea, valCool, Enegy.	Предновогодний рэйв с участием: Boro&Moff, Izo, Ipomea, valCool, Enegy.	Emofunk (Christmas rave) live	Emofunk (Christmas rave) live	New Year Eve rave involving: Boro&Moff, Izo, Ipomea, valCool, Enegy.	Предновогодний рэйв с участием: Boro&Moff, Izo, Ipomea, valCool, Enegy.	71	21	Пераднавагодні рэйв з удзелам: Boro&Moff, Izo, Ipomea, valCool, Enegy.\r\nБыло ТРЫ літра гарэлкі і шмат-шмат трупаў.	Пераднавагодні рэйв з удзелам: Boro&Moff, Izo, Ipomea, valCool, Enegy.	Emofunk (Christmas rave) live	Пераднавагодні рэйв з удзелам: Boro&Moff, Izo, Ipomea, valCool, Enegy.	2018-06-20 12:30:40.53937+02
-573	2008-01-07 01:00:00+01	marrakesh	Marrakesh	Усходняе цёпла, вострыя прыправы і рытмы. Сумесь індастрыял і медытацый на вольныя тэмы.	Усходняе цёпла, вострыя прыправы і рытмы. Сумесь індастрыял і медытацый на вольныя тэмы.	Усходняе цёпла, вострыя прыправы і рытмы. Сумесь індастрыял і медытацый на вольныя тэмы.	release/M10_Manti_Marrakesh_mix.mp3	covers/marrakesh.jpg	t	MNT010	LAME 192kbps 44100Hz	56:48	1. Deepac Ram - Between thoughts\r\n2. Trianglesun - Budha\r\n3. Enamoured - Mooli\r\n4. Pete Vicary - D-maddix\r\n5. Monsoon Day - Spice trail\r\n6. Muslimgauze - Hussein Mahmood Jeeb Tehar Gass  \r\n7. Slack Baba - Drink more tea (Herbal mix)  \r\n8. Enrico Experience - Bine el barah quel liom\r\n9. Vibrasphere - San Pedro	t	t	t	Eastern heat, spices and rhythms. A mixture of industrial and meditation on free themes.	Восточное тепло, пряности и ритмы. Смесь индастриала и медитаций на вольные темы.	Eastern heat, spices and rhythms. A mixture of industrial and meditation on free themes.	Восточное тепло, пряности и ритмы. Смесь индастриала и медитаций на вольные темы.	Marrakesh	Marrakesh	Eastern heat, spices and rhythms. A mixture of industrial and meditation on free themes.	Восточное тепло, пряности и ритмы. Смесь индастриала и медитаций на вольные темы.	61	28	Усходняе цёпла, вострыя прыправы і рытмы. Сумесь індастрыял і медытацый на вольныя тэмы.	Усходняе цёпла, вострыя прыправы і рытмы. Сумесь індастрыял і медытацый на вольныя тэмы.	Marrakesh	Усходняе цёпла, вострыя прыправы і рытмы. Сумесь індастрыял і медытацый на вольныя тэмы.	2018-06-20 12:30:40.54674+02
-558	2009-10-14 02:00:00+02	hobh-three	Дом разбитых сердец III, такая Lite	Толькі тады нараджаюцца такія сэты, калі па-сапраўднаму балюча.	Толькі тады нараджаюцца такія сэты, калі па-сапраўднаму балюча.	Толькі тады нараджаюцца такія сэты, калі па-сапраўднаму балюча.	release/M19_Manti_HOBH_03_So_lite.mp3	covers/hobh-3.jpg	t	MNT019	LAME 320kbps 44100Hz	58:25	1. Radiohead - Street spirit\r\n2. Blink 182 - I miss you\r\n3. Khoiba - That reason\r\n4. Royksopp - Vision one \r\n5. Planet Funk - Ultraviolet days\r\n6. Depeche Mode - Freelove\r\n7. Red Hot Chili Peppers - Scar tissue\r\n8. Coldplay - Clocks\r\n9. Sum 41 - Pieces\r\n10. Three Days Grays - Home\r\n11. Linkin Park - In the end\r\n12. The Cardigans - Erase and rewind\r\n13. Air - How does it make you feel	t	t	t	Only then such sets are born when it really hurts.	Только тогда рождаются такие сеты, когда по-настоящему больно.	Only then such sets are born when it really hurts.	Только тогда рождаются такие сеты, когда по-настоящему больно.	House of broken hearts III, so lite	Дом разбитых сердец III, такая Lite	Only then such sets are born when it really hurts.	Только тогда рождаются такие сеты, когда по-настоящему больно.	86	12	Толькі тады нараджаюцца такія сэты, калі па-сапраўднаму балюча.	Толькі тады нараджаюцца такія сэты, калі па-сапраўднаму балюча.	Дом разбитых сердец III, такая Lite	Толькі тады нараджаюцца такія сэты, калі па-сапраўднаму балюча.	2018-06-20 12:30:40.550356+02
-598	2016-03-21 22:31:32+01	february	Люты	Дзіўныя тры месяцы дзіўнай зімы прымусілі пра многае падумаць і расставіць усё на свае месцы.	Дзіўныя тры месяцы дзіўнай зімы прымусілі пра многае падумаць і расставіць усё на свае месцы.	Дзіўныя тры месяцы дзіўнай зімы прымусілі пра многае падумаць і расставіць усё на свае месцы. Вельмі многае ў тэкстах нагадала пра сябе, пра іншых і іншае..	release/ME05_Manti_February.mp3	covers/february.jpg	t	MNTE05	LAME 320kbps 44100Hz	1:14:45	1. Jahmal feat. VibeTGK - Я Убираюсь\r\n2. АК 47 feat. Ноггано - Моя игра\r\n3. Noize Mc - Тыщатыщ\r\n4. Триагрутрика - Гелик\r\n5. Guf - Наугад (scratch by DJ Shved)\r\n6. Скриптонит feat. Юрик Четверг, Truwer - Сука тащит нас на дно\r\n7. Баста и Смоки Мо - Жить достойно\r\n8. Рэм Дигга feat. Баста - Другой\r\n9. Krec - Моно\r\n10. Витя АК - Еду в Ленинград\r\n11. Баста и Смоки Мо - Амадей (skit)\r\n12. 9 ГРАММ feat. DJ Wide - Po-Hoo-You\r\n13. Raga - Амфетамины до добра не доведут\r\n14. Триагрутрика - Олдскуловая сага\r\n15. АК-47 feat. Триагрутрика - Откуда ты приехал\r\n16. Krec - Буря и гром\r\n17. Смоки Мо - Горсть лепестков\r\n18. Krec - Февраль\r\n19. Баста feat. Тати - Хочу к тебе\r\n20. Скриптонит - Это любовь	t	t	t	Very strange three months of winter forced to think about many things and put everything in its place. A lot of in the lyrics reminded about themselves, about others and other..	Странные три месяца странной зимы заставили о многом подумать и расставить все на свои места. \r\nОчень многое в текстах напомнило о себе, о других и другом..	Very strange three months of winter forced to think about many things and put everything in its place.	Странные три месяца странной зимы заставили о многом подумать и расставить все на свои места.	February	Февраль	Very strange three months of winter forced to think about many things and put everything in its place.	Странные три месяца странной зимы заставили о многом подумать и расставить все на свои места.	107	53	Дзіўныя тры месяцы дзіўнай зімы прымусілі пра многае падумаць і расставіць усё на свае месцы. Вельмі многае ў тэкстах нагадала пра сябе, пра іншых і іншае..	Дзіўныя тры месяцы дзіўнай зімы прымусілі пра многае падумаць і расставіць усё на свае месцы.	Люты	Дзіўныя тры месяцы дзіўнай зімы прымусілі пра многае падумаць і расставіць усё на свае месцы.	2018-06-20 12:30:40.542961+02
-557	2009-02-23 01:00:00+01	hobh-two	Дом разбитых сердец II, пепел	Другая частка працы пад агульнай назвай "Дом разбітых сэрцаў".	Другая частка працы пад агульнай назвай "Дом разбітых сэрцаў".	Другая частка працы пад агульнай назвай "Дом разбітых сэрцаў". Галоўная асаблівасць дадзенай кампіляцыі ў тым, што абсалютна ўсе трэкі - музыка "нашых" выканаўцаў, гэта можна без цяжказцяў заўважыць па трэклісту. Уся музыка збіралася гадамі і дбайна фільтравалася.	release/M15_Manti_HOBH_02_Pepel.mp3	covers/hobh-2.jpg	t	MNT015	LAME 320kbps 44100Hz	60:32	1. Tokio - Когда ты плачешь \r\n2. Дельфин - Весна\r\n3. Без билета - Ромашка\r\n4. Земфира - Прости меня моя любовь\r\n5. Гришковец - Извини\r\n6. Ленинград - У меня есть все\r\n7. Грин грей - Осень\r\n8. 5'nizza - Сюрная\r\n9. Океан ельзи - Вiдпусти\r\n10. Дельфин - Любовь\r\n11. T9 - Ода нашей любви\r\n12. Party makers - Новая любовь\r\n13. Нагано - Голос андеграунда\r\n14. Krec - Искра	t	t	t	The second part of the work is under the general title "House of broken hearts". The main feature of this compilation is that absolutely all tracks are music of "our" performers, it can be easily noticed from the tracklist. All music was collected for years and carefully filtered.	Вторая часть работы под общим названием "Дом разбитых сердец". Главная особенность данной компиляции в том, что абсолютно все треки - музыка "наших" исполнителей, это можно без труда заметить по треклисту. Вся музыка собиралась годами и тщательно фильтровалась.	The second part of the work is under the general title "House of broken hearts".	Вторая часть работы под общим названием "Дом разбитых сердец".	House of broken hearts II, ash	Дом разбитых сердец II, пепел	The second part of the work is under the general title "House of broken hearts".	Вторая часть работы под общим названием "Дом разбитых сердец".	84	11	Другая частка працы пад агульнай назвай "Дом разбітых сэрцаў". Галоўная асаблівасць дадзенай кампіляцыі ў тым, што абсалютна ўсе трэкі - музыка "нашых" выканаўцаў, гэта можна без цяжказцяў заўважыць па трэклісту. Уся музыка збіралася гадамі і дбайна фільтравалася.	Другая частка працы пад агульнай назвай "Дом разбітых сэрцаў".	Дом разбитых сердец II, пепел	Другая частка працы пад агульнай назвай "Дом разбітых сэрцаў".	2018-06-20 12:30:40.557713+02
-595	2015-04-20 11:23:50+02	before	Before I go to sleep	У пэўным сэнсе юбілейны, 40-ы сэт з серыі мінімалістычнага драма. Практычна ніякай жэсці, усё вельмі тэхнічна і тонка...	У пэўным сэнсе юбілейны, 40-ы сэт з серыі <a href="/blog/?tag=techstep">мінімалістычнага драма</a>.	У пэўным сэнсе юбілейны, 40-ы сэт з серыі <a href="/blog/?tag=techstep">мінімалістычнага драма</a>. Практычна ніякай жэсці, усё вельмі тэхнічна і тонка...	release/M40_Manti_Before_I_go_to_sleep.mp3	covers/before.jpg	t	MNT040	LAME 320kbps 44100Hz	53:38	1. DLR, Hydro, Mako & Villem - The formula\r\n2. Mob Tactics - Savages (Original mix)\r\n3. Dabs & Safire feat. Mc Lowqui - Hideout\r\n4. Emperor - Begin (feat. Georgia Yates)\r\n5. Dimension - Jet Black (Original mix)\r\n6. Noel - Defence\r\n7. KROT - Rusty pipe\r\n8. D iolax - Space vortex\r\n9. Rune Kaiza Elok - Lynks\r\n10. Agnostetics - Dark mind\r\n11. D Iolax - The forgotten tribe\r\n12. Breekda & Dark Soul - Sea\r\n13. Kije - Without you (feat. Jently)	t	t	t	In a some sense, the jubilee, 40th set from the series of <a href="/blog/?tag=techstep">minimalistic dnb</a>.\r\nVirtually no hard sound, all very technical and subtle...	В некотором смысле юбилейный, 40-ой сэт из серии <a href="/blog/?tag=techstep">минималистичного драма</a>.\r\nПрактически никакой жести, все очень технично и тонко...	In a some sense, the jubilee, 40th set from the series of minimalistic dnb.	В некотором смысле юбилейный, 40-ой сэт из серии минималистичного драма. Практически никакой жести, все очень технично и тонко...	Before I go to sleep	Before I go to sleep	In a some sense, the jubilee, 40th set from the series of <a href="/blog/?tag=techstep">minimalistic dnb</a>.	В некотором смысле юбилейный, 40-ой сэт из серии <a href="/blog/?tag=techstep">минималистичного драма</a>.	97	50	У пэўным сэнсе юбілейны, 40-ы сэт з серыі <a href="/blog/?tag=techstep">мінімалістычнага драма</a>. Практычна ніякай жэсці, усё вельмі тэхнічна і тонка...	У пэўным сэнсе юбілейны, 40-ы сэт з серыі мінімалістычнага драма. Практычна ніякай жэсці, усё вельмі тэхнічна і тонка...	Before I go to sleep	У пэўным сэнсе юбілейны, 40-ы сэт з серыі <a href="/blog/?tag=techstep">мінімалістычнага драма</a>.	2018-06-20 12:30:40.568733+02
-597	2016-01-23 18:10:55+01	phantom	Phantom shield	Самае вялікае задавальненне ў жыцці рабіць тое, што іншыя кажуць, што вы не можаце...	Самае вялікае задавальненне ў жыцці рабіць тое, што іншыя кажуць, што вы не можаце...	Самае вялікае задавальненне ў жыцці рабіць тое, што іншыя кажуць, што вы не можаце...	release/M42_Manti_Phantom_shield.mp3	covers/phantom.jpg	t	MNT042	LAME 320kbps 44100Hz	57:49	1. Miles - Sense data\r\n2. Mark System - Final approach\r\n3. L-Side - Dreadlocks\r\n4. Kaset - Nectar\r\n5. Ben Soundscape, Superior Selectionz - Revenge\r\n6. Icicle - Lost hours\r\n7. Detail - Lost\r\n8. Bredren - Red Powder (Arkaik remix)\r\n9. DLR - Tugboat\r\n10. Chromatic - Inertia\r\n11. Ulterior Motive - Featherweight\r\n12. Kantyze - Alien origins\r\n13. Skeptical - Imperial\r\n14. Simstah - Subliminal\r\n15. Mista - Elephant juice	t	t	t	The greatest pleasure in life is doing what others say you can not...	Самое большое удовольствие в жизни делать то, что другие говорят, что вы не можете...	The greatest pleasure in life is doing what others say you can not...	Самое большое удовольствие в жизни делать то, что другие говорят, что вы не можете...	Phantom shield	Phantom shield	The greatest pleasure in life is doing what others say you can not...	Самое большое удовольствие в жизни делать то, что другие говорят, что вы не можете...	82	52	Самае вялікае задавальненне ў жыцці рабіць тое, што іншыя кажуць, што вы не можаце...	Самае вялікае задавальненне ў жыцці рабіць тое, што іншыя кажуць, што вы не можаце...	Phantom shield	Самае вялікае задавальненне ў жыцці рабіць тое, што іншыя кажуць, што вы не можаце...	2018-06-20 12:30:40.561027+02
-579	2012-04-25 02:00:00+02	exception	Exception	Гэты сэт з'яўляецца працягам серыі мінімалістычных нейра міксаў, працягам працы пад назвай Katana.	Гэты сэт з'яўляецца працягам серыі <a href="/blog/?tag=techstep">мінімалістычных нейра міксаў</a>, працягам працы пад назвай <a href="/blog/katana/">Katana</a>.	Гэты сэт з'яўляецца працягам серыі <a href="/blog/?tag=techstep">мінімалістычных нейра міксаў</a>, працягам працы пад назвай <a href="/blog/katana/">Katana</a>.\r\nАдна з першых работ цалкам запісаная ў жывую на маім трактары (Traktor Pro + X1 + TA6), трохі была падмайстарана, але ў цэлым засталася даволі жывой.	release/M26_Manti_Exception_mix.mp3	covers/exception.jpg	t	MNT026	LAME 320kbps 44100Hz	51:35	1. Mortem - Monoveler\r\n2. Icicle - Alien Groove\r\n3. Paimon - Hellraiser  \r\n4. Science Fiction - Abyss  \r\n5. Mortem - Get Close\r\n6. June Miller - Snapcase\r\n7. Alix Perez - Exemption\r\n8. Kabuki & Savine - Backup\r\n9. The Countamen & Alley Cat - Payload (Konflict remix)\r\n10. Science Fiction - Bystander effect  \r\n11. Nickbee & Malc - Cosmos\r\n12. Icicle, Distance - Exhale	t	t	t	This set is a continuation of the series <a href="/blog/?tag=techstep">minimalistic neuro mixes</a>, a continuation of the work called <a href="/blog/katana/">Katana</a>.\r\nOne of the first works fully recorded live on my tractor (Traktor Pro + X1 + TA6), was slightly mastered, but in general it remained pretty live.	Этот сет является продолжением серии <a href="/blog/?tag=techstep">минималистичных нейро миксов</a>, продолжением работы под названием <a href="/blog/katana/">Katana</a>.\r\nОдна из первых работ полностью записанная в живую на моем тракторе (Traktor Pro + X1 + TA6), немного была подмастерена, но в целом осталась довольно живой.	This set is a continuation of the series minimalistic neuro mixes, a continuation of the work called Katana.	Этот сет является продолжением серии минималистичных нейро миксов, продолжением работы под названием Katana.	Exception	Exception	This set is a continuation of the series <a href="/blog/?tag=techstep">minimalistic neuro mixes</a>, a continuation of the work called <a href="/blog/katana/">Katana</a>.	Этот сет является продолжением серии <a href="/blog/?tag=techstep">минималистичных нейро миксов</a>, продолжением работы под названием <a href="/blog/katana/">Katana</a>.	114	34	Гэты сэт з'яўляецца працягам серыі <a href="/blog/?tag=techstep">мінімалістычных нейра міксаў</a>, працягам працы пад назвай <a href="/blog/katana/">Katana</a>.\r\nАдна з першых работ цалкам запісаная ў жывую на маім трактары (Traktor Pro + X1 + TA6), трохі была падмайстарана, але ў цэлым засталася даволі жывой.	Гэты сэт з'яўляецца працягам серыі мінімалістычных нейра міксаў, працягам працы пад назвай Katana.	Exception	Гэты сэт з'яўляецца працягам серыі <a href="/blog/?tag=techstep">мінімалістычных нейра міксаў</a>, працягам працы пад назвай <a href="/blog/katana/">Katana</a>.	2018-06-20 12:30:40.564498+02
-574	2008-10-31 01:00:00+01	helloween-live	Helloween live	Першы досвед працы з драмам, з яго даволі агрэсіўным і жорсткім напрамкам Neurofunk.	Першы досвед працы з драмам, з яго даволі агрэсіўным і жорсткім напрамкам <a href="/blog/?tag=neurofunk">Neurofunk</a>.	Першы досвед працы з драмам, з яго даволі агрэсіўным і жорсткім напрамкам <a href="/blog/?tag=neurofunk">Neurofunk</a>. Тэхнічна не ўсё так гладка, але, па-мойму, кампіляцыя згладжвае гэтыя агрэхі.\r\nПадштурхнулі мяне на гэты эксперымент з драмам, "выпадкова" запампаваныя першыя 56 рэлізаў лэйбл SUBTITLES.	release/M11_Manti_Helloween_party_live.mp3	covers/helloween.jpg	t	MNT011	LAME 320kbps 44100Hz	36:01		t	t	t	The first experience with the dnb, with its rather aggressive and hard style <a href="/blog/?tag=neurofunk">Neurofunk</a>. Technically, not everything is so smooth, but, in my opinion, the compilation smoothes out these flaws.\r\nSpurred me on this experiment with the dnb, "accidentally" downloaded the first 56 releases of the label SUBTITLES.	Первый опыт работы с драмом, с его довольно агрессивным и жестким направлением <a href="/blog/?tag=neurofunk">Neurofunk</a>. Технически не все так гладко, но, по-моему, компиляция сглаживает эти огрехи.\r\nСподвигли меня на этот эксперимент с драмом, "случайно" скачанные первые 56 релизов лэйбла SUBTITLES.	The first experience with the dnb, with its rather aggressive and hard style Neurofunk.	Первый опыт работы с драмом, с его довольно агрессивным и жестким направлением Neurofunk.	Helloween live	Helloween live	The first experience with the dnb, with its rather aggressive and hard style <a href="/blog/?tag=neurofunk">Neurofunk</a>.	Первый опыт работы с драмом, с его довольно агрессивным и жестким направлением <a href="/blog/?tag=neurofunk">Neurofunk</a>.	92	29	Першы досвед працы з драмам, з яго даволі агрэсіўным і жорсткім напрамкам <a href="/blog/?tag=neurofunk">Neurofunk</a>. Тэхнічна не ўсё так гладка, але, па-мойму, кампіляцыя згладжвае гэтыя агрэхі.\r\nПадштурхнулі мяне на гэты эксперымент з драмам, "выпадкова" запампаваныя першыя 56 рэлізаў лэйбл SUBTITLES.	Першы досвед працы з драмам, з яго даволі агрэсіўным і жорсткім напрамкам Neurofunk.	Helloween live	Першы досвед працы з драмам, з яго даволі агрэсіўным і жорсткім напрамкам <a href="/blog/?tag=neurofunk">Neurofunk</a>.	2018-06-20 12:30:40.577689+02
-556	2006-12-11 01:00:00+01	hobh-one	Дом разбитых сердец, начало	Для ўсіх тых, хто пакутуе.	Для ўсіх тых, хто пакутуе.	Для всех тех, кто страдает...	release/M03_Manti_HOBH_01_Nachalo.mp3	covers/hobh-1.jpg	t	MNT003	LAME 192kbps 44100Hz	64:54	1. Telepopmusik - 6p_6q_=h_4n\r\n2. Amon Tobin - Mighty micro people\r\n3. Manmademan - Breeze\r\n4. Nuclear Ramjet - Near earth project\r\n5. Telefon Tel Aviv - When it happens, it moves all by itself\r\n6. Imogen Heap - Hide & seek \r\n7. Halou - Ill carri you\r\n8. marco_manti - Music for Lilou \r\n9. Linkin Park - My December (Alter-Native mastering) \r\n10. switch (depeche mode)\r\n11. Junkie XL - We become one\r\n12. Planet Funk feat. Sally Doherty - Dusk\r\n13. 2Raumwohnung - Wir erinnern uns nicht\r\n14. Daft Punk - Something about us\r\n15. A-ha - Summer moved on	t	t	t	For all those who suffer.	Для всех тех, кто страдает.	For all those who suffer.	Для всех тех, кто страдает.	House of broken hearts, beginning	Дом разбитых сердец, начало	For all those who suffer.	Для всех тех, кто страдает.	84	10	Для всех тех, кто страдает...	Для ўсіх тых, хто пакутуе.	Дом разбитых сердец, начало	Для ўсіх тых, хто пакутуе.	2018-06-20 12:30:40.585389+02
-589	2013-08-27 19:43:56+02	zeppelin	Zeppelin	Цікавая праца для аматараў мінімалістычнага і шумнага тэхна гучання на ватных хуткасцях.	Цікавая праца для аматараў мінімалістычнага і шумнага тэхна гучання на "ватных" хуткасцях.	Цікавая праца для аматараў мінімалістычнага і шумнага тэхна гучання на "ватных" хуткасцях. Праца працягвае серыю эксперыментальных міксаў з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.	release/M36_Manti_Zeppelin.mp3	covers/zeppelin.jpg	t	MNT036	LAME 320kbps 44100Hz	57:55	1. Orson Throb - Silent cloud\r\n2. CV313 - Subtraktive\r\n3. STL - A beautiful mind\r\n4. Orson Throb - Im from the space\r\n5. Zzzzra - Mecanographie phase 1\r\n6. Echospace feat. The Howard Street Rhythm Section - Spatial dimension\r\n7. Deepchord - Grand bend\r\n8. Dolby - He0r\r\n9. Orson Throb - For my people\r\n10. Echospace - Sonorous (CV313s Midst of something beautiful mix)	t	t	t	An interesting work for fans of minimalistic and noisy techno sound at low speeds. The work continues a series of experimental mixes from the series <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.	Интересная работа для любителей минималистичного и шумного техно звучания на "ватных" скоростях.\r\nРабота продолжает серию экспериментальных миксов из серии <a href="http://manti.by/tag/lsc/">Light Synthetic Compilation</a>.	An interesting work for fans of minimalistic and noisy techno sound at low speeds.	Интересная работа для любителей минималистичного и шумного техно звучания на ватных скоростях.	Zeppelin	Zeppelin	An interesting work for fans of minimalistic and noisy techno sound at low speeds.	Интересная работа для любителей минималистичного и шумного техно звучания на "ватных" скоростях.	118	44	Цікавая праца для аматараў мінімалістычнага і шумнага тэхна гучання на "ватных" хуткасцях. Праца працягвае серыю эксперыментальных міксаў з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.	Цікавая праца для аматараў мінімалістычнага і шумнага тэхна гучання на ватных хуткасцях.	Zeppelin	Цікавая праца для аматараў мінімалістычнага і шумнага тэхна гучання на "ватных" хуткасцях.	2018-06-20 12:30:40.589254+02
-577	2011-03-03 01:00:00+01	trauma	Trauma	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.\r\nПрактычна цалкам сэт скампілен ў бальніцы, пазней сабраны адной (цэлай) рукой пры дапамозе ACID Pro ад кампаніі Sony і пары стандартных прымочак: Ozone, GCO, Elephant і да т.п.\r\nСэт перадае ўсю тую шырокую гаму адчуванняў, якія можна выпрабаваць у нашых дзяржаўных бальніцах.	release/M23_Manti_Trauma_mix.mp3	covers/trauma.jpg	t	MNT023	LAME 320kbps 44100Hz	53:29	1. Real - When the dream\\'s done\r\n2. Cliffhanga - Centipede\r\n3. Paperclip & Malk - Detective  \r\n4. Paperclip & Flame - Bad illumination\r\n5. EBK - Soma\r\n6. Black Sun Empire - Kempi (feat. Nymfo)    \r\n7. Unknown Error - Dark wars  \r\n8. Receptor & Engage - Wi-fi waves  \r\n9. Black Sun Empire - Wasteland (feat. SPL)    \r\n10. Flame - Prehistoric (vip mix)  \r\n11. Katharsys & Gancher - Sky from beyond  \r\n12. Pyro - Restless (Katharsys remix)\r\n13. Nphonix & Enei - Quicksilver    \r\n13. Receptor - Princess	t	t	t	This set, like no other physically suffered and invented in the trauma department of the hospital in my home town, after a hard fall on alpine skiing.\r\nAlmost completely set compiled in the hospital, later assembled one (intact) hand with ACID Pro from Sony and a couple of standard plugins: Ozone, GCO, Elephant, etc.\r\nSet conveys the whole gamma of sensations that can be experienced in our public hospitals.	Этот сет, как никакой другой выстрадан физически и придуман в травматологическом отделении больницы моего родного города, после жесткого падения на горных лыжах.\r\nПрактически полностью сет скомпилен в больнице, позже собран одной (целой) рукой при помощи ACID Pro от компании Sony и пары стандартных примочек: Ozone, GCO, Elephant и т.п.\r\nСет передает всю ту широкую гамму ощущений, которые можно испытать в наших государственных больницах.	This set, like no other physically suffered and invented in the trauma department of the hospital in my home town, after a hard fall on alpine skiing.	Этот сет, как никакой другой выстрадан физически и придуман в травматологическом отделении больницы моего родного города, после жесткого падения на горных лыжах.	Trauma	Trauma	This set, like no other physically suffered and invented in the trauma department of the hospital in my home town, after a hard fall on alpine skiing.	Этот сет, как никакой другой выстрадан физически и придуман в травматологическом отделении больницы моего родного города, после жесткого падения на горных лыжах.	91	32	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.\r\nПрактычна цалкам сэт скампілен ў бальніцы, пазней сабраны адной (цэлай) рукой пры дапамозе ACID Pro ад кампаніі Sony і пары стандартных прымочак: Ozone, GCO, Elephant і да т.п.\r\nСэт перадае ўсю тую шырокую гаму адчуванняў, якія можна выпрабаваць у нашых дзяржаўных бальніцах.	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.	Trauma	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.	2018-06-20 12:30:40.57301+02
-572	2007-10-27 02:00:00+02	janaca-express-02	Janaca express 02	Другая частка майго трыпа ў залюстаркоўе.	Другая частка майго трыпа ў залюстаркоўе. Першую частку можна знайсці <a href="/blog/janaca-express/">тут</a>.	Другая частка майго трыпа ў залюстаркоўе. Першую частку можна знайсці <a href="/blog/janaca-express/">тут</a>.	release/M09_Manti_Janaca_express_mix_02.mp3	covers/janaca.jpg	t	MNT009	LAME 192kbps 44100Hz	59:38	1. Intro - Tristan  \r\n2. Quantum feat. Keren Porat - Janaca express\r\n3. Rocky vs. Galactika - Global air (Monster edit)  \r\n4. Zen Mechanics - Vurt  \r\n5. Space Vision - Mascer jedi\r\n6. Lucy - Flash damage\r\n7. Insomnia - The real thing  \r\n8. Magoon - Future\r\n9. Sangeet - Distorted dream\r\n10. Vibe Tribe - Kick the bass	t	t	t	The second part of my trip is through the looking-glass. The first part can be found <a href="/blog/janaca-express/">here</a>.	Вторая часть моего трипа в зазеркалье. Первую часть можно найти <a href="/blog/janaca-express/">здесь</a>.	The second part of my trip is through the looking-glass.	Вторая часть моего трипа в зазеркалье.	Janaca express 02	Janaca express 02	The second part of my trip is through the looking-glass. The first part can be found <a href="/blog/janaca-express/">here</a>.	Вторая часть моего трипа в зазеркалье. Первую часть можно найти <a href="/blog/janaca-express/">здесь</a>.	60	27	Другая частка майго трыпа ў залюстаркоўе. Першую частку можна знайсці <a href="/blog/janaca-express/">тут</a>.	Другая частка майго трыпа ў залюстаркоўе.	Janaca express 02	Другая частка майго трыпа ў залюстаркоўе. Першую частку можна знайсці <a href="/blog/janaca-express/">тут</a>.	2018-06-20 12:30:40.581784+02
+576	2009-03-15 00:00:00+00	killing-machine	Killing machine	Змрачнейшы мікс ў маім жыцці, нават уся серыя Гоа і побач не стаяла па жорсткасці.	Змрачнейшы мікс ў маім жыцці, нават уся серыя Гоа і побач не стаяла па жорсткасці.	Змрачнейшы мікс ў маім жыцці, нават уся серыя Гоа і побач не стаяла па жорсткасці. Запісаны мікс быў пасля доўгіх эксперыментаў у клубах, над тымі каму "не важна". Тэхнічна - "рыдлёўка", пару месцаў проста захлыналіся ад колькасці гуку.\r\nМікс быў запісаны ў хатніх умовах, прычым розныя кавалкі ў розных праграмах. Выкарыстаў практычна ўвесь спектр свайго софту: Samplitude, Ableton, Tracktor.	release/M16_Manti_Killing_machine_mix.mp3	covers/killing-machine.jpg	t	MNT016	LAME 320kbps 44100Hz	49:55	1. Intro - Red or blue (Matrix)\r\n2. Current Value & Donny - Nightmare man  \r\n3. Limewax - One of them (Current Value remix)    \r\n4. Counterstrike - Stardurst\r\n5. Limewax - Cracking core (Technical Itch vip mix)\r\n6. Prozac & Ethex - The game\r\n7. Current Value - Stomache\r\n8. Dying Punks & Current Value - Love all the people    \r\n9. Paperclip - Simple access  \r\n10. Limewax vs. Phobos feat. SPL - He will find us (Duomix)\r\n11. Oceanlab - Clear blue water (Current Value remix)	t	t	t	The darkest mix in my life, even the whole series of Goa and nearby did not stand for cruelty. Recorded mix was after a lot of experiments in clubs, over those who "not important". Technically - "shovel", a couple of places just choked with the amount of sound.\r\nMix was recorded at home, with different pieces in different programs. I used almost the whole range of my software: Samplitude, Ableton, Tracktor.	Мрачнейший микс в моей жизни, даже вся серия Гоа и рядом не стояла по жестокости. Записан микс был после долгих экспериментов в клубах, над теми кому "побарабану". Технически - "лопата", пару мест просто захлебывались от количества звука.\r\nМикс был записан в домашних условиях, причем разные куски в разных программах. Использовал практически весь спектр своего софта: Samplitude, Ableton, Tracktor.	The darkest mix in my life, even the whole series of Goa and nearby did not stand for cruelty.	Мрачнейший микс в моей жизни, даже вся серия Гоа и рядом не стояла по жестокости.	Killing machine	Killing machine	The darkest mix in my life, even the whole series of Goa and nearby did not stand for cruelty.	Мрачнейший микс в моей жизни, даже вся серия Гоа и рядом не стояла по жестокости.	71	31	Змрачнейшы мікс ў маім жыцці, нават уся серыя Гоа і побач не стаяла па жорсткасці. Запісаны мікс быў пасля доўгіх эксперыментаў у клубах, над тымі каму "не важна". Тэхнічна - "рыдлёўка", пару месцаў проста захлыналіся ад колькасці гуку.\r\nМікс быў запісаны ў хатніх умовах, прычым розныя кавалкі ў розных праграмах. Выкарыстаў практычна ўвесь спектр свайго софту: Samplitude, Ableton, Tracktor.	Змрачнейшы мікс ў маім жыцці, нават уся серыя Гоа і побач не стаяла па жорсткасці.	Killing machine	Змрачнейшы мікс ў маім жыцці, нават уся серыя Гоа і побач не стаяла па жорсткасці.	2018-06-20 10:30:40.414174+00
+568	2005-10-12 00:00:00+00	all-she-wants-is	All she wants is (SCSI device)	Адна з першых і вельмі старых прац, зробленая пад уражаннем польска-нямецкіх тэхна бацькоў.	Адна з першых і вельмі старых прац, зробленая пад уражаннем польска-нямецкіх тэхна бацькоў.	Адна з першых і вельмі старых прац, зробленая пад уражаннем польска-нямецкіх тэхна бацькоў.	release/M02_Manti_All_she_wants_is_mix_(SCSI_device).mp3	covers/all-she-wants.jpg	t	MNT002	LAME 320kbps 44100Hz	1:11:39		t	t	t	One of the first and very old works, made under the impression of the Polish-German techno fathers.	Одна из первых и очень старых работ, сделанная под впечатлением польско-немецких техно отцов.	One of the first and very old works, made under the impression of the Polish-German techno fathers.	Одна из первых и очень старых работ, сделанная под впечатлением польско-немецких техно отцов.	All she wants is (SCSI device)	All she wants is (SCSI device)	One of the first and very old works, made under the impression of the Polish-German techno fathers.	Одна из первых и очень старых работ, сделанная под впечатлением польско-немецких техно отцов.	64	23	Адна з першых і вельмі старых прац, зробленая пад уражаннем польска-нямецкіх тэхна бацькоў.	Адна з першых і вельмі старых прац, зробленая пад уражаннем польска-нямецкіх тэхна бацькоў.	All she wants is (SCSI device)	Адна з першых і вельмі старых прац, зробленая пад уражаннем польска-нямецкіх тэхна бацькоў.	2018-06-20 10:30:40.417865+00
+594	2014-09-11 08:35:30+00	prohibition	Сухой закон	Другая праца ў стылі. Думаў ўжо не збяру, але любоў да хіп-хопу не прайшла.	Другая праца ў стылі. Думаў ўжо не збяру, але любоў да хіп-хопу не прайшла.	Другая праца ў стылі. Думаў ўжо не збяру, але любоў да хіп-хопу не прайшла.	release/ME04_Manti_Prohibition.mp3	covers/prohibition.jpg	t	MNTE04	LAME 320kbps 44100Hz	1:13:32	1. Vibe TGK - Новая Тема\r\n2. 9Грамм - Как Они Смотрят (при уч. Грубый Ниоткуда)\r\n3. Guf - Фанзона\r\n4. Словетский - Москва\r\n5. ГРОТ - Алкотестер\r\n6. Tony-Gun - Шум Гам\r\n7. Guf - Распорядок дня\r\n8. Bonus RPK - Serce Polski\r\n9. Витя АК - Все МС\r\n10. Триагрутрика - Свободный Стиль\r\n11. Честер (Небро) - Пол страны\r\n12. Brick Bazuka - Не кино (фит Типси Тип)\r\n13. Guf - О лени (фит ОУ74)\r\n14. Murovei - На улицах будущего\r\n15. Рэм Дигга - Давай сделаем так\r\n16. Кровосток - Весна\r\n17. Баста и Словетский - Пойдем покурим на лоджию\r\n18. Дельфин - Любовь\r\n20. Murovei - Теплый дождь\r\n21. Jahmal TGK - Капелька Добра\r\n22. Ассаи - Иду за тобой	t	t	t	The second work in style. I thought I would not compile it, but my love for hip-hop did not go away.	Вторая работа в стиле. Думал уже не соберу, но любовь к хип-хопу не прошла.	The second work in style. I thought I would not compile it, but my love for hip-hop did not go away.	Вторая работа в стиле. Думал уже не соберу, но любовь к хип-хопу не прошла.	Prohibition	Сухой закон	The second work in style. I thought I would not compile it, but my love for hip-hop did not go away.	Вторая работа в стиле. Думал уже не соберу, но любовь к хип-хопу не прошла.	120	49	Другая праца ў стылі. Думаў ўжо не збяру, але любоў да хіп-хопу не прайшла.	Другая праца ў стылі. Думаў ўжо не збяру, але любоў да хіп-хопу не прайшла.	Сухой закон	Другая праца ў стылі. Думаў ўжо не збяру, але любоў да хіп-хопу не прайшла.	2018-06-20 10:30:40.407122+00
+586	2013-04-11 13:30:03+00	alice	Alice in Wonderland	Гэты сэт апісвае настроі і пачуцці, якія пераследуюць мяне ў кожным маім падарожжы ў залюстаркоўе, да людзей у белых халатах.	Гэты сэт апісвае настроі і пачуцці, якія пераследуюць мяне ў кожным маім падарожжы ў залюстаркоўе, да людзей у белых халатах.	Гэты сэт апісвае настроі і пачуцці, якія пераследуюць мяне ў кожным маім падарожжы ў залюстаркоўе, да людзей у белых халатах.	release/M34_Manti_Alice_in_Wonderland.mp3	covers/alice.jpg	t	MNT034	LAME 320kbps 44100Hz	55:12	1. Christopher Young - Portrait of Mr. Boogie\r\n2. Agressor Bunx & Neutral Point - Revelation\r\n3. Maztek - Limber\r\n4. Redco - Ion\r\n5. EastColors - Murderer\r\n6. Dextems - Forsaken\r\n7. BSE, Bulletproof & State of Mind - Roulette (Gridlok remix)\r\n8. Noisia & The Upbeats - Dustup\r\n9. Cruk - Punisher (Original mix)\r\n10. Nouwa - I can faster (Original mix)\r\n11. Break - Condenser\r\n12. Paperclip - Whom I belong\r\n13. Synkro - Acceptance	t	t	t	This set describes the moods and feelings that haunt me in every my journey through the looking-glass, to people in white gowns.	Этот сет описывает настроения и чувства, которые преследуют меня в каждом моем путешествии в зазеркалье, к людям в белых халатах.	This set describes the moods and feelings that haunt me in every my journey through the looking-glass, to people in white gowns.	Этот сет описывает настроения и чувства, которые преследуют меня в каждом моем путешествии в зазеркалье, к людям в белых халатах.	Alice in Wonderland	Alice in Wonderland	This set describes the moods and feelings that haunt me in every my journey through the looking-glass, to people in white gowns.	Этот сет описывает настроения и чувства, которые преследуют меня в каждом моем путешествии в зазеркалье, к людям в белых халатах.	150	41	Гэты сэт апісвае настроі і пачуцці, якія пераследуюць мяне ў кожным маім падарожжы ў залюстаркоўе, да людзей у белых халатах.	Гэты сэт апісвае настроі і пачуцці, якія пераследуюць мяне ў кожным маім падарожжы ў залюстаркоўе, да людзей у белых халатах.	Alice in Wonderland	Гэты сэт апісвае настроі і пачуцці, якія пераследуюць мяне ў кожным маім падарожжы ў залюстаркоўе, да людзей у белых халатах.	2018-06-20 10:30:40.424661+00
+584	2011-10-12 00:00:00+00	nlp	Паліва для танка (НЛП)	Мабыць адзіная на дадзены момант Hip-Hop кампіляцыя ў чыстым выглядзе, зборнік маіх любімых трэкаў.	Мабыць адзіная на дадзены момант Hip-Hop кампіляцыя ў чыстым выглядзе, зборнік маіх любімых трэкаў.	Мабыць адзіная на дадзены момант Hip-Hop кампіляцыя ў чыстым выглядзе, зборнік маіх любімых трэкаў.	release/ME01_Manti_NLP_compilation.mp3	covers/nlp.jpg	t	MNTE01	LAME 320kbps 44100Hz	1:13:57	1. Jahmal TGK - Моя Свобода\r\n2. Витя АК47 feat. Купэ - В тепле 2 яйца\r\n3. РоМД a.k.a. Рэм Дигга - Кто бы это мог быть\r\n4. РоМД a.k.a. Рэм Дигга - Виниловый Рома (Скит)\r\n5. NINTENDO - Криминал\r\n6. Jahmal TGK - Лада плывёт\r\n7. TRIAGRUTRIKA feat. АК47, Восточный Округ, Лёша Маэстро (WB) - Всем\r\n8. КРП a.k.a. Купэ feat. Гуф - Oрел или решка\r\n9. Баста и Guf - Если бы+ (Scratch DJ Mixoid)\r\n10. CENTR - Хип-хоп\r\n11. Guf - Metropolitan mail\r\n12. Кровосток - Сдавать говно\r\n13. Slim - Под пальмами\r\n14. РоМД a.k.a. Рэм Дигга - Мутки\r\n15. CENTR - Сосулька (скит)\r\n16. Витя АК & Tip & Зевс - Че такого\r\n17. TRIAGRUTRIKA feat. Витя АК - Чемодан лавэ\r\n18. Баста и Guf - Не всё потеряно пока (Scratch DJ Tactics)\r\n19. Guf feat. Ба - Дома\r\n20. TRIAGRUTRIKA feat. Лёша Маэстро (WB), Ramzes (ОДБР) - Мой город не спит	t	t	t	Perhaps the only currently Hip-Hop Compilation in its purest form, a collection of my favorite tracks.	Пожалуй единственная на данный момент Hip-Hop компиляция в чистом виде, сборник моих любимых треков.	Perhaps the only currently Hip-Hop Compilation in its purest form, a collection of my favorite tracks.	Пожалуй единственная на данный момент Hip-Hop компиляция в чистом виде, сборник моих любимых треков.	Fuel for the tank (NLP)	Топливо для танка (НЛП)	Perhaps the only currently Hip-Hop Compilation in its purest form, a collection of my favorite tracks.	Пожалуй единственная на данный момент Hip-Hop компиляция в чистом виде, сборник моих любимых треков.	127	39	Мабыць адзіная на дадзены момант Hip-Hop кампіляцыя ў чыстым выглядзе, зборнік маіх любімых трэкаў.	Мабыць адзіная на дадзены момант Hip-Hop кампіляцыя ў чыстым выглядзе, зборнік маіх любімых трэкаў.	Паліва для танка (НЛП)	Мабыць адзіная на дадзены момант Hip-Hop кампіляцыя ў чыстым выглядзе, зборнік маіх любімых трэкаў.	2018-06-20 10:30:40.431669+00
+596	2015-12-02 06:11:32+00	new-horizons	New horizons	Часам, вельмі простыя і бяскрыўдныя ўчынкі адкрываюць нам, да гэтага моманту нябачныя, новыя гарызонты...	Часам, вельмі простыя і бяскрыўдныя ўчынкі адкрываюць нам, да гэтага моманту нябачныя, новыя гарызонты...	Часам, вельмі простыя і бяскрыўдныя ўчынкі адкрываюць нам, да гэтага моманту нябачныя, новыя гарызонты, пасля чаго яшчэ больш хочацца жыць і радавацца гэтаму.	release/M41_Manti_New_horizons.mp3	covers/new-horizons.jpg	t	MNT041	LAME 320kbps 44100Hz	1:14:11	1. Burial - Forgive\r\n2. Baikal - Seagulls In The Sky\r\n3. ODESZA - How Did I Get Here\r\n4. Vanilla - Summer\r\n5. Sunchase - You what\r\n6. Mister Lies – Cleam\r\n7. I-dex - Coral\r\n8. Volfworks - Over The Love\r\n9. M-Koda - Whole Surface\r\n10. Aircolor - Hesea\r\n11. Echo 6 - Escaped From The Ice\r\n12. Meg Myers - Desire (Hucci remix)\r\n14. I-dex - Glacier\r\n13. Bones - Autumn Leaves\r\n15. Krusseldorf - Reboot Jam\r\n16. Synkro - Body Close (feat. Lyves)\r\n17. Jan Amit - Ages\r\n18. Bronchusevenmx - Murder\r\n19. Synkro - Changes	t	t	t	Sometimes, very simple and innocuous actions reveal to us, until this moment invisible, new horizons, after which we even want to live and enjoy it even more.	Иногда, очень простые и безобидные поступки открывают нам, до этого момента невидимые, новые горизонты, после чего еще больше хочется жить и радоваться этому.	Sometimes, very simple and innocuous actions reveal to us, until this moment invisible, new horizons...	Иногда, очень простые и безобидные поступки открывают нам, до этого момента невидимые, новые горизонты...	New horizons	New horizons	Sometimes, very simple and innocuous actions reveal to us, until this moment invisible, new horizons...	Иногда, очень простые и безобидные поступки открывают нам, до этого момента невидимые, новые горизонты...	73	51	Часам, вельмі простыя і бяскрыўдныя ўчынкі адкрываюць нам, да гэтага моманту нябачныя, новыя гарызонты, пасля чаго яшчэ больш хочацца жыць і радавацца гэтаму.	Часам, вельмі простыя і бяскрыўдныя ўчынкі адкрываюць нам, да гэтага моманту нябачныя, новыя гарызонты...	New horizons	Часам, вельмі простыя і бяскрыўдныя ўчынкі адкрываюць нам, да гэтага моманту нябачныя, новыя гарызонты...	2018-06-20 10:30:40.43511+00
+583	2013-03-05 00:00:00+00	reach	Reach out of the Sun	Дзіўны вясновы настрой і куча розных падзей у асабістым, і не толькі, жыцці, прывялі да стварэння гэтай кампіляцыі.	Дзіўны вясновы настрой і куча розных падзей у асабістым, і не толькі, жыцці, прывялі да стварэння гэтай кампіляцыі.	Дзіўны вясновы настрой і куча розных падзей у асабістым, і не толькі, жыцці, прывялі да стварэння гэтай кампіляцыі.\r\nДадзеная праца, нешта сярэдняе паміж серыямі <a href="/blog/hobh-two/">Дом разбітых сэрцаў</a> і <a href="/blog/synthetic/">Synthetic</a>, з першым большай частцы эмацыйна, а з другім па гуку і агульная атмасфера.	release/M33_Manti_Reach_out_to_the_sun.mp3	covers/reach-out-of-the-sun.jpg	t	MNT033	LAME 320kbps 44100Hz	1:05:37	1. Idex - Arc 07\r\n2. Kriipis Tulo - The deep of the night\r\n3. Apparat - Black water\r\n4. June Miller - Coming Closer\r\n5. Ishome - Earth\r\n6. Digital Mystery Tour - The Blooming  \r\n7. Late - Dreams are    \r\n8. Monoceros - Monocrom    \r\n9. Oak - Otaku\r\n10. Monokle - Warm control\r\n11. Electrosoul system - Morning Forest\r\n12. Synkro - Spirals\r\n13. Nanobyte - Lost time\r\n14. Monolake - Television tower	t	t	t	Strange spring mood and a lot of different events in my personal life, led to the creation of this compilation.\r\nThis work, that somewhere between series <a href="/blog/hobh-two/">House of broken hearts</a> and <a href="/blog/synthetic/">Synthetic</a>, with the first is mostly emotional, and the second for the sound and the overall atmosphere.	Странные весенние настроения и куча различных событий в личной, и не только, жизни привели к созданию этой компиляции.\r\nДанная работа, что-то среднее между сериями <a href="/blog/hobh-two/">Дом разбитых сердец</a> и <a href="/blog/synthetic/">Synthetic</a>, с первым по-большей части эмоционально, а со вторым по звуку и общей атмосфере...	Strange spring mood and a lot of different events in my personal life, led to the creation of this compilation.	Странные весенние настроения и куча различных событий в личной, и не только, жизни, привели к созданию этой компиляции.	Reach out of the Sun	Reach out of the Sun	Strange spring mood and a lot of different events in my personal life, led to the creation of this compilation.	Странные весенние настроения и куча различных событий в личной, и не только, жизни привели к созданию этой компиляции.	170	38	Дзіўны вясновы настрой і куча розных падзей у асабістым, і не толькі, жыцці, прывялі да стварэння гэтай кампіляцыі.\r\nДадзеная праца, нешта сярэдняе паміж серыямі <a href="/blog/hobh-two/">Дом разбітых сэрцаў</a> і <a href="/blog/synthetic/">Synthetic</a>, з першым большай частцы эмацыйна, а з другім па гуку і агульная атмасфера.	Дзіўны вясновы настрой і куча розных падзей у асабістым, і не толькі, жыцці, прывялі да стварэння гэтай кампіляцыі.	Reach out of the Sun	Дзіўны вясновы настрой і куча розных падзей у асабістым, і не толькі, жыцці, прывялі да стварэння гэтай кампіляцыі.	2018-06-20 10:30:40.428014+00
+600	2016-10-17 14:32:52+00	litl	LITL	Litl - рэкурсіўны акронім для "I Love Terry Lee". Для ўсіх, хто любіць гэтага музыку, як люблю яго я.	Litl - рэкурсіўны акронім для "I Love Terry Lee". Для ўсіх, хто любіць гэтага музыку, як люблю яго я.	Litl - рэкурсіўны акронім для "I Love Terry Lee". Для ўсіх, хто любіць гэтага музыку, як люблю яго я.	release/MR01_Manti_LITL.mp3	covers/litl.jpg	t	MR001	LAME 320kbps 44100Hz	58:38	All tracks written by Terry Lee Brown Junior\r\n\r\n1. Smugglers\r\n2. Gitane\r\n3. Electric avenue\r\n4. Soul digits\r\n5. Baltimore (Dub mix)\r\n6. Under pressure\r\n7. Home\r\n8. Chatterbox\r\n9. Bohemian life (Dub mix)\r\n10. Delightful encounter	t	t	t	LITL - recursive acronym for "I Love Terry Lee". For all who loves this musician as I love it.	LITL - рекурсивный акроним для «I Love Terry Lee». Для всех, кто любит этого музыканта, как люблю его я.	LITL - recursive acronym for "I Love Terry Lee". For all who loves this musician as I love it.	LITL - рекурсивный акроним для «I Love Terry Lee». Для всех, кто любит этого музыканта, как люблю его я.	LITL	LITL	LITL - recursive acronym for "I Love Terry Lee". For all who loves this musician as I love it.	LITL - рекурсивный акроним для «I Love Terry Lee». Для всех, кто любит этого музыканта, как люблю его я.	21	55	Litl - рэкурсіўны акронім для "I Love Terry Lee". Для ўсіх, хто любіць гэтага музыку, як люблю яго я.	Litl - рэкурсіўны акронім для "I Love Terry Lee". Для ўсіх, хто любіць гэтага музыку, як люблю яго я.	LITL	Litl - рэкурсіўны акронім для "I Love Terry Lee". Для ўсіх, хто любіць гэтага музыку, як люблю яго я.	2018-06-20 10:30:40.438533+00
+580	2012-06-01 00:00:00+00	progress	Progress R-7A	Я не асоба люблю Брэйкс, але калі гэтая музыка суправаджаецца прагрэсіўнай атмасферай - атрымліваюцца проста цудоўныя рэчы.	Я не асоба люблю Брэйкс, але калі гэтая музыка суправаджаецца прагрэсіўнай атмасферай - атрымліваюцца проста цудоўныя рэчы.	Я не асоба люблю Брэйкс, але калі гэтая музыка суправаджаецца прагрэсіўнай атмасферай - атрымліваюцца проста цудоўныя рэчы.	release/M28_Manti_Progress_R-7A_mix.mp3	covers/progress_r-7a.jpg	t	MNT028	LAME 320kbps 44100Hz	56:18	1. Abdomen Burst - Lullaby (Original Mix)\r\n2. Jamie Stevens - The Night Before (Momu Remix)\r\n3. Rhino Drum - Underground Sound (Fretwell Remix) \r\n4. Neo - Aura (Cosmonaut-Rework)\r\n5. Pilot - Dilema (Plastic Shell Remix)\r\n6. Pete Gawtry - It\\'s Life (Wrecked Angle Remix)\r\n7. Plastic Shell - Hard Way (Original Mix) \r\n8. Cosmonaut feat. Мумий Троль - Иди, я буду\r\n9. Shiloh - Dream On (Original Mix)\r\n10. Pinkbox Special - Nice Guys Finish Last (Original Mix)	t	t	t	I'm not particularly fond of Breaks, but when this music is accompanied by a progressive atmosphere - it turns out simply unmatched things.	Я не особо люблю Брейкс, но когда эта музыка сопровождается прогрессив атмосферой - получаются просто бесподобные вещи.	I'm not particularly fond of Breaks, but when this music is accompanied by a progressive atmosphere - it turns out simply unmatched things.	Я не особо люблю Брейкс, но когда эта музыка сопровождается прогрессив атмосферой - получаются просто бесподобные вещи.	Progress R-7A	Progress R-7A	I'm not particularly fond of Breaks, but when this music is accompanied by a progressive atmosphere - it turns out simply unmatched things.	Я не особо люблю Брейкс, но когда эта музыка сопровождается прогрессив атмосферой - получаются просто бесподобные вещи.	114	35	Я не асоба люблю Брэйкс, але калі гэтая музыка суправаджаецца прагрэсіўнай атмасферай - атрымліваюцца проста цудоўныя рэчы.	Я не асоба люблю Брэйкс, але калі гэтая музыка суправаджаецца прагрэсіўнай атмасферай - атрымліваюцца проста цудоўныя рэчы.	Progress R-7A	Я не асоба люблю Брэйкс, але калі гэтая музыка суправаджаецца прагрэсіўнай атмасферай - атрымліваюцца проста цудоўныя рэчы.	2018-06-20 10:30:40.441924+00
+548	2005-08-08 00:00:00+00	insomnia	Insomnia	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	release/M01_Manti_Insomnia_mix.mp3	covers/insomnia.jpg	t	MNT001	LAME 192kbps 44100Hz	79:31	1. Http - Звезды небесные\r\n2. I/dex - Zeel\r\n3. Pole 3 - Silbefisch\r\n4. Deep-z - Returning (Dedicated to Fula)\r\n5. I/dex - Ksren\r\n6. Plastikman - Disconnect    \r\n7. Akvalangist - Adpcm\r\n8. Fax - 20w\r\n9. David Alvarado - Aire  \r\n10. Fax - Aslip\r\n11. Deluge - Departure\r\n12. Pole 3 - Uberfahrt\r\n13. Taylor Deupree - Snow-Sand	t	t	t	The set from which everything started, was first recorded in 2004, since then nothing has changed, except for the sound quality - the set was re-released in 2007 just for the sake of this goal...	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	The set from which everything started, was first recorded in 2004, since then nothing has changed, except for the sound quality - the set was re-released in 2007 just for the sake of this goal...	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	Insomnia	Insomnia	The set from which everything started, was first recorded in 2004, since then nothing has changed, except for the sound quality - the set was re-released in 2007 just for the sake of this goal...	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	67	1	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	Insomnia	Сет с которого все и началось, впервые был записан в 2004 году, с тех пор собственно ничего не изменилось, кроме качества звука - сет был переигран в 2007 только ради этой цели...	2018-06-20 10:30:40.448646+00
+571	2007-09-10 00:00:00+00	janaca-express	Janaca express	Мікс, які складаецца з двух частак, каждая з якіх адрозніваецца як эмацыйна, так тэхнічна і стылістычна.	Мікс, які складаецца з двух частак, каждая з якіх адрозніваецца як эмацыйна, так тэхнічна і стылістычна.	Мікс, які складаецца з двух частак, каждая з якіх адрозніваецца як эмацыйна, так тэхнічна і стылістычна. У той жа час увесь матэрыял падтрымлівае ідэю трансавай псіхадэлічнай музыкі, хоць і не так глыбока, як класічны псай.\r\nБудзе асабліва цікава тым, хто не любіць класічны, даволі жорсткі псай, але ў той жа час цікавіцца даволі хуткімі формамі (каля 145bpm).	release/M06_Manti_Janaca_express_mix_01.mp3	covers/janaca.jpg	t	MNT006	LAME 192kbps 44100Hz	1:00:39	1. Silicon Sound feat. Psychotrop - Departure\r\n2. Silent Sphere - Violet visions  \r\n3. Electro Sun - High cue  \r\n4. Astrix - Tweaky  \r\n5. Psypsiq Jicuri - A rain of hope in the galaxy  \r\n6. Xerox & Illumination - Temporary insanity  \r\n7. Astrix - Techno widows  \r\n8. Delerious - Dynamic force\r\n9. Astrix feat. Michele Adamson - Closer to heaven	t	t	t	Mix, consisting of two parts, each differs emotionally, technically and stylistically. At the same time, all the material supports the idea of Trance music, although not as deep as classical Psy.\r\nIt will be especially interesting for those who do not like classical, rather cruel Psy, but at the same time are interested in fairly fast forms (about 145bpm).	Микс, состоящий из двух частей, каждая из которых отличается как эмоционально, так технически и стилистически. В то же время весь материал поддерживает идею трансовой психоделической музыки, хотя и не так глубоко, как классический псай.\r\nБудет особенно интесно тем, кто не любит классический, довольно жестокий псай, но в то же время интересуется довольно быстрыми формами (около 145bpm).	Mix, consisting of two parts, each differs emotionally, technically and stylistically.	Микс, состоящий из двух частей, какждая из которых отличается как эмоционально, так технически и стилистически.	Janaca express	Janaca express	Mix, consisting of two parts, each differs emotionally, technically and stylistically.	Микс, состоящий из двух частей, какждая из которых отличается как эмоционально, так технически и стилистически.	65	26	Мікс, які складаецца з двух частак, каждая з якіх адрозніваецца як эмацыйна, так тэхнічна і стылістычна. У той жа час увесь матэрыял падтрымлівае ідэю трансавай псіхадэлічнай музыкі, хоць і не так глыбока, як класічны псай.\r\nБудзе асабліва цікава тым, хто не любіць класічны, даволі жорсткі псай, але ў той жа час цікавіцца даволі хуткімі формамі (каля 145bpm).	Мікс, які складаецца з двух частак, каждая з якіх адрозніваецца як эмацыйна, так тэхнічна і стылістычна.	Janaca express	Мікс, які складаецца з двух частак, каждая з якіх адрозніваецца як эмацыйна, так тэхнічна і стылістычна.	2018-06-20 10:30:40.451746+00
+565	2008-11-08 00:00:00+00	chillhouse-live	Chillhouse live	Практычна класічны хаус з некаторымі прымешкамі дып і тэч нотак. Запісаны "ужывую" ў клубе ХХ стагоддзе.	Практычна класічны хаус з некаторымі прымешкамі дып і тэч нотак. Запісаны "ужывую" ў клубе ХХ стагоддзе.	Практычна класічны хаус з некаторымі прымешкамі дып і тэч нотак. Запісаны "ужывую" ў клубе ХХ стагоддзе.	release/M12_Manti_Chillhouse_live.mp3	covers/chillhouse.jpg	t	MNT012	LAME 320kbps 44100Hz	68:44		t	t	t	Almost a classic house with some impurities Deepa and tech notes. Recorded "live" in the club "XX century".	Практически классический хаус с некоторыми примесями дипа и теч ноток. Записан "вживую" в клубе ХХ век.	Almost a classic house with some impurities Deepa and tech notes. Recorded "live" in the club "XX century".	Практически классический хаус с некоторыми примесями дипа и теч ноток. Записан "вживую" в клубе ХХ век.	Chillhouse live	Chillhouse live	Almost a classic house with some impurities Deepa and tech notes. Recorded "live" in the club "XX century".	Практически классический хаус с некоторыми примесями дипа и теч ноток. Записан "вживую" в клубе ХХ век.	54	20	Практычна класічны хаус з некаторымі прымешкамі дып і тэч нотак. Запісаны "ужывую" ў клубе ХХ стагоддзе.	Практычна класічны хаус з некаторымі прымешкамі дып і тэч нотак. Запісаны "ужывую" ў клубе ХХ стагоддзе.	Chillhouse live	Практычна класічны хаус з некаторымі прымешкамі дып і тэч нотак. Запісаны "ужывую" ў клубе ХХ стагоддзе.	2018-06-20 10:30:40.445428+00
+567	2012-08-25 00:00:00+00	cote-d-azur	Cote d'Azur promo	Гадовы, гадовы мікс, які лепш слухаць стоячы на пяску і удыхаючы пах салёнага марскога паветра.	Гадовы, гадовы мікс, які лепш слухаць стоячы на пяску і удыхаючы пах салёнага марскога паветра.	Гадовы, гадовы мікс, які лепш слухаць стоячы на пяску і удыхаючы пах салёнага марскога паветра. Многае навеяна летнім надвор'ем, оўпэнами і людзьмі, якія мяне атачалі ўвесь гэты час.\r\nПа сутнасці сваёй з'яўляецца зборкай лепшых трэкаў з двух маіх розных кампілоў за летні перыяд. Так што слухаем і атрымліваем асалоду.	release/M30_Manti_Cote_d-Azur_(Summer-Autumn-12_promo).mp3	covers/cote-d-azur.jpg	t	MNT030	LAME 320kbps 44100Hz	1:00:38	1. Strict Border - Reboot Me (Hermanez remix) - Suara\r\n2. Danny Serrano & Westboy - Bubblegun - Suara\r\n3. Juliet Sikora, Tube & Berger - Jam Word Up (Original mix) - Kittball\r\n4. MSMS - Hold it (Original mix) - Plastic city\r\n5. Marco Bailey - Rubber band - Bedrock\r\n6. Piek - Burn Baby Burn (Siwell Remix) - Sphera\r\n7. Taster Peter, Phunx - Jack This Tune (Mario Ochoa remix) - Bitten\r\n8. Tiger Stripes - Give You Up - Toolroom\r\n9. Richard Grey - You are my high (Federico Scavo remix) - Tiger\r\n10. Marco Bailey - Jungle laps - Bedrock\r\n11. Oscar Barila and Maiki - Debbie white (Simone Tavazzi remix) - Kostbar\r\n12. Andrew Bayer - Gaff's Eulogy - Anjunadeep	t	t	t	Summer, summer mix, which is better to listen standing on the sand and inhaling the smell of salty sea air. Much is inspired by the summer weather, openairs and people who surrounded me all this time.\r\nIn essence, it is the assembly of the best tracks from my two different compilations for the summer period. So we listen and enjoy.	Летний, летний микс, который лучше слушать стоя на песке и вдыхая запах соленого морского воздуха. Многое навеяно летней погодой, оупенами и людьми, которые меня окружали все это время.\r\nПо сути своей является сборкой лучших треков из двух моих различных компилов за летний период. Так что слушаем и наслаждаемся.	Summer, summer mix, which is better to listen standing on the sand and inhaling the smell of salty sea air.	Летний, летний микс, который лучше слушать стоя на песке и вдыхая запах соленого морского воздуха.	Cote d'Azur promo	Cote d'Azur promo	Summer, summer mix, which is better to listen standing on the sand and inhaling the smell of salty sea air.	Летний, летний микс, который лучше слушать стоя на песке и вдыхая запах соленого морского воздуха.	125	22	Гадовы, гадовы мікс, які лепш слухаць стоячы на пяску і удыхаючы пах салёнага марскога паветра. Многае навеяна летнім надвор'ем, оўпэнами і людзьмі, якія мяне атачалі ўвесь гэты час.\r\nПа сутнасці сваёй з'яўляецца зборкай лепшых трэкаў з двух маіх розных кампілоў за летні перыяд. Так што слухаем і атрымліваем асалоду.	Гадовы, гадовы мікс, які лепш слухаць стоячы на пяску і удыхаючы пах салёнага марскога паветра.	Cote d'Azur promo	Гадовы, гадовы мікс, які лепш слухаць стоячы на пяску і удыхаючы пах салёнага марскога паветра.	2018-06-20 10:30:40.458193+00
+587	2013-05-18 17:11:01+00	silence	Aweary silence	Інтэлігентны і прыгожы вакальны хаус для тых хто любіць мякчэй)\r\nУсіх з надыходзячым летам!	Інтэлігентны і прыгожы вакальны хаус для тых хто любіць мякчэй)\r\nУсіх з надыходзячым летам!	Інтэлігентны і прыгожы вакальны хаус для тых хто любіць мякчэй)\r\nУсіх з надыходзячым летам!	release/M35_Manti_Aweary_silence.mp3	covers/silence.jpg	t	MNT035	LAME 320kbps 44100Hz	1:01:37	0. Intro - Aweary silence\r\n1. Kolombo - Don't be shy (Original mix)\r\n2. Maxxi Soundsystem feat. Name One - Regrets we have no use for (Original mix)\r\n3. Dana Bergquist & Peder G - Survive (Original mix)\r\n4. Jimmy Vlach - Just walking (Original mix)\r\n5. Nora En Pure - You make me float (Calippo remix)\r\n6. Agoria - Baboul hair cuttin (Gui Boratto remix)\r\n7. GusGus - Over\r\n8. P.A.C.O. And Tube & Berger - Greyjoy (Original mix)\r\n9. Terry Grant, MSMS - The killing kind (Original mix)\r\n10. Kasper Bjorke feat. Laid Back - Bohemian soul (Adana Twins On a Cloudy Day remix)\r\n11. Tube & Berger - Long roads (Original mix)\r\n12. Phaeleh feat. Anneka - Memories	t	t	t	Intelligent and beautiful vocal house for those who like to softer)\r\nAll congratulations on the coming summer!	Интеллигентный и красивый вокальный хаус для тех кто любит помягче)\r\nВсех с наступающим летом!	Intelligent and beautiful vocal house for those who like to softer)\r\nAll congratulations on the coming summer!	Интеллигентный и красивый вокальный хаус для тех кто любит помягче)\r\nВсех с наступающим летом!	Aweary silence	Aweary silence	Intelligent and beautiful vocal house for those who like to softer)\r\nAll congratulations on the coming summer!	Интеллигентный и красивый вокальный хаус для тех кто любит помягче)\r\nВсех с наступающим летом!	166	42	Інтэлігентны і прыгожы вакальны хаус для тых хто любіць мякчэй)\r\nУсіх з надыходзячым летам!	Інтэлігентны і прыгожы вакальны хаус для тых хто любіць мякчэй)\r\nУсіх з надыходзячым летам!	Aweary silence	Інтэлігентны і прыгожы вакальны хаус для тых хто любіць мякчэй)\r\nУсіх з надыходзячым летам!	2018-06-20 10:30:40.46222+00
+590	2014-01-15 16:52:33+00	power-rangers	Power rangers	Напэўна самы мой вясёлы мікс. Сабраны з лепшых драмавых трэкаў з якімі мне ўдалося сустрэцца за апошнія 5 гадоў.	Напэўна самы мой вясёлы мікс. Сабраны з лепшых драмавых трэкаў з якімі мне ўдалося сустрэцца за апошнія 5 гадоў.	Напэўна самы мой вясёлы мікс. Сабраны з лепшых драмавых трэкаў з якімі мне ўдалося сустрэцца за апошнія 5 гадоў.\r\nНіякай жэсці, толькі лета і пазітыў ...	release/ME03_Manti_Power_rangers.mp3	covers/power-rangers.jpg	t	MNTEX003	LAME 320kbps 44100Hz	51:20	1. Brookes Brothers - Tear you down\r\n2. Artificial Intelligence Ft. Steo - You can dream\r\n3. Metrik - Moving on\r\n4. Sonic & Silver - Rocket launcher (VIP remix)\r\n5. Capital Cities - Safe & sound (NuLogic remix)\r\n6. State Of Mind feat. 3pm - Somebody stop me (Smooth remix)\r\n7. Benny Page feat. UK Apache - Nuttah story\r\n8. Aphrodite - Stalker\r\n9. L Plus - The Price\r\n10. Danny Bird - We can have it all (Sigma remix)\r\n11. Skeets feat. Jeston Langland - This moment (Darwin remix)\r\n12. Rawtekk - Snowflakes (Original mix)	t	t	t	Probably my most cheerful mix. Compiled from the best tracks that I was able to hear for the last 5 years.\r\nNo hard sound, only summer vibes and positive feelings...	Наверное самый мой веселый микс. Собран из лучших драмовых треков с которыми мне удалось повстречаться за последние 5 лет. \r\nНикакой жести, только лето и позитив...	Probably my most cheerful mix. Compiled from the best tracks that I was able to hear for the last 5 years.	Наверное самый мой веселый микс. Собран из лучших драмовых треков с которыми мне удалось повстречаться за последние 5 лет.	Power rangers	Power rangers	Probably my most cheerful mix. Compiled from the best tracks that I was able to hear for the last 5 years.	Наверное самый мой веселый микс. Собран из лучших драмовых треков с которыми мне удалось повстречаться за последние 5 лет.	124	45	Напэўна самы мой вясёлы мікс. Сабраны з лепшых драмавых трэкаў з якімі мне ўдалося сустрэцца за апошнія 5 гадоў.\r\nНіякай жэсці, толькі лета і пазітыў ...	Напэўна самы мой вясёлы мікс. Сабраны з лепшых драмавых трэкаў з якімі мне ўдалося сустрэцца за апошнія 5 гадоў.	Power rangers	Напэўна самы мой вясёлы мікс. Сабраны з лепшых драмавых трэкаў з якімі мне ўдалося сустрэцца за апошнія 5 гадоў.	2018-06-20 10:30:40.455099+00
+591	2014-02-09 13:06:29+00	space	Space is Ours	Калі я чую такую музыку, - адказала яна, - мне бывае цяжка паверыць, што свет матэрыяльны, што ёсць толькі вось гэта...	Калі я чую такую музыку, - адказала яна, - мне бывае цяжка паверыць, што свет матэрыяльны, што ёсць толькі вось гэта...	Калі я чую такую музыку, - адказала яна, - мне бывае цяжка паверыць, што свет матэрыяльны, што ёсць толькі вось гэта, - узмахам рукі яна паказала на Кубрык і ўсе тыя матэрыяльныя аб'екты, якія іх атачалі. - Таму што ёсць нешта, чаго мы не ведаем, але што захоўваецца ў музыцы. Гэта ўсё ж такі ёсць. Гэта можна адчуць.	release/M37_Manti_Space_is_ours.mp3	covers/space-is-ours.jpg	t	MNT037	LAME 320kbps 44100Hz	58:51	1. Sub Mass - Dog eat dog\r\n2. Nscape - Lost head\r\n3. Dextems - The voyager (original mix)\r\n4. Nphonix & Counterstrike - Maverick\r\n5. D_iolax - Optics (Original mix)\r\n6. Villem - Ascent (with Fields And Mako)\r\n7. Inward Phase - Vicious march\r\n8. Teddy Killerz - Violence\r\n9. Nphonix & Paimon & Place 2b - Deadly funk\r\n10. Teddy Killerz & Jade - Blackout (feat. 2Shy)\r\n11. Paperclip - Jupiter in danger (Original mix)\r\n12. Dextems - Arctic sound\r\n13. Emperor - She said\r\n14. B Cloud - Aside a bustle (Original mix)	t	t	t	When I hear such music, - she answered, - it's hard for me to believe that the world is material, that there is only this, - she pointed to the cockpit and all the material objects that surrounded them with a wave of her hand. - Because there is something that we do not know, but what is imprinted in the music. It's still there. It can be felt.	Когда я слышу такую музыку, – ответила она, – мне бывает трудно поверить, что мир материален, что есть только вот это, – взмахом руки она указала на кубрик и все те материальные объекты, которые их окружали. – Потому что есть что-то, чего мы не знаем, но что запечатлевается в музыке. Это все-таки есть. Это можно почувствовать.	When I hear such music, - she answered, - it's hard for me to believe that the world is material, that there is only this...	Когда я слышу такую музыку, – ответила она, – мне бывает трудно поверить, что мир материален, что есть только вот это...	Space is Ours	Space is Ours	When I hear such music, - she answered, - it's hard for me to believe that the world is material, that there is only this...	Когда я слышу такую музыку, – ответила она, – мне бывает трудно поверить, что мир материален, что есть только вот это...	134	46	Калі я чую такую музыку, - адказала яна, - мне бывае цяжка паверыць, што свет матэрыяльны, што ёсць толькі вось гэта, - узмахам рукі яна паказала на Кубрык і ўсе тыя матэрыяльныя аб'екты, якія іх атачалі. - Таму што ёсць нешта, чаго мы не ведаем, але што захоўваецца ў музыцы. Гэта ўсё ж такі ёсць. Гэта можна адчуць.	Калі я чую такую музыку, - адказала яна, - мне бывае цяжка паверыць, што свет матэрыяльны, што ёсць толькі вось гэта...	Space is Ours	Калі я чую такую музыку, - адказала яна, - мне бывае цяжка паверыць, што свет матэрыяльны, што ёсць толькі вось гэта...	2018-06-20 10:30:40.468316+00
+552	2010-04-18 00:00:00+00	solaris	Solaris	Чацвёрты мікс з серыі Light Synthetic Compilation.	Чацвёрты мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.	Чацвёрты мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>. Амаль год я збіраў і адфільтроўваюць матэрыял з "выключным" гучаннем.\r\nПа традыцыі сэт пабудаваны па любімай схеме "два + тры" (адначасова гучыць больш двух трэкаў), тым самым ўскладняючы і упрыгожваючы "шумавую" карціну.\r\nСэт так названы не выпадкова, інтро - саўндтрэк да галівудскай версіі фільма "Салярыс" Стывена Содэрберга.\r\nСлухайце, медытуйце, атрымлівайце асалоду.	release/M21_Manti_Solaris_mix.mp3	covers/solaris.jpg	t	MNT021	LAME 320kbps 44100Hz	52:44	1. Cliff Martinez - We don't have to think like that anymore\r\n2. Cliff Martinez - First sleep\r\n3. Alva Noto - Xerrox monophaser 1\r\n4. Indo - Pneuma\r\n5. Avec.Berre - Stepdrop\r\n6. Ilpo Vaisanen - Autioitu 1\r\n7. Kassian Troyer - Plant shift\r\n8. Valliam – In samsara\r\n9. Clint Mansell - Stay with me\r\n10. Astrum - Saturn\r\n11. Pinch meets Pavel Ambiont - Poison/Remedy\r\n12. Alva Noto - Xerrox phaser acat 1	t	t	t	The fourth mix from the series <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>. For almost a year I collected and filtered out the material with "exceptional" sound.\r\nBy tradition, the set is built according to the favorite "two + three" scheme (at the same time more than two tracks are played), thereby complicating and decorating the "noise" picture.\r\nSeth is so named not accidentally, intro - the soundtrack to the Hollywood version of the movie "Solaris" by Stephen Soderbergh.\r\nListen, meditate, enjoy.	Четвертый микс из серии <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>. Почти год я собирал и отфильтровывал материал с "исключительным" звучанием.\r\nПо традиции сет построен по любимой схеме "два+три" (одновременно звучит более двух треков), тем самым усложняя и украшая "шумовую" картину.\r\nСет так назван не случайно, интро  - саундтрек к голливудской версии фильма "Солярис" Стивена Содерберга.\r\nСлушайте, медитируйте, наслаждайтесь.	The fourth mix from the series Light Synthetic Compilation.	Четвертый микс из серии Light Synthetic Compilation.	Solaris	Solaris	The fourth mix from the series <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.	Четвертый микс из серии <a href="/tag/lsc/">Light Synthetic Compilation</a>.	72	5	Чацвёрты мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>. Амаль год я збіраў і адфільтроўваюць матэрыял з "выключным" гучаннем.\r\nПа традыцыі сэт пабудаваны па любімай схеме "два + тры" (адначасова гучыць больш двух трэкаў), тым самым ўскладняючы і упрыгожваючы "шумавую" карціну.\r\nСэт так названы не выпадкова, інтро - саўндтрэк да галівудскай версіі фільма "Салярыс" Стывена Содэрберга.\r\nСлухайце, медытуйце, атрымлівайце асалоду.	Чацвёрты мікс з серыі Light Synthetic Compilation.	Solaris	Чацвёрты мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.	2018-06-20 10:30:40.471551+00
+563	2009-05-21 00:00:00+00	basstech	Special mix for Basstech	Сэт запісаны адмыслова для праграмы BASSTECH.	Сэт запісаны адмыслова для праграмы BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>).	Сэт запісаны адмыслова для праграмы BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). Усе трэкі зведзены "ужывую" ў гасцях у Іллі (Dj Hotei), за што яму вялікі дзякуй.\r\nПрактычна ўсе трэкі ўяўляюць сабой класічны нейрафанк, частка трэкаў еўрапейскія (Noisia, Spor), частка расейскія (Marqus, Paperclip).	release/M18_Manti_Special_mix_for_Basstech_(novoeradio.by).mp3	covers/basstech.jpg	t	MNT018	LAME 320kbps 44100Hz	58:42	1. Engage - Im gonna bite you\r\n2. Marqus - Angel  \r\n3. Bes & Flame - Eurofunk  \r\n4. Noisia - Exorcism\r\n5. Skynet - Carbon shock (Noisia remix)      \r\n6. Noisia - Block control  \r\n7. Hightech - GITS  \r\n8. Marqus - Mirage  \r\n9. Paperclip - Shogun  \r\n10. Paperclip - Bearing death  \r\n11. Spor - Supernova  \r\n12. Noisia, Maldini and Vegas - Meditation\r\n13. Quadrant - Rage and rapture	t	t	t	The set was recorded specially for the BASSTECH radio show (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). All tracks are compiled "live" at visit to Ilya (Dj Hotei), for which many thanks to him.\r\nAlmost all tracks are a classical Neurofunk, some tracks are European (Noisia, Spor), part Russian (Marqus, Paperclip).	Сет записан специально для программы BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). Все треки сведены "вживую" в гостях у Ильи (Dj Hotei), за что ему большое спасибо.\r\nПрактически все треки представляют собой классический нейрофанк, часть треков европейский (Noisia, Spor), часть российский (Marqus, Paperclip).	The set was recorded specially for the BASSTECH radio show.	Сет записан специально для программы BASSTECH.	Special mix for Basstech	Special mix for Basstech	The set was recorded specially for the BASSTECH radio show (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>).	Сет записан специально для программы BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>).	80	18	Сэт запісаны адмыслова для праграмы BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). Усе трэкі зведзены "ужывую" ў гасцях у Іллі (Dj Hotei), за што яму вялікі дзякуй.\r\nПрактычна ўсе трэкі ўяўляюць сабой класічны нейрафанк, частка трэкаў еўрапейскія (Noisia, Spor), частка расейскія (Marqus, Paperclip).	Сэт запісаны адмыслова для праграмы BASSTECH.	Special mix for Basstech	Сэт запісаны адмыслова для праграмы BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>).	2018-06-20 10:30:40.465354+00
+578	2011-05-30 00:00:00+00	renaissance	Renaissance promo	Раніцай заўсёды ўстае сонца. Сэт - лагічны працяг папярэдняй працы, пад назвай Trauma.	Раніцай заўсёды ўстае сонца ...\r\nСэт - лагічны працяг папярэдняй працы, пад назвай <a href="/blog/trauma/">Trauma<a>.	Раніцай заўсёды ўстае сонца ...\r\nСэт - лагічны працяг папярэдняй працы, пад назвай <a href="/blog/trauma/">Trauma<a>. У цэлым не стаў  пярэчыць сабе і парушаць свае традыцыі - усё тэхнічна, добры майстарынг, у пачатку патлусцей, у канцы хутчэй.	release/M24_Manti_Renaissanse_(Winter-Spring-12_promo).mp3	covers/renaissanse.jpg	t	MNT024	LAME 320kbps 44100Hz	1:02:53	1. Gravediggazz - Trippin (intro)\r\n2. Allied - N-sphere  \r\n3. Asphexia - Profusion  \r\n4. Inside Info - Metronome\r\n5. Encode - None  \r\n6. Malk - Made in sikness\r\n7. Nphonix - False flag    \r\n8. Receptor - Lullaby  \r\n9. Int Company - Uppi    \r\n10. Redject - 7th sorrow\r\n11. Hector - Suddenly (tribute to E.Letov)  \r\n12. Sintax - Metro    \r\n13. Switch Technique - Metro\r\n14. Bop - As is	t	t	t	In the morning the sun always rises...\r\nSet is a logical continuation of the previous work, called <a href="/blog/trauma/">Trauma<a>. In general, I did not contradict myself and violate my traditions - all technically, good mastering, at the beginning more fat, at the end a bit quickly.	Утром всегда встает солнце...\r\nСет - логическое продолжение предыдущей работы, под названием <a href="/blog/trauma/">Trauma<a>. В целом не стал перечить себе и нарушать свои традиции - все технично, хороший мастеринг, в начале пожирнее, в конце побыстрее.	In the morning the sun always rises. Set is a logical continuation of the previous work, called Trauma.	Утром всегда встает солнце. Сет - логическое продолжение предыдущей работы, под названием Trauma.	Renaissance promo	Renaissance promo	In the morning the sun always rises...\r\nSet is a logical continuation of the previous work, called <a href="/blog/trauma/">Trauma<a>.	Утром всегда встает солнце...\r\nСет - логическое продолжение предыдущей работы, под названием <a href="/blog/trauma/">Trauma</a>.	114	33	Раніцай заўсёды ўстае сонца ...\r\nСэт - лагічны працяг папярэдняй працы, пад назвай <a href="/blog/trauma/">Trauma<a>. У цэлым не стаў  пярэчыць сабе і парушаць свае традыцыі - усё тэхнічна, добры майстарынг, у пачатку патлусцей, у канцы хутчэй.	Раніцай заўсёды ўстае сонца. Сэт - лагічны працяг папярэдняй працы, пад назвай Trauma.	Renaissance promo	Раніцай заўсёды ўстае сонца ...\r\nСэт - лагічны працяг папярэдняй працы, пад назвай <a href="/blog/trauma/">Trauma<a>.	2018-06-20 10:30:40.474399+00
+601	2017-04-12 04:14:16+00	shining	Shining	Таму скрозь сонца, свецяць зоркі...	Таму скрозь сонца, свецяць зоркі...	Таму скрозь сонца, свецяць зоркі...	release/M43_Manti_Shining.mp3	covers/shining.jpg	t	MNT041	LAME 320kbps 44100Hz	1:05:14	1. Sangam - Purple lights\r\n2. Ed Sheeran - I see fire (Kalev remix)\r\n3. Tyoma - 1st\r\n4. Onuka - Time\r\n5. Wildes - Bare\r\n6. Emancipator - Greenland\r\n7. Flume feat. Anthony For Cleopatra - Sleepless\r\n8. Seven Lions and Echos - Cold skin\r\n9. ZES - Do it again\r\n10. CloZee - Closed circle\r\n11. Bop - Blurred Memories (feat. Synkro)\r\n12. Home - Resonance\r\n13. Ishome - Ken Tavr\r\n14. ZD - Breathe\r\n15. Owsey - You're always young in my dreams\r\n16. Skrillex feat. Njomza - Pretty bye bye\r\n17. Different Sleep feat. Soleman - Drive me crazy\r\n18. Koda - The last stand\r\n19. Yume and VarCity - Not alone	t	t	t	Therefore, through the sun, the stars is shining...	Поэтому сквозь солнце, светят звезды...	Therefore, through the sun, the stars is shining...	Поэтому сквозь солнце, светят звезды...	Shining	Shining	Therefore, through the sun, the stars is shining...	Поэтому сквозь солнце, светят звезды...	25	56	Таму скрозь сонца, свецяць зоркі...	Таму скрозь сонца, свецяць зоркі...	Shining	Таму скрозь сонца, свецяць зоркі...	2018-06-20 10:30:40.477284+00
+585	2013-01-18 00:00:00+00	my-friend-friday	My friend Friday	Спантанны пятніцкі мікс.	Спантанны пятніцкі мікс.	Спантанны пятніцкі мікс.	release/ME02_Manti_My_Friend_Friday.mp3	covers/friday.jpg	t	MNTE02	LAME 320kbps 44100Hz	37:15	1. Milton Jackson - Breathe (David Labeij remix)\r\n2. Lee Van Dowski - Not A Remix (Original mix)\r\n3. DJ Smilk, Juan Ddd - Dollar bills\r\n4. The Messenger - Preachin\\' Out\r\n5. Luca M & Just2 - Peak Week (Original mix)\r\n6. Per Hammar, Frida Fralk - Get that\r\n7. Oscar Barila - Yoda (Original mix)\r\n8. Tube & Berger - Fog Head (Louis Osbourne & Jamie Anderson remix)	t	t	t	Spontaneous Friday mix.	Спонтанный пятничный микс.	Spontaneous Friday mix.	Спонтанный пятничный микс.	My friend Friday	My friend Friday	Spontaneous Friday mix.	Спонтанный пятничный микс.	141	40	Спантанны пятніцкі мікс.	Спантанны пятніцкі мікс.	My friend Friday	Спантанны пятніцкі мікс.	2018-06-20 10:30:40.480331+00
+592	2014-02-15 02:51:17+00	lets-go-dancing	Let's go dancing	Красивый и мелодичный сет с большим количеством красивого вокала.	Красивый и мелодичный сет с большим количеством красивого вокала.	Красивый и мелодичный сет с большим количеством красивого вокала.	release/M38_Manti_Lets_go_dancing.mp3	covers/lets-go-dancing.jpg	t	MNT038	LAME 320kbps 44100Hz	53:49	1. Gui Boratto - Too late (Original mix)\r\n2. Pleasurekraft, Jaceo, Vedic - Chloroformd (Original mix)\r\n3. John Tejada - Elsewhere (Original mix)\r\n4. Mr. V & Chris Minus - The end (Original Mix)\r\n5. Noir, Lomez, Atnarko feat. Symbol - Lost again (Raw club cut)\r\n6. Kolombo, Sammy W & Alex E - Play ur chick! (Original mix)\r\n7. Mahmut Orhan - Without you (Aytac Kart remix)\r\n8. Osunlade - Dionne (Original mix)\r\n9. John Tejada - We can pretend (Original mix)\r\n10 Tiga, Audion - Let's go dancing (Maya Jane Coles Dancing in the deep remix)\r\n11 Dave DK - Nakai pop (Ambient Version)	t	t	t	A beautiful and melodic set with lots of beautiful vocals.	Красивый и мелодичный сет с большим количеством красивого вокала.	A beautiful and melodic set with lots of beautiful vocals.	Красивый и мелодичный сет с большим количеством красивого вокала.	Let's go dancing	Let's go dancing	A beautiful and melodic set with lots of beautiful vocals.	Красивый и мелодичный сет с большим количеством красивого вокала.	128	47	Красивый и мелодичный сет с большим количеством красивого вокала.	Красивый и мелодичный сет с большим количеством красивого вокала.	Let's go dancing	Красивый и мелодичный сет с большим количеством красивого вокала.	2018-06-20 10:30:40.486591+00
+582	2012-11-27 00:00:00+00	stockholm-syndrome-backset	Stockholm syndrome - Backset	Працяг працы над сабой. Другі мікс з серыі "Stockholm syndrome".	Працяг працы над сабой. Другі мікс з серыі <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a>.	Працяг працы над сабой. Другі мікс з серыі <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a>. Першую працу можна знайсці тут <a href="/stockholm-syndrome/">Manti - Stockholm syndrome</a>.	release/M32_Manti_Stockholm_syndrome_Backset.mp3	covers/stockholm-syndrome-backset.jpg	t	MNT032	LAME 320kbps 44100Hz	1:00:01	1. Tube & Berger & Milan Euringer - Lovebreak (Original mix)\r\n2. Shades Of Gray - Crazee\r\n3. Layo & Bushwaka feat. Kim Ann Foxman - Cant hurt you (Original mix)\r\n4. Marc Romboy - More Muzik (Original mix)\r\n5. Darling Farah - Body (Jimmy Edgar remix)\r\n6. Tom Novy - Walking On the Moog (caTekk Remix)\r\n7. Kink - E79\r\n8. Norm - Foco (Paul Jey remix)\r\n9. Takt Tick - Gloomy Dawn (Original mix)\r\n10. Danny Daze and Matches - If this\r\n11. Vas Floyd - Deep house soul (Vas Floyd & Mr Jones strings mix)\r\n12. Terry Lee Brown Junior - Delightful encounter	t	t	t	Continuation of work on yourself. The second mix from the <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a> series. The first work can be found here <a href="/stockholm-syndrome/">Manti - Stockholm syndrome</a>.	Продолжение работы над собой. Второй микс из серии <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a>. Первую работу можно найти здесь <a href="/stockholm-syndrome/">Manti - Stockholm syndrome</a>.	Continuation of work on yourself. The second mix from the "Stockholm syndrome" series.	Продолжение работы над собой. Второй микс из серии "Stockholm syndrome".	Stockholm syndrome - Backset	Stockholm syndrome - Backset	Continuation of work on yourself. The second mix from the <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a> series.	Продолжение работы над собой. Второй микс из серии <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a>.	115	37	Працяг працы над сабой. Другі мікс з серыі <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a>. Першую працу можна знайсці тут <a href="/stockholm-syndrome/">Manti - Stockholm syndrome</a>.	Працяг працы над сабой. Другі мікс з серыі "Stockholm syndrome".	Stockholm syndrome - Backset	Працяг працы над сабой. Другі мікс з серыі <a href="/blog/?tag=stockholm-syndrome">Stockholm syndrome</a>.	2018-06-20 10:30:40.531266+00
+581	2012-06-30 00:00:00+00	enzo-cafe	Enzo cafe live	Жывы мікс для Enzo cafe (Мінск, Беларусь)	Жывы мікс для Enzo cafe (Мінск, Беларусь)	Жывы мікс для Enzo cafe (Мінск, Беларусь)	release/M29_Manti_Enzo_Cafe_live.mp3	covers/enzo.jpg	t	MNT029	LAME 320kbps 44100Hz	1:01:13	1. La Fleur - Ten Fingers (Original Mix) \r\n2. Boss Axis - Cologne (Rodriguez Jr. remix)\r\n3. Tiefschwarz - I can\\'t resist (feat. Dave Aju)\r\n4. Sebo K - Mr. Duke (Alternative version)\r\n5. Martin Landsky - Morning Caffeine (Organ Dub)\r\n6. Bambook feat. Arkanna - Off the system (Beat Factory remix)\r\n7. FCODE - Mixture (original mix)  \r\n8. Noir & Chris Minus - Sleep no more (vocal mix)\r\n9. Tojami Sessions - Tetra\r\n10. Strict Border - Pianist In The Zoo\r\n11. Strict Border - Rendevouz\r\n12. MSMS - Juice	t	t	t	Live mix for Enzo cafe (Minsk, Belarus)	Живой микс для Enzo cafe (Минск, Беларусь)	Live mix for Enzo cafe (Minsk, Belarus)	Живой микс для Enzo cafe (Минск, Беларусь)	Enzo cafe live	Enzo cafe live	Live mix for Enzo cafe (Minsk, Belarus)	Живой микс для Enzo cafe (Минск, Беларусь)	130	36	Жывы мікс для Enzo cafe (Мінск, Беларусь)	Жывы мікс для Enzo cafe (Мінск, Беларусь)	Enzo cafe live	Жывы мікс для Enzo cafe (Мінск, Беларусь)	2018-06-20 10:30:40.421258+00
+551	2009-05-07 00:00:00+00	plastic-toy	Plastic toy	Трэці мікс з серыі Light Synthetic Compilation.	Трэці мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>	Трэці мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.\r\nСумесь эмбіенту, нойза і даб тэхна! Многія з трэкаў звязаны "па-тры", тым самым ўскладняючы і упрыгожваючы "шумавую" карціну. Сэт для аматараў ненапряжных бітаў і шумоў\r\nУсе плаўна і заблытана.	release/M17_Manti_Plastic_toy_mix.mp3	covers/plastic-toy.jpg	t	MNT017	LAME 320kbps 44100Hz	49:01	1. Biosphere - Kobresia\r\n2. Lowtec - A2 untitled\r\n3. I/dex - Drafts\r\n4. Pole-3 - Rondell zwei\r\n5. Minilogue - Stations II\r\n6. Ike - Cluster funk\r\n7. Intrusion - Tswana dub (Brendon Moeller vs Beat Pharmacy dub)\r\n8. Harmash - Hibernatoria08\r\n9. Apparat - Wooden (Anders Ilar remix)\r\n10. Minilogue - City lights\r\n11. Dolby - He0r\r\n12. Harmash - Hibernatoria05\r\n13. Minilogue - Cow, crickets and clay	t	t	t	The third mix from the <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a> series.\r\nA compilation of Ambient, Noise and Dub Techno! Many of the tracks are connected "by three", thereby complicating and decorating the "noise" picture. Set for fans of soft bits and noises.\r\nEverything is slow and messed up.	Третий микс из серии <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.\r\nСмесь эмбиента, нойза и даб техно! Многие из треков связаны "по-три", тем самым усложняя и украшая "шумовую" картину. Сет для любителей ненапряжных битов и шумов.\r\nВсе медлено и запутанно.	The third mix from the Light Synthetic Compilation series.	Третий микс из серии "light synthetic compilation". Смесь амбиента, нойза и даб техно!!! Многие из треков связаны "по-три", тем самым усложняя и украшая "шумовую" картину. Сет для любителей ненапряжных битов и шумов, все медлено и запутанно.	Plastic toy	Plastic toy	The third mix from the <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a> series.	Третий микс из серии <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>	61	4	Трэці мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.\r\nСумесь эмбіенту, нойза і даб тэхна! Многія з трэкаў звязаны "па-тры", тым самым ўскладняючы і упрыгожваючы "шумавую" карціну. Сэт для аматараў ненапряжных бітаў і шумоў\r\nУсе плаўна і заблытана.	Трэці мікс з серыі Light Synthetic Compilation.	Plastic toy	Трэці мікс з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>	2018-06-20 10:30:40.483421+00
+593	2014-09-11 08:21:09+00	predator	Predator	Злы і вельмі магутны нейра сэт. Толькі самае лепшае і тлустае.	Злы і вельмі магутны нейра сэт. Толькі самае лепшае і тлустае.	Злы і вельмі магутны нейра сэт. Толькі самае лепшае і тлустае.	release/M39_Manti_Predator.mp3	covers/predator.jpg	t	MNT039	LAME 320kbps 44100Hz	53:20	1. Sunchase & Max NRG - Algebra\r\n2. Agressor Bunx - Armageddon\r\n3. Emperor & Mefjus - Void main void\r\n4. Phace - The set up\r\n5. Misanthrop - Greed Of gain\r\n6. Ulterior Motive - Gang rule\r\n7. Audio & Meth - Alone\r\n8. InsideInfo & Mefjus - Mythos\r\n9. Heamy - Destroy it (Original mix)\r\n10. Emperor - Precursor (Mefjus remix)\r\n11. Dextems - Tunnels\r\n12. Optiv & BTK - Feelings\r\n13. Phaeleh - So far away	t	t	t	An evil and very powerful neuro set. Only the best and fat.	Злой и очень мощный нейро сет. Только самое лучшее и жирное.	An evil and very powerful neuro set. Only the best and fat.	Злой и очень мощный нейро сет. Только самое лучшее и жирное.	Predator	Predator	An evil and very powerful neuro set. Only the best and fat.	Злой и очень мощный нейро сет. Только самое лучшее и жирное.	108	48	Злы і вельмі магутны нейра сэт. Толькі самае лепшае і тлустае.	Злы і вельмі магутны нейра сэт. Толькі самае лепшае і тлустае.	Predator	Злы і вельмі магутны нейра сэт. Толькі самае лепшае і тлустае.	2018-06-20 10:30:40.490349+00
+569	2007-02-18 00:00:00+00	iris	IRIS, it's all about me promo	Вельмі доўгая і карпатлівая праца, як тэхнічна, так і ідэйна.	Вельмі доўгая і карпатлівая праца, як тэхнічна, так і ідэйна.	Вельмі доўгая і карпатлівая праца, як тэхнічна, так і ідэйна. Вытрыманая ў класічным стылі Deep House, з прыўнясеннем нотак Tech House.	release/M04_Manti_Iris_mix_(Spring-Summer-07_promo).mp3	covers/iris.jpg	t	MNT004	LAME 320kbps 44100Hz	1:00:15	1. Lator - Rolling children  \r\n2. Acos CoolKAs feat. Metropoliz - Friends (Vocal mix)\r\n3. Brooks - Pink Sigarettes (Ajazz mix)\r\n4. Raz Ohara - This'a beautiful day (Mathias Schaffhauser mix)  \r\n5. Jussipekka - Breeze\r\n6. Gamat 3000 - Whispering  \r\n7. Phunk Diggaz - Whispers  \r\n8. Terry Lee Brown Jr. - Bad house music (Dub'98)  \r\n9. Plank 15 - Strings of life  \r\n10. Lator - Clown fish (kaZantip mix)	t	t	t	Very long and painstaking work, both technically and ideologically. It is sustained in the classical style of Deep House, with the introduction of notes Tech House.	Очень длительная и кропотливая работа, как технически, так и идейно. Выдержана в классическом стиле deep house, с привнесением ноток Tech House.	Very long and painstaking work, both technically and ideologically.	Очень длительная и кропотливая работа, как технически, так и идейно.	IRIS, it's all about me promo	IRIS, it's all about me promo	Very long and painstaking work, both technically and ideologically.	Очень длительная и кропотливая работа, как технически, так и идейно.	80	24	Вельмі доўгая і карпатлівая праца, як тэхнічна, так і ідэйна. Вытрыманая ў класічным стылі Deep House, з прыўнясеннем нотак Tech House.	Вельмі доўгая і карпатлівая праца, як тэхнічна, так і ідэйна.	IRIS, it's all about me promo	Вельмі доўгая і карпатлівая праца, як тэхнічна, так і ідэйна.	2018-06-20 10:30:40.493213+00
+559	2010-05-18 00:00:00+00	hobh-four	Дом разбитых сердец 4, южные сны	Зноў з пабітым сэрцам, зноў усё баліць, ные і плача. Не збіраўся кампіляцыю гэтую выпускаць, па меншай меры так хутка, але так ужо сышліся зоркі.	Зноў з пабітым сэрцам, зноў усё баліць, ные і плача. Не збіраўся кампіляцыю гэтую выпускаць, па меншай меры так хутка, але так ужо сышліся зоркі.	Зноў з пабітым сэрцам, зноў усё баліць, ные і плача.\r\nНе збіраўся кампіляцыю гэтую выпускаць, па меншай меры так хутка, але так ужо сышліся зоркі, ды і шмат чаго накіпела, таму выказаўся так, як змог.\r\nМногае мне вельмі блізка ў гэтых словах: «што-та паміж радкоў, аб тым што ў двукоссях». Дзякуй хлопцам, якія іх пішуць. Не належыце сур'ёзна да якасці, тэхніцы і іншым бяздушным параметрах, проста слухайце, калі вам гэта блізка.	release/M22_Manti_HOBH_04_Yuzhnye_sny.mp3	covers/hobh-4.jpg	t	MNT022	LAME 320kbps 44100Hz	43:12	1. Guf feat. Princip – Заходит луна\r\n2. Баста – Любовь без памяти\r\n3. Krec feat. Maestro A-Sid – Весна\r\n4. Каста – Встреча\r\n5. Смоки Мо – Герман и Патрик\r\n6. Дельфин – Надежда\r\n7. Guf feat. Ба – Дома\r\n8. Krec – Другие берега\r\n9. Лельфин – Любовь\r\n10. Михей и Джуманжи – Сука любовь\r\n11. Krec – Южные сны	t	t	t	Again with a broken heart, again everything hurts, whines and cries.\r\nI did not intend to release this compilation, at least so quickly, but so the stars came together, and a lot of things boiled up, so I spoke as I could.\r\nMuch is very close to me in these words: "something between the lines, something in quotes." Thanks guys who write them. Do not take seriously the quality, technique and other soulless parameters, just listen if you are close.	Опять с разбитым сердцем, опять все болит, ноет и плачет.\r\nНе собирался компиляцию эту выпускать, по крайней мере так быстро, но так уж сошлись звезды, да и много чего накипело, поэтому высказался так, как смог. \r\nМногое мне очень близко в этих словах: «кое что между строк, кое что в кавычках». Спасибо парням, которые их пишут. Не относитесь серьезно к качеству, технике и другим бездушным параметрам, просто слушайте, если вам это близко.	Again with a broken heart, again everything hurts, whines and cries. I did not intend to release this compilation, at least so quickly, but so the stars came together.	Опять с разбитым сердцем, опять все болит, ноет и плачет. Не собирался компиляцию эту выпускать, по крайней мере так быстро, но так уж сошлись звезды.	House of broken hearts 4, southern dreams	Дом разбитых сердец 4, южные сны	Again with a broken heart, again everything hurts, whines and cries. I did not intend to release this compilation, at least so quickly, but so the stars came together.	Опять с разбитым сердцем, опять все болит, ноет и плачет. Не собирался компиляцию эту выпускать, по крайней мере так быстро, но так уж сошлись звезды.	100	13	Зноў з пабітым сэрцам, зноў усё баліць, ные і плача.\r\nНе збіраўся кампіляцыю гэтую выпускаць, па меншай меры так хутка, але так ужо сышліся зоркі, ды і шмат чаго накіпела, таму выказаўся так, як змог.\r\nМногае мне вельмі блізка ў гэтых словах: «што-та паміж радкоў, аб тым што ў двукоссях». Дзякуй хлопцам, якія іх пішуць. Не належыце сур'ёзна да якасці, тэхніцы і іншым бяздушным параметрах, проста слухайце, калі вам гэта блізка.	Зноў з пабітым сэрцам, зноў усё баліць, ные і плача. Не збіраўся кампіляцыю гэтую выпускаць, па меншай меры так хутка, але так ужо сышліся зоркі.	Дом разбитых сердец 4, южные сны	Зноў з пабітым сэрцам, зноў усё баліць, ные і плача. Не збіраўся кампіляцыю гэтую выпускаць, па меншай меры так хутка, але так ужо сышліся зоркі.	2018-06-20 10:30:40.499401+00
+555	2011-12-05 00:00:00+00	katana	Katana	Гэты сэт з'яўляецца вельмі чыстай эсэнцыяй тэхнічнага драма.	Гэты сэт з'яўляецца вельмі чыстай эсэнцыяй <a href="/blog/?tag=neurostep">тэхнічнага днб</a>. Кампілілся доўга і ўпарта і у выніку атрымалася даволі якасна.	Гэты сэт з'яўляецца вельмі чыстай эсэнцыяй <a href="/blog/?tag=neurostep">тэхнічнага днб</a>. Кампілілся доўга і ўпарта і у выніку атрымалася даволі якасна.	release/M25_Manti_Katana_mix.mp3	covers/katana.jpg	t	MNT025	LAME 320kbps 44100Hz	57:32	0. Sunchase - Asphalt\r\n1. Amoss - Flex\r\n2. Alix Perez - Behind time\r\n3. Trinity - Harvester\r\n4. Paperclip - Blueprints\r\n5. Enei - No Fear (feat. Riya)\r\n6 Need for mirrors - Skip rope\r\n7. Enei - Cracker (Jubei remix)\r\n8. Optiv & BTK - Inception\r\n9. Ulterior Motive - Seven Segments\r\n10. Dub Phizix - Four (feat. Skeptical)\r\n11. Nickbee - Carpe diem\r\n12. Malk - My crazy baby\r\n13. Parhelia - Spaceship named Andromeda	t	t	t	This set is a very pure essence of <a href="/blog/?tag=neurostep">technical dnb</a>. Compiled long and hard and in the end it turned out pretty high quality.	Этот сет является очень чистой эссенцией <a href="/blog/?tag=neurostep">техничного днб</a>. Компилился долго и упорно и в итоге получилось довольно качественно.	This set is a very pure essence of technical dnb.	Этот сет является очень чистой эссенцией техничного драма.	Katana	Katana	This set is a very pure essence of <a href="/blog/?tag=neurostep">technical dnb</a>. Compiled long and hard and in the end it turned out pretty high quality.	Этот сет является очень чистой эссенцией <a href="/blog/?tag=neurostep">техничного днб</a>. Компилился долго и упорно и в итоге получилось довольно качественно.	122	9	Гэты сэт з'яўляецца вельмі чыстай эсэнцыяй <a href="/blog/?tag=neurostep">тэхнічнага днб</a>. Кампілілся доўга і ўпарта і у выніку атрымалася даволі якасна.	Гэты сэт з'яўляецца вельмі чыстай эсэнцыяй тэхнічнага драма.	Katana	Гэты сэт з'яўляецца вельмі чыстай эсэнцыяй <a href="/blog/?tag=neurostep">тэхнічнага днб</a>. Кампілілся доўга і ўпарта і у выніку атрымалася даволі якасна.	2018-06-20 10:30:40.502881+00
+550	2007-09-16 00:00:00+00	synthetic	Synthetic	На мой погляд, самая складаная, але і самая цікавая мая амбиент праца.	На мой погляд, самая складаная, але і самая цікавая мая амбиент праца.	На мой погляд, самая складаная, але і самая цікавая мая амбиент праца. Інтэлектуальны і якасны саўнд ў дадатку да нямецкіх і чэшскім ваенных распрацовак.	release/M07_Manti_Synthetic_mix.mp3	covers/synthetic.jpg	t	MNT007	LAME 192kbps 44100Hz	59:40	1. Falter - Nachtflug\r\n2. H.u.v.a - Distances\r\n3. H.u.v.a. - Acces to the long fields\r\n4. Biosphere (Hia) - Gas street basin  \r\n5. Fax - Deja vu\r\n6. Telefon Tel Aviv - TTV\r\n7. Lator - B-4 talk (Promo version)\r\n8. Shuttle 358 - Floops\r\n9. Solarise speek\r\n10. Vladislav Delay - He lived deeply  \r\n11. Monolake - Indigo	t	t	t	In my opinion, the most difficult, but also the most interesting ambient work. Intellectual and high-quality sound in addition to German and Czech military developments.	На мой взгляд, самая сложная, но и самая интересная моя амбиент работа. Интеллектуальный и качественный саунд в дополнении к немецким и чешским военным разработкам.	In my opinion, the most difficult, but also the most interesting ambient work.	На мой взгляд, самая сложная, но и самая интересная моя амбиент работа.	Synthetic	Synthetic	In my opinion, the most difficult, but also the most interesting ambient work.	На мой взгляд, самая сложная, но и самая интересная моя амбиент работа.	93	3	На мой погляд, самая складаная, але і самая цікавая мая амбиент праца. Інтэлектуальны і якасны саўнд ў дадатку да нямецкіх і чэшскім ваенных распрацовак.	На мой погляд, самая складаная, але і самая цікавая мая амбиент праца.	Synthetic	На мой погляд, самая складаная, але і самая цікавая мая амбиент праца.	2018-06-20 10:30:40.496238+00
+570	2007-06-05 00:00:00+00	hi-pass	Hi-Pass live	Салодкі гадовы мікс на папулярныя мінімальныя тэмы.	Салодкі гадовы мікс на папулярныя мінімальныя тэмы.	- У нас было два пакеты травы, 75 таблетак міскаліна, 5 упаковак кіслаты, пол сальніцы какаіну і бясконцае мноства транквілізатараў ўсіх гатункаў і расфарбовак, а таксама тэкіла, ром, скрыня піва, пінта чыстага эфіру і аміл нітрат.\r\nХантэр С. Томпсан.	release/M05_Manti_Hi-Pass_live.mp3	covers/hi-pass.jpg	t	MNT005	LAME 160kbps 44100Hz	53:22		t	t	t	- We had two bags of grass, seventy-five pellets of mescaline, five sheets of high powered blotter acid, a salt shaker half full of cocaine, and a whole galaxy of multi-colored uppers, downers, screamers, laughers and also a quart of tequila, a quart of rum, a case of Budweiser, a pint of raw ether and two dozen amyls.\r\nHunter S. Thompson.	- У нас было два пакета травы, 75 таблеток мискалина, 5 упаковок кислоты, пол солонки кокаина и бесконечное множество транквилизаторов всех сортов и расцветок, а также текила, ром, ящик пива, пинта чистого эфира и амил нитрат.\r\nХантер С. Томпсон.	Sweet summer mix on the popular minimal themes.	Сладкий летний микс на популярные минимальные темы.	Hi-Pass live	Hi-Pass live	Sweet summer mix on the popular minimal themes.	Сладкий летний микс на популярные минимальные темы.	85	25	- У нас было два пакеты травы, 75 таблетак міскаліна, 5 упаковак кіслаты, пол сальніцы какаіну і бясконцае мноства транквілізатараў ўсіх гатункаў і расфарбовак, а таксама тэкіла, ром, скрыня піва, пінта чыстага эфіру і аміл нітрат.\r\nХантэр С. Томпсан.	Салодкі гадовы мікс на папулярныя мінімальныя тэмы.	Hi-Pass live	Салодкі гадовы мікс на папулярныя мінімальныя тэмы.	2018-06-20 10:30:40.511607+00
+554	2012-05-02 00:00:00+00	autoreply	Autoreply promo	Вясновы прома мікс на тэму дып хаўзу. Вельмі доўгачаканы мікс для мяне, пасля працяглага драмового запою, хоць і запісаўся даволі спантанна.	Вясновы прома мікс на тэму дып хаўзу. Вельмі доўгачаканы мікс для мяне, пасля працяглага драмового запою, хоць і запісаўся даволі спантанна.	Вясновы прома мікс на тэму дып хаўзу. Вельмі доўгачаканы мікс для мяне, пасля працяглага драмового запою, хоць і запісаўся даволі спантанна.	release/M27_Manti_Autoreply_mix_(Spring-Summer-12_promo).mp3	covers/autoreply.jpg	t	MNT027	LAME 320kbps 44100Hz	58:54	0. Intro - Tokyo\r\n1. Fish Go Deep - Deep like\r\n2. Brawther - Spaceman funk (Deep club mix)\r\n3. Ion Ludwig - L'Sable\r\n4. Dublee - Touch (Sweetbutter mix)\r\n5. Oscar Barila and Maiki - Above the clouds\r\n6. Ben Rourke - Tahiti\r\n7. Nikola Gala - I don't stop\r\n8. The Timewriter - Superschall (M.In remix)\r\n9. Oscar Barila - Tampa\r\n10. Jussi Pekka - Stream horse (Motorcitysoul remix)\r\n11. Thomas Bjerring - Republique	t	t	t	Spring promo mix on the topic of Deep House. A very long-awaited mix for me, after a long DnB binge, although I spelled quite spontaneously.	Весенний промо микс на тему дип хауза. Очень долгожданный микс для меня, после длительного драмового запоя, хотя и записался довольно спонтанно.	Spring promo mix on the topic of Deep House. A very long-awaited mix for me, after a long DnB binge, although I spelled quite spontaneously.	Весенний промо микс на тему дип хауза. Очень долгожданный микс для меня, после длительного драмового запоя.	Autoreply promo	Autoreply promo	Spring promo mix on the topic of Deep House. A very long-awaited mix for me, after a long DnB binge, although I spelled quite spontaneously.	Весенний промо микс на тему дип хауза. Очень долгожданный микс для меня, после длительного драмового запоя, хотя и записался довольно спонтанно.	158	8	Вясновы прома мікс на тэму дып хаўзу. Вельмі доўгачаканы мікс для мяне, пасля працяглага драмового запою, хоць і запісаўся даволі спантанна.	Вясновы прома мікс на тэму дып хаўзу. Вельмі доўгачаканы мікс для мяне, пасля працяглага драмового запою, хоць і запісаўся даволі спантанна.	Autoreply promo	Вясновы прома мікс на тэму дып хаўзу. Вельмі доўгачаканы мікс для мяне, пасля працяглага драмового запою, хоць і запісаўся даволі спантанна.	2018-06-20 10:30:40.516634+00
+564	2010-02-04 00:00:00+00	basstech-2	Mix for Basstech part 2	Второй выход на программе BASSTECH. Все треки сведены вживую, правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет	Второй выход на программе BASSTECH (novoeradio.by/basstech). Все треки сведены "вживую", правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет есть и его можно слушать.	Другі выхад на праграме BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). Усе трэкі зведзены "ужывую", праўда на хуткую руку, таму крыху пацярпела якасць, але тым не менш сэт ёсць і яго можна слухаць.\r\nБольшасць трэкаў "айчынага" вытворца, якая ўяўляе сабой Рускі нейрафанк, ад диповых і лайтовых напрамкаў, да самага тоўстых і безкампромісных. Ёсць і трохі техноида, для аматараў прамой і вар'яткай бочкі.	release/M20_Manti_Mix_for_Basstech_(novoeradio.by).mp3	covers/basstech-2.jpg	t	MNT020	LAME 320kbps 44100Hz	56:18	1. Strauss - Also sprach Zarathustra op.30 (Introduction)\r\n2. Miditacia - Power station  \r\n3. Miditacia - Anomalies  \r\n4. Brainfuzz - Scope  \r\n5. Hedj & Proktah - Rhino    \r\n6. Receptor - Rhyno    \r\n7. Marqus - Paranoik  \r\n8. Rregula and Dementia - Fortress  \r\n9. Isotop feat Shots and Kaiza - Kartago\r\n10. Dereck - Apollo    \r\n11. Nickbee - Iodine  \r\n12. Paperclip - Infinite drift  \r\n13. Receptor - Kurchatov      \r\n14. Telefon tel aviv - Fahrenheit fair enough (Prefuse 73 bonus beats remix)	t	t	t	Second set for the BASSTECH radio show (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). All tracks are mixed "live", but on the "quick" hand, so the quality suffered a bit, but nevertheless, there are a set and you can listen to.\r\nMost of the tracks "domestic" manufacturer representing Russian Neurofunk from deep directions to the most heavy and uncompromising. There are a few Technoid notes, for lovers of direct and crazy drums.	Второй выход на программе BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). Все треки сведены "вживую", правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет есть и его можно слушать. \r\nБольшинство треков "отечественного" производителя, представляющие собой Русский нейрофанк, от диповых и лайтовых направлений, до самых жирных и безкомпромисных. Есть и немного техноида, для любителей прямой и сумасшедшей бочки.	Second set for the BASSTECH radio show	Второй выход на программе BASSTECH	Mix for Basstech part 2	Mix for Basstech part 2	Second set for the BASSTECH radio show (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>).	Второй выход на программе BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>).	70	19	Другі выхад на праграме BASSTECH (<a href="http://novoeradio.by/basstech">novoeradio.by/basstech</a>). Усе трэкі зведзены "ужывую", праўда на хуткую руку, таму крыху пацярпела якасць, але тым не менш сэт ёсць і яго можна слухаць.\r\nБольшасць трэкаў "айчынага" вытворца, якая ўяўляе сабой Рускі нейрафанк, ад диповых і лайтовых напрамкаў, да самага тоўстых і безкампромісных. Ёсць і трохі техноида, для аматараў прамой і вар'яткай бочкі.	Второй выход на программе BASSTECH. Все треки сведены вживую, правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет	Mix for Basstech part 2	Второй выход на программе BASSTECH (novoeradio.by/basstech). Все треки сведены "вживую", правда на скорую руку, поэтому немного пострадало качество, но тем не менее сет есть и его можно слушать.	2018-06-20 10:30:40.506978+00
+553	2012-09-09 00:00:00+00	stockholm-syndrome	Stockholm syndrome	Вельмі не стандартны для мяне мікс, як па кампіляцыі, так і па тэхніцы.	Вельмі не стандартны для мяне мікс, як па кампіляцыі, так і па тэхніцы. Спецыяльна не востраць па маё ДР, але так ужо атрымалася, што мікс быў скончаны менавіта ў гэты дзень, знамянальна.	Вельмі не стандартны для мяне мікс, як па кампіляцыі, так і па тэхніцы. Спецыяльна не востраць па маё ДР, але так ужо атрымалася, што мікс быў скончаны менавіта ў гэты дзень, знамянальна.\r\nНатхніў мяне на стварэнне такога мікса каманды GusGus, так што аматары іх творчасць прысвячаецца ...	release/M31_Manti_Stockholm_syndrome_mix.mp3	covers/stockholm-syndrome.jpg	t	MNT031	LAME 320kbps 44100Hz	1:18:34	0. Intro - Crimea\r\n1. Tube & Berger - Come Together (Original Mix)\r\n2. Markus Fix - I'll House You (Original Mix)\r\n3. Tiefschwarz feat. Cassy - Find me\r\n4. Oxia - Housewife (feat. Miss Kittin)\r\n5. Royksopp - Tricky Tricky (Beyond Deep remix)\r\n6. Aki Bergen - Dont call me artist\r\n7. Sian - East of eden (Original mix)\r\n8. Popsled and Magit Cacoon - Higher point (Original mix)\r\n9. Oxia, Simon Mattson - Harmonie (Simon Mattson Remix)\r\n10. Dusty Kid - Cowboys\r\n11. Swayzak - Make up your mind\r\n12. Terry Lee Brown Junior - Bohemian life\r\n13. Agoria, Carl Craig and La Scalars - Speechless (Radio Slave remix)	t	t	t	Not very standard for me to mix, as the compilation and technique. I not specifically sharpened on my DR, but it just so happened that the mix has been completed on that day, momentous.\r\nIt inspired me to create this mix team GusGus, so that fans of their work is dedicated to ...	Очень не стандартный для меня микс, как по компиляции, так и по технике. Специально не затачивался по мое ДР, но так уж получилось, что микс был закончен именно в этот день, знаменательно.\r\nВоодушевила меня на создание такого микса команда GusGus, так что любителям их творчества посвящается...	Not very standard for me to mix, as the compilation and technique.	Очень не стандартный для меня микс, как по компиляции, так и по технике.	Stockholm syndrome	Stockholm syndrome	Not very standard for me to mix, as the compilation and technique. I not specifically sharpened on my DR, but it just so happened that the mix has been completed on that day, momentous.	Очень не стандартный для меня микс, как по компиляции, так и по технике. Специально не затачивался по мое ДР, но так уж получилось, что микс был закончен именно в этот день, знаменательно.	112	6	Вельмі не стандартны для мяне мікс, як па кампіляцыі, так і па тэхніцы. Спецыяльна не востраць па маё ДР, але так ужо атрымалася, што мікс быў скончаны менавіта ў гэты дзень, знамянальна.\r\nНатхніў мяне на стварэнне такога мікса каманды GusGus, так што аматары іх творчасць прысвячаецца ...	Вельмі не стандартны для мяне мікс, як па кампіляцыі, так і па тэхніцы.	Stockholm syndrome	Вельмі не стандартны для мяне мікс, як па кампіляцыі, так і па тэхніцы. Спецыяльна не востраць па маё ДР, але так ужо атрымалася, што мікс быў скончаны менавіта ў гэты дзень, знамянальна.	2018-06-20 10:30:40.52359+00
+602	2018-05-25 10:25:07.981184+00	last-night	Last night	Бойся того, что внутри тебя, так как злейший враг любого - он сам.	Бойся того, что внутри тебя, так как злейший враг любого - он сам.	Бойся того, что внутри тебя, так как злейший враг любого - он сам. Для того, чтобы стать лучше, надо научиться слушать себя, понимать и находить компромиссы, порой неприятные и тяжелые.	release/M44_Manti_Last_night.mp3	covers/last-night.jpg	t	MNT044	LAME 320kbps 44100Hz	51:54	1. Ben Salisbury and Geoff Barrow - End Credits (Alt Version)\r\n2. Hans Zimmer and Benjamin Wallfisch - 2049\r\n3. Hans Zimmer and Benjamin Wallfisch - Sea Wall\r\n4. Shuma feat. IDex - To-to-to (Extended)\r\n5. Pye Corner Audio - Resist\r\n6. Deepchord - Roca 9\r\n7. Antrru - Carbon Pad\r\n8. Vacant - High Rise\r\n9. Untold - Discipline\r\n10. Phaeleh - Absence of Light\r\n11. Owsey - Alone in the traffic of this world\r\n12. Vacant - Your Mind\r\n13. Young And Dramatic - Never (Sol remix)\r\n14. Harmash - Through The Dark Woods\r\n15. Phaeleh - Frequency	t	t	t	Fear what's inside of you, since the worst enemy of anyone is himself. In order to become better, you must learn to listen to yourself, understand and find compromises, sometimes unpleasant and difficult.	Бойся того, что внутри тебя, так как злейший враг любого - он сам. Для того, чтобы стать лучше, надо научиться слушать себя, понимать и находить компромиссы, порой неприятные и тяжелые.	Fear what's inside of you, since the worst enemy of anyone is himself.	Бойся того, что внутри тебя, так как злейший враг любого - он сам.	Last night	Last night	Fear what's inside of you, since the worst enemy of anyone is himself.	Бойся того, что внутри тебя, так как злейший враг любого - он сам.	0	0	Бойся таго, што ўнутры цябе, так як люты вораг любога - ён сам. Для таго, каб стаць лепш, трэба навучыцца слухаць сябе, разумець і знаходзіць кампрамісы, часам непрыемныя і цяжкія.	Бойся таго, што ўнутры цябе, так як люты вораг любога - ён сам.	Last night	Бойся таго, што ўнутры цябе, так як люты вораг любога - ён сам.	2018-06-21 07:47:16.576483+00
+575	2008-11-08 00:00:00+00	janaca-express-live	Janaca Express live	Жывая версія двух частак гоа трыпа Janaca Express, запісанага ў 2007 годзе.	Жывая версія двух частак гоа трыпа Janaca Express, запісанага ў 2007 годзе.	Жывая версія двух частак гоа трыпа Janaca Express, запісанага ў 2007 годзе.	release/M13_Manti_Janaca_express_live.mp3	covers/janaca.jpg	t	MNT013	LAME 320kbps 44100Hz	1:04:26	1. Silicon Sound feat. Psychotrop - Departure\r\n2. Silent Sphere - Violet visions \r\n3. Electro Sun - High cue \r\n4. Astrix - Tweaky \r\n5. Psypsiq Jicuri - A rain of hope in the galaxy \r\n6. Xerox & Illumination - Temporary insanity \r\n7. Astrix - Techno widows \r\n8. Delerious - Dynamic force\r\n9. Astrix feat. Michele Adamson - Closer to heaven	t	t	t	A live version of two parts of the Janaca Express trip, recorded in 2007.	Живая версия двух частей гоа трипа Janaca Express, записанного в 2007 году.	A live version of two parts of the Janaca Express trip, recorded in 2007.	Живая версия двух частей гоа трипа Janaca Express, записанного в прошлом году.	Janaca Express live	Janaca Express live	A live version of two parts of the Janaca Express trip, recorded in 2007.	Живая версия двух частей гоа трипа Janaca Express, записанного в прошлом году.	104	30	Жывая версія двух частак гоа трыпа Janaca Express, запісанага ў 2007 годзе.	Жывая версія двух частак гоа трыпа Janaca Express, запісанага ў 2007 годзе.	Janaca Express live	Жывая версія двух частак гоа трыпа Janaca Express, запісанага ў 2007 годзе.	2018-06-20 10:30:40.520471+00
+562	2007-10-27 00:00:00+00	bar-launge	Bar La'unge live	Прыемнае спалучэнне Лаунжа, Драма і Айсид Джаза.	Прыемнае спалучэнне Лаунжа, Драма і Айсид Джаза.	Прыемнае спалучэнне Лаунжа, Драма і Айсид Джаза.	release/M08_Manti_Bar_Launge_mix.mp3	covers/bar-launge.jpg	t	MNT008	LAME 192kbps 44100Hz	67:34	1. Groove Armada - Suntoucher\r\n2. Lemon Jelly - 95 aka make things right  \r\n3. One Self - Unfamilar places\r\n4. Dj Dobry Chlopak - Waco (Pono pele)\r\n5. Bebel Gilberto - Aganju (John Beltram mix)    \r\n6. Copabossa - Mihna (Namorada mix)\r\n7. Jehro - All I want  \r\n8. Ohm G & Bruno - One  \r\n9. Linn & Freddie - Live 4 love  \r\n10. Aural Float - Still here  \r\n11. LTJ Bukem - Journey inward\r\n12. Nookie - Natural experience\r\n13. Macoto - Where are you going?\r\n14. Vice versa - Still don't it\r\n15. Telepopmusik - Yesterday was a lie	t	t	t	A pleasant combination of the Lounge, DnB and Acid Jazz.	Приятное сочетание Лаунжа, Драма и Айсид Джаза.	A pleasant combination of the Lounge, DnB and Acid Jazz.	Приятное сочетание Лаунжа, Драма и Айсид Джаза.	Bar La'unge live	Bar La'unge live	A pleasant combination of the Lounge, DnB and Acid Jazz.	Приятное сочетание Лаунжа, Драма и Айсид Джаза.	71	17	Прыемнае спалучэнне Лаунжа, Драма і Айсид Джаза.	Прыемнае спалучэнне Лаунжа, Драма і Айсид Джаза.	Bar La'unge live	Прыемнае спалучэнне Лаунжа, Драма і Айсид Джаза.	2018-06-20 10:30:40.53557+00
+566	2008-12-27 00:00:00+00	emofunk-	Emofunk (Christmas rave) live	Пераднавагодні рэйв з удзелам: Boro&Moff, Izo, Ipomea, valCool, Enegy.	Пераднавагодні рэйв з удзелам: Boro&Moff, Izo, Ipomea, valCool, Enegy.	Пераднавагодні рэйв з удзелам: Boro&Moff, Izo, Ipomea, valCool, Enegy.\r\nБыло ТРЫ літра гарэлкі і шмат-шмат трупаў.	release/M14_Manti_Emofunk_live.mp3	covers/christmas-rave.jpg	t	MNT014	LAME 320kbps 44100Hz	51:11		t	t	t	New Year Eve rave involving: Boro&Moff, Izo, Ipomea, valCool, Enegy.\r\nThere were three liters of vodka and a lot of corpses.	Предновогодний рэйв с участием: Boro&Moff, Izo, Ipomea, valCool, Enegy.\r\nБыло ТРИ литра водки и много-много трупов.	New Year Eve rave involving: Boro&Moff, Izo, Ipomea, valCool, Enegy.	Предновогодний рэйв с участием: Boro&Moff, Izo, Ipomea, valCool, Enegy.	Emofunk (Christmas rave) live	Emofunk (Christmas rave) live	New Year Eve rave involving: Boro&Moff, Izo, Ipomea, valCool, Enegy.	Предновогодний рэйв с участием: Boro&Moff, Izo, Ipomea, valCool, Enegy.	71	21	Пераднавагодні рэйв з удзелам: Boro&Moff, Izo, Ipomea, valCool, Enegy.\r\nБыло ТРЫ літра гарэлкі і шмат-шмат трупаў.	Пераднавагодні рэйв з удзелам: Boro&Moff, Izo, Ipomea, valCool, Enegy.	Emofunk (Christmas rave) live	Пераднавагодні рэйв з удзелам: Boro&Moff, Izo, Ipomea, valCool, Enegy.	2018-06-20 10:30:40.53937+00
+573	2008-01-07 00:00:00+00	marrakesh	Marrakesh	Усходняе цёпла, вострыя прыправы і рытмы. Сумесь індастрыял і медытацый на вольныя тэмы.	Усходняе цёпла, вострыя прыправы і рытмы. Сумесь індастрыял і медытацый на вольныя тэмы.	Усходняе цёпла, вострыя прыправы і рытмы. Сумесь індастрыял і медытацый на вольныя тэмы.	release/M10_Manti_Marrakesh_mix.mp3	covers/marrakesh.jpg	t	MNT010	LAME 192kbps 44100Hz	56:48	1. Deepac Ram - Between thoughts\r\n2. Trianglesun - Budha\r\n3. Enamoured - Mooli\r\n4. Pete Vicary - D-maddix\r\n5. Monsoon Day - Spice trail\r\n6. Muslimgauze - Hussein Mahmood Jeeb Tehar Gass  \r\n7. Slack Baba - Drink more tea (Herbal mix)  \r\n8. Enrico Experience - Bine el barah quel liom\r\n9. Vibrasphere - San Pedro	t	t	t	Eastern heat, spices and rhythms. A mixture of industrial and meditation on free themes.	Восточное тепло, пряности и ритмы. Смесь индастриала и медитаций на вольные темы.	Eastern heat, spices and rhythms. A mixture of industrial and meditation on free themes.	Восточное тепло, пряности и ритмы. Смесь индастриала и медитаций на вольные темы.	Marrakesh	Marrakesh	Eastern heat, spices and rhythms. A mixture of industrial and meditation on free themes.	Восточное тепло, пряности и ритмы. Смесь индастриала и медитаций на вольные темы.	61	28	Усходняе цёпла, вострыя прыправы і рытмы. Сумесь індастрыял і медытацый на вольныя тэмы.	Усходняе цёпла, вострыя прыправы і рытмы. Сумесь індастрыял і медытацый на вольныя тэмы.	Marrakesh	Усходняе цёпла, вострыя прыправы і рытмы. Сумесь індастрыял і медытацый на вольныя тэмы.	2018-06-20 10:30:40.54674+00
+558	2009-10-14 00:00:00+00	hobh-three	Дом разбитых сердец III, такая Lite	Толькі тады нараджаюцца такія сэты, калі па-сапраўднаму балюча.	Толькі тады нараджаюцца такія сэты, калі па-сапраўднаму балюча.	Толькі тады нараджаюцца такія сэты, калі па-сапраўднаму балюча.	release/M19_Manti_HOBH_03_So_lite.mp3	covers/hobh-3.jpg	t	MNT019	LAME 320kbps 44100Hz	58:25	1. Radiohead - Street spirit\r\n2. Blink 182 - I miss you\r\n3. Khoiba - That reason\r\n4. Royksopp - Vision one \r\n5. Planet Funk - Ultraviolet days\r\n6. Depeche Mode - Freelove\r\n7. Red Hot Chili Peppers - Scar tissue\r\n8. Coldplay - Clocks\r\n9. Sum 41 - Pieces\r\n10. Three Days Grays - Home\r\n11. Linkin Park - In the end\r\n12. The Cardigans - Erase and rewind\r\n13. Air - How does it make you feel	t	t	t	Only then such sets are born when it really hurts.	Только тогда рождаются такие сеты, когда по-настоящему больно.	Only then such sets are born when it really hurts.	Только тогда рождаются такие сеты, когда по-настоящему больно.	House of broken hearts III, so lite	Дом разбитых сердец III, такая Lite	Only then such sets are born when it really hurts.	Только тогда рождаются такие сеты, когда по-настоящему больно.	86	12	Толькі тады нараджаюцца такія сэты, калі па-сапраўднаму балюча.	Толькі тады нараджаюцца такія сэты, калі па-сапраўднаму балюча.	Дом разбитых сердец III, такая Lite	Толькі тады нараджаюцца такія сэты, калі па-сапраўднаму балюча.	2018-06-20 10:30:40.550356+00
+598	2016-03-21 21:31:32+00	february	Люты	Дзіўныя тры месяцы дзіўнай зімы прымусілі пра многае падумаць і расставіць усё на свае месцы.	Дзіўныя тры месяцы дзіўнай зімы прымусілі пра многае падумаць і расставіць усё на свае месцы.	Дзіўныя тры месяцы дзіўнай зімы прымусілі пра многае падумаць і расставіць усё на свае месцы. Вельмі многае ў тэкстах нагадала пра сябе, пра іншых і іншае..	release/ME05_Manti_February.mp3	covers/february.jpg	t	MNTE05	LAME 320kbps 44100Hz	1:14:45	1. Jahmal feat. VibeTGK - Я Убираюсь\r\n2. АК 47 feat. Ноггано - Моя игра\r\n3. Noize Mc - Тыщатыщ\r\n4. Триагрутрика - Гелик\r\n5. Guf - Наугад (scratch by DJ Shved)\r\n6. Скриптонит feat. Юрик Четверг, Truwer - Сука тащит нас на дно\r\n7. Баста и Смоки Мо - Жить достойно\r\n8. Рэм Дигга feat. Баста - Другой\r\n9. Krec - Моно\r\n10. Витя АК - Еду в Ленинград\r\n11. Баста и Смоки Мо - Амадей (skit)\r\n12. 9 ГРАММ feat. DJ Wide - Po-Hoo-You\r\n13. Raga - Амфетамины до добра не доведут\r\n14. Триагрутрика - Олдскуловая сага\r\n15. АК-47 feat. Триагрутрика - Откуда ты приехал\r\n16. Krec - Буря и гром\r\n17. Смоки Мо - Горсть лепестков\r\n18. Krec - Февраль\r\n19. Баста feat. Тати - Хочу к тебе\r\n20. Скриптонит - Это любовь	t	t	t	Very strange three months of winter forced to think about many things and put everything in its place. A lot of in the lyrics reminded about themselves, about others and other..	Странные три месяца странной зимы заставили о многом подумать и расставить все на свои места. \r\nОчень многое в текстах напомнило о себе, о других и другом..	Very strange three months of winter forced to think about many things and put everything in its place.	Странные три месяца странной зимы заставили о многом подумать и расставить все на свои места.	February	Февраль	Very strange three months of winter forced to think about many things and put everything in its place.	Странные три месяца странной зимы заставили о многом подумать и расставить все на свои места.	107	53	Дзіўныя тры месяцы дзіўнай зімы прымусілі пра многае падумаць і расставіць усё на свае месцы. Вельмі многае ў тэкстах нагадала пра сябе, пра іншых і іншае..	Дзіўныя тры месяцы дзіўнай зімы прымусілі пра многае падумаць і расставіць усё на свае месцы.	Люты	Дзіўныя тры месяцы дзіўнай зімы прымусілі пра многае падумаць і расставіць усё на свае месцы.	2018-06-20 10:30:40.542961+00
+557	2009-02-23 00:00:00+00	hobh-two	Дом разбитых сердец II, пепел	Другая частка працы пад агульнай назвай "Дом разбітых сэрцаў".	Другая частка працы пад агульнай назвай "Дом разбітых сэрцаў".	Другая частка працы пад агульнай назвай "Дом разбітых сэрцаў". Галоўная асаблівасць дадзенай кампіляцыі ў тым, што абсалютна ўсе трэкі - музыка "нашых" выканаўцаў, гэта можна без цяжказцяў заўважыць па трэклісту. Уся музыка збіралася гадамі і дбайна фільтравалася.	release/M15_Manti_HOBH_02_Pepel.mp3	covers/hobh-2.jpg	t	MNT015	LAME 320kbps 44100Hz	60:32	1. Tokio - Когда ты плачешь \r\n2. Дельфин - Весна\r\n3. Без билета - Ромашка\r\n4. Земфира - Прости меня моя любовь\r\n5. Гришковец - Извини\r\n6. Ленинград - У меня есть все\r\n7. Грин грей - Осень\r\n8. 5'nizza - Сюрная\r\n9. Океан ельзи - Вiдпусти\r\n10. Дельфин - Любовь\r\n11. T9 - Ода нашей любви\r\n12. Party makers - Новая любовь\r\n13. Нагано - Голос андеграунда\r\n14. Krec - Искра	t	t	t	The second part of the work is under the general title "House of broken hearts". The main feature of this compilation is that absolutely all tracks are music of "our" performers, it can be easily noticed from the tracklist. All music was collected for years and carefully filtered.	Вторая часть работы под общим названием "Дом разбитых сердец". Главная особенность данной компиляции в том, что абсолютно все треки - музыка "наших" исполнителей, это можно без труда заметить по треклисту. Вся музыка собиралась годами и тщательно фильтровалась.	The second part of the work is under the general title "House of broken hearts".	Вторая часть работы под общим названием "Дом разбитых сердец".	House of broken hearts II, ash	Дом разбитых сердец II, пепел	The second part of the work is under the general title "House of broken hearts".	Вторая часть работы под общим названием "Дом разбитых сердец".	84	11	Другая частка працы пад агульнай назвай "Дом разбітых сэрцаў". Галоўная асаблівасць дадзенай кампіляцыі ў тым, што абсалютна ўсе трэкі - музыка "нашых" выканаўцаў, гэта можна без цяжказцяў заўважыць па трэклісту. Уся музыка збіралася гадамі і дбайна фільтравалася.	Другая частка працы пад агульнай назвай "Дом разбітых сэрцаў".	Дом разбитых сердец II, пепел	Другая частка працы пад агульнай назвай "Дом разбітых сэрцаў".	2018-06-20 10:30:40.557713+00
+595	2015-04-20 09:23:50+00	before	Before I go to sleep	У пэўным сэнсе юбілейны, 40-ы сэт з серыі мінімалістычнага драма. Практычна ніякай жэсці, усё вельмі тэхнічна і тонка...	У пэўным сэнсе юбілейны, 40-ы сэт з серыі <a href="/blog/?tag=techstep">мінімалістычнага драма</a>.	У пэўным сэнсе юбілейны, 40-ы сэт з серыі <a href="/blog/?tag=techstep">мінімалістычнага драма</a>. Практычна ніякай жэсці, усё вельмі тэхнічна і тонка...	release/M40_Manti_Before_I_go_to_sleep.mp3	covers/before.jpg	t	MNT040	LAME 320kbps 44100Hz	53:38	1. DLR, Hydro, Mako & Villem - The formula\r\n2. Mob Tactics - Savages (Original mix)\r\n3. Dabs & Safire feat. Mc Lowqui - Hideout\r\n4. Emperor - Begin (feat. Georgia Yates)\r\n5. Dimension - Jet Black (Original mix)\r\n6. Noel - Defence\r\n7. KROT - Rusty pipe\r\n8. D iolax - Space vortex\r\n9. Rune Kaiza Elok - Lynks\r\n10. Agnostetics - Dark mind\r\n11. D Iolax - The forgotten tribe\r\n12. Breekda & Dark Soul - Sea\r\n13. Kije - Without you (feat. Jently)	t	t	t	In a some sense, the jubilee, 40th set from the series of <a href="/blog/?tag=techstep">minimalistic dnb</a>.\r\nVirtually no hard sound, all very technical and subtle...	В некотором смысле юбилейный, 40-ой сэт из серии <a href="/blog/?tag=techstep">минималистичного драма</a>.\r\nПрактически никакой жести, все очень технично и тонко...	In a some sense, the jubilee, 40th set from the series of minimalistic dnb.	В некотором смысле юбилейный, 40-ой сэт из серии минималистичного драма. Практически никакой жести, все очень технично и тонко...	Before I go to sleep	Before I go to sleep	In a some sense, the jubilee, 40th set from the series of <a href="/blog/?tag=techstep">minimalistic dnb</a>.	В некотором смысле юбилейный, 40-ой сэт из серии <a href="/blog/?tag=techstep">минималистичного драма</a>.	97	50	У пэўным сэнсе юбілейны, 40-ы сэт з серыі <a href="/blog/?tag=techstep">мінімалістычнага драма</a>. Практычна ніякай жэсці, усё вельмі тэхнічна і тонка...	У пэўным сэнсе юбілейны, 40-ы сэт з серыі мінімалістычнага драма. Практычна ніякай жэсці, усё вельмі тэхнічна і тонка...	Before I go to sleep	У пэўным сэнсе юбілейны, 40-ы сэт з серыі <a href="/blog/?tag=techstep">мінімалістычнага драма</a>.	2018-06-20 10:30:40.568733+00
+597	2016-01-23 17:10:55+00	phantom	Phantom shield	Самае вялікае задавальненне ў жыцці рабіць тое, што іншыя кажуць, што вы не можаце...	Самае вялікае задавальненне ў жыцці рабіць тое, што іншыя кажуць, што вы не можаце...	Самае вялікае задавальненне ў жыцці рабіць тое, што іншыя кажуць, што вы не можаце...	release/M42_Manti_Phantom_shield.mp3	covers/phantom.jpg	t	MNT042	LAME 320kbps 44100Hz	57:49	1. Miles - Sense data\r\n2. Mark System - Final approach\r\n3. L-Side - Dreadlocks\r\n4. Kaset - Nectar\r\n5. Ben Soundscape, Superior Selectionz - Revenge\r\n6. Icicle - Lost hours\r\n7. Detail - Lost\r\n8. Bredren - Red Powder (Arkaik remix)\r\n9. DLR - Tugboat\r\n10. Chromatic - Inertia\r\n11. Ulterior Motive - Featherweight\r\n12. Kantyze - Alien origins\r\n13. Skeptical - Imperial\r\n14. Simstah - Subliminal\r\n15. Mista - Elephant juice	t	t	t	The greatest pleasure in life is doing what others say you can not...	Самое большое удовольствие в жизни делать то, что другие говорят, что вы не можете...	The greatest pleasure in life is doing what others say you can not...	Самое большое удовольствие в жизни делать то, что другие говорят, что вы не можете...	Phantom shield	Phantom shield	The greatest pleasure in life is doing what others say you can not...	Самое большое удовольствие в жизни делать то, что другие говорят, что вы не можете...	82	52	Самае вялікае задавальненне ў жыцці рабіць тое, што іншыя кажуць, што вы не можаце...	Самае вялікае задавальненне ў жыцці рабіць тое, што іншыя кажуць, што вы не можаце...	Phantom shield	Самае вялікае задавальненне ў жыцці рабіць тое, што іншыя кажуць, што вы не можаце...	2018-06-20 10:30:40.561027+00
+579	2012-04-25 00:00:00+00	exception	Exception	Гэты сэт з'яўляецца працягам серыі мінімалістычных нейра міксаў, працягам працы пад назвай Katana.	Гэты сэт з'яўляецца працягам серыі <a href="/blog/?tag=techstep">мінімалістычных нейра міксаў</a>, працягам працы пад назвай <a href="/blog/katana/">Katana</a>.	Гэты сэт з'яўляецца працягам серыі <a href="/blog/?tag=techstep">мінімалістычных нейра міксаў</a>, працягам працы пад назвай <a href="/blog/katana/">Katana</a>.\r\nАдна з першых работ цалкам запісаная ў жывую на маім трактары (Traktor Pro + X1 + TA6), трохі была падмайстарана, але ў цэлым засталася даволі жывой.	release/M26_Manti_Exception_mix.mp3	covers/exception.jpg	t	MNT026	LAME 320kbps 44100Hz	51:35	1. Mortem - Monoveler\r\n2. Icicle - Alien Groove\r\n3. Paimon - Hellraiser  \r\n4. Science Fiction - Abyss  \r\n5. Mortem - Get Close\r\n6. June Miller - Snapcase\r\n7. Alix Perez - Exemption\r\n8. Kabuki & Savine - Backup\r\n9. The Countamen & Alley Cat - Payload (Konflict remix)\r\n10. Science Fiction - Bystander effect  \r\n11. Nickbee & Malc - Cosmos\r\n12. Icicle, Distance - Exhale	t	t	t	This set is a continuation of the series <a href="/blog/?tag=techstep">minimalistic neuro mixes</a>, a continuation of the work called <a href="/blog/katana/">Katana</a>.\r\nOne of the first works fully recorded live on my tractor (Traktor Pro + X1 + TA6), was slightly mastered, but in general it remained pretty live.	Этот сет является продолжением серии <a href="/blog/?tag=techstep">минималистичных нейро миксов</a>, продолжением работы под названием <a href="/blog/katana/">Katana</a>.\r\nОдна из первых работ полностью записанная в живую на моем тракторе (Traktor Pro + X1 + TA6), немного была подмастерена, но в целом осталась довольно живой.	This set is a continuation of the series minimalistic neuro mixes, a continuation of the work called Katana.	Этот сет является продолжением серии минималистичных нейро миксов, продолжением работы под названием Katana.	Exception	Exception	This set is a continuation of the series <a href="/blog/?tag=techstep">minimalistic neuro mixes</a>, a continuation of the work called <a href="/blog/katana/">Katana</a>.	Этот сет является продолжением серии <a href="/blog/?tag=techstep">минималистичных нейро миксов</a>, продолжением работы под названием <a href="/blog/katana/">Katana</a>.	114	34	Гэты сэт з'яўляецца працягам серыі <a href="/blog/?tag=techstep">мінімалістычных нейра міксаў</a>, працягам працы пад назвай <a href="/blog/katana/">Katana</a>.\r\nАдна з першых работ цалкам запісаная ў жывую на маім трактары (Traktor Pro + X1 + TA6), трохі была падмайстарана, але ў цэлым засталася даволі жывой.	Гэты сэт з'яўляецца працягам серыі мінімалістычных нейра міксаў, працягам працы пад назвай Katana.	Exception	Гэты сэт з'яўляецца працягам серыі <a href="/blog/?tag=techstep">мінімалістычных нейра міксаў</a>, працягам працы пад назвай <a href="/blog/katana/">Katana</a>.	2018-06-20 10:30:40.564498+00
+574	2008-10-31 00:00:00+00	helloween-live	Helloween live	Першы досвед працы з драмам, з яго даволі агрэсіўным і жорсткім напрамкам Neurofunk.	Першы досвед працы з драмам, з яго даволі агрэсіўным і жорсткім напрамкам <a href="/blog/?tag=neurofunk">Neurofunk</a>.	Першы досвед працы з драмам, з яго даволі агрэсіўным і жорсткім напрамкам <a href="/blog/?tag=neurofunk">Neurofunk</a>. Тэхнічна не ўсё так гладка, але, па-мойму, кампіляцыя згладжвае гэтыя агрэхі.\r\nПадштурхнулі мяне на гэты эксперымент з драмам, "выпадкова" запампаваныя першыя 56 рэлізаў лэйбл SUBTITLES.	release/M11_Manti_Helloween_party_live.mp3	covers/helloween.jpg	t	MNT011	LAME 320kbps 44100Hz	36:01		t	t	t	The first experience with the dnb, with its rather aggressive and hard style <a href="/blog/?tag=neurofunk">Neurofunk</a>. Technically, not everything is so smooth, but, in my opinion, the compilation smoothes out these flaws.\r\nSpurred me on this experiment with the dnb, "accidentally" downloaded the first 56 releases of the label SUBTITLES.	Первый опыт работы с драмом, с его довольно агрессивным и жестким направлением <a href="/blog/?tag=neurofunk">Neurofunk</a>. Технически не все так гладко, но, по-моему, компиляция сглаживает эти огрехи.\r\nСподвигли меня на этот эксперимент с драмом, "случайно" скачанные первые 56 релизов лэйбла SUBTITLES.	The first experience with the dnb, with its rather aggressive and hard style Neurofunk.	Первый опыт работы с драмом, с его довольно агрессивным и жестким направлением Neurofunk.	Helloween live	Helloween live	The first experience with the dnb, with its rather aggressive and hard style <a href="/blog/?tag=neurofunk">Neurofunk</a>.	Первый опыт работы с драмом, с его довольно агрессивным и жестким направлением <a href="/blog/?tag=neurofunk">Neurofunk</a>.	92	29	Першы досвед працы з драмам, з яго даволі агрэсіўным і жорсткім напрамкам <a href="/blog/?tag=neurofunk">Neurofunk</a>. Тэхнічна не ўсё так гладка, але, па-мойму, кампіляцыя згладжвае гэтыя агрэхі.\r\nПадштурхнулі мяне на гэты эксперымент з драмам, "выпадкова" запампаваныя першыя 56 рэлізаў лэйбл SUBTITLES.	Першы досвед працы з драмам, з яго даволі агрэсіўным і жорсткім напрамкам Neurofunk.	Helloween live	Першы досвед працы з драмам, з яго даволі агрэсіўным і жорсткім напрамкам <a href="/blog/?tag=neurofunk">Neurofunk</a>.	2018-06-20 10:30:40.577689+00
+556	2006-12-11 00:00:00+00	hobh-one	Дом разбитых сердец, начало	Для ўсіх тых, хто пакутуе.	Для ўсіх тых, хто пакутуе.	Для всех тех, кто страдает...	release/M03_Manti_HOBH_01_Nachalo.mp3	covers/hobh-1.jpg	t	MNT003	LAME 192kbps 44100Hz	64:54	1. Telepopmusik - 6p_6q_=h_4n\r\n2. Amon Tobin - Mighty micro people\r\n3. Manmademan - Breeze\r\n4. Nuclear Ramjet - Near earth project\r\n5. Telefon Tel Aviv - When it happens, it moves all by itself\r\n6. Imogen Heap - Hide & seek \r\n7. Halou - Ill carri you\r\n8. marco_manti - Music for Lilou \r\n9. Linkin Park - My December (Alter-Native mastering) \r\n10. switch (depeche mode)\r\n11. Junkie XL - We become one\r\n12. Planet Funk feat. Sally Doherty - Dusk\r\n13. 2Raumwohnung - Wir erinnern uns nicht\r\n14. Daft Punk - Something about us\r\n15. A-ha - Summer moved on	t	t	t	For all those who suffer.	Для всех тех, кто страдает.	For all those who suffer.	Для всех тех, кто страдает.	House of broken hearts, beginning	Дом разбитых сердец, начало	For all those who suffer.	Для всех тех, кто страдает.	84	10	Для всех тех, кто страдает...	Для ўсіх тых, хто пакутуе.	Дом разбитых сердец, начало	Для ўсіх тых, хто пакутуе.	2018-06-20 10:30:40.585389+00
+589	2013-08-27 17:43:56+00	zeppelin	Zeppelin	Цікавая праца для аматараў мінімалістычнага і шумнага тэхна гучання на ватных хуткасцях.	Цікавая праца для аматараў мінімалістычнага і шумнага тэхна гучання на "ватных" хуткасцях.	Цікавая праца для аматараў мінімалістычнага і шумнага тэхна гучання на "ватных" хуткасцях. Праца працягвае серыю эксперыментальных міксаў з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.	release/M36_Manti_Zeppelin.mp3	covers/zeppelin.jpg	t	MNT036	LAME 320kbps 44100Hz	57:55	1. Orson Throb - Silent cloud\r\n2. CV313 - Subtraktive\r\n3. STL - A beautiful mind\r\n4. Orson Throb - Im from the space\r\n5. Zzzzra - Mecanographie phase 1\r\n6. Echospace feat. The Howard Street Rhythm Section - Spatial dimension\r\n7. Deepchord - Grand bend\r\n8. Dolby - He0r\r\n9. Orson Throb - For my people\r\n10. Echospace - Sonorous (CV313s Midst of something beautiful mix)	t	t	t	An interesting work for fans of minimalistic and noisy techno sound at low speeds. The work continues a series of experimental mixes from the series <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.	Интересная работа для любителей минималистичного и шумного техно звучания на "ватных" скоростях.\r\nРабота продолжает серию экспериментальных миксов из серии <a href="http://manti.by/tag/lsc/">Light Synthetic Compilation</a>.	An interesting work for fans of minimalistic and noisy techno sound at low speeds.	Интересная работа для любителей минималистичного и шумного техно звучания на ватных скоростях.	Zeppelin	Zeppelin	An interesting work for fans of minimalistic and noisy techno sound at low speeds.	Интересная работа для любителей минималистичного и шумного техно звучания на "ватных" скоростях.	118	44	Цікавая праца для аматараў мінімалістычнага і шумнага тэхна гучання на "ватных" хуткасцях. Праца працягвае серыю эксперыментальных міксаў з серыі <a href="/blog/?tag=light-synthetic-compilation">Light Synthetic Compilation</a>.	Цікавая праца для аматараў мінімалістычнага і шумнага тэхна гучання на ватных хуткасцях.	Zeppelin	Цікавая праца для аматараў мінімалістычнага і шумнага тэхна гучання на "ватных" хуткасцях.	2018-06-20 10:30:40.589254+00
+577	2011-03-03 00:00:00+00	trauma	Trauma	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.\r\nПрактычна цалкам сэт скампілен ў бальніцы, пазней сабраны адной (цэлай) рукой пры дапамозе ACID Pro ад кампаніі Sony і пары стандартных прымочак: Ozone, GCO, Elephant і да т.п.\r\nСэт перадае ўсю тую шырокую гаму адчуванняў, якія можна выпрабаваць у нашых дзяржаўных бальніцах.	release/M23_Manti_Trauma_mix.mp3	covers/trauma.jpg	t	MNT023	LAME 320kbps 44100Hz	53:29	1. Real - When the dream\\'s done\r\n2. Cliffhanga - Centipede\r\n3. Paperclip & Malk - Detective  \r\n4. Paperclip & Flame - Bad illumination\r\n5. EBK - Soma\r\n6. Black Sun Empire - Kempi (feat. Nymfo)    \r\n7. Unknown Error - Dark wars  \r\n8. Receptor & Engage - Wi-fi waves  \r\n9. Black Sun Empire - Wasteland (feat. SPL)    \r\n10. Flame - Prehistoric (vip mix)  \r\n11. Katharsys & Gancher - Sky from beyond  \r\n12. Pyro - Restless (Katharsys remix)\r\n13. Nphonix & Enei - Quicksilver    \r\n13. Receptor - Princess	t	t	t	This set, like no other physically suffered and invented in the trauma department of the hospital in my home town, after a hard fall on alpine skiing.\r\nAlmost completely set compiled in the hospital, later assembled one (intact) hand with ACID Pro from Sony and a couple of standard plugins: Ozone, GCO, Elephant, etc.\r\nSet conveys the whole gamma of sensations that can be experienced in our public hospitals.	Этот сет, как никакой другой выстрадан физически и придуман в травматологическом отделении больницы моего родного города, после жесткого падения на горных лыжах.\r\nПрактически полностью сет скомпилен в больнице, позже собран одной (целой) рукой при помощи ACID Pro от компании Sony и пары стандартных примочек: Ozone, GCO, Elephant и т.п.\r\nСет передает всю ту широкую гамму ощущений, которые можно испытать в наших государственных больницах.	This set, like no other physically suffered and invented in the trauma department of the hospital in my home town, after a hard fall on alpine skiing.	Этот сет, как никакой другой выстрадан физически и придуман в травматологическом отделении больницы моего родного города, после жесткого падения на горных лыжах.	Trauma	Trauma	This set, like no other physically suffered and invented in the trauma department of the hospital in my home town, after a hard fall on alpine skiing.	Этот сет, как никакой другой выстрадан физически и придуман в травматологическом отделении больницы моего родного города, после жесткого падения на горных лыжах.	91	32	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.\r\nПрактычна цалкам сэт скампілен ў бальніцы, пазней сабраны адной (цэлай) рукой пры дапамозе ACID Pro ад кампаніі Sony і пары стандартных прымочак: Ozone, GCO, Elephant і да т.п.\r\nСэт перадае ўсю тую шырокую гаму адчуванняў, якія можна выпрабаваць у нашых дзяржаўных бальніцах.	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.	Trauma	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.	2018-06-20 10:30:40.57301+00
+572	2007-10-27 00:00:00+00	janaca-express-02	Janaca express 02	Другая частка майго трыпа ў залюстаркоўе.	Другая частка майго трыпа ў залюстаркоўе. Першую частку можна знайсці <a href="/blog/janaca-express/">тут</a>.	Другая частка майго трыпа ў залюстаркоўе. Першую частку можна знайсці <a href="/blog/janaca-express/">тут</a>.	release/M09_Manti_Janaca_express_mix_02.mp3	covers/janaca.jpg	t	MNT009	LAME 192kbps 44100Hz	59:38	1. Intro - Tristan  \r\n2. Quantum feat. Keren Porat - Janaca express\r\n3. Rocky vs. Galactika - Global air (Monster edit)  \r\n4. Zen Mechanics - Vurt  \r\n5. Space Vision - Mascer jedi\r\n6. Lucy - Flash damage\r\n7. Insomnia - The real thing  \r\n8. Magoon - Future\r\n9. Sangeet - Distorted dream\r\n10. Vibe Tribe - Kick the bass	t	t	t	The second part of my trip is through the looking-glass. The first part can be found <a href="/blog/janaca-express/">here</a>.	Вторая часть моего трипа в зазеркалье. Первую часть можно найти <a href="/blog/janaca-express/">здесь</a>.	The second part of my trip is through the looking-glass.	Вторая часть моего трипа в зазеркалье.	Janaca express 02	Janaca express 02	The second part of my trip is through the looking-glass. The first part can be found <a href="/blog/janaca-express/">here</a>.	Вторая часть моего трипа в зазеркалье. Первую часть можно найти <a href="/blog/janaca-express/">здесь</a>.	60	27	Другая частка майго трыпа ў залюстаркоўе. Першую частку можна знайсці <a href="/blog/janaca-express/">тут</a>.	Другая частка майго трыпа ў залюстаркоўе.	Janaca express 02	Другая частка майго трыпа ў залюстаркоўе. Першую частку можна знайсці <a href="/blog/janaca-express/">тут</a>.	2018-06-20 10:30:40.581784+00
 \.
 
 
@@ -2032,421 +2033,421 @@ SELECT pg_catalog.setval('public.core_email_id_seq', 1, true);
 --
 
 COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
-1	2017-04-18 14:38:26.785579+02	5	Test	1	[{"added": {}}]	22	1
-2	2017-04-18 16:42:31.612962+02	5	Test	3		22	1
-3	2017-04-18 16:43:27.591832+02	6	Test	1	[{"added": {}}]	22	1
-4	2017-04-18 16:48:31.373765+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-5	2017-04-18 17:00:38.636777+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-6	2017-04-18 17:01:55.475761+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-7	2017-04-18 17:03:29.502987+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-8	2017-04-18 17:04:15.805394+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-9	2017-04-18 17:08:57.65367+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-10	2017-04-18 17:10:25.776528+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-11	2017-04-18 17:12:43.685739+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-12	2017-04-18 17:13:31.835511+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-13	2017-04-18 17:16:39.270798+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-14	2017-04-18 17:39:33.223239+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-15	2017-04-18 17:45:41.623354+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-16	2017-04-18 17:52:41.190565+02	26	FAILURE    2ffe34c2-a2a1-40dc-8dda-07640ad21a42 blog.tasks.convert_to_ogg_preview	2	[]	12	1
-17	2017-04-18 17:53:16.879215+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-18	2017-04-18 17:55:20.755091+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-19	2017-04-18 17:57:58.693867+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-20	2017-04-18 18:00:26.960774+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-21	2017-04-19 11:50:38.810303+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-22	2017-04-19 12:03:31.838539+02	6	Test	2	[{"changed": {"fields": ["mp3_preview_ready", "ogg_preview_ready", "ogg_release_ready", "tags"]}}]	22	1
-23	2017-04-19 12:11:39.686651+02	6	Test	2	[{"changed": {"fields": ["mp3_preview_ready", "ogg_preview_ready", "ogg_release_ready", "tags"]}}]	22	1
-24	2017-04-19 12:14:15.662442+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-25	2017-04-19 12:20:18.938933+02	6	Test	2	[{"changed": {"fields": ["mp3_preview_ready", "ogg_preview_ready", "ogg_release_ready", "tags"]}}]	22	1
-26	2017-04-19 12:30:36.525062+02	6	Test	2	[{"changed": {"fields": ["mp3_preview_ready", "ogg_preview_ready", "ogg_release_ready", "tags"]}}]	22	1
-27	2017-04-19 12:36:56.360251+02	7	t	1	[{"added": {}}]	22	1
-28	2017-04-19 12:37:55.217383+02	8	n	1	[{"added": {}}]	22	1
-29	2017-04-19 12:38:03.598252+02	6	Test	2	[{"changed": {"fields": ["related", "tags"]}}]	22	1
-30	2017-04-19 12:40:11.441257+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-31	2017-04-19 12:40:32.022243+02	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
-32	2017-04-19 14:31:50.676657+02	1	test	1	[{"added": {}}]	24	1
-33	2017-04-19 14:36:06.664008+02	1	test	1	[{"added": {}}]	24	1
-34	2017-04-19 14:36:36.389882+02	1	test - Image#1	1	[{"added": {}}]	23	1
-35	2017-04-19 14:37:30.454554+02	1	test - Image#1	3		23	1
-36	2017-04-19 14:38:46.375238+02	2	test - Image#2	1	[{"added": {}}]	23	1
-37	2017-04-19 14:49:26.182572+02	2	test - Image#2	2	[{"changed": {"fields": ["thumbnail_image", "preview_image", "gallery_image"]}}]	23	1
-38	2017-04-19 15:30:49.730999+02	3	test - Image#3	1	[{"added": {}}]	23	1
-39	2017-04-19 15:31:03.136702+02	4	test - Image#4	1	[{"added": {}}]	23	1
-40	2017-04-19 15:53:22.442356+02	2	Second	1	[{"added": {}}]	24	1
-41	2017-04-19 15:53:34.95993+02	1	First	2	[{"changed": {"fields": ["slug", "name", "tags"]}}]	24	1
-42	2017-04-20 10:08:52.727215+02	1	Первая Галлерея	2	[{"changed": {"fields": ["name", "name_ru", "name_en", "tags"]}}]	24	1
-43	2017-04-20 10:09:28.673187+02	2	Вторая Галерея	2	[{"changed": {"fields": ["name", "name_ru", "name_en", "tags"]}}]	24	1
-44	2017-04-20 10:09:37.636636+02	1	Первая Галерея	2	[{"changed": {"fields": ["name", "name_ru", "tags"]}}]	24	1
-45	2017-04-20 10:40:33.238654+02	6	Тестовый Артикль	2	[{"changed": {"fields": ["name_ru", "name_en", "meta_ru", "meta_en", "summary_ru", "summary_en", "description_ru", "description_en"]}}]	22	1
-46	2017-04-21 12:19:34.625117+02	6	Вторая Галерея - Image#6	1	[{"added": {}}]	23	1
-47	2017-04-21 12:20:01.18448+02	7	Вторая Галерея - Image#7	1	[{"added": {}}]	23	1
-48	2017-04-21 12:20:14.175796+02	8	Вторая Галерея - Image#8	1	[{"added": {}}]	23	1
-49	2017-04-21 12:21:31.352327+02	8	Вторая Галерея - Image#8	2	[{"changed": {"fields": ["tags"]}}]	23	1
-50	2017-04-21 12:21:49.073723+02	5	n	3		4	1
-51	2017-04-21 12:21:49.095733+02	2	post	3		4	1
-52	2017-04-21 12:21:49.10778+02	3	r	3		4	1
-53	2017-04-21 12:21:49.121115+02	4	t	3		4	1
-54	2017-04-21 12:21:49.133184+02	1	test	3		4	1
-55	2017-04-21 12:26:39.455791+02	9	Первая Галерея - Image#9	1	[{"added": {}}]	23	1
-56	2017-04-26 14:55:23.53881+02	9	Gallery #First Gallery - Image#9	3		23	1
-57	2017-04-26 14:55:23.598489+02	8	Gallery #Second Gallery - Image#8	3		23	1
-58	2017-04-26 14:55:23.610681+02	6	Gallery #Second Gallery - Image#6	3		23	1
-59	2017-04-26 14:55:23.623097+02	3	Gallery #First Gallery - Image#3	3		23	1
-60	2017-04-26 14:55:23.636358+02	2	Gallery #First Gallery - Image#2	3		23	1
-61	2017-04-26 14:55:23.671541+02	7	Gallery #Second Gallery - Image#7	3		23	1
-62	2017-04-26 14:55:23.70754+02	4	Gallery #First Gallery - Image#4	3		23	1
-63	2017-04-26 14:55:35.611357+02	2	Second Gallery	3		24	1
-64	2017-04-26 14:55:35.627738+02	1	First Gallery	3		24	1
-65	2017-05-02 14:22:52.667595+02	611	Gallery #oslo-tenerife - Image#611	2	[{"changed": {"fields": ["tags"]}}]	23	1
-66	2017-05-02 15:13:39.620952+02	836	Gallery #spring-17 - Image#836	1	[{"added": {}}]	23	1
-67	2017-05-02 15:15:03.41346+02	836	Gallery #spring-17 - Image#836	2	[{"changed": {"fields": ["tags"]}}]	23	1
-68	2017-05-02 15:35:24.708815+02	836	Gallery #spring-17 - Image#836	2	[{"changed": {"fields": ["tags"]}}]	23	1
-69	2017-05-02 15:36:21.800369+02	836	Gallery #spring-17 - Image#836	2	[{"changed": {"fields": ["tags"]}}]	23	1
-70	2017-05-02 15:38:00.588844+02	836	Gallery #spring-17 - Image#836	2	[{"changed": {"fields": ["tags", "thumbnail_image", "preview_image", "gallery_image", "phash"]}}]	23	1
-71	2017-05-02 15:38:39.409675+02	836	Gallery #spring-17 - Image#836	2	[{"changed": {"fields": ["tags"]}}]	23	1
-72	2017-05-02 15:41:03.591488+02	836	Gallery #spring-17 - Image#836	2	[{"changed": {"fields": ["tags"]}}]	23	1
-73	2017-05-02 16:19:50.832093+02	837	Gallery #spring-17 - Image#837	1	[{"added": {}}]	23	1
-74	2017-05-02 16:24:34.452275+02	837	Gallery #spring-17 - Image#837	2	[{"changed": {"fields": ["tags"]}}]	23	1
-130	2018-05-29 14:19:19.06068+02	29	Featured	2	[{"changed": {"fields": ["slug"]}}]	4	1
-75	2017-05-02 16:27:47.644662+02	834	Gallery #autumn-13 - Image#834	2	[{"changed": {"fields": ["tags", "thumbnail_ready", "preview_ready", "gallery_ready"]}}]	23	1
-76	2017-05-02 16:30:20.913649+02	830	Gallery #autumn-13 - Image#830	2	[{"changed": {"fields": ["tags"]}}]	23	1
-77	2017-05-03 14:17:43.030351+02	439	Shining	2	[{"changed": {"fields": ["cover", "release"]}}]	22	1
-78	2017-05-03 14:17:57.035851+02	439	Shining	2	[{"changed": {"fields": ["cover", "release"]}}]	22	1
-79	2017-05-03 16:19:30.105794+02	599	100 метров за 4 секунды	3		22	1
-80	2017-05-03 16:19:30.1462+02	588	Forthcoming releses	3		22	1
-81	2017-05-03 16:19:30.157873+02	561	Правила и Копирайт	3		22	1
-82	2017-05-03 16:19:30.171029+02	560	Обо мне	3		22	1
-83	2017-05-03 16:19:30.182702+02	549	Моё резюме	3		22	1
-84	2018-04-20 17:21:41.746603+02	16		3		4	1
-85	2018-04-25 16:30:30.61844+02	601	Shining	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-86	2018-04-26 16:19:57.80854+02	1	manti.by@gmail.com	1	[{"added": {}}]	2	1
-87	2018-05-02 20:54:52.348433+02	601	Shining	2	[{"changed": {"fields": ["meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-88	2018-05-02 20:55:00.854421+02	601	Shining	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-89	2018-05-22 18:22:04.453913+02	600	LITL	2	[{"changed": {"fields": ["name_en", "meta_en", "summary_en", "description_en", "genre", "tags", "tracklist", "mp3_preview_ready", "ogg_preview_ready"]}}]	22	1
-90	2018-05-23 13:52:07.213428+02	553	Stockholm syndrome	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-91	2018-05-23 13:58:37.143659+02	555	Katana	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist", "mp3_preview_ready"]}}]	22	1
-92	2018-05-23 14:00:45.779055+02	587	Aweary silence	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-93	2018-05-23 14:01:08.62123+02	601	Shining	2	[{"changed": {"fields": ["name_en", "genre", "tags"]}}]	22	1
-94	2018-05-23 14:02:48.519191+02	600	LITL	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "summary_be", "summary_ru", "description_be", "description_ru", "genre", "tags"]}}]	22	1
-95	2018-05-23 14:05:41.436795+02	598	Люты	2	[{"changed": {"fields": ["name_be", "name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist", "mp3_preview_ready", "ogg_preview_ready", "ogg_release_ready"]}}]	22	1
-96	2018-05-23 14:07:04.374368+02	597	Phantom shield	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist", "mp3_preview_ready", "ogg_preview_ready"]}}]	22	1
-97	2018-05-23 14:11:18.571495+02	601	Shining	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-98	2018-05-23 17:33:02.910932+02	600	LITL	2	[{"changed": {"fields": ["name_en", "genre", "tags"]}}]	22	1
-99	2018-05-23 17:37:24.650444+02	596	New horizons	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist", "mp3_preview_ready", "ogg_preview_ready", "ogg_release_ready"]}}]	22	1
-100	2018-05-25 12:25:08.22805+02	602	Last night	1	[{"added": {}}]	22	1
-101	2018-05-25 12:35:30.809047+02	32	<Task: 19dad32e-c5c7-44e1-ae4b-f2c54a928644 (FAILURE)>	3		27	1
-102	2018-05-25 12:35:36.786897+02	37	<Task: 0ea26618-2093-4275-b787-4cd3e09970d5 (SUCCESS)>	3		27	1
-103	2018-05-25 12:35:36.793115+02	36	<Task: e702bfbb-154c-4d67-9609-ce0bf422d781 (SUCCESS)>	3		27	1
-104	2018-05-25 12:35:36.796735+02	35	<Task: 5b526af0-019c-4c4a-b3a7-51a2a235e0b0 (SUCCESS)>	3		27	1
-105	2018-05-25 12:35:36.80002+02	34	<Task: 957a747a-de44-4ac0-b36b-8b5d1ee5db3a (SUCCESS)>	3		27	1
-106	2018-05-25 12:35:36.803961+02	33	<Task: 3424ec92-f382-41b4-af4d-e2fd75992579 (SUCCESS)>	3		27	1
-107	2018-05-25 12:35:36.807093+02	31	<Task: 8ff0cc7c-60c6-4f63-9336-dee8706f926c (SUCCESS)>	3		27	1
-108	2018-05-25 12:35:36.810847+02	30	<Task: 4d733fcc-60ac-46db-8d37-cc8850960e30 (SUCCESS)>	3		27	1
-109	2018-05-25 12:35:45.424159+02	602	Last night	2	[{"changed": {"fields": ["genre", "tags", "mp3_preview_ready"]}}]	22	1
-110	2018-05-25 13:08:59.653328+02	601	Shining	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-111	2018-05-25 13:09:20.396653+02	596	New horizons	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-112	2018-05-25 13:10:38.615869+02	553	Stockholm syndrome	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-113	2018-05-25 13:11:14.815531+02	590	Power rangers	2	[{"changed": {"fields": ["meta_be", "meta_ru", "summary_be", "summary_ru", "description_be", "description_ru", "genre", "tags", "tracklist"]}}]	22	1
-114	2018-05-25 13:12:14.292071+02	592	Let's go dancing	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-115	2018-05-25 13:13:04.577682+02	598	Февраль	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-116	2018-05-29 13:52:39.455194+02	602	Last night	2	[{"changed": {"fields": ["genre", "tags", "cover", "release"]}}]	22	1
-117	2018-05-29 14:00:03.212651+02	602	Spectre	2	[{"changed": {"fields": ["name_be", "name_ru", "name_en", "slug", "genre", "tags"]}}]	22	1
-118	2018-05-29 14:03:50.389668+02	602	Spectre	2	[{"changed": {"fields": ["genre", "tags", "related"]}}]	22	1
-119	2018-05-29 14:14:00.251044+02	555	Katana	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-120	2018-05-29 14:14:20.579166+02	596	New horizons	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-121	2018-05-29 14:15:20.598337+02	600	LITL	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-122	2018-05-29 14:15:36.327354+02	598	Февраль	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-123	2018-05-29 14:15:49.027866+02	597	Phantom shield	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-124	2018-05-29 14:16:25.781202+02	592	Let's go dancing	2	[{"changed": {"fields": ["name_en", "meta_en", "summary_en", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-125	2018-05-29 14:16:38.398932+02	587	Aweary silence	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-126	2018-05-29 14:17:08.999594+02	9	ambient	3		4	1
-127	2018-05-29 14:18:28.251066+02	548	Insomnia	2	[{"changed": {"fields": ["name_en", "meta_en", "summary_en", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-128	2018-05-29 14:18:44.547829+02	12	Ambient	2	[{"changed": {"fields": ["slug"]}}]	4	1
-129	2018-05-29 14:19:12.040571+02	7	featured	3		4	1
-131	2018-05-29 14:20:53.932847+02	587	Aweary silence	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-132	2018-05-29 14:21:03.148064+02	109	Intelligent house	3		4	1
-133	2018-05-29 14:22:01.522366+02	555	Katana	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-134	2018-05-29 14:25:28.902284+02	597	Phantom shield	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-135	2018-05-30 10:42:19.117015+02	600	LITL	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-136	2018-05-30 10:42:35.157106+02	592	Let's go dancing	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-137	2018-05-30 10:45:38.284096+02	590	Power rangers	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-138	2018-05-30 15:58:08.260767+02	1	Email object	1	[{"added": {}}]	1	1
-139	2018-05-30 15:58:20.491138+02	1	Email object	3		1	1
-140	2018-05-30 15:58:33.697518+02	596	New horizons	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-141	2018-06-06 15:47:27.901306+02	589	Zeppelin	2	[{"changed": {"fields": ["description_be", "description_ru", "genre", "tags", "tracklist"]}}]	22	1
-142	2018-06-06 15:52:09.44075+02	589	Zeppelin	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_en", "description_en", "genre", "tags"]}}]	22	1
-143	2018-06-06 16:01:25.486319+02	595	Before I go to sleep	2	[{"changed": {"fields": ["name_be", "name_ru", "name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-144	2018-06-06 16:58:15.665563+02	591	Space is Ours	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-145	2018-06-07 15:27:45.951417+02	1	manti.by@gmail.com	2	[{"changed": {"fields": ["original_image"]}}]	2	1
-146	2018-06-07 15:28:02.371758+02	1	manti.by@gmail.com	2	[{"changed": {"fields": ["original_image"]}}]	2	1
-147	2018-06-14 12:12:00.901661+02	602	Last night	2	[{"changed": {"fields": ["name_be", "name_ru", "name_en", "slug", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
-148	2018-06-14 12:13:15.2878+02	594	Сухой закон	2	[{"changed": {"fields": ["meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-149	2018-06-14 12:13:30.034205+02	594	Сухой закон	2	[{"changed": {"fields": ["name_en", "genre", "tags"]}}]	22	1
-150	2018-06-14 12:14:24.581934+02	593	Predator	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-151	2018-06-14 12:15:48.24521+02	586	Alice in Wonderland	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-152	2018-06-14 12:16:54.619952+02	585	My friend Friday	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-153	2018-06-14 12:18:30.851988+02	584	Топливо для танка (НЛП)	2	[{"changed": {"fields": ["name_be", "name_en", "meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-154	2018-06-14 12:24:54.665705+02	583	Reach out of the Sun	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-155	2018-06-14 12:27:16.342414+02	582	Stockholm syndrome - Backset	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-156	2018-06-14 12:27:47.897636+02	581	Enzo cafe live	2	[{"changed": {"fields": ["meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-157	2018-06-14 12:27:58.149052+02	581	Enzo cafe live	2	[{"changed": {"fields": ["name_en", "genre", "tags"]}}]	22	1
-158	2018-06-14 12:29:33.839377+02	580	Progress R-7A	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-159	2018-06-14 12:33:46.854328+02	579	Exception	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-160	2018-06-14 12:36:27.41597+02	578	Renaissance promo	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-161	2018-06-14 12:40:08.276471+02	577	Trauma	2	[{"changed": {"fields": ["name_be", "name_ru", "name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-162	2018-06-14 12:45:04.345841+02	576	Killing machine	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-163	2018-06-14 12:46:34.031093+02	575	Janaca Express live	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-164	2018-06-14 12:49:38.818814+02	602	Last night	2	[{"changed": {"fields": ["genre", "tags", "ogg_preview_ready"]}}]	22	1
-165	2018-06-14 13:00:10.90117+02	17	For IT	3		4	1
-166	2018-06-14 13:05:34.270764+02	574	Helloween live	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
-167	2018-06-14 13:07:53.105131+02	573	Marrakesh	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-168	2018-06-14 13:11:47.027339+02	572	Janaca express part 02	2	[{"changed": {"fields": ["name_en", "slug", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-169	2018-06-14 13:15:42.638017+02	571	Janaca express	2	[{"changed": {"fields": ["name_be", "name_ru", "name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-170	2018-06-14 13:17:38.711456+02	572	Janaca express 02	2	[{"changed": {"fields": ["name_be", "name_ru", "name_en", "meta_be", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
-171	2018-06-14 13:22:36.664949+02	570	Hi-Pass live	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
-172	2018-06-14 13:24:18.791626+02	569	IRIS, it's all about me promo	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-173	2018-06-14 13:25:39.421984+02	568	All she wants is (SCSI device)	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
-174	2018-06-14 13:27:59.830427+02	567	Cote d'Azur promo	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-175	2018-06-14 13:29:29.124629+02	566	Emofunk (Christmas rave) live	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
-176	2018-06-14 13:30:48.494157+02	565	Chillhouse live	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
-177	2018-06-14 13:35:58.572868+02	564	Mix for Basstech part 2	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-178	2018-06-14 13:39:48.296071+02	563	Special mix for Basstech	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-179	2018-06-14 17:04:55.697776+02	562	Bar La'unge live	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-180	2018-06-14 17:10:47.334047+02	559	Дом разбитых сердец 4, южные сны	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-181	2018-06-14 17:12:08.909884+02	558	Дом разбитых сердец III, такая Lite	2	[{"changed": {"fields": ["meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-182	2018-06-14 17:12:38.745299+02	558	Дом разбитых сердец III, такая Lite	2	[{"changed": {"fields": ["name_en", "genre", "tags"]}}]	22	1
-183	2018-06-14 17:16:03.628943+02	557	Дом разбитых сердец II, пепел	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-184	2018-06-14 17:17:18.458351+02	556	Дом разбитых сердец, начало	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-185	2018-06-14 17:18:32.465466+02	554	Autoreply promo	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-186	2018-06-14 17:21:48.459958+02	552	Solaris	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-187	2018-06-14 17:25:41.174885+02	551	Plastic toy	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-188	2018-06-14 17:27:36.93032+02	550	Synthetic	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
-189	2018-06-14 17:34:52.865086+02	898	Gallery #Default - Image#898	3		23	1
-190	2018-06-14 17:34:52.870752+02	878	Gallery #Default - Image#878	3		23	1
-191	2018-06-14 17:35:25.660478+02	916	Gallery #Default - Image#916	1	[{"added": {}}]	23	1
-192	2018-06-15 14:26:09.363072+02	602	Last night	2	[{"changed": {"fields": ["genre", "tags", "cover"]}}]	22	1
-193	2018-06-15 14:28:14.119135+02	917	Gallery #Default - Image#917	1	[{"added": {}}]	23	1
-194	2018-06-15 14:30:13.704287+02	916	Gallery #Default - Image#916	2	[{"changed": {"fields": ["tags"]}}]	23	1
-195	2018-06-15 14:39:28.508909+02	916	Gallery #Default - Image#916	3		23	1
-196	2018-06-15 14:39:44.526659+02	918	Gallery #Default - Image#918	1	[{"added": {}}]	23	1
-197	2018-06-15 14:43:17.609694+02	918	Gallery #Default - Image#918	3		23	1
-198	2018-06-15 14:44:20.834053+02	919	Gallery #Default - Image#919	1	[{"added": {}}]	23	1
-199	2018-06-15 14:50:12.951235+02	153	<Task: d622bcf5-0d78-46b4-b220-cea175c0f261 (SUCCESS)>	3		27	1
-200	2018-06-15 14:50:12.955056+02	152	<Task: b715dce1-f99c-41f4-a565-f144704d639a (SUCCESS)>	3		27	1
-201	2018-06-15 14:50:12.957027+02	151	<Task: 115d13cb-a61d-4ab5-a404-9f4096f159b8 (SUCCESS)>	3		27	1
-202	2018-06-15 14:50:12.958691+02	150	<Task: a98ed447-443f-4b3a-98f2-dffbc5e699e8 (SUCCESS)>	3		27	1
-203	2018-06-15 14:50:12.960575+02	149	<Task: ec3aadf7-ff71-4487-9715-49ab3cf1de45 (SUCCESS)>	3		27	1
-204	2018-06-15 14:50:12.962465+02	148	<Task: 9b74b2a8-4275-49c9-9741-4fe2e4f354bb (SUCCESS)>	3		27	1
-205	2018-06-15 14:50:12.965289+02	147	<Task: 7efebcaa-995e-4749-b1a8-de2a79521884 (SUCCESS)>	3		27	1
-206	2018-06-15 14:50:12.967663+02	146	<Task: c80624ac-d572-4b32-857c-9a78b386714b (SUCCESS)>	3		27	1
-207	2018-06-15 14:50:12.969499+02	145	<Task: 2e4ce89a-8bfd-4410-ab0c-d0acac99146c (SUCCESS)>	3		27	1
-208	2018-06-15 14:50:12.971353+02	144	<Task: 76007875-bf84-403f-baa6-9060f48f5c2d (SUCCESS)>	3		27	1
-209	2018-06-15 14:50:12.973171+02	143	<Task: 37254a9b-36fe-4f43-b305-dcaaefa11777 (SUCCESS)>	3		27	1
-210	2018-06-15 14:50:12.974817+02	142	<Task: 5e0868c5-7aed-4767-b02b-c779200bcb97 (SUCCESS)>	3		27	1
-211	2018-06-15 14:50:12.976372+02	141	<Task: 33cfe341-38b1-4fc2-a513-52982859f8bb (SUCCESS)>	3		27	1
-212	2018-06-15 14:50:12.977874+02	140	<Task: 8b5ba3f3-00ca-44a8-9b12-bd32836c46e6 (SUCCESS)>	3		27	1
-213	2018-06-15 14:50:12.979278+02	139	<Task: 2890400a-ff3e-4a34-a4d8-1f20cf0882db (SUCCESS)>	3		27	1
-214	2018-06-15 14:50:12.980904+02	138	<Task: 8b6732ec-02af-4585-8f88-4625ec07697f (SUCCESS)>	3		27	1
-215	2018-06-15 14:50:12.982922+02	137	<Task: 4b8e7059-3595-443e-bd40-52b2fe99b1e9 (SUCCESS)>	3		27	1
-216	2018-06-15 14:50:12.985007+02	136	<Task: 686a4a0b-1dec-4c10-9e91-0a8e8ddd6e64 (SUCCESS)>	3		27	1
-217	2018-06-15 14:50:12.986514+02	135	<Task: 2db15df7-c6f6-48fe-ae2a-0022f45f4a00 (SUCCESS)>	3		27	1
-218	2018-06-15 14:50:12.990114+02	134	<Task: 5666b041-f44a-4bad-af33-52a39620149a (SUCCESS)>	3		27	1
-219	2018-06-15 14:50:12.991864+02	133	<Task: 338a6bc6-ae22-400b-a749-926e119f3ede (SUCCESS)>	3		27	1
-220	2018-06-15 14:50:12.993325+02	132	<Task: fb3e9169-5ce7-40a7-b722-2c91249b6251 (SUCCESS)>	3		27	1
-221	2018-06-15 14:50:12.995124+02	131	<Task: 921d3006-a35c-49d4-b6f4-46bb32558866 (SUCCESS)>	3		27	1
-222	2018-06-15 14:50:12.997012+02	130	<Task: 3bf120b5-a065-4554-8edf-d9af7bb5fbcc (SUCCESS)>	3		27	1
-223	2018-06-15 14:50:12.999097+02	129	<Task: 1b5e2025-f56a-4bcb-9113-7f989ac53732 (SUCCESS)>	3		27	1
-224	2018-06-15 14:50:13.001238+02	128	<Task: 375173e5-11e2-48c1-82fe-9fe8b3296b84 (SUCCESS)>	3		27	1
-225	2018-06-15 14:50:13.003246+02	127	<Task: aa0f0372-fc42-4509-87bb-a12643111fa1 (SUCCESS)>	3		27	1
-226	2018-06-15 14:50:13.004938+02	126	<Task: 86cc92d9-97ce-4d6e-a7d1-22cea3437711 (SUCCESS)>	3		27	1
-227	2018-06-15 14:50:13.006494+02	125	<Task: 7dae7cd2-a1ce-410d-afe2-874f299169fa (SUCCESS)>	3		27	1
-228	2018-06-15 14:50:13.00833+02	124	<Task: 2fe0e07b-3b5d-446c-823f-5c5441270049 (SUCCESS)>	3		27	1
-229	2018-06-15 14:50:13.009799+02	123	<Task: 829e1065-6413-4df7-bbd7-031972d38de0 (SUCCESS)>	3		27	1
-230	2018-06-15 14:50:13.01132+02	122	<Task: ceb0840a-d431-4fe3-8e34-958c86cfa6c6 (SUCCESS)>	3		27	1
-231	2018-06-15 14:50:13.012842+02	121	<Task: 925c8bd0-84c1-4aa6-99a8-edfe94ede401 (SUCCESS)>	3		27	1
-232	2018-06-15 14:50:13.014201+02	120	<Task: f687fd13-5f04-42ca-9fe2-dfd60add2ae5 (SUCCESS)>	3		27	1
-233	2018-06-15 14:50:13.01588+02	119	<Task: 7fea2de9-9ac6-4f08-93f5-eb849d44464e (SUCCESS)>	3		27	1
-234	2018-06-15 14:50:13.017199+02	118	<Task: a7e337c3-a30b-4dcb-9d53-1ce1e9c46a0d (SUCCESS)>	3		27	1
-235	2018-06-15 14:50:13.018662+02	117	<Task: a381147c-c9b7-4525-bc03-4f316ee2c240 (SUCCESS)>	3		27	1
-236	2018-06-15 14:50:13.020298+02	116	<Task: 223135dd-b413-4553-b65f-a805201cc151 (SUCCESS)>	3		27	1
-237	2018-06-15 14:50:13.021938+02	115	<Task: 71e850f3-11e0-44a9-b63a-4ccab55e4eff (SUCCESS)>	3		27	1
-238	2018-06-15 14:50:13.02349+02	114	<Task: 1337cf60-6732-435e-aaa8-faf36f230f0d (SUCCESS)>	3		27	1
-239	2018-06-15 14:50:13.025498+02	113	<Task: 263cb96e-25dc-4026-b058-090e54d08d2c (SUCCESS)>	3		27	1
-240	2018-06-15 14:50:13.027058+02	112	<Task: 1f228a32-b80f-47e6-8792-6f739b6e3c99 (SUCCESS)>	3		27	1
-241	2018-06-15 14:50:13.028675+02	111	<Task: c4972363-97b5-43c9-b40d-2210efc161be (SUCCESS)>	3		27	1
-242	2018-06-15 14:50:13.030214+02	110	<Task: 5c36319c-980a-4a05-a754-a6d72890c4d4 (SUCCESS)>	3		27	1
-243	2018-06-15 14:50:13.032267+02	109	<Task: b39149dd-63f1-4b9e-88b0-dfa39d139e63 (SUCCESS)>	3		27	1
-244	2018-06-15 14:50:13.03425+02	108	<Task: e90adb13-a799-4ce4-a57c-c460274bdcb9 (SUCCESS)>	3		27	1
-245	2018-06-15 14:50:13.036454+02	107	<Task: f4c6a2d7-88fb-433b-842c-7801c9941c46 (SUCCESS)>	3		27	1
-246	2018-06-15 14:50:13.038002+02	106	<Task: e091c37f-c7b1-4528-873d-212524b229bf (SUCCESS)>	3		27	1
-247	2018-06-15 14:50:13.039736+02	105	<Task: 8d09e42c-859f-4329-a723-81ba79b058a1 (SUCCESS)>	3		27	1
-248	2018-06-15 14:50:13.041296+02	104	<Task: f29991c5-ef60-4a90-bc51-4d11278517fd (SUCCESS)>	3		27	1
-249	2018-06-15 14:50:13.042918+02	103	<Task: 235cc9f8-6a84-4278-871d-13c7d54d3076 (SUCCESS)>	3		27	1
-250	2018-06-15 14:50:13.044787+02	102	<Task: a515deb2-53fb-4b53-bd15-247287e3d097 (SUCCESS)>	3		27	1
-251	2018-06-15 14:50:13.046508+02	101	<Task: 52dbf8d2-0b09-4185-92a8-e6680be94f0d (SUCCESS)>	3		27	1
-252	2018-06-15 14:50:13.048335+02	100	<Task: 9e730db9-52ea-4451-a990-7e7999c711de (SUCCESS)>	3		27	1
-253	2018-06-15 14:50:13.049797+02	99	<Task: 2baccbf7-2741-4bca-8845-d35d4da8a51d (SUCCESS)>	3		27	1
-254	2018-06-15 14:50:13.051511+02	98	<Task: 24ddff29-c873-43ac-b6e5-399f3f8cc6f9 (SUCCESS)>	3		27	1
-255	2018-06-15 14:50:13.053012+02	97	<Task: 0afcb594-8f7d-433a-8998-5852d63bd152 (SUCCESS)>	3		27	1
-256	2018-06-15 14:50:13.054352+02	96	<Task: 37b880f0-e508-408e-b65c-d5ac7362f4ff (SUCCESS)>	3		27	1
-257	2018-06-15 14:50:13.055864+02	95	<Task: f9b425e9-c619-400a-bb4e-a7e8936ce288 (SUCCESS)>	3		27	1
-258	2018-06-15 14:50:13.05721+02	94	<Task: f20b2e95-7338-404d-a348-8e245dfdf835 (SUCCESS)>	3		27	1
-259	2018-06-15 14:50:13.058664+02	93	<Task: 6bae8f17-aec5-4402-b36d-bc6986c417c0 (SUCCESS)>	3		27	1
-260	2018-06-15 14:50:13.060428+02	92	<Task: d918c8f6-6c5e-49fc-8915-1ab759ccd384 (SUCCESS)>	3		27	1
-261	2018-06-15 14:50:13.061927+02	91	<Task: 14f9b322-851b-4905-b3dd-31fd9684b878 (SUCCESS)>	3		27	1
-262	2018-06-15 14:50:13.063447+02	90	<Task: a5dc4205-c2e8-4224-9b2d-1ec118da23f8 (SUCCESS)>	3		27	1
-263	2018-06-15 14:50:13.064926+02	89	<Task: 14055ed1-a71a-4199-aa25-a83c64de7f30 (SUCCESS)>	3		27	1
-264	2018-06-15 14:50:13.066571+02	88	<Task: 22ecbf8c-eba6-4ec3-8a99-81d750c2d5ef (SUCCESS)>	3		27	1
-265	2018-06-15 14:50:13.068273+02	87	<Task: 2735474e-47af-43f9-a170-23ca663591d2 (SUCCESS)>	3		27	1
-266	2018-06-15 14:50:13.069547+02	86	<Task: b04c5b4f-d1fd-4032-8383-93338a4cbea7 (SUCCESS)>	3		27	1
-267	2018-06-15 14:50:13.070904+02	85	<Task: e10e91b2-30ca-440c-91a0-16b1f4e19a1d (SUCCESS)>	3		27	1
-268	2018-06-15 14:50:13.072188+02	84	<Task: c44d1fb2-25fb-4ac5-bb51-cc47fb344c59 (SUCCESS)>	3		27	1
-269	2018-06-15 14:50:13.073573+02	83	<Task: b2e618e0-5716-46cc-9e95-dce5975cf18d (SUCCESS)>	3		27	1
-270	2018-06-15 14:50:13.074977+02	82	<Task: 2d22a6f0-1eab-440c-9f43-73026ddb6829 (SUCCESS)>	3		27	1
-271	2018-06-15 14:50:13.07643+02	81	<Task: 03c7fd1a-4911-4f6c-ab7d-508319c19aed (SUCCESS)>	3		27	1
-272	2018-06-15 14:50:13.077999+02	80	<Task: 37a8947c-1d8b-4c84-95f5-710f3748a716 (SUCCESS)>	3		27	1
-273	2018-06-15 14:50:13.079611+02	79	<Task: c87d5d36-b0da-4676-867c-af1923997653 (SUCCESS)>	3		27	1
-274	2018-06-15 14:50:13.081292+02	78	<Task: f08d4701-af1e-4382-82db-d699735e141a (SUCCESS)>	3		27	1
-275	2018-06-15 14:50:13.083344+02	77	<Task: 2872f841-19e9-4952-b23d-cb449dd1cdf9 (SUCCESS)>	3		27	1
-276	2018-06-15 14:50:13.085245+02	76	<Task: 1c1dc396-43b5-4c13-beaf-8b57b4dd062d (SUCCESS)>	3		27	1
-277	2018-06-15 14:50:13.087007+02	75	<Task: 6749a1c7-7c3c-4c57-8eec-e6242e2e9fad (SUCCESS)>	3		27	1
-278	2018-06-15 14:50:13.088914+02	74	<Task: 868d2dd3-9902-4ce5-b099-7945931af9db (SUCCESS)>	3		27	1
-279	2018-06-15 14:50:13.091463+02	73	<Task: 10f746ec-996e-4119-82de-13e0ef430a3f (SUCCESS)>	3		27	1
-280	2018-06-15 14:50:13.093863+02	72	<Task: 259889eb-83c4-4a13-9bd0-6c2b5edeaa92 (SUCCESS)>	3		27	1
-281	2018-06-15 14:50:13.096499+02	71	<Task: af2e6872-3b65-4dfa-aac4-bd26ed65c612 (SUCCESS)>	3		27	1
-282	2018-06-15 14:50:13.098454+02	70	<Task: 09aa58b4-01f5-42dd-82cb-eb41ffe4ff59 (SUCCESS)>	3		27	1
-283	2018-06-15 14:50:13.100165+02	69	<Task: 98cde5b0-feba-4235-8fd2-d5453a57e287 (SUCCESS)>	3		27	1
-284	2018-06-15 14:50:13.102077+02	68	<Task: 240acdae-31a0-4a3e-9ed3-c06ce47e1f44 (SUCCESS)>	3		27	1
-285	2018-06-15 14:50:13.10444+02	67	<Task: f30b53d6-ff6f-484c-9eab-bd8e7d2315af (SUCCESS)>	3		27	1
-286	2018-06-15 14:50:13.107564+02	66	<Task: 73ba24fd-d273-431e-8263-a8b82abd2f7b (SUCCESS)>	3		27	1
-287	2018-06-15 14:50:13.109749+02	65	<Task: 6c00ef77-6cbf-4932-a33e-21615ef8f232 (SUCCESS)>	3		27	1
-288	2018-06-15 14:50:13.111555+02	64	<Task: be503b96-d0e9-424e-9c3e-999de753b63e (SUCCESS)>	3		27	1
-289	2018-06-15 14:50:13.113234+02	63	<Task: b04bfbba-6929-4095-b11b-c48d5503cf5b (SUCCESS)>	3		27	1
-290	2018-06-15 14:50:13.114817+02	62	<Task: f7619ed8-7ad8-460e-89fa-403f2832a278 (SUCCESS)>	3		27	1
-291	2018-06-15 14:50:13.11652+02	61	<Task: fb910443-8e2e-4456-b8dd-26e918bd021f (SUCCESS)>	3		27	1
-292	2018-06-15 14:50:13.118012+02	60	<Task: 1ffa1060-6c6d-4674-adef-62e87fd17d1b (SUCCESS)>	3		27	1
-293	2018-06-15 14:50:13.119514+02	59	<Task: 1f48d84d-c33e-48d0-8001-433679a4e504 (SUCCESS)>	3		27	1
-294	2018-06-15 14:50:13.121053+02	58	<Task: ed001253-118d-48c3-9169-d999850b4499 (SUCCESS)>	3		27	1
-295	2018-06-15 14:50:13.122466+02	57	<Task: 4bf378a4-88c2-44fd-82a2-08c222234fc2 (SUCCESS)>	3		27	1
-296	2018-06-15 14:50:13.124326+02	56	<Task: 3a9b6c8a-7cdb-420e-bc86-afcc95a2905e (SUCCESS)>	3		27	1
-297	2018-06-15 14:50:13.125944+02	55	<Task: 0a2ea823-b403-481d-8bcb-8b9ccd246c4c (SUCCESS)>	3		27	1
-298	2018-06-15 14:50:13.127527+02	54	<Task: 5ba94dcb-7d7c-41e9-bebb-0112605a3762 (SUCCESS)>	3		27	1
-299	2018-06-15 14:50:13.128958+02	53	<Task: 3c69641f-a1c7-408c-bc1a-558377e48416 (SUCCESS)>	3		27	1
-300	2018-06-15 14:50:13.130592+02	52	<Task: 2d5a56ed-d07f-4615-84ab-e229ff6a6568 (SUCCESS)>	3		27	1
-301	2018-06-15 14:50:13.132627+02	51	<Task: 75c8e44b-de93-418b-b8c3-671048a83235 (SUCCESS)>	3		27	1
-302	2018-06-15 14:50:13.13491+02	50	<Task: 85492455-21e2-4f97-a0b6-bf381ea54598 (SUCCESS)>	3		27	1
-303	2018-06-15 14:50:22.766+02	602	Last night	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-304	2018-06-15 14:52:30.601851+02	602	Last night	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-305	2018-06-19 12:33:15.236952+02	602	Last night	2	[{"changed": {"fields": ["genre", "tags", "tracklist"]}}]	22	1
-306	2018-06-20 11:22:05.002759+02	423	<Task: f2b17736-58b5-40ca-b354-553e57b9b77a (SUCCESS)>	3		27	1
-307	2018-06-20 11:22:05.014941+02	422	<Task: b66e508d-8016-42a9-9435-6bcb23f5ebdc (SUCCESS)>	3		27	1
-308	2018-06-20 11:22:05.017283+02	421	<Task: 02bb33e1-6b62-47d6-89ea-8975fa98ab1b (SUCCESS)>	3		27	1
-309	2018-06-20 11:22:05.019145+02	420	<Task: c740fa4a-80d6-42fd-92da-690421d93ea1 (SUCCESS)>	3		27	1
-310	2018-06-20 11:22:05.021224+02	419	<Task: de634f9c-1933-449a-9266-098413130bcd (SUCCESS)>	3		27	1
-311	2018-06-20 11:22:05.023009+02	418	<Task: 4a88f325-0502-417d-9bfc-97d27aa5cf3d (SUCCESS)>	3		27	1
-312	2018-06-20 11:22:05.024814+02	417	<Task: 414b1182-2327-42a1-b667-3e7c1bef5105 (SUCCESS)>	3		27	1
-313	2018-06-20 11:22:05.026248+02	416	<Task: 0ab807ea-f4af-410c-917e-07d6ed099f33 (SUCCESS)>	3		27	1
-314	2018-06-20 11:22:05.027667+02	415	<Task: ce02430b-c113-4196-9e34-459dfd41731a (SUCCESS)>	3		27	1
-315	2018-06-20 11:22:05.029061+02	414	<Task: 6eb3069f-02fc-4375-bb0c-138bd53b36ac (SUCCESS)>	3		27	1
-316	2018-06-20 11:22:05.03063+02	413	<Task: dea5f549-a74b-4639-a2a4-b729ecfe2070 (SUCCESS)>	3		27	1
-317	2018-06-20 11:22:05.032257+02	412	<Task: e57af9a1-438d-4149-b1e9-028446345f9b (SUCCESS)>	3		27	1
-318	2018-06-20 11:22:05.033719+02	411	<Task: f7419ba0-448a-49c5-9b2d-ebf7d3e57a86 (SUCCESS)>	3		27	1
-319	2018-06-20 11:22:05.035222+02	410	<Task: b8c1892c-56b6-4c77-a560-fc87b305fc3a (SUCCESS)>	3		27	1
-320	2018-06-20 11:22:05.03665+02	409	<Task: 3c5e07e6-fc6a-4931-9e1f-334a8f9127eb (SUCCESS)>	3		27	1
-321	2018-06-20 11:22:05.03823+02	408	<Task: 8e3ff1ba-3b9e-48af-9013-16a893b80133 (SUCCESS)>	3		27	1
-322	2018-06-20 11:22:05.040122+02	407	<Task: 30cf450a-61fa-4fb6-94df-f990008ac0f4 (SUCCESS)>	3		27	1
-323	2018-06-20 11:22:05.042097+02	406	<Task: d4ad8378-7c90-4756-9f28-85de4b38847c (SUCCESS)>	3		27	1
-324	2018-06-20 11:22:05.043837+02	405	<Task: b9657a4d-3d70-4d71-bfd8-cbd4d3fd12d1 (SUCCESS)>	3		27	1
-325	2018-06-20 11:22:05.045402+02	404	<Task: 678dbf76-918e-49c9-9c1e-8b67f5efd1b0 (SUCCESS)>	3		27	1
-326	2018-06-20 11:22:05.047008+02	403	<Task: 491da5b4-238b-4524-92dc-5030d49034d2 (SUCCESS)>	3		27	1
-327	2018-06-20 11:22:05.048539+02	402	<Task: a662a867-701a-45db-8a39-35a2cd580675 (SUCCESS)>	3		27	1
-328	2018-06-20 11:22:05.050134+02	401	<Task: 1f97518b-8a6a-4082-a145-69cb09b23617 (SUCCESS)>	3		27	1
-329	2018-06-20 11:22:05.05169+02	400	<Task: 58b7dfa0-2c07-4e7c-8542-0d8f180b6b27 (SUCCESS)>	3		27	1
-330	2018-06-20 11:22:05.053164+02	399	<Task: 4eb8b4dd-aff4-46af-8059-30bbfb4bb4cc (SUCCESS)>	3		27	1
-331	2018-06-20 11:22:05.054645+02	398	<Task: 8703f337-6ac4-4a51-a0f7-8f5ded33f92c (SUCCESS)>	3		27	1
-332	2018-06-20 11:22:05.056076+02	397	<Task: 1ea2f90b-107b-4302-b26b-025795009e91 (SUCCESS)>	3		27	1
-333	2018-06-20 11:22:05.057556+02	396	<Task: 50ca6f3a-cac5-4d7a-8b07-4cbdb1cca5a5 (SUCCESS)>	3		27	1
-334	2018-06-20 11:22:05.059286+02	395	<Task: e5c2cf05-5f30-43f7-a8c6-4ef76c0b461e (SUCCESS)>	3		27	1
-335	2018-06-20 11:22:05.060763+02	394	<Task: ea6c4e34-d757-4eaa-86b2-4997b10058bc (SUCCESS)>	3		27	1
-336	2018-06-20 11:22:05.063127+02	393	<Task: 1bc9558d-300b-4821-8b67-09b6877f1ec3 (SUCCESS)>	3		27	1
-337	2018-06-20 11:22:05.070087+02	392	<Task: ed59c6c8-9bde-4c7d-aceb-b12c81fc5967 (SUCCESS)>	3		27	1
-338	2018-06-20 11:22:05.072068+02	391	<Task: eb41150b-5df9-4952-b3c7-fd967715af42 (SUCCESS)>	3		27	1
-339	2018-06-20 11:22:05.073827+02	390	<Task: 8757ee1b-3798-4666-a62f-6d015ddd754b (SUCCESS)>	3		27	1
-340	2018-06-20 11:22:05.075436+02	389	<Task: 80380420-4a57-4b74-8491-27c2ec9de3ae (SUCCESS)>	3		27	1
-341	2018-06-20 11:22:05.076945+02	388	<Task: da82901f-44f3-41f9-bc8f-9c7e39b663c9 (SUCCESS)>	3		27	1
-342	2018-06-20 11:22:05.078631+02	387	<Task: c9e73d2d-5b2b-4863-b858-62869425108f (SUCCESS)>	3		27	1
-343	2018-06-20 11:22:05.08054+02	386	<Task: e6891938-afe7-4b34-832b-eb9879cc1636 (SUCCESS)>	3		27	1
-344	2018-06-20 11:22:05.08212+02	385	<Task: 1dfe278b-a50e-48df-80db-cfa00592bada (SUCCESS)>	3		27	1
-345	2018-06-20 11:22:05.083598+02	384	<Task: 199fff8d-d3b4-46de-a394-594a33397f43 (SUCCESS)>	3		27	1
-346	2018-06-20 11:22:05.085007+02	383	<Task: db3c3d4a-7567-40ab-8e45-b628c0a2733a (SUCCESS)>	3		27	1
-347	2018-06-20 11:22:05.086304+02	382	<Task: fe499a13-0c82-46d3-a212-cae7ebd46282 (SUCCESS)>	3		27	1
-348	2018-06-20 11:22:05.089674+02	381	<Task: 6095d1af-0635-4047-bf6a-cceffd65eb05 (SUCCESS)>	3		27	1
-349	2018-06-20 11:22:05.091428+02	380	<Task: af3174eb-97f1-4517-9074-e91c173cd760 (SUCCESS)>	3		27	1
-350	2018-06-20 11:22:05.0931+02	379	<Task: ed019f82-d1b2-494f-81ba-0b24b027e7d9 (SUCCESS)>	3		27	1
-351	2018-06-20 11:22:05.094666+02	378	<Task: 8665f133-c334-48e2-bdf8-038dd22c7ee9 (SUCCESS)>	3		27	1
-352	2018-06-20 11:22:05.096333+02	377	<Task: b0394306-8bdc-4509-93f1-383cdce115bd (SUCCESS)>	3		27	1
-353	2018-06-20 11:22:05.098023+02	376	<Task: e82f009b-0745-4ae6-9bc1-21e207007e17 (SUCCESS)>	3		27	1
-354	2018-06-20 11:22:05.100109+02	375	<Task: 3a3be69c-d618-46a8-ab4d-9159dcf00f76 (SUCCESS)>	3		27	1
-355	2018-06-20 11:22:05.101781+02	374	<Task: 69860029-7c5e-4e84-b220-4ecf43321344 (SUCCESS)>	3		27	1
-356	2018-06-20 11:22:05.10366+02	373	<Task: f68e5d6b-c7f5-4a88-a8cf-0e52f7c569ae (SUCCESS)>	3		27	1
-357	2018-06-20 11:22:05.106133+02	372	<Task: 2d1301c9-aa30-4a9a-92a5-ab4bcb9becc2 (SUCCESS)>	3		27	1
-358	2018-06-20 11:22:05.10798+02	371	<Task: 5b79d9ad-346d-455a-ad34-43c49aba390c (SUCCESS)>	3		27	1
-359	2018-06-20 11:22:05.109848+02	370	<Task: 06fea525-d4f1-4460-939a-ecc59bd7ce41 (SUCCESS)>	3		27	1
-360	2018-06-20 11:22:05.111665+02	369	<Task: 26e00cf6-dbea-4d1b-9f19-21971c24d4d4 (SUCCESS)>	3		27	1
-361	2018-06-20 11:22:05.116577+02	368	<Task: 2885c83e-1a77-495e-b9e9-a18c1a2510d5 (SUCCESS)>	3		27	1
-362	2018-06-20 11:22:05.118549+02	367	<Task: 69064b3e-2217-4f61-8f52-99a2a3994eaf (SUCCESS)>	3		27	1
-363	2018-06-20 11:22:05.120334+02	366	<Task: a2bad72d-40ca-45bb-ade1-125695472955 (SUCCESS)>	3		27	1
-364	2018-06-20 11:22:05.122026+02	365	<Task: c855177f-a4fb-48c1-8ae2-008f495fa256 (SUCCESS)>	3		27	1
-365	2018-06-20 11:22:05.124296+02	364	<Task: e45076d8-2103-41ef-8cf1-d570c97708a6 (SUCCESS)>	3		27	1
-366	2018-06-20 11:22:05.126225+02	363	<Task: 27510b00-fafd-40b5-b1e2-1da7e96ae679 (SUCCESS)>	3		27	1
-367	2018-06-20 11:22:05.128267+02	362	<Task: 767a57fa-d7ed-46d6-ad76-2759e4383d41 (SUCCESS)>	3		27	1
-368	2018-06-20 11:22:05.129861+02	361	<Task: 8fd37ec7-cf5f-44ec-9864-6caa2446e03b (SUCCESS)>	3		27	1
-369	2018-06-20 11:22:05.131598+02	360	<Task: 0e525978-d5d5-4444-b94b-24970dbc5e34 (SUCCESS)>	3		27	1
-370	2018-06-20 11:22:05.133228+02	359	<Task: d7719e2c-076f-4105-b549-13a3338f82a4 (SUCCESS)>	3		27	1
-371	2018-06-20 11:22:05.134937+02	358	<Task: d9e4ea3b-8bdb-45f5-982f-771e56cee214 (SUCCESS)>	3		27	1
-372	2018-06-20 11:22:05.13648+02	357	<Task: 1cc666a0-d743-40d1-a64c-1542ddc530d4 (SUCCESS)>	3		27	1
-373	2018-06-20 11:22:05.138076+02	356	<Task: c39caedb-2f75-4567-8edc-fab9c34e878a (SUCCESS)>	3		27	1
-374	2018-06-20 11:22:05.139743+02	355	<Task: 5b4832a0-94fb-4454-8cd9-d03a65c264b1 (SUCCESS)>	3		27	1
-375	2018-06-20 11:22:05.141466+02	354	<Task: a943000b-6fc6-44a8-9c5f-9eff09624fbc (SUCCESS)>	3		27	1
-376	2018-06-20 11:22:05.143237+02	353	<Task: 688f2dde-3b20-4495-8936-a10d824872a1 (SUCCESS)>	3		27	1
-377	2018-06-20 11:22:05.144612+02	352	<Task: 63478267-449f-4127-8794-63cb867d22ee (SUCCESS)>	3		27	1
-378	2018-06-20 11:22:05.145984+02	351	<Task: bb000625-d45b-4be2-9699-73378dc56a91 (SUCCESS)>	3		27	1
-379	2018-06-20 11:22:05.147681+02	350	<Task: 4ba461a2-2fbe-49df-8aa5-68706c731c9a (SUCCESS)>	3		27	1
-380	2018-06-20 11:22:05.149286+02	349	<Task: 0f4616e6-fe76-4a56-8500-c1696b51658d (SUCCESS)>	3		27	1
-381	2018-06-20 11:22:05.150929+02	348	<Task: a7b834c8-fc14-4e9f-95dc-5531bef4517e (SUCCESS)>	3		27	1
-382	2018-06-20 11:22:05.152467+02	347	<Task: d1467769-f3e7-4664-91bf-78effda1ab01 (SUCCESS)>	3		27	1
-383	2018-06-20 11:22:05.154006+02	346	<Task: 0b89bdd8-43d1-4d5b-adae-d0a087bc3f8a (SUCCESS)>	3		27	1
-384	2018-06-20 11:22:05.155755+02	345	<Task: 950ec0d0-f50a-4f72-b32e-6b7039e784cb (SUCCESS)>	3		27	1
-385	2018-06-20 11:22:05.157354+02	344	<Task: 676e9c57-bfba-447c-ada1-a16f959d214b (SUCCESS)>	3		27	1
-386	2018-06-20 11:22:05.158975+02	343	<Task: ab76f0b8-a31d-4643-992c-95f6ba2d9b56 (SUCCESS)>	3		27	1
-387	2018-06-20 11:22:05.16056+02	342	<Task: 7017cfd1-c428-4b3c-8418-b5119b568e58 (SUCCESS)>	3		27	1
-388	2018-06-20 11:22:05.162064+02	341	<Task: d5283eae-4ef8-412c-a67a-5ff9d25e0516 (SUCCESS)>	3		27	1
-389	2018-06-20 11:22:05.163669+02	340	<Task: ee6f1956-6b93-49da-90d7-2462d89f46ce (SUCCESS)>	3		27	1
-390	2018-06-20 11:22:05.165237+02	339	<Task: 4cd00e5f-5a6f-45d7-8de6-43fd7bde99af (SUCCESS)>	3		27	1
-391	2018-06-20 11:22:05.166893+02	338	<Task: 7a0390f3-1db6-4ab6-a169-59bd4134ea6b (SUCCESS)>	3		27	1
-392	2018-06-20 11:22:05.168628+02	337	<Task: 009b7195-f50f-42e5-bf9d-c91123e3ff66 (SUCCESS)>	3		27	1
-393	2018-06-20 11:22:05.170106+02	336	<Task: 46ba6ee4-7379-4bea-ba6e-f17810887447 (SUCCESS)>	3		27	1
-394	2018-06-20 11:22:05.171747+02	335	<Task: 41d3f112-4668-4f06-9135-ee79752468b4 (SUCCESS)>	3		27	1
-395	2018-06-20 11:22:05.173226+02	334	<Task: 9bd958a4-5764-4840-b2e2-ad266f9e047a (SUCCESS)>	3		27	1
-396	2018-06-20 11:22:05.174951+02	333	<Task: 4ca14a42-89af-4fbf-8585-06a0984b6e7c (SUCCESS)>	3		27	1
-397	2018-06-20 11:22:05.176481+02	332	<Task: 322f3d49-ae1e-4890-a49c-183a7d0a2d07 (SUCCESS)>	3		27	1
-398	2018-06-20 11:22:05.17787+02	331	<Task: f40d64ce-acde-4f84-a4b4-b00762fe4c7e (SUCCESS)>	3		27	1
-399	2018-06-20 11:22:05.179383+02	330	<Task: 61c48ce4-c248-4572-864d-d62979b8bdf3 (SUCCESS)>	3		27	1
-400	2018-06-20 11:22:05.180754+02	329	<Task: 417a8c03-6923-46be-bc5d-a4dc1722d80e (SUCCESS)>	3		27	1
-401	2018-06-20 11:22:05.18226+02	328	<Task: b191e547-f06d-46f0-a9f3-3b58001e179f (SUCCESS)>	3		27	1
-402	2018-06-20 11:22:05.183931+02	327	<Task: 2bbbc699-8e7a-434d-b14c-7500bfd8001a (SUCCESS)>	3		27	1
-403	2018-06-20 11:22:05.185479+02	326	<Task: 9f786726-7049-4be5-ba44-2a7728d82169 (SUCCESS)>	3		27	1
-404	2018-06-20 11:22:05.187135+02	325	<Task: a30deb32-fba2-4e77-add8-8aa50c06815b (SUCCESS)>	3		27	1
-405	2018-06-20 11:22:05.188658+02	324	<Task: 4501eea4-0929-4cbe-b71c-791de0ebc028 (SUCCESS)>	3		27	1
-406	2018-06-20 11:22:05.190179+02	323	<Task: e6c49452-ec6e-4788-8966-307ef9ba2786 (SUCCESS)>	3		27	1
-407	2018-06-20 11:22:05.191809+02	322	<Task: 2d49d766-f8ee-4703-955a-2d01cb2c7d29 (SUCCESS)>	3		27	1
-408	2018-06-20 11:22:05.19338+02	321	<Task: bf4a404e-4d85-451a-a742-99e793d86e13 (SUCCESS)>	3		27	1
-409	2018-06-20 11:22:05.195543+02	320	<Task: 8a5ecc33-c2b3-4b82-bae4-d64935afaf19 (SUCCESS)>	3		27	1
-410	2018-06-20 11:22:05.197624+02	319	<Task: 6571962e-1644-4db2-b271-d2acc6d18b24 (SUCCESS)>	3		27	1
-411	2018-06-20 11:22:05.199467+02	318	<Task: b3e9f624-7ac6-459e-a7f0-fc073f83f0d0 (SUCCESS)>	3		27	1
-412	2018-06-20 11:22:05.201193+02	317	<Task: 72b7f4f0-efad-428e-b5a1-b23e70d1519a (SUCCESS)>	3		27	1
-413	2018-06-21 09:45:59.528449+02	602	Last night	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
-414	2018-06-21 09:47:16.593513+02	602	Last night	2	[{"changed": {"fields": ["genre", "tags", "cover"]}}]	22	1
-415	2018-06-25 12:10:57.124156+02	1	https://manti.by/sr/0fcb	1	[{"added": {}}]	38	1
+1	2017-04-18 12:38:26.785579+00	5	Test	1	[{"added": {}}]	22	1
+2	2017-04-18 14:42:31.612962+00	5	Test	3		22	1
+3	2017-04-18 14:43:27.591832+00	6	Test	1	[{"added": {}}]	22	1
+4	2017-04-18 14:48:31.373765+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+5	2017-04-18 15:00:38.636777+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+6	2017-04-18 15:01:55.475761+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+7	2017-04-18 15:03:29.502987+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+8	2017-04-18 15:04:15.805394+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+9	2017-04-18 15:08:57.65367+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+10	2017-04-18 15:10:25.776528+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+11	2017-04-18 15:12:43.685739+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+12	2017-04-18 15:13:31.835511+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+13	2017-04-18 15:16:39.270798+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+14	2017-04-18 15:39:33.223239+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+15	2017-04-18 15:45:41.623354+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+16	2017-04-18 15:52:41.190565+00	26	FAILURE    2ffe34c2-a2a1-40dc-8dda-07640ad21a42 blog.tasks.convert_to_ogg_preview	2	[]	12	1
+17	2017-04-18 15:53:16.879215+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+18	2017-04-18 15:55:20.755091+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+19	2017-04-18 15:57:58.693867+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+20	2017-04-18 16:00:26.960774+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+21	2017-04-19 09:50:38.810303+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+22	2017-04-19 10:03:31.838539+00	6	Test	2	[{"changed": {"fields": ["mp3_preview_ready", "ogg_preview_ready", "ogg_release_ready", "tags"]}}]	22	1
+23	2017-04-19 10:11:39.686651+00	6	Test	2	[{"changed": {"fields": ["mp3_preview_ready", "ogg_preview_ready", "ogg_release_ready", "tags"]}}]	22	1
+24	2017-04-19 10:14:15.662442+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+25	2017-04-19 10:20:18.938933+00	6	Test	2	[{"changed": {"fields": ["mp3_preview_ready", "ogg_preview_ready", "ogg_release_ready", "tags"]}}]	22	1
+26	2017-04-19 10:30:36.525062+00	6	Test	2	[{"changed": {"fields": ["mp3_preview_ready", "ogg_preview_ready", "ogg_release_ready", "tags"]}}]	22	1
+27	2017-04-19 10:36:56.360251+00	7	t	1	[{"added": {}}]	22	1
+28	2017-04-19 10:37:55.217383+00	8	n	1	[{"added": {}}]	22	1
+29	2017-04-19 10:38:03.598252+00	6	Test	2	[{"changed": {"fields": ["related", "tags"]}}]	22	1
+30	2017-04-19 10:40:11.441257+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+31	2017-04-19 10:40:32.022243+00	6	Test	2	[{"changed": {"fields": ["tags"]}}]	22	1
+32	2017-04-19 12:31:50.676657+00	1	test	1	[{"added": {}}]	24	1
+33	2017-04-19 12:36:06.664008+00	1	test	1	[{"added": {}}]	24	1
+34	2017-04-19 12:36:36.389882+00	1	test - Image#1	1	[{"added": {}}]	23	1
+35	2017-04-19 12:37:30.454554+00	1	test - Image#1	3		23	1
+36	2017-04-19 12:38:46.375238+00	2	test - Image#2	1	[{"added": {}}]	23	1
+37	2017-04-19 12:49:26.182572+00	2	test - Image#2	2	[{"changed": {"fields": ["thumbnail_image", "preview_image", "gallery_image"]}}]	23	1
+38	2017-04-19 13:30:49.730999+00	3	test - Image#3	1	[{"added": {}}]	23	1
+39	2017-04-19 13:31:03.136702+00	4	test - Image#4	1	[{"added": {}}]	23	1
+40	2017-04-19 13:53:22.442356+00	2	Second	1	[{"added": {}}]	24	1
+41	2017-04-19 13:53:34.95993+00	1	First	2	[{"changed": {"fields": ["slug", "name", "tags"]}}]	24	1
+42	2017-04-20 08:08:52.727215+00	1	Первая Галлерея	2	[{"changed": {"fields": ["name", "name_ru", "name_en", "tags"]}}]	24	1
+43	2017-04-20 08:09:28.673187+00	2	Вторая Галерея	2	[{"changed": {"fields": ["name", "name_ru", "name_en", "tags"]}}]	24	1
+44	2017-04-20 08:09:37.636636+00	1	Первая Галерея	2	[{"changed": {"fields": ["name", "name_ru", "tags"]}}]	24	1
+45	2017-04-20 08:40:33.238654+00	6	Тестовый Артикль	2	[{"changed": {"fields": ["name_ru", "name_en", "meta_ru", "meta_en", "summary_ru", "summary_en", "description_ru", "description_en"]}}]	22	1
+46	2017-04-21 10:19:34.625117+00	6	Вторая Галерея - Image#6	1	[{"added": {}}]	23	1
+47	2017-04-21 10:20:01.18448+00	7	Вторая Галерея - Image#7	1	[{"added": {}}]	23	1
+48	2017-04-21 10:20:14.175796+00	8	Вторая Галерея - Image#8	1	[{"added": {}}]	23	1
+49	2017-04-21 10:21:31.352327+00	8	Вторая Галерея - Image#8	2	[{"changed": {"fields": ["tags"]}}]	23	1
+50	2017-04-21 10:21:49.073723+00	5	n	3		4	1
+51	2017-04-21 10:21:49.095733+00	2	post	3		4	1
+52	2017-04-21 10:21:49.10778+00	3	r	3		4	1
+53	2017-04-21 10:21:49.121115+00	4	t	3		4	1
+54	2017-04-21 10:21:49.133184+00	1	test	3		4	1
+55	2017-04-21 10:26:39.455791+00	9	Первая Галерея - Image#9	1	[{"added": {}}]	23	1
+56	2017-04-26 12:55:23.53881+00	9	Gallery #First Gallery - Image#9	3		23	1
+57	2017-04-26 12:55:23.598489+00	8	Gallery #Second Gallery - Image#8	3		23	1
+58	2017-04-26 12:55:23.610681+00	6	Gallery #Second Gallery - Image#6	3		23	1
+59	2017-04-26 12:55:23.623097+00	3	Gallery #First Gallery - Image#3	3		23	1
+60	2017-04-26 12:55:23.636358+00	2	Gallery #First Gallery - Image#2	3		23	1
+61	2017-04-26 12:55:23.671541+00	7	Gallery #Second Gallery - Image#7	3		23	1
+62	2017-04-26 12:55:23.70754+00	4	Gallery #First Gallery - Image#4	3		23	1
+63	2017-04-26 12:55:35.611357+00	2	Second Gallery	3		24	1
+64	2017-04-26 12:55:35.627738+00	1	First Gallery	3		24	1
+65	2017-05-02 12:22:52.667595+00	611	Gallery #oslo-tenerife - Image#611	2	[{"changed": {"fields": ["tags"]}}]	23	1
+66	2017-05-02 13:13:39.620952+00	836	Gallery #spring-17 - Image#836	1	[{"added": {}}]	23	1
+67	2017-05-02 13:15:03.41346+00	836	Gallery #spring-17 - Image#836	2	[{"changed": {"fields": ["tags"]}}]	23	1
+68	2017-05-02 13:35:24.708815+00	836	Gallery #spring-17 - Image#836	2	[{"changed": {"fields": ["tags"]}}]	23	1
+69	2017-05-02 13:36:21.800369+00	836	Gallery #spring-17 - Image#836	2	[{"changed": {"fields": ["tags"]}}]	23	1
+70	2017-05-02 13:38:00.588844+00	836	Gallery #spring-17 - Image#836	2	[{"changed": {"fields": ["tags", "thumbnail_image", "preview_image", "gallery_image", "phash"]}}]	23	1
+71	2017-05-02 13:38:39.409675+00	836	Gallery #spring-17 - Image#836	2	[{"changed": {"fields": ["tags"]}}]	23	1
+72	2017-05-02 13:41:03.591488+00	836	Gallery #spring-17 - Image#836	2	[{"changed": {"fields": ["tags"]}}]	23	1
+73	2017-05-02 14:19:50.832093+00	837	Gallery #spring-17 - Image#837	1	[{"added": {}}]	23	1
+74	2017-05-02 14:24:34.452275+00	837	Gallery #spring-17 - Image#837	2	[{"changed": {"fields": ["tags"]}}]	23	1
+130	2018-05-29 12:19:19.06068+00	29	Featured	2	[{"changed": {"fields": ["slug"]}}]	4	1
+75	2017-05-02 14:27:47.644662+00	834	Gallery #autumn-13 - Image#834	2	[{"changed": {"fields": ["tags", "thumbnail_ready", "preview_ready", "gallery_ready"]}}]	23	1
+76	2017-05-02 14:30:20.913649+00	830	Gallery #autumn-13 - Image#830	2	[{"changed": {"fields": ["tags"]}}]	23	1
+77	2017-05-03 12:17:43.030351+00	439	Shining	2	[{"changed": {"fields": ["cover", "release"]}}]	22	1
+78	2017-05-03 12:17:57.035851+00	439	Shining	2	[{"changed": {"fields": ["cover", "release"]}}]	22	1
+79	2017-05-03 14:19:30.105794+00	599	100 метров за 4 секунды	3		22	1
+80	2017-05-03 14:19:30.1462+00	588	Forthcoming releses	3		22	1
+81	2017-05-03 14:19:30.157873+00	561	Правила и Копирайт	3		22	1
+82	2017-05-03 14:19:30.171029+00	560	Обо мне	3		22	1
+83	2017-05-03 14:19:30.182702+00	549	Моё резюме	3		22	1
+84	2018-04-20 15:21:41.746603+00	16		3		4	1
+85	2018-04-25 14:30:30.61844+00	601	Shining	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+86	2018-04-26 14:19:57.80854+00	1	manti.by@gmail.com	1	[{"added": {}}]	2	1
+87	2018-05-02 18:54:52.348433+00	601	Shining	2	[{"changed": {"fields": ["meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+88	2018-05-02 18:55:00.854421+00	601	Shining	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+89	2018-05-22 16:22:04.453913+00	600	LITL	2	[{"changed": {"fields": ["name_en", "meta_en", "summary_en", "description_en", "genre", "tags", "tracklist", "mp3_preview_ready", "ogg_preview_ready"]}}]	22	1
+90	2018-05-23 11:52:07.213428+00	553	Stockholm syndrome	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+91	2018-05-23 11:58:37.143659+00	555	Katana	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist", "mp3_preview_ready"]}}]	22	1
+92	2018-05-23 12:00:45.779055+00	587	Aweary silence	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+93	2018-05-23 12:01:08.62123+00	601	Shining	2	[{"changed": {"fields": ["name_en", "genre", "tags"]}}]	22	1
+94	2018-05-23 12:02:48.519191+00	600	LITL	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "summary_be", "summary_ru", "description_be", "description_ru", "genre", "tags"]}}]	22	1
+95	2018-05-23 12:05:41.436795+00	598	Люты	2	[{"changed": {"fields": ["name_be", "name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist", "mp3_preview_ready", "ogg_preview_ready", "ogg_release_ready"]}}]	22	1
+96	2018-05-23 12:07:04.374368+00	597	Phantom shield	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist", "mp3_preview_ready", "ogg_preview_ready"]}}]	22	1
+97	2018-05-23 12:11:18.571495+00	601	Shining	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+98	2018-05-23 15:33:02.910932+00	600	LITL	2	[{"changed": {"fields": ["name_en", "genre", "tags"]}}]	22	1
+99	2018-05-23 15:37:24.650444+00	596	New horizons	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist", "mp3_preview_ready", "ogg_preview_ready", "ogg_release_ready"]}}]	22	1
+100	2018-05-25 10:25:08.22805+00	602	Last night	1	[{"added": {}}]	22	1
+101	2018-05-25 10:35:30.809047+00	32	<Task: 19dad32e-c5c7-44e1-ae4b-f2c54a928644 (FAILURE)>	3		27	1
+102	2018-05-25 10:35:36.786897+00	37	<Task: 0ea26618-2093-4275-b787-4cd3e09970d5 (SUCCESS)>	3		27	1
+103	2018-05-25 10:35:36.793115+00	36	<Task: e702bfbb-154c-4d67-9609-ce0bf422d781 (SUCCESS)>	3		27	1
+104	2018-05-25 10:35:36.796735+00	35	<Task: 5b526af0-019c-4c4a-b3a7-51a2a235e0b0 (SUCCESS)>	3		27	1
+105	2018-05-25 10:35:36.80002+00	34	<Task: 957a747a-de44-4ac0-b36b-8b5d1ee5db3a (SUCCESS)>	3		27	1
+106	2018-05-25 10:35:36.803961+00	33	<Task: 3424ec92-f382-41b4-af4d-e2fd75992579 (SUCCESS)>	3		27	1
+107	2018-05-25 10:35:36.807093+00	31	<Task: 8ff0cc7c-60c6-4f63-9336-dee8706f926c (SUCCESS)>	3		27	1
+108	2018-05-25 10:35:36.810847+00	30	<Task: 4d733fcc-60ac-46db-8d37-cc8850960e30 (SUCCESS)>	3		27	1
+109	2018-05-25 10:35:45.424159+00	602	Last night	2	[{"changed": {"fields": ["genre", "tags", "mp3_preview_ready"]}}]	22	1
+110	2018-05-25 11:08:59.653328+00	601	Shining	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+111	2018-05-25 11:09:20.396653+00	596	New horizons	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+112	2018-05-25 11:10:38.615869+00	553	Stockholm syndrome	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+113	2018-05-25 11:11:14.815531+00	590	Power rangers	2	[{"changed": {"fields": ["meta_be", "meta_ru", "summary_be", "summary_ru", "description_be", "description_ru", "genre", "tags", "tracklist"]}}]	22	1
+114	2018-05-25 11:12:14.292071+00	592	Let's go dancing	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+115	2018-05-25 11:13:04.577682+00	598	Февраль	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+116	2018-05-29 11:52:39.455194+00	602	Last night	2	[{"changed": {"fields": ["genre", "tags", "cover", "release"]}}]	22	1
+117	2018-05-29 12:00:03.212651+00	602	Spectre	2	[{"changed": {"fields": ["name_be", "name_ru", "name_en", "slug", "genre", "tags"]}}]	22	1
+118	2018-05-29 12:03:50.389668+00	602	Spectre	2	[{"changed": {"fields": ["genre", "tags", "related"]}}]	22	1
+119	2018-05-29 12:14:00.251044+00	555	Katana	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+120	2018-05-29 12:14:20.579166+00	596	New horizons	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+121	2018-05-29 12:15:20.598337+00	600	LITL	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+122	2018-05-29 12:15:36.327354+00	598	Февраль	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+123	2018-05-29 12:15:49.027866+00	597	Phantom shield	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+124	2018-05-29 12:16:25.781202+00	592	Let's go dancing	2	[{"changed": {"fields": ["name_en", "meta_en", "summary_en", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+125	2018-05-29 12:16:38.398932+00	587	Aweary silence	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+126	2018-05-29 12:17:08.999594+00	9	ambient	3		4	1
+127	2018-05-29 12:18:28.251066+00	548	Insomnia	2	[{"changed": {"fields": ["name_en", "meta_en", "summary_en", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+128	2018-05-29 12:18:44.547829+00	12	Ambient	2	[{"changed": {"fields": ["slug"]}}]	4	1
+129	2018-05-29 12:19:12.040571+00	7	featured	3		4	1
+131	2018-05-29 12:20:53.932847+00	587	Aweary silence	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+132	2018-05-29 12:21:03.148064+00	109	Intelligent house	3		4	1
+133	2018-05-29 12:22:01.522366+00	555	Katana	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+134	2018-05-29 12:25:28.902284+00	597	Phantom shield	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+135	2018-05-30 08:42:19.117015+00	600	LITL	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+136	2018-05-30 08:42:35.157106+00	592	Let's go dancing	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+137	2018-05-30 08:45:38.284096+00	590	Power rangers	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+138	2018-05-30 13:58:08.260767+00	1	Email object	1	[{"added": {}}]	1	1
+139	2018-05-30 13:58:20.491138+00	1	Email object	3		1	1
+140	2018-05-30 13:58:33.697518+00	596	New horizons	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+141	2018-06-06 13:47:27.901306+00	589	Zeppelin	2	[{"changed": {"fields": ["description_be", "description_ru", "genre", "tags", "tracklist"]}}]	22	1
+142	2018-06-06 13:52:09.44075+00	589	Zeppelin	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_en", "description_en", "genre", "tags"]}}]	22	1
+143	2018-06-06 14:01:25.486319+00	595	Before I go to sleep	2	[{"changed": {"fields": ["name_be", "name_ru", "name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+144	2018-06-06 14:58:15.665563+00	591	Space is Ours	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+145	2018-06-07 13:27:45.951417+00	1	manti.by@gmail.com	2	[{"changed": {"fields": ["original_image"]}}]	2	1
+146	2018-06-07 13:28:02.371758+00	1	manti.by@gmail.com	2	[{"changed": {"fields": ["original_image"]}}]	2	1
+147	2018-06-14 10:12:00.901661+00	602	Last night	2	[{"changed": {"fields": ["name_be", "name_ru", "name_en", "slug", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
+148	2018-06-14 10:13:15.2878+00	594	Сухой закон	2	[{"changed": {"fields": ["meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+149	2018-06-14 10:13:30.034205+00	594	Сухой закон	2	[{"changed": {"fields": ["name_en", "genre", "tags"]}}]	22	1
+150	2018-06-14 10:14:24.581934+00	593	Predator	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+151	2018-06-14 10:15:48.24521+00	586	Alice in Wonderland	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+152	2018-06-14 10:16:54.619952+00	585	My friend Friday	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+153	2018-06-14 10:18:30.851988+00	584	Топливо для танка (НЛП)	2	[{"changed": {"fields": ["name_be", "name_en", "meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+154	2018-06-14 10:24:54.665705+00	583	Reach out of the Sun	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+155	2018-06-14 10:27:16.342414+00	582	Stockholm syndrome - Backset	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+156	2018-06-14 10:27:47.897636+00	581	Enzo cafe live	2	[{"changed": {"fields": ["meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+157	2018-06-14 10:27:58.149052+00	581	Enzo cafe live	2	[{"changed": {"fields": ["name_en", "genre", "tags"]}}]	22	1
+158	2018-06-14 10:29:33.839377+00	580	Progress R-7A	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+159	2018-06-14 10:33:46.854328+00	579	Exception	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+160	2018-06-14 10:36:27.41597+00	578	Renaissance promo	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+161	2018-06-14 10:40:08.276471+00	577	Trauma	2	[{"changed": {"fields": ["name_be", "name_ru", "name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+162	2018-06-14 10:45:04.345841+00	576	Killing machine	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+163	2018-06-14 10:46:34.031093+00	575	Janaca Express live	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+164	2018-06-14 10:49:38.818814+00	602	Last night	2	[{"changed": {"fields": ["genre", "tags", "ogg_preview_ready"]}}]	22	1
+165	2018-06-14 11:00:10.90117+00	17	For IT	3		4	1
+166	2018-06-14 11:05:34.270764+00	574	Helloween live	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
+167	2018-06-14 11:07:53.105131+00	573	Marrakesh	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+168	2018-06-14 11:11:47.027339+00	572	Janaca express part 02	2	[{"changed": {"fields": ["name_en", "slug", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+169	2018-06-14 11:15:42.638017+00	571	Janaca express	2	[{"changed": {"fields": ["name_be", "name_ru", "name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+170	2018-06-14 11:17:38.711456+00	572	Janaca express 02	2	[{"changed": {"fields": ["name_be", "name_ru", "name_en", "meta_be", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
+171	2018-06-14 11:22:36.664949+00	570	Hi-Pass live	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
+172	2018-06-14 11:24:18.791626+00	569	IRIS, it's all about me promo	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+173	2018-06-14 11:25:39.421984+00	568	All she wants is (SCSI device)	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
+174	2018-06-14 11:27:59.830427+00	567	Cote d'Azur promo	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+175	2018-06-14 11:29:29.124629+00	566	Emofunk (Christmas rave) live	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
+176	2018-06-14 11:30:48.494157+00	565	Chillhouse live	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags"]}}]	22	1
+177	2018-06-14 11:35:58.572868+00	564	Mix for Basstech part 2	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+178	2018-06-14 11:39:48.296071+00	563	Special mix for Basstech	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+179	2018-06-14 15:04:55.697776+00	562	Bar La'unge live	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+180	2018-06-14 15:10:47.334047+00	559	Дом разбитых сердец 4, южные сны	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+181	2018-06-14 15:12:08.909884+00	558	Дом разбитых сердец III, такая Lite	2	[{"changed": {"fields": ["meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+182	2018-06-14 15:12:38.745299+00	558	Дом разбитых сердец III, такая Lite	2	[{"changed": {"fields": ["name_en", "genre", "tags"]}}]	22	1
+183	2018-06-14 15:16:03.628943+00	557	Дом разбитых сердец II, пепел	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+184	2018-06-14 15:17:18.458351+00	556	Дом разбитых сердец, начало	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+185	2018-06-14 15:18:32.465466+00	554	Autoreply promo	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_en", "description_be", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+186	2018-06-14 15:21:48.459958+00	552	Solaris	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+187	2018-06-14 15:25:41.174885+00	551	Plastic toy	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+188	2018-06-14 15:27:36.93032+00	550	Synthetic	2	[{"changed": {"fields": ["name_en", "meta_be", "meta_ru", "meta_en", "summary_be", "summary_ru", "summary_en", "description_be", "description_ru", "description_en", "genre", "tags", "tracklist"]}}]	22	1
+189	2018-06-14 15:34:52.865086+00	898	Gallery #Default - Image#898	3		23	1
+190	2018-06-14 15:34:52.870752+00	878	Gallery #Default - Image#878	3		23	1
+191	2018-06-14 15:35:25.660478+00	916	Gallery #Default - Image#916	1	[{"added": {}}]	23	1
+192	2018-06-15 12:26:09.363072+00	602	Last night	2	[{"changed": {"fields": ["genre", "tags", "cover"]}}]	22	1
+193	2018-06-15 12:28:14.119135+00	917	Gallery #Default - Image#917	1	[{"added": {}}]	23	1
+194	2018-06-15 12:30:13.704287+00	916	Gallery #Default - Image#916	2	[{"changed": {"fields": ["tags"]}}]	23	1
+195	2018-06-15 12:39:28.508909+00	916	Gallery #Default - Image#916	3		23	1
+196	2018-06-15 12:39:44.526659+00	918	Gallery #Default - Image#918	1	[{"added": {}}]	23	1
+197	2018-06-15 12:43:17.609694+00	918	Gallery #Default - Image#918	3		23	1
+198	2018-06-15 12:44:20.834053+00	919	Gallery #Default - Image#919	1	[{"added": {}}]	23	1
+199	2018-06-15 12:50:12.951235+00	153	<Task: d622bcf5-0d78-46b4-b220-cea175c0f261 (SUCCESS)>	3		27	1
+200	2018-06-15 12:50:12.955056+00	152	<Task: b715dce1-f99c-41f4-a565-f144704d639a (SUCCESS)>	3		27	1
+201	2018-06-15 12:50:12.957027+00	151	<Task: 115d13cb-a61d-4ab5-a404-9f4096f159b8 (SUCCESS)>	3		27	1
+202	2018-06-15 12:50:12.958691+00	150	<Task: a98ed447-443f-4b3a-98f2-dffbc5e699e8 (SUCCESS)>	3		27	1
+203	2018-06-15 12:50:12.960575+00	149	<Task: ec3aadf7-ff71-4487-9715-49ab3cf1de45 (SUCCESS)>	3		27	1
+204	2018-06-15 12:50:12.962465+00	148	<Task: 9b74b2a8-4275-49c9-9741-4fe2e4f354bb (SUCCESS)>	3		27	1
+205	2018-06-15 12:50:12.965289+00	147	<Task: 7efebcaa-995e-4749-b1a8-de2a79521884 (SUCCESS)>	3		27	1
+206	2018-06-15 12:50:12.967663+00	146	<Task: c80624ac-d572-4b32-857c-9a78b386714b (SUCCESS)>	3		27	1
+207	2018-06-15 12:50:12.969499+00	145	<Task: 2e4ce89a-8bfd-4410-ab0c-d0acac99146c (SUCCESS)>	3		27	1
+208	2018-06-15 12:50:12.971353+00	144	<Task: 76007875-bf84-403f-baa6-9060f48f5c2d (SUCCESS)>	3		27	1
+209	2018-06-15 12:50:12.973171+00	143	<Task: 37254a9b-36fe-4f43-b305-dcaaefa11777 (SUCCESS)>	3		27	1
+210	2018-06-15 12:50:12.974817+00	142	<Task: 5e0868c5-7aed-4767-b02b-c779200bcb97 (SUCCESS)>	3		27	1
+211	2018-06-15 12:50:12.976372+00	141	<Task: 33cfe341-38b1-4fc2-a513-52982859f8bb (SUCCESS)>	3		27	1
+212	2018-06-15 12:50:12.977874+00	140	<Task: 8b5ba3f3-00ca-44a8-9b12-bd32836c46e6 (SUCCESS)>	3		27	1
+213	2018-06-15 12:50:12.979278+00	139	<Task: 2890400a-ff3e-4a34-a4d8-1f20cf0882db (SUCCESS)>	3		27	1
+214	2018-06-15 12:50:12.980904+00	138	<Task: 8b6732ec-02af-4585-8f88-4625ec07697f (SUCCESS)>	3		27	1
+215	2018-06-15 12:50:12.982922+00	137	<Task: 4b8e7059-3595-443e-bd40-52b2fe99b1e9 (SUCCESS)>	3		27	1
+216	2018-06-15 12:50:12.985007+00	136	<Task: 686a4a0b-1dec-4c10-9e91-0a8e8ddd6e64 (SUCCESS)>	3		27	1
+217	2018-06-15 12:50:12.986514+00	135	<Task: 2db15df7-c6f6-48fe-ae2a-0022f45f4a00 (SUCCESS)>	3		27	1
+218	2018-06-15 12:50:12.990114+00	134	<Task: 5666b041-f44a-4bad-af33-52a39620149a (SUCCESS)>	3		27	1
+219	2018-06-15 12:50:12.991864+00	133	<Task: 338a6bc6-ae22-400b-a749-926e119f3ede (SUCCESS)>	3		27	1
+220	2018-06-15 12:50:12.993325+00	132	<Task: fb3e9169-5ce7-40a7-b722-2c91249b6251 (SUCCESS)>	3		27	1
+221	2018-06-15 12:50:12.995124+00	131	<Task: 921d3006-a35c-49d4-b6f4-46bb32558866 (SUCCESS)>	3		27	1
+222	2018-06-15 12:50:12.997012+00	130	<Task: 3bf120b5-a065-4554-8edf-d9af7bb5fbcc (SUCCESS)>	3		27	1
+223	2018-06-15 12:50:12.999097+00	129	<Task: 1b5e2025-f56a-4bcb-9113-7f989ac53732 (SUCCESS)>	3		27	1
+224	2018-06-15 12:50:13.001238+00	128	<Task: 375173e5-11e2-48c1-82fe-9fe8b3296b84 (SUCCESS)>	3		27	1
+225	2018-06-15 12:50:13.003246+00	127	<Task: aa0f0372-fc42-4509-87bb-a12643111fa1 (SUCCESS)>	3		27	1
+226	2018-06-15 12:50:13.004938+00	126	<Task: 86cc92d9-97ce-4d6e-a7d1-22cea3437711 (SUCCESS)>	3		27	1
+227	2018-06-15 12:50:13.006494+00	125	<Task: 7dae7cd2-a1ce-410d-afe2-874f299169fa (SUCCESS)>	3		27	1
+228	2018-06-15 12:50:13.00833+00	124	<Task: 2fe0e07b-3b5d-446c-823f-5c5441270049 (SUCCESS)>	3		27	1
+229	2018-06-15 12:50:13.009799+00	123	<Task: 829e1065-6413-4df7-bbd7-031972d38de0 (SUCCESS)>	3		27	1
+230	2018-06-15 12:50:13.01132+00	122	<Task: ceb0840a-d431-4fe3-8e34-958c86cfa6c6 (SUCCESS)>	3		27	1
+231	2018-06-15 12:50:13.012842+00	121	<Task: 925c8bd0-84c1-4aa6-99a8-edfe94ede401 (SUCCESS)>	3		27	1
+232	2018-06-15 12:50:13.014201+00	120	<Task: f687fd13-5f04-42ca-9fe2-dfd60add2ae5 (SUCCESS)>	3		27	1
+233	2018-06-15 12:50:13.01588+00	119	<Task: 7fea2de9-9ac6-4f08-93f5-eb849d44464e (SUCCESS)>	3		27	1
+234	2018-06-15 12:50:13.017199+00	118	<Task: a7e337c3-a30b-4dcb-9d53-1ce1e9c46a0d (SUCCESS)>	3		27	1
+235	2018-06-15 12:50:13.018662+00	117	<Task: a381147c-c9b7-4525-bc03-4f316ee2c240 (SUCCESS)>	3		27	1
+236	2018-06-15 12:50:13.020298+00	116	<Task: 223135dd-b413-4553-b65f-a805201cc151 (SUCCESS)>	3		27	1
+237	2018-06-15 12:50:13.021938+00	115	<Task: 71e850f3-11e0-44a9-b63a-4ccab55e4eff (SUCCESS)>	3		27	1
+238	2018-06-15 12:50:13.02349+00	114	<Task: 1337cf60-6732-435e-aaa8-faf36f230f0d (SUCCESS)>	3		27	1
+239	2018-06-15 12:50:13.025498+00	113	<Task: 263cb96e-25dc-4026-b058-090e54d08d2c (SUCCESS)>	3		27	1
+240	2018-06-15 12:50:13.027058+00	112	<Task: 1f228a32-b80f-47e6-8792-6f739b6e3c99 (SUCCESS)>	3		27	1
+241	2018-06-15 12:50:13.028675+00	111	<Task: c4972363-97b5-43c9-b40d-2210efc161be (SUCCESS)>	3		27	1
+242	2018-06-15 12:50:13.030214+00	110	<Task: 5c36319c-980a-4a05-a754-a6d72890c4d4 (SUCCESS)>	3		27	1
+243	2018-06-15 12:50:13.032267+00	109	<Task: b39149dd-63f1-4b9e-88b0-dfa39d139e63 (SUCCESS)>	3		27	1
+244	2018-06-15 12:50:13.03425+00	108	<Task: e90adb13-a799-4ce4-a57c-c460274bdcb9 (SUCCESS)>	3		27	1
+245	2018-06-15 12:50:13.036454+00	107	<Task: f4c6a2d7-88fb-433b-842c-7801c9941c46 (SUCCESS)>	3		27	1
+246	2018-06-15 12:50:13.038002+00	106	<Task: e091c37f-c7b1-4528-873d-212524b229bf (SUCCESS)>	3		27	1
+247	2018-06-15 12:50:13.039736+00	105	<Task: 8d09e42c-859f-4329-a723-81ba79b058a1 (SUCCESS)>	3		27	1
+248	2018-06-15 12:50:13.041296+00	104	<Task: f29991c5-ef60-4a90-bc51-4d11278517fd (SUCCESS)>	3		27	1
+249	2018-06-15 12:50:13.042918+00	103	<Task: 235cc9f8-6a84-4278-871d-13c7d54d3076 (SUCCESS)>	3		27	1
+250	2018-06-15 12:50:13.044787+00	102	<Task: a515deb2-53fb-4b53-bd15-247287e3d097 (SUCCESS)>	3		27	1
+251	2018-06-15 12:50:13.046508+00	101	<Task: 52dbf8d2-0b09-4185-92a8-e6680be94f0d (SUCCESS)>	3		27	1
+252	2018-06-15 12:50:13.048335+00	100	<Task: 9e730db9-52ea-4451-a990-7e7999c711de (SUCCESS)>	3		27	1
+253	2018-06-15 12:50:13.049797+00	99	<Task: 2baccbf7-2741-4bca-8845-d35d4da8a51d (SUCCESS)>	3		27	1
+254	2018-06-15 12:50:13.051511+00	98	<Task: 24ddff29-c873-43ac-b6e5-399f3f8cc6f9 (SUCCESS)>	3		27	1
+255	2018-06-15 12:50:13.053012+00	97	<Task: 0afcb594-8f7d-433a-8998-5852d63bd152 (SUCCESS)>	3		27	1
+256	2018-06-15 12:50:13.054352+00	96	<Task: 37b880f0-e508-408e-b65c-d5ac7362f4ff (SUCCESS)>	3		27	1
+257	2018-06-15 12:50:13.055864+00	95	<Task: f9b425e9-c619-400a-bb4e-a7e8936ce288 (SUCCESS)>	3		27	1
+258	2018-06-15 12:50:13.05721+00	94	<Task: f20b2e95-7338-404d-a348-8e245dfdf835 (SUCCESS)>	3		27	1
+259	2018-06-15 12:50:13.058664+00	93	<Task: 6bae8f17-aec5-4402-b36d-bc6986c417c0 (SUCCESS)>	3		27	1
+260	2018-06-15 12:50:13.060428+00	92	<Task: d918c8f6-6c5e-49fc-8915-1ab759ccd384 (SUCCESS)>	3		27	1
+261	2018-06-15 12:50:13.061927+00	91	<Task: 14f9b322-851b-4905-b3dd-31fd9684b878 (SUCCESS)>	3		27	1
+262	2018-06-15 12:50:13.063447+00	90	<Task: a5dc4205-c2e8-4224-9b2d-1ec118da23f8 (SUCCESS)>	3		27	1
+263	2018-06-15 12:50:13.064926+00	89	<Task: 14055ed1-a71a-4199-aa25-a83c64de7f30 (SUCCESS)>	3		27	1
+264	2018-06-15 12:50:13.066571+00	88	<Task: 22ecbf8c-eba6-4ec3-8a99-81d750c2d5ef (SUCCESS)>	3		27	1
+265	2018-06-15 12:50:13.068273+00	87	<Task: 2735474e-47af-43f9-a170-23ca663591d2 (SUCCESS)>	3		27	1
+266	2018-06-15 12:50:13.069547+00	86	<Task: b04c5b4f-d1fd-4032-8383-93338a4cbea7 (SUCCESS)>	3		27	1
+267	2018-06-15 12:50:13.070904+00	85	<Task: e10e91b2-30ca-440c-91a0-16b1f4e19a1d (SUCCESS)>	3		27	1
+268	2018-06-15 12:50:13.072188+00	84	<Task: c44d1fb2-25fb-4ac5-bb51-cc47fb344c59 (SUCCESS)>	3		27	1
+269	2018-06-15 12:50:13.073573+00	83	<Task: b2e618e0-5716-46cc-9e95-dce5975cf18d (SUCCESS)>	3		27	1
+270	2018-06-15 12:50:13.074977+00	82	<Task: 2d22a6f0-1eab-440c-9f43-73026ddb6829 (SUCCESS)>	3		27	1
+271	2018-06-15 12:50:13.07643+00	81	<Task: 03c7fd1a-4911-4f6c-ab7d-508319c19aed (SUCCESS)>	3		27	1
+272	2018-06-15 12:50:13.077999+00	80	<Task: 37a8947c-1d8b-4c84-95f5-710f3748a716 (SUCCESS)>	3		27	1
+273	2018-06-15 12:50:13.079611+00	79	<Task: c87d5d36-b0da-4676-867c-af1923997653 (SUCCESS)>	3		27	1
+274	2018-06-15 12:50:13.081292+00	78	<Task: f08d4701-af1e-4382-82db-d699735e141a (SUCCESS)>	3		27	1
+275	2018-06-15 12:50:13.083344+00	77	<Task: 2872f841-19e9-4952-b23d-cb449dd1cdf9 (SUCCESS)>	3		27	1
+276	2018-06-15 12:50:13.085245+00	76	<Task: 1c1dc396-43b5-4c13-beaf-8b57b4dd062d (SUCCESS)>	3		27	1
+277	2018-06-15 12:50:13.087007+00	75	<Task: 6749a1c7-7c3c-4c57-8eec-e6242e2e9fad (SUCCESS)>	3		27	1
+278	2018-06-15 12:50:13.088914+00	74	<Task: 868d2dd3-9902-4ce5-b099-7945931af9db (SUCCESS)>	3		27	1
+279	2018-06-15 12:50:13.091463+00	73	<Task: 10f746ec-996e-4119-82de-13e0ef430a3f (SUCCESS)>	3		27	1
+280	2018-06-15 12:50:13.093863+00	72	<Task: 259889eb-83c4-4a13-9bd0-6c2b5edeaa92 (SUCCESS)>	3		27	1
+281	2018-06-15 12:50:13.096499+00	71	<Task: af2e6872-3b65-4dfa-aac4-bd26ed65c612 (SUCCESS)>	3		27	1
+282	2018-06-15 12:50:13.098454+00	70	<Task: 09aa58b4-01f5-42dd-82cb-eb41ffe4ff59 (SUCCESS)>	3		27	1
+283	2018-06-15 12:50:13.100165+00	69	<Task: 98cde5b0-feba-4235-8fd2-d5453a57e287 (SUCCESS)>	3		27	1
+284	2018-06-15 12:50:13.102077+00	68	<Task: 240acdae-31a0-4a3e-9ed3-c06ce47e1f44 (SUCCESS)>	3		27	1
+285	2018-06-15 12:50:13.10444+00	67	<Task: f30b53d6-ff6f-484c-9eab-bd8e7d2315af (SUCCESS)>	3		27	1
+286	2018-06-15 12:50:13.107564+00	66	<Task: 73ba24fd-d273-431e-8263-a8b82abd2f7b (SUCCESS)>	3		27	1
+287	2018-06-15 12:50:13.109749+00	65	<Task: 6c00ef77-6cbf-4932-a33e-21615ef8f232 (SUCCESS)>	3		27	1
+288	2018-06-15 12:50:13.111555+00	64	<Task: be503b96-d0e9-424e-9c3e-999de753b63e (SUCCESS)>	3		27	1
+289	2018-06-15 12:50:13.113234+00	63	<Task: b04bfbba-6929-4095-b11b-c48d5503cf5b (SUCCESS)>	3		27	1
+290	2018-06-15 12:50:13.114817+00	62	<Task: f7619ed8-7ad8-460e-89fa-403f2832a278 (SUCCESS)>	3		27	1
+291	2018-06-15 12:50:13.11652+00	61	<Task: fb910443-8e2e-4456-b8dd-26e918bd021f (SUCCESS)>	3		27	1
+292	2018-06-15 12:50:13.118012+00	60	<Task: 1ffa1060-6c6d-4674-adef-62e87fd17d1b (SUCCESS)>	3		27	1
+293	2018-06-15 12:50:13.119514+00	59	<Task: 1f48d84d-c33e-48d0-8001-433679a4e504 (SUCCESS)>	3		27	1
+294	2018-06-15 12:50:13.121053+00	58	<Task: ed001253-118d-48c3-9169-d999850b4499 (SUCCESS)>	3		27	1
+295	2018-06-15 12:50:13.122466+00	57	<Task: 4bf378a4-88c2-44fd-82a2-08c222234fc2 (SUCCESS)>	3		27	1
+296	2018-06-15 12:50:13.124326+00	56	<Task: 3a9b6c8a-7cdb-420e-bc86-afcc95a2905e (SUCCESS)>	3		27	1
+297	2018-06-15 12:50:13.125944+00	55	<Task: 0a2ea823-b403-481d-8bcb-8b9ccd246c4c (SUCCESS)>	3		27	1
+298	2018-06-15 12:50:13.127527+00	54	<Task: 5ba94dcb-7d7c-41e9-bebb-0112605a3762 (SUCCESS)>	3		27	1
+299	2018-06-15 12:50:13.128958+00	53	<Task: 3c69641f-a1c7-408c-bc1a-558377e48416 (SUCCESS)>	3		27	1
+300	2018-06-15 12:50:13.130592+00	52	<Task: 2d5a56ed-d07f-4615-84ab-e229ff6a6568 (SUCCESS)>	3		27	1
+301	2018-06-15 12:50:13.132627+00	51	<Task: 75c8e44b-de93-418b-b8c3-671048a83235 (SUCCESS)>	3		27	1
+302	2018-06-15 12:50:13.13491+00	50	<Task: 85492455-21e2-4f97-a0b6-bf381ea54598 (SUCCESS)>	3		27	1
+303	2018-06-15 12:50:22.766+00	602	Last night	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+304	2018-06-15 12:52:30.601851+00	602	Last night	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+305	2018-06-19 10:33:15.236952+00	602	Last night	2	[{"changed": {"fields": ["genre", "tags", "tracklist"]}}]	22	1
+306	2018-06-20 09:22:05.002759+00	423	<Task: f2b17736-58b5-40ca-b354-553e57b9b77a (SUCCESS)>	3		27	1
+307	2018-06-20 09:22:05.014941+00	422	<Task: b66e508d-8016-42a9-9435-6bcb23f5ebdc (SUCCESS)>	3		27	1
+308	2018-06-20 09:22:05.017283+00	421	<Task: 02bb33e1-6b62-47d6-89ea-8975fa98ab1b (SUCCESS)>	3		27	1
+309	2018-06-20 09:22:05.019145+00	420	<Task: c740fa4a-80d6-42fd-92da-690421d93ea1 (SUCCESS)>	3		27	1
+310	2018-06-20 09:22:05.021224+00	419	<Task: de634f9c-1933-449a-9266-098413130bcd (SUCCESS)>	3		27	1
+311	2018-06-20 09:22:05.023009+00	418	<Task: 4a88f325-0502-417d-9bfc-97d27aa5cf3d (SUCCESS)>	3		27	1
+312	2018-06-20 09:22:05.024814+00	417	<Task: 414b1182-2327-42a1-b667-3e7c1bef5105 (SUCCESS)>	3		27	1
+313	2018-06-20 09:22:05.026248+00	416	<Task: 0ab807ea-f4af-410c-917e-07d6ed099f33 (SUCCESS)>	3		27	1
+314	2018-06-20 09:22:05.027667+00	415	<Task: ce02430b-c113-4196-9e34-459dfd41731a (SUCCESS)>	3		27	1
+315	2018-06-20 09:22:05.029061+00	414	<Task: 6eb3069f-02fc-4375-bb0c-138bd53b36ac (SUCCESS)>	3		27	1
+316	2018-06-20 09:22:05.03063+00	413	<Task: dea5f549-a74b-4639-a2a4-b729ecfe2070 (SUCCESS)>	3		27	1
+317	2018-06-20 09:22:05.032257+00	412	<Task: e57af9a1-438d-4149-b1e9-028446345f9b (SUCCESS)>	3		27	1
+318	2018-06-20 09:22:05.033719+00	411	<Task: f7419ba0-448a-49c5-9b2d-ebf7d3e57a86 (SUCCESS)>	3		27	1
+319	2018-06-20 09:22:05.035222+00	410	<Task: b8c1892c-56b6-4c77-a560-fc87b305fc3a (SUCCESS)>	3		27	1
+320	2018-06-20 09:22:05.03665+00	409	<Task: 3c5e07e6-fc6a-4931-9e1f-334a8f9127eb (SUCCESS)>	3		27	1
+321	2018-06-20 09:22:05.03823+00	408	<Task: 8e3ff1ba-3b9e-48af-9013-16a893b80133 (SUCCESS)>	3		27	1
+322	2018-06-20 09:22:05.040122+00	407	<Task: 30cf450a-61fa-4fb6-94df-f990008ac0f4 (SUCCESS)>	3		27	1
+323	2018-06-20 09:22:05.042097+00	406	<Task: d4ad8378-7c90-4756-9f28-85de4b38847c (SUCCESS)>	3		27	1
+324	2018-06-20 09:22:05.043837+00	405	<Task: b9657a4d-3d70-4d71-bfd8-cbd4d3fd12d1 (SUCCESS)>	3		27	1
+325	2018-06-20 09:22:05.045402+00	404	<Task: 678dbf76-918e-49c9-9c1e-8b67f5efd1b0 (SUCCESS)>	3		27	1
+326	2018-06-20 09:22:05.047008+00	403	<Task: 491da5b4-238b-4524-92dc-5030d49034d2 (SUCCESS)>	3		27	1
+327	2018-06-20 09:22:05.048539+00	402	<Task: a662a867-701a-45db-8a39-35a2cd580675 (SUCCESS)>	3		27	1
+328	2018-06-20 09:22:05.050134+00	401	<Task: 1f97518b-8a6a-4082-a145-69cb09b23617 (SUCCESS)>	3		27	1
+329	2018-06-20 09:22:05.05169+00	400	<Task: 58b7dfa0-2c07-4e7c-8542-0d8f180b6b27 (SUCCESS)>	3		27	1
+330	2018-06-20 09:22:05.053164+00	399	<Task: 4eb8b4dd-aff4-46af-8059-30bbfb4bb4cc (SUCCESS)>	3		27	1
+331	2018-06-20 09:22:05.054645+00	398	<Task: 8703f337-6ac4-4a51-a0f7-8f5ded33f92c (SUCCESS)>	3		27	1
+332	2018-06-20 09:22:05.056076+00	397	<Task: 1ea2f90b-107b-4302-b26b-025795009e91 (SUCCESS)>	3		27	1
+333	2018-06-20 09:22:05.057556+00	396	<Task: 50ca6f3a-cac5-4d7a-8b07-4cbdb1cca5a5 (SUCCESS)>	3		27	1
+334	2018-06-20 09:22:05.059286+00	395	<Task: e5c2cf05-5f30-43f7-a8c6-4ef76c0b461e (SUCCESS)>	3		27	1
+335	2018-06-20 09:22:05.060763+00	394	<Task: ea6c4e34-d757-4eaa-86b2-4997b10058bc (SUCCESS)>	3		27	1
+336	2018-06-20 09:22:05.063127+00	393	<Task: 1bc9558d-300b-4821-8b67-09b6877f1ec3 (SUCCESS)>	3		27	1
+337	2018-06-20 09:22:05.070087+00	392	<Task: ed59c6c8-9bde-4c7d-aceb-b12c81fc5967 (SUCCESS)>	3		27	1
+338	2018-06-20 09:22:05.072068+00	391	<Task: eb41150b-5df9-4952-b3c7-fd967715af42 (SUCCESS)>	3		27	1
+339	2018-06-20 09:22:05.073827+00	390	<Task: 8757ee1b-3798-4666-a62f-6d015ddd754b (SUCCESS)>	3		27	1
+340	2018-06-20 09:22:05.075436+00	389	<Task: 80380420-4a57-4b74-8491-27c2ec9de3ae (SUCCESS)>	3		27	1
+341	2018-06-20 09:22:05.076945+00	388	<Task: da82901f-44f3-41f9-bc8f-9c7e39b663c9 (SUCCESS)>	3		27	1
+342	2018-06-20 09:22:05.078631+00	387	<Task: c9e73d2d-5b2b-4863-b858-62869425108f (SUCCESS)>	3		27	1
+343	2018-06-20 09:22:05.08054+00	386	<Task: e6891938-afe7-4b34-832b-eb9879cc1636 (SUCCESS)>	3		27	1
+344	2018-06-20 09:22:05.08212+00	385	<Task: 1dfe278b-a50e-48df-80db-cfa00592bada (SUCCESS)>	3		27	1
+345	2018-06-20 09:22:05.083598+00	384	<Task: 199fff8d-d3b4-46de-a394-594a33397f43 (SUCCESS)>	3		27	1
+346	2018-06-20 09:22:05.085007+00	383	<Task: db3c3d4a-7567-40ab-8e45-b628c0a2733a (SUCCESS)>	3		27	1
+347	2018-06-20 09:22:05.086304+00	382	<Task: fe499a13-0c82-46d3-a212-cae7ebd46282 (SUCCESS)>	3		27	1
+348	2018-06-20 09:22:05.089674+00	381	<Task: 6095d1af-0635-4047-bf6a-cceffd65eb05 (SUCCESS)>	3		27	1
+349	2018-06-20 09:22:05.091428+00	380	<Task: af3174eb-97f1-4517-9074-e91c173cd760 (SUCCESS)>	3		27	1
+350	2018-06-20 09:22:05.0931+00	379	<Task: ed019f82-d1b2-494f-81ba-0b24b027e7d9 (SUCCESS)>	3		27	1
+351	2018-06-20 09:22:05.094666+00	378	<Task: 8665f133-c334-48e2-bdf8-038dd22c7ee9 (SUCCESS)>	3		27	1
+352	2018-06-20 09:22:05.096333+00	377	<Task: b0394306-8bdc-4509-93f1-383cdce115bd (SUCCESS)>	3		27	1
+353	2018-06-20 09:22:05.098023+00	376	<Task: e82f009b-0745-4ae6-9bc1-21e207007e17 (SUCCESS)>	3		27	1
+354	2018-06-20 09:22:05.100109+00	375	<Task: 3a3be69c-d618-46a8-ab4d-9159dcf00f76 (SUCCESS)>	3		27	1
+355	2018-06-20 09:22:05.101781+00	374	<Task: 69860029-7c5e-4e84-b220-4ecf43321344 (SUCCESS)>	3		27	1
+356	2018-06-20 09:22:05.10366+00	373	<Task: f68e5d6b-c7f5-4a88-a8cf-0e52f7c569ae (SUCCESS)>	3		27	1
+357	2018-06-20 09:22:05.106133+00	372	<Task: 2d1301c9-aa30-4a9a-92a5-ab4bcb9becc2 (SUCCESS)>	3		27	1
+358	2018-06-20 09:22:05.10798+00	371	<Task: 5b79d9ad-346d-455a-ad34-43c49aba390c (SUCCESS)>	3		27	1
+359	2018-06-20 09:22:05.109848+00	370	<Task: 06fea525-d4f1-4460-939a-ecc59bd7ce41 (SUCCESS)>	3		27	1
+360	2018-06-20 09:22:05.111665+00	369	<Task: 26e00cf6-dbea-4d1b-9f19-21971c24d4d4 (SUCCESS)>	3		27	1
+361	2018-06-20 09:22:05.116577+00	368	<Task: 2885c83e-1a77-495e-b9e9-a18c1a2510d5 (SUCCESS)>	3		27	1
+362	2018-06-20 09:22:05.118549+00	367	<Task: 69064b3e-2217-4f61-8f52-99a2a3994eaf (SUCCESS)>	3		27	1
+363	2018-06-20 09:22:05.120334+00	366	<Task: a2bad72d-40ca-45bb-ade1-125695472955 (SUCCESS)>	3		27	1
+364	2018-06-20 09:22:05.122026+00	365	<Task: c855177f-a4fb-48c1-8ae2-008f495fa256 (SUCCESS)>	3		27	1
+365	2018-06-20 09:22:05.124296+00	364	<Task: e45076d8-2103-41ef-8cf1-d570c97708a6 (SUCCESS)>	3		27	1
+366	2018-06-20 09:22:05.126225+00	363	<Task: 27510b00-fafd-40b5-b1e2-1da7e96ae679 (SUCCESS)>	3		27	1
+367	2018-06-20 09:22:05.128267+00	362	<Task: 767a57fa-d7ed-46d6-ad76-2759e4383d41 (SUCCESS)>	3		27	1
+368	2018-06-20 09:22:05.129861+00	361	<Task: 8fd37ec7-cf5f-44ec-9864-6caa2446e03b (SUCCESS)>	3		27	1
+369	2018-06-20 09:22:05.131598+00	360	<Task: 0e525978-d5d5-4444-b94b-24970dbc5e34 (SUCCESS)>	3		27	1
+370	2018-06-20 09:22:05.133228+00	359	<Task: d7719e2c-076f-4105-b549-13a3338f82a4 (SUCCESS)>	3		27	1
+371	2018-06-20 09:22:05.134937+00	358	<Task: d9e4ea3b-8bdb-45f5-982f-771e56cee214 (SUCCESS)>	3		27	1
+372	2018-06-20 09:22:05.13648+00	357	<Task: 1cc666a0-d743-40d1-a64c-1542ddc530d4 (SUCCESS)>	3		27	1
+373	2018-06-20 09:22:05.138076+00	356	<Task: c39caedb-2f75-4567-8edc-fab9c34e878a (SUCCESS)>	3		27	1
+374	2018-06-20 09:22:05.139743+00	355	<Task: 5b4832a0-94fb-4454-8cd9-d03a65c264b1 (SUCCESS)>	3		27	1
+375	2018-06-20 09:22:05.141466+00	354	<Task: a943000b-6fc6-44a8-9c5f-9eff09624fbc (SUCCESS)>	3		27	1
+376	2018-06-20 09:22:05.143237+00	353	<Task: 688f2dde-3b20-4495-8936-a10d824872a1 (SUCCESS)>	3		27	1
+377	2018-06-20 09:22:05.144612+00	352	<Task: 63478267-449f-4127-8794-63cb867d22ee (SUCCESS)>	3		27	1
+378	2018-06-20 09:22:05.145984+00	351	<Task: bb000625-d45b-4be2-9699-73378dc56a91 (SUCCESS)>	3		27	1
+379	2018-06-20 09:22:05.147681+00	350	<Task: 4ba461a2-2fbe-49df-8aa5-68706c731c9a (SUCCESS)>	3		27	1
+380	2018-06-20 09:22:05.149286+00	349	<Task: 0f4616e6-fe76-4a56-8500-c1696b51658d (SUCCESS)>	3		27	1
+381	2018-06-20 09:22:05.150929+00	348	<Task: a7b834c8-fc14-4e9f-95dc-5531bef4517e (SUCCESS)>	3		27	1
+382	2018-06-20 09:22:05.152467+00	347	<Task: d1467769-f3e7-4664-91bf-78effda1ab01 (SUCCESS)>	3		27	1
+383	2018-06-20 09:22:05.154006+00	346	<Task: 0b89bdd8-43d1-4d5b-adae-d0a087bc3f8a (SUCCESS)>	3		27	1
+384	2018-06-20 09:22:05.155755+00	345	<Task: 950ec0d0-f50a-4f72-b32e-6b7039e784cb (SUCCESS)>	3		27	1
+385	2018-06-20 09:22:05.157354+00	344	<Task: 676e9c57-bfba-447c-ada1-a16f959d214b (SUCCESS)>	3		27	1
+386	2018-06-20 09:22:05.158975+00	343	<Task: ab76f0b8-a31d-4643-992c-95f6ba2d9b56 (SUCCESS)>	3		27	1
+387	2018-06-20 09:22:05.16056+00	342	<Task: 7017cfd1-c428-4b3c-8418-b5119b568e58 (SUCCESS)>	3		27	1
+388	2018-06-20 09:22:05.162064+00	341	<Task: d5283eae-4ef8-412c-a67a-5ff9d25e0516 (SUCCESS)>	3		27	1
+389	2018-06-20 09:22:05.163669+00	340	<Task: ee6f1956-6b93-49da-90d7-2462d89f46ce (SUCCESS)>	3		27	1
+390	2018-06-20 09:22:05.165237+00	339	<Task: 4cd00e5f-5a6f-45d7-8de6-43fd7bde99af (SUCCESS)>	3		27	1
+391	2018-06-20 09:22:05.166893+00	338	<Task: 7a0390f3-1db6-4ab6-a169-59bd4134ea6b (SUCCESS)>	3		27	1
+392	2018-06-20 09:22:05.168628+00	337	<Task: 009b7195-f50f-42e5-bf9d-c91123e3ff66 (SUCCESS)>	3		27	1
+393	2018-06-20 09:22:05.170106+00	336	<Task: 46ba6ee4-7379-4bea-ba6e-f17810887447 (SUCCESS)>	3		27	1
+394	2018-06-20 09:22:05.171747+00	335	<Task: 41d3f112-4668-4f06-9135-ee79752468b4 (SUCCESS)>	3		27	1
+395	2018-06-20 09:22:05.173226+00	334	<Task: 9bd958a4-5764-4840-b2e2-ad266f9e047a (SUCCESS)>	3		27	1
+396	2018-06-20 09:22:05.174951+00	333	<Task: 4ca14a42-89af-4fbf-8585-06a0984b6e7c (SUCCESS)>	3		27	1
+397	2018-06-20 09:22:05.176481+00	332	<Task: 322f3d49-ae1e-4890-a49c-183a7d0a2d07 (SUCCESS)>	3		27	1
+398	2018-06-20 09:22:05.17787+00	331	<Task: f40d64ce-acde-4f84-a4b4-b00762fe4c7e (SUCCESS)>	3		27	1
+399	2018-06-20 09:22:05.179383+00	330	<Task: 61c48ce4-c248-4572-864d-d62979b8bdf3 (SUCCESS)>	3		27	1
+400	2018-06-20 09:22:05.180754+00	329	<Task: 417a8c03-6923-46be-bc5d-a4dc1722d80e (SUCCESS)>	3		27	1
+401	2018-06-20 09:22:05.18226+00	328	<Task: b191e547-f06d-46f0-a9f3-3b58001e179f (SUCCESS)>	3		27	1
+402	2018-06-20 09:22:05.183931+00	327	<Task: 2bbbc699-8e7a-434d-b14c-7500bfd8001a (SUCCESS)>	3		27	1
+403	2018-06-20 09:22:05.185479+00	326	<Task: 9f786726-7049-4be5-ba44-2a7728d82169 (SUCCESS)>	3		27	1
+404	2018-06-20 09:22:05.187135+00	325	<Task: a30deb32-fba2-4e77-add8-8aa50c06815b (SUCCESS)>	3		27	1
+405	2018-06-20 09:22:05.188658+00	324	<Task: 4501eea4-0929-4cbe-b71c-791de0ebc028 (SUCCESS)>	3		27	1
+406	2018-06-20 09:22:05.190179+00	323	<Task: e6c49452-ec6e-4788-8966-307ef9ba2786 (SUCCESS)>	3		27	1
+407	2018-06-20 09:22:05.191809+00	322	<Task: 2d49d766-f8ee-4703-955a-2d01cb2c7d29 (SUCCESS)>	3		27	1
+408	2018-06-20 09:22:05.19338+00	321	<Task: bf4a404e-4d85-451a-a742-99e793d86e13 (SUCCESS)>	3		27	1
+409	2018-06-20 09:22:05.195543+00	320	<Task: 8a5ecc33-c2b3-4b82-bae4-d64935afaf19 (SUCCESS)>	3		27	1
+410	2018-06-20 09:22:05.197624+00	319	<Task: 6571962e-1644-4db2-b271-d2acc6d18b24 (SUCCESS)>	3		27	1
+411	2018-06-20 09:22:05.199467+00	318	<Task: b3e9f624-7ac6-459e-a7f0-fc073f83f0d0 (SUCCESS)>	3		27	1
+412	2018-06-20 09:22:05.201193+00	317	<Task: 72b7f4f0-efad-428e-b5a1-b23e70d1519a (SUCCESS)>	3		27	1
+413	2018-06-21 07:45:59.528449+00	602	Last night	2	[{"changed": {"fields": ["genre", "tags"]}}]	22	1
+414	2018-06-21 07:47:16.593513+00	602	Last night	2	[{"changed": {"fields": ["genre", "tags", "cover"]}}]	22	1
+415	2018-06-25 10:10:57.124156+00	1	https://manti.by/sr/0fcb	1	[{"added": {}}]	38	1
 \.
 
 
@@ -2530,61 +2531,63 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 38, true);
 --
 
 COPY public.django_migrations (id, app, name, applied) FROM stdin;
-1	contenttypes	0001_initial	2017-04-18 14:19:41.485108+02
-2	auth	0001_initial	2017-04-18 14:19:42.091556+02
-3	admin	0001_initial	2017-04-18 14:19:42.242972+02
-4	admin	0002_logentry_remove_auto_add	2017-04-18 14:19:42.284094+02
-5	contenttypes	0002_remove_content_type_name	2017-04-18 14:19:42.358548+02
-6	auth	0002_alter_permission_name_max_length	2017-04-18 14:19:42.391597+02
-7	auth	0003_alter_user_email_max_length	2017-04-18 14:19:42.424814+02
-8	auth	0004_alter_user_username_opts	2017-04-18 14:19:42.448671+02
-9	auth	0005_alter_user_last_login_null	2017-04-18 14:19:42.495125+02
-10	auth	0006_require_contenttypes_0002	2017-04-18 14:19:42.506982+02
-11	auth	0007_alter_validators_add_error_messages	2017-04-18 14:19:42.533833+02
-12	auth	0008_alter_user_username_max_length	2017-04-18 14:19:42.623079+02
-14	profiles	0001_initial	2017-04-18 14:19:43.68407+02
-15	sessions	0001_initial	2017-04-18 14:19:43.826606+02
-16	taggit	0001_initial	2017-04-18 14:19:44.106751+02
-17	taggit	0002_auto_20150616_2121	2017-04-18 14:19:44.179929+02
-18	thumbnail	0001_initial	2017-04-18 14:19:44.287772+02
-19	blog	0001_initial	2017-04-18 14:23:51.906464+02
-20	blog	0002_post_converted	2017-04-18 17:39:23.843526+02
-21	blog	0003_auto_20170419_0947	2017-04-19 11:47:53.955654+02
-22	blog	0004_auto_20170419_1039	2017-04-19 12:39:40.420759+02
-24	gallery	0001_initial	2017-04-19 14:35:55.371464+02
-25	gallery	0002_auto_20170419_1251	2017-04-19 14:52:02.706693+02
-26	profiles	0002_auto_20170419_1251	2017-04-19 14:52:02.87612+02
-27	blog	0005_auto_20170419_1519	2017-04-19 17:19:37.358336+02
-28	gallery	0003_auto_20170419_1519	2017-04-19 17:19:37.413739+02
-29	gallery	0004_auto_20170420_0802	2017-04-20 10:02:51.758643+02
-30	blog	0006_auto_20170420_0812	2017-04-20 10:12:56.755146+02
-31	gallery	0005_image_phash	2017-04-26 14:25:54.12656+02
-32	gallery	0006_auto_20170502_1246	2017-05-02 14:46:58.185583+02
-33	profiles	0003_auto_20170502_1246	2017-05-02 14:46:58.635773+02
-34	gallery	0007_auto_20170502_1432	2017-05-02 16:32:04.470723+02
-35	profiles	0004_auto_20170502_1432	2017-05-02 16:32:04.571224+02
-36	blog	0007_post_viewed	2017-05-02 16:51:37.595918+02
-37	blog	0008_post_original_id	2017-05-02 17:10:41.158642+02
-39	blog	0009_auto_20170503_1246	2017-05-03 14:46:56.349443+02
-40	core	0001_initial	2017-05-04 10:19:40.361805+02
-41	core	0002_email_name	2017-05-04 10:20:27.916458+02
-42	blog	0010_auto_20170717_1218	2018-04-20 11:42:24.982164+02
-43	blog	0011_auto_20170721_1151	2018-04-20 11:42:25.110073+02
-44	gallery	0008_auto_20170512_1151	2018-04-20 11:42:25.16937+02
-45	gallery	0009_gallery_name_by	2018-04-20 11:42:25.271413+02
-46	gallery	0010_auto_20170721_1155	2018-04-20 11:42:25.339266+02
-47	profiles	0005_auto_20170620_1156	2018-04-20 11:42:25.402934+02
-55	blog	0012_auto_20180425_1523	2018-04-25 17:30:23.938112+02
-56	gallery	0011_auto_20180425_1523	2018-04-25 17:30:23.958941+02
-57	blog	0013_auto_20180525_1219	2018-05-30 15:43:29.169567+02
-64	blog	0014_auto_20180619_1106	2018-06-19 15:52:32.035773+02
-65	core	0003_auto_20180619_1106	2018-06-19 15:52:32.059245+02
-66	gallery	0012_auto_20180619_1106	2018-06-19 15:52:32.185704+02
-67	profiles	0006_auto_20180619_1106	2018-06-19 15:52:32.224738+02
-68	sites	0001_initial	2018-06-19 15:52:32.237741+02
-69	sites	0002_alter_domain_unique	2018-06-19 15:52:32.25334+02
-70	django_celery_results	0001_initial	2018-06-20 13:15:22.702983+02
-71	shortener	0001_initial	2018-06-25 12:09:36.320284+02
+1	contenttypes	0001_initial	2017-04-18 12:19:41.485108+00
+2	auth	0001_initial	2017-04-18 12:19:42.091556+00
+3	admin	0001_initial	2017-04-18 12:19:42.242972+00
+4	admin	0002_logentry_remove_auto_add	2017-04-18 12:19:42.284094+00
+5	contenttypes	0002_remove_content_type_name	2017-04-18 12:19:42.358548+00
+6	auth	0002_alter_permission_name_max_length	2017-04-18 12:19:42.391597+00
+7	auth	0003_alter_user_email_max_length	2017-04-18 12:19:42.424814+00
+8	auth	0004_alter_user_username_opts	2017-04-18 12:19:42.448671+00
+9	auth	0005_alter_user_last_login_null	2017-04-18 12:19:42.495125+00
+10	auth	0006_require_contenttypes_0002	2017-04-18 12:19:42.506982+00
+11	auth	0007_alter_validators_add_error_messages	2017-04-18 12:19:42.533833+00
+12	auth	0008_alter_user_username_max_length	2017-04-18 12:19:42.623079+00
+14	profiles	0001_initial	2017-04-18 12:19:43.68407+00
+15	sessions	0001_initial	2017-04-18 12:19:43.826606+00
+16	taggit	0001_initial	2017-04-18 12:19:44.106751+00
+17	taggit	0002_auto_20150616_2121	2017-04-18 12:19:44.179929+00
+18	thumbnail	0001_initial	2017-04-18 12:19:44.287772+00
+19	blog	0001_initial	2017-04-18 12:23:51.906464+00
+20	blog	0002_post_converted	2017-04-18 15:39:23.843526+00
+21	blog	0003_auto_20170419_0947	2017-04-19 09:47:53.955654+00
+22	blog	0004_auto_20170419_1039	2017-04-19 10:39:40.420759+00
+24	gallery	0001_initial	2017-04-19 12:35:55.371464+00
+25	gallery	0002_auto_20170419_1251	2017-04-19 12:52:02.706693+00
+26	profiles	0002_auto_20170419_1251	2017-04-19 12:52:02.87612+00
+27	blog	0005_auto_20170419_1519	2017-04-19 15:19:37.358336+00
+28	gallery	0003_auto_20170419_1519	2017-04-19 15:19:37.413739+00
+29	gallery	0004_auto_20170420_0802	2017-04-20 08:02:51.758643+00
+30	blog	0006_auto_20170420_0812	2017-04-20 08:12:56.755146+00
+31	gallery	0005_image_phash	2017-04-26 12:25:54.12656+00
+32	gallery	0006_auto_20170502_1246	2017-05-02 12:46:58.185583+00
+33	profiles	0003_auto_20170502_1246	2017-05-02 12:46:58.635773+00
+34	gallery	0007_auto_20170502_1432	2017-05-02 14:32:04.470723+00
+35	profiles	0004_auto_20170502_1432	2017-05-02 14:32:04.571224+00
+36	blog	0007_post_viewed	2017-05-02 14:51:37.595918+00
+37	blog	0008_post_original_id	2017-05-02 15:10:41.158642+00
+39	blog	0009_auto_20170503_1246	2017-05-03 12:46:56.349443+00
+40	core	0001_initial	2017-05-04 08:19:40.361805+00
+41	core	0002_email_name	2017-05-04 08:20:27.916458+00
+42	blog	0010_auto_20170717_1218	2018-04-20 09:42:24.982164+00
+43	blog	0011_auto_20170721_1151	2018-04-20 09:42:25.110073+00
+44	gallery	0008_auto_20170512_1151	2018-04-20 09:42:25.16937+00
+45	gallery	0009_gallery_name_by	2018-04-20 09:42:25.271413+00
+46	gallery	0010_auto_20170721_1155	2018-04-20 09:42:25.339266+00
+47	profiles	0005_auto_20170620_1156	2018-04-20 09:42:25.402934+00
+55	blog	0012_auto_20180425_1523	2018-04-25 15:30:23.938112+00
+56	gallery	0011_auto_20180425_1523	2018-04-25 15:30:23.958941+00
+57	blog	0013_auto_20180525_1219	2018-05-30 13:43:29.169567+00
+64	blog	0014_auto_20180619_1106	2018-06-19 13:52:32.035773+00
+65	core	0003_auto_20180619_1106	2018-06-19 13:52:32.059245+00
+66	gallery	0012_auto_20180619_1106	2018-06-19 13:52:32.185704+00
+67	profiles	0006_auto_20180619_1106	2018-06-19 13:52:32.224738+00
+68	sites	0001_initial	2018-06-19 13:52:32.237741+00
+69	sites	0002_alter_domain_unique	2018-06-19 13:52:32.25334+00
+70	django_celery_results	0001_initial	2018-06-20 11:15:22.702983+00
+71	shortener	0001_initial	2018-06-25 10:09:36.320284+00
+72	gallery	0013_remove_image_phash	2018-09-05 12:33:21.798774+00
+73	shortener	0002_link_name	2018-09-19 14:39:43.622464+00
 \.
 
 
@@ -2592,7 +2595,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 71, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 73, true);
 
 
 --
@@ -2600,26 +2603,28 @@ SELECT pg_catalog.setval('public.django_migrations_id_seq', 71, true);
 --
 
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
-bjbtgy20ik63fj9uleo8qlpztrd9uh8n	MjA0MWI0ZWEyNjdkNjlmZWU3YTg1MDU5MjU3YzRhMjZmYWQ5ZTJiOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA1ZWY1NWZiMzdjMWJlOWM4NjhjN2IyODI4NmQzZDdhYmUxMjg0MGIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-05-02 14:22:50.13504+02
-qmdtpjladvqarynn2yi8epaompsw1enj	MjA0MWI0ZWEyNjdkNjlmZWU3YTg1MDU5MjU3YzRhMjZmYWQ5ZTJiOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA1ZWY1NWZiMzdjMWJlOWM4NjhjN2IyODI4NmQzZDdhYmUxMjg0MGIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-05-05 12:18:39.206394+02
-7f88cbc2k536n8zfqjbva7as1f7i6out	MjA0MWI0ZWEyNjdkNjlmZWU3YTg1MDU5MjU3YzRhMjZmYWQ5ZTJiOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA1ZWY1NWZiMzdjMWJlOWM4NjhjN2IyODI4NmQzZDdhYmUxMjg0MGIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-05-10 14:25:05.963981+02
-u6o3odywkxwb10pqch95j90xpyf57q1y	MjA0MWI0ZWEyNjdkNjlmZWU3YTg1MDU5MjU3YzRhMjZmYWQ5ZTJiOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA1ZWY1NWZiMzdjMWJlOWM4NjhjN2IyODI4NmQzZDdhYmUxMjg0MGIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-05-16 14:19:23.32708+02
-a41cfas42y0l1o87bkiddmt2u2friqqb	NmY3YzAzOGMzNTk4N2E1OGI2Nzc0Y2IzMzMyMGEzNDRhYzkwN2FiNTp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-05-04 16:33:01.262247+02
-qud7rd1zoghslybc6jvtdhrkwchq0qet	YzdjZDdmYzMzNjhlODYzYWU5YjJiZDk2MWEzYzRjODVhNDBjOGUyYTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiOTZmYjNmNWQ1YThjYzFmODI0NzE3YWQ2Yzk3OTY4ZmUwOTlmMTRiYSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-05-10 16:13:46.161751+02
-9i6arxjbvn1m9ickoe9qtvcu9v5fqtm2	NmY3YzAzOGMzNTk4N2E1OGI2Nzc0Y2IzMzMyMGEzNDRhYzkwN2FiNTp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-05-10 23:05:38.589577+02
-5ifko4bh1azbfs6cwkl64fgzoi4r3fcm	NmY3YzAzOGMzNTk4N2E1OGI2Nzc0Y2IzMzMyMGEzNDRhYzkwN2FiNTp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-05-10 23:13:58.735303+02
-4dgz8eymr63402660m9r85ov9qa6o0u0	MWJhNTVmMzIwYWQxMmI1NzY1OWIzNDg0MzFiZTNkOTY0MzllMTQ5Njp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-06-05 18:21:15.465551+02
-nrnp8ffpz4q9tdnf9m1362adsvqmyaxi	MWJhNTVmMzIwYWQxMmI1NzY1OWIzNDg0MzFiZTNkOTY0MzllMTQ5Njp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-06-12 13:50:58.766637+02
-3nrcgt1emqyxcdgpnda6fmk22jqn0i34	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-06-13 11:27:32.756221+02
-6mr86lyz3b4rz8cdbmdso42wirqpr3tc	NmY3YzAzOGMzNTk4N2E1OGI2Nzc0Y2IzMzMyMGEzNDRhYzkwN2FiNTp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-06-20 16:55:58.678705+02
-wspwo326ikihd6r4p88y55mveft0xwky	MTMwMzIyZDMxNmU0NjJkZjZlODZjOTkzMGNjZTAzMTY5MjQ1ZjI0Mzp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2018-06-28 17:32:28.826572+02
-fnlfyiq4ul01pkjj3b3yhjta1tfx7pi2	MWJhNTVmMzIwYWQxMmI1NzY1OWIzNDg0MzFiZTNkOTY0MzllMTQ5Njp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-06-29 14:29:44.900033+02
-e47508auiw1lwnxfsrhmoeil9p6rjuqm	MWJhNTVmMzIwYWQxMmI1NzY1OWIzNDg0MzFiZTNkOTY0MzllMTQ5Njp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-06-29 14:35:48.422586+02
-64n3rh0j4s8fa07b0d1jn8774ibfqw5r	MTMwMzIyZDMxNmU0NjJkZjZlODZjOTkzMGNjZTAzMTY5MjQ1ZjI0Mzp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2018-06-29 15:55:32.061411+02
-ize9nt7q89x0zssaoowpgsirqh68fel5	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-07-03 12:16:20.835798+02
-vkvdj94qbyxb97mk2gxpyroi7lofm28u	MTMwMzIyZDMxNmU0NjJkZjZlODZjOTkzMGNjZTAzMTY5MjQ1ZjI0Mzp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2018-07-04 10:52:11.699805+02
-lwlo899l6kzx4mm8rvhmg23n4x25xzru	YzdjZDdmYzMzNjhlODYzYWU5YjJiZDk2MWEzYzRjODVhNDBjOGUyYTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiOTZmYjNmNWQ1YThjYzFmODI0NzE3YWQ2Yzk3OTY4ZmUwOTlmMTRiYSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-07-05 09:42:09.661702+02
-0adh7k5tqcx646qfy34uzi2w8oj6jznx	NmY3YzAzOGMzNTk4N2E1OGI2Nzc0Y2IzMzMyMGEzNDRhYzkwN2FiNTp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-07-09 12:10:13.81038+02
+bjbtgy20ik63fj9uleo8qlpztrd9uh8n	MjA0MWI0ZWEyNjdkNjlmZWU3YTg1MDU5MjU3YzRhMjZmYWQ5ZTJiOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA1ZWY1NWZiMzdjMWJlOWM4NjhjN2IyODI4NmQzZDdhYmUxMjg0MGIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-05-02 12:22:50.13504+00
+qmdtpjladvqarynn2yi8epaompsw1enj	MjA0MWI0ZWEyNjdkNjlmZWU3YTg1MDU5MjU3YzRhMjZmYWQ5ZTJiOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA1ZWY1NWZiMzdjMWJlOWM4NjhjN2IyODI4NmQzZDdhYmUxMjg0MGIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-05-05 10:18:39.206394+00
+7f88cbc2k536n8zfqjbva7as1f7i6out	MjA0MWI0ZWEyNjdkNjlmZWU3YTg1MDU5MjU3YzRhMjZmYWQ5ZTJiOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA1ZWY1NWZiMzdjMWJlOWM4NjhjN2IyODI4NmQzZDdhYmUxMjg0MGIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-05-10 12:25:05.963981+00
+u6o3odywkxwb10pqch95j90xpyf57q1y	MjA0MWI0ZWEyNjdkNjlmZWU3YTg1MDU5MjU3YzRhMjZmYWQ5ZTJiOTp7Il9hdXRoX3VzZXJfaGFzaCI6IjA1ZWY1NWZiMzdjMWJlOWM4NjhjN2IyODI4NmQzZDdhYmUxMjg0MGIiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2017-05-16 12:19:23.32708+00
+a41cfas42y0l1o87bkiddmt2u2friqqb	NmY3YzAzOGMzNTk4N2E1OGI2Nzc0Y2IzMzMyMGEzNDRhYzkwN2FiNTp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-05-04 14:33:01.262247+00
+qud7rd1zoghslybc6jvtdhrkwchq0qet	YzdjZDdmYzMzNjhlODYzYWU5YjJiZDk2MWEzYzRjODVhNDBjOGUyYTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiOTZmYjNmNWQ1YThjYzFmODI0NzE3YWQ2Yzk3OTY4ZmUwOTlmMTRiYSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-05-10 14:13:46.161751+00
+9i6arxjbvn1m9ickoe9qtvcu9v5fqtm2	NmY3YzAzOGMzNTk4N2E1OGI2Nzc0Y2IzMzMyMGEzNDRhYzkwN2FiNTp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-05-10 21:05:38.589577+00
+5ifko4bh1azbfs6cwkl64fgzoi4r3fcm	NmY3YzAzOGMzNTk4N2E1OGI2Nzc0Y2IzMzMyMGEzNDRhYzkwN2FiNTp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-05-10 21:13:58.735303+00
+4dgz8eymr63402660m9r85ov9qa6o0u0	MWJhNTVmMzIwYWQxMmI1NzY1OWIzNDg0MzFiZTNkOTY0MzllMTQ5Njp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-06-05 16:21:15.465551+00
+nrnp8ffpz4q9tdnf9m1362adsvqmyaxi	MWJhNTVmMzIwYWQxMmI1NzY1OWIzNDg0MzFiZTNkOTY0MzllMTQ5Njp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-06-12 11:50:58.766637+00
+3nrcgt1emqyxcdgpnda6fmk22jqn0i34	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-06-13 09:27:32.756221+00
+6mr86lyz3b4rz8cdbmdso42wirqpr3tc	NmY3YzAzOGMzNTk4N2E1OGI2Nzc0Y2IzMzMyMGEzNDRhYzkwN2FiNTp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-06-20 14:55:58.678705+00
+wspwo326ikihd6r4p88y55mveft0xwky	MTMwMzIyZDMxNmU0NjJkZjZlODZjOTkzMGNjZTAzMTY5MjQ1ZjI0Mzp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2018-06-28 15:32:28.826572+00
+fnlfyiq4ul01pkjj3b3yhjta1tfx7pi2	MWJhNTVmMzIwYWQxMmI1NzY1OWIzNDg0MzFiZTNkOTY0MzllMTQ5Njp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-06-29 12:29:44.900033+00
+e47508auiw1lwnxfsrhmoeil9p6rjuqm	MWJhNTVmMzIwYWQxMmI1NzY1OWIzNDg0MzFiZTNkOTY0MzllMTQ5Njp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9pZCI6IjEiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-06-29 12:35:48.422586+00
+64n3rh0j4s8fa07b0d1jn8774ibfqw5r	MTMwMzIyZDMxNmU0NjJkZjZlODZjOTkzMGNjZTAzMTY5MjQ1ZjI0Mzp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2018-06-29 13:55:32.061411+00
+ize9nt7q89x0zssaoowpgsirqh68fel5	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-07-03 10:16:20.835798+00
+vkvdj94qbyxb97mk2gxpyroi7lofm28u	MTMwMzIyZDMxNmU0NjJkZjZlODZjOTkzMGNjZTAzMTY5MjQ1ZjI0Mzp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=	2018-07-04 08:52:11.699805+00
+lwlo899l6kzx4mm8rvhmg23n4x25xzru	YzdjZDdmYzMzNjhlODYzYWU5YjJiZDk2MWEzYzRjODVhNDBjOGUyYTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9oYXNoIjoiOTZmYjNmNWQ1YThjYzFmODI0NzE3YWQ2Yzk3OTY4ZmUwOTlmMTRiYSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-07-05 07:42:09.661702+00
+0adh7k5tqcx646qfy34uzi2w8oj6jznx	NmY3YzAzOGMzNTk4N2E1OGI2Nzc0Y2IzMzMyMGEzNDRhYzkwN2FiNTp7Il9hdXRoX3VzZXJfaGFzaCI6Ijk2ZmIzZjVkNWE4Y2MxZjgyNDcxN2FkNmM5Nzk2OGZlMDk5ZjE0YmEiLCJfYXV0aF91c2VyX2lkIjoiMSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=	2018-07-09 10:10:13.81038+00
+kw7pq074zpe8jl96jwee3iver6223q37	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-09-27 14:28:29.646624+00
+ewueulnnr3e3d8spb57uywowfeph19qu	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-09-27 14:29:58.877831+00
 \.
 
 
@@ -2644,7 +2649,7 @@ SELECT pg_catalog.setval('public.django_site_id_seq', 1, true);
 --
 
 COPY public.gallery_gallery (id, created, slug, name, "order", name_en, name_ru, name_be, updated) FROM stdin;
-30	2018-04-25 16:44:28.02291+02	default	Default	0	\N	\N	Default	2018-06-19 15:52:32.074936+02
+30	2018-04-25 14:44:28.02291+00	default	Default	0	\N	\N	Default	2018-06-19 13:52:32.074936+00
 \.
 
 
@@ -2659,46 +2664,46 @@ SELECT pg_catalog.setval('public.gallery_gallery_id_seq', 30, true);
 -- Data for Name: gallery_image; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
-COPY public.gallery_image (id, created, original_image, "order", gallery_id, phash, updated) FROM stdin;
-902	2017-03-04 16:05:59+01	gallery/DSC08272.JPG	12	30	f1084b3e9bf560e1	2018-06-19 15:52:32.143527+02
-901	2018-04-25 16:44:33.68852+02	gallery/DSC00003.jpg	13	30	edc15b9c9c89c28d	2018-06-19 15:52:32.143527+02
-900	2012-11-24 21:55:49+01	gallery/DSC08037.JPG	14	30	c0957f0fbc8798e0	2018-06-19 15:52:32.143527+02
-905	2018-04-25 16:44:36.712436+02	gallery/DSC00138.jpg	15	30	a45b6b545b8c55a9	2018-06-19 15:52:32.143527+02
-897	2018-04-25 16:44:33.249412+02	gallery/DSC00590.jpg	16	30	f3c2cc135cacc3d4	2018-06-19 15:52:32.143527+02
-896	2012-09-29 19:07:35+02	gallery/DSC01820.JPG	17	30	d0b4b1c37b7a2c4c	2018-06-19 15:52:32.143527+02
-879	2012-12-30 18:51:16+01	gallery/2012-12-30_17-51-16.jpg	18	30	c2d3eb6d26360699	2018-06-19 15:52:32.143527+02
-877	2018-04-25 16:44:28.137709+02	gallery/STL001.jpg	19	30	b3c7ddd550516a18	2018-06-19 15:52:32.143527+02
-886	2012-11-02 23:44:09+01	gallery/DSC04353.JPG	20	30	829a6f6666277989	2018-06-19 15:52:32.143527+02
-913	2018-04-25 16:44:40.341017+02	gallery/DSC08764.jpg	21	30	9b909cad02af63ba	2018-06-19 15:52:32.143527+02
-894	2018-04-25 16:44:32.992684+02	gallery/DSC05200.jpg	22	30	b5f303dc0e6686cc	2018-06-19 15:52:32.143527+02
-880	2012-09-23 03:15:16+02	gallery/DSC01064.JPG	23	30	d6c5131e4d62b699	2018-06-19 15:52:32.143527+02
-882	2012-09-29 17:09:30+02	gallery/DSC01674.JPG	24	30	99db652c247466f2	2018-06-19 15:52:32.143527+02
-887	2015-03-07 19:39:35+01	gallery/DSC05997.JPG	25	30	d0d6a5294ad6b52b	2018-06-19 15:52:32.143527+02
-892	2017-04-02 15:34:58+02	gallery/DSC08851.jpg	26	30	e59233ccc9e64c33	2018-06-19 15:52:32.143527+02
-883	2018-04-25 16:44:29.414546+02	gallery/DSC00022.jpg	27	30	a0a012cb4da5d7df	2018-06-19 15:52:32.143527+02
-891	2013-09-16 16:55:14+02	gallery/_DSC2813.jpg	28	30	e8c387c18bcc63a7	2018-06-19 15:52:32.143527+02
-890	2013-04-17 13:41:18+02	gallery/_DSC5016.jpg	29	30	cde2139f2f23308d	2018-06-19 15:52:32.143527+02
-889	2014-08-30 16:29:58+02	gallery/2014-08-30_14-29-58.jpg	30	30	b17c4587328f703d	2018-06-19 15:52:32.143527+02
-888	2018-04-25 16:44:31.544017+02	gallery/DSC08205.jpg	31	30	928d5268efc07f16	2018-06-19 15:52:32.143527+02
-884	2018-04-25 16:44:29.543137+02	gallery/DSC00119.jpg	32	30	e5305999989b656d	2018-06-19 15:52:32.143527+02
-893	2013-02-25 19:27:58+01	gallery/_DSC2826.JPG	33	30	a5c95a36d588a1db	2018-06-19 15:52:32.143527+02
-895	2018-04-25 16:44:33.046772+02	gallery/2014-08-21_21-22-57.jpg	34	30	90b0b05c7c2f6f87	2018-06-19 15:52:32.143527+02
-881	2014-08-22 18:28:45+02	gallery/2014-08-22_16-28-34.jpg	35	30	c83613ceec13176d	2018-06-19 15:52:32.143527+02
-914	2013-03-11 23:02:16+01	gallery/_DSC3578.jpg	1	30	964f694d6d7c6424	2018-06-19 15:52:32.143527+02
-912	2018-04-25 16:44:39.560673+02	gallery/DSC00046.jpg	2	30	e69819c7b01e4b3d	2018-06-19 15:52:32.143527+02
-911	2014-03-02 01:25:55+01	gallery/DSC01231.JPG	3	30	cf6436c3e10e31ce	2018-06-19 15:52:32.143527+02
-909	2015-11-29 15:51:10+01	gallery/IMG_20151129_145108.jpg	4	30	90f420df42cfb8f1	2018-06-19 15:52:32.143527+02
-908	2018-04-25 16:44:37.018958+02	gallery/_DSC5918.jpg	5	30	f0d62233d38b9b51	2018-06-19 15:52:32.143527+02
-899	2018-04-25 16:44:33.494002+02	gallery/DSC00175.jpg	36	30	c283852533edcd1f	2018-06-19 15:52:32.143527+02
-885	2018-04-25 16:44:29.980556+02	gallery/DSC00070.jpg	37	30	85b37e0985ee3907	2018-06-19 15:52:32.143527+02
-915	2014-08-09 23:29:30+02	gallery/DSC03392.JPG	6	30	f1bc98f006124e7f	2018-06-19 15:52:32.143527+02
-906	2012-09-20 22:01:34+02	gallery/DSC00283.JPG	7	30	ec9c7146a3cd83d1	2018-06-19 15:52:32.143527+02
-907	2018-04-25 16:44:36.95263+02	gallery/DSC08626.jpg	8	30	88f0ccc8eb6b63e1	2018-06-19 15:52:32.143527+02
-904	2016-07-02 22:15:39+02	gallery/IMG_20160702_201539281_HDR.jpg	9	30	dfdee0e0a08f2b0a	2018-06-19 15:52:32.143527+02
-910	2018-04-25 16:44:37.819194+02	gallery/DSC00093.jpg	10	30	ec993364666c4799	2018-06-19 15:52:32.143527+02
-917	2018-06-15 14:27:44+02	gallery/DSC00007.jpg	38	30	cdc93c3348e71936	2018-06-19 15:52:32.143527+02
-903	2014-09-01 14:31:50+02	gallery/2014-09-01_12-31-50.jpg	11	30	91b9da4dc40f93c6	2018-06-19 15:52:32.143527+02
-919	2018-06-15 14:44:09+02	gallery/DSC00388.jpg	39	30	d1a28287ded3c4f1	2018-06-19 15:52:32.143527+02
+COPY public.gallery_image (id, created, original_image, "order", gallery_id, updated) FROM stdin;
+902	2017-03-04 15:05:59+00	gallery/DSC08272.JPG	12	30	2018-06-19 13:52:32.143527+00
+901	2018-04-25 14:44:33.68852+00	gallery/DSC00003.jpg	13	30	2018-06-19 13:52:32.143527+00
+900	2012-11-24 20:55:49+00	gallery/DSC08037.JPG	14	30	2018-06-19 13:52:32.143527+00
+905	2018-04-25 14:44:36.712436+00	gallery/DSC00138.jpg	15	30	2018-06-19 13:52:32.143527+00
+897	2018-04-25 14:44:33.249412+00	gallery/DSC00590.jpg	16	30	2018-06-19 13:52:32.143527+00
+896	2012-09-29 17:07:35+00	gallery/DSC01820.JPG	17	30	2018-06-19 13:52:32.143527+00
+879	2012-12-30 17:51:16+00	gallery/2012-12-30_17-51-16.jpg	18	30	2018-06-19 13:52:32.143527+00
+877	2018-04-25 14:44:28.137709+00	gallery/STL001.jpg	19	30	2018-06-19 13:52:32.143527+00
+886	2012-11-02 22:44:09+00	gallery/DSC04353.JPG	20	30	2018-06-19 13:52:32.143527+00
+913	2018-04-25 14:44:40.341017+00	gallery/DSC08764.jpg	21	30	2018-06-19 13:52:32.143527+00
+894	2018-04-25 14:44:32.992684+00	gallery/DSC05200.jpg	22	30	2018-06-19 13:52:32.143527+00
+880	2012-09-23 01:15:16+00	gallery/DSC01064.JPG	23	30	2018-06-19 13:52:32.143527+00
+882	2012-09-29 15:09:30+00	gallery/DSC01674.JPG	24	30	2018-06-19 13:52:32.143527+00
+887	2015-03-07 18:39:35+00	gallery/DSC05997.JPG	25	30	2018-06-19 13:52:32.143527+00
+892	2017-04-02 13:34:58+00	gallery/DSC08851.jpg	26	30	2018-06-19 13:52:32.143527+00
+883	2018-04-25 14:44:29.414546+00	gallery/DSC00022.jpg	27	30	2018-06-19 13:52:32.143527+00
+891	2013-09-16 14:55:14+00	gallery/_DSC2813.jpg	28	30	2018-06-19 13:52:32.143527+00
+890	2013-04-17 11:41:18+00	gallery/_DSC5016.jpg	29	30	2018-06-19 13:52:32.143527+00
+889	2014-08-30 14:29:58+00	gallery/2014-08-30_14-29-58.jpg	30	30	2018-06-19 13:52:32.143527+00
+888	2018-04-25 14:44:31.544017+00	gallery/DSC08205.jpg	31	30	2018-06-19 13:52:32.143527+00
+884	2018-04-25 14:44:29.543137+00	gallery/DSC00119.jpg	32	30	2018-06-19 13:52:32.143527+00
+893	2013-02-25 18:27:58+00	gallery/_DSC2826.JPG	33	30	2018-06-19 13:52:32.143527+00
+895	2018-04-25 14:44:33.046772+00	gallery/2014-08-21_21-22-57.jpg	34	30	2018-06-19 13:52:32.143527+00
+881	2014-08-22 16:28:45+00	gallery/2014-08-22_16-28-34.jpg	35	30	2018-06-19 13:52:32.143527+00
+914	2013-03-11 22:02:16+00	gallery/_DSC3578.jpg	1	30	2018-06-19 13:52:32.143527+00
+912	2018-04-25 14:44:39.560673+00	gallery/DSC00046.jpg	2	30	2018-06-19 13:52:32.143527+00
+911	2014-03-02 00:25:55+00	gallery/DSC01231.JPG	3	30	2018-06-19 13:52:32.143527+00
+909	2015-11-29 14:51:10+00	gallery/IMG_20151129_145108.jpg	4	30	2018-06-19 13:52:32.143527+00
+908	2018-04-25 14:44:37.018958+00	gallery/_DSC5918.jpg	5	30	2018-06-19 13:52:32.143527+00
+899	2018-04-25 14:44:33.494002+00	gallery/DSC00175.jpg	36	30	2018-06-19 13:52:32.143527+00
+885	2018-04-25 14:44:29.980556+00	gallery/DSC00070.jpg	37	30	2018-06-19 13:52:32.143527+00
+915	2014-08-09 21:29:30+00	gallery/DSC03392.JPG	6	30	2018-06-19 13:52:32.143527+00
+906	2012-09-20 20:01:34+00	gallery/DSC00283.JPG	7	30	2018-06-19 13:52:32.143527+00
+907	2018-04-25 14:44:36.95263+00	gallery/DSC08626.jpg	8	30	2018-06-19 13:52:32.143527+00
+904	2016-07-02 20:15:39+00	gallery/IMG_20160702_201539281_HDR.jpg	9	30	2018-06-19 13:52:32.143527+00
+910	2018-04-25 14:44:37.819194+00	gallery/DSC00093.jpg	10	30	2018-06-19 13:52:32.143527+00
+917	2018-06-15 12:27:44+00	gallery/DSC00007.jpg	38	30	2018-06-19 13:52:32.143527+00
+903	2014-09-01 12:31:50+00	gallery/2014-09-01_12-31-50.jpg	11	30	2018-06-19 13:52:32.143527+00
+919	2018-06-15 12:44:09+00	gallery/DSC00388.jpg	39	30	2018-06-19 13:52:32.143527+00
 \.
 
 
@@ -2714,7 +2719,7 @@ SELECT pg_catalog.setval('public.gallery_image_id_seq', 919, true);
 --
 
 COPY public.profiles_profile (created, original_image, user_id, updated) FROM stdin;
-2018-04-26 16:19:11+02	profile/1/3236632408534018.jpg	1	2018-06-20 13:23:06.892429+02
+2018-04-26 14:19:11+00	profile/1/8305737923478132.jpg	1	2018-09-13 14:34:44.356802+00
 \.
 
 
@@ -2722,8 +2727,8 @@ COPY public.profiles_profile (created, original_image, user_id, updated) FROM st
 -- Data for Name: shortener_link; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
-COPY public.shortener_link (id, created, updated, original_link, short_link) FROM stdin;
-1	2018-06-25 12:10:57.122946+02	2018-06-25 12:10:57.122975+02	https://yandex.by/maps/?um=constructor%3A77ed757187907e9af9fb6e5ddb0a2aa4ea9453a2c67905af2c8347878a9a35c8&source=constructorLink	0fcb
+COPY public.shortener_link (id, created, updated, original_link, short_link, name) FROM stdin;
+1	2018-06-25 10:10:57.122946+00	2018-06-25 10:10:57.122975+00	https://yandex.by/maps/?um=constructor%3A77ed757187907e9af9fb6e5ddb0a2aa4ea9453a2c67905af2c8347878a9a35c8&source=constructorLink	0fcb	\N
 \.
 
 
@@ -7031,7 +7036,7 @@ sorl-thumbnail||image||cd47d88c2110f69279882c19925ffd25	{"storage": "django.core
 
 
 --
--- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_group auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_group
@@ -7039,7 +7044,7 @@ ALTER TABLE ONLY public.auth_group
 
 
 --
--- Name: auth_group_permissions_group_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_group_permissions auth_group_permissions_group_id_0cd325b0_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_group_permissions
@@ -7047,7 +7052,7 @@ ALTER TABLE ONLY public.auth_group_permissions
 
 
 --
--- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_group_permissions auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_group_permissions
@@ -7055,7 +7060,7 @@ ALTER TABLE ONLY public.auth_group_permissions
 
 
 --
--- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_group auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_group
@@ -7063,7 +7068,7 @@ ALTER TABLE ONLY public.auth_group
 
 
 --
--- Name: auth_permission_content_type_id_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_permission auth_permission_content_type_id_01ab375a_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_permission
@@ -7071,7 +7076,7 @@ ALTER TABLE ONLY public.auth_permission
 
 
 --
--- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_permission auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_permission
@@ -7079,7 +7084,7 @@ ALTER TABLE ONLY public.auth_permission
 
 
 --
--- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_user_groups auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user_groups
@@ -7087,7 +7092,7 @@ ALTER TABLE ONLY public.auth_user_groups
 
 
 --
--- Name: auth_user_groups_user_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_user_groups auth_user_groups_user_id_94350c0c_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user_groups
@@ -7095,7 +7100,7 @@ ALTER TABLE ONLY public.auth_user_groups
 
 
 --
--- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_user auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user
@@ -7103,7 +7108,7 @@ ALTER TABLE ONLY public.auth_user
 
 
 --
--- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_user_user_permissions auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user_user_permissions
@@ -7111,7 +7116,7 @@ ALTER TABLE ONLY public.auth_user_user_permissions
 
 
 --
--- Name: auth_user_user_permissions_user_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_14a6b632_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user_user_permissions
@@ -7119,7 +7124,7 @@ ALTER TABLE ONLY public.auth_user_user_permissions
 
 
 --
--- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_user auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user
@@ -7127,7 +7132,7 @@ ALTER TABLE ONLY public.auth_user
 
 
 --
--- Name: blog_genresproxy_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: blog_genresproxy blog_genresproxy_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_genresproxy
@@ -7135,7 +7140,7 @@ ALTER TABLE ONLY public.blog_genresproxy
 
 
 --
--- Name: blog_post_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: blog_post blog_post_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_post
@@ -7143,7 +7148,7 @@ ALTER TABLE ONLY public.blog_post
 
 
 --
--- Name: blog_post_related_from_post_id_92e0fb81_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: blog_post_related blog_post_related_from_post_id_92e0fb81_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_post_related
@@ -7151,7 +7156,7 @@ ALTER TABLE ONLY public.blog_post_related
 
 
 --
--- Name: blog_post_related_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: blog_post_related blog_post_related_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_post_related
@@ -7159,7 +7164,7 @@ ALTER TABLE ONLY public.blog_post_related
 
 
 --
--- Name: blog_post_slug_key; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: blog_post blog_post_slug_key; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_post
@@ -7167,7 +7172,7 @@ ALTER TABLE ONLY public.blog_post
 
 
 --
--- Name: blog_tagsproxy_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: blog_tagsproxy blog_tagsproxy_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_tagsproxy
@@ -7175,7 +7180,7 @@ ALTER TABLE ONLY public.blog_tagsproxy
 
 
 --
--- Name: celery_taskmeta_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: celery_taskmeta celery_taskmeta_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.celery_taskmeta
@@ -7183,7 +7188,7 @@ ALTER TABLE ONLY public.celery_taskmeta
 
 
 --
--- Name: celery_taskmeta_task_id_key; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: celery_taskmeta celery_taskmeta_task_id_key; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.celery_taskmeta
@@ -7191,7 +7196,7 @@ ALTER TABLE ONLY public.celery_taskmeta
 
 
 --
--- Name: celery_tasksetmeta_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: celery_tasksetmeta celery_tasksetmeta_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.celery_tasksetmeta
@@ -7199,7 +7204,7 @@ ALTER TABLE ONLY public.celery_tasksetmeta
 
 
 --
--- Name: celery_tasksetmeta_taskset_id_key; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: celery_tasksetmeta celery_tasksetmeta_taskset_id_key; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.celery_tasksetmeta
@@ -7207,7 +7212,7 @@ ALTER TABLE ONLY public.celery_tasksetmeta
 
 
 --
--- Name: core_email_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: core_email core_email_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.core_email
@@ -7215,7 +7220,7 @@ ALTER TABLE ONLY public.core_email
 
 
 --
--- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: django_admin_log django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_admin_log
@@ -7223,7 +7228,7 @@ ALTER TABLE ONLY public.django_admin_log
 
 
 --
--- Name: django_celery_results_taskresult_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: django_celery_results_taskresult django_celery_results_taskresult_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_celery_results_taskresult
@@ -7231,7 +7236,7 @@ ALTER TABLE ONLY public.django_celery_results_taskresult
 
 
 --
--- Name: django_celery_results_taskresult_task_id_key; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: django_celery_results_taskresult django_celery_results_taskresult_task_id_key; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_celery_results_taskresult
@@ -7239,7 +7244,7 @@ ALTER TABLE ONLY public.django_celery_results_taskresult
 
 
 --
--- Name: django_content_type_app_label_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: django_content_type django_content_type_app_label_76bd3d3b_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_content_type
@@ -7247,7 +7252,7 @@ ALTER TABLE ONLY public.django_content_type
 
 
 --
--- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: django_content_type django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_content_type
@@ -7255,7 +7260,7 @@ ALTER TABLE ONLY public.django_content_type
 
 
 --
--- Name: django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: django_migrations django_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_migrations
@@ -7263,7 +7268,7 @@ ALTER TABLE ONLY public.django_migrations
 
 
 --
--- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: django_session django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_session
@@ -7271,7 +7276,7 @@ ALTER TABLE ONLY public.django_session
 
 
 --
--- Name: django_site_domain_a2e37b91_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: django_site django_site_domain_a2e37b91_uniq; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_site
@@ -7279,7 +7284,7 @@ ALTER TABLE ONLY public.django_site
 
 
 --
--- Name: django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: django_site django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_site
@@ -7287,7 +7292,7 @@ ALTER TABLE ONLY public.django_site
 
 
 --
--- Name: gallery_gallery_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: gallery_gallery gallery_gallery_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.gallery_gallery
@@ -7295,7 +7300,7 @@ ALTER TABLE ONLY public.gallery_gallery
 
 
 --
--- Name: gallery_gallery_slug_key; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: gallery_gallery gallery_gallery_slug_key; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.gallery_gallery
@@ -7303,7 +7308,7 @@ ALTER TABLE ONLY public.gallery_gallery
 
 
 --
--- Name: gallery_image_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: gallery_image gallery_image_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.gallery_image
@@ -7311,7 +7316,7 @@ ALTER TABLE ONLY public.gallery_image
 
 
 --
--- Name: profiles_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: profiles_profile profiles_profile_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.profiles_profile
@@ -7319,7 +7324,7 @@ ALTER TABLE ONLY public.profiles_profile
 
 
 --
--- Name: shortener_link_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: shortener_link shortener_link_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.shortener_link
@@ -7327,7 +7332,7 @@ ALTER TABLE ONLY public.shortener_link
 
 
 --
--- Name: shortener_link_short_link_key; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: shortener_link shortener_link_short_link_key; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.shortener_link
@@ -7335,7 +7340,7 @@ ALTER TABLE ONLY public.shortener_link
 
 
 --
--- Name: taggit_tag_name_key; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: taggit_tag taggit_tag_name_key; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.taggit_tag
@@ -7343,7 +7348,7 @@ ALTER TABLE ONLY public.taggit_tag
 
 
 --
--- Name: taggit_tag_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: taggit_tag taggit_tag_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.taggit_tag
@@ -7351,7 +7356,7 @@ ALTER TABLE ONLY public.taggit_tag
 
 
 --
--- Name: taggit_tag_slug_key; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: taggit_tag taggit_tag_slug_key; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.taggit_tag
@@ -7359,7 +7364,7 @@ ALTER TABLE ONLY public.taggit_tag
 
 
 --
--- Name: taggit_taggeditem_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: taggit_taggeditem taggit_taggeditem_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.taggit_taggeditem
@@ -7367,7 +7372,7 @@ ALTER TABLE ONLY public.taggit_taggeditem
 
 
 --
--- Name: thumbnail_kvstore_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
+-- Name: thumbnail_kvstore thumbnail_kvstore_pkey; Type: CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.thumbnail_kvstore
@@ -7634,7 +7639,7 @@ CREATE INDEX thumbnail_kvstore_key_3f850178_like ON public.thumbnail_kvstore USI
 
 
 --
--- Name: auth_group_permiss_permission_id_84c5c92e_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_group_permissions auth_group_permiss_permission_id_84c5c92e_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_group_permissions
@@ -7642,7 +7647,7 @@ ALTER TABLE ONLY public.auth_group_permissions
 
 
 --
--- Name: auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_group_permissions auth_group_permissions_group_id_b120cbf9_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_group_permissions
@@ -7650,7 +7655,7 @@ ALTER TABLE ONLY public.auth_group_permissions
 
 
 --
--- Name: auth_permiss_content_type_id_2f476e4b_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_permission auth_permiss_content_type_id_2f476e4b_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_permission
@@ -7658,7 +7663,7 @@ ALTER TABLE ONLY public.auth_permission
 
 
 --
--- Name: auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_user_groups auth_user_groups_group_id_97559544_fk_auth_group_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user_groups
@@ -7666,7 +7671,7 @@ ALTER TABLE ONLY public.auth_user_groups
 
 
 --
--- Name: auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_user_groups auth_user_groups_user_id_6a12ed8b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user_groups
@@ -7674,7 +7679,7 @@ ALTER TABLE ONLY public.auth_user_groups
 
 
 --
--- Name: auth_user_user_per_permission_id_1fbb5f2c_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_user_user_permissions auth_user_user_per_permission_id_1fbb5f2c_fk_auth_permission_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user_user_permissions
@@ -7682,7 +7687,7 @@ ALTER TABLE ONLY public.auth_user_user_permissions
 
 
 --
--- Name: auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: auth_user_user_permissions auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.auth_user_user_permissions
@@ -7690,7 +7695,7 @@ ALTER TABLE ONLY public.auth_user_user_permissions
 
 
 --
--- Name: blog_genresproxy_content_object_id_ce7599f5_fk_blog_post_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: blog_genresproxy blog_genresproxy_content_object_id_ce7599f5_fk_blog_post_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_genresproxy
@@ -7698,7 +7703,7 @@ ALTER TABLE ONLY public.blog_genresproxy
 
 
 --
--- Name: blog_genresproxy_tag_id_325dc9e9_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: blog_genresproxy blog_genresproxy_tag_id_325dc9e9_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_genresproxy
@@ -7706,7 +7711,7 @@ ALTER TABLE ONLY public.blog_genresproxy
 
 
 --
--- Name: blog_post_related_from_post_id_c2319dd1_fk_blog_post_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: blog_post_related blog_post_related_from_post_id_c2319dd1_fk_blog_post_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_post_related
@@ -7714,7 +7719,7 @@ ALTER TABLE ONLY public.blog_post_related
 
 
 --
--- Name: blog_post_related_to_post_id_4e6bcd6c_fk_blog_post_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: blog_post_related blog_post_related_to_post_id_4e6bcd6c_fk_blog_post_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_post_related
@@ -7722,7 +7727,7 @@ ALTER TABLE ONLY public.blog_post_related
 
 
 --
--- Name: blog_tagsproxy_content_object_id_cfed689a_fk_blog_post_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: blog_tagsproxy blog_tagsproxy_content_object_id_cfed689a_fk_blog_post_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_tagsproxy
@@ -7730,7 +7735,7 @@ ALTER TABLE ONLY public.blog_tagsproxy
 
 
 --
--- Name: blog_tagsproxy_tag_id_e0581575_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: blog_tagsproxy blog_tagsproxy_tag_id_e0581575_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.blog_tagsproxy
@@ -7738,7 +7743,7 @@ ALTER TABLE ONLY public.blog_tagsproxy
 
 
 --
--- Name: django_admin_content_type_id_c4bce8eb_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: django_admin_log django_admin_content_type_id_c4bce8eb_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_admin_log
@@ -7746,7 +7751,7 @@ ALTER TABLE ONLY public.django_admin_log
 
 
 --
--- Name: django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: django_admin_log django_admin_log_user_id_c564eba6_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.django_admin_log
@@ -7754,7 +7759,7 @@ ALTER TABLE ONLY public.django_admin_log
 
 
 --
--- Name: gallery_image_gallery_id_491b0492_fk_gallery_gallery_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: gallery_image gallery_image_gallery_id_491b0492_fk_gallery_gallery_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.gallery_image
@@ -7762,7 +7767,7 @@ ALTER TABLE ONLY public.gallery_image
 
 
 --
--- Name: profiles_profile_user_id_a3e81f91_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: profiles_profile profiles_profile_user_id_a3e81f91_fk_auth_user_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.profiles_profile
@@ -7770,7 +7775,7 @@ ALTER TABLE ONLY public.profiles_profile
 
 
 --
--- Name: taggit_tagge_content_type_id_9957a03c_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: taggit_taggeditem taggit_tagge_content_type_id_9957a03c_fk_django_content_type_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.taggit_taggeditem
@@ -7778,21 +7783,11 @@ ALTER TABLE ONLY public.taggit_taggeditem
 
 
 --
--- Name: taggit_taggeditem_tag_id_f4f5b767_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
+-- Name: taggit_taggeditem taggit_taggeditem_tag_id_f4f5b767_fk_taggit_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: manti
 --
 
 ALTER TABLE ONLY public.taggit_taggeditem
     ADD CONSTRAINT taggit_taggeditem_tag_id_f4f5b767_fk_taggit_tag_id FOREIGN KEY (tag_id) REFERENCES public.taggit_tag(id) DEFERRABLE INITIALLY DEFERRED;
-
-
---
--- Name: SCHEMA public; Type: ACL; Schema: -; Owner: postgres
---
-
-REVOKE ALL ON SCHEMA public FROM PUBLIC;
-REVOKE ALL ON SCHEMA public FROM postgres;
-GRANT ALL ON SCHEMA public TO postgres;
-GRANT ALL ON SCHEMA public TO PUBLIC;
 
 
 --

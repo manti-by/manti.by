@@ -9,7 +9,7 @@ jobs:
       - run:
           name: Install base dependencies
           command: pip install -r requirements.txt
-          working_directory: /srv/manti.by/src/deploy
+          working_directory: /srv/manti.by/src/deploy/docker
       - run:
           name: Run flake8
           command: flake8

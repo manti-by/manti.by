@@ -2,9 +2,5 @@ User-agent: Yandex
 Host: manti.by
 
 User-agent: *
-Disallow: /dashboard/
-Disallow: /profile/
-Disallow: /content/(covers|gallery|preview|profile|release)
-Disallow: /static/(css|js|img|svg)
 
 Sitemap: http://manti.by/sitemap.xml

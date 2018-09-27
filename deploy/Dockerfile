@@ -15,7 +15,7 @@ RUN mkdir -p /var/log/manti.by/
 
 RUN apt-get update && apt-get -y install \
   autoconf automake build-essential cmake git-core libtool libass-dev libfreetype6-dev \
-  libmp3lame-dev libtheora-dev libvorbis-dev pkg-config texinfo wget zlib1g-dev yasm
+  libmp3lame-dev libtheora-dev libvorbis-dev pkg-config texinfo wget zlib1g-dev yasm supervisor
 
 RUN mkdir -p /srv/manti.by/ffmpeg/
 RUN wget -O ffmpeg-snapshot.tar.bz2 https://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2
@@ -39,26 +39,21 @@ RUN ./configure \
   --enable-nonfree
 
 RUN make && make install
-RUN rm -rf /srv/manti.by/ffmpeg/
-
 
 # Install any needed packages specified in requirements.txt
 
-RUN apt-get update && apt-get install -y supervisor
-RUN apt-get clean
-
-COPY requirements.txt /etc/manti.by/requirements.txt
+COPY docker/requirements.txt /etc/manti.by/requirements.txt
 RUN pip install --upgrade pip
 RUN pip install --trusted-host pypi.org --no-cache-dir -r /etc/manti.by/requirements.txt
 
 
 # Setup supervisor
 
-COPY confs/supervisord.conf /etc/supervisor/supervisord.conf
-COPY confs/supervisor.conf /etc/supervisor/conf.d/manti.by.conf
+COPY docker/supervisord.conf /etc/supervisor/supervisord.conf
+COPY docker/supervisor.conf /etc/supervisor/conf.d/manti.by.conf
 
-COPY confs/uwsgi.ini /etc/manti.by/uwsgi.ini
-COPY confs/uwsgi-params.conf /etc/manti.by/uwsgi-params.conf
+COPY docker/uwsgi.ini /etc/manti.by/uwsgi.ini
+COPY docker/uwsgi-params.conf /etc/manti.by/uwsgi-params.conf
 
 
 # Set working directory and expose ports
@@ -71,13 +66,19 @@ EXPOSE 8080
 EXPOSE 8888
 EXPOSE 5555
 
+# Clean caches
+
+RUN rm -rf /srv/manti.by/ffmpeg/
+RUN apt-get autoremove --purge && apt-get clean
+
 
 # Fix file permissions
 
-RUN chown -R www-data:www-data /srv/manti.by/
-RUN chown -R www-data:www-data /var/log/manti.by/
-RUN chown -R www-data:www-data /var/log/supervisor/
-RUN chown -R www-data:www-data /var/run/
+RUN useradd -m -s /bin/bash manti
+RUN chown -R manti:manti /srv/manti.by/
+RUN chown -R manti:manti /var/log/manti.by/
+RUN chown -R manti:manti /var/log/supervisor/
+RUN chown -R manti:manti /var/run/
 
 
 # Start app services

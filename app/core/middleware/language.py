@@ -9,7 +9,7 @@ class LocaleMiddleware:
 
     def __call__(self, request):
         locale = settings.LANGUAGE_CODE
-        current_domain = request.META['HTTP_HOST']
+        current_domain = request.META.get('HTTP_HOST')
 
         if 'dashboard' in request.path:
             locale = 'ru'
