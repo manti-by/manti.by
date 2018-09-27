@@ -21,6 +21,12 @@ server {
 }
 
 server {
+    listen 80, 443 ssl http2;
+    server_name www.manti.by;
+    return 301 https://manti.by;
+}
+
+server {
     listen 443 ssl http2;
     server_name manti.by ru.manti.by en.manti.by;
     charset     utf-8;
@@ -115,7 +121,7 @@ server {
 }
 
 server {
-    listen 443 ssl;
+    listen 443 ssl http2;
     server_name flower.manti.by;
 
     location / {
@@ -146,7 +152,7 @@ server {
 }
 
 server {
-    listen 443 ssl;
+    listen 443 ssl http2;
     server_name deluge.manti.by;
 
     location / {
