@@ -99,7 +99,6 @@ server {
 }
 
 server {
-    listen 80;
     server_name flower.manti.by;
 
     location / {
@@ -109,17 +108,57 @@ server {
         auth_basic "Restricted";
         auth_basic_user_file /etc/nginx/.htpasswd;
     }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/deluge.manti.by/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/deluge.manti.by/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
 }
 
 server {
-    listen 80;
     server_name deluge.manti.by;
 
     location / {
-        proxy_pass http://127.0.0.1:8888/;
+        proxy_pass http://127.0.0.1:8112/;
         include /home/manti/www/manti.by/src/deploy/confs/proxy-params.conf;
         add_header X-Frame-Options SAMEORIGIN;
         auth_basic "Restricted";
         auth_basic_user_file /etc/nginx/.htpasswd;
     }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/deluge.manti.by/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/deluge.manti.by/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+
+server {
+    if ($host = deluge.manti.by) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name deluge.manti.by;
+    return 404; # managed by Certbot
+
+
+}
+
+server {
+    if ($host = flower.manti.by) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+    listen 80;
+    server_name flower.manti.by;
+    return 404; # managed by Certbot
+
+
 }
