@@ -50,7 +50,7 @@
                 {% endif %}
                 <div class="latest flex">
                     {% for image in latest_images %}
-                        {% thumbnail image.original_image "x200" as im %}
+                        {% thumbnail image.original_image "x150" as im %}
                             <a href="{% url 'gallery_list' %}" name="gallery"
                                class="thumbnail {% if im|is_portrait %}portrait{% else %}landscape{% endif %}">
                                 <img data-src="{{ im.url }}" alt="{% trans 'Image #' %}{{ image.id }}"

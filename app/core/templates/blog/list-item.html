@@ -1,12 +1,14 @@
-{% load i18n common_tags %}
+{% load i18n thumbnail common_tags %}
 
 <article class="post" data-id="{{ item.id }}">
     <div class="flex">
-        <div class="image shadow">
-            <a href="{% url 'post' item.slug %}" name="post-{{ item.slug }}">
-                <img data-src="{{ item.cover.url }}"
-                     data-webp="{% webp_cover item.cover %}" alt="{{ item.name }}"
-                     title="{{ item.name }}" class="lazy" />
+        <div class="image">
+            <a href="{% url 'post' item.slug %}" name="post-{{ item.slug }}" class="shadow">
+                {% thumbnail item.cover "x400" as im %}
+                    <img data-src="{{ im.url }}"
+                         data-webp="{% webp_cover im %}" alt="{{ item.name }}"
+                         title="{{ item.name }}" class="lazy" />
+                {% endthumbnail %}
             </a>
         </div>
         <div class="data">

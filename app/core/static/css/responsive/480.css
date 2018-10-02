@@ -100,6 +100,10 @@
         margin-top: 4.5em;
     }
 
+    main .sidebar .instagram li {
+        margin: 0.15em 0;
+    }
+
     .post .info strong {
         font-weight: 500;
     }
@@ -164,21 +168,19 @@
         margin-left: 0;
     }
 
-    .post .flex {
-        padding-top: 0;
-        margin: 0 0 2em 0;
-    }
-
     .post .flex .post {
         width: auto;
         flex-basis: 100%;
         margin-bottom: 0.5em;
     }
 
+    .post .image {
+        margin-right: 0;
+    }
+
     .post .image,
     .post .data {
         width: 100%;
-        min-height: 200px;
         margin-bottom: 1em;
     }
 
@@ -211,16 +213,7 @@
         margin-left: 0;
         font-size: 1.5em;
     }
-
-    .home .post .image,
-    .home .post .info,
-    .home .post .data,
-    .home .post .tracklist {
-        width: 100%;
-        min-height: 155px;
-        margin-bottom: 1em;
-    }
-
+    
     .home .featured .post .image {
         min-height: 200px;
         margin-bottom: 0;
@@ -231,10 +224,6 @@
     .home .featured .post .tracklist {
         min-height: 0;
         margin-bottom: 0;
-    }
-
-    .post .image a {
-        position: relative;
     }
 
     .post .links {

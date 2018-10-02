@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% load static i18n common_tags %}
+{% load static i18n thumbnail common_tags %}
 
 {% block title %}{{ item.name }} - {{ META_TITLE }}{% endblock %}
 {% block meta %}{{ item.meta }}{% endblock %}
@@ -32,8 +32,10 @@
         <h2 class="mobile-visible">{{ item.name }}</h2>
         <div class="flex">
             <div class="image shadow">
-                <img src="{% webp_cover item.cover %}" alt="{{ item.name }}"
-                     title="{{ item.name }}">
+                {% thumbnail item.cover "x600" as im %}
+                    <img src="{% webp_cover im %}" alt="{{ item.name }}"
+                         title="{{ item.name }}">
+                {% endthumbnail %}
             </div>
             <div class="data">
                 <div class="info">

@@ -24,15 +24,16 @@ def webp_cover(context, cover):
     is_supports_webp = context.get('is_supports_webp', False)
 
     if not cover:
-        return static('img/no-image.png') \
-            if is_supports_webp else static('img/no-image.webp')
+        return static('img/no-image.webp') \
+            if is_supports_webp else static('img/no-image.png')
 
     if not is_supports_webp:
         return cover.url
 
-    webp_path = os.path.splitext(cover.file.name)[0] + '.webp'
+    jpeg_path = os.path.join(cover.storage.location, cover.name)
+    webp_path = os.path.splitext(jpeg_path)[0] + '.webp'
     if not os.path.isfile(webp_path):
-        image = Image.open(cover.file.name)
+        image = Image.open(jpeg_path)
         image.save(webp_path, 'WEBP', quality=90)
 
     return cover.url.replace('.jpg', '.webp')

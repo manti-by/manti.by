@@ -1,11 +1,13 @@
-{% load i18n common_tags %}
+{% load i18n thumbnail common_tags %}
 
 <div class="post shadow" data-id="{{ item.id }}">
     <div class="image">
         <a href="{% url 'post' item.slug %}">
-            <img data-src="{{ item.cover.url }}"
-                 data-webp="{% webp_cover item.cover %}" alt="{{ item.name }}"
-                 title="{{ item.name }}" class="lazy" />
+            {% thumbnail item.cover "x400" as im %}
+                <img data-src="{{ item.cover.url }}"
+                     data-webp="{% webp_cover im %}" alt="{{ item.name }}"
+                     title="{{ item.name }}" class="lazy" />
+            {% endthumbnail %}
         </a>
     </div>
     <div class="info">

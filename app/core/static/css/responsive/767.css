@@ -221,6 +221,7 @@
     }
 
     .post .flex {
+        justify-content: space-between;
         padding-top: 0;
         margin: 0 0 2em 0;
     }
@@ -283,8 +284,6 @@
     .home .post .data,
     .home .post .tracklist {
         width: 100%;
-        min-height: 155px;
-        margin-bottom: 1em;
     }
 
     .home .featured .post .image {
@@ -297,10 +296,6 @@
     .home .featured .post .tracklist {
         min-height: 0;
         margin-bottom: 0;
-    }
-
-    .post .image a {
-        position: relative;
     }
 
     .post .links {
@@ -317,7 +312,17 @@
     }
 }
 
+@media only screen and (max-width: 767px) and (orientation: portrait) {
+    .post .image {
+        margin-right: 0;
+    }
+}
+
 @media only screen and (max-width: 767px) and (orientation: landscape) {
+    .post .image {
+        margin-right: 0;
+    }
+
     .gallery .item .preview {
         width: calc(100%  / 2 - 0.2em);
         max-height: 176px;
