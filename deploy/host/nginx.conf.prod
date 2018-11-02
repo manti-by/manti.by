@@ -105,6 +105,9 @@ server {
     location /dashboard {
         expires    off;
         add_header Cache-Control 'private';
+
+        uwsgi_pass  manti-by;
+        include     /home/manti/www/manti.by/src/deploy/host/uwsgi-params.conf;
     }
 
     location / {
