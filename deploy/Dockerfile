@@ -51,9 +51,7 @@ RUN pip install --trusted-host pypi.org --no-cache-dir -r /etc/manti.by/requirem
 
 COPY docker/supervisord.conf /etc/supervisor/supervisord.conf
 COPY docker/supervisor.conf /etc/supervisor/conf.d/manti.by.conf
-
 COPY docker/uwsgi.ini /etc/manti.by/uwsgi.ini
-COPY docker/uwsgi-params.conf /etc/manti.by/uwsgi-params.conf
 
 
 # Set working directory and expose ports
