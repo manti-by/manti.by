@@ -32,8 +32,10 @@ services:
       - manti-by-postgres
       - manti-by-memcached
       - manti-by-redis
+    environment:
+    - DJANGO_SETTINGS_MODULE=prod
     volumes:
-      - ../:/srv/manti.by/src/
-      - ../../log/:/var/log/manti.by/
+      - /home/manti/www/manti.by/src/:/srv/manti.by/src/
+      - /home/manti/www/manti.by/log/:/var/log/manti.by/
       - /mnt/nostromo/static/:/srv/manti.by/static/
       - /mnt/nostromo/content/:/srv/manti.by/content/

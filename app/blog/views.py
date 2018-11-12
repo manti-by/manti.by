@@ -20,7 +20,7 @@ def index(request):
         try:
             tag = Tag.objects.get(slug__iexact=tag)
             item_list = Post.objects.filter(tags__slug=tag.slug).order_by('-created')[:6]
-        except Tag.DoesNotExist as e:
+        except Tag.DoesNotExist:
             client.captureException()
             item_list = []
     else:

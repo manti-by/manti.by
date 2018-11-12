@@ -54,7 +54,7 @@ def login_page(request):
                 return redirect('profile')
 
             data = {'error': 'Invalid credentials, please check your email and password'}
-    except User.DoesNotExist as e:
+    except User.DoesNotExist:
         client.captureException()
 
         email = request.POST.get('email')

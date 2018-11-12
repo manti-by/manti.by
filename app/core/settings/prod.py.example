@@ -11,22 +11,23 @@ COMPRESS_ENABLED = False
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'manti.by',
+                 'ru.manti.by', 'en.manti.by']
 
-BASE_URL = 'http://127.0.0.1'
+BASE_URL = 'http://manti.by'
 
-SESSION_COOKIE_DOMAIN = '127.0.0.1'
+SESSION_COOKIE_DOMAIN = '.manti.by'
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/home/manti/www/manti.by/static'
+STATIC_URL = 'http://manti.by/static/'
+STATIC_ROOT = '/srv/manti.by/static'
 
-MEDIA_URL = '/content/'
-MEDIA_ROOT = '/home/manti/www/manti.by/content'
+MEDIA_URL = 'http://manti.by/content/'
+MEDIA_ROOT = '/srv/manti.by/content'
 
 LOCALE_URLS = {
-    'be': '127.0.0.1',
-    'ru': '127.0.0.1',
-    'en': '127.0.0.1',
+    'be': 'manti.by',
+    'ru': 'ru.manti.by',
+    'en': 'en.manti.by',
 }
 
 DATABASES = {
@@ -35,14 +36,14 @@ DATABASES = {
         'NAME': 'manti',
         'USER': 'manti',
         'PASSWORD': 'pa55word',
-        'HOST': 'localhost',
+        'HOST': 'manti-by-postgres',
         'PORT': '5433',
     }
 }
 
-THUMBNAIL_REDIS_HOST = 'localhost'
+THUMBNAIL_REDIS_HOST = 'manti-by-redis'
 
-CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_BROKER_URL = 'redis://manti-by-redis:6379/0'
 
 CACHES = {
     'default': {
@@ -54,6 +55,16 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
+        'file_app': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/manti.by/app.log',
+        },
+        'file_django': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': '/var/log/manti.by/django.log',
+        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -64,22 +75,22 @@ LOGGING = {
     },
     'loggers': {
         '': {
-            'handlers': ['console'],
+            'handlers': ['console', 'file_app'],
             'level': 'WARNING',
             'propagate': True,
             'formatter': 'verbose',
         },
         'django': {
-            'handlers': ['console'],
+            'handlers': ['file_django'],
             'level': 'WARNING',
             'propagate': True,
             'formatter': 'simple',
         },
         'django.template': {
-            'handlers': ['console'],
+            'handlers': ['null'],
         },
         'django.db.backends': {
-            'handlers': ['console'],
+            'handlers': ['null'],
         },
     },
 }

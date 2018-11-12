@@ -17,11 +17,11 @@ Source link: https://github.com/manti-by/Manti.by
 
 Requirements:
 
-    Ubuntu 16, Python 3+, PostgreSQL, Memcache, Redis
+    Ubuntu 18, Python 3.5, PostgreSQL 10, Memcache, Redis
 
 
-Setup environment
------------------
+Setup dev environment
+---------------------
 
 1. Install base system packages (second line for production servers)
 
@@ -56,8 +56,8 @@ Setup environment
 3. Install [Redis server](https://redis.io/download)
 
 
-Install application
--------------------
+Build and run app in dev mode
+-----------------------------
 
 1. Create virtual environment and install project dependencies
 
@@ -80,12 +80,12 @@ Install application
 
 3. Deploy data to database
 
-        $ sudo -u postgres psql -d manti < deploy/manti.sql
+        $ sudo -u postgres psql -d manti < deploy/database/manti.sql
 
 
 4. Create local config file (dev or prod environment)
 
-        $ cp app/core/settings/local.py.dev app/core/settings/local.py
+        $ cp app/core/settings/local.py.example app/core/settings/local.py
 
 
 5. Migrate, collect static files and create admin user
@@ -96,23 +96,16 @@ Install application
         $ ./manage.py createsuperuser
 
 
-6. Run local dev server or link configs on prod server and restart
+6. Run local development server
 
         $ ./manage.py runserver 0.0.0.0:8000
-        
-        $ sudo ln -s ./deploy/confs/nginx.conf /etc/nginx/sites-enabled/default.conf
-        $ sudo ln -s ./deploy/confs/supervisor.conf /etc/supervisor/conf.d/default.conf
-        $ sudo service nginx restart
-        $ sudo supervisorctl restart manti:
 
 
-Docker setup
-------------
+Production setup
+----------------
 
-1. Install [Docker](https://docs.docker.com/install/) and [docker-compose](https://docs.docker.com/compose/install/)
+1. Install [Docker](https://docs.docker.com/install/)
 
-2. Build app image and run
+2. Build and run app using Makefile
 
-        $ cd deploy/ 
-        $ docker build -f Dockerfile -t mantiby/manti.by:latest .
-        $ docker-compose up
+        $ make start
