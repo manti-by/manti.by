@@ -1256,7 +1256,7 @@ SELECT pg_catalog.setval('public.auth_permission_id_seq', 114, true);
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$36000$Impb9AFV4BFs$4HDC51m4ebxTRm0ALvie7zsnp9z+UZlTP1+/gVL1vFs=	2018-11-06 23:05:12.053324+00	t	manti			manti.by@gmail.com	t	t	2017-04-18 12:22:42.684202+00
+1	pbkdf2_sha256$36000$Impb9AFV4BFs$4HDC51m4ebxTRm0ALvie7zsnp9z+UZlTP1+/gVL1vFs=	2018-11-21 07:51:59.794618+00	t	manti			manti.by@gmail.com	t	t	2017-04-18 12:22:42.684202+00
 \.
 
 
@@ -2453,6 +2453,7 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 418	2018-10-26 17:53:49.998825+00	3	https://manti.by/sr/df50	1	[{"added": {}}]	38	1
 419	2018-10-31 12:03:07.532368+00	4	https://manti.by/sr/345f	1	[{"added": {}}]	38	1
 420	2018-11-06 13:10:08.743832+00	921	Gallery #Default - Image#921	1	[{"added": {}}]	23	1
+421	2018-11-21 07:52:18.701238+00	5	https://manti.by/sr/beef	1	[{"added": {}}]	38	1
 \.
 
 
@@ -2460,7 +2461,7 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 420, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 421, true);
 
 
 --
@@ -2633,6 +2634,7 @@ psbneknu4o4pvaemf44hj2w1om9q7ooz	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM
 3p96anovdttfe0baugrhinsmk2dbuuih	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-11-09 17:52:45.208311+00
 3z8qtv8sorlh1ga324z1ozudvo56fhdo	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-11-20 13:09:47.191612+00
 dy6p3k8iusixbli5bk7nm0reo60rw26t	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-11-20 23:05:12.056948+00
+xxf7642tqukrjvuze73j8agqrpmo0n8b	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2018-12-05 07:51:59.80122+00
 \.
 
 
@@ -2742,6 +2744,7 @@ COPY public.shortener_link (id, created, updated, original_link, short_link, nam
 2	2018-10-26 17:53:26.556041+00	2018-10-26 17:53:26.556075+00	https://developer.mozilla.org/en-US/docs/Web/Manifest	f6f7	Web app icons (Basic)
 3	2018-10-26 17:53:49.998029+00	2018-10-26 17:53:49.998055+00	https://developer.apple.com/design/human-interface-guidelines/ios/icons-and-images/app-icon/	df50	Web app icons (iOS)
 4	2018-10-31 12:03:07.531331+00	2018-10-31 12:03:07.531401+00	https://ibe.s7.ru/air?execution=e1s1&ibe_conversation=be3b0917-4c17-48f2-adfa-fb5d4d4f51b3&id=deeplink&RDMPTN=false&journeySpan=RT&source=google.com&medium=referral&AA1=SIP&AA2=MSQ&FLX=false&DA2=SIP&D	345f	Минск - Симферополь
+5	2018-11-21 07:52:18.698302+00	2018-11-21 07:52:18.698346+00	https://github.com/manti-by/Manti.by/blob/master/deploy/host/nginx.conf	beef	Nginx redirects
 \.
 
 
@@ -2749,7 +2752,7 @@ COPY public.shortener_link (id, created, updated, original_link, short_link, nam
 -- Name: shortener_link_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
 --
 
-SELECT pg_catalog.setval('public.shortener_link_id_seq', 4, true);
+SELECT pg_catalog.setval('public.shortener_link_id_seq', 5, true);
 
 
 --

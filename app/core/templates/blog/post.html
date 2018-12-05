@@ -32,9 +32,13 @@
         <h2 class="mobile-visible">{{ item.name }}</h2>
         <div class="flex">
             <div class="image shadow">
-                {% thumbnail item.cover "x600" as im %}
-                    <img src="{% webp_cover im %}" alt="{{ item.name }}"
-                         title="{{ item.name }}">
+                {% thumbnail item.cover "x600" as image %}
+                    {% thumbnail item.cover "x50" as thumb %}
+                        <img src="{{ thumb.url }}"
+                             data-src="{{ image.url }}"
+                             data-webp="{% webp_cover image %}"
+                             alt="{{ item.name }}" class="lazy">
+                    {% endthumbnail %}
                 {% endthumbnail %}
             </div>
             <div class="data">

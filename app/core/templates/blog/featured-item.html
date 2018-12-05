@@ -3,17 +3,20 @@
 <div class="post shadow" data-id="{{ item.id }}">
     <div class="image">
         <a href="{% url 'post' item.slug %}">
-            {% thumbnail item.cover "x400" as im %}
-                <img data-src="{{ item.cover.url }}"
-                     data-webp="{% webp_cover im %}" alt="{{ item.name }}"
-                     title="{{ item.name }}" class="lazy" />
+            {% thumbnail item.cover "x400" as image %}
+                {% thumbnail item.cover "x50" as thumb %}
+                    <img src="{{ thumb.url }}"
+                         data-src="{{ image.url }}"
+                         data-webp="{% webp_cover image %}"
+                         alt="{{ item.name }}" class="lazy">
+                {% endthumbnail %}
             {% endthumbnail %}
         </a>
     </div>
     <div class="info">
         <div class="wrap">
             <h3>
-                <a href="{% url 'post' item.slug %}" name="post-{{ item.slug }}">
+                <a href="{% url 'post' item.slug %}">
                     {{ item.name }}
                 </a>
             </h3>

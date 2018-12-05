@@ -3,17 +3,20 @@
 <article class="post" data-id="{{ item.id }}">
     <div class="flex">
         <div class="image">
-            <a href="{% url 'post' item.slug %}" name="post-{{ item.slug }}" class="shadow">
-                {% thumbnail item.cover "x400" as im %}
-                    <img data-src="{{ im.url }}"
-                         data-webp="{% webp_cover im %}" alt="{{ item.name }}"
-                         title="{{ item.name }}" class="lazy" />
+            <a href="{% url 'post' item.slug %}" class="shadow">
+                {% thumbnail item.cover "x400" as image %}
+                    {% thumbnail item.cover "x50" as thumb %}
+                        <img src="{{ thumb.url }}"
+                             data-src="{{ image.url }}"
+                             data-webp="{% webp_cover image %}" alt="{{ item.name }}"
+                             title="{{ item.name }}" class="lazy">
+                    {% endthumbnail %}
                 {% endthumbnail %}
             </a>
         </div>
         <div class="data">
             <h2>
-                <a href="{% url 'post' item.slug %}" name="post-{{ item.slug }}">
+                <a href="{% url 'post' item.slug %}">
                     {{ item.name }} /{{ item.genre.all|join:", " }}/
                 </a>
             </h2>

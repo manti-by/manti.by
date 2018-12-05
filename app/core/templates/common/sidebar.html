@@ -27,21 +27,29 @@
             {% for i in instagram_photos %}
                 <li>
                     <a href="{{ i.link }}">
-                        <img data-src="{{ i.image }}" alt="{{ i.name }}" class="lazy">
+                        <img src="{% static 'img/one-pixel.jpg' %}"
+                             data-src="{{ i.image }}"
+                              class="lazy" alt="{{ i.name }}">
                     </a>
                 </li>
             {% endfor %}
         </ul>
     </div>
     <div class="social panel">
-        <a href="https://www.instagram.com/manti_by/" name="Instagram" target="_blank" rel="noopener">
-            <img data-src="{% static 'svg/instagram.svg' %}" class="lazy" alt="Instagram">
+        <a href="https://www.instagram.com/manti_by/" target="_blank" rel="noopener">
+            <img src="{% static 'img/one-pixel.jpg' %}"
+                 data-src="{% static 'svg/instagram.svg' %}"
+                 class="lazy" alt="Instagram">
         </a>
-        <a href="https://twitter.com/manti_by/" name="Twitter" target="_blank" rel="noopener">
-            <img data-src="{% static 'svg/twitter.svg' %}" class="lazy" alt="Twitter">
+        <a href="https://twitter.com/manti_by/" target="_blank" rel="noopener">
+            <img src="{% static 'img/one-pixel.jpg' %}"
+                 data-src="{% static 'svg/twitter.svg' %}"
+                 class="lazy" alt="Twitter">
         </a>
-        <a href="http://coub.com/manti.by" name="Coub" target="_blank" rel="noopener">
-            <img data-src="{% static 'svg/coub.svg' %}" class="lazy" alt="Coub">
+        <a href="http://coub.com/manti.by" target="_blank" rel="noopener">
+            <img src="{% static 'img/one-pixel.jpg' %}"
+                 data-src="{% static 'svg/coub.svg' %}"
+                 class="lazy" alt="Coub">
         </a>
     </div>
 </div>

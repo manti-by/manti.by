@@ -26,6 +26,7 @@ def global_template_vars(request):
         'ABSOLUTE_URL': request.build_absolute_uri(),
         'BASE_URL': settings.BASE_URL,
         'DATE_FORMAT': settings.DATE_FORMAT,
+        'META_TITLE': settings.META_TITLE,
         'user': request.user,
         'tags': Post.tags.most_common()[:10],
         'posts': Post.objects.ordered().filter(is_music=True)[:10],
