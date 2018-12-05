@@ -33,7 +33,7 @@ services:
       - manti-by-memcache
       - manti-by-redis
     environment:
-    - DJANGO_SETTINGS_MODULE=prod
+    - DJANGO_SETTINGS_MODULE=core.settings.prod
     volumes:
       - /home/manti/www/manti.by/src/:/srv/manti.by/src/
       - /home/manti/www/manti.by/log/:/var/log/manti.by/
