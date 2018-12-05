@@ -5,23 +5,23 @@ from .base import *
 
 SECRET_KEY = ''
 
-DEBUG = True
+DEBUG = False
 
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
 
 TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'manti.by',
                  'ru.manti.by', 'en.manti.by']
 
-BASE_URL = 'http://manti.by'
+BASE_URL = 'https://manti.by'
 
 SESSION_COOKIE_DOMAIN = '.manti.by'
 
-STATIC_URL = 'http://manti.by/static/'
+STATIC_URL = 'https://manti.by/static/'
 STATIC_ROOT = '/srv/manti.by/static'
 
-MEDIA_URL = 'http://manti.by/content/'
+MEDIA_URL = 'https://manti.by/content/'
 MEDIA_ROOT = '/srv/manti.by/content'
 
 LOCALE_URLS = {

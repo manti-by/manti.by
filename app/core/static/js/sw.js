@@ -1,7 +1,7 @@
 const CACHE = 'cache';
 
 self.addEventListener('activate', (event) => {
-    let cacheWhitelist = [STATIC_CACHE];
+    let cacheWhitelist = [CACHE];
 
     event.waitUntil(
         caches.keys().then(function (cacheNames) {
@@ -25,7 +25,7 @@ self.addEventListener('fetch', function(event) {
                 }
 
                 let fetchRequest = event.request.clone();
-                return fetch(fetchRequest).then(
+                return fetch(fetchRequest, {mode: 'cors'}).then(
                     function(response) {
                         if (!response || response.status !== 200 || response.type !== 'basic') {
                             return response;
