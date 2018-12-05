@@ -16,9 +16,9 @@ services:
     container_name: manti-by-redis
     logging:
       driver: "none"
-  manti-by-memcached:
+  manti-by-memcache:
     image: memcached:latest
-    container_name: manti-by-memcached
+    container_name: manti-by-memcache
     logging:
       driver: "none"
   manti-by-app:
@@ -30,7 +30,7 @@ services:
       - "5555:5555"
     links:
       - manti-by-postgres
-      - manti-by-memcached
+      - manti-by-memcache
       - manti-by-redis
     environment:
     - DJANGO_SETTINGS_MODULE=prod

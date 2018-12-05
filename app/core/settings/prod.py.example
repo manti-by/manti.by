@@ -47,7 +47,8 @@ CELERY_BROKER_URL = 'redis://manti-by-redis:6379/0'
 
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': 'manti-by-memcache:11211',
     }
 }
 
