@@ -24,14 +24,17 @@ self.addEventListener('fetch', function(event) {
                     return response;
                 }
 
-                let fetchRequest = event.request.clone();
-                return fetch(fetchRequest, {mode: 'cors'}).then(
-                    function(response) {
-                        if (!response || response.status !== 200 || response.type !== 'basic') {
-                            return response;
-                        }
+                let fetchRequest = event.request.clone(),
+                    request_url = new URL(event.request.url),
+                    is_success, is_internal, is_dashboard;
 
-                        if (response.url.indexOf('dashboard') >= 0) {
+                return fetch(fetchRequest).then(
+                    function(response) {
+                        is_success = !response || response.status !== 200 || response.type !== 'basic';
+                        is_internal = request_url.host.indexOf('manti.by') < 0;
+                        is_dashboard = response.url.indexOf('dashboard') >= 0;
+
+                        if (is_success || is_internal || is_dashboard) {
                             return response;
                         }
 

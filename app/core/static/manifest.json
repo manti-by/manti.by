@@ -1,7 +1,7 @@
 {
   "name": "Official blog of Alex Manti",
   "short_name": "Manti.by",
-  "start_url": "/?utm_source=shortcut",
+  "start_url": "https://manti.by",
   "display": "standalone",
   "background_color": "#CCCCCC",
   "theme_color": "#B40303",
