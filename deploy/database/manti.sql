@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.10
--- Dumped by pg_dump version 9.6.10
+-- Dumped from database version 9.6.11
+-- Dumped by pg_dump version 9.6.11
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -579,7 +579,10 @@ CREATE TABLE public.django_celery_results_taskresult (
     date_done timestamp with time zone NOT NULL,
     traceback text,
     hidden boolean NOT NULL,
-    meta text
+    meta text,
+    task_args text,
+    task_kwargs text,
+    task_name character varying(255)
 );
 
 
@@ -2468,7 +2471,7 @@ SELECT pg_catalog.setval('public.django_admin_log_id_seq', 421, true);
 -- Data for Name: django_celery_results_taskresult; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
-COPY public.django_celery_results_taskresult (id, task_id, status, content_type, content_encoding, result, date_done, traceback, hidden, meta) FROM stdin;
+COPY public.django_celery_results_taskresult (id, task_id, status, content_type, content_encoding, result, date_done, traceback, hidden, meta, task_args, task_kwargs, task_name) FROM stdin;
 \.
 
 
@@ -2594,6 +2597,8 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 71	shortener	0001_initial	2018-06-25 10:09:36.320284+00
 72	gallery	0013_remove_image_phash	2018-09-19 09:15:10.220134+00
 73	shortener	0002_link_name	2018-09-19 09:15:10.264519+00
+74	django_celery_results	0002_add_task_name_args_kwargs	2018-12-05 11:23:16.813294+00
+75	django_celery_results	0003_auto_20181106_1101	2018-12-05 11:23:16.821536+00
 \.
 
 
@@ -2601,7 +2606,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 73, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 75, true);
 
 
 --
