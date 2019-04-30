@@ -7,14 +7,10 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('gallery', '0010_auto_20170721_1155'),
-    ]
+    dependencies = [("gallery", "0010_auto_20170721_1155")]
 
     operations = [
         migrations.RenameField(
-            model_name='gallery',
-            old_name='name_by',
-            new_name='name_be',
-        ),
+            model_name="gallery", old_name="name_by", new_name="name_be"
+        )
     ]

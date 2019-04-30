@@ -5,29 +5,21 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('blog', '0009_auto_20170503_1246'),
-    ]
+    dependencies = [("blog", "0009_auto_20170503_1246")]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='description_by',
-            field=models.TextField(null=True),
+            model_name="post", name="description_by", field=models.TextField(null=True)
         ),
         migrations.AddField(
-            model_name='post',
-            name='meta_by',
-            field=models.TextField(null=True),
+            model_name="post", name="meta_by", field=models.TextField(null=True)
         ),
         migrations.AddField(
-            model_name='post',
-            name='name_by',
+            model_name="post",
+            name="name_by",
             field=models.CharField(max_length=255, null=True),
         ),
         migrations.AddField(
-            model_name='post',
-            name='summary_by',
-            field=models.TextField(null=True),
+            model_name="post", name="summary_by", field=models.TextField(null=True)
         ),
     ]

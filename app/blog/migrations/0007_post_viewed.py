@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('blog', '0006_auto_20170420_0812'),
-    ]
+    dependencies = [("blog", "0006_auto_20170420_0812")]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='viewed',
+            model_name="post",
+            name="viewed",
             field=models.IntegerField(blank=True, default=0),
-        ),
+        )
     ]

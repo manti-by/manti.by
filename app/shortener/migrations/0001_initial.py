@@ -9,21 +9,39 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Link',
+            name="Link",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(auto_now_add=True, verbose_name='Created, UTC')),
-                ('updated', models.DateTimeField(auto_now=True, verbose_name='Updated, UTC')),
-                ('original_link', models.URLField(verbose_name='Original Link')),
-                ('short_link', models.URLField(blank=True, null=True, unique=True, verbose_name='Short Link')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    models.DateTimeField(
+                        auto_now_add=True, verbose_name="Created, UTC"
+                    ),
+                ),
+                (
+                    "updated",
+                    models.DateTimeField(auto_now=True, verbose_name="Updated, UTC"),
+                ),
+                ("original_link", models.URLField(verbose_name="Original Link")),
+                (
+                    "short_link",
+                    models.URLField(
+                        blank=True, null=True, unique=True, verbose_name="Short Link"
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
-        ),
+            options={"abstract": False},
+        )
     ]

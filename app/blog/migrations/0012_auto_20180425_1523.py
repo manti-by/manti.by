@@ -7,29 +7,19 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('blog', '0011_auto_20170721_1151'),
-    ]
+    dependencies = [("blog", "0011_auto_20170721_1151")]
 
     operations = [
         migrations.RenameField(
-            model_name='post',
-            old_name='description_by',
-            new_name='description_be',
+            model_name="post", old_name="description_by", new_name="description_be"
         ),
         migrations.RenameField(
-            model_name='post',
-            old_name='meta_by',
-            new_name='meta_be',
+            model_name="post", old_name="meta_by", new_name="meta_be"
         ),
         migrations.RenameField(
-            model_name='post',
-            old_name='name_by',
-            new_name='name_be',
+            model_name="post", old_name="name_by", new_name="name_be"
         ),
         migrations.RenameField(
-            model_name='post',
-            old_name='summary_by',
-            new_name='summary_be',
+            model_name="post", old_name="summary_by", new_name="summary_be"
         ),
     ]

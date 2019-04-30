@@ -6,22 +6,29 @@ import taggit.managers
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('taggit', '0002_auto_20150616_2121'),
-        ('gallery', '0001_initial'),
-    ]
+    dependencies = [("taggit", "0002_auto_20150616_2121"), ("gallery", "0001_initial")]
 
     operations = [
         migrations.AddField(
-            model_name='gallery',
-            name='tags',
-            field=taggit.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.',
-                                                  through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags'),
+            model_name="gallery",
+            name="tags",
+            field=taggit.managers.TaggableManager(
+                blank=True,
+                help_text="A comma-separated list of tags.",
+                through="taggit.TaggedItem",
+                to="taggit.Tag",
+                verbose_name="Tags",
+            ),
         ),
         migrations.AddField(
-            model_name='image',
-            name='tags',
-            field=taggit.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.',
-                                                  through='taggit.TaggedItem', to='taggit.Tag', verbose_name='Tags'),
+            model_name="image",
+            name="tags",
+            field=taggit.managers.TaggableManager(
+                blank=True,
+                help_text="A comma-separated list of tags.",
+                through="taggit.TaggedItem",
+                to="taggit.Tag",
+                verbose_name="Tags",
+            ),
         ),
     ]

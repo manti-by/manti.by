@@ -4,7 +4,7 @@ from django.db import migrations
 
 
 def update_translations(apps, schema_editor):
-    Post = apps.get_model('blog', 'Post')
+    Post = apps.get_model("blog", "Post")
     for post in Post.objects.all():
         post.name_by = post.name_ru
         post.meta_by = post.meta_ru
@@ -15,10 +15,6 @@ def update_translations(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('blog', '0010_auto_20170717_1218'),
-    ]
+    dependencies = [("blog", "0010_auto_20170717_1218")]
 
-    operations = [
-        migrations.RunPython(update_translations),
-    ]
+    operations = [migrations.RunPython(update_translations)]

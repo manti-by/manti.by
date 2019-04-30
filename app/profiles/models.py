@@ -9,14 +9,15 @@ from core.utils import profile_image_name
 
 class Profile(BaseModel):
 
-    original_image = models.ImageField(upload_to=profile_image_name, blank=True, null=True,
-                                       verbose_name=_('Profile Image'))
+    original_image = models.ImageField(
+        upload_to=profile_image_name,
+        blank=True,
+        null=True,
+        verbose_name=_("Profile Image"),
+    )
 
     user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        primary_key=True,
-        related_name='profile',
+        User, on_delete=models.CASCADE, primary_key=True, related_name="profile"
     )
 
     def __str__(self):
@@ -26,4 +27,4 @@ class Profile(BaseModel):
     def image(self):
         if self.original_image:
             return self.original_image.url
-        return static('img/no-image.png')
+        return static("img/no-image.png")

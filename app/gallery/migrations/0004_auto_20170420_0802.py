@@ -5,19 +5,17 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('gallery', '0003_auto_20170419_1519'),
-    ]
+    dependencies = [("gallery", "0003_auto_20170419_1519")]
 
     operations = [
         migrations.AddField(
-            model_name='gallery',
-            name='name_en',
+            model_name="gallery",
+            name="name_en",
             field=models.CharField(max_length=255, null=True),
         ),
         migrations.AddField(
-            model_name='gallery',
-            name='name_ru',
+            model_name="gallery",
+            name="name_ru",
             field=models.CharField(max_length=255, null=True),
         ),
     ]

@@ -3,7 +3,7 @@ from gallery.models import Gallery
 
 
 class GalleryTranslationOptions(TranslationOptions):
-    fields = ('name',)
+    fields = ("name",)
 
 
 translator.register(Gallery, GalleryTranslationOptions)

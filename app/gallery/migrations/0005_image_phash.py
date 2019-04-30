@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('gallery', '0004_auto_20170420_0802'),
-    ]
+    dependencies = [("gallery", "0004_auto_20170420_0802")]
 
     operations = [
         migrations.AddField(
-            model_name='image',
-            name='phash',
+            model_name="image",
+            name="phash",
             field=models.CharField(blank=True, max_length=255, null=True),
-        ),
+        )
     ]

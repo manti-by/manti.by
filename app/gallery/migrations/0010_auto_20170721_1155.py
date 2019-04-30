@@ -4,7 +4,7 @@ from django.db import migrations
 
 
 def update_translations(apps, schema_editor):
-    Gallery = apps.get_model('gallery', 'Gallery')
+    Gallery = apps.get_model("gallery", "Gallery")
     for gallery in Gallery.objects.all():
         gallery.name_by = gallery.name_ru
         gallery.save()
@@ -12,10 +12,6 @@ def update_translations(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('gallery', '0009_gallery_name_by'),
-    ]
+    dependencies = [("gallery", "0009_gallery_name_by")]
 
-    operations = [
-        migrations.RunPython(update_translations),
-    ]
+    operations = [migrations.RunPython(update_translations)]

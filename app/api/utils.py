@@ -14,10 +14,9 @@ def resource_wrapper(f):
             return f(*args, **kwargs)
         except Profile.DoesNotExist as e:
             client.captureException()
-            return JsonResponse({'status': 404,
-                                 'message': e}, status=200)
+            return JsonResponse({"status": 404, "message": e}, status=200)
         except Exception as e:
             client.captureException()
-            return JsonResponse({'status': 500,
-                                 'message': e}, status=200)
+            return JsonResponse({"status": 500, "message": e}, status=200)
+
     return wrapper

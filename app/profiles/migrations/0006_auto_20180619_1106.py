@@ -7,19 +7,17 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('profiles', '0005_auto_20170620_1156'),
-    ]
+    dependencies = [("profiles", "0005_auto_20170620_1156")]
 
     operations = [
         migrations.AddField(
-            model_name='profile',
-            name='updated',
-            field=models.DateTimeField(auto_now=True, verbose_name='Updated, UTC'),
+            model_name="profile",
+            name="updated",
+            field=models.DateTimeField(auto_now=True, verbose_name="Updated, UTC"),
         ),
         migrations.AlterField(
-            model_name='profile',
-            name='created',
-            field=models.DateTimeField(auto_now_add=True, verbose_name='Created, UTC'),
+            model_name="profile",
+            name="created",
+            field=models.DateTimeField(auto_now_add=True, verbose_name="Created, UTC"),
         ),
     ]

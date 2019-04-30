@@ -18,11 +18,11 @@ BASE_URL = 'https://manti.by'
 
 SESSION_COOKIE_DOMAIN = '.manti.by'
 
-STATIC_URL = 'https://manti.by/static/'
-STATIC_ROOT = '/srv/manti.by/static'
+STATIC_URL = 'https://static.manti.by/'
+STATIC_ROOT = '/mnt/nostromo/static'
 
-MEDIA_URL = 'https://manti.by/content/'
-MEDIA_ROOT = '/srv/manti.by/content'
+MEDIA_URL = 'https://content.manti.by/'
+MEDIA_ROOT = '/mnt/nostromo/content'
 
 LOCALE_URLS = {
     'be': 'manti.by',

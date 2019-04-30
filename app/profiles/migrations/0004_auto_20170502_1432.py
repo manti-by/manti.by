@@ -5,21 +5,10 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('profiles', '0003_auto_20170502_1246'),
-    ]
+    dependencies = [("profiles", "0003_auto_20170502_1246")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='profile',
-            name='gallery_ready',
-        ),
-        migrations.RemoveField(
-            model_name='profile',
-            name='preview_ready',
-        ),
-        migrations.RemoveField(
-            model_name='profile',
-            name='thumbnail_ready',
-        ),
+        migrations.RemoveField(model_name="profile", name="gallery_ready"),
+        migrations.RemoveField(model_name="profile", name="preview_ready"),
+        migrations.RemoveField(model_name="profile", name="thumbnail_ready"),
     ]

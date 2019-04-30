@@ -8,15 +8,18 @@ import taggit.managers
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('blog', '0012_auto_20180425_1523'),
-    ]
+    dependencies = [("blog", "0012_auto_20180425_1523")]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='genre',
-            field=taggit.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.',
-                                                  through='blog.GenresProxy', to='taggit.Tag', verbose_name='Genre'),
-        ),
+            model_name="post",
+            name="genre",
+            field=taggit.managers.TaggableManager(
+                blank=True,
+                help_text="A comma-separated list of tags.",
+                through="blog.GenresProxy",
+                to="taggit.Tag",
+                verbose_name="Genre",
+            ),
+        )
     ]

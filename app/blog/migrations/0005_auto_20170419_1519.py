@@ -5,14 +5,14 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('blog', '0004_auto_20170419_1039'),
-    ]
+    dependencies = [("blog", "0004_auto_20170419_1039")]
 
     operations = [
         migrations.AlterField(
-            model_name='post',
-            name='related',
-            field=models.ManyToManyField(blank=True, related_name='_post_related_+', to='blog.Post'),
-        ),
+            model_name="post",
+            name="related",
+            field=models.ManyToManyField(
+                blank=True, related_name="_post_related_+", to="blog.Post"
+            ),
+        )
     ]

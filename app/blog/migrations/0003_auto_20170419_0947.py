@@ -5,28 +5,23 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('blog', '0002_post_converted'),
-    ]
+    dependencies = [("blog", "0002_post_converted")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='post',
-            name='converted',
-        ),
+        migrations.RemoveField(model_name="post", name="converted"),
         migrations.AddField(
-            model_name='post',
-            name='mp3_preview_ready',
+            model_name="post",
+            name="mp3_preview_ready",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='post',
-            name='ogg_preview_ready',
+            model_name="post",
+            name="ogg_preview_ready",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='post',
-            name='ogg_release_ready',
+            model_name="post",
+            name="ogg_release_ready",
             field=models.BooleanField(default=False),
         ),
     ]

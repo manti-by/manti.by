@@ -12,15 +12,19 @@ logger = logging.getLogger()
 
 
 class Command(BaseCommand):
-
     def handle(self, *args, **options):
         for email in Email.objects.filter(is_sent=False):
             try:
-                text_content = render_to_string('emails/email.txt', {'email': email})
-                html_content = render_to_string('emails/email.html', {'email': email})
+                text_content = render_to_string("emails/email.txt", {"email": email})
+                html_content = render_to_string("emails/email.html", {"email": email})
 
-                send_mail(email.subject, text_content, email.email,
-                          (settings.CONTACT_EMAIL,), html_message=html_content)
+                send_mail(
+                    email.subject,
+                    text_content,
+                    email.email,
+                    (settings.CONTACT_EMAIL,),
+                    html_message=html_content,
+                )
                 email.is_sent = True
                 email.save()
             except Exception as e:

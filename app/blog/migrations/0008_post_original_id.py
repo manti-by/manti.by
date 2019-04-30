@@ -5,14 +5,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('blog', '0007_post_viewed'),
-    ]
+    dependencies = [("blog", "0007_post_viewed")]
 
     operations = [
         migrations.AddField(
-            model_name='post',
-            name='original_id',
+            model_name="post",
+            name="original_id",
             field=models.IntegerField(blank=True, default=0),
-        ),
+        )
     ]

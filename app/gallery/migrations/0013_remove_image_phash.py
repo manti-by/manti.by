@@ -7,13 +7,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('gallery', '0012_auto_20180619_1106'),
-    ]
+    dependencies = [("gallery", "0012_auto_20180619_1106")]
 
-    operations = [
-        migrations.RemoveField(
-            model_name='image',
-            name='phash',
-        ),
-    ]
+    operations = [migrations.RemoveField(model_name="image", name="phash")]

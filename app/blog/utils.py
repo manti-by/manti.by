@@ -1,5 +1,8 @@
-from core.tasks import convert_to_mp3_preview, \
-    convert_to_ogg_preview, convert_to_ogg_release
+from core.tasks import (
+    convert_to_mp3_preview,
+    convert_to_ogg_preview,
+    convert_to_ogg_release,
+)
 
 
 def generate_preview_for_post(post):

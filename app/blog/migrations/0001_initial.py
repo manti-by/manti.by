@@ -11,39 +11,82 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-        ('taggit', '0002_auto_20150616_2121'),
-    ]
+    dependencies = [("taggit", "0002_auto_20150616_2121")]
 
     operations = [
         migrations.CreateModel(
-            name='Post',
+            name="Post",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created', models.DateTimeField(default=django.utils.timezone.now, verbose_name='Created, UTC')),
-                ('slug', models.SlugField(blank=True, null=True, unique=True, verbose_name='Slug')),
-                ('title', models.CharField(max_length=255)),
-                ('meta', models.TextField()),
-                ('summary', models.TextField()),
-                ('description', models.TextField()),
-                ('release', models.FileField(blank=True, max_length=255, null=True,
-                                             upload_to=core.utils.release_name, verbose_name='Release File')),
-                ('cover', models.ImageField(blank=True, max_length=255, null=True,
-                                            upload_to=core.utils.cover_name, verbose_name='Cover Image')),
-                ('is_music', models.BooleanField(default=False)),
-                ('catnum', models.CharField(blank=True, max_length=16)),
-                ('genre', models.CharField(blank=True, max_length=32)),
-                ('quality', models.CharField(blank=True, max_length=255)),
-                ('length', models.CharField(blank=True, max_length=16)),
-                ('tracklist', models.TextField(blank=True)),
-                ('related', models.ForeignKey(blank=True, null=True,
-                                              on_delete=django.db.models.deletion.CASCADE, to='blog.Post')),
-                ('tags', taggit.managers.TaggableManager(help_text='A comma-separated list of tags.',
-                                                         through='taggit.TaggedItem', to='taggit.Tag',
-                                                         verbose_name='Tags')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now, verbose_name="Created, UTC"
+                    ),
+                ),
+                (
+                    "slug",
+                    models.SlugField(
+                        blank=True, null=True, unique=True, verbose_name="Slug"
+                    ),
+                ),
+                ("title", models.CharField(max_length=255)),
+                ("meta", models.TextField()),
+                ("summary", models.TextField()),
+                ("description", models.TextField()),
+                (
+                    "release",
+                    models.FileField(
+                        blank=True,
+                        max_length=255,
+                        null=True,
+                        upload_to=core.utils.release_name,
+                        verbose_name="Release File",
+                    ),
+                ),
+                (
+                    "cover",
+                    models.ImageField(
+                        blank=True,
+                        max_length=255,
+                        null=True,
+                        upload_to=core.utils.cover_name,
+                        verbose_name="Cover Image",
+                    ),
+                ),
+                ("is_music", models.BooleanField(default=False)),
+                ("catnum", models.CharField(blank=True, max_length=16)),
+                ("genre", models.CharField(blank=True, max_length=32)),
+                ("quality", models.CharField(blank=True, max_length=255)),
+                ("length", models.CharField(blank=True, max_length=16)),
+                ("tracklist", models.TextField(blank=True)),
+                (
+                    "related",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="blog.Post",
+                    ),
+                ),
+                (
+                    "tags",
+                    taggit.managers.TaggableManager(
+                        help_text="A comma-separated list of tags.",
+                        through="taggit.TaggedItem",
+                        to="taggit.Tag",
+                        verbose_name="Tags",
+                    ),
+                ),
             ],
-            options={
-                'abstract': False,
-            },
-        ),
+            options={"abstract": False},
+        )
     ]

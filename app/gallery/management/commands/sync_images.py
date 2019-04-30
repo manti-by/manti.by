@@ -10,13 +10,13 @@ from gallery.models import Gallery, Image
 
 
 class Command(BaseCommand):
-    help = 'Sync gallery images'
+    help = "Sync gallery images"
 
     def handle(self, *args, **options):
         checked = added = 0
-        images = Image.objects.values_list('phash', flat=True)
-        galleries = Gallery.objects.values_list('slug', flat=True)
-        gallery_path = os.path.join(settings.MEDIA_ROOT, 'gallery')
+        images = Image.objects.values_list("phash", flat=True)
+        galleries = Gallery.objects.values_list("slug", flat=True)
+        gallery_path = os.path.join(settings.MEDIA_ROOT, "gallery")
         for root, dirs, f in os.walk(gallery_path):
             for dir in dirs:
                 if dir not in galleries:
@@ -32,8 +32,10 @@ class Command(BaseCommand):
                         checked += 1
                         if file_phash not in images:
                             image = Image(phash=file_phash, gallery=gallery)
-                            image.original_image.name = file_name.replace(settings.MEDIA_ROOT, '')[1:]
+                            image.original_image.name = file_name.replace(
+                                settings.MEDIA_ROOT, ""
+                            )[1:]
                             image.save()
-                            self.stdout.write('Saved %s' % image.original_image.name)
+                            self.stdout.write("Saved %s" % image.original_image.name)
                             added += 1
-        self.stdout.write('Checked %d images, added %d' % (checked, added))
+        self.stdout.write("Checked %d images, added %d" % (checked, added))

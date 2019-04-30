@@ -7,14 +7,12 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('shortener', '0001_initial'),
-    ]
+    dependencies = [("shortener", "0001_initial")]
 
     operations = [
         migrations.AddField(
-            model_name='link',
-            name='name',
+            model_name="link",
+            name="name",
             field=models.CharField(blank=True, max_length=255, null=True),
-        ),
+        )
     ]

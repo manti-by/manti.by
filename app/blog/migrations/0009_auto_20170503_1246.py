@@ -8,65 +8,94 @@ import taggit.managers
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('taggit', '0002_auto_20150616_2121'),
-        ('blog', '0008_post_original_id'),
+        ("taggit", "0002_auto_20150616_2121"),
+        ("blog", "0008_post_original_id"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='GenresProxy',
+            name="GenresProxy",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                )
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False},
         ),
         migrations.CreateModel(
-            name='TagsProxy',
+            name="TagsProxy",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                )
             ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False},
         ),
-        migrations.RemoveField(
-            model_name='post',
-            name='genre',
-        ),
+        migrations.RemoveField(model_name="post", name="genre"),
         migrations.AlterField(
-            model_name='post',
-            name='tags',
-            field=taggit.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.',
-                                                  through='blog.TagsProxy', to='taggit.Tag', verbose_name='Tags'),
+            model_name="post",
+            name="tags",
+            field=taggit.managers.TaggableManager(
+                blank=True,
+                help_text="A comma-separated list of tags.",
+                through="blog.TagsProxy",
+                to="taggit.Tag",
+                verbose_name="Tags",
+            ),
         ),
         migrations.AddField(
-            model_name='tagsproxy',
-            name='content_object',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='blog.Post'),
+            model_name="tagsproxy",
+            name="content_object",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="blog.Post"
+            ),
         ),
         migrations.AddField(
-            model_name='tagsproxy',
-            name='tag',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
-                                    related_name='blog_tagsproxy_items', to='taggit.Tag'),
+            model_name="tagsproxy",
+            name="tag",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="blog_tagsproxy_items",
+                to="taggit.Tag",
+            ),
         ),
         migrations.AddField(
-            model_name='genresproxy',
-            name='content_object',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='blog.Post'),
+            model_name="genresproxy",
+            name="content_object",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="blog.Post"
+            ),
         ),
         migrations.AddField(
-            model_name='genresproxy',
-            name='tag',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE,
-                                    related_name='blog_genresproxy_items', to='taggit.Tag'),
+            model_name="genresproxy",
+            name="tag",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="blog_genresproxy_items",
+                to="taggit.Tag",
+            ),
         ),
         migrations.AddField(
-            model_name='post',
-            name='genre',
-            field=taggit.managers.TaggableManager(blank=True, help_text='A comma-separated list of tags.',
-                                                  through='blog.GenresProxy', to='taggit.Tag', verbose_name='Tags'),
+            model_name="post",
+            name="genre",
+            field=taggit.managers.TaggableManager(
+                blank=True,
+                help_text="A comma-separated list of tags.",
+                through="blog.GenresProxy",
+                to="taggit.Tag",
+                verbose_name="Tags",
+            ),
         ),
     ]

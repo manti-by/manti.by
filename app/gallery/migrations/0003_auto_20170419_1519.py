@@ -5,17 +5,15 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('gallery', '0002_auto_20170419_1251'),
-    ]
+    dependencies = [("gallery", "0002_auto_20170419_1251")]
 
     operations = [
         migrations.AlterModelOptions(
-            name='gallery',
-            options={'verbose_name': 'Gallery', 'verbose_name_plural': 'Gallery List'},
+            name="gallery",
+            options={"verbose_name": "Gallery", "verbose_name_plural": "Gallery List"},
         ),
         migrations.AlterModelOptions(
-            name='image',
-            options={'verbose_name': 'Image', 'verbose_name_plural': 'Image List'},
+            name="image",
+            options={"verbose_name": "Image", "verbose_name_plural": "Image List"},
         ),
     ]

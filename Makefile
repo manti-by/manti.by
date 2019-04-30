@@ -13,12 +13,6 @@ destroy:
 bash:
 	docker exec -it manti-by-app bash
 
-ci:
-	circleci build
-
-flake:
-	flake8
-
 build:
 	cd deploy/ && docker build -t mantiby/manti.by:latest .
 
@@ -37,3 +31,11 @@ migrate:
 
 static:
 	docker exec -it manti-by-app python app/manage.py collectstatic --no-input
+
+ci:
+	circleci build
+
+check:
+	black --target-version py36 app/
+	isort app/*.py
+	flake8

@@ -5,24 +5,22 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('gallery', '0005_image_phash'),
-    ]
+    dependencies = [("gallery", "0005_image_phash")]
 
     operations = [
         migrations.AddField(
-            model_name='image',
-            name='gallery_ready',
+            model_name="image",
+            name="gallery_ready",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='image',
-            name='preview_ready',
+            model_name="image",
+            name="preview_ready",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='image',
-            name='thumbnail_ready',
+            model_name="image",
+            name="thumbnail_ready",
             field=models.BooleanField(default=False),
         ),
     ]

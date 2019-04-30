@@ -12,9 +12,8 @@ from core.utils import flush_cache, original_name
 
 
 class GalleryManager(models.Manager):
-
     def ordered(self):
-        return self.get_queryset().order_by('-order')
+        return self.get_queryset().order_by("-order")
 
 
 class Gallery(SlugifyMixin, BaseModel):
@@ -30,30 +29,31 @@ class Gallery(SlugifyMixin, BaseModel):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('gallery', args=[self.slug])
+        return reverse("gallery", args=[self.slug])
 
     @property
     def last_update(self):
         try:
-            return self.images.order_by('-created')[0].created
+            return self.images.order_by("-created")[0].created
         except Exception:
             return self.updated
 
     class Meta:
-        verbose_name = _('Gallery')
-        verbose_name_plural = _('Gallery List')
+        verbose_name = _("Gallery")
+        verbose_name_plural = _("Gallery List")
 
 
 class ImageManager(models.Manager):
-
     def ordered(self):
-        return self.get_queryset().order_by('-order')
+        return self.get_queryset().order_by("-order")
 
 
 class Image(BaseModel):
 
-    original_image = models.ImageField(upload_to=original_name, blank=True, null=True, verbose_name=_('Image'))
-    gallery = models.ForeignKey(Gallery, null=True, blank=True, related_name='images')
+    original_image = models.ImageField(
+        upload_to=original_name, blank=True, null=True, verbose_name=_("Image")
+    )
+    gallery = models.ForeignKey(Gallery, null=True, blank=True, related_name="images")
 
     order = models.IntegerField(blank=True, default=0)
     tags = TaggableManager(blank=True)
@@ -61,13 +61,13 @@ class Image(BaseModel):
     objects = ImageManager()
 
     def __str__(self):
-        return 'Gallery #%s - Image#%d' % (self.gallery.name, self.id)
+        return "Gallery #%s - Image#%d" % (self.gallery.name, self.id)
 
     class Meta:
-        verbose_name = _('Image')
-        verbose_name_plural = _('Image List')
+        verbose_name = _("Image")
+        verbose_name_plural = _("Image List")
 
 
-@receiver(post_save, sender=Image, dispatch_uid='flush_gallery_cache')
+@receiver(post_save, sender=Image, dispatch_uid="flush_gallery_cache")
 def flush_gallery_cache(sender, instance, **kwargs):
-    flush_cache(['index', 'gallery'])
+    flush_cache(["index", "gallery"])
