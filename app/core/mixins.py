@@ -3,7 +3,7 @@ import logging
 from unidecode import unidecode
 
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 

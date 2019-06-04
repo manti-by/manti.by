@@ -15,11 +15,11 @@ from blog.utils import generate_preview_for_post
 
 
 class GenresProxy(TaggedItemBase):
-    content_object = models.ForeignKey("Post")
+    content_object = models.ForeignKey("Post", on_delete=models.CASCADE)
 
 
 class TagsProxy(TaggedItemBase):
-    content_object = models.ForeignKey("Post")
+    content_object = models.ForeignKey("Post", on_delete=models.CASCADE)
 
 
 class PostManager(models.Manager):
@@ -57,11 +57,8 @@ class Post(SlugifyMixin, BaseModel):
     length = models.CharField(max_length=16, blank=True)
     tracklist = models.TextField(blank=True)
 
-    genre = TaggableManager(blank=True, through=GenresProxy, verbose_name=_("Genre"))
-    genre.rel.related_name = "post_genres"
-
-    tags = TaggableManager(blank=True, through=TagsProxy, verbose_name=_("Tags"))
-    tags.rel.related_name = "post_tags"
+    genre = TaggableManager(blank=True, through=GenresProxy, verbose_name=_("Genre"), related_name="post_genres")
+    tags = TaggableManager(blank=True, through=TagsProxy, verbose_name=_("Tags"), related_name = "post_tags")
 
     viewed = models.IntegerField(blank=True, default=0)
     related = models.ManyToManyField("self", blank=True)

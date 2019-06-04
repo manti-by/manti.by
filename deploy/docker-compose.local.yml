@@ -10,53 +10,45 @@ services:
       - POSTGRES_DB=manti
       - POSTGRES_USER=manti
       - POSTGRES_PASSWORD=pa55word
-    logging:
-      driver: "none"
 
   manti-by-redis:
     image: redis:latest
     container_name: manti-by-redis
-    logging:
-      driver: "none"
-
-  manti-by-memcache:
-    image: memcached:latest
-    container_name: manti-by-memcache
-    logging:
-      driver: "none"
 
   manti-by-app:
+    user: manti
     image: mantiby/manti.by:latest
     container_name: manti-by-app
     ports:
       - 8080:8080
     links:
       - manti-by-postgres
-      - manti-by-memcache
       - manti-by-redis
     environment:
-      - DJANGO_SETTINGS_MODULE=core.settings.prod
+      - DJANGO_SETTINGS_MODULE=core.settings.dev
       - ROLE=app
     volumes:
-      - /home/manti/www/manti.by/src/:/srv/manti.by/src/
-      - /mnt/nostromo/manti.by/log/:/var/log/manti.by/
-      - /mnt/nostromo/manti.by/static/:/var/lib/manti.by/static/
-      - /mnt/nostromo/manti.by/content/:/var/lib/manti.by/content/
+      - /home/manti/www/manti/manti.by/src/:/srv/manti.by/src/
+      - /home/manti/www/manti/manti.by/log/:/var/log/manti.by/
+      - /home/manti/www/manti/manti.by/static/:/var/lib/manti.by/static/
+      - /home/manti/www/manti/manti.by/content/:/var/lib/manti.by/content/
 
   manti-by-celery:
+    user: manti
     image: mantiby/manti.by:latest
     container_name: manti-by-celery
     links:
       - manti-by-postgres
       - manti-by-redis
     volumes:
-      - /home/manti/www/manti.by/src/:/srv/manti.by/src/
-      - /mnt/nostromo/manti.by/log/:/var/log/manti.by/
-      - /mnt/nostromo/manti.by/content/:/var/lib/manti.by/content/
+      - /home/manti/www/manti/manti.by/src/:/srv/manti.by/src/
+      - /home/manti/www/manti/manti.by/log/:/var/log/manti.by/
+      - /home/manti/www/manti/manti.by/content/:/var/lib/manti.by/content/
     environment:
       - ROLE=celery
 
   manti-by-flower:
+    user: manti
     image: mantiby/manti.by:latest
     container_name: manti-by-flower
     ports:
@@ -65,7 +57,7 @@ services:
       - manti-by-postgres
       - manti-by-redis
     volumes:
-      - /home/manti/www/manti.by/src/:/srv/manti.by/src/
-      - /mnt/nostromo/manti.by/log/:/var/log/manti.by/
+      - /home/manti/www/manti/manti.by/src/:/srv/manti.by/src/
+      - /home/manti/www/manti/manti.by/log/:/var/log/manti.by/
     environment:
       - ROLE=flower

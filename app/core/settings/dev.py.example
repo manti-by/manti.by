@@ -5,9 +5,9 @@ from .base import *
 
 SECRET_KEY = ""
 
-DEBUG = True
+DEBUG = False
 
-COMPRESS_ENABLED = False
+COMPRESS_ENABLED = True
 
 TEMPLATE_DEBUG = False
 
@@ -18,12 +18,10 @@ BASE_URL = "http://127.0.0.1"
 SESSION_COOKIE_DOMAIN = "127.0.0.1"
 
 STATIC_URL = "/static/"
-STATIC_ROOT = "/home/manti/www/manti/manti.by/static"
+STATIC_ROOT = "/var/lib/manti.by/static"
 
 MEDIA_URL = "/content/"
-MEDIA_ROOT = "/home/manti/www/manti/manti.by/content"
-
-TEMPLATE_VERSION = "v2"
+MEDIA_ROOT = "/var/lib/manti.by/content"
 
 LOCALE_URLS = {"be": "127.0.0.1", "ru": "127.0.0.1", "en": "127.0.0.1"}
 
@@ -33,14 +31,14 @@ DATABASES = {
         "NAME": "manti",
         "USER": "manti",
         "PASSWORD": "pa55word",
-        "HOST": "localhost",
-        "PORT": "5433",
+        "HOST": "manti-by-postgres",
+        "PORT": "5432",
     }
 }
 
-THUMBNAIL_REDIS_HOST = "localhost"
+THUMBNAIL_REDIS_HOST = "manti-by-redis"
 
-CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_BROKER_URL = "redis://manti-by-redis:6379/0"
 
 CACHES = {"default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"}}
 

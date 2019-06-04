@@ -3,101 +3,89 @@ import os
 from .base import *
 
 
-SECRET_KEY = ''
+SECRET_KEY = "k"
 
-DEBUG = False
+DEBUG = True
 
-COMPRESS_ENABLED = True
+COMPRESS_ENABLED = False
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'manti.by',
-                 'ru.manti.by', 'en.manti.by']
+ALLOWED_HOSTS = ["127.0.0.1", "manti.by", "ru.manti.by", "en.manti.by"]
 
-BASE_URL = 'https://manti.by'
+BASE_URL = "http://manti.by"
 
-SESSION_COOKIE_DOMAIN = '.manti.by'
+SESSION_COOKIE_DOMAIN = ".manti.by"
 
-STATIC_URL = 'https://static.manti.by/'
-STATIC_ROOT = '/mnt/nostromo/static'
+STATIC_URL = "http://manti.by/static/"
+STATIC_ROOT = "/srv/manti.by/static"
 
-MEDIA_URL = 'https://content.manti.by/'
-MEDIA_ROOT = '/mnt/nostromo/content'
+MEDIA_URL = "http://manti.by/content/"
+MEDIA_ROOT = "/srv/manti.by/content"
 
-LOCALE_URLS = {
-    'be': 'manti.by',
-    'ru': 'ru.manti.by',
-    'en': 'en.manti.by',
-}
+LOCALE_URLS = {"be": "manti.by", "ru": "ru.manti.by", "en": "en.manti.by"}
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'manti',
-        'USER': 'manti',
-        'PASSWORD': 'pa55word',
-        'HOST': 'manti-by-postgres',
-        'PORT': '5433',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "manti",
+        "USER": "manti",
+        "PASSWORD": "pa55word",
+        "HOST": "manti-by-postgres",
+        "PORT": "",
     }
 }
 
-THUMBNAIL_REDIS_HOST = 'manti-by-redis'
+THUMBNAIL_REDIS_HOST = "manti-by-redis"
 
-CELERY_BROKER_URL = 'redis://manti-by-redis:6379/0'
+CELERY_BROKER_URL = "redis://manti-by-redis:6379/0"
 
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': 'manti-by-memcache:11211',
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
+        "LOCATION": "manti-by-memcache:11211",
     }
 }
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'file_app': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/var/log/manti.by/app.log',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "file_app": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "/var/log/manti.by/app.log",
         },
-        'file_django': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/var/log/manti.by/django.log',
+        "file_django": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "/var/log/manti.by/django.log",
         },
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-        },
-        'null': {
-            'class': 'logging.NullHandler',
-        },
+        "console": {"level": "DEBUG", "class": "logging.StreamHandler"},
+        "null": {"class": "logging.NullHandler"},
     },
-    'loggers': {
-        '': {
-            'handlers': ['console', 'file_app'],
-            'level': 'WARNING',
-            'propagate': True,
-            'formatter': 'verbose',
+    "loggers": {
+        "": {
+            "handlers": ["console", "file_app"],
+            "level": "WARNING",
+            "propagate": True,
+            "formatter": "verbose",
         },
-        'django': {
-            'handlers': ['file_django'],
-            'level': 'WARNING',
-            'propagate': True,
-            'formatter': 'simple',
+        "django": {
+            "handlers": ["file_django"],
+            "level": "WARNING",
+            "propagate": True,
+            "formatter": "simple",
         },
-        'django.template': {
-            'handlers': ['null'],
-        },
-        'django.db.backends': {
-            'handlers': ['null'],
-        },
+        "django.template": {"handlers": ["null"]},
+        "django.db.backends": {"handlers": ["null"]},
     },
 }
 
-INSTAGRAM_CLIENT_ID = ''
-INSTAGRAM_ACCESS_TOKEN = ''
-INSTAGRAM_CLIENT_SECRET = ''
+INSTAGRAM_CLIENT_ID = ""
+INSTAGRAM_ACCESS_TOKEN = ""
+INSTAGRAM_CLIENT_SECRET = ""
 
-RAVEN_CONFIG['dsn'] = ''
+RAVEN_CONFIG[
+    "dsn"
+] = ""
