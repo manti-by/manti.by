@@ -27,10 +27,10 @@ pg_dump:
 	sudo chown -R ${USER}:${GROUP} deploy/database/
 
 migrate:
-	docker exec -it manti-by-app python app/manage.py migrate
+	docker exec -it manti-by-app python manage.py migrate
 
 static:
-	docker exec -it manti-by-app python app/manage.py collectstatic --no-input
+	docker exec -it manti-by-app python manage.py collectstatic --no-input
 
 ci:
 	circleci build
