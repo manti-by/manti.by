@@ -53,7 +53,9 @@ class Image(BaseModel):
     original_image = models.ImageField(
         upload_to=original_name, blank=True, null=True, verbose_name=_("Image")
     )
-    gallery = models.ForeignKey(Gallery, null=True, blank=True, related_name="images", on_delete=models.CASCADE)
+    gallery = models.ForeignKey(
+        Gallery, null=True, blank=True, related_name="images", on_delete=models.CASCADE
+    )
 
     order = models.IntegerField(blank=True, default=0)
     tags = TaggableManager(blank=True)

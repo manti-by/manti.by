@@ -16,10 +16,10 @@ class GalleryModelTest:
 
         release_path = os.path.join(settings.MEDIA_ROOT, "gallery")
         if not os.path.exists(release_path):
-            os.mkdir(release_path)
+            os.makedirs(release_path)
 
         shutil.copy(
-            os.path.join(settings.STATIC_ROOT, "test", "test.jpg"),
+            os.path.join(settings.PROJECT_DIR, "static", "test", "test.jpg"),
             os.path.join(settings.MEDIA_ROOT, "gallery", "test.jpg"),
         )
 

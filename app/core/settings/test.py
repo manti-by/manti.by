@@ -17,9 +17,11 @@ BASE_URL = "http://127.0.0.1"
 
 LOCALE_URLS = {"be": "127.0.0.1", "ru": "127.0.0.1", "en": "127.0.0.1"}
 
-STATIC_ROOT = os.path.join(PROJECT_DIR, "static")
+STATIC_URL = "/static/"
+STATIC_ROOT = "/var/lib/manti.by/static"
 
-MEDIA_ROOT = "/tmp/"
+MEDIA_URL = "/content/"
+MEDIA_ROOT = "/var/lib/manti.by/content"
 
 DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": "test"}}
 

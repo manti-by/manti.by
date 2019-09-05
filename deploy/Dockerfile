@@ -5,7 +5,7 @@ FROM python:3.7-slim
 
 # Create required dirs
 
-RUN mkdir -p /srv/manti.by/ffmpeg/ /etc/manti.by/ /var/lib/manti.by/ /var/log/manti.by/
+RUN mkdir -p /srv/manti.by/ffmpeg/ /etc/manti.by/ /var/lib/manti.by/static/ /var/lib/manti.by/contenct/ /var/log/manti.by/
 
 
 # Install FFMpeg

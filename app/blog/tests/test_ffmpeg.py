@@ -27,15 +27,15 @@ class FFMpegTest:
 
         release_path = os.path.join(settings.MEDIA_ROOT, "release")
         if not os.path.exists(release_path):
-            os.mkdir(release_path)
+            os.makedirs(release_path)
 
         preview_path = os.path.join(settings.MEDIA_ROOT, "preview")
         if not os.path.exists(preview_path):
-            os.mkdir(preview_path)
+            os.makedirs(preview_path)
 
         print("Copy test files")
         shutil.copy(
-            os.path.join(settings.STATIC_ROOT, "test", "test.mp3"),
+            os.path.join(settings.PROJECT_DIR, "static", "test", "test.mp3"),
             os.path.join(settings.MEDIA_ROOT, "release", "test.mp3"),
         )
 
