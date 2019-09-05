@@ -1,22 +1,14 @@
 # Use an official python 3.7 image
-
 FROM python:3.7-slim
 
 
-# Create required dirs
-
-RUN mkdir -p /srv/manti.by/ffmpeg/ /etc/manti.by/ /var/lib/manti.by/static/ /var/lib/manti.by/contenct/ /var/log/manti.by/
-
-
 # Install FFMpeg
-
 RUN apt-get update && \
     apt-get -y install autoconf automake build-essential cmake git-core libtool libass-dev libfreetype6-dev \
-    libmp3lame-dev libtheora-dev libvorbis-dev pkg-config texinfo wget zlib1g-dev yasm && \
-    apt-get autoremove --purge && \
-    apt-get clean
+    libmp3lame-dev libtheora-dev libvorbis-dev pkg-config texinfo wget zlib1g-dev yasm
 
-RUN wget -O ffmpeg-snapshot.tar.bz2 https://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
+RUN mkdir -p /srv/manti.by/ffmpeg/ && \
+    wget -O ffmpeg-snapshot.tar.bz2 https://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
     tar xjvf ffmpeg-snapshot.tar.bz2 -C /srv/manti.by/
 
 WORKDIR /srv/manti.by/ffmpeg/
@@ -41,25 +33,32 @@ RUN export PATH="/bin:$PATH" && export PKG_CONFIG_PATH="/srv/manti.by/ffmpeg/bui
 
 
 # Install any needed packages specified in requirements.txt
-
+RUN mkdir -p /etc/manti.by/
 COPY requirements.txt /etc/manti.by/requirements.txt
 RUN pip install --trusted-host pypi.org --no-cache-dir --upgrade pip && \
     pip install --trusted-host pypi.org --no-cache-dir -r /etc/manti.by/requirements.txt
 
 
 # Set working directory
-
+RUN mkdir -p /srv/manti.by/src/
 WORKDIR /srv/manti.by/src/
 RUN git init && git remote add origin https://github.com/manti-by/Manti.by.git
 
 
-# Fix file permissions
+# Create additional dirs
+RUN mkdir -p /var/log/manti.by/ /var/lib/manti.by/static/ /var/lib/manti.by/content/
 
+
+# Fix file permissions
 RUN useradd -m -s /bin/bash manti
-RUN chown -R manti:manti /srv/manti.by/ffmpeg/ /etc/manti.by/ /var/lib/manti.by/ /var/log/manti.by/
+RUN chown -R manti:manti /srv/manti.by/src/ /etc/manti.by/ /var/lib/manti.by/ /var/log/manti.by/
+
+
+# Remove unused packages
+RUN apt-get autoremove --purge && \
+    apt-get clean
 
 
 # Start app services
-
 WORKDIR /srv/manti.by/src/app/
 CMD python run.py

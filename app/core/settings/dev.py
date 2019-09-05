@@ -5,7 +5,7 @@ from .base import *
 
 SECRET_KEY = "9(+8&f)43k--m$cq1#kcwy$%o4hlj9remnlybh+-*gl6_*10*k"
 
-DEBUG = False
+DEBUG = True
 
 COMPRESS_ENABLED = True
 
