@@ -125,6 +125,12 @@
         box-shadow: none;
     }
 
+    .home .gallery .featured .latest .thumbnail img {
+        right: initial;
+        min-width: 100%;
+        max-width: 100%;
+    }
+
     .home .main .posts,
     .home .main .sidebar {
         width: 100%;
