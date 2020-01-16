@@ -7,7 +7,7 @@ About
 
 Django custom blog engine for music and photo publishing.
 
-[![CircleCI](https://circleci.com/gh/manti-by/Manti.by.svg?style=svg&circle-token=251a247a58b266c9154253facca70ce0d8b6e169)](https://circleci.com/gh/manti-by/Manti.by)
+[![CircleCI](https://img.shields.io/circleci/build/github/manti-by/Manti.by?token=251a247a58b266c9154253facca70ce0d8b6e169)](https://circleci.com/gh/manti-by/Manti.by)
 [![Docker](https://img.shields.io/docker/automated/mantiby/manti.by.svg)](https://hub.docker.com/r/mantiby/manti.by/)
 [![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://raw.githubusercontent.com/manti-by/Manti.by/master/LICENSE)
 
@@ -17,7 +17,7 @@ Source link: https://github.com/manti-by/Manti.by
 
 Requirements:
 
-    Ubuntu 18, Python 3.5, PostgreSQL 10, Memcache, Redis
+    Ubuntu 18, Python 3.7, PostgreSQL 10, Memcache, Redis
 
 
 Setup dev environment
@@ -32,8 +32,12 @@ Setup dev environment
 2. Get [FFMpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), compile and install
 
         $ sudo apt install -y autoconf automake build-essential cmake libtool libass-dev \
-            libfreetype6-dev libmp3lame-dev libtheora-dev libvorbis-dev pkg-config \
-            texinfo zlib1g-dev yasm
+              libfreetype6-dev libmp3lame-dev libtheora-dev libvorbis-dev pkg-config \
+              texinfo zlib1g-dev yasm
+            
+        $ mkdir -p $HOME/usr/ffmpeg/ && \
+              wget -O ffmpeg-snapshot.tar.bz2 https://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
+              tar xjvf ffmpeg-snapshot.tar.bz2 -C $HOME/usr/ffmpeg/
         
         $ export PATH="$HOME/bin:$PATH" && export PKG_CONFIG_PATH="$HOME/usr/ffmpeg/build/lib/pkgconfig"
         $ ./configure \
@@ -108,4 +112,5 @@ Production setup
 
 2. Build and run app using Makefile
 
+        $ make build
         $ make start

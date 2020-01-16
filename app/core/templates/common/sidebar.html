@@ -21,35 +21,4 @@
             {% endfor %}
         </ul>
     </div>
-    <div class="instagram panel">
-        <h4>{% trans 'Instagram' %}</h4>
-        <ul class="flex">
-            {% for i in instagram_photos %}
-                <li>
-                    <a href="{{ i.link }}">
-                        <img src="{% static 'img/one-pixel.jpg' %}"
-                             data-src="{{ i.image }}"
-                              class="lazy" alt="{{ i.name }}">
-                    </a>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-    <div class="social panel">
-        <a href="https://www.instagram.com/manti_by/" target="_blank" rel="noopener">
-            <img src="{% static 'img/one-pixel.jpg' %}"
-                 data-src="{% static 'svg/instagram.svg' %}"
-                 class="lazy" alt="Instagram">
-        </a>
-        <a href="https://twitter.com/manti_by/" target="_blank" rel="noopener">
-            <img src="{% static 'img/one-pixel.jpg' %}"
-                 data-src="{% static 'svg/twitter.svg' %}"
-                 class="lazy" alt="Twitter">
-        </a>
-        <a href="http://coub.com/manti.by" target="_blank" rel="noopener">
-            <img src="{% static 'img/one-pixel.jpg' %}"
-                 data-src="{% static 'svg/coub.svg' %}"
-                 class="lazy" alt="Coub">
-        </a>
-    </div>
 </div>
