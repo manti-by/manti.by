@@ -3,3 +3,23 @@
 *.js linguist-vendored=false
 *.css linguist-vendored=false
 *.html linguist-vendored=false
+
+app/core/static/js/libs/jquery-3.3.1/jquery.min.js export-ignore
+app/core/static/js/libs/jquery-2.2.4/jquery.min.js export-ignore
+
+app/core/static/js/libs/jquery-browser-0.1.0/jquery.browser.min.js export-ignore
+
+app/core/static/js/libs/jquery-touchswipe-1.6.19/jquery.touchswipe.min.js export-ignore
+
+app/core/static/js/libs/jquery-ui-1.12.1/external/jquery/jquery.js export-ignore
+app/core/static/js/libs/jquery-ui-1.12.1/jquery-ui.min.js export-ignore
+app/core/static/js/libs/jquery-ui-1.12.1/jquery-ui.css export-ignore
+app/core/static/js/libs/jquery-ui-1.12.1/jquery-ui.min.css export-ignore
+app/core/static/js/libs/jquery-ui-1.12.1/jquery-ui.structure.css export-ignore
+app/core/static/js/libs/jquery-ui-1.12.1/jquery-ui.structure.min.css export-ignore
+app/core/static/js/libs/jquery-ui-1.12.1/jquery-ui.theme.css export-ignore
+app/core/static/js/libs/jquery-ui-1.12.1/jquery-ui.theme.min.css export-ignore
+app/core/static/js/libs/jquery-ui-1.12.1/index.html export-ignore
+app/core/static/js/libs/jquery-ui-1.12.1/AUTHORS.txt export-ignore
+app/core/static/js/libs/jquery-ui-1.12.1/LICENSE.txt export-ignore
+app/core/static/js/libs/jquery-ui-1.12.1/package.json export-ignore
