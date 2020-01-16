@@ -60,8 +60,6 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.middleware.gzip.GZipMiddleware",
     "django.middleware.http.ConditionalGetMiddleware",
-    "htmlmin.middleware.HtmlMinifyMiddleware",
-    "htmlmin.middleware.MarkRequestMiddleware",
     "core.middleware.language.LocaleMiddleware",
     "core.middleware.response.ResponseMiddleware",
 ]

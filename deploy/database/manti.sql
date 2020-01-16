@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.11
--- Dumped by pg_dump version 9.6.11
+-- Dumped from database version 11.3 (Debian 11.3-1.pgdg90+1)
+-- Dumped by pg_dump version 11.3 (Debian 11.3-1.pgdg90+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -12,22 +12,9 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
 
 SET default_tablespace = '';
 
@@ -1104,25 +1091,11 @@ COPY public.auth_group (id, name) FROM stdin;
 
 
 --
--- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
-
-
---
 -- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
 COPY public.auth_group_permissions (id, group_id, permission_id) FROM stdin;
 \.
-
-
---
--- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
 
 
 --
@@ -1248,18 +1221,11 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 
 
 --
--- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.auth_permission_id_seq', 114, true);
-
-
---
 -- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
-1	pbkdf2_sha256$36000$Impb9AFV4BFs$4HDC51m4ebxTRm0ALvie7zsnp9z+UZlTP1+/gVL1vFs=	2019-07-31 11:42:23.673964+00	t	manti			manti.by@gmail.com	t	t	2017-04-18 12:22:42.684202+00
+1	pbkdf2_sha256$150000$niuCJ97ZT1MT$9B8F+FP9eUSfVj4lTtBdYtc/uEpuis2kyCqZ+K52xgY=	2019-09-05 15:04:49.574379+00	t	manti			manti.by@gmail.com	t	t	2017-04-18 12:22:42.684202+00
 \.
 
 
@@ -1272,32 +1238,11 @@ COPY public.auth_user_groups (id, user_id, group_id) FROM stdin;
 
 
 --
--- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
-
-
---
--- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.auth_user_id_seq', 2, true);
-
-
---
 -- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
 COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
 \.
-
-
---
--- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 
 
 --
@@ -1406,13 +1351,6 @@ COPY public.blog_genresproxy (id, content_object_id, tag_id) FROM stdin;
 
 
 --
--- Name: blog_genresproxy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.blog_genresproxy_id_seq', 352, true);
-
-
---
 -- Data for Name: blog_post; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
@@ -1468,13 +1406,6 @@ COPY public.blog_post (id, created, slug, name, meta, summary, description, rele
 577	2011-03-03 00:00:00+00	trauma	Trauma	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.\r\nПрактычна цалкам сэт скампілен ў бальніцы, пазней сабраны адной (цэлай) рукой пры дапамозе ACID Pro ад кампаніі Sony і пары стандартных прымочак: Ozone, GCO, Elephant і да т.п.\r\nСэт перадае ўсю тую шырокую гаму адчуванняў, якія можна выпрабаваць у нашых дзяржаўных бальніцах.	release/M23_Manti_Trauma_mix.mp3	covers/trauma.jpg	t	MNT023	LAME 320kbps 44100Hz	53:29	1. Real - When the dream\\'s done\r\n2. Cliffhanga - Centipede\r\n3. Paperclip & Malk - Detective  \r\n4. Paperclip & Flame - Bad illumination\r\n5. EBK - Soma\r\n6. Black Sun Empire - Kempi (feat. Nymfo)    \r\n7. Unknown Error - Dark wars  \r\n8. Receptor & Engage - Wi-fi waves  \r\n9. Black Sun Empire - Wasteland (feat. SPL)    \r\n10. Flame - Prehistoric (vip mix)  \r\n11. Katharsys & Gancher - Sky from beyond  \r\n12. Pyro - Restless (Katharsys remix)\r\n13. Nphonix & Enei - Quicksilver    \r\n13. Receptor - Princess	t	t	t	This set, like no other physically suffered and invented in the trauma department of the hospital in my home town, after a hard fall on alpine skiing.\r\nAlmost completely set compiled in the hospital, later assembled one (intact) hand with ACID Pro from Sony and a couple of standard plugins: Ozone, GCO, Elephant, etc.\r\nSet conveys the whole gamma of sensations that can be experienced in our public hospitals.	Этот сет, как никакой другой выстрадан физически и придуман в травматологическом отделении больницы моего родного города, после жесткого падения на горных лыжах.\r\nПрактически полностью сет скомпилен в больнице, позже собран одной (целой) рукой при помощи ACID Pro от компании Sony и пары стандартных примочек: Ozone, GCO, Elephant и т.п.\r\nСет передает всю ту широкую гамму ощущений, которые можно испытать в наших государственных больницах.	This set, like no other physically suffered and invented in the trauma department of the hospital in my home town, after a hard fall on alpine skiing.	Этот сет, как никакой другой выстрадан физически и придуман в травматологическом отделении больницы моего родного города, после жесткого падения на горных лыжах.	Trauma	Trauma	This set, like no other physically suffered and invented in the trauma department of the hospital in my home town, after a hard fall on alpine skiing.	Этот сет, как никакой другой выстрадан физически и придуман в травматологическом отделении больницы моего родного города, после жесткого падения на горных лыжах.	91	32	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.\r\nПрактычна цалкам сэт скампілен ў бальніцы, пазней сабраны адной (цэлай) рукой пры дапамозе ACID Pro ад кампаніі Sony і пары стандартных прымочак: Ozone, GCO, Elephant і да т.п.\r\nСэт перадае ўсю тую шырокую гаму адчуванняў, якія можна выпрабаваць у нашых дзяржаўных бальніцах.	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.	Trauma	Гэты сэт, як ніякі іншы выпакутаваны фізічна і прыдуманы ў траўматалагічным аддзяленні бальніцы майго роднага горада, пасля жорсткага падзення на горных лыжах.	2018-06-20 10:30:40.57301+00
 572	2007-10-27 00:00:00+00	janaca-express-02	Janaca express 02	Другая частка майго трыпа ў залюстаркоўе.	Другая частка майго трыпа ў залюстаркоўе. Першую частку можна знайсці <a href="/blog/janaca-express/">тут</a>.	Другая частка майго трыпа ў залюстаркоўе. Першую частку можна знайсці <a href="/blog/janaca-express/">тут</a>.	release/M09_Manti_Janaca_express_mix_02.mp3	covers/janaca.jpg	t	MNT009	LAME 192kbps 44100Hz	59:38	1. Intro - Tristan  \r\n2. Quantum feat. Keren Porat - Janaca express\r\n3. Rocky vs. Galactika - Global air (Monster edit)  \r\n4. Zen Mechanics - Vurt  \r\n5. Space Vision - Mascer jedi\r\n6. Lucy - Flash damage\r\n7. Insomnia - The real thing  \r\n8. Magoon - Future\r\n9. Sangeet - Distorted dream\r\n10. Vibe Tribe - Kick the bass	t	t	t	The second part of my trip is through the looking-glass. The first part can be found <a href="/blog/janaca-express/">here</a>.	Вторая часть моего трипа в зазеркалье. Первую часть можно найти <a href="/blog/janaca-express/">здесь</a>.	The second part of my trip is through the looking-glass.	Вторая часть моего трипа в зазеркалье.	Janaca express 02	Janaca express 02	The second part of my trip is through the looking-glass. The first part can be found <a href="/blog/janaca-express/">here</a>.	Вторая часть моего трипа в зазеркалье. Первую часть можно найти <a href="/blog/janaca-express/">здесь</a>.	60	27	Другая частка майго трыпа ў залюстаркоўе. Першую частку можна знайсці <a href="/blog/janaca-express/">тут</a>.	Другая частка майго трыпа ў залюстаркоўе.	Janaca express 02	Другая частка майго трыпа ў залюстаркоўе. Першую частку можна знайсці <a href="/blog/janaca-express/">тут</a>.	2018-06-20 10:30:40.581784+00
 \.
-
-
---
--- Name: blog_post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.blog_post_id_seq', 602, true);
 
 
 --
@@ -1717,13 +1648,6 @@ COPY public.blog_post_related (id, from_post_id, to_post_id) FROM stdin;
 1174	601	602
 1175	596	602
 \.
-
-
---
--- Name: blog_post_related_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.blog_post_related_id_seq', 1175, true);
 
 
 --
@@ -1980,25 +1904,11 @@ COPY public.blog_tagsproxy (id, content_object_id, tag_id) FROM stdin;
 
 
 --
--- Name: blog_tagsproxy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.blog_tagsproxy_id_seq', 267, true);
-
-
---
 -- Data for Name: celery_taskmeta; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
 COPY public.celery_taskmeta (id, task_id, status, result, date_done, traceback, hidden, meta) FROM stdin;
 \.
-
-
---
--- Name: celery_taskmeta_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.celery_taskmeta_id_seq', 249, true);
 
 
 --
@@ -2010,25 +1920,11 @@ COPY public.celery_tasksetmeta (id, taskset_id, result, date_done, hidden) FROM 
 
 
 --
--- Name: celery_tasksetmeta_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.celery_tasksetmeta_id_seq', 1, false);
-
-
---
 -- Data for Name: core_email; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
 COPY public.core_email (id, created, email, subject, message, meta, is_sent, name, updated) FROM stdin;
 \.
-
-
---
--- Name: core_email_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.core_email_id_seq', 1, true);
 
 
 --
@@ -2463,25 +2359,11 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 
 
 --
--- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 423, true);
-
-
---
 -- Data for Name: django_celery_results_taskresult; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
 COPY public.django_celery_results_taskresult (id, task_id, status, content_type, content_encoding, result, date_done, traceback, hidden, meta, task_args, task_kwargs, task_name) FROM stdin;
 \.
-
-
---
--- Name: django_celery_results_taskresult_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.django_celery_results_taskresult_id_seq', 1, false);
 
 
 --
@@ -2528,13 +2410,6 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 37	sites	site
 38	shortener	link
 \.
-
-
---
--- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.django_content_type_id_seq', 38, true);
 
 
 --
@@ -2605,13 +2480,6 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 
 
 --
--- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 75, true);
-
-
---
 -- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
@@ -2645,6 +2513,7 @@ xxf7642tqukrjvuze73j8agqrpmo0n8b	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM
 m2abcidyddxvwmzywiafo5wsohrzmc1x	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2019-01-22 09:04:13.30825+00
 rvc28530w8pe6fe7m6xvybqvgpb4uhr6	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2019-03-29 14:12:27.4595+00
 bctbep5p7m1lxhmflzhmvmrn4pihlmj5	NWE5ZGIzZWM1M2Y4NjZmZDBhMGJlNGIzYjc5ODkxZjVlNWM4NTgyNjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI5NmZiM2Y1ZDVhOGNjMWY4MjQ3MTdhZDZjOTc5NjhmZTA5OWYxNGJhIn0=	2019-05-01 19:31:48.847699+00
+723ez08qyixghygqws9w0e7v8q2bjejp	M2FmNTAyNTFmOGM2OTRkODE3MGU0YzBkMGY0ZTljMTgxOGE0N2E0Zjp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiJlYThhZmYzY2VmYTQyNzRhYjU0NTU3ZGNiZDI5NzI0YWIxNWY5YmUzIn0=	2019-09-19 15:04:49.583644+00
 \.
 
 
@@ -2658,26 +2527,12 @@ COPY public.django_site (id, domain, name) FROM stdin;
 
 
 --
--- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.django_site_id_seq', 1, true);
-
-
---
 -- Data for Name: gallery_gallery; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
 COPY public.gallery_gallery (id, created, slug, name, "order", name_en, name_ru, name_be, updated) FROM stdin;
 30	2018-04-25 14:44:28.02291+00	default	Default	0	\N	\N	Default	2018-06-19 13:52:32.074936+00
 \.
-
-
---
--- Name: gallery_gallery_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.gallery_gallery_id_seq', 30, true);
 
 
 --
@@ -2731,13 +2586,6 @@ COPY public.gallery_image (id, created, original_image, "order", gallery_id, upd
 
 
 --
--- Name: gallery_image_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.gallery_image_id_seq', 922, true);
-
-
---
 -- Data for Name: profiles_profile; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
@@ -2758,13 +2606,6 @@ COPY public.shortener_link (id, created, updated, original_link, short_link, nam
 5	2018-11-21 07:52:18.698302+00	2018-11-21 07:52:18.698346+00	https://github.com/manti-by/Manti.by/blob/master/deploy/host/nginx.conf	beef	Nginx redirects
 6	2019-01-08 09:25:28.866799+00	2019-01-08 09:25:28.866832+00	https://app.modelo.io/share-token/8DpLtedfxI	71e1	Дом 3D
 \.
-
-
---
--- Name: shortener_link_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.shortener_link_id_seq', 6, true);
 
 
 --
@@ -2899,25 +2740,11 @@ COPY public.taggit_tag (id, name, slug) FROM stdin;
 
 
 --
--- Name: taggit_tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.taggit_tag_id_seq', 137, true);
-
-
---
 -- Data for Name: taggit_taggeditem; Type: TABLE DATA; Schema: public; Owner: manti
 --
 
 COPY public.taggit_taggeditem (id, object_id, content_type_id, tag_id) FROM stdin;
 \.
-
-
---
--- Name: taggit_taggeditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
---
-
-SELECT pg_catalog.setval('public.taggit_taggeditem_id_seq', 12, true);
 
 
 --
@@ -7061,6 +6888,167 @@ sorl-thumbnail||image||29abb718643d01753ab873730c05bcec	{"storage": "django.core
 sorl-thumbnail||image||5c92a1e7d0e2d54940150805013cd612	{"storage": "django.core.files.storage.FileSystemStorage", "name": "cache/5f/d3/5fd3531af8e85bce978e9a2631429e50_TqHVvG5.jpg", "size": [1920, 1280]}
 sorl-thumbnail||image||cd47d88c2110f69279882c19925ffd25	{"storage": "django.core.files.storage.FileSystemStorage", "name": "cache/5f/d3/5fd3531af8e85bce978e9a2631429e50.jpg", "size": [1920, 1280]}
 \.
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 114, true);
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.auth_user_id_seq', 2, true);
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
+
+
+--
+-- Name: blog_genresproxy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.blog_genresproxy_id_seq', 352, true);
+
+
+--
+-- Name: blog_post_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.blog_post_id_seq', 602, true);
+
+
+--
+-- Name: blog_post_related_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.blog_post_related_id_seq', 1175, true);
+
+
+--
+-- Name: blog_tagsproxy_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.blog_tagsproxy_id_seq', 267, true);
+
+
+--
+-- Name: celery_taskmeta_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.celery_taskmeta_id_seq', 249, true);
+
+
+--
+-- Name: celery_tasksetmeta_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.celery_tasksetmeta_id_seq', 1, false);
+
+
+--
+-- Name: core_email_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.core_email_id_seq', 1, true);
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 423, true);
+
+
+--
+-- Name: django_celery_results_taskresult_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.django_celery_results_taskresult_id_seq', 1, false);
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 38, true);
+
+
+--
+-- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 75, true);
+
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.django_site_id_seq', 1, true);
+
+
+--
+-- Name: gallery_gallery_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.gallery_gallery_id_seq', 30, true);
+
+
+--
+-- Name: gallery_image_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.gallery_image_id_seq', 922, true);
+
+
+--
+-- Name: shortener_link_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.shortener_link_id_seq', 6, true);
+
+
+--
+-- Name: taggit_tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.taggit_tag_id_seq', 137, true);
+
+
+--
+-- Name: taggit_taggeditem_id_seq; Type: SEQUENCE SET; Schema: public; Owner: manti
+--
+
+SELECT pg_catalog.setval('public.taggit_taggeditem_id_seq', 12, true);
 
 
 --
