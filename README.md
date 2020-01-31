@@ -26,7 +26,7 @@ Setup dev environment
 1. Install base system packages (second line for production servers)
 
         $ sudo apt-get install -y git-core python3-pip python3-dev python3-six postgresql libpq-dev \
-            wget nginx supervisor
+              wget nginx supervisor
 
 
 2. Get [FFMpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), compile and install
