@@ -1,5 +1,6 @@
-app/core/static/js/libs/jquery-2.2.4/* linguist-vendored=false
-app/core/static/js/libs/jquery-3.3.1/* linguist-vendored=false
-app/core/static/js/libs/jquery-browser-0.1.0/* linguist-vendored=false
-app/core/static/js/libs/jquery-touchswipe-1.6.19/* linguist-vendored=false
-app/core/static/js/libs/jquery-ui-1.12.1/* linguist-vendored=false
+app/core/static/js/libs/jquery-3.3.1/* linguist-vendored=true
+app/core/static/js/libs/jquery-browser-0.1.0/* linguist-vendored=true
+app/core/static/js/libs/jquery-ui-1.12.1/* linguist-vendored=true
+app/core/static/js/libs/jquery-2.2.4/* linguist-vendored=true
+
+deploy/database/* linguist-vendored=true
