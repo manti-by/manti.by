@@ -58,7 +58,7 @@ jobs:
 
       - name: Check for missing migrations
         run: |
-          python app/manage.py makemigrations --dry-run --check --verbosity=3 --settings=core.settings.test
+          python app/manage.py makemigrations --dry-run --check --verbosity=3 --settings=settings.test
         env:
           POSTGRES_HOST: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
@@ -67,7 +67,7 @@ jobs:
 
       - name: Run Django system checks
         run: |
-          python app/manage.py check --fail-level WARNING --settings=core.settings.test
+          python app/manage.py check --fail-level WARNING --settings=settings.test
         env:
           POSTGRES_HOST: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}

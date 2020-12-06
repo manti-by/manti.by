@@ -6,6 +6,6 @@ __pycache__/
 
 .pytest_cache/
 
-core/static/cache/
-core/settings/local.py
-core/settings/prod.py
+app/static/cache/
+app/settings/local.py
+app/settings/prod.py
