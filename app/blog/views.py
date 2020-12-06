@@ -25,7 +25,7 @@ def index(request):
             item_list = Post.objects.filter(tags__slug=tag.slug).order_by("-created")[
                 :6
             ]
-        except Tag.DoesNotExist:
+        except Tag.DoesNotExist as e:
             logger.exception(e)
             item_list = []
     else:

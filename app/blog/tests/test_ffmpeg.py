@@ -1,7 +1,7 @@
 import os
-import uuid
 import pytest
 import shutil
+import uuid
 
 from django.conf import settings
 
@@ -23,8 +23,6 @@ class FFMpegTest:
             "release": "release/test.mp3",
         }
 
-        print("Create directories for FFMpegTest")
-
         release_path = os.path.join(settings.MEDIA_ROOT, "release")
         if not os.path.exists(release_path):
             os.makedirs(release_path)
@@ -33,7 +31,6 @@ class FFMpegTest:
         if not os.path.exists(preview_path):
             os.makedirs(preview_path)
 
-        print("Copy test files")
         shutil.copy(
             os.path.join(settings.PROJECT_DIR, "static", "test", "test.mp3"),
             os.path.join(settings.MEDIA_ROOT, "release", "test.mp3"),

@@ -82,7 +82,7 @@ TEMPLATES = [
     }
 ]
 
-WSGI_APPLICATION = "core.wsgi.application"
+WSGI_APPLICATION = "wsgi.application"
 
 BASE_URL = "https://manti.by"
 
@@ -138,14 +138,19 @@ THUMBNAIL_QUALITY = 85
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
 LANGUAGE_CODE = "be"
-ugettext = lambda s: s
+
+
+def _(x):
+    return x
+
+
 LANGUAGES = (
-    ("be", ugettext("Belarussian")),
-    ("ru", ugettext("Russian")),
-    ("en", ugettext("English")),
+    ("be", _("Belarussian")),
+    ("ru", _("Russian")),
+    ("en", _("English")),
 )
 
-LOCALE_PATHS = (os.path.join(PROJECT_DIR, "locale"),)
+LOCALE_PATHS = (os.path.join(PROJECT_DIR, "core", "locale"),)
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_L10N = True
@@ -174,11 +179,6 @@ MEDIA_ROOT = os.path.join(PROJECT_DIR, "content")
 MEDIA_URL = "/content/"
 
 FILE_UPLOAD_PERMISSIONS = 0o644
-
-
-# Login redirect url
-
-LOGIN_URL = "/profiles/login/"
 
 
 # Email settings

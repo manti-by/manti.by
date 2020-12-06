@@ -5,6 +5,7 @@ SECRET_KEY = "151+9%r1l=uv&nub$s=%a3d3&2xzwoi=&v*!_gzn92car9uu*y"
 DEBUG = False
 
 COMPRESS_ENABLED = True
+COMPRESS_ROOT = "/tmp/cache"
 
 TEMPLATE_DEBUG = False
 
@@ -15,11 +16,10 @@ BASE_URL = "http://127.0.0.1"
 LOCALE_URLS = {"be": "127.0.0.1", "ru": "127.0.0.1", "en": "127.0.0.1"}
 
 STATIC_URL = "/static/"
-STATIC_ROOT = "/var/lib/manti.by/static"
+STATIC_ROOT = "/tmp/static"
 
 MEDIA_URL = "/content/"
-MEDIA_ROOT = "/var/lib/manti.by/content"
-
+MEDIA_ROOT = "/tmp/content"
 
 CACHES = {
     "default": {

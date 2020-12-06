@@ -17,4 +17,5 @@ def resource_wrapper(f):
         except Exception as e:
             logger.exception(e)
             return JsonResponse({"status": 500, "message": e}, status=200)
+
     return wrapper

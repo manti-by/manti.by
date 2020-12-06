@@ -30,10 +30,10 @@ RUN export PATH="/bin:$PATH" && export PKG_CONFIG_PATH="/srv/manti.by/ffmpeg/bui
 
 
 # Install any needed packages specified in requirements.txt
-RUN mkdir -p /etc/manti.by/
-COPY requirements/base.txt /etc/manti.by/requirements.txt
+COPY requirements/base.txt /tmp/requirements.txt
 RUN pip install --trusted-host pypi.org --no-cache --upgrade pip && \
-  pip install --trusted-host pypi.org --no-cache -r /etc/manti.by/requirements.txt
+  pip install --trusted-host pypi.org --no-cache -r /tmp/requirements.txt && \
+  rm -rf /tmp/requirements.txt
 
 
 # Remove unused packages

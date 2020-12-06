@@ -27,9 +27,9 @@ static:
 	docker exec -it manti-by-app python manage.py collectstatic --no-input
 
 check:
-	standard --fix app/core/static/js/
-	black --target-version py38 app/
 	flake8
+	black --target-version py38 app/
+	standard --fix app/core/static/js/
 
 test:
-	pytest
+	pytest app/
