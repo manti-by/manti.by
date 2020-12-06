@@ -3,7 +3,6 @@ import logging
 from django.http import Http404
 from django.shortcuts import render
 from django.core.cache import cache
-from raven.contrib.django.raven_compat.models import client
 
 from core.models import Email
 from core.utils import update_cache
@@ -48,7 +47,6 @@ def index(request):
         )
         return update_cache(cache_key, cached_data)
     except Exception as e:
-        client.captureException()
         logger.exception(e)
         raise Http404
 
@@ -62,7 +60,6 @@ def static(request, page):
         cached_data = render(request, "static/%s.html" % page)
         return update_cache(cache_key, cached_data)
     except Exception as e:
-        client.captureException()
         logger.exception(e)
         raise Http404
 
@@ -77,6 +74,5 @@ def email(request, email_id):
         cached_data = render(request, "emails/email.html", {"email": mail})
         return update_cache(cache_key, cached_data)
     except Exception as e:
-        client.captureException()
         logger.exception(e)
         raise Http404

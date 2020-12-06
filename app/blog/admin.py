@@ -2,7 +2,7 @@ from django.db import models
 from django.forms import Textarea
 
 from django.contrib import admin
-from django.contrib.staticfiles.templatetags.staticfiles import static as static_file
+from django.templatetags.static import static as static_file
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 

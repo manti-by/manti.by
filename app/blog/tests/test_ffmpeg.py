@@ -6,7 +6,7 @@ import shutil
 from django.conf import settings
 
 from blog.models import Post
-from core.tasks import (
+from core.services import (
     convert_to_mp3_preview,
     convert_to_ogg_preview,
     convert_to_ogg_release,

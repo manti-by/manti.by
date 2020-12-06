@@ -1,12 +1,15 @@
+import logging
+
 from django.http import Http404
 from django.shortcuts import render
 from django.core.cache import cache
 from django.utils.translation import ugettext_lazy as _
-from raven.contrib.django.raven_compat.models import client
 
 from core.utils import update_cache
 from blog.models import Post
 from taggit.models import Tag
+
+logger = logging.getLogger(__name__)
 
 
 def index(request):
@@ -23,7 +26,7 @@ def index(request):
                 :6
             ]
         except Tag.DoesNotExist:
-            client.captureException()
+            logger.exception(e)
             item_list = []
     else:
         item_list = Post.objects.order_by("-created")[:6]
@@ -45,6 +48,6 @@ def post(request, slug):
 
         cached_data = render(request, template, {"item": item})
         return update_cache(cache_key, cached_data)
-    except Post.DoesNotExist:
-        client.captureException()
+    except Post.DoesNotExist as e:
+        logger.exception(e)
         raise Http404(_("Post with slug %s does not exists") % slug)

@@ -1,13 +1,9 @@
 import os
-import json
 import random
 import logging
-import requests
 
 from datetime import tzinfo, timedelta
-from django.conf import settings
 from django.core.cache import cache
-from raven.contrib.django.raven_compat.models import client
 
 
 logger = logging.getLogger()
@@ -15,34 +11,6 @@ logger = logging.getLogger()
 
 def unique_str():
     return str("".join([str(random.randint(0, 9)) for _ in range(16)]))
-
-
-def get_instagram_photos(limit=6):
-    recent_media = []
-    cached_data = cache.get("instagram_photos")
-    if cached_data is not None:
-        return cached_data
-    try:
-        url = (
-            "https://api.instagram.com/v1/users/self/media/recent/?access_token=%s"
-            % settings.INSTAGRAM_ACCESS_TOKEN
-        )
-        response = requests.get(url)
-        if response.status_code == 200:
-            data = json.loads(response.content.decode())
-            for item in data["data"]:
-                recent_media.append(
-                    {
-                        "link": item["link"],
-                        "image": item["images"]["thumbnail"]["url"],
-                        "name": item["caption"]["text"].split("\n")[0],
-                    }
-                )
-        cache.set("instagram_photos", recent_media[:limit], 60 * 60 * 24)
-    except Exception as e:
-        client.captureException()
-        logger.error(e)
-    return recent_media[:limit]
 
 
 def update_cache(cache_key, cached_data, timeout=60 * 60 * 24 * 5):

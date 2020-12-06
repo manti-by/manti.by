@@ -21,13 +21,6 @@ services:
     logging:
       driver: "none"
 
-  manti-by-memcache:
-    image: memcached:latest
-    container_name: manti-by-memcache
-    restart: always
-    logging:
-      driver: "none"
-
   manti-by-app:
     image: mantiby/manti.by:latest
     container_name: manti-by-app
@@ -36,16 +29,16 @@ services:
       - 8080:8080
     links:
       - manti-by-postgres
-      - manti-by-memcache
       - manti-by-redis
     environment:
       - DJANGO_SETTINGS_MODULE=core.settings.prod
-      - ROLE=app
     volumes:
       - /home/manti/www/manti.by/src/:/srv/manti.by/src/
       - /mnt/nostromo/manti.by/log/:/var/log/manti.by/
       - /mnt/nostromo/manti.by/static/:/var/lib/manti.by/static/
       - /mnt/nostromo/manti.by/content/:/var/lib/manti.by/content/
+    command: |
+      gunicorn core.wsgi:application -w 2 -b 0.0.0.0:8080 --log-file /var/log/manti.by/wsgi.log
 
   manti-by-celery:
     image: mantiby/manti.by:latest
@@ -58,20 +51,5 @@ services:
       - /home/manti/www/manti.by/src/:/srv/manti.by/src/
       - /mnt/nostromo/manti.by/log/:/var/log/manti.by/
       - /mnt/nostromo/manti.by/content/:/var/lib/manti.by/content/
-    environment:
-      - ROLE=celery
-
-  manti-by-flower:
-    image: mantiby/manti.by:latest
-    container_name: manti-by-flower
-    restart: always
-    ports:
-      - 5555:5555
-    links:
-      - manti-by-postgres
-      - manti-by-redis
-    volumes:
-      - /home/manti/www/manti.by/src/:/srv/manti.by/src/
-      - /mnt/nostromo/manti.by/log/:/var/log/manti.by/
-    environment:
-      - ROLE=flower
+    command: |
+      python manage.py rqworker default

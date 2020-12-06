@@ -1,17 +1,15 @@
 (($) => {
+  'use strict'
 
-    'use strict';
+  $.initLoader = () => {
+    const loader = $('#loader')
 
-    $.initLoader = () => {
-        let loader = $('#loader');
-
-        $.loaderShow = () => {
-            loader.addClass('visible');
-        };
-
-        $.loaderHide = () =>  {
-            loader.removeClass('visible');
-        };
+    $.loaderShow = () => {
+      loader.addClass('visible')
     }
 
-})(jQuery);
+    $.loaderHide = () => {
+      loader.removeClass('visible')
+    }
+  }
+})(jQuery)

@@ -5,7 +5,6 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.utils.translation import ugettext_lazy as _
 from djrest.resource import Resource
-from raven.contrib.django.raven_compat.models import client
 
 from api.utils import resource_wrapper
 from core.context_processors.common import global_template_vars
@@ -35,7 +34,7 @@ class OrderableResource(Resource):
                     obj.save()
                     item["result"] = _("Updated")
                 except Exception as e:
-                    client.captureException()
+                    logger.exception(e)
                     item["result"] = e
             return JsonResponse({"status": 200, "data": data}, status=200)
 

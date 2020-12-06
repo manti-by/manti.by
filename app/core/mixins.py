@@ -1,7 +1,5 @@
 import logging
 
-from unidecode import unidecode
-
 from django.db import models
 from django.urls import reverse
 from django.template.defaultfilters import slugify
@@ -18,10 +16,6 @@ class SlugifyMixin(models.Model):
         return reverse(self.__class__.__name__.lower(), args=[str(self.slug)])
 
     def save(self, *args, **kwargs):
-        if hasattr(self, "name") and self.slug is None:
-            self.slug = unidecode(self.name)
-        else:
-            self.slug = unidecode(self.slug)
         self.slug = slugify(self.slug)
         super(SlugifyMixin, self).save(*args, **kwargs)
 

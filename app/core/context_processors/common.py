@@ -3,7 +3,6 @@ import httpagentparser
 from django.conf import settings
 
 from blog.models import Post
-from core.utils import get_instagram_photos
 
 
 WEBP_VALID_BROWSERS = ["Chrome", "Opera", "Opera Mobile"]
@@ -30,7 +29,6 @@ def global_template_vars(request):
         "user": request.user,
         "tags": Post.tags.most_common()[:10],
         "posts": Post.objects.ordered().filter(is_music=True)[:10],
-        "instagram_photos": get_instagram_photos(),
         "is_supports_webp": is_supports_webp(request),
         "is_home": False,
         "is_secure": request.is_secure,

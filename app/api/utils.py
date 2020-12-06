@@ -1,7 +1,6 @@
 import logging
 
 from django.http import JsonResponse
-from raven.contrib.django.raven_compat.models import client
 
 from profiles.models import Profile
 
@@ -13,10 +12,9 @@ def resource_wrapper(f):
         try:
             return f(*args, **kwargs)
         except Profile.DoesNotExist as e:
-            client.captureException()
+            logger.exception(e)
             return JsonResponse({"status": 404, "message": e}, status=200)
         except Exception as e:
-            client.captureException()
+            logger.exception(e)
             return JsonResponse({"status": 500, "message": e}, status=200)
-
     return wrapper

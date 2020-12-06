@@ -3,7 +3,7 @@ import os
 from .base import *
 
 
-SECRET_KEY = "k"
+SECRET_KEY = ""
 
 DEBUG = True
 
@@ -28,22 +28,35 @@ LOCALE_URLS = {"be": "manti.by", "ru": "ru.manti.by", "en": "en.manti.by"}
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "manti",
-        "USER": "manti",
+        "NAME": "manti_by",
+        "USER": "manti_by",
         "PASSWORD": "pa55word",
         "HOST": "manti-by-postgres",
-        "PORT": "",
+        "PORT": "5432",
     }
 }
 
 THUMBNAIL_REDIS_HOST = "manti-by-redis"
 
-CELERY_BROKER_URL = "redis://manti-by-redis:6379/0"
+RQ_QUEUES = {
+    "default": {
+        "HOST": "manti-by-redis",
+        "PORT": 6379,
+        "DB": 0,
+        "DEFAULT_TIMEOUT": 360,
+    },
+    "high": {
+        "HOST": "manti-by-redis",
+        "PORT": 6379,
+        "DB": 0,
+    },
+}
 
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
-        "LOCATION": "manti-by-memcache:11211",
+        "BACKEND": "redis_cache.cache.RedisCache",
+        "LOCATION": "manti-by-redis:6379",
+        "OPTIONS": {"MAX_ENTRIES": 5000, "DB": 0},
     }
 }
 
@@ -81,11 +94,3 @@ LOGGING = {
         "django.db.backends": {"handlers": ["null"]},
     },
 }
-
-INSTAGRAM_CLIENT_ID = ""
-INSTAGRAM_ACCESS_TOKEN = ""
-INSTAGRAM_CLIENT_SECRET = ""
-
-RAVEN_CONFIG[
-    "dsn"
-] = ""

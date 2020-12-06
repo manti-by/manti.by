@@ -13,11 +13,11 @@ Django custom blog engine for music and photo publishing.
 
 Author: Alexander Chaika <manti.by@gmail.com>
 
-Source link: https://github.com/manti-by/Manti.by
+Source link: https://github.com/manti-by/manti.by
 
 Requirements:
 
-    Ubuntu 18, Python 3.7, PostgreSQL 10, Memcache, Redis
+    Python 3.8, PostgreSQL 12, Memcache, Redis
 
 
 Setup dev environment
@@ -26,35 +26,35 @@ Setup dev environment
 1. Install base system packages (second line for production servers)
 
         $ sudo apt-get install -y git-core python3-pip python3-dev python3-six postgresql libpq-dev \
-              wget nginx supervisor
+          wget nginx supervisor
 
 
 2. Get [FFMpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), compile and install
 
         $ sudo apt install -y autoconf automake build-essential cmake libtool libass-dev \
-              libfreetype6-dev libmp3lame-dev libtheora-dev libvorbis-dev pkg-config \
-              texinfo zlib1g-dev yasm
+            libfreetype6-dev libmp3lame-dev libtheora-dev libvorbis-dev pkg-config \
+            texinfo zlib1g-dev yasm
             
         $ mkdir -p $HOME/usr/ffmpeg/ && \
-              wget -O ffmpeg-snapshot.tar.bz2 https://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
-              tar xjvf ffmpeg-snapshot.tar.bz2 -C $HOME/usr/ffmpeg/
+            wget -O ffmpeg-snapshot.tar.bz2 https://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
+            tar xjvf ffmpeg-snapshot.tar.bz2 -C $HOME/usr/ffmpeg/
         
         $ export PATH="$HOME/bin:$PATH" && export PKG_CONFIG_PATH="$HOME/usr/ffmpeg/build/lib/pkgconfig"
         $ ./configure \
-              --prefix="$HOME/usr/ffmpeg/build" \
-              --pkg-config-flags="--static" \
-              --extra-cflags="-I$HOME/usr/ffmpeg/build/include" \
-              --extra-ldflags="-L$HOME/usr/ffmpeg/build/lib" \
-              --extra-libs="-lpthread -lm" \
-              --bindir="$HOME/bin" \
-              --enable-gpl \
-              --enable-libass \
-              --enable-libfreetype \
-              --enable-libmp3lame \
-              --enable-libtheora \
-              --enable-libvorbis \
-              --enable-nonfree
-        $ make -j2 && make install
+            --prefix="$HOME/usr/ffmpeg/build" \
+            --pkg-config-flags="--static" \
+            --extra-cflags="-I$HOME/usr/ffmpeg/build/include" \
+            --extra-ldflags="-L$HOME/usr/ffmpeg/build/lib" \
+            --extra-libs="-lpthread -lm" \
+            --bindir="$HOME/bin" \
+            --enable-gpl \
+            --enable-libass \
+            --enable-libfreetype \
+            --enable-libmp3lame \
+            --enable-libtheora \
+            --enable-libvorbis \
+            --enable-nonfree
+        $ make -j4 && make install
 
 
 3. Install [Redis server](https://redis.io/download)

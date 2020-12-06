@@ -1,17 +1,11 @@
 start:
-	@docker-compose -f deploy/docker-compose.yml up -d
-	@printf "Waiting for PostgreSQL."
-	@until docker exec -it manti-by-postgres psql -U manti -c '\l' > /dev/null; do printf "."; sleep 1; done
-	@printf " Connected!\n"
-
-dev:
-	@docker-compose -f deploy/docker-compose.local.yml up
+	docker-compose -f deploy/docker-compose.yml up -d
 
 stop:
-	@docker-compose -f deploy/docker-compose.yml stop
+	docker-compose -f deploy/docker-compose.yml stop
 
 destroy:
-	@docker-compose -f deploy/docker-compose.yml down
+	docker-compose -f deploy/docker-compose.yml down
 
 bash:
 	docker exec -it manti-by-app bash
@@ -37,6 +31,5 @@ ci:
 
 check:
 	standard --fix app/core/static/js/
-	black --target-version py37 app/
-	isort app/*.py
+	black --target-version py38 app/
 	flake8

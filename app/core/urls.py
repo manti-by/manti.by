@@ -1,7 +1,7 @@
 from django.conf import settings
-from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
+from django.urls import include, path
 
 from core import views as core_views
 from api.resources import OrderableResource, PostResource, SearchResource
@@ -12,28 +12,30 @@ sitemaps = {"index": IndexSitemap, "blog": BlogSitemap, "static": StaticSitemap}
 
 
 urlpatterns = [
-    url(r"^$", core_views.index, name="index"),
-    url(r"^email/(?P<email_id>\d+)/$", core_views.email, name="email"),
-    url(r"^about/", core_views.static, {"page": "about"}, name="about"),
-    url(r"^resume/", core_views.static, {"page": "resume"}, name="resume"),
-    url(r"^copyrights/", core_views.static, {"page": "copyrights"}, name="copyrights"),
+    path("", core_views.index, name="index"),
+    path("email/<email_id>/", core_views.email, name="email"),
+    path("about/", core_views.static, {"page": "about"}, name="about"),
+    path("resume/", core_views.static, {"page": "resume"}, name="resume"),
+    path("copyrights/", core_views.static, {"page": "copyrights"}, name="copyrights"),
     # API urls
-    url(r"^api/posts/?$", PostResource.as_view()),
-    url(r"^api/orderable/?$", OrderableResource.as_view()),
-    url(r"^api/search/?$", SearchResource.as_view()),
+    path("api/posts/", PostResource.as_view()),
+    path("api/orderable/", OrderableResource.as_view()),
+    path("api/search/", SearchResource.as_view()),
     # Blog urls
-    url(r"^blog/", include("blog.urls"), name="blog"),
+    path("blog/", include("blog.urls"), name="blog"),
     # Gallery urls
-    url(r"^gallery/", include("gallery.urls")),
+    path("gallery/", include("gallery.urls")),
     # Profile urls
-    url(r"^profile/", include("profiles.urls")),
+    path("profile/", include("profiles.urls")),
     # URL shortener
-    url(r"^sr/", include("shortener.urls")),
+    path("sr/", include("shortener.urls")),
     # Admin urls
-    url(r"^dashboard/", admin.site.urls),
+    path("dashboard/", admin.site.urls),
+    # Django RQ
+    path("dashboard/django-rq/", include("django_rq.urls")),
     # Sitemap
-    url(
-        r"^sitemap\.xml$",
+    path(
+        "sitemap.xml",
         sitemap,
         {"sitemaps": sitemaps},
         name="django.contrib.sitemaps.views.sitemap",

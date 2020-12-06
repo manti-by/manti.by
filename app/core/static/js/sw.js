@@ -1,53 +1,57 @@
-const CACHE = 'cache';
+const CACHE = 'cache'
 
 self.addEventListener('activate', (event) => {
-    let cacheWhitelist = [CACHE];
+  const cacheWhitelist = [CACHE]
 
-    event.waitUntil(
-        caches.keys().then(function (cacheNames) {
-            return Promise.all(
-                cacheNames.map(function (cacheName) {
-                    if (cacheWhitelist.indexOf(cacheName) === -1) {
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheWhitelist.indexOf(cacheName) === -1) {
+            return caches.delete(cacheName)
+          }
         })
-    );
-});
+      )
+    })
+  )
+})
 
-self.addEventListener('fetch', function(event) {
-    event.respondWith(
-        caches.match(event.request)
-            .then(function(response) {
-                if (response) {
-                    return response;
-                }
+self.addEventListener('install', (event) => {
+  event.waitUntil(
+    caches
+      .open(CACHE)
+      .then((cache) => cache.addAll(['/static']))
+  )
+})
 
-                let fetchRequest = event.request.clone(),
-                    request_url = new URL(event.request.url),
-                    is_success, is_internal, is_dashboard;
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    caches.match(event.request).then((response) => {
+      if (response) {
+        return response
+      }
 
-                return fetch(fetchRequest).then(
-                    function(response) {
-                        is_success = !response || response.status !== 200 || response.type !== 'basic';
-                        is_internal = request_url.host.indexOf('manti.by') < 0;
-                        is_dashboard = response.url.indexOf('dashboard') >= 0;
+      const fetchRequest = event.request.clone()
+      const requestUrl = new URL(event.request.url)
+      let isSuccess, isExternal, isDashboard
 
-                        if (is_success || is_internal || is_dashboard) {
-                            return response;
-                        }
+      return fetch(fetchRequest).then((response) => {
+        isSuccess = !response || response.status !== 200 || response.type !== 'basic'
+        isExternal = requestUrl.host.indexOf('manti.by') < 0
+        isDashboard = response.url.indexOf('dashboard') >= 0
 
-                        let responseToCache = response.clone();
-                        caches.open(CACHE)
-                            .then(function(cache) {
-                                cache.put(event.request, responseToCache);
-                            });
+        if (isSuccess || isExternal || isDashboard) {
+          return response
+        }
 
-                        return response;
-                    }
-                )
-            }
-        )
-    );
-});
+        const responseToCache = response.clone()
+        caches.open(CACHE)
+          .then((cache) => {
+            cache.put(event.request, responseToCache)
+          })
+
+        return response
+      })
+    })
+  )
+})

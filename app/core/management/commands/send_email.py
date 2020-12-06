@@ -4,7 +4,6 @@ from django.conf import settings
 from django.core.mail import send_mail
 from django.core.management.base import BaseCommand
 from django.template.loader import render_to_string
-from raven.contrib.django.raven_compat.models import client
 
 from core.models import Email
 
@@ -28,5 +27,4 @@ class Command(BaseCommand):
                 email.is_sent = True
                 email.save()
             except Exception as e:
-                client.captureException()
                 logger.error(e)

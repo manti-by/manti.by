@@ -11,30 +11,30 @@ COMPRESS_ENABLED = False
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["*"]
 
-BASE_URL = "http://127.0.0.1"
+BASE_URL = "http://localhost"
 
-SESSION_COOKIE_DOMAIN = "127.0.0.1"
+SESSION_COOKIE_DOMAIN = "localhost"
 
 STATIC_URL = "/static/"
-STATIC_ROOT = "/home/manti/www/manti/manti.by/static"
+STATIC_ROOT = "/home/manti/www/manti.by/static"
 
 MEDIA_URL = "/content/"
-MEDIA_ROOT = "/home/manti/www/manti/manti.by/content"
+MEDIA_ROOT = "/home/manti/www/manti.by/content"
 
 TEMPLATE_VERSION = "v2"
 
-LOCALE_URLS = {"be": "127.0.0.1", "ru": "127.0.0.1", "en": "127.0.0.1"}
+LOCALE_URLS = {"be": "localhost", "ru": "localhost", "en": "localhost"}
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "manti",
-        "USER": "manti",
+        "NAME": "manti_by",
+        "USER": "manti_by",
         "PASSWORD": "pa55word",
         "HOST": "localhost",
-        "PORT": "5433",
+        "PORT": "5432",
     }
 }
 
@@ -67,11 +67,3 @@ LOGGING = {
         "django.template": {"handlers": ["console"], "level": "DEBUG"},
     },
 }
-
-INSTAGRAM_CLIENT_ID = ""
-INSTAGRAM_ACCESS_TOKEN = ""
-INSTAGRAM_CLIENT_SECRET = ""
-
-RAVEN_CONFIG[
-    "dsn"
-] = ""

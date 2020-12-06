@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-import raven
 
 
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -38,8 +37,7 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "compressor",
     "modeltranslation",
-    "django_celery_results",
-    "raven.contrib.django.raven_compat",
+    "django_rq",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -90,19 +88,17 @@ BASE_URL = "https://manti.by"
 
 SESSION_COOKIE_DOMAIN = ".manti.by"
 
-SITE_ID = 1
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "test",
         "USER": "test",
-        "PASSWORD": "",
+        "PASSWORD": "test",
         "HOST": "localhost",
-        "PORT": "",
+        "PORT": "5432",
     }
 }
 
@@ -111,8 +107,9 @@ DATABASES = {
 
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
-        "LOCATION": "127.0.0.1:11211",
+        "BACKEND": "redis_cache.cache.RedisCache",
+        "LOCATION": "localhost:6379",
+        "OPTIONS": {"MAX_ENTRIES": 5000, "DB": 0},
     }
 }
 
@@ -174,7 +171,7 @@ THUMBNAIL_QUALITY = 85
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "localhost"
-EMAIL_PORT = 2525
+EMAIL_PORT = 25
 
 DEFAULT_FROM_EMAIL = "admin@manti.by"
 DEFAULT_TO_EMAIL = ""
@@ -195,11 +192,6 @@ COMPRESS_CSS_FILTERS = [
 ]
 COMPRESS_CSS_HASHING_METHOD = None
 
-# Celery settings
-
-CELERY_BROKER_URL = "redis://localhost:6379/0"
-CELERY_RESULT_BACKEND = "django-db"
-
 
 # Meta tags info
 
@@ -207,15 +199,12 @@ META_TITLE = "Welcome to official blog of Alex Manti."
 META_DESCRIPTION = "Official blog of Alex Manti. My music, photos and info about me."
 
 
-# Instagram settings
+# Queues
 
-INSTAGRAM_USER_ID = ""
-INSTAGRAM_CLIENT_ID = ""
-INSTAGRAM_ACCESS_TOKEN = ""
-INSTAGRAM_CLIENT_SECRET = ""
-
-
-# Sentry integration
-
-ROOT_DIR = os.path.dirname((os.path.dirname(PROJECT_DIR)))
-RAVEN_CONFIG = {"dsn": "", "release": raven.fetch_git_sha(ROOT_DIR)}
+RQ_QUEUES = {
+    "default": {
+        "HOST": "localhost",
+        "PORT": 6379,
+        "DB": 0,
+    },
+}
