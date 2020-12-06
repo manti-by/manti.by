@@ -36,6 +36,7 @@ ci:
 	circleci build
 
 check:
+	standard --fix app/core/static/js/
 	black --target-version py37 app/
 	isort app/*.py
 	flake8

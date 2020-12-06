@@ -1,0 +1,17 @@
+{
+  "name": "manti-by",
+  "version": "1.5.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/manti-by/manti.by.git"
+  },
+  "license": "BSD",
+  "standard": {
+    "ignore": [
+      "app/core/static/js/lib/jquery-3.3.1/",
+      "app/core/static/js/lib/jjquery-browser-0.1.0/",
+      "app/core/static/js/lib/jquery-touchswipe-1.6.19/",
+      "app/core/static/js/lib/jquery-ui-1.12.1/"
+    ]
+  }
+}
