@@ -50,7 +50,6 @@ class FFMpegTest:
             shutil.rmtree(preview_path)
 
     @pytest.mark.django_db
-    @pytest.mark.skip(reason="Cant run ffmpeg in the CI box")
     def test_convert_to_mp3_preview(self):
         post = Post.objects.create(**self.data)
         code = convert_to_mp3_preview(post.id)
@@ -60,7 +59,6 @@ class FFMpegTest:
         assert os.path.getsize(post.preview_mp3_file) > 0
 
     @pytest.mark.django_db
-    @pytest.mark.skip(reason="Cant run ffmpeg in the CI box")
     def test_convert_to_ogg_release(self):
         post = Post.objects.create(**self.data)
         code = convert_to_ogg_release(post.id)
@@ -70,7 +68,6 @@ class FFMpegTest:
         assert os.path.getsize(post.release_ogg_file) > 0
 
     @pytest.mark.django_db
-    @pytest.mark.skip(reason="Cant run ffmpeg in the CI box")
     def test_convert_to_ogg_preview(self):
         post = Post.objects.create(**self.data)
         code = convert_to_ogg_preview(post.id)

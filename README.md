@@ -7,7 +7,7 @@ About
 
 Django custom blog engine for music and photo publishing.
 
-[![CircleCI](https://img.shields.io/circleci/build/github/manti-by/Manti.by?token=251a247a58b266c9154253facca70ce0d8b6e169)](https://circleci.com/gh/manti-by/Manti.by)
+[![CircleCI](https://img.shields.io/github/workflow/status/manti-by/manti.by/backend)](https://github.com/manti-by/manti.by/actions)
 [![Docker](https://img.shields.io/docker/automated/mantiby/manti.by.svg)](https://hub.docker.com/r/mantiby/manti.by/)
 [![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://raw.githubusercontent.com/manti-by/Manti.by/master/LICENSE)
 

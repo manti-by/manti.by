@@ -1,6 +1,6 @@
-from django.conf.urls import url
+from django.urls import path
 
 from shortener import views
 
 
-urlpatterns = [url(r"^(?P<short_link>[-\w]+)$", views.shortener, name="shortener")]
+urlpatterns = [path("<short_link>/", views.shortener, name="shortener")]

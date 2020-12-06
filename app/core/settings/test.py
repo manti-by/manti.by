@@ -1,7 +1,4 @@
-import os
-import raven
-
-from .base import *
+from .base import *  # noqa: F401, F403
 
 SECRET_KEY = "151+9%r1l=uv&nub$s=%a3d3&2xzwoi=&v*!_gzn92car9uu*y"
 
@@ -23,7 +20,16 @@ STATIC_ROOT = "/var/lib/manti.by/static"
 MEDIA_URL = "/content/"
 MEDIA_ROOT = "/var/lib/manti.by/content"
 
-DATABASES = {"default": {"ENGINE": "django.db.backends.sqlite3", "NAME": "test"}}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "manti_by",
+        "USER": "manti_by",
+        "PASSWORD": "manti_by",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
 
 CACHES = {
     "default": {
@@ -43,26 +49,13 @@ LOGGING = {
     },
     "handlers": {
         "console": {"class": "logging.StreamHandler"},
-        "null": {"class": "logging.NullHandler"},
     },
     "loggers": {
-        "app": {
+        "": {
             "handlers": ["console"],
             "level": "DEBUG",
             "propagate": True,
             "formatter": "simple",
-        },
-        "django": {
-            "handlers": ["console"],
-            "level": "DEBUG",
-            "propagate": True,
-            "formatter": "simple",
-        },
-        "django.template": {"handlers": ["null"], "propagate": False, "level": "ERROR"},
-        "django.db.backends": {
-            "handlers": ["null"],
-            "propagate": False,
-            "level": "ERROR",
         },
     },
 }

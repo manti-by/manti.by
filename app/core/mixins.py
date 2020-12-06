@@ -3,7 +3,7 @@ import logging
 from django.db import models
 from django.urls import reverse
 from django.template.defaultfilters import slugify
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 logger = logging.getLogger()
 
@@ -16,7 +16,7 @@ class SlugifyMixin(models.Model):
         return reverse(self.__class__.__name__.lower(), args=[str(self.slug)])
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.slug)
+        self.slug = slugify(self.name)
         super(SlugifyMixin, self).save(*args, **kwargs)
 
     class Meta:

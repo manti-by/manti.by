@@ -1,10 +1,10 @@
 import os
-import mock
 import uuid
 import pytest
 import shutil
 
 from django.conf import settings
+from unittest.mock import patch
 
 from blog.models import Post
 
@@ -40,7 +40,7 @@ class PostModelTest:
         assert post.translations_filled is False
         assert post.files_converted is False
 
-    @mock.patch("blog.models.generate_preview_for_post")
+    @patch("blog.models.generate_preview_for_post")
     def test_update(self, generate_mock):
         post = Post.objects.create(**self.data, is_music=True)
 
@@ -56,9 +56,9 @@ class PostModelTest:
 
         assert genre in post.genre.names()
         assert tag in post.tags.names()
-        assert "%s /%s/" % (self.data["name"], genre) == post.title
+        assert post.title == f"{self.data['name']} /{genre}/"
 
-    @mock.patch("blog.models.generate_preview_for_post")
+    @patch("blog.models.generate_preview_for_post")
     def test_files(self, generate_mock):
         post = Post.objects.create(**self.data, release="release/test.mp3")
 

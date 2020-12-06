@@ -26,10 +26,10 @@ migrate:
 static:
 	docker exec -it manti-by-app python manage.py collectstatic --no-input
 
-ci:
-	circleci build
-
 check:
 	standard --fix app/core/static/js/
 	black --target-version py38 app/
 	flake8
+
+test:
+	pytest
