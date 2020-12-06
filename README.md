@@ -17,7 +17,7 @@ Source link: https://github.com/manti-by/manti.by
 
 Requirements:
 
-    Python 3.8, PostgreSQL 12, Memcache, Redis
+    Python 3.8, PostgreSQL 12, Redis
 
 
 Setup dev environment
