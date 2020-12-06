@@ -14,11 +14,9 @@ jobs:
     runs-on: ubuntu-latest
 
     container:
-
       image: mantiby/manti.by:latest
 
     services:
-
       postgres:
         image: postgres:latest
         env:
@@ -36,7 +34,6 @@ jobs:
         options: --entrypoint redis-server
 
     steps:
-
       - name: Check out the repository
         uses: actions/checkout@v2
 
@@ -63,19 +60,25 @@ jobs:
         run: |
           python app/manage.py makemigrations --dry-run --check --verbosity=3 --settings=core.settings.test
         env:
+          POSTGRES_HOST: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+          REDIS_HOST: redis
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
 
       - name: Run Django system checks
         run: |
           python app/manage.py check --fail-level WARNING --settings=core.settings.test
         env:
+          POSTGRES_HOST: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+          REDIS_HOST: redis
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}
 
       - name: Run Pytest suite
         run: |
           pytest --create-db --disable-warnings app/
         env:
+          POSTGRES_HOST: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
+          REDIS_HOST: redis
           REDIS_PORT: ${{ job.services.redis.ports[6379] }}

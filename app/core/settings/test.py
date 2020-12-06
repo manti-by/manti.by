@@ -20,32 +20,12 @@ STATIC_ROOT = "/var/lib/manti.by/static"
 MEDIA_URL = "/content/"
 MEDIA_ROOT = "/var/lib/manti.by/content"
 
-THUMBNAIL_REDIS_PORT = os.environ.get("REDIS_PORT", 6379)
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "manti_by",
-        "USER": "manti_by",
-        "PASSWORD": "manti_by",
-        "HOST": "localhost",
-        "PORT": os.environ.get("POSTGRES_PORT", 5432),
-    }
-}
 
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
         "LOCATION": "unique-snowflake",
     }
-}
-
-RQ_QUEUES = {
-    "default": {
-        "HOST": "localhost",
-        "PORT": os.environ.get("REDIS_PORT", 6379),
-        "DB": 0,
-    },
 }
 
 

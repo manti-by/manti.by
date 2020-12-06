@@ -94,11 +94,11 @@ SESSION_COOKIE_DOMAIN = ".manti.by"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "test",
-        "USER": "test",
-        "PASSWORD": "test",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": os.environ.get("POSTGRES_NAME", "manti_by"),
+        "USER": os.environ.get("POSTGRES_USER", "manti_by"),
+        "PASSWORD": os.environ.get("POSTGRES_PASS", "manti_by"),
+        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
+        "PORT": os.environ.get("POSTGRES_PORT", 5432),
     }
 }
 
@@ -108,10 +108,30 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "redis_cache.cache.RedisCache",
-        "LOCATION": "localhost:6379",
+        "LOCATION": f"{os.environ.get('REDIS_HOST', 'localhost')}:{os.environ.get('REDIS_PORT', 6379)}",
         "OPTIONS": {"MAX_ENTRIES": 5000, "DB": 0},
     }
 }
+
+
+# Queues
+# https://github.com/rq/django-rq
+
+RQ_QUEUES = {
+    "default": {
+        "HOST": os.environ.get("REDIS_HOST", "localhost"),
+        "PORT": os.environ.get("REDIS_PORT", 6379),
+        "DB": 0,
+    },
+}
+
+
+# Sorl thumbnailer settings
+
+THUMBNAIL_KVSTORE = "sorl.thumbnail.kvstores.redis_kvstore.KVStore"
+THUMBNAIL_REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
+THUMBNAIL_REDIS_PORT = os.environ.get("REDIS_PORT", 6379)
+THUMBNAIL_QUALITY = 85
 
 
 # Internationalization
@@ -155,17 +175,11 @@ MEDIA_URL = "/content/"
 
 FILE_UPLOAD_PERMISSIONS = 0o644
 
+
 # Login redirect url
 
 LOGIN_URL = "/profiles/login/"
 
-
-# Sorl thumbnailer settings
-
-THUMBNAIL_REDIS_HOST = "localhost"
-THUMBNAIL_REDIS_PORT = "6379"
-THUMBNAIL_KVSTORE = "sorl.thumbnail.kvstores.redis_kvstore.KVStore"
-THUMBNAIL_QUALITY = 85
 
 # Email settings
 
@@ -197,14 +211,3 @@ COMPRESS_CSS_HASHING_METHOD = None
 
 META_TITLE = "Welcome to official blog of Alex Manti."
 META_DESCRIPTION = "Official blog of Alex Manti. My music, photos and info about me."
-
-
-# Queues
-
-RQ_QUEUES = {
-    "default": {
-        "HOST": "localhost",
-        "PORT": 6379,
-        "DB": 0,
-    },
-}
