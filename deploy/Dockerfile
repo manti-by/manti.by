@@ -19,7 +19,7 @@ RUN export PATH="/bin:$PATH" && export PKG_CONFIG_PATH="/srv/manti.by/ffmpeg/bui
       --extra-cflags="-I/srv/manti.by/ffmpeg/build/include" \
       --extra-ldflags="-L/srv/manti.by/ffmpeg/build/lib" \
       --extra-libs="-lpthread -lm" \
-      --bindir="bin" \
+      --bindir="/bin" \
       --enable-libmp3lame \
       --enable-libtheora \
       --enable-libvorbis \
@@ -44,9 +44,9 @@ RUN apt-get autoremove --purge && \
 # Create additional dirs and fix file permissions
 RUN useradd -m -s /bin/bash manti && \
   mkdir -p /srv/manti.by/src/ /var/log/manti.by/ /var/lib/manti.by/static/ /var/lib/manti.by/content/ && \
-  chown -R manti:manti /srv/manti.by/src/ /etc/manti.by/ /var/lib/manti.by/ /var/log/manti.by/
+  chown -R manti:manti /srv/manti.by/src/ /var/lib/manti.by/ /var/log/manti.by/
 
 
 # Set working directory and run command
 WORKDIR /srv/manti.by/src/
-CMD python app/manage.py runserver
+CMD python manage.py runserver

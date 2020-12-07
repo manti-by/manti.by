@@ -58,8 +58,9 @@ jobs:
 
       - name: Check for missing migrations
         run: |
-          python app/manage.py makemigrations --dry-run --check --verbosity=3 --settings=settings.test
+          python manage.py makemigrations --dry-run --check --verbosity=3
         env:
+          DJANGO_SETTINGS_MODULE: settings.test
           POSTGRES_HOST: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
           REDIS_HOST: redis
@@ -67,8 +68,9 @@ jobs:
 
       - name: Run Django system checks
         run: |
-          python app/manage.py check --fail-level WARNING --settings=settings.test
+          python manage.py check --fail-level WARNING
         env:
+          DJANGO_SETTINGS_MODULE: settings.test
           POSTGRES_HOST: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
           REDIS_HOST: redis
@@ -76,8 +78,9 @@ jobs:
 
       - name: Run Pytest suite
         run: |
-          pytest --create-db --disable-warnings app/
+          pytest --create-db --disable-warnings
         env:
+          DJANGO_SETTINGS_MODULE: settings.test
           POSTGRES_HOST: postgres
           POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
           REDIS_HOST: redis

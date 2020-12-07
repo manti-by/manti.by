@@ -7,8 +7,11 @@ stop:
 destroy:
 	docker-compose -f deploy/docker-compose.yml down
 
+dc-test:
+	docker-compose -f deploy/docker-compose.yml run --rm django pytest --create-db --disable-warnings
+
 bash:
-	docker exec -it manti-by-app bash
+	docker exec -it django bash
 
 build:
 	cd deploy/ && docker build -t mantiby/manti.by:latest .
