@@ -58,7 +58,7 @@ jobs:
 
       - name: Check for missing migrations
         run: |
-          python manage.py makemigrations --dry-run --check --verbosity=3
+          python app/manage.py makemigrations --dry-run --check --verbosity=3
         env:
           DJANGO_SETTINGS_MODULE: settings.test
           POSTGRES_HOST: postgres
@@ -68,7 +68,7 @@ jobs:
 
       - name: Run Django system checks
         run: |
-          python manage.py check --fail-level WARNING
+          python app/manage.py check --fail-level WARNING
         env:
           DJANGO_SETTINGS_MODULE: settings.test
           POSTGRES_HOST: postgres
@@ -78,7 +78,7 @@ jobs:
 
       - name: Run Pytest suite
         run: |
-          pytest --create-db --disable-warnings
+          pytest app/ --create-db --disable-warnings
         env:
           DJANGO_SETTINGS_MODULE: settings.test
           POSTGRES_HOST: postgres
