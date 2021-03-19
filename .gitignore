@@ -6,6 +6,6 @@ __pycache__/
 
 .pytest_cache/
 
-app/static/cache/
-app/settings/local.py
-app/settings/prod.py
+manti_by/static/cache/
+manti_by/settings/local.py
+manti_by/settings/prod.py
