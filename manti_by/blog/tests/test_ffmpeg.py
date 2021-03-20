@@ -1,4 +1,6 @@
 import os
+from unittest.mock import patch
+
 import pytest
 import shutil
 import uuid
@@ -47,28 +49,34 @@ class FFMpegTest:
             shutil.rmtree(preview_path)
 
     @pytest.mark.django_db
-    def test_convert_to_mp3_preview(self):
+    @patch("manti_by.core.services.subprocess")
+    def test_convert_to_mp3_preview(self, subprocess_mock):
+        subprocess_mock.call.return_value = 0
         post = Post.objects.create(**self.data)
         code = convert_to_mp3_preview(post.id)
 
         assert code == 0
         assert post.release_mp3_file is not None
-        assert os.path.getsize(post.preview_mp3_file) > 0
+        assert subprocess_mock.call.called
 
     @pytest.mark.django_db
-    def test_convert_to_ogg_release(self):
+    @patch("manti_by.core.services.subprocess")
+    def test_convert_to_ogg_release(self, subprocess_mock):
+        subprocess_mock.call.return_value = 0
         post = Post.objects.create(**self.data)
         code = convert_to_ogg_release(post.id)
 
         assert code == 0
         assert post.release_mp3_file is not None
-        assert os.path.getsize(post.release_ogg_file) > 0
+        assert subprocess_mock.call.called
 
     @pytest.mark.django_db
-    def test_convert_to_ogg_preview(self):
+    @patch("manti_by.core.services.subprocess")
+    def test_convert_to_ogg_preview(self, subprocess_mock):
+        subprocess_mock.call.return_value = 0
         post = Post.objects.create(**self.data)
         code = convert_to_ogg_preview(post.id)
 
         assert code == 0
         assert post.preview_ogg_file is not None
-        assert os.path.getsize(post.preview_ogg_file) > 0
+        assert subprocess_mock.call.called
