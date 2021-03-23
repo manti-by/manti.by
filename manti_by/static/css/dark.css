@@ -1,0 +1,69 @@
+@media (prefers-color-scheme: dark) {
+  body {
+    color: #666;
+    background: #121212;
+  }
+
+  h1, h2, .post h2 {
+    color: #aaa;
+  }
+
+  a, p, b, li {
+    color: #666;
+  }
+
+  input, select, textarea, button {
+    color: #aaa;
+    border-color: #636363;
+    background: #636363;
+  }
+
+  #search,
+  header {
+    background: #121212;
+  }
+
+  header .mobile-menu {
+    background: #121212;
+  }
+
+  #search input {
+    border-bottom: 1px solid #333;
+  }
+
+  cite {
+    color: #aaa;
+    background: #464646;
+  }
+
+  .static {
+    background: #333;
+  }
+
+  .static p,
+  .static li {
+    color: #aaa;
+  }
+
+  .shadow {
+    box-shadow: 1px 1px 1px rgba(255, 255, 255, .1);
+  }
+
+  #player {
+    border-top: 1px solid #333;
+    background: #121212;
+  }
+
+  #player .now-playing a span.image-wrapper {
+    background: #121212;
+  }
+
+  .player {
+    color: #aaa;
+    background: #636363;
+  }
+
+  .player .progress-label {
+    color: #aaa;
+  }
+}

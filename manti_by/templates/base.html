@@ -9,28 +9,28 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
         <meta name="theme-color" content="#B40303">
-        <link rel="manifest" href="{% static "manifest.json" %}">
+        <link rel="manifest" href="{% static 'manifest.json' %}">
         <link rel="canonical" href="{{ ABSOLUTE_URL }}">
 
         <!-- Add to homescreen for Chrome on Android -->
         <meta name="mobile-web-app-capable" content="yes">
-        <link rel="icon" type="image/png" sizes="48x48" href="{% static "img/logo/48.png" %}">
-        <link rel="icon" type="image/png" sizes="72x72" href="{% static "img/logo/72.png" %}">
-        <link rel="icon" type="image/png" sizes="96x96" href="{% static "img/logo/96.png" %}">
-        <link rel="icon" type="image/png" sizes="144x144" href="{% static "img/logo/144.png" %}">
-        <link rel="icon" type="image/png" sizes="192x192" href="{% static "img/logo/192.png" %}">
-        <link rel="icon" type="image/png" sizes="256x256" href="{% static "img/logo/256.png" %}">
-        <link rel="icon" type="image/png" sizes="512x512" href="{% static "img/logo/512.png" %}">
+        <link rel="icon" type="image/png" sizes="48x48" href="{% static 'img/logo/48.png' %}">
+        <link rel="icon" type="image/png" sizes="72x72" href="{% static 'img/logo/72.png' %}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'img/logo/96.png' %}">
+        <link rel="icon" type="image/png" sizes="144x144" href="{% static 'img/logo/144.png' %}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{% static 'img/logo/192.png' %}">
+        <link rel="icon" type="image/png" sizes="256x256" href="{% static 'img/logo/256.png' %}">
+        <link rel="icon" type="image/png" sizes="512x512" href="{% static 'img/logo/512.png' %}">
 
         <!-- Add to homescreen for Safari on iOS -->
         <meta name="apple-mobile-web-app-capable" content="yes">
-        <link rel="apple-touch-icon" type="image/png" sizes="48x48" href="{% static "img/logo/48.png" %}">
-        <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="{% static "img/logo/72.png" %}">
-        <link rel="apple-touch-icon" type="image/png" sizes="96x96" href="{% static "img/logo/96.png" %}">
-        <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="{% static "img/logo/144.png" %}">
-        <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="{% static "img/logo/192.png" %}">
-        <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="{% static "img/logo/256.png" %}">
-        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="{% static "img/logo/512.png" %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="48x48" href="{% static 'img/logo/48.png' %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="{% static 'img/logo/72.png' %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="96x96" href="{% static 'img/logo/96.png' %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="{% static 'img/logo/144.png' %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="{% static 'img/logo/192.png' %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="{% static 'img/logo/256.png' %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="{% static 'img/logo/512.png' %}">
 
         <meta name="description"
               content="{% block meta %}{% endblock %} | {% trans 'Official blog of Alex Manti. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.' %}">
@@ -80,7 +80,7 @@
                         <a href="{% url 'gallery_list' %}" rel="bookmark" class="link-item mobile-hidden">
                             <span class="text">{% trans 'Gallery' %}</span>
                         </a>
-                        <span class="language" class="link-item">
+                        <span class="language link-item">
                             {% for lang in LANGUAGES %}
                                 {% if lang.0 == ACTIVE_LANGUAGE %}
                                     <span class="item text active">{{ lang.0 }}</span>
@@ -165,6 +165,7 @@
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/480.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/dark.css' %}" media="all">
         {% endcompress %}
         </noscript>
         {% compress css inline %}
