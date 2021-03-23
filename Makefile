@@ -9,7 +9,7 @@ docker-test:
 	    pytest --create-db --disable-warnings
 
 bash:
-	docker exec -it django manti-by-bash
+	docker exec -it manti-by-django bash
 
 psql:
 	docker exec -it manti-by-postgres psql -U manti_by

@@ -16,7 +16,8 @@ class SlugifyMixin(models.Model):
         return reverse(self.__class__.__name__.lower(), args=[str(self.slug)])
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.name)
+        if self.slug is None:
+            self.slug = slugify(self.name)
         super(SlugifyMixin, self).save(*args, **kwargs)
 
     class Meta:
