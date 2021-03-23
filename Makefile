@@ -1,42 +1,32 @@
-start:
-	@docker-compose -f deploy/docker-compose.yml up -d
-	@printf "Waiting for PostgreSQL."
-	@until docker exec -it manti-by-postgres psql -U manti -c '\l' > /dev/null; do printf "."; sleep 1; done
-	@printf " Connected!\n"
+build:
+	docker build -t mantiby/manti.by:latest .
 
-dev:
-	@docker-compose -f deploy/docker-compose.local.yml up
-
-stop:
-	@docker-compose -f deploy/docker-compose.yml stop
-
-destroy:
-	@docker-compose -f deploy/docker-compose.yml down
+docker-test:
+	docker run --rm \
+	    -e DJANGO_SETTINGS_MODULE=manti_by.settings.sqlite \
+	    -v /home/manti/www/manti.by/src/:/srv/manti.by/src/ \
+	    mantiby/manti.by:latest \
+	    pytest --create-db --disable-warnings
 
 bash:
-	docker exec -it manti-by-app bash
-
-build:
-	cd deploy/ && docker build -t mantiby/manti.by:latest .
+	docker exec -it django manti-by-bash
 
 psql:
-	docker exec -it manti-by-postgres psql -U manti
+	docker exec -it manti-by-postgres psql -U manti_by
 
 pg_dump:
-	docker exec -it manti-by-postgres pg_dump -U manti -d manti > deploy/database/manti.sql
-	sudo chown -R ${USER}:${GROUP} deploy/database/
+	docker exec -it manti-by-postgres pg_dump -U manti_by -d manti_by > database.sql
 
 migrate:
-	docker exec -it manti-by-app python manage.py migrate
+	docker exec -it manti-by-django python manage.py migrate
 
 static:
-	docker exec -it manti-by-app python manage.py collectstatic --no-input
-
-ci:
-	circleci build
+	docker exec -it manti-by-django python manage.py collectstatic --no-input
 
 check:
-	standard --fix app/core/static/js/
-	black --target-version py37 app/
-	isort app/*.py
-	flake8
+	flake8 manti_by/
+	black --target-version py38 manti_by/
+	standard --fix manti_by/static/js/
+
+test:
+	pytest

@@ -1,0 +1,217 @@
+{% load static compress thumbnail i18n common_tags %}
+<!DOCTYPE html>
+<html lang="{{ ACTIVE_LANGUAGE }}">
+    <head>
+        <title>{% block title %}{% endblock %} | {% trans 'Drum and Bass, House, Techno and Chillout.' %}</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+        <meta name="theme-color" content="#B40303">
+        <link rel="manifest" href="{% static 'manifest.json' %}">
+        <link rel="canonical" href="{{ ABSOLUTE_URL }}">
+
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" type="image/png" sizes="48x48" href="{% static 'img/logo/48.png' %}">
+        <link rel="icon" type="image/png" sizes="72x72" href="{% static 'img/logo/72.png' %}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'img/logo/96.png' %}">
+        <link rel="icon" type="image/png" sizes="144x144" href="{% static 'img/logo/144.png' %}">
+        <link rel="icon" type="image/png" sizes="192x192" href="{% static 'img/logo/192.png' %}">
+        <link rel="icon" type="image/png" sizes="256x256" href="{% static 'img/logo/256.png' %}">
+        <link rel="icon" type="image/png" sizes="512x512" href="{% static 'img/logo/512.png' %}">
+
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="apple-touch-icon" type="image/png" sizes="48x48" href="{% static 'img/logo/48.png' %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="{% static 'img/logo/72.png' %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="96x96" href="{% static 'img/logo/96.png' %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="{% static 'img/logo/144.png' %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="{% static 'img/logo/192.png' %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="{% static 'img/logo/256.png' %}">
+        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="{% static 'img/logo/512.png' %}">
+
+        <meta name="description"
+              content="{% block meta %}{% endblock %} | {% trans 'Official blog of Alex Manti. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.' %}">
+        <meta name="yandex-verification" content="4c23c3980836ae34" />
+
+        {% block open-graph %}
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{% trans 'Drum and Bass, House, Techno and Chillout.' %}">
+        <meta property="og:description"
+              content="{% trans 'Official blog of Alex Manti. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.' %}">
+        <meta property="og:image" content="{% webp_static 'img/share.jpg' %}">
+        {% endblock %}
+        <meta property="og:url" content="{{ ABSOLUTE_URL }}">
+
+        {% compress css inline %}
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/reset.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/font.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/search.css' %}" media="all">
+            {% block styles %}{% endblock %}
+        {% endcompress %}
+    </head>
+    <body>
+        <div id="loader"><div></div></div>
+
+        {% include 'common/player.html' %}
+
+        <header class="visible shadow {% if is_home %}home{% endif %}">
+            <nav class="container">
+                <div class="flex">
+                    <div class="left">
+                        <a href="{% url 'index' %}" class="homelink" rel="home">
+                            <span class="icon">
+                                <i class="material-icons">settings_input_svideo</i>
+                            </span>
+                            <span class="text">
+                                Manti.by
+                            </span>
+                        </a>
+                        <span class="breadcrumbs">{% block breadcrumbs %}{% endblock %}</span>
+                    </div>
+                    <div class="right">
+                        <a href="{% url 'blog' %}" rel="bookmark" class="link-item mobile-hidden">
+                            <span class="text">{% trans 'Music' %}</span>
+                        </a>
+                        <a href="{% url 'gallery_list' %}" rel="bookmark" class="link-item mobile-hidden">
+                            <span class="text">{% trans 'Gallery' %}</span>
+                        </a>
+                        <span class="language link-item">
+                            {% for lang in LANGUAGES %}
+                                {% if lang.0 == ACTIVE_LANGUAGE %}
+                                    <span class="item text active">{{ lang.0 }}</span>
+                                {% else %}
+                                    <a href="{% get_locale_domain lang.0 %}{{ request.path }}" class="item text">
+                                        {{ lang.0 }}
+                                    </a>
+                                {% endif %}
+                                <span class="item spacer">/</span>
+                            {% endfor %}
+                        </span>
+                        {% if user.is_authenticated %}
+                            <span class="user">
+                                <a href="{% url 'profile' %}">
+                                    {% if user.profile.original_image %}
+                                        {% thumbnail user.profile.original_image "x24" as im %}
+                                            <img src="{{ im.url }}" alt="{{ user.username }}">
+                                        {% endthumbnail %}
+                                    {% else %}
+                                        <img src="{% static 'img/no-image.png' %}" alt="{{ user.username }}"
+                                             title="{{ user.username }}" />
+                                    {% endif %}
+                                </a>
+                            </span>
+                        {% endif %}
+                        <span class="mobile-menu-button">
+                            <i class="material-icons">more_vert</i>
+                        </span>
+                    </div>
+                </div>
+            </nav>
+            <nav class="mobile-menu shadow">
+                <a href="{% url 'blog' %}" class="mobile-visible">
+                    {% trans 'Music' %}
+                </a>
+                <a href="{% url 'gallery_list' %}" class="mobile-visible">
+                    {% trans 'Gallery' %}
+                </a>
+                <a href="{% url 'about' %}">{% trans 'About' %}</a>
+                <a href="{% url 'resume' %}">{% trans 'Resume' %}</a>
+                <a href="{% url 'copyrights' %}">{% trans 'Copyrights' %}</a>
+                <span class="open-search">{% trans 'Search' %}</span>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+                {% endif %}
+            </nav>
+        </header>
+
+        <section id="search" class="shadow">
+            <div class="container">
+                <div class="flex">
+                    <input type="text" aria-label="Search" />
+                    <div class="submit-search">
+                        <i class="material-icons">search</i>
+                    </div>
+                    <div class="search-result shadow"></div>
+                </div>
+                <div class="close-search"><i class="material-icons">close</i></div>
+            </div>
+        </section>
+
+        <main>
+            {% block content %}
+                404 Not Found
+            {% endblock %}
+        </main>
+
+        <footer>
+            <nav class="container">
+                <a href="{% url 'about' %}" class="mobile-hidden">{% trans 'About' %}</a>
+                <a href="{% url 'resume' %}" class="mobile-hidden">{% trans 'Resume' %}</a>
+                <a href="{% url 'copyrights' %}" class="mobile-hidden">{% trans 'Copyrights' %}</a>
+                <div id="copy">
+                    Alex Manti&copy; 2005 - {% now 'Y' %}
+                </div>
+            </nav>
+        </footer>
+
+        <noscript id="deferred-styles">
+        {% compress css %}
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/480.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/dark.css' %}" media="all">
+        {% endcompress %}
+        </noscript>
+        {% compress css inline %}
+            <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
+        {% endcompress %}
+
+        {% compress js %}
+            <script src="{% static 'js/libs/jquery-3.3.1/jquery.min.js' %}"></script>
+            <script src="{% static 'js/libs/jquery-browser-0.1.0/jquery.browser.min.js' %}"></script>
+
+            <script type="text/javascript">
+                const DEBUG = {% if DEBUG %}true{% else %}false{% endif %};
+            </script>
+            <script src="{% static 'js/widgets/lazy.js' %}"></script>
+            <script src="{% static 'js/widgets/menu.js' %}"></script>
+            <script src="{% static 'js/widgets/loader.js' %}"></script>
+            <script src="{% static 'js/widgets/header.js' %}"></script>
+            <script src="{% static 'js/widgets/search.js' %}"></script>
+            <script src="{% static 'js/libs/common.js' %}"></script>
+            <script src="{% static 'js/libs/player.js' %}"></script>
+            <script src="{% static 'js/core.js' %}"></script>
+
+            {% block scripts %}{% endblock %}
+
+            <script type="text/javascript">
+                // Load deferred styles
+                let raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                      window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+                if (raf) {
+                    raf(() => {
+                        window.setTimeout($.loadDeferredStyles, 0);
+                    });
+                } else {
+                    window.addEventListener('load', $.loadDeferredStyles);
+                }
+            </script>
+        {% endcompress %}
+        <script type="application/ld+json">
+          {
+            "@context":"https://schema.org",
+            "@type":"MusicGroup",
+            "name":"{{ META_TITLE }}",
+            "url":"{{ BASE_URL }}",
+            "logo":"{% static 'img/logo/192.png' %}",
+            "sameAs" : ["https://instagram.com/manti_by","https://soundcloud.com/manti_by"]
+          }
+        </script>
+    </body>
+</html>

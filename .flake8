@@ -1,9 +1,21 @@
 [flake8]
+ignore =
+  # pydocstyle - docstring conventions (PEP257)
+  D1    # [pydocstyle] missing docstring
+  D203  # [pydocstyle] 1 blank line required before class docstring
+  D212  # [pydocstyle] Multi-line docstring summary should start at the first line
+  D406  # [pydocstyle] Section name should end with a newline
+  D407  # [pydocstyle] Missing dashed underline after section
+  D412  # [pydocstyle] No blank lines allowed between a section header and its content
+  # pycodestyle - style checker (PEP8)
+  W503  # [pycodestyle] line break before binary operator
+  W504  # [pycodestyle] line break after binary operator
+  E231  # Missing whitespace after ',', ';', or ':'
 exclude =
-    .git,
-    __pycache__,
-    app/manage.py
-    app/core/settings/
-    deploy/
+  .git,
+  __pycache__,
+  app/manage.py
+  app/core/settings/
+  deploy/
 max-line-length = 120
 max-complexity = 14
