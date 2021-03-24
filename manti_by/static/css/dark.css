@@ -31,6 +31,10 @@
     border-bottom: 1px solid #333;
   }
 
+  #search .search-result {
+    background: #121212;
+  }
+
   cite {
     color: #aaa;
     background: #464646;
@@ -46,7 +50,8 @@
   }
 
   .shadow {
-    box-shadow: 1px 1px 1px rgba(255, 255, 255, .1);
+    border: 1px solid #232323;
+    box-shadow: none;
   }
 
   #player {
@@ -60,10 +65,14 @@
 
   .player {
     color: #aaa;
-    background: #636363;
+    background: #333333;
   }
 
   .player .progress-label {
     color: #aaa;
+  }
+
+  .featured .post .info .wrap {
+    background: #121212;
   }
 }

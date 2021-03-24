@@ -51,6 +51,11 @@
             <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/search.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/480.css' %}" media="all">
+            <link type="text/css" rel="stylesheet" href="{% static 'css/dark.css' %}" media="all">
             {% block styles %}{% endblock %}
         {% endcompress %}
     </head>
@@ -159,15 +164,6 @@
             </nav>
         </footer>
 
-        <noscript id="deferred-styles">
-        {% compress css %}
-            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}" media="all">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}" media="all">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}" media="all">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/480.css' %}" media="all">
-            <link type="text/css" rel="stylesheet" href="{% static 'css/dark.css' %}" media="all">
-        {% endcompress %}
-        </noscript>
         {% compress css inline %}
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
         {% endcompress %}
@@ -175,7 +171,6 @@
         {% compress js %}
             <script src="{% static 'js/libs/jquery-3.3.1/jquery.min.js' %}"></script>
             <script src="{% static 'js/libs/jquery-browser-0.1.0/jquery.browser.min.js' %}"></script>
-
             <script type="text/javascript">
                 const DEBUG = {% if DEBUG %}true{% else %}false{% endif %};
             </script>
@@ -187,21 +182,7 @@
             <script src="{% static 'js/libs/common.js' %}"></script>
             <script src="{% static 'js/libs/player.js' %}"></script>
             <script src="{% static 'js/core.js' %}"></script>
-
             {% block scripts %}{% endblock %}
-
-            <script type="text/javascript">
-                // Load deferred styles
-                let raf = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
-                      window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-                if (raf) {
-                    raf(() => {
-                        window.setTimeout($.loadDeferredStyles, 0);
-                    });
-                } else {
-                    window.addEventListener('load', $.loadDeferredStyles);
-                }
-            </script>
         {% endcompress %}
         <script type="application/ld+json">
           {
