@@ -24,6 +24,10 @@
     background: #636363;
   }
 
+  #loader {
+    background: rgba(0, 0, 0, 0.5);
+  }
+
   #search,
   header {
     background: #121212;
@@ -44,10 +48,6 @@
   cite {
     color: #aaa;
     background: #464646;
-  }
-
-  .static {
-    background: #333;
   }
 
   .static p,

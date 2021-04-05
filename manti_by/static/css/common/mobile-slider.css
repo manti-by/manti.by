@@ -59,6 +59,6 @@
     }
 
    .featured .mobile-slider .post {
-        width: 32%;
+        width: calc(32% - 2px);
    }
 }

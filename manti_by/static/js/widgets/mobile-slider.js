@@ -7,7 +7,7 @@
   const controls = slider.find('.controls')
 
   const activateSlide = (active) => {
-    const left = 0 - (active * (content.width() / 3 * 1.028))
+    const left = 0 - (active * (content.width() / 3 * 1.02))
     content.animate({ left: left + 'px' }, 800)
 
     controls.find('.active').removeClass('active')
