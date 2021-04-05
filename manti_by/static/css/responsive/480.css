@@ -129,6 +129,8 @@
         right: initial;
         min-width: 100%;
         max-width: 100%;
+        min-height: auto;
+        max-height: none;
     }
 
     .home .main .posts,
@@ -201,6 +203,7 @@
     .post .tracklist .tracks {
         margin-bottom: 0.5em;
         font-size: 1.1em;
+        height: auto;
     }
 
     .post .info .preview {

@@ -20,3 +20,6 @@ if __name__ == "__main__":
             )
         raise
     execute_from_command_line(sys.argv)
+
+    from django.core.cache import cache
+    cache.clear()

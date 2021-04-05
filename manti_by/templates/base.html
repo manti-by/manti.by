@@ -51,12 +51,12 @@
             <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/common/search.css' %}" media="all">
+            {% block styles %}{% endblock %}
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/480.css' %}" media="all">
             <link type="text/css" rel="stylesheet" href="{% static 'css/dark.css' %}" media="all">
-            {% block styles %}{% endblock %}
         {% endcompress %}
     </head>
     <body>

@@ -12,6 +12,12 @@
     color: #666;
   }
 
+  h1 a,
+  h2 a,
+  h3 a {
+      color: #666;
+  }
+
   input, select, textarea, button {
     color: #aaa;
     border-color: #636363;
