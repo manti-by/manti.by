@@ -13,14 +13,14 @@
   },
   "homepage": "https://github.com/manti-by/manti.by#readme",
   "dependencies": {
-    "jquery": "3.3.1",
+    "jquery": "3.6.0",
     "jquery-browser": "0.1.0",
     "jquery-touchswipe": "1.6.19",
     "jquery-ui": "1.12.1"
   },
   "standard": {
     "ignore": [
-      "manti_by/static/js/libs/jquery-3.3.1/",
+      "manti_by/static/js/libs/jquery-3.6.0/",
       "manti_by/static/js/libs/jquery-browser-0.1.0/",
       "manti_by/static/js/libs/jquery-touchswipe-1.6.19/",
       "manti_by/static/js/libs/jquery-ui-1.12.1/"

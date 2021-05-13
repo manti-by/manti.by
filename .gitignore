@@ -7,8 +7,5 @@ manti_by/settings/prod.py
 
 .pytest_cache/
 
-static/
-media/
-
 *.pyc
 *~
