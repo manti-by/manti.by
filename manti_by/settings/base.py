@@ -32,11 +32,11 @@ ENVIRONMENT = "prod"
 
 INSTALLED_APPS = [
     "manti_by.api",
-    "manti_by.blog",
-    "manti_by.core",
-    "manti_by.gallery",
-    "manti_by.profiles",
-    "manti_by.shortener",
+    "manti_by.apps.blog",
+    "manti_by.apps.core",
+    "manti_by.apps.gallery",
+    "manti_by.apps.profiles",
+    "manti_by.apps.shortener",
     "taggit",
     "sorl.thumbnail",
     "compressor",
@@ -62,10 +62,10 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.middleware.gzip.GZipMiddleware",
     "django.middleware.http.ConditionalGetMiddleware",
-    "manti_by.core.middleware.language.LocaleMiddleware",
+    "manti_by.apps.core.middleware.language.LocaleMiddleware",
 ]
 
-ROOT_URLCONF = "manti_by.core.urls"
+ROOT_URLCONF = "manti_by.urls"
 
 TEMPLATES = [
     {
@@ -78,7 +78,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "manti_by.core.context_processors.common.global_template_vars",
+                "manti_by.apps.core.context_processors.common.global_template_vars",
             ],
             "debug": False,
         },

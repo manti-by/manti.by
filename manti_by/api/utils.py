@@ -2,7 +2,7 @@ import logging
 
 from django.http import JsonResponse
 
-from manti_by.profiles.models import Profile
+from manti_by.apps.profiles.models import Profile
 
 logger = logging.getLogger(__name__)
 

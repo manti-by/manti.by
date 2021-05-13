@@ -17,10 +17,10 @@ BASE_URL = "https://manti.by"
 SESSION_COOKIE_DOMAIN = ".manti.by"
 
 STATIC_URL = "https://static.manti.by/"
-STATIC_ROOT = "/var/lib/manti.by/static"
+STATIC_ROOT = "/var/lib/manti/static"
 
 MEDIA_URL = "https://content.manti.by/"
-MEDIA_ROOT = "/var/lib/manti.by/content"
+MEDIA_ROOT = "/var/lib/manti/content"
 
 LOCALE_URLS = {"be": "manti.by", "ru": "ru.manti.by", "en": "en.manti.by"}
 
@@ -58,12 +58,12 @@ LOGGING = {
         "file_app": {
             "level": "WARNING",
             "class": "logging.FileHandler",
-            "filename": "/var/log/manti.by/app.log",
+            "filename": "/var/log/manti/app.log",
         },
         "file_django": {
             "level": "WARNING",
             "class": "logging.FileHandler",
-            "filename": "/var/log/manti.by/django.log",
+            "filename": "/var/log/manti/django.log",
         },
         "null": {"class": "logging.NullHandler"},
     },

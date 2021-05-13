@@ -1,5 +1,9 @@
 -r base.txt
 
+pytest>=6.2.2
+pytest-django>=4.1.0
+fakeredis>=1.4.5
+
 ipython>=7.21.0
 flake8>=3.9.0
 black>=20.8b1

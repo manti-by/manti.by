@@ -1,11 +1,23 @@
 {
-  "name": "manti-by",
-  "version": "2.0.0",
+  "name": "manti_by",
+  "version": "2.1.0",
+  "description": "Django custom blog engine for music and photo publishing",
   "repository": {
     "type": "git",
-    "url": "https://github.com/manti-by/manti.by.git"
+    "url": "git+https://github.com/manti-by/manti.by.git"
   },
-  "license": "BSD",
+  "author": "Alexander Chaika",
+  "license": "BSD-3-Clause",
+    "bugs": {
+    "url": "https://github.com/manti-by/manti.by/issues"
+  },
+  "homepage": "https://github.com/manti-by/manti.by#readme",
+  "dependencies": {
+    "jquery": "3.3.1",
+    "jquery-browser": "0.1.0",
+    "jquery-touchswipe": "1.6.19",
+    "jquery-ui": "1.12.1"
+  },
   "standard": {
     "ignore": [
       "manti_by/static/js/libs/jquery-3.3.1/",

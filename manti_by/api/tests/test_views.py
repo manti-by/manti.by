@@ -4,7 +4,7 @@ import pytest
 
 from django.conf import settings
 
-from manti_by.blog.models import Post
+from manti_by.apps.blog.models import Post
 
 
 class ApiViewsTest:
