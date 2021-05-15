@@ -11,6 +11,9 @@ docker-test:
 bash:
 	docker exec -it manti-by-django bash
 
+shell:
+	docker exec -it manti-by-django python manage.py shell
+
 psql:
 	docker exec -it manti-by-postgres psql -U manti_by
 
