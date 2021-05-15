@@ -2,7 +2,6 @@ import os
 import random
 import logging
 
-from fakeredis import FakeStrictRedis
 from rq import Queue
 import django_rq
 

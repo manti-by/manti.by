@@ -31,7 +31,7 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=manti_by.settings.prod
     volumes:
-      - /home/manti/www/manti.by/src/:/srv/manti/src/
+      - /home/manti/www/manti.by/manti/:/srv/manti/src/
       - /mnt/nostromo/www/manti/static/:/var/lib/manti/static/
       - /mnt/nostromo/www/manti/content/:/var/lib/manti/content/
       - /mnt/nostromo/www/manti/log/:/var/log/manti/
@@ -48,7 +48,7 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=manti_by.settings.prod
     volumes:
-      - /home/manti/www/manti.by/src/:/srv/manti/src/
+      - /home/manti/www/manti.by/manti/:/srv/manti/src/
       - /mnt/nostromo/www/manti/content/:/var/lib/manti/content/
       - /mnt/nostromo/www/manti/log/:/var/log/manti/
     command: |
