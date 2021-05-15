@@ -78,6 +78,8 @@ def cover_name(instance, filename):
 
 
 def get_rq_queue():
+    from fakeredis import FakeStrictRedis
+
     if settings.ENVIRONMENT in ("local", "test"):
         return Queue(connection=FakeStrictRedis())
     return django_rq.get_queue(is_async=settings.RQ_ASYNC)
