@@ -12,7 +12,7 @@ from manti_by.apps.core.utils import flush_cache, original_name
 
 
 class GalleryManager(models.Manager):
-    def ordered(self):
+    def orderedordered(self):
         return self.get_queryset().order_by("-order")
 
 

@@ -23,10 +23,10 @@ def index(request):
         if featured_image:
             featured_image = featured_image[0]
             latest_images = Image.objects.exclude(pk=featured_image.pk).order_by(
-                "-created"
+                "-order"
             )[:6]
         else:
-            latest_images = Image.objects.all().order_by("-created")[:6]
+            latest_images = Image.objects.all().order_by("-order")[:6]
 
         featured_posts = Post.objects.filter(tags__name__iexact="featured")[:3]
         latest_posts = (
