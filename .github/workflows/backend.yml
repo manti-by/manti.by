@@ -20,10 +20,10 @@ jobs:
       - name: Check out the repository
         uses: actions/checkout@v2
 
-      - name: Set up Python 3.9.5
+      - name: Set up Python 3.9.7
         uses: actions/setup-python@v1
         with:
-          python-version: 3.9.5
+          python-version: 3.9.7
 
       - name: Cache pip
         uses: actions/cache@v2
