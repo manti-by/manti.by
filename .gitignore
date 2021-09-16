@@ -9,3 +9,5 @@ manti_by/settings/prod.py
 
 *.pyc
 *~
+
+docker-compose.local.yml

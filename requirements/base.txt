@@ -2,14 +2,14 @@ django>=3.2.7,<3.3.0
 pillow>=8.3.2,<8.4.0
 psycopg2-binary>=2.8.6,<2.9.0
 sorl-thumbnail>=12.7.0,<12.8.0
-django-rq>=2.4.0,<2.5.0
+django-rq>=2.4.1,<2.5.0
 django-redis-cache>=3.0.0,<3.1.0
 
-django-taggit>=1.3.0,<1.4.0
-django_compressor>=2.4,<2.5
-django-modeltranslation>=0.16.1,<0.17.0
+django-taggit>=1.5.1,<1.6.0
+django_compressor>=2.4.1,<2.5.0
+django-modeltranslation>=0.17.3,<0.18.0
 git+https://github.com/manti-by/djrest.git#egg=djrest
 
 exifread>=2.3.2,<2.4.0
-imagehash>=4.2.0,<4.3.0
+imagehash>=4.2.1,<4.3.0
 httpagentparser>=1.9.1,<1.10.0
