@@ -31,5 +31,8 @@ check:
 	black --target-version py38 manti_by/
 	standard --fix manti_by/static/js/
 
+django-checks:
+	python manage.py makemigrations --dry-run --check --verbosity=3
+
 test:
 	pytest
