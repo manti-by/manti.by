@@ -64,7 +64,7 @@ Build and run app in dev mode
 
 1. Create virtual environment and install project dependencies
 
-        $ virtualenv -p python3.9 --prompt="mnt-" ../venv
+        $ python3.9 -m venv --prompt="mnt" .venv/
         $ source ../venv/bin/activate
         $ pip install -r requirements/dev.txt
 
@@ -72,7 +72,7 @@ Build and run app in dev mode
 2. Create user and database
 
         $ sudo su postgres && psql
-        # CREATE USER manti_by WITH PASSWORD manti_by CREATEDB;
+        # CREATE USER manti_by WITH PASSWORD 'manti_by' CREATEDB;
 
         $ psql -h localhost -U manti_by
         # CREATE DATABASE manti_by;

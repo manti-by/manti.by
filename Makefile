@@ -11,9 +11,6 @@ docker-test:
 bash:
 	docker exec -it manti-by-django bash
 
-shell:
-	docker exec -it manti-by-django python manage.py shell
-
 psql:
 	docker exec -it manti-by-postgres psql -U manti_by
 
@@ -29,10 +26,9 @@ static:
 check:
 	flake8 manti_by/
 	black --target-version py38 manti_by/
-	standard --fix manti_by/static/js/
 
 django-checks:
 	python manage.py makemigrations --dry-run --check --verbosity=3
 
 test:
-	pytest
+	pytest -n 4
