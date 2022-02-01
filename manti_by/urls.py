@@ -27,10 +27,10 @@ urlpatterns = [
     path("profile/", include("manti_by.apps.profiles.urls"), name="profile"),
     # URL shortener
     path("sr/", include("manti_by.apps.shortener.urls")),
-    # Admin urls
-    path("dashboard/", admin.site.urls),
     # Django RQ
     path("dashboard/django-rq/", include("django_rq.urls")),
+    # Admin urls
+    path("dashboard/", admin.site.urls),
     # Sitemap
     path(
         "sitemap.xml",

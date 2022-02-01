@@ -15,6 +15,11 @@ class Command(BaseCommand):
         checked = 0
         for post in Post.objects.all():
             try:
+                post.mp3_release_ready = (
+                    os.path.exists(post.release_mp3_file)
+                    and os.path.getsize(post.release_mp3_file) > 0
+                )
+
                 post.ogg_release_ready = (
                     os.path.exists(post.release_ogg_file)
                     and os.path.getsize(post.release_ogg_file) > 0

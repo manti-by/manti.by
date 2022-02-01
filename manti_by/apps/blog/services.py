@@ -2,6 +2,7 @@ from manti_by.apps.core.services import (
     convert_to_mp3_preview,
     convert_to_ogg_preview,
     convert_to_ogg_release,
+    convert_to_mp3_release,
 )
 from manti_by.apps.core.utils import get_rq_queue
 
@@ -13,6 +14,8 @@ def generate_preview_for_post(post):
         return
     if not post.mp3_preview_ready:
         queue.enqueue(convert_to_mp3_preview, post.id)
+    if not post.mp3_release_ready:
+        queue.enqueue(convert_to_mp3_release, post.id)
     if not post.ogg_preview_ready:
         queue.enqueue(convert_to_ogg_preview, post.id)
     if not post.ogg_release_ready:

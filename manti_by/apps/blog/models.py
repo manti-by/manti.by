@@ -71,12 +71,15 @@ class Post(SlugifyMixin, BaseModel):
     related = models.ManyToManyField("self", blank=True)
 
     mp3_preview_ready = models.BooleanField(blank=True, default=False)
+    mp3_release_ready = models.BooleanField(blank=True, default=False)
     ogg_preview_ready = models.BooleanField(blank=True, default=False)
     ogg_release_ready = models.BooleanField(blank=True, default=False)
 
-    original_id = models.IntegerField(blank=True, default=0)  # Temporary field
-
     objects = PostManager()
+
+    class Meta:
+        verbose_name = _("Post")
+        verbose_name_plural = _("Posts")
 
     def __str__(self):
         return self.name
@@ -84,7 +87,7 @@ class Post(SlugifyMixin, BaseModel):
     @property
     def files_converted(self):
         return (
-            self.mp3_preview_ready and self.ogg_preview_ready and self.ogg_release_ready
+            self.mp3_preview_ready and self.mp3_release_ready and self.ogg_preview_ready and self.ogg_release_ready
         )
 
     @property
@@ -113,11 +116,11 @@ class Post(SlugifyMixin, BaseModel):
 
     @property
     def release_mp3_url(self):
-        return self.release.url if self.release else None
+        return self.release.url.replace("flac", "mp3") if self.release else None
 
     @property
     def release_mp3_file(self):
-        return self.release.file.name if self.release else None
+        return self.release.file.name.replace("flac", "mp3") if self.release else None
 
     @property
     def preview_mp3_url(self):

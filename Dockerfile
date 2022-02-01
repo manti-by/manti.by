@@ -22,7 +22,7 @@ RUN export PATH="/bin:$PATH" && export PKG_CONFIG_PATH="/var/lib/ffmpeg/build/li
       --enable-libtheora \
       --enable-libvorbis \
       --enable-nonfree && \
-  make -j2 && \
+  make -j4 && \
   make install && \
   rm -rf /var/lib/ffmpeg/
 
@@ -33,7 +33,7 @@ RUN pip install --trusted-host pypi.org --no-cache-dir --upgrade pip && \
     pip install --trusted-host pypi.org --no-cache-dir -r /tmp/prod.txt
 
 # Remove system packages after use
-RUN apt-get autoremove -y --purge autoconf automake build-essential cmake git-core pkg-config wget yasm && \
+RUN apt-get autoremove -y --purge autoconf automake build-essential cmake git-core pkg-config yasm && \
     apt-get clean -y
 
 # Add base user

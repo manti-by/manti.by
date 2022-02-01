@@ -105,6 +105,8 @@ DATABASES = {
     }
 }
 
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 # Cache backend
 # https://docs.djangoproject.com/en/1.10/topics/cache/
 
@@ -153,7 +155,7 @@ LANGUAGES = (
     ("en", _("English")),
 )
 
-LOCALE_PATHS = (os.path.join(PROJECT_DIR, "core", "locale"),)
+LOCALE_PATHS = (os.path.join(PROJECT_DIR, "apps", "core", "locale"),)
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_L10N = True
@@ -212,5 +214,5 @@ COMPRESS_CSS_HASHING_METHOD = None
 
 # Meta tags info
 
-META_TITLE = "Welcome to official blog of Alex Manti."
-META_DESCRIPTION = "Official blog of Alex Manti. My music, photos and info about me."
+META_TITLE = _("Welcome to blog of Alex Chaika.")
+META_DESCRIPTION = _("Blog of Alex Chaika. My music, photos and info about me.")

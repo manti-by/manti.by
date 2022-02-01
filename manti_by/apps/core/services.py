@@ -1,7 +1,7 @@
 import logging
 import subprocess
 
-from manti_by.apps.blog.constants import MP3_PREVIEW, OGG_PREVIEW, OGG_RELEASE
+from manti_by.apps.blog.constants import MP3_PREVIEW, MP3_RELEASE, OGG_PREVIEW, OGG_RELEASE
 
 logger = logging.getLogger(__name__)
 
@@ -19,11 +19,15 @@ def convert_release(ffmpeg_format, post_id, output_type=""):
         result = post.preview_ogg_file
     elif output_type == OGG_RELEASE:
         result = post.release_ogg_file
+    elif output_type == MP3_RELEASE:
+        if post.release.file.name == post.release_mp3_file:
+            return
+        result = post.release_mp3_file
     else:
         result = post.preview_mp3_file
 
     ffmpeg_format.append(result)
-    command = ["ffmpeg", "-y", "-nostats", "-i", post.release_mp3_file] + ffmpeg_format
+    command = ["ffmpeg", "-y", "-nostats", "-i", post.release.file.name] + ffmpeg_format
     return subprocess.call(command)
 
 
@@ -43,6 +47,11 @@ def convert_to_mp3_preview(post_id):
         "afade=t=out:st=1770:d=30",
     ]
     return convert_release(command, post_id, MP3_PREVIEW)
+
+
+def convert_to_mp3_release(post_id):
+    command = ["-acodec", "libmp3lame", "-ab", "320k"]
+    return convert_release(command, post_id, MP3_RELEASE)
 
 
 def convert_to_ogg_preview(post_id):

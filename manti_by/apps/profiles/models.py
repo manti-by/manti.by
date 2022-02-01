@@ -20,6 +20,10 @@ class Profile(BaseModel):
         User, on_delete=models.CASCADE, primary_key=True, related_name="profile"
     )
 
+    class Meta:
+        verbose_name = _("Profile")
+        verbose_name_plural = _("Profiles")
+
     def __str__(self):
         return self.user.email
 
