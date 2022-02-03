@@ -1,7 +1,12 @@
 import logging
 import subprocess
 
-from manti_by.apps.blog.constants import MP3_PREVIEW, MP3_RELEASE, OGG_PREVIEW, OGG_RELEASE
+from manti_by.apps.blog.constants import (
+    MP3_PREVIEW,
+    MP3_RELEASE,
+    OGG_PREVIEW,
+    OGG_RELEASE,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -12,23 +17,36 @@ def convert_release(ffmpeg_format, post_id, output_type=""):
     try:
         post = Post.objects.get(id=post_id)
     except Post.DoesNotExist as e:
-        logger.warning(e)
-        return
+        logger.error(e)
+        return -1
 
-    if output_type == OGG_PREVIEW:
-        result = post.preview_ogg_file
-    elif output_type == OGG_RELEASE:
-        result = post.release_ogg_file
+    if output_type == OGG_RELEASE:
+        if post.release.file.name == post.release_ogg_file:
+            return 0
+        result_file_name = post.release_ogg_file
+        update_attribute = "ogg_release_ready"
     elif output_type == MP3_RELEASE:
         if post.release.file.name == post.release_mp3_file:
-            return
-        result = post.release_mp3_file
+            return 0
+        result_file_name = post.release_mp3_file
+        update_attribute = "mp3_release_ready"
+    elif output_type == OGG_PREVIEW:
+        result_file_name = post.preview_ogg_file
+        update_attribute = "ogg_preview_ready"
+    elif output_type == MP3_PREVIEW:
+        result_file_name = post.preview_mp3_file
+        update_attribute = "mp3_preview_ready"
     else:
-        result = post.preview_mp3_file
+        logger.error(f"Invalid conversion format {output_type}")
+        return -1
 
-    ffmpeg_format.append(result)
-    command = ["ffmpeg", "-y", "-nostats", "-i", post.release.file.name] + ffmpeg_format
-    return subprocess.call(command)
+    ffmpeg_format.append(result_file_name)
+    command = ["ffmpeg", "-y", "-i", post.release.file.name] + ffmpeg_format
+    command_exit_code = subprocess.call(command)
+    if command_exit_code == 0:
+        setattr(post, update_attribute, True)
+        post.save()
+    return command_exit_code
 
 
 def convert_to_mp3_preview(post_id):

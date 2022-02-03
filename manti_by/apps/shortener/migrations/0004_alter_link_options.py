@@ -6,12 +6,12 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('shortener', '0003_alter_link_id'),
+        ("shortener", "0003_alter_link_id"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='link',
-            options={'verbose_name': 'Link', 'verbose_name_plural': 'Links'},
+            name="link",
+            options={"verbose_name": "Link", "verbose_name_plural": "Links"},
         ),
     ]

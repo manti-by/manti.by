@@ -7,37 +7,45 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('taggit', '0004_alter_taggeditem_content_type_alter_taggeditem_tag'),
-        ('blog', '0016_auto_20210917_1132'),
+        ("taggit", "0004_alter_taggeditem_content_type_alter_taggeditem_tag"),
+        ("blog", "0016_auto_20210917_1132"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='post',
-            options={'verbose_name': 'Post', 'verbose_name_plural': 'Posts'},
+            name="post",
+            options={"verbose_name": "Post", "verbose_name_plural": "Posts"},
         ),
         migrations.RemoveField(
-            model_name='post',
-            name='original_id',
+            model_name="post",
+            name="original_id",
         ),
         migrations.AddField(
-            model_name='post',
-            name='mp3_release_ready',
+            model_name="post",
+            name="mp3_release_ready",
             field=models.BooleanField(blank=True, default=False),
         ),
         migrations.AlterField(
-            model_name='genresproxy',
-            name='tag',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='%(app_label)s_%(class)s_items', to='taggit.tag'),
+            model_name="genresproxy",
+            name="tag",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="%(app_label)s_%(class)s_items",
+                to="taggit.tag",
+            ),
         ),
         migrations.AlterField(
-            model_name='post',
-            name='related',
-            field=models.ManyToManyField(blank=True, to='blog.Post'),
+            model_name="post",
+            name="related",
+            field=models.ManyToManyField(blank=True, to="blog.Post"),
         ),
         migrations.AlterField(
-            model_name='tagsproxy',
-            name='tag',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='%(app_label)s_%(class)s_items', to='taggit.tag'),
+            model_name="tagsproxy",
+            name="tag",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="%(app_label)s_%(class)s_items",
+                to="taggit.tag",
+            ),
         ),
     ]
