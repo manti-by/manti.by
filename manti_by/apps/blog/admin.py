@@ -50,6 +50,7 @@ class PostAdmin(admin.ModelAdmin):
                 "fields": (
                     "cover",
                     "release",
+                    "mp3_release_ready",
                     "mp3_preview_ready",
                     "ogg_preview_ready",
                     "ogg_release_ready",

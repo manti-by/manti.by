@@ -1,18 +1,27 @@
+from __future__ import annotations
+from typing import TYPE_CHECKING
+
 from manti_by.apps.core.services import (
     convert_to_mp3_preview,
     convert_to_ogg_preview,
     convert_to_ogg_release,
+    convert_to_mp3_release,
 )
 from manti_by.apps.core.utils import get_rq_queue
 
 queue = get_rq_queue()
 
+if TYPE_CHECKING:
+    from manti_by.apps.blog.models import Post
 
-def generate_preview_for_post(post):
+
+def generate_preview_for_post(post: Post):
     if not post.release:
         return
     if not post.mp3_preview_ready:
         queue.enqueue(convert_to_mp3_preview, post.id)
+    if not post.mp3_release_ready:
+        queue.enqueue(convert_to_mp3_release, post.id)
     if not post.ogg_preview_ready:
         queue.enqueue(convert_to_ogg_preview, post.id)
     if not post.ogg_release_ready:

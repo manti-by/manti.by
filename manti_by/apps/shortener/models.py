@@ -16,6 +16,10 @@ class Link(BaseModel):
         unique=True, null=True, blank=True, verbose_name=_("Short Link")
     )
 
+    class Meta:
+        verbose_name = _("Link")
+        verbose_name_plural = _("Links")
+
     def __str__(self):
         return self.link
 

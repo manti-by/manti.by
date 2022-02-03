@@ -25,6 +25,10 @@ class Gallery(SlugifyMixin, BaseModel):
 
     objects = GalleryManager()
 
+    class Meta:
+        verbose_name = _("Gallery")
+        verbose_name_plural = _("Galleries")
+
     def __str__(self):
         return self.name
 
@@ -37,10 +41,6 @@ class Gallery(SlugifyMixin, BaseModel):
             return self.images.order_by("-created")[0].created
         except Exception:
             return self.updated
-
-    class Meta:
-        verbose_name = _("Gallery")
-        verbose_name_plural = _("Gallery List")
 
 
 class ImageManager(models.Manager):
@@ -63,12 +63,12 @@ class Image(BaseModel):
 
     objects = ImageManager()
 
-    def __str__(self):
-        return "Gallery #%s - Image#%d" % (self.gallery.name, self.id)
-
     class Meta:
         verbose_name = _("Image")
-        verbose_name_plural = _("Image List")
+        verbose_name_plural = _("Images")
+
+    def __str__(self):
+        return "Gallery #%s - Image#%d" % (self.gallery.name, self.id)
 
 
 @receiver(post_save, sender=Image, dispatch_uid="flush_gallery_cache")

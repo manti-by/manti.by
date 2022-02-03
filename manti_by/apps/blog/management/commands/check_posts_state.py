@@ -13,8 +13,13 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         checked = 0
-        for post in Post.objects.all():
+        for post in Post.objects.all().order_by("created"):
             try:
+                post.mp3_release_ready = (
+                    os.path.exists(post.release_mp3_file)
+                    and os.path.getsize(post.release_mp3_file) > 0
+                )
+
                 post.ogg_release_ready = (
                     os.path.exists(post.release_ogg_file)
                     and os.path.getsize(post.release_ogg_file) > 0
@@ -31,9 +36,10 @@ class Command(BaseCommand):
                 )
 
                 self.stdout.write(
-                    "Checked post #%d: %d %d %d"
+                    "Checked post #%d: %d %d %d %d"
                     % (
                         post.id,
+                        1 if post.mp3_release_ready else 0,
                         1 if post.ogg_release_ready else 0,
                         1 if post.mp3_preview_ready else 0,
                         1 if post.ogg_preview_ready else 0,
