@@ -27,10 +27,9 @@ RUN export PATH="/bin:$PATH" && export PKG_CONFIG_PATH="/var/lib/ffmpeg/build/li
   rm -rf /var/lib/ffmpeg/
 
 # Install python packages specified in requirements
-COPY requirements/base.txt /tmp/base.txt
-COPY requirements/prod.txt /tmp/prod.txt
+COPY requirements.txt /tmp/requirements.txt
 RUN pip install --trusted-host pypi.org --no-cache-dir --upgrade pip && \
-    pip install --trusted-host pypi.org --no-cache-dir -r /tmp/prod.txt
+    pip install --trusted-host pypi.org --no-cache-dir -r /tmp/requirements.txt
 
 # Remove system packages after use
 RUN apt-get autoremove -y --purge autoconf automake build-essential cmake git-core pkg-config yasm && \

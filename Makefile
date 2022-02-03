@@ -3,10 +3,10 @@ build:
 
 docker-test:
 	docker run --rm \
-	    -e DJANGO_SETTINGS_MODULE=manti_by.settings.sqlite \
-	    -v /home/manti/www/manti.by/src/:/srv/manti.by/src/ \
-	    mantiby/manti.by:latest \
-	    pytest --create-db --disable-warnings
+		-e DJANGO_SETTINGS_MODULE=manti_by.settings.sqlite \
+		-v /home/manti/www/manti.by/manti/:/srv/manti/src/ \
+		mantiby/manti.by:latest \
+		pytest --create-db --disable-warnings
 
 bash:
 	docker exec -it manti-by-django bash
@@ -25,10 +25,10 @@ static:
 
 check:
 	flake8 manti_by/
-	black --target-version py38 manti_by/
+	black --target-version py39 manti_by/
 
 django-checks:
-	python manage.py makemigrations --dry-run --check --verbosity=3
+	python3 manage.py makemigrations --dry-run --check --verbosity=3
 
 test:
-	pytest -n 4
+	pytest

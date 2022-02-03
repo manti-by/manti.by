@@ -112,7 +112,7 @@ class Post(SlugifyMixin, BaseModel):
         try:
             ext = self.release.url.split(".")[-1]
             return self.release.url.replace(f".{ext}", "")
-        except (IndexError, AttributeError):
+        except (IndexError, AttributeError, ValueError):
             return
 
     @property
@@ -120,21 +120,21 @@ class Post(SlugifyMixin, BaseModel):
         try:
             ext = self.release.file.name.split(".")[-1]
             return self.release.file.name.replace(f".{ext}", "")
-        except (IndexError, AttributeError):
+        except (IndexError, AttributeError, ValueError):
             return
 
     @property
     def preview_file_url(self) -> Optional[str]:
         try:
             return self.release_file_url.replace("release", "preview")
-        except (IndexError, AttributeError):
+        except (IndexError, AttributeError, ValueError):
             return
 
     @property
     def preview_file_name(self) -> Optional[str]:
         try:
             return self.release_file_name.replace("release", "preview")
-        except (IndexError, AttributeError):
+        except (IndexError, AttributeError, ValueError):
             return
 
     @property
