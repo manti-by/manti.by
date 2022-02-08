@@ -14,6 +14,8 @@ ALLOWED_HOSTS = ("127.0.0.1", "localhost", "manti.by", "ru.manti.by", "en.manti.
 
 BASE_URL = "https://manti.by"
 
+CSRF_TRUSTED_ORIGINS = ("https://manti.by",)
+
 SESSION_COOKIE_DOMAIN = ".manti.by"
 
 STATIC_URL = "https://static.manti.by/"
