@@ -1,0 +1,82 @@
+{% extends "base" %}
+
+{% block title %}Home{% endblock %}
+{% block meta %}Home{% endblock %}
+
+{% block content %}
+  <div class="home container">
+    <div class="featured posts">
+      <h1>Featured</h1>
+      <div id="featured-slider" class="mobile-slider">
+        <div class="flex content">
+          {% for item in featured_posts %}
+            {% include "partial/featured" %}
+          {% endfor %}
+        </div>
+        <div class="controls">
+          <div class="prev button hidden">
+            <i class="material-icons">chevron_left</i>
+          </div>
+          <ul>
+            {% for item in featured_posts %}
+              <li {% if forloop.first %}class="active"{% endif %}>&bullet;</li>
+            {% endfor %}
+          </ul>
+          <div class="next button">
+            <i class="material-icons">chevron_right</i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="gallery">
+      <h2>Latest Images</h2>
+      <div class="featured">
+        <a href="/gallery/">
+          <img src="{{ featured_image.thumbnail }}" data-src="{{ featured_image.display }}"
+               alt="Popular image from gallery" class="lazy">
+        </a>
+        <div class="latest flex">
+          {% for image in latest_images %}
+            <a href="/gallery/" class="thumbnail">
+              <img src="{{ image.thumbnail }}" data-src="{{ image.preview }}" alt="Image #{{ image.id }}" class="lazy">
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+    <h2>Latest posts</h2>
+    <div class="main flex">
+      <section class="posts">
+        {% for item in latest_posts %}
+          {% include 'partial/item' %}
+        {% endfor %}
+      </section>
+      {% include "sidebar" %}
+    </div>
+  </div>
+{% endblock %}
+
+{% block styles %}
+  <link type="text/css" rel="stylesheet" href="/static/css/index.css" media="all">
+  <link type="text/css" rel="stylesheet" href="/static/css/blog/list-item.css" media="all">
+  <link type="text/css" rel="stylesheet" href="/static/css/blog/featured-item.css" media="all">
+  <link type="text/css" rel="stylesheet" href="/static/css/common/mobile-slider.css" media="all">
+{% endblock %}
+
+{% block scripts %}
+  <script src="/static/js/libs/jquery-touchswipe-1.6.19/jquery.touchswipe.min.js"></script>
+  <script src="/static/js/widgets/tracklist.js"></script>
+  <script src="/static/js/widgets/mobile-slider.js"></script>
+  <script type="text/javascript">
+    (function ($) {
+      $(document).ready(() => {
+        $.initTracklist();
+        $.initMobileSlider();
+      });
+
+      $(window).on('resize', () => {
+        $.initMobileSlider();
+      });
+    })(jQuery);
+  </script>
+{% endblock %}

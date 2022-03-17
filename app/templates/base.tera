@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{% endblock %} | Blog of Alex Chaika. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.</title>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+        <meta name="theme-color" content="#B40303">
+        <link rel="manifest" href="/static/manifest.json">
+        <link rel="canonical" href="https://manti.io">
+
+        <!-- Add to homescreen for Chrome on Android -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <link rel="icon" type="image/png" sizes="48x48" href="/static/img/logo/48.png">
+        <link rel="icon" type="image/png" sizes="72x72" href="/static/img/logo/72.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/static/img/logo/96.png">
+        <link rel="icon" type="image/png" sizes="144x144" href="/static/img/logo/144.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/static/img/logo/192.png">
+        <link rel="icon" type="image/png" sizes="256x256" href="/static/img/logo/256.png">
+        <link rel="icon" type="image/png" sizes="512x512" href="/static/img/logo/512.png">
+
+        <!-- Add to homescreen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="apple-touch-icon" type="image/png" sizes="48x48" href="/static/img/logo/48.png">
+        <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="/static/img/logo/72.png">
+        <link rel="apple-touch-icon" type="image/png" sizes="96x96" href="/static/img/logo/96.png">
+        <link rel="apple-touch-icon" type="image/png" sizes="144x144" href="/static/img/logo/144.png">
+        <link rel="apple-touch-icon" type="image/png" sizes="192x192" href="/static/img/logo/192.png">
+        <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="/static/img/logo/256.png">
+        <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="/static/img/logo/512.png">
+
+        <meta name="description"
+              content="{% block meta %}{% endblock %} | Blog of Alex Chaika. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.">
+
+        {% block open_graph %}
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="Blog of Alex Chaika.">
+        <meta property="og:description"
+              content="Blog of Alex Chaika. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.">
+        <meta property="og:image" content="/static/img/share.jpg">
+        {% endblock %}
+        <meta property="og:url" content="https://manti.io">
+
+        <link type="text/css" rel="stylesheet" href="/static/css/common/reset.css" media="all">
+        <link type="text/css" rel="stylesheet" href="/static/css/font.css" media="all">
+        <link type="text/css" rel="stylesheet" href="/static/css/base.css" media="all">
+        <link type="text/css" rel="stylesheet" href="/static/css/common/player.css" media="all">
+        <link type="text/css" rel="stylesheet" href="/static/css/common/search.css" media="all">
+        <link type="text/css" rel="stylesheet" href="/static/css/responsive/1600.css" media="all">
+        <link type="text/css" rel="stylesheet" href="/static/css/responsive/1024.css" media="all">
+        <link type="text/css" rel="stylesheet" href="/static/css/responsive/767.css" media="all">
+        <link type="text/css" rel="stylesheet" href="/static/css/responsive/480.css" media="all">
+        <link type="text/css" rel="stylesheet" href="/static/css/dark.css'" media="all">
+    </head>
+    <body>
+        <div id="loader"><div></div></div>
+
+        <header class="visible shadow {% if is_home %}home{% endif %}">
+            <nav class="container">
+                <div class="flex">
+                    <div class="left">
+                        <a href="/" class="homelink" rel="home">
+                            <span class="icon">
+                                <i class="material-icons">settings_input_svideo</i>
+                            </span>
+                            <span class="text">
+                                Manti.by
+                            </span>
+                        </a>
+                        <span class="breadcrumbs">{% block breadcrumbs %}{% endblock %}</span>
+                    </div>
+                    <div class="right">
+                        <a href="/blog/" rel="bookmark" class="link-item mobile-hidden">
+                            <span class="text">Music</span>
+                        </a>
+                        <a href="/gallery/" rel="bookmark" class="link-item mobile-hidden">
+                            <span class="text">Gallery</span>
+                        </a>
+                        <span class="mobile-menu-button">
+                            <i class="material-icons">more_vert</i>
+                        </span>
+                    </div>
+                </div>
+            </nav>
+            <nav class="mobile-menu shadow">
+                <a href="/blog/" class="mobile-visible">Music</a>
+                <a href="/gallery/" class="mobile-visible">Gallery</a>
+                <a href="/about/">About</a>
+                <a href="/resume/">Resume</a>
+                <a href="/copyrights/">Copyrights</a>
+                <span class="open-search">Search</span>
+            </nav>
+        </header>
+
+        <section id="search" class="shadow">
+            <div class="container">
+                <div class="flex">
+                    <input type="text" aria-label="Search" />
+                    <div class="submit-search">
+                        <i class="material-icons">search</i>
+                    </div>
+                    <div class="search-result shadow"></div>
+                </div>
+                <div class="close-search"><i class="material-icons">close</i></div>
+            </div>
+        </section>
+
+        <main>
+            {% block content %}
+                404 Not Found
+            {% endblock %}
+        </main>
+
+        <footer>
+            <nav class="container">
+                <a href="/about/" class="mobile-hidden">About</a>
+                <a href="/resume/" class="mobile-hidden">Resume</a>
+                <a href="/copyrights/" class="mobile-hidden">Copyrights</a>
+                <div id="copy">
+                    Alex Manti&copy; 2005 - 2022
+                </div>
+            </nav>
+        </footer>
+
+        <link type="text/css" rel="stylesheet" href="/static/css/common/print.css" media="print">
+        <script src="/static/js/libs/jquery-3.6.0/jquery.min.js"></script>
+        <script src="/static/js/libs/jquery-browser-0.1.0/jquery.browser.min.js"></script>
+        <script type="text/javascript">
+            const DEBUG = {% if DEBUG %}true{% else %}false{% endif %};
+        </script>
+        <script src="/static/js/widgets/lazy.js"></script>
+        <script src="/static/js/widgets/menu.js"></script>
+        <script src="/static/js/widgets/loader.js"></script>
+        <script src="/static/js/widgets/header.js"></script>
+        <script src="/static/js/widgets/search.js"></script>
+        <script src="/static/js/libs/common.js"></script>
+        <script src="/static/js/libs/player.js"></script>
+        <script src="/static/js/core.js"></script>
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

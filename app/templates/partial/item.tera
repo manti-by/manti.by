@@ -1,0 +1,54 @@
+<article class="post" data-id="{{ item.id }}">
+  <div class="flex">
+    <div class="image">
+      <a href="/post/{{ item.slug }}" class="shadow">
+        <img src="{{ item.cover.thumbnail }}" data-src="{{ item.cover.display }}" alt="{{ item.name }}" class="lazy">
+      </a>
+    </div>
+    <div class="data">
+      <h2>
+        <a href="/post/{{ item.slug }}">
+          {{ item.name }} /{{ item.genres | join(sep=", ") }}/
+        </a>
+      </h2>
+      <div class="info">
+        <div class="summary">{{ item.summary | linebreaksbr }}</div>
+        <div class="created">
+          <strong>Created</strong>: {{ item.created_at }}
+        </div>
+        <div class="length">
+          <strong>Length</strong>: {{ item.length }}
+        </div>
+        <div class="preview">
+          <div id="player-{{ item.id }}" class="player inline" data-id="{{ item.id }}">
+            <div class="button play-pause play"></div>
+            <div class="progress-bar position">
+              <div class="progress-line"></div>
+              <div class="progress-line-loaded"></div>
+              <div class="progress-line-active"></div>
+            </div>
+            <div class="progress-label">
+              <span>00:00:00</span>
+            </div>
+          </div>
+        </div>
+        <div class="tags">
+          <strong>Tags</strong>:
+          {% for t in item.tags %}
+            <a href="/blog/?tag={{ t.slug }}" class="tag">{{ t.name }}</a>
+          {% endfor %}
+        </div>
+        <div class="links">
+          <span class="link show-tracklist">Tracklist</span>
+          <a href="{{ item.release.original }}" class="download">Download</a>
+        </div>
+      </div>
+      <div class="tracklist hidden">
+        <div class="tracks">{{ item.tracklist | linebreaksbr }}</div>
+        <div class="links">
+          <span class="link hide-tracklist">Hide Tracklist</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>

@@ -1,0 +1,18 @@
+<div class="sidebar">
+    <div class="tags panel">
+        <h4>Popular tags</h4>
+        <ul>
+            {% for t in tags %}
+                <li><a href="/blog/?tag={{ t.slug }}">{{ t.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="galleries panel">
+        <h4>Latest posts</h4>
+        <ul>
+            {% for p in posts %}
+                <li><a href="/post/{{ p.slug }}/">{{ p.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
