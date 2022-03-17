@@ -12,13 +12,13 @@
       </h1>
       <div class="description flex">
         <div class="content">
-          <img src="/static/img/one-pixel.jpg" data-src="/static/img/cut-mobile.jpg"
+          <img src="/app/static/img/one-pixel.jpg" data-src="/static/img/cut-mobile.jpg"
                class="image mobile-visible lazy" alt="Manti">
           {% include "about/readme.tera" %}
           {% include "about/resume.tera" %}
         </div>
         <div class="image mobile-hidden">
-          <img src="/static/img/one-pixel.jpg" data-src="/static/img/cut.jpg"
+          <img src="/app/static/img/one-pixel.jpg" data-src="/static/img/cut.jpg"
                class="lazy" alt="Manti">
         </div>
       </div>

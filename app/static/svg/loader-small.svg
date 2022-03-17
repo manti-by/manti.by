@@ -1,0 +1,12 @@
+<svg width="32px"  height="32px"  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-squaricle">
+    <g transform="translate(50 50)">
+      <g transform="scale(0.551048 0.551048)">
+        <animateTransform attributeName="transform" type="scale" calcMode="spline" values="0.8;0.5;0.8" keyTimes="0;0.5;1" dur="1.4s" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="0s" repeatCount="indefinite"></animateTransform>
+        <rect x="-45" y="-45" width="90" height="90" ng-attr-fill="{{config.fill}}" ng-attr-stroke="{{config.stroke}}" ng-attr-stroke-width="{{config.width}}" fill="#ffffff" stroke="#696969" stroke-width="5" rx="34.5218" transform="rotate(224.057)">
+          <animate attributeName="rx" calcMode="linear" values="0;50;0" keyTimes="0;0.5;1" dur="1.4" begin="0s" repeatCount="indefinite"></animate>
+          <animate attributeName="stroke-width" calcMode="linear" values="5;15;5" keyTimes="0;0.5;1" dur="1.4" begin="0s" repeatCount="indefinite"></animate>
+          <animateTransform attributeName="transform" type="rotate" calcMode="spline" values="0 0 0;270 0 0;540 0 0" keyTimes="0;0.5;1" dur="1.4s" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" begin="0s" repeatCount="indefinite"></animateTransform>
+        </rect>
+      </g>
+    </g>
+  </svg>

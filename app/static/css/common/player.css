@@ -1,0 +1,175 @@
+.player {
+    position: relative;
+    display: flex;
+    padding: 0.35rem;
+    width: 80%;
+    border-radius: 0.25rem;
+    background: #dedede;
+}
+
+.player .button {
+    width: 26px;
+    height: 24px;
+    margin: 0 0.2rem;
+    cursor: pointer;
+    background: url(../../img/shape-player.png) no-repeat;
+}
+
+.player .play {
+    background-position: 0 0;
+}
+
+.player .pause {
+    background-position: 0 -24px;
+}
+
+.player .progress-bar {
+    position: relative;
+    width: calc(100% - 24px - 5.2rem);
+    margin: 0 0.2rem;
+    color: #666;
+    cursor: pointer;
+}
+
+.player .progress-bar .progress-line,
+.player .progress-bar .progress-line-loaded,
+.player .progress-bar .progress-line-active {
+    position: absolute;
+    top: 0.7rem;
+    left: 0;
+    height: 4px;
+}
+
+.player .progress-bar .progress-line {
+    width: 100%;
+    background: #999;
+}
+
+.player .progress-bar .progress-line-loaded {
+    width: 0;
+    background: #3C0;
+    z-index: 5;
+    cursor: pointer;
+}
+
+.player .progress-bar .progress-line-active {
+    width: 0;
+    background: #b40303;
+    z-index: 10;
+}
+
+.player .progress-label {
+    width: 4em;
+    margin: 0 0.75rem;
+    padding-top: 0.35em;
+    font-size: 1rem;
+    text-align: center;
+    color: #5E5E5E;
+}
+
+
+#player {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-top: 1px solid #EEE;
+    background: #FFF;
+    z-index: 1000;
+    transform: translate3d(0, 100%, 0);
+    transition: transform .2s linear, background 1s ease, height .5s ease;
+}
+
+#player.visible {
+    transform: translateZ(0);
+}
+
+#player .container {
+    padding: 0.6em 0 0.4em 0;
+    font-size: 1em;
+}
+
+#player .controls {
+    width: 70%;
+    margin-top: 5px;
+}
+
+#player .next-track {
+    background-position: -0px -72px;
+}
+
+#player .prev-track {
+    background-position: -0px -48px;
+}
+
+#player .position {
+    width: 45%;
+}
+
+#player .volume {
+    width: 15%;
+}
+
+#player .volume-label {
+    margin: 0 0.2rem;
+    padding-top: 0.4em;
+    font-size: 0.8em;
+    text-align: center;
+    color: #666;
+}
+
+#player .now-playing {
+    width: calc(27% - 1.5em);
+    padding: 0;
+    margin: 0 0.5em 0 1em;
+    text-align: left;
+    overflow: hidden;
+}
+
+#player .now-playing a {
+    display: block;
+    position: relative;
+    height: 35px;
+    text-decoration: none !important;
+    overflow: hidden;
+}
+
+#player .now-playing a span.image-wrapper {
+    position: absolute;
+    padding-right: 5px;
+    background: #FFF;
+    z-index: 100;
+}
+
+#player .now-playing a span.title-wrapper {
+    display: inline-block;
+    position: absolute;
+    top: 8px;
+    left: 42px;
+    white-space: nowrap;
+    color: #666;
+    z-index: 10;
+}
+
+#player .high-definition {
+    cursor: pointer;
+    text-decoration: line-through;
+    color: #666;
+}
+
+#player .high-definition.active {
+    color: #b40303;
+    text-decoration: none;
+}
+
+#player .close {
+    top: 7px;
+    right: -48px;
+    color: #666;
+    cursor: pointer;
+}
+
+#player .close i {
+    position: relative;
+    top: 0.5rem;
+    font-size: 1em;
+}
