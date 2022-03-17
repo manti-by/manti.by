@@ -1,9 +1,7 @@
-#.gitignore
+app/target/
+app/Cargo.lock
 
-manti_by/static/cache/
-
-manti_by/settings/local.py
-manti_by/settings/prod.py
+content/
 
 .pytest_cache/
 .venv/
@@ -11,5 +9,3 @@ manti_by/settings/prod.py
 
 *.pyc
 *~
-
-docker-compose.local.yml

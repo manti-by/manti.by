@@ -5,10 +5,8 @@ Manti.by
 About
 -----
 
-Django custom blog engine for music and photo publishing.
+Custom blog engine for music and photo publishing.
 
-[![CircleCI](https://img.shields.io/github/workflow/status/manti-by/manti.by/Backend/develop)](https://github.com/manti-by/manti.by/actions)
-[![Docker](https://img.shields.io/docker/automated/mantiby/manti.by.svg)](https://hub.docker.com/r/mantiby/manti.by/)
 [![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://raw.githubusercontent.com/manti-by/Manti.by/master/LICENSE)
 
 Author: Alexander Chaika <manti.by@gmail.com>
@@ -17,16 +15,13 @@ Source link: https://github.com/manti-by/manti.by
 
 Requirements:
 
-    Python 3.9, PostgreSQL 12, Redis
+    Rust/Rocket, Nginx
 
 
 Setup dev environment
 ---------------------
 
-1. Install base system packages (second line for production servers)
-
-        $ sudo apt-get install -y wget git-core python3-pip python3-dev postgresql libpq-dev
-
+1. Install [Rust](https://www.rust-lang.org/tools/install)
 
 2. Get [FFMpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), compile and install
 
@@ -52,55 +47,24 @@ Setup dev environment
             --enable-nonfree
         $ make -j4 && make install
 
-3. Install [Python 3.9](https://www.python.org/downloads/source/)
-   
-4. Install [Postgres server](https://www.postgresql.org/download/linux/ubuntu/)
-
-5. Install [Redis server](https://redis.io/download)
-
 
 Build and run app in dev mode
 -----------------------------
 
-1. Create virtual environment and install project dependencies
+1. Build binary app
 
-        $ python3.9 -m venv --prompt="mnt" .venv/
-        $ source ../venv/bin/activate
-        $ pip install -r requirements/dev.txt
-
-
-2. Create user and database
-
-        $ sudo su postgres && psql
-        # CREATE USER manti_by WITH PASSWORD 'manti_by' CREATEDB;
-
-        $ psql -h localhost -U manti_by
-        # CREATE DATABASE manti_by;
-
-
-3. Create local config file (dev or prod environment)
-
-        $ cp manti_by/settings/local.py.example manti_by/settings/local.py
-
-
-4. Migrate, collect static files and create admin user
-
-        $ ./manage.py migrate
-        $ ./manage.py collectstatic --no-input
-        $ ./manage.py createsuperuser
-
+        $ cd app/ && cargo build
 
 5. Run local development server
 
-        $ ./manage.py runserver 127.0.0.1:8000
+        $ cd app/ && cargo run
 
 
 Production setup
 ----------------
 
-1. Install [Docker](https://docs.docker.com/install/)
+1. Install [Nginx](https://ubuntu.com/tutorials/install-and-configure-nginx)
 
-2. Build and run app using Makefile
+2. Link nginx config (TBU)
 
-        $ make build
-        $ docker-compose up -d
+3. Create system service (TBU)
