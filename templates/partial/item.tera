@@ -2,7 +2,7 @@
   <div class="flex">
     <div class="image">
       <a href="/post/{{ item.slug }}" class="shadow">
-        <img src="{{ item.cover.thumbnail }}" data-src="{{ item.cover.display }}" alt="{{ item.name }}" class="lazy">
+        <img src="{{ item.cover.thumbnail }}" data-src="{{ item.cover.preview }}" alt="{{ item.name }}" class="lazy">
       </a>
     </div>
     <div class="data">
@@ -12,7 +12,7 @@
         </a>
       </h2>
       <div class="info">
-        <div class="summary">{{ item.summary | linebreaksbr }}</div>
+        <div class="summary">{{ item.summary }}</div>
         <div class="created">
           <strong>Created</strong>: {{ item.created_at }}
         </div>
@@ -34,17 +34,17 @@
         </div>
         <div class="tags">
           <strong>Tags</strong>:
-          {% for t in item.tags %}
-            <a href="/blog/?tag={{ t.slug }}" class="tag">{{ t.name }}</a>
+          {% for tag in item.tags %}
+            <a href="/blog/?tag={{ tag }}" class="tag">{{ tag }}</a>
           {% endfor %}
         </div>
         <div class="links">
           <span class="link show-tracklist">Tracklist</span>
-          <a href="{{ item.release.original }}" class="download">Download</a>
+          <a href="{{ item.original }}" class="download">Download</a>
         </div>
       </div>
       <div class="tracklist hidden">
-        <div class="tracks">{{ item.tracklist | linebreaksbr }}</div>
+        <div class="tracks">{{ item.tracklist }}</div>
         <div class="links">
           <span class="link hide-tracklist">Hide Tracklist</span>
         </div>

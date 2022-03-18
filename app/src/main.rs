@@ -4,7 +4,6 @@
 extern crate rocket;
 
 use rocket::response::content;
-use rocket_contrib::serve::StaticFiles;
 use rocket_contrib::templates::Template;
 use serde::{Serialize, Deserialize};
 use serde_json::json;
@@ -35,10 +34,68 @@ fn about() -> Template {
     Template::render("about", context)
 }
 
+#[derive(Serialize, Deserialize)]
+struct Attachment {
+    mp3: String,
+    ogg: String,
+}
+
+#[derive(Serialize, Deserialize)]
+struct Cover {
+    original: String,
+    display: String,
+    preview: String,
+    thumbnail: String,
+}
+
+#[derive(Serialize, Deserialize)]
+struct Release {
+    id: String,
+    slug: String,
+    name: String,
+    created_at: String,
+    summary: String,
+    description: String,
+    catnum: String,
+    quality: String,
+    length: String,
+    tracklist: String,
+    viewed: u16,
+    genres: Vec<String>,
+    tags: Vec<String>,
+    related: Vec<String>,
+    original: String,
+    release: Attachment,
+    preview: Attachment,
+    cover: Cover,
+}
+
+#[derive(Serialize, Deserialize)]
+struct Blog {
+    tags: Vec<String>,
+    posts: Vec<String>,
+    releases: Vec<Release>,
+}
+
+fn get_blog_context() -> serde_json::Result<Blog> {
+    let file = File::open("../content/releases.json").unwrap();
+    let reader = BufReader::new(file);
+    let mut blog: Blog = serde_json::from_reader(reader)?;
+    blog.releases.reverse();
+    Ok(blog)
+}
+
 #[get("/blog")]
 fn blog() -> Template {
-    let context = json!({});
-    Template::render("partial", context)
+    match get_blog_context() {
+        Ok(context) => {
+            Template::render("blog", context)
+        },
+        Err(e) => {
+            let context = json!({"message": e.to_string()});
+            Template::render("error", context)
+        }
+    }
 }
 
 #[derive(Serialize, Deserialize)]
@@ -90,8 +147,6 @@ fn api() -> content::Json<&'static str> {
 fn main() {
     rocket::ignite()
         .attach(Template::fairing())
-        .mount("/static", StaticFiles::from("../static"))
-        .mount("/content", StaticFiles::from("../content"))
         .mount("/", routes![index, blog, gallery, api, about, dashboard])
         .launch();
 }

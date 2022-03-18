@@ -23,8 +23,14 @@ clean-covers:
 	rm -rf content/covers.json
 	rm -rf content/covers/*.webp
 
+reorder-covers:
+	./scripts/reorder_gallery.py
+
 update-covers:
 	./scripts/update_covers.py
+
+rebuild-covers: clean-covers reorder-covers update-covers
+
 
 clean-releases:
 	rm -rf content/preview/*.mp3
@@ -40,3 +46,6 @@ build:
 
 run:
 	cd app/ && cargo run
+
+env:
+	rustup override set nightly

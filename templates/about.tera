@@ -14,8 +14,8 @@
         <div class="content">
           <img src="/static/img/one-pixel.jpg" data-src="/static/img/cut-mobile.jpg"
                class="image mobile-visible lazy" alt="Manti">
-          {% include "about/about/readme.tera" %}
-          {% include "about/about/resume.tera" %}
+          {% include "about/readme" %}
+          {% include "about/resume" %}
         </div>
         <div class="image mobile-hidden">
           <img src="/static/img/one-pixel.jpg" data-src="/static/img/cut.jpg"

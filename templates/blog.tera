@@ -25,11 +25,11 @@
   </h1>
   <div class="blog container flex">
     <div class="posts">
-      {% for item in item_list %}
-        {% include "partial/partial/item.tera" %}
+      {% for item in releases %}
+        {% include "partial/item" %}
       {% endfor %}
     </div>
-    {% include "sidebar.tera" %}
+    {% include "sidebar" %}
   </div>
 {% endblock %}
 

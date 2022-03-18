@@ -15,7 +15,6 @@ logger = logging.getLogger(__name__)
 
 
 if __name__ == "__main__":
-    result = []
     for index, item in enumerate(sorted(base_dir.glob("*.jpg"))):
         if item.is_file():
             logger.info(f"Processing {item.name}")
@@ -25,14 +24,3 @@ if __name__ == "__main__":
                 )
                 create_thumbnail(img, base_dir / f"{item.stem}.preview.webp", 400, 400, crop=True)
                 create_thumbnail(img, base_dir / f"{item.stem}.thumbnail.webp", 50, 50, crop=True)
-                result.append(
-                    {
-                        "id": index,
-                        "original": f"/covers/{item.name}",
-                        "display": f"/covers/{item.stem}.display.webp",
-                        "preview": f"/covers/{item.stem}.preview.webp",
-                        "thumbnail": f"/covers/{item.stem}.thumbnail.webp",
-                    }
-                )
-    with open(base_dir.parent / "covers.json", "w") as f:
-        f.write(json.dumps(result))
