@@ -28,7 +28,7 @@
         <div class="now-playing">
             <a href="#">
                 <span class="image-wrapper">
-                    <img src="/app/static/img/no-image.webp" alt="No image" width="33" height="33" />
+                    <img src="/static/img/no-image.webp" alt="No image" width="33" height="33" />
                 </span>
                 <span class="title-wrapper"></span>
             </a>

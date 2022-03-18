@@ -26,7 +26,7 @@
   <div class="blog container flex">
     <div class="posts">
       {% for item in item_list %}
-        {% include "partial/item.tera" %}
+        {% include "partial/partial/item.tera" %}
       {% endfor %}
     </div>
     {% include "sidebar.tera" %}
@@ -34,13 +34,13 @@
 {% endblock %}
 
 {% block styles %}
-  <link type="text/css" rel="stylesheet" href="/app/static/css/blog/list.css" media="all">
-  <link type="text/css" rel="stylesheet" href="/app/static/css/blog/list-item.css" media="all">
+  <link type="text/css" rel="stylesheet" href="/static/css/blog/list.css" media="all">
+  <link type="text/css" rel="stylesheet" href="/static/css/blog/list-item.css" media="all">
 {% endblock %}
 
 {% block scripts %}
-  <script type="text/javascript" src="/app/static/js/widgets/ajax.js"></script>
-  <script type="text/javascript" src="/app/static/js/widgets/tracklist.js"></script>
+  <script type="text/javascript" src="/static/js/widgets/ajax.js"></script>
+  <script type="text/javascript" src="/static/js/widgets/tracklist.js"></script>
   <script type="text/javascript">
     (($) => {
       $(document).ready(() => {

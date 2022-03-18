@@ -4,9 +4,9 @@
 extern crate rocket;
 
 use rocket::response::content;
-use rocket::response::Redirect;
 use rocket_contrib::serve::StaticFiles;
 use rocket_contrib::templates::Template;
+use serde::{Serialize, Deserialize};
 use serde_json::json;
 use std::fs::File;
 use std::io::BufReader;
@@ -35,26 +35,32 @@ fn about() -> Template {
     Template::render("about", context)
 }
 
-#[get("/resume")]
-fn resume() -> Redirect {
-    Redirect::permanent(uri!(about))
-}
-
-#[get("/copyrights")]
-fn copyrights() -> Redirect {
-    Redirect::permanent(uri!(about))
-}
-
 #[get("/blog")]
 fn blog() -> Template {
     let context = json!({});
     Template::render("partial", context)
 }
 
-fn get_gallery_context() -> serde_json::Result<serde_json::Value> {
-    let file = File::open("/home/manti/www/manti.io/content/gallery.json").unwrap();
+#[derive(Serialize, Deserialize)]
+struct Image {
+    id: u32,
+    original: String,
+    display: String,
+    preview: String,
+    thumbnail: String,
+}
+
+#[derive(Serialize, Deserialize)]
+struct Gallery {
+    images: Vec<Image>,
+}
+
+fn get_gallery_context() -> serde_json::Result<Gallery> {
+    let file = File::open("../content/gallery.json").unwrap();
     let reader = BufReader::new(file);
-    serde_json::from_reader(reader)
+    let mut gallery: Gallery = serde_json::from_reader(reader)?;
+    gallery.images.reverse();
+    Ok(gallery)
 }
 
 #[get("/gallery")]

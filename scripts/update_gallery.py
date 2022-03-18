@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 
 if __name__ == "__main__":
-    result = []
+    images = []
     for item in sorted(base_dir.glob("*.jpg")):
         if item.is_file():
             logger.info(f"Processing {item.name}")
@@ -23,9 +23,9 @@ if __name__ == "__main__":
                 create_thumbnail(
                     img, base_dir / f"{item.stem}.display.webp", 1920, 1280, crop=False
                 )
-                create_thumbnail(img, base_dir / f"{item.stem}.preview.webp", 400, 225, crop=True)
+                create_thumbnail(img, base_dir / f"{item.stem}.preview.webp", 394, 222, crop=True)
                 create_thumbnail(img, base_dir / f"{item.stem}.thumbnail.webp", 80, 45, crop=True)
-                result.append(
+                images.append(
                     {
                         "id": int(item.stem.split("_")[0]),
                         "original": f"/gallery/{item.name}",
@@ -35,4 +35,4 @@ if __name__ == "__main__":
                     }
                 )
     with open(base_dir.parent / "gallery.json", "w") as f:
-        f.write(json.dumps(result))
+        f.write(json.dumps({"images": images}))

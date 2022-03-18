@@ -6,7 +6,8 @@ edition = "2018"
 [dependencies]
 rocket = "0.4.10"
 json = "0.12.4"
-serde_json = "1.0"
+serde = { version = "1.0.136", features = ["derive"] }
+serde_json = "1.0.79"
 
 [dependencies.rocket_contrib]
 version = "0.4.10"

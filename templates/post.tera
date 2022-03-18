@@ -88,19 +88,19 @@
     <h2 class="featured">Related posts</h2>
     <div class="featured flex">
       {% for item in item.related | slice(end=3) %}
-        {% include 'partial/featured.tera' %}
+        {% include 'partial/partial/featured.tera' %}
       {% endfor %}
     </div>
   </article>
 {% endblock %}
 
 {% block styles %}
-  <link type="text/css" rel="stylesheet" href="/app/static/css/blog/featured-item.css" media="all">
-  <link type="text/css" rel="stylesheet" href="/app/static/css/blog/post.css" media="all">
+  <link type="text/css" rel="stylesheet" href="/static/css/blog/featured-item.css" media="all">
+  <link type="text/css" rel="stylesheet" href="/static/css/blog/post.css" media="all">
 {% endblock %}
 
 {% block scripts %}
-  <script type="text/javascript" src="/app/static/js/widgets/tracklist.js"></script>
+  <script type="text/javascript" src="/static/js/widgets/tracklist.js"></script>
   <script type="text/javascript">
     (($) => {
       $(document).ready(() => {

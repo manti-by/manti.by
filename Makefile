@@ -33,3 +33,10 @@ clean-releases:
 
 update-releases:
 	./scripts/update_releases.py
+
+
+build:
+	cd app/ && cargo build
+
+run:
+	cd app/ && cargo run
