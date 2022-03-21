@@ -5,33 +5,27 @@ extern crate rocket;
 
 use rocket::response::content;
 use rocket_contrib::templates::Template;
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 use serde_json::json;
 use std::fs::File;
 use std::io::BufReader;
 
-#[get("/")]
-fn index() -> Template {
-    let context = json!({
-        "featured_image": {
-            "id": 44,
-            "display": "/content/gallery/44_Quattro-Corti.display.webp",
-            "preview": "/content/gallery/44_Quattro-Corti.preview.webp",
-            "thumbnail": "/content/gallery/44_Quattro-Corti.thumbnail.webp",
-        },
-        "featured_posts": [],
-        "latest_images": [],
-        "latest_posts": [],
-        "tags": [],
-        "posts": [],
-    });
-    Template::render("index", context)
+#[derive(Serialize, Deserialize)]
+struct Tag {
+    slug: String,
+    name: String,
 }
 
-#[get("/about")]
-fn about() -> Template {
-    let context = json!({});
-    Template::render("about", context)
+#[derive(Serialize, Deserialize)]
+struct Tags {
+    tags: Vec<Tag>,
+}
+
+fn get_tags() -> serde_json::Result<Tags> {
+    let file = File::open("../content/tags.json").unwrap();
+    let reader = BufReader::new(file);
+    let tags: Tags = serde_json::from_reader(reader)?;
+    Ok(tags)
 }
 
 #[derive(Serialize, Deserialize)]
@@ -71,36 +65,20 @@ struct Release {
 }
 
 #[derive(Serialize, Deserialize)]
-struct Blog {
-    tags: Vec<String>,
-    posts: Vec<String>,
+struct Releases {
     releases: Vec<Release>,
 }
 
-fn get_blog_context() -> serde_json::Result<Blog> {
+fn get_releases() -> serde_json::Result<Releases> {
     let file = File::open("../content/releases.json").unwrap();
     let reader = BufReader::new(file);
-    let mut blog: Blog = serde_json::from_reader(reader)?;
-    blog.releases.reverse();
-    Ok(blog)
-}
-
-#[get("/blog")]
-fn blog() -> Template {
-    match get_blog_context() {
-        Ok(context) => {
-            Template::render("blog", context)
-        },
-        Err(e) => {
-            let context = json!({"message": e.to_string()});
-            Template::render("error", context)
-        }
-    }
+    let releases: Releases = serde_json::from_reader(reader)?;
+    Ok(releases)
 }
 
 #[derive(Serialize, Deserialize)]
 struct Image {
-    id: u32,
+    id: i16,
     original: String,
     display: String,
     preview: String,
@@ -112,20 +90,84 @@ struct Gallery {
     images: Vec<Image>,
 }
 
-fn get_gallery_context() -> serde_json::Result<Gallery> {
+fn get_gallery() -> serde_json::Result<Gallery> {
     let file = File::open("../content/gallery.json").unwrap();
     let reader = BufReader::new(file);
-    let mut gallery: Gallery = serde_json::from_reader(reader)?;
-    gallery.images.reverse();
+    let gallery: Gallery = serde_json::from_reader(reader)?;
     Ok(gallery)
+}
+
+#[derive(Serialize, Deserialize)]
+struct IndexContext {
+    featured_image: Image,
+    tags: Tags,
+    gallery: Gallery,
+    releases: Releases,
+}
+
+fn get_index_context() -> Result<IndexContext, serde_json::Error> {
+    Ok(IndexContext {
+        featured_image: Image {
+            id: 44,
+            original: String::from("/content/gallery/44_Quattro-Corti.jpg"),
+            display: String::from("/content/gallery/44_Quattro-Corti.display.webp"),
+            preview: String::from("/content/gallery/44_Quattro-Corti.preview.webp"),
+            thumbnail: String::from("/content/gallery/44_Quattro-Corti.thumbnail.webp"),
+        },
+        tags: get_tags()?,
+        gallery: get_gallery()?,
+        releases: get_releases()?,
+    })
+}
+
+#[get("/")]
+fn index() -> Template {
+    match get_index_context() {
+        Ok(context) => Template::render("index", context),
+        Err(e) => {
+            let context = json!({"message": e.to_string()});
+            Template::render("error", context)
+        }
+    }
+}
+
+#[get("/about")]
+fn about() -> Template {
+    let context = json!({});
+    Template::render("about", context)
+}
+
+
+#[derive(Serialize, Deserialize)]
+struct BlogContext {
+    tags: Tags,
+    gallery: Gallery,
+    releases: Releases,
+}
+
+fn get_blog_context() -> Result<BlogContext, serde_json::Error> {
+    Ok(BlogContext {
+        tags: get_tags()?,
+        gallery: get_gallery()?,
+        releases: get_releases()?,
+    })
+}
+
+#[get("/blog")]
+fn blog() -> Template {
+    match get_blog_context() {
+        Ok(context) => Template::render("blog", context),
+        Err(e) => {
+            let context = json!({"message": e.to_string()});
+            Template::render("error", context)
+        }
+    }
 }
 
 #[get("/gallery")]
 fn gallery() -> Template {
-    match get_gallery_context() {
-        Ok(context) => {
-            Template::render("gallery", context)
-        },
+    match get_gallery() {
+        Ok(context) => Template::render("gallery", context),
         Err(e) => {
             let context = json!({"message": e.to_string()});
             Template::render("error", context)
@@ -140,8 +182,15 @@ fn dashboard() -> Template {
 }
 
 #[get("/api")]
-fn api() -> content::Json<&'static str> {
-    content::Json("{[]}")
+fn api() -> content::Json<String> {
+    let json_result = match get_releases() {
+        Ok(context) => serde_json::to_string(&context),
+        Err(e) => {
+            let context = json!({"message": e.to_string()});
+            serde_json::to_string(&context)
+        }
+    };
+    content::Json(json_result.unwrap())
 }
 
 fn main() {

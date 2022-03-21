@@ -5,14 +5,14 @@
 
 {% block breadcrumbs %}
   {% if tag %}
-    <div class="spacer">&gt;</div>
+    <span class="spacer">&gt;</span>
     <a href="/blog/">Music</a>
-    <div class="mobile-hidden">
+    <span class="mobile-hidden">
       <span class="spacer">&bull;</span>
       <h1><span class="tag">{{ tag }}</span></h1>
-    </div>
+    </span>
   {% else %}
-    <div class="spacer">&bull;</div>
+    <span class="spacer">&bull;</span>
     <h1>Music</h1>
   {% endif %}
 {% endblock %}
@@ -25,7 +25,7 @@
   </h1>
   <div class="blog container flex">
     <div class="posts">
-      {% for item in releases %}
+      {% for item in releases.releases | reverse | slice(end=10) %}
         {% include "partial/item" %}
       {% endfor %}
     </div>

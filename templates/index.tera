@@ -9,7 +9,7 @@
       <h1>Featured</h1>
       <div id="featured-slider" class="mobile-slider">
         <div class="flex content">
-          {% for item in featured_posts %}
+          {% for item in releases.releases | slice(end=3) %}
             {% include "partial/featured" %}
           {% endfor %}
         </div>
@@ -18,7 +18,7 @@
             <i class="material-icons">chevron_left</i>
           </div>
           <ul>
-            {% for item in featured_posts %}
+            {% for item in releases.releases | slice(end=3) %}
               <li {% if forloop.first %}class="active"{% endif %}>&bullet;</li>
             {% endfor %}
           </ul>
@@ -36,9 +36,10 @@
                alt="Popular image from gallery" class="lazy">
         </a>
         <div class="latest flex">
-          {% for image in latest_images %}
+          {% for image in gallery.images | slice(end=5) %}
             <a href="/gallery/" class="thumbnail">
-              <img src="{{ image.thumbnail }}" data-src="{{ image.preview }}" alt="Image #{{ image.id }}" class="lazy">
+              <img src="/content/{{ image.thumbnail }}" data-src="/content/{{ image.preview }}"
+                   alt="Image #{{ image.id }}" class="lazy">
             </a>
           {% endfor %}
         </div>
@@ -47,7 +48,7 @@
     <h2>Latest posts</h2>
     <div class="main flex">
       <section class="posts">
-        {% for item in latest_posts %}
+        {% for item in releases.releases | slice(end=4) %}
           {% include 'partial/item' %}
         {% endfor %}
       </section>

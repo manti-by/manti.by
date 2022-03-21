@@ -224,7 +224,7 @@ header nav .text:hover {
 
 header nav .link-item {
     display: inline-block;
-    min-width: 106px;
+    min-width: 95px;
 }
 
 header .language {
@@ -431,20 +431,7 @@ footer {
     margin: 5em 0 2em 0;
     color: #666;
     font-size: 0.9rem;
-}
-
-footer a {
-    padding-right: 1em;
-    text-transform: uppercase;
-    color: #b40303;
-}
-
-footer a:hover, #footer a:active {
-    text-decoration: underline;
-}
-
-footer #copy {
-    float: right;
+    text-align: center;
 }
 
 #loader {

@@ -2,7 +2,7 @@
     <div class="tags panel">
         <h4>Popular tags</h4>
         <ul>
-            {% for t in tags %}
+            {% for t in tags.tags | slice(end=10) %}
                 <li><a href="/blog/?tag={{ t.slug }}">{{ t.name }}</a></li>
             {% endfor %}
         </ul>
@@ -10,7 +10,7 @@
     <div class="galleries panel">
         <h4>Latest posts</h4>
         <ul>
-            {% for p in posts %}
+            {% for p in releases.releases | slice(end=10) %}
                 <li><a href="/post/{{ p.slug }}/">{{ p.name }}</a></li>
             {% endfor %}
         </ul>

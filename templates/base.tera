@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>{% block title %}{% endblock %} | Blog of Alex Chaika. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.</title>
+        <title>{% block title %}{% endblock %} | Blog of Alexander Chaika. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.</title>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,7 +9,7 @@
 
         <meta name="theme-color" content="#B40303">
         <link rel="manifest" href="/static/manifest.json">
-        <link rel="canonical" href="https://manti.io">
+        <link rel="canonical" href="https://manti.by">
 
         <!-- Add to homescreen for Chrome on Android -->
         <meta name="mobile-web-app-capable" content="yes">
@@ -31,14 +31,13 @@
         <link rel="apple-touch-icon" type="image/png" sizes="256x256" href="/static/img/logo/256.png">
         <link rel="apple-touch-icon" type="image/png" sizes="512x512" href="/static/img/logo/512.png">
 
-        <meta name="description"
-              content="{% block meta %}{% endblock %} | Blog of Alex Chaika. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.">
+        <meta name="description" content="{% block meta %}{% endblock %} | Blog of Alexander Chaika. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.">
 
         {% block open_graph %}
         <meta property="og:type" content="website">
-        <meta property="og:title" content="Blog of Alex Chaika.">
+        <meta property="og:title" content="Blog of Alexander Chaika.">
         <meta property="og:description"
-              content="Blog of Alex Chaika. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.">
+              content="Blog of Alexander Chaika. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.">
         <meta property="og:image" content="/static/img/share.jpg">
         {% endblock %}
         <meta property="og:url" content="https://manti.io">
@@ -119,12 +118,7 @@
 
         <footer>
             <nav class="container">
-                <a href="/about/" class="mobile-hidden">About</a>
-                <a href="/resume/" class="mobile-hidden">Resume</a>
-                <a href="/copyrights/" class="mobile-hidden">Copyrights</a>
-                <div id="copy">
-                    Alex Manti&copy; 2005 - 2022
-                </div>
+                  Alexander Chaika, 2005
             </nav>
         </footer>
 

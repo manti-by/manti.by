@@ -1,6 +1,6 @@
 [package]
-name = "manti-io"
-version = "0.1.0"
+name = "manti-by"
+version = "0.1.1"
 edition = "2018"
 
 [dependencies]
