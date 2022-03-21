@@ -3,106 +3,29 @@
 #[macro_use]
 extern crate rocket;
 
+mod data;
+mod images;
+mod releases;
+mod tags;
+
 use rocket::response::content;
 use rocket_contrib::templates::Template;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
-use std::fs::File;
-use std::io::BufReader;
 
-#[derive(Serialize, Deserialize)]
-struct Tag {
-    slug: String,
-    name: String,
-}
-
-#[derive(Serialize, Deserialize)]
-struct Tags {
-    tags: Vec<Tag>,
-}
-
-fn get_tags() -> serde_json::Result<Tags> {
-    let file = File::open("../content/tags.json").unwrap();
-    let reader = BufReader::new(file);
-    let tags: Tags = serde_json::from_reader(reader)?;
-    Ok(tags)
-}
-
-#[derive(Serialize, Deserialize)]
-struct Attachment {
-    mp3: String,
-    ogg: String,
-}
-
-#[derive(Serialize, Deserialize)]
-struct Cover {
-    original: String,
-    display: String,
-    preview: String,
-    thumbnail: String,
-}
-
-#[derive(Serialize, Deserialize)]
-struct Release {
-    id: String,
-    slug: String,
-    name: String,
-    created_at: String,
-    summary: String,
-    description: String,
-    catnum: String,
-    quality: String,
-    length: String,
-    tracklist: String,
-    viewed: u16,
-    genres: Vec<String>,
-    tags: Vec<String>,
-    related: Vec<String>,
-    original: String,
-    release: Attachment,
-    preview: Attachment,
-    cover: Cover,
-}
-
-#[derive(Serialize, Deserialize)]
-struct Releases {
-    releases: Vec<Release>,
-}
-
-fn get_releases() -> serde_json::Result<Releases> {
-    let file = File::open("../content/releases.json").unwrap();
-    let reader = BufReader::new(file);
-    let releases: Releases = serde_json::from_reader(reader)?;
-    Ok(releases)
-}
-
-#[derive(Serialize, Deserialize)]
-struct Image {
-    id: i16,
-    original: String,
-    display: String,
-    preview: String,
-    thumbnail: String,
-}
-
-#[derive(Serialize, Deserialize)]
-struct Gallery {
-    images: Vec<Image>,
-}
-
-fn get_gallery() -> serde_json::Result<Gallery> {
-    let file = File::open("../content/gallery.json").unwrap();
-    let reader = BufReader::new(file);
-    let gallery: Gallery = serde_json::from_reader(reader)?;
-    Ok(gallery)
-}
+use crate::data::DATA;
+use crate::images::Image;
+use crate::releases::Release;
+use crate::tags::Tag;
 
 #[derive(Serialize, Deserialize)]
 struct IndexContext {
-    featured_image: Image,
-    tags: Tags,
-    gallery: Gallery,
-    releases: Releases,
+    pub featured_image: Image,
+    pub featured_releases: Vec<Release>,
+    pub front_releases: Vec<Release>,
+    pub releases: Vec<Release>,
+    pub images: Vec<Image>,
+    pub tags: Vec<Tag>,
 }
 
 fn get_index_context() -> Result<IndexContext, serde_json::Error> {
@@ -114,9 +37,11 @@ fn get_index_context() -> Result<IndexContext, serde_json::Error> {
             preview: String::from("/content/gallery/44_Quattro-Corti.preview.webp"),
             thumbnail: String::from("/content/gallery/44_Quattro-Corti.thumbnail.webp"),
         },
-        tags: get_tags()?,
-        gallery: get_gallery()?,
-        releases: get_releases()?,
+        featured_releases: DATA.releases.featured(),
+        front_releases: DATA.releases.front(),
+        releases: DATA.releases.latest(),
+        images: DATA.images.latest(),
+        tags: DATA.tags.popular(),
     })
 }
 
@@ -137,19 +62,16 @@ fn about() -> Template {
     Template::render("about", context)
 }
 
-
 #[derive(Serialize, Deserialize)]
 struct BlogContext {
-    tags: Tags,
-    gallery: Gallery,
-    releases: Releases,
+    pub tags: Vec<Tag>,
+    pub releases: Vec<Release>,
 }
 
 fn get_blog_context() -> Result<BlogContext, serde_json::Error> {
     Ok(BlogContext {
-        tags: get_tags()?,
-        gallery: get_gallery()?,
-        releases: get_releases()?,
+        releases: DATA.releases.latest(),
+        tags: DATA.tags.popular(),
     })
 }
 
@@ -164,9 +86,20 @@ fn blog() -> Template {
     }
 }
 
+#[derive(Serialize, Deserialize)]
+struct GalleryContext {
+    pub images: Vec<Image>,
+}
+
+fn get_gallery_context() -> Result<GalleryContext, serde_json::Error> {
+    Ok(GalleryContext {
+        images: DATA.images.latest(),
+    })
+}
+
 #[get("/gallery")]
 fn gallery() -> Template {
-    match get_gallery() {
+    match get_gallery_context() {
         Ok(context) => Template::render("gallery", context),
         Err(e) => {
             let context = json!({"message": e.to_string()});
@@ -183,13 +116,7 @@ fn dashboard() -> Template {
 
 #[get("/api")]
 fn api() -> content::Json<String> {
-    let json_result = match get_releases() {
-        Ok(context) => serde_json::to_string(&context),
-        Err(e) => {
-            let context = json!({"message": e.to_string()});
-            serde_json::to_string(&context)
-        }
-    };
+    let json_result = serde_json::to_string(&DATA.releases.latest());
     content::Json(json_result.unwrap())
 }
 

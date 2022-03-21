@@ -12,7 +12,7 @@
   <article class="gallery container">
     <div class="item">
       <div class="images">
-        {% for image in images | reverse %}
+        {% for image in images %}
           <a href="/content/{{ image.display }}" data-id="{{ image.id }}" class="preview shadow">
             <img src="/content/{{ image.thumbnail }}" data-src="/content/{{ image.preview }}"
                  alt="Image #{{ image.id }}" class="lazy">
