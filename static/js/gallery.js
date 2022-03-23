@@ -7,20 +7,49 @@ class Gallery {
     this.overlay = null
     this.id_map = []
     this.current_id = null
+
+    this.init()
   }
 
-  init () {
-    const close_pointer = document.createElement('<div class="close"><i class="material-icons">close</i></div>')
-    const next_pointer = document.createElement('<div class="next"><i class="material-icons">chevron_right</i></div>')
-    const prev_pointer = document.createElement('<div class="prev"><i class="material-icons">chevron_left</i></div>')
-    const overlay = document.createElement('<div id="overlay" class="hidden"></div>')
+  init() {
+    // Create image overlay
+    this.overlay = document.createElement("div")
+    this.overlay.classList.add("hidden")
+    this.overlay.id = "overlay"
 
-    // Add element to the page
-    overlay.appendChild(close_pointer).appendChild(prev_pointer).appendChild(next_pointer)
-    document.appendChild(overlay)
+    // Create controls
+    let close_icon = document.createElement("i")
+    close_icon.classList.add("material-icons")
+    close_icon.innerText = "close"
+
+    let close_pointer = document.createElement("div")
+    close_pointer.classList.add("close")
+    close_pointer.appendChild(close_icon)
+
+    let next_icon = document.createElement("i")
+    next_icon.classList.add("material-icons")
+    next_icon.innerText = "chevron_right"
+
+    let next_pointer = document.createElement("div")
+    next_pointer.classList.add("next")
+    next_pointer.appendChild(next_icon)
+
+    let prev_icon = document.createElement("i")
+    prev_icon.classList.add("material-icons")
+    prev_icon.innerText = "chevron_left"
+
+    let prev_pointer = document.createElement("div")
+    prev_pointer.classList.add("prev")
+    prev_pointer.appendChild(prev_icon)
+
+    // Add controls to overlay and overlay to document
+    this.overlay.appendChild(close_pointer)
+    this.overlay.appendChild(next_pointer)
+    this.overlay.appendChild(prev_pointer)
+    document.body.appendChild(this.overlay)
 
     // Bind overlay actions
-    overlay.onclick = () => { this.next() }
+    this.overlay.onclick = () => { this.next() }
     next_pointer.onclick = () => { this.next() }
     prev_pointer.onclick = () => { this.prev() }
 
@@ -44,7 +73,7 @@ class Gallery {
     }
 
     // Bind image actions
-    const previews = document.querySelectorAll(".preview")
+    let previews = document.querySelectorAll(".preview")
     for (let i = 0; i < previews.length; i++) {
       const id = previews[i].dataset.id
       const link = previews[i].href
@@ -52,20 +81,22 @@ class Gallery {
       previews[i].onclick = (event) => {
         event.preventDefault()
         this.build(id, link)
-        this.id_map.push([id, link])
       }
+      this.id_map.push([id, link])
     }
-
-    this.overlay = overlay
   }
 
   build(id, link) {
     window.loader.show()
-    this.overlay.querySelectorAll(".original").remove()
 
-    this.image = document.createElement(
-      '<img src="' + link + '" class="original resizible shadow" alt="Image #' + id + '"/>'
-    )
+    let original = this.overlay.querySelector(".original")
+    if (original) original.remove()
+
+    this.image = document.createElement("img")
+    this.image.classList.add("original", "resizible", "shadow")
+    this.image.src = link
+    this.image.alt = "Image #" + id
+
     this.image.onload = () => {
       this.current_id = id
       this.overlay.append(this.image)
@@ -112,11 +143,11 @@ class Gallery {
   }
 
   open () {
-    this.overlay.removeClass("hidden")
+    this.overlay.classList.remove("hidden")
   }
 
   hide () {
-    this.overlay.addClass("hidden")
+    this.overlay.classList.add("hidden")
   }
 }
 

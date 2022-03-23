@@ -19,8 +19,6 @@ if __name__ == "__main__":
         if item.is_file():
             logger.info(f"Processing {item.name}")
             with Image.open(item) as img:
-                create_thumbnail(
-                    img, base_dir / f"{item.stem}.display.webp", 600, 600, crop=False
-                )
+                create_thumbnail(img, base_dir / f"{item.stem}.display.webp", 600, 600)
                 create_thumbnail(img, base_dir / f"{item.stem}.preview.webp", 400, 400, crop=True)
-                create_thumbnail(img, base_dir / f"{item.stem}.thumbnail.webp", 50, 50, crop=True)
+                create_thumbnail(img, base_dir / f"{item.stem}.thumbnail.webp", 1, 1, crop=True)

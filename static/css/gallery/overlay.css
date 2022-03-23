@@ -11,10 +11,9 @@
 }
 
 #overlay img {
-    position: absolute;
+    position: relative;
     top: 2%;
-    left: 2%;
-    margin: 0 auto;
+    left: 0;
     max-width: 96%;
     max-height: 96%;
 }

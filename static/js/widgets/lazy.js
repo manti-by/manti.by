@@ -5,6 +5,8 @@ class LazyImages {
   constructor() {
     this.observer = new IntersectionObserver(changes => {
       for (const change of changes) {
+        if (!change.target.dataset.src) return
+
         change.target.src = change.target.dataset.src
         change.target.onload = () => {
           change.target.classList.remove("lazy")
@@ -12,6 +14,7 @@ class LazyImages {
         }
       }
     })
+    this.bind()
   }
 
   bind() {

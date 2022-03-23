@@ -24,7 +24,7 @@ if __name__ == "__main__":
                     img, base_dir / f"{item.stem}.display.webp", 1920, 1280, crop=False
                 )
                 create_thumbnail(img, base_dir / f"{item.stem}.preview.webp", 394, 222, crop=True)
-                create_thumbnail(img, base_dir / f"{item.stem}.thumbnail.webp", 80, 45, crop=True)
+                create_thumbnail(img, base_dir / f"{item.stem}.thumbnail.webp", 1, 1, crop=True, force=True)
                 images.append(
                     {
                         "id": int(item.stem.split("_")[0]),

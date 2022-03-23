@@ -1,17 +1,18 @@
 "use strict"
 
 class Ajax {
-  options = {type: 'html', limit: 6}
+  options = {type: "html", start: 6,  limit: 6}
 
   constructor() {
-    this.footer = document.querySelector("footer")
-    this.start = 6
     this.locked = false
+    this.footer = document.querySelector("footer")
 
     const params = new Proxy(new URLSearchParams(window.location.search), {
       get: (searchParams, prop) => searchParams.get(prop),
     })
     if (params.tag) this.options.tag = params.tag
+
+    this.bind()
   }
 
   bind() {

@@ -1,3 +1,4 @@
+import math
 import subprocess
 
 from pathlib import Path
@@ -7,16 +8,16 @@ from PIL import Image
 
 
 def create_thumbnail(
-    original_image: Image, file_path: Path, width: int, height: int, crop: bool
+    original_image: Image, file_path: Path, width: int, height: int, crop: bool = False, force: bool = False
 ):
     target_image = original_image.copy()
-    if not Path(file_path).is_file():
+    if not Path(file_path).is_file() or force:
         # Resize original image to target width
-        target_height = int(original_image.height * width / original_image.width)
+        target_height = math.ceil(original_image.height * width / original_image.width)
         target_image = target_image.resize((width, target_height), Image.ANTIALIAS)
 
         # Crop image to target height if offset more than 2 pixels
-        offset = int((target_height - height) / 2)
+        offset = math.ceil((target_height - height) / 2)
         if crop and offset > 2:
             target_image = target_image.crop((0, offset, width, height + offset))
 

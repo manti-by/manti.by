@@ -38,7 +38,7 @@
         <div class="latest flex">
           {% for image in images | slice(end=5) %}
             <a href="/gallery/" class="thumbnail">
-              <img src="/content/{{ image.thumbnail }}" data-src="/content/{{ image.preview }}"
+              <img src="{{ image.thumbnail }}" data-src="{{ image.preview }}"
                    alt="Image #{{ image.id }}" class="lazy">
             </a>
           {% endfor %}

@@ -13,8 +13,8 @@
     <div class="item">
       <div class="images">
         {% for image in images %}
-          <a href="/content/{{ image.display }}" data-id="{{ image.id }}" class="preview shadow">
-            <img src="/content/{{ image.thumbnail }}" data-src="/content/{{ image.preview }}"
+          <a href="{{ image.display }}" data-id="{{ image.id }}" class="preview shadow">
+            <img src="{{ image.thumbnail }}" data-src="{{ image.preview }}"
                  alt="Image #{{ image.id }}" class="lazy">
           </a>
         {% endfor %}

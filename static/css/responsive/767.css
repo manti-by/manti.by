@@ -164,9 +164,9 @@
     }
 
     .home .gallery .featured .latest {
-        position: relative;
-        left: 0;
-        bottom: 0;
+        position: absolute;
+        left: 0.5rem;
+        bottom: -0.5rem;
         height: auto;
     }
 
