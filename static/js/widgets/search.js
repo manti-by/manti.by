@@ -1,55 +1,72 @@
-(($) => {
-  'use strict'
+"use strict"
 
-  $.initSearch = () => {
-    const header = $('header')
-    const search = $('section')
-    const search_input = $('section input')
-    const search_result = $('.search-result')
-    const open_button = $('.open-search')
-    const close_button = $('.close-search')
+class Search {
+  constructor() {
+    this.header = document.querySelector("header")
+    this.search = document.querySelector("section")
+    this.search_input = document.querySelector("section input")
+    this.search_result = document.querySelector(".search-result")
+    this.open_button = document.querySelector(".open-search")
+    this.close_button = document.querySelector(".close-search")
+    this.bind()
+  }
 
-    search_input.on('keyup', () => {
-      const q = search_input.val()
-      let result_items = ''
+  bind() {
+    this.search_input.onkeyup = () => {
+      const query = this.search_input.value
 
-      if (q.length > 2) {
-        $.get('/api/search', { q: q }, (response) => {
+      if (query.length > 2) {
+        fetch("/api/?query=" + query).then(response => {
           if (response.status === 200) {
-            if (response.data.length > 0) {
-              search_result
-                .removeClass('hidden')
-                .width(search_input.width() + 10)
-                .css('top', search_input.position().top + 33)
-                .css('left', search_input.position().left)
-                .html('<ul></ul>')
+            response.json().then(data => {
+              if (data.length > 0) {
+                this.search_result.classList.remove("hidden")
+                this.search_result.offsetWidth = this.search_input.offsetWidth + 10
+                this.search_result.style.top = this.search_input.position().top + 33
+                this.search_result.style.left = this.search_input.position().left
 
-              for (const item of response.data) {
-                result_items += '<li><a href="' + item.url + '">' + item.name + '</a></li>'
+                let search_content = ""
+                for (const item of data) {
+                  search_content += '<li><a href="' + item.url + '">' + item.name + '</a></li>'
+                }
+                this.search_result.innerHTML = "<ul>" + search_content + "</ul>"
               }
-              search_result.find('ul').append(result_items)
-            }
+            })
+            return
           }
+          console.error(response)
         })
       }
-    })
-
-    search_input.on('click', () => (false))
-
-    open_button.on('click', () => {
-      search.addClass('visible')
-      header.addClass('hidden')
-      return false
-    })
-
-    const close_search = () => {
-      search_input.val('')
-      search_result.addClass('hidden').html('')
-      search.removeClass('visible')
-      header.removeClass('hidden')
     }
 
-    close_button.on('click', close_search)
-    $(document).on('click', close_search)
+    this.search_input.onclick = (event) => {
+      event.preventDefault()
+    }
+
+    this.open_button.onclick = (event) => {
+      event.preventDefault()
+
+      this.search.classList.add("visible")
+      this.header.classList.add("hidden")
+
+      this.search_input.focus()
+    }
+
+    const close_search = () => {
+      this.search_input.value = ""
+
+      this.search_result.classList.add("hidden")
+      this.search_result.innerHTML = ""
+
+      this.search.classList.remove("visible")
+      this.header.classList.remove("hidden")
+    }
+
+    this.close_button.onclick = close_search
+    document.onclick = close_search
   }
-})(jQuery)
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  new Search()
+})

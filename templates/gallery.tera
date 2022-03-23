@@ -29,10 +29,5 @@
 {% endblock %}
 
 {% block scripts %}
-  <script type="text/javascript" src="/static/js/libs/gallery.js"></script>
-  <script type="text/javascript">
-    $(document).ready(() => {
-      $.gallery.init();
-    });
-  </script>
+  <script type="text/javascript" src="/static/js/gallery.js"></script>
 {% endblock %}

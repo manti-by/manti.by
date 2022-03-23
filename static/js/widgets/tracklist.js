@@ -1,21 +1,19 @@
-(($) => {
-  'use strict'
+"use strict"
 
-  $.initTracklist = () => {
-    $(document).on('click', '.show-tracklist', (event) => {
-      $(event.target).closest('.data')
-        .find('.info').addClass('hidden')
+class Tracklist {
+  constructor() {
+    document.querySelectorAll(".show-tracklist").onclick = (event) => {
+      event.target.closest(".data").querySelector(".info").classList.add("hidden")
+      event.target.closest(".data").querySelector(".tracklist").classList.remove("hidden")
+    }
 
-      $(event.target).closest('.data')
-        .find('.tracklist').removeClass('hidden')
-    })
-
-    $(document).on('click', '.hide-tracklist', (event) => {
-      $(event.target).closest('.data')
-        .find('.info').removeClass('hidden')
-
-      $(event.target).closest('.data')
-        .find('.tracklist').addClass('hidden')
-    })
+    document.querySelectorAll(".hide").onclick = (event) => {
+      event.target.closest(".data").querySelector(".info").classList.remove("hidden")
+      event.target.closest(".data").querySelector(".tracklist").classList.add("hidden")
+    }
   }
-})(jQuery)
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  new Tracklist()
+})

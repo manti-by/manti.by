@@ -1,37 +1,54 @@
-(($) => {
-  'use strict'
+"use strict"
 
-  $.initBlogAjax = (tag) => {
-    const footer = $('footer')
-    const options = { type: 'html', limit: 6 }
-    let start = 6; let locked = false
+class Ajax {
+  options = {type: 'html', limit: 6}
 
-    if (tag) options.tag = tag
-    $(window).on('scroll', () => {
-      if (footer.offset().top < $(window).scrollTop() + $(window).height()) {
-        if (!locked) {
-          locked = true
-          options.start = start
-          $.loaderShow()
+  constructor() {
+    this.footer = document.querySelector("footer")
+    this.start = 6
+    this.locked = false
 
-          $.get('/api/', options, (response) => {
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    })
+    if (params.tag) this.options.tag = params.tag
+  }
+
+  bind() {
+    window.onscroll = () => {
+      if (this.footer.offsetTop < window.scrollTop + window.innerHeight) {
+        if (!this.locked) {
+          this.locked = true
+          this.options.start = start
+
+          window.loader.show()
+
+          let query = Object.keys(this.options)
+            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(this.options[k])).join('&')
+
+          fetch("/api/?" + query).then(response => {
             if (response.status === 200) {
-              start += 6
+              this.options.start += 6
               for (const post of response.data) {
-                $('.partial .posts').append(post)
+                document.querySelector(".partial .posts").append(post)
               }
 
-              $.initLazyImages()
-              $.player.updateActivePosts()
-              if (response.data.length) locked = false
-            } else {
-              DEBUG && console.error(response.message)
-            }
+              window.lazy.bind()
+              window.player.updateActivePosts()
 
-            $.loaderHide()
+              if (response.data.length) this.locked = false
+              return
+            }
+            console.error(response.message)
+          }).finally(() => {
+            window.loader.hide()
           })
         }
       }
-    })
+    }
   }
-})(jQuery)
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  new Ajax()
+})

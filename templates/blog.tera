@@ -41,12 +41,4 @@
 {% block scripts %}
   <script type="text/javascript" src="/static/js/widgets/ajax.js"></script>
   <script type="text/javascript" src="/static/js/widgets/tracklist.js"></script>
-  <script type="text/javascript">
-    (($) => {
-      $(document).ready(() => {
-        $.initBlogAjax("{% if tag %}{{ tag.slug }}{% endif %}")
-        $.initTracklist()
-      })
-    })(jQuery)
-  </script>
 {% endblock %}
