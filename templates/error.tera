@@ -1,3 +1,20 @@
-<div class="error">
-    {{ message }}
-</div>
+{% extends "base" %}
+
+{% block title %}About{% endblock %}
+{% block meta %}About{% endblock %}
+
+{% block content %}
+  <div id="error" class="container">
+    <div class="icon">
+      <i class="material-icons-outlined">error_outline</i>
+    </div>
+    <div class="description">
+      {{ message }}.
+      <div class="muted">That&apos;s all we know.</div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block styles %}
+  <link type="text/css" rel="stylesheet" href="/static/css/error.css" media="all">
+{% endblock %}

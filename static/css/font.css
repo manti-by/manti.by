@@ -6,6 +6,13 @@
     src: url(../fonts/material-icons.woff2) format('woff2');
 }
 
+@font-face {
+    font-family: 'Material Icons Outlined';
+    font-style: normal;
+    font-weight: 400;
+    src: url(../fonts/material-icons-outlined.woff2) format('woff2');
+}
+
 /* cyrillic-ext */
 @font-face {
     font-family: 'Roboto';
@@ -80,7 +87,8 @@
                    U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-.material-icons {
+.material-icons,
+.material-icons-outlined {
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
@@ -94,4 +102,8 @@
     direction: ltr;
     -webkit-font-feature-settings: 'liga';
     -webkit-font-smoothing: antialiased;
+}
+
+.material-icons-outlined {
+    font-family: 'Material Icons Outlined';
 }
