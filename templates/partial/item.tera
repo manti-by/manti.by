@@ -1,26 +1,27 @@
-<article class="post" data-id="{{ item.id }}">
+<article class="post" data-id="{{ post.id }}">
   <div class="flex">
     <div class="image">
-      <a href="/post/{{ item.slug }}" class="shadow">
-        <img src="{{ item.cover.thumbnail }}" data-src="{{ item.cover.preview }}" alt="{{ item.name }}" class="lazy">
+      <a href="/post/{{ post.slug }}" class="shadow">
+        <img src="{{ post.cover.thumbnail }}" data-src="{{ post.cover.preview }}" alt="{{ post.name }}" class="lazy">
       </a>
     </div>
     <div class="data">
       <h2>
-        <a href="/post/{{ item.slug }}">
-          {{ item.name }} /{{ item.genres | join(sep=", ") }}/
-        </a>
+        <a href="/post/{{ post.slug }}">{{ post.name }}</a><br>
+        {% for tag in post.genres %}
+          <a href="/blog/?tag={{ tag.slug }}" class="tag">{{ tag.name }}</a>
+        {% endfor %}
       </h2>
       <div class="info">
-        <div class="summary">{{ item.summary }}</div>
+        <div class="summary">{{ post.summary }}</div>
         <div class="created">
-          <strong>Created</strong>: {{ item.created_at }}
+          <strong>Created</strong>: {{ post.created_at }}
         </div>
         <div class="length">
-          <strong>Length</strong>: {{ item.length }}
+          <strong>Length</strong>: {{ post.length }}
         </div>
         <div class="preview">
-          <div id="player-{{ item.id }}" class="player inline" data-id="{{ item.id }}">
+          <div id="player-{{ post.id }}" class="player inline" data-id="{{ post.id }}">
             <div class="button play-pause play"></div>
             <div class="progress-bar position">
               <div class="progress-line"></div>
@@ -34,17 +35,17 @@
         </div>
         <div class="tags">
           <strong>Tags</strong>:
-          {% for tag in item.tags %}
-            <a href="/blog/?tag={{ tag }}" class="tag">{{ tag }}</a>
+          {% for tag in post.tags %}
+            <a href="/blog/?tag={{ tag.slug }}" class="tag">{{ tag.name }}</a>
           {% endfor %}
         </div>
         <div class="links">
           <span class="link show-tracklist">Tracklist</span>
-          <a href="{{ item.original }}" class="download">Download</a>
+          <a href="{{ post.original }}" class="download">Download</a>
         </div>
       </div>
       <div class="tracklist hidden">
-        <div class="tracks">{{ item.tracklist }}</div>
+        <div class="tracks">{{ post.tracklist }}</div>
         <div class="links">
           <span class="link hide-tracklist">Hide Tracklist</span>
         </div>

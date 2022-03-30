@@ -25,7 +25,7 @@
   </h1>
   <div class="blog container flex">
     <div class="posts">
-      {% for item in releases | slice(end=6) %}
+      {% for post in releases | slice(end=6) %}
         {% include "partial/item" %}
       {% endfor %}
     </div>

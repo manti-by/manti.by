@@ -12,6 +12,7 @@ use rocket::response::content;
 use rocket_contrib::templates::Template;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
+use std::error::Error;
 
 use crate::data::DATA;
 use crate::images::Image;
@@ -87,6 +88,29 @@ fn blog() -> Template {
 }
 
 #[derive(Serialize, Deserialize)]
+struct PostContext {
+    pub post: Release,
+}
+
+fn get_post_context(slug: String) -> Result<PostContext, Box<dyn Error>> {
+    match DATA.releases.get(slug) {
+        Some(post) => Ok(PostContext { post }),
+        None => panic!("Post not found"),
+    }
+}
+
+#[get("/post/<slug>")]
+fn post(slug: String) -> Template {
+    match get_post_context(slug) {
+        Ok(context) => Template::render("post", context),
+        Err(e) => {
+            let context = json!({"message": e.to_string()});
+            Template::render("error", context)
+        }
+    }
+}
+
+#[derive(Serialize, Deserialize)]
 struct GalleryContext {
     pub images: Vec<Image>,
 }
@@ -123,6 +147,9 @@ fn api() -> content::Json<String> {
 fn main() {
     rocket::ignite()
         .attach(Template::fairing())
-        .mount("/", routes![index, blog, gallery, api, about, dashboard])
+        .mount(
+            "/",
+            routes![index, blog, post, gallery, api, about, dashboard],
+        )
         .launch();
 }

@@ -1,3 +1,5 @@
+use crate::{Tag, DATA};
+use serde::ser::SerializeStruct;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Clone)]
@@ -14,12 +16,13 @@ pub struct Cover {
     pub thumbnail: String,
 }
 
-#[derive(Serialize, Deserialize, Clone)]
+#[derive(Deserialize, Clone)]
 pub struct Release {
     pub id: String,
     pub slug: String,
     pub name: String,
     pub created_at: String,
+    pub cover: Cover,
     pub summary: String,
     pub description: String,
     pub catnum: String,
@@ -33,12 +36,121 @@ pub struct Release {
     pub original: String,
     pub release: Attachment,
     pub preview: Attachment,
+}
+
+#[derive(Deserialize, Clone)]
+pub struct RelatedRelease {
+    pub id: String,
+    pub slug: String,
+    pub name: String,
+    pub created_at: String,
     pub cover: Cover,
+    pub genres: Vec<String>,
+    pub tags: Vec<String>,
 }
 
 impl Release {
-    pub fn tags(&self) -> Vec<String> {
-        self.tags.iter().rev().cloned().collect()
+    pub fn get_tags_objects(&self) -> Vec<Tag> {
+        DATA.tags
+            .tags
+            .iter()
+            .filter(|x| self.tags.contains(&x.slug))
+            .cloned()
+            .collect()
+    }
+    pub fn get_genres_objects(&self) -> Vec<Tag> {
+        DATA.tags
+            .tags
+            .iter()
+            .filter(|x| self.genres.contains(&x.slug))
+            .cloned()
+            .collect()
+    }
+    pub fn get_related_objects(&self) -> Vec<RelatedRelease> {
+        DATA.releases
+            .releases
+            .iter()
+            .filter(|x| self.related.contains(&x.id))
+            .map(|x| RelatedRelease::from(x.clone()))
+            .collect()
+    }
+}
+
+impl RelatedRelease {
+    pub fn get_tags_objects(&self) -> Vec<Tag> {
+        DATA.tags
+            .tags
+            .iter()
+            .filter(|x| self.tags.contains(&x.slug))
+            .cloned()
+            .collect()
+    }
+    pub fn get_genres_objects(&self) -> Vec<Tag> {
+        DATA.tags
+            .tags
+            .iter()
+            .filter(|x| self.genres.contains(&x.slug))
+            .cloned()
+            .collect()
+    }
+}
+
+impl serde::ser::Serialize for Release {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::ser::Serializer,
+    {
+        let mut state = serializer.serialize_struct("Release", 3)?;
+        state.serialize_field("id", &self.id)?;
+        state.serialize_field("slug", &self.slug)?;
+        state.serialize_field("name", &self.name)?;
+        state.serialize_field("created_at", &self.created_at)?;
+        state.serialize_field("summary", &self.summary)?;
+        state.serialize_field("description", &self.description)?;
+        state.serialize_field("catnum", &self.catnum)?;
+        state.serialize_field("quality", &self.quality)?;
+        state.serialize_field("length", &self.length)?;
+        state.serialize_field("tracklist", &self.tracklist)?;
+        state.serialize_field("viewed", &self.viewed)?;
+        state.serialize_field("original", &self.original)?;
+        state.serialize_field("release", &self.release)?;
+        state.serialize_field("preview", &self.preview)?;
+        state.serialize_field("cover", &self.cover)?;
+        state.serialize_field("tags", &self.get_tags_objects())?;
+        state.serialize_field("genres", &self.get_genres_objects())?;
+        state.serialize_field("related", &self.get_related_objects())?;
+        state.end()
+    }
+}
+
+impl From<Release> for RelatedRelease {
+    fn from(r: Release) -> Self {
+        Self {
+            id: r.id,
+            slug: r.slug,
+            name: r.name,
+            created_at: r.created_at,
+            cover: r.cover,
+            genres: r.genres,
+            tags: r.tags,
+        }
+    }
+}
+
+impl serde::ser::Serialize for RelatedRelease {
+    fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
+    where
+        S: serde::ser::Serializer,
+    {
+        let mut state = serializer.serialize_struct("Release", 3)?;
+        state.serialize_field("id", &self.id)?;
+        state.serialize_field("slug", &self.slug)?;
+        state.serialize_field("name", &self.name)?;
+        state.serialize_field("created_at", &self.created_at)?;
+        state.serialize_field("cover", &self.cover)?;
+        state.serialize_field("tags", &self.get_tags_objects())?;
+        state.serialize_field("genres", &self.get_genres_objects())?;
+        state.end()
     }
 }
 
@@ -68,5 +180,9 @@ impl Releases {
 
     pub fn latest(&self) -> Vec<Release> {
         self.releases.iter().rev().cloned().collect()
+    }
+
+    pub fn get(&self, slug: String) -> Option<Release> {
+        self.releases.iter().find(|x| x.slug == slug).cloned()
     }
 }

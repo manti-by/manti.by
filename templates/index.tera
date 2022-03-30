@@ -9,7 +9,7 @@
       <h1>Featured</h1>
       <div id="featured-slider" class="mobile-slider">
         <div class="flex content">
-          {% for item in featured_releases | slice(end=3) %}
+          {% for featured in featured_releases | slice(end=3) %}
             {% include "partial/featured" %}
           {% endfor %}
         </div>
@@ -48,7 +48,7 @@
     <h2>Latest posts</h2>
     <div class="main flex">
       <section class="posts">
-        {% for item in front_releases | slice(end=5) %}
+        {% for post in front_releases | slice(end=5) %}
           {% include 'partial/item' %}
         {% endfor %}
       </section>

@@ -1,16 +1,21 @@
-<div class="post shadow" data-id="{{ item.id }}">
+<div class="post shadow" data-id="{{ featured.id }}">
   <div class="image">
-    <a href="/post/{{ item.slug }}">
-      <img src="{{ item.cover.thumbnail }}" data-src="{{ item.cover.preview }}" alt="{{ item.name }}" class="lazy">
+    <a href="/post/{{ featured.slug }}">
+      <img src="{{ featured.cover.thumbnail }}" data-src="{{ featured.cover.preview }}" alt="{{ featured.name }}"
+           class="lazy">
     </a>
   </div>
   <div class="info">
     <div class="wrap">
       <h3>
-        <a href="/post/{{ item.slug }}/">{{ item.name }}</a>
+        <a href="/post/{{ featured.slug }}/">{{ featured.name }}</a>
       </h3>
-      <div class="genre">{{ item.genres | join(sep=", ") }}</div>
-      <div class="created">{{ item.created_at }}</div>
+      <div class="genre">
+      {% for tag in featured.genres %}
+        <a href="/blog/?tag={{ tag.slug }}" class="tag">{{ tag.name }}</a>
+      {% endfor %}
+      </div>
+      <div class="created">{{ featured.created_at }}</div>
     </div>
   </div>
 </div>

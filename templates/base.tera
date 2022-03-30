@@ -72,6 +72,9 @@
                                 <i class="material-icons">search</i>
                             </span>
                         </span>
+                        <span class="mobile-menu-button">
+                            <i class="material-icons">more_vert</i>
+                        </span>
                     </div>
                 </div>
             </nav>
