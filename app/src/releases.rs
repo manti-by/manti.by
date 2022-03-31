@@ -50,49 +50,62 @@ pub struct RelatedRelease {
     pub tags: Vec<String>,
 }
 
-impl Release {
-    pub fn get_tags_objects(&self) -> Vec<Tag> {
+trait ReleaseTags {
+    fn get_tags(&self) -> Vec<String>;
+    fn get_genres(&self) -> Vec<String>;
+
+    fn get_tags_objects(&self) -> Vec<Tag> {
         DATA.tags
             .tags
             .iter()
-            .filter(|x| self.tags.contains(&x.slug))
+            .filter(|x| self.get_tags().contains(&x.slug))
             .cloned()
             .collect()
     }
-    pub fn get_genres_objects(&self) -> Vec<Tag> {
+    fn get_genres_objects(&self) -> Vec<Tag> {
         DATA.tags
             .tags
             .iter()
-            .filter(|x| self.genres.contains(&x.slug))
+            .filter(|x| self.get_genres().contains(&x.slug))
             .cloned()
             .collect()
     }
-    pub fn get_related_objects(&self) -> Vec<RelatedRelease> {
+}
+
+trait ReleaseRelated {
+    fn get_related(&self) -> Vec<String>;
+
+    fn get_related_objects(&self) -> Vec<RelatedRelease> {
         DATA.releases
             .releases
             .iter()
-            .filter(|x| self.related.contains(&x.id))
+            .filter(|x| self.get_related().contains(&x.id))
             .map(|x| RelatedRelease::from(x.clone()))
             .collect()
     }
 }
 
-impl RelatedRelease {
-    pub fn get_tags_objects(&self) -> Vec<Tag> {
-        DATA.tags
-            .tags
-            .iter()
-            .filter(|x| self.tags.contains(&x.slug))
-            .cloned()
-            .collect()
+impl ReleaseTags for Release {
+    fn get_tags(&self) -> Vec<String> {
+        self.tags.clone()
     }
-    pub fn get_genres_objects(&self) -> Vec<Tag> {
-        DATA.tags
-            .tags
-            .iter()
-            .filter(|x| self.genres.contains(&x.slug))
-            .cloned()
-            .collect()
+    fn get_genres(&self) -> Vec<String> {
+        self.genres.clone()
+    }
+}
+
+impl ReleaseRelated for Release {
+    fn get_related(&self) -> Vec<String> {
+        self.related.clone()
+    }
+}
+
+impl ReleaseTags for RelatedRelease {
+    fn get_tags(&self) -> Vec<String> {
+        self.tags.clone()
+    }
+    fn get_genres(&self) -> Vec<String> {
+        self.genres.clone()
     }
 }
 

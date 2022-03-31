@@ -9,9 +9,6 @@
     <div class="data">
       <h2>
         <a href="/post/{{ post.slug }}">{{ post.name }}</a><br>
-        {% for tag in post.genres %}
-          <a href="/blog/?tag={{ tag.slug }}" class="tag">{{ tag.name }}</a>
-        {% endfor %}
       </h2>
       <div class="info">
         <div class="summary">{{ post.summary }}</div>

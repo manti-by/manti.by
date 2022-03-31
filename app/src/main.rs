@@ -15,7 +15,7 @@ use serde_json::json;
 use std::error::Error;
 
 use crate::data::DATA;
-use crate::images::{ Image, FeaturedImage };
+use crate::images::{FeaturedImage, Image};
 use crate::releases::Release;
 use crate::tags::Tag;
 
