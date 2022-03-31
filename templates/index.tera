@@ -33,13 +33,13 @@
       <div class="featured">
         <a href="/gallery/">
           <img src="{{ featured_image.thumbnail }}" data-src="{{ featured_image.display }}"
-               alt="Popular image from gallery" class="lazy">
+               width="1200" height="350" alt="Popular image from gallery" class="lazy">
         </a>
         <div class="latest flex">
           {% for image in images | slice(end=5) %}
             <a href="/gallery/" class="thumbnail">
               <img src="{{ image.thumbnail }}" data-src="{{ image.preview }}"
-                   alt="Image #{{ image.id }}" class="lazy">
+                   width="178" height="100" alt="Image #{{ image.id }}" class="lazy">
             </a>
           {% endfor %}
         </div>
@@ -59,8 +59,8 @@
 
 {% block styles %}
   <link type="text/css" rel="stylesheet" href="/static/css/index.css" media="all">
-  <link type="text/css" rel="stylesheet" href="/static/css/blog/list-item.css" media="all">
-  <link type="text/css" rel="stylesheet" href="/static/css/blog/featured-item.css" media="all">
+  <link type="text/css" rel="stylesheet" href="/static/css/blog/item.css" media="all">
+  <link type="text/css" rel="stylesheet" href="/static/css/blog/featured.css" media="all">
   <link type="text/css" rel="stylesheet" href="/static/css/common/slider.css" media="all">
 {% endblock %}
 

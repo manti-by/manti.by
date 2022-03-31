@@ -21,8 +21,8 @@
 }
 
 .featured .post .image a img {
-    min-width: 100%;
-    max-width: 100%;
+    position: relative;
+    left: -2%;
 }
 
 .featured .post .info {

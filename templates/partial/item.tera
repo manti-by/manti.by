@@ -2,7 +2,8 @@
   <div class="flex">
     <div class="image">
       <a href="/post/{{ post.slug }}" class="shadow">
-        <img src="{{ post.cover.thumbnail }}" data-src="{{ post.cover.preview }}" alt="{{ post.name }}" class="lazy">
+        <img src="{{ post.cover.thumbnail }}" data-src="{{ post.cover.preview }}" alt="{{ post.name }}"
+             width="400" height="400" class="lazy">
       </a>
     </div>
     <div class="data">
@@ -15,7 +16,7 @@
       <div class="info">
         <div class="summary">{{ post.summary }}</div>
         <div class="created">
-          <strong>Created</strong>: {{ post.created_at }}
+          <strong>Created</strong>: {{ post.created_at | date(format="%b %d, %Y") }}
         </div>
         <div class="length">
           <strong>Length</strong>: {{ post.length }}

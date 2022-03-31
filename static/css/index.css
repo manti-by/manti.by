@@ -52,10 +52,8 @@
 
 .home .gallery .featured .latest .thumbnail img {
     position: relative;
-    right: 25%;
+    right: 38%;
     display: block;
-    min-height: 100%;
-    max-height: 100%;
 }
 
 .home .gallery .featured .latest .thumbnail img.lazy {

@@ -1,14 +1,15 @@
 [package]
 name = "manti-by"
-version = "0.1.2"
+version = "0.1.3"
 edition = "2018"
 
 [dependencies]
 rocket = "0.4.10"
 json = "0.12.4"
-serde = { version = "1.0.136", features = ["derive"] }
 serde_json = "1.0.79"
 lazy_static = "1.4.0"
+serde = { version = "1.0.136", features = ["derive"] }
+chrono = { version = "0.4.19", features = ["serde"] }
 
 [dependencies.rocket_contrib]
 version = "0.4.10"

@@ -19,8 +19,7 @@ class Player {
 
   init () {
     this.player = document.getElementById("player")
-    this.player.audio = this.player.querySelector("audio")
-    this.player.api = this.player.audio.get(0)
+    this.player.api = this.player.querySelector("audio")
 
     this.player.link = this.player.querySelector(".now-playing a")
     this.player.image = this.player.querySelector(".now-playing img")
@@ -33,7 +32,9 @@ class Player {
     this.is_hd && this.player.querySelector(".high-definition").classList.add("active")
 
     this.updateActivePosts()
-    this.active_id = this.getData("first").id
+
+    let release = this.getData("first")
+    if (release) this.active_id = release.id
 
     this.checkMpegSupport()
     this.bind()
@@ -115,24 +116,24 @@ class Player {
       this.updatePosition(event)
     }
 
-    document.onmousedown = (event) => {
-      if (!event.currentTarget.classList.contains("progress-bar")) return
-      event.currentTarget.dataset.active = "true"
-    }
+    // document.onmousedown = (event) => {
+    //   if (!event.currentTarget.classList.contains("progress-bar")) return
+    //   event.currentTarget.dataset.active = "true"
+    // }
 
-    document.onmousemove = (event) => {
-      if (!event.currentTarget.classList.contains("progress-bar")) return
-      if (event.currentTarget.dataset.active === "true") this.updatePosition(event)
-    }
+    // document.onmousemove = (event) => {
+    //   if (!event.currentTarget.classList.contains("progress-bar")) return
+    //   if (event.currentTarget.dataset.active === "true") this.updatePosition(event)
+    // }
 
-    document.onmouseup = (event) => {
-      if (!event.currentTarget.classList.contains("progress-bar")) return
-      event.currentTarget.dataset.active = "false"
-    }
+    // document.onmouseup = (event) => {
+    //   if (!event.currentTarget.classList.contains("progress-bar")) return
+    //   event.currentTarget.dataset.active = "false"
+    // }
   }
 
   getData(option, full_data) {
-    if (!this.data.length) throw "Audio data is empty"
+    if (!this.data.length) return
 
     let items = this.active
     if (full_data) {
@@ -197,7 +198,7 @@ class Player {
     const current_player = document.getElementById("#player-" + this.active_id)
 
     // Skip if not playing or not loaded
-    if (this.is_playing !== true || this.player.audio.get(0).readyState === AUDIO_NOT_READY) return
+    if (this.is_playing !== true || this.player.api.readyState === AUDIO_NOT_READY) return
 
     // Update internals
     this.duration = this.player.api.duration
@@ -232,7 +233,7 @@ class Player {
     const player_volume_label = this.player.querySelector(".volume-label span")
 
     player_volume_label.innerHTML = this.volume
-    player_volume_line_active.offsetWidth = this.volume * player_volume_line.offsetWidth / 100
+    player_volume_line_active.style.offsetWidth = this.volume * player_volume_line.style.offsetWidth / 100
   }
 
   updatePosition (event) {
@@ -306,7 +307,7 @@ class Player {
     this.player.title.innerHtml = data.title
     this.player.link.href = data.url
     this.player.image.src = data.cover
-    this.player.audio.src = data[quality][format]
+    this.player.api.src = data[quality][format]
 
     this.player.api.load()
 
@@ -368,11 +369,11 @@ class Player {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  window.player = new Player()
+  window.player = new Player([])
 
   fetch("/api/").then(response => {
     if (response.status === 200) {
-      window.player.init(response.data)
+      window.player.data = response.data
       return
     }
     console.error(response.message)

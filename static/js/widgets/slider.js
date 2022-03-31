@@ -20,13 +20,14 @@ class Slider {
     this.content.style.left = 0
     if (window.innerWidth > 767) return
 
-    this.slider.ontouchstart = (event) => {
+    this.slider.addEventListener("touchstart", (event) => {
       this.touchstartX = event.changedTouches[0].screenX
-    }
-    this.slider.ontouchend = (event) => {
+    }, {passive: true})
+
+    this.slider.addEventListener("touchend", (event) => {
       this.touchendX = event.changedTouches[0].screenX
       this.handleSwipe()
-    }
+    }, {passive: true})
 
     this.controls.querySelector(".button").onclick = (event) => {
       event.currentTarget.classList.contains("next") ? this.next() : this.prev()

@@ -15,13 +15,13 @@ use serde_json::json;
 use std::error::Error;
 
 use crate::data::DATA;
-use crate::images::Image;
+use crate::images::{ Image, FeaturedImage };
 use crate::releases::Release;
 use crate::tags::Tag;
 
 #[derive(Serialize, Deserialize)]
 struct IndexContext {
-    pub featured_image: Image,
+    pub featured_image: FeaturedImage,
     pub featured_releases: Vec<Release>,
     pub front_releases: Vec<Release>,
     pub releases: Vec<Release>,
@@ -31,12 +31,9 @@ struct IndexContext {
 
 fn get_index_context() -> Result<IndexContext, serde_json::Error> {
     Ok(IndexContext {
-        featured_image: Image {
-            id: 44,
-            original: String::from("/content/gallery/44_Quattro-Corti.jpg"),
-            display: String::from("/content/gallery/44_Quattro-Corti.display.webp"),
-            preview: String::from("/content/gallery/44_Quattro-Corti.preview.webp"),
-            thumbnail: String::from("/content/gallery/44_Quattro-Corti.thumbnail.webp"),
+        featured_image: FeaturedImage {
+            display: String::from("/static/img/featured.display.webp"),
+            thumbnail: String::from("/static/img/featured.thumbnail.webp"),
         },
         featured_releases: DATA.releases.featured(),
         front_releases: DATA.releases.front(),

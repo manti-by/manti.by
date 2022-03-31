@@ -36,7 +36,7 @@
           <h2 class="mobile-hidden">{{ post.name }}</h2>
           <div class="description">{{ post.description }}</div>
           <div class="created">
-            <strong>Created</strong>: {{ post.created_at }}
+            <strong>Created</strong>: {{ post.created_at | date(format="%b %d, %Y")  }}
           </div>
           <div class="catnum">
             <strong>Catalog No</strong>: {{ post.catnum }}
@@ -97,7 +97,7 @@
 {% endblock %}
 
 {% block styles %}
-  <link type="text/css" rel="stylesheet" href="/static/css/blog/featured-item.css" media="all">
+  <link type="text/css" rel="stylesheet" href="/static/css/blog/featured.css" media="all">
   <link type="text/css" rel="stylesheet" href="/static/css/blog/post.css" media="all">
 {% endblock %}
 

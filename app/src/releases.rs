@@ -1,4 +1,5 @@
 use crate::{Tag, DATA};
+use chrono::NaiveDate;
 use serde::ser::SerializeStruct;
 use serde::{Deserialize, Serialize};
 
@@ -21,7 +22,7 @@ pub struct Release {
     pub id: String,
     pub slug: String,
     pub name: String,
-    pub created_at: String,
+    pub created_at: NaiveDate,
     pub cover: Cover,
     pub summary: String,
     pub description: String,
@@ -43,7 +44,7 @@ pub struct RelatedRelease {
     pub id: String,
     pub slug: String,
     pub name: String,
-    pub created_at: String,
+    pub created_at: NaiveDate,
     pub cover: Cover,
     pub genres: Vec<String>,
     pub tags: Vec<String>,

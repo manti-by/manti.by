@@ -23,8 +23,6 @@
 
 .post .image a img {
     display: block;
-    min-width: 100%;
-    max-width: 100%;
 }
 
 .post .links {

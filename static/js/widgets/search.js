@@ -53,6 +53,8 @@ class Search {
     }
 
     const close_search = () => {
+      if (!this.search.classList.contains("visible")) return
+      
       this.search_input.value = ""
 
       this.search_result.classList.add("hidden")

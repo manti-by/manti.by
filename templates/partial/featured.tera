@@ -2,7 +2,7 @@
   <div class="image">
     <a href="/post/{{ featured.slug }}">
       <img src="{{ featured.cover.thumbnail }}" data-src="{{ featured.cover.preview }}" alt="{{ featured.name }}"
-           class="lazy">
+           width="400" height="400" class="lazy">
     </a>
   </div>
   <div class="info">
@@ -15,7 +15,7 @@
         <a href="/blog/?tag={{ tag.slug }}" class="tag">{{ tag.name }}</a>
       {% endfor %}
       </div>
-      <div class="created">{{ featured.created_at }}</div>
+      <div class="created">{{ featured.created_at | date(format="%b %d, %Y")}}</div>
     </div>
   </div>
 </div>
