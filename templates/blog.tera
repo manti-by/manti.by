@@ -29,7 +29,7 @@
         {% include "partial/item" %}
       {% endfor %}
     </div>
-    {% include "sidebar" %}
+    {% include "partial/sidebar" %}
   </div>
 {% endblock %}
 

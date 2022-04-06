@@ -196,6 +196,15 @@ impl Releases {
         self.releases.iter().rev().cloned().collect()
     }
 
+    pub fn filter(&self, tag: String) -> Vec<Release> {
+        self.releases
+            .iter()
+            .rev()
+            .filter(|x| x.tags.contains(&tag))
+            .cloned()
+            .collect()
+    }
+
     pub fn get(&self, slug: String) -> Option<Release> {
         self.releases.iter().find(|x| x.slug == slug).cloned()
     }

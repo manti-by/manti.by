@@ -52,7 +52,7 @@
           {% include 'partial/item' %}
         {% endfor %}
       </section>
-      {% include "sidebar" %}
+      {% include "partial/sidebar" %}
     </div>
   </div>
 {% endblock %}

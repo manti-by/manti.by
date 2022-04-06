@@ -10,7 +10,7 @@
     <div class="galleries panel">
         <h4>Latest posts</h4>
         <ul>
-            {% for p in releases | slice(end=10) %}
+            {% for p in latest | slice(end=10) %}
                 <li><a href="/post/{{ p.slug }}/">{{ p.name }}</a></li>
             {% endfor %}
         </ul>

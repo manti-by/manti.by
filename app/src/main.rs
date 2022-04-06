@@ -25,6 +25,7 @@ struct IndexContext {
     pub featured_releases: Vec<Release>,
     pub front_releases: Vec<Release>,
     pub releases: Vec<Release>,
+    pub latest: Vec<Release>,
     pub images: Vec<Image>,
     pub tags: Vec<Tag>,
 }
@@ -38,6 +39,7 @@ fn get_index_context() -> Result<IndexContext, serde_json::Error> {
         featured_releases: DATA.releases.featured(),
         front_releases: DATA.releases.front(),
         releases: DATA.releases.latest(),
+        latest: DATA.releases.latest(),
         images: DATA.images.latest(),
         tags: DATA.tags.popular(),
     })
@@ -62,20 +64,26 @@ fn about() -> Template {
 
 #[derive(Serialize, Deserialize)]
 struct BlogContext {
-    pub tags: Vec<Tag>,
     pub releases: Vec<Release>,
+    pub latest: Vec<Release>,
+    pub tags: Vec<Tag>,
 }
 
-fn get_blog_context() -> Result<BlogContext, serde_json::Error> {
+fn get_blog_context(tag: Option<String>) -> Result<BlogContext, serde_json::Error> {
+    let releases = match tag {
+        Some(tag) => DATA.releases.filter(tag),
+        None => DATA.releases.latest(),
+    };
     Ok(BlogContext {
-        releases: DATA.releases.latest(),
+        releases,
+        latest: DATA.releases.latest(),
         tags: DATA.tags.popular(),
     })
 }
 
-#[get("/blog")]
-fn blog() -> Template {
-    match get_blog_context() {
+#[get("/blog?<tag>")]
+fn blog(tag: Option<String>) -> Template {
+    match get_blog_context(tag) {
         Ok(context) => Template::render("blog", context),
         Err(e) => {
             let context = json!({"message": e.to_string()});
