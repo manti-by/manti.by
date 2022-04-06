@@ -6,8 +6,8 @@ After=network.target
 User=manti
 Group=www-data
 Restart=always
-WorkingDirectory=/home/manti/www/manti.by/bin
-ExecStart=/home/manti/www/manti.by/bin/app
+WorkingDirectory=/home/manti/www/manti.by/dist
+ExecStart=/home/manti/www/manti.by/dist/app
 StandardOutput=file:/mnt/nostromo/www/manti.by/log/app.log
 StandardError=file:/mnt/nostromo/www/manti.by/log/app-error.log
 

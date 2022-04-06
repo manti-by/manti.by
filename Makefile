@@ -1,9 +1,8 @@
 check:
-	flake8 scripts/
-	black --target-version py39 scripts/
+	black --target-version py39 tests/pytest/
 
 test:
-	pytest
+	cd tests/pytest/ && pytest .
 
 
 clean-gallery:
@@ -43,6 +42,10 @@ update-releases:
 
 build:
 	cd app/ && cargo build
+
+release:
+	cd app/ && cargo build --release
+	cp app/target/release/manti-by dist/app
 
 run:
 	cd app/ && cargo run

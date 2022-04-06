@@ -18,16 +18,16 @@ pub struct Data {
 
 impl Default for Data {
     fn default() -> Self {
-        let file = File::open("../content/tags.json").unwrap();
+        let file = File::open("/home/manti/www/manti.by/content/tags.json").unwrap();
         let reader = BufReader::new(file);
         let tags: Tags = serde_json::from_reader(reader).unwrap();
 
-        let file = File::open("../content/gallery.json").unwrap();
+        let file = File::open("/home/manti/www/manti.by/content/gallery.json").unwrap();
         let reader = BufReader::new(file);
         let mut images: Images = serde_json::from_reader(reader).unwrap();
         images.images = images.images.iter().rev().cloned().collect();
 
-        let file = File::open("../content/releases.json").unwrap();
+        let file = File::open("/home/manti/www/manti.by/content/releases.json").unwrap();
         let reader = BufReader::new(file);
         let mut releases: Releases = serde_json::from_reader(reader).unwrap();
         releases.releases = releases.releases.iter().rev().cloned().collect();
