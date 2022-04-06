@@ -137,24 +137,21 @@ fn gallery() -> Template {
     }
 }
 
-#[get("/dashboard")]
-fn dashboard() -> Template {
-    let context = json!({});
-    Template::render("dashboard", context)
+#[get("/api?<query>", rank = 1)]
+fn search(query: String) -> content::Json<String> {
+    let json_result = serde_json::to_string(&DATA.releases.search(query));
+    content::Json(json_result.unwrap())
 }
 
-#[get("/api")]
-fn api() -> content::Json<String> {
-    let json_result = serde_json::to_string(&DATA.releases.latest());
+#[get("/api?<start>&<limit>", rank = 2)]
+fn api(start: Option<usize>, limit: Option<usize>) -> content::Json<String> {
+    let json_result = serde_json::to_string(&DATA.releases.paginate(start, limit));
     content::Json(json_result.unwrap())
 }
 
 fn main() {
     rocket::ignite()
         .attach(Template::fairing())
-        .mount(
-            "/",
-            routes![index, blog, post, gallery, api, about, dashboard],
-        )
+        .mount("/", routes![index, blog, post, gallery, search, api, about])
         .launch();
 }

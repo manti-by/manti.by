@@ -22,6 +22,6 @@ pub struct Images {
 
 impl Images {
     pub fn latest(&self) -> Vec<Image> {
-        self.images.iter().rev().cloned().collect()
+        self.images.to_owned()
     }
 }

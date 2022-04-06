@@ -39,6 +39,15 @@ pub struct Release {
     pub preview: Attachment,
 }
 
+impl Release {
+    pub fn contains(&self, term: &String) -> bool {
+        let term = term.to_lowercase();
+        self.name.to_lowercase().contains(&term)
+            | self.description.to_lowercase().contains(&term)
+            | self.tracklist.to_lowercase().contains(&term)
+    }
+}
+
 #[derive(Deserialize, Clone)]
 pub struct RelatedRelease {
     pub id: String,
@@ -193,7 +202,7 @@ impl Releases {
     }
 
     pub fn latest(&self) -> Vec<Release> {
-        self.releases.iter().rev().cloned().collect()
+        self.releases.to_owned()
     }
 
     pub fn filter(&self, tag: String) -> Vec<Release> {
@@ -203,6 +212,20 @@ impl Releases {
             .filter(|x| x.tags.contains(&tag))
             .cloned()
             .collect()
+    }
+
+    pub fn search(&self, query: String) -> Vec<Release> {
+        self.releases
+            .iter()
+            .filter(|x| x.contains(&query))
+            .cloned()
+            .collect()
+    }
+
+    pub fn paginate(&self, start: Option<usize>, limit: Option<usize>) -> Vec<Release> {
+        let start = start.unwrap_or(0);
+        let limit = limit.unwrap_or(self.releases.len());
+        self.releases[start..limit].to_vec()
     }
 
     pub fn get(&self, slug: String) -> Option<Release> {

@@ -24,11 +24,13 @@ impl Default for Data {
 
         let file = File::open("../content/gallery.json").unwrap();
         let reader = BufReader::new(file);
-        let images: Images = serde_json::from_reader(reader).unwrap();
+        let mut images: Images = serde_json::from_reader(reader).unwrap();
+        images.images = images.images.iter().rev().cloned().collect();
 
         let file = File::open("../content/releases.json").unwrap();
         let reader = BufReader::new(file);
-        let releases: Releases = serde_json::from_reader(reader).unwrap();
+        let mut releases: Releases = serde_json::from_reader(reader).unwrap();
+        releases.releases = releases.releases.iter().rev().cloned().collect();
 
         Data {
             tags,
