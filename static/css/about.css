@@ -1,0 +1,47 @@
+.about {
+  font-size: 1em;
+}
+
+.about section {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 1050px;
+  margin-bottom: 1.75em;
+}
+
+.about h3 {
+  font-size: 1.5em;
+  text-transform: none;
+}
+
+.about aside {
+  padding-top: .325em;
+  width: 24%;
+  color: #666;
+}
+
+.about div {
+  width: 76%;
+}
+
+.about ul {
+  margin-bottom: 1.5em;
+  line-height: 1.3;
+}
+
+.about li {
+  margin-bottom: .75em;
+}
+
+.about .muted,
+.about .description {
+  margin: .5em 0 0;
+  font-size: 1em;
+}
+
+.about .muted {
+  margin-bottom: 1.5em;
+  font-size: 1em;
+  color: #666;
+}

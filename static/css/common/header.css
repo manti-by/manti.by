@@ -1,0 +1,175 @@
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    font-size: .875em;
+    background: #FFF;
+    z-index: 1000;
+    transform: translate3d(0, -100%, 0);
+    transition: transform .2s linear, background 1s ease, height .5s ease;
+}
+
+header.visible {
+    transform: translateZ(0);
+}
+
+header nav {
+    position: relative;
+    padding: 1.4em 0 1.6em 0;
+}
+
+header nav i,
+header nav .text {
+    color: #666;
+    text-transform: uppercase;
+}
+
+header nav .material-icons {
+    position: relative;
+    top: 3px;
+    font-size: 18px;
+}
+
+header nav .text:hover {
+    color: #b40303;
+}
+
+header nav .link-item {
+    display: inline-block;
+    min-width: 95px;
+}
+
+header .language {
+    margin: 0 2em 0 0;
+}
+
+header .language .item.text {
+    font-weight: 500;
+}
+
+header .language .item.text.active {
+    font-weight: 400;
+    color: #666;
+    cursor: auto;
+}
+
+header .language .item.text.active:hover  {
+    border-bottom: 0;
+}
+
+header .language .item.spacer {
+    color: #666;
+    margin: 0 0.25em;
+    border: none;
+    cursor: auto;
+}
+
+header .language .item.spacer:last-child {
+    display: none;
+}
+
+header nav .user {
+    position: relative;
+    display: inline-block;
+    height: 1em;
+    width: 1.5em;
+    margin: 0 0 0 0.5em;
+    overflow: visible;
+}
+
+header nav .user a {
+    position: absolute;
+    top: -0.1em;
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 0.75em;
+    background: #CCC;
+    overflow: hidden;
+}
+
+header nav .user a img {
+    min-width: 100%;
+    max-width: 100%;
+}
+
+header .mobile-menu-button {
+    width: 1em;
+    margin-left: 0.25em;
+    cursor: pointer;
+}
+
+header .mobile-menu {
+    position: fixed;
+    display: none;
+    top: 52px;
+    min-width: 150px;
+    padding: 0.2em 0;
+    background: #FFF;
+}
+
+header .mobile-menu.open {
+    display: block;
+}
+
+header .mobile-menu a,
+header .mobile-menu .open-search {
+    display: block;
+    width: 175px;
+    margin: 0 0.25em;
+    padding: 0.5em 0.25em;
+    color: #666;
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    border-bottom: none;
+}
+
+header .mobile-menu .open-search {
+    cursor: pointer;
+}
+
+header .mobile-menu a:hover,
+header .mobile-menu a.active,
+header .mobile-menu .open-search:hover {
+    color: #666;
+    text-decoration: none;
+    background-color: #EFEFEF;
+}
+
+header .mobile-menu a:last-child {
+    border-bottom: none;
+}
+
+header .breadcrumbs {
+    color: #666;
+}
+
+header .breadcrumbs a {
+    color: #666;
+}
+
+header .breadcrumbs a:hover {
+    color: #b40303;
+}
+
+header .breadcrumbs .spacer {
+    margin: 0.25em;
+}
+
+header .breadcrumbs .tag {
+    margin: 0;
+    font-size: 1em;
+}
+
+header .breadcrumbs .tag:hover {
+    color: inherit;
+}
+
+header .breadcrumbs h1 {
+    display: inline;
+    margin: 0;
+    font-size: 1em;
+    text-transform: none;
+    color: #666;
+}

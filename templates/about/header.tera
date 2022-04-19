@@ -1,0 +1,20 @@
+<section>
+  <aside>
+    <img src="/static/img/pixel.webp" data-src="/static/img/resume.webp" class="lazy" alt="Alexander Chaika">
+  </aside>
+  <div>
+    <h2>
+      <span class="print-hidden">About me</span>
+      <span class="print-visible">Alexander Chaika, Python Developer</span>
+    </h2>
+    <p>
+      I'm a professional backend developer with an experience in developing web applications.<br>
+      I do my job well both as part of a team and as a sole unit.
+    </p>
+    <ul>
+      <li><a href="tel:+375295105493">+375 29 510-54-93</a></li>
+      <li><a href="mailto:manti.by@gmail.com">manti.by@gmail.com</a></li>
+      <li><a href="https://github.com/manti-by">https://github.com/manti-by</a></li>
+    </ul>
+  </div>
+</section>

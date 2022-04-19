@@ -3,25 +3,21 @@
 {% block title %}About{% endblock %}
 {% block meta %}About{% endblock %}
 
+{% block breadcrumbs %}
+  <span class="spacer">&bull;</span>
+  <h1>About</h1>
+{% endblock %}
+
 {% block content %}
-  <article class="container about shadow">
-    <div class="static">
-      <h1>
-        <span class="print-hidden">About me</span>
-        <span class="print-visible">Alexander Chaika</span>
-      </h1>
-      <div class="description flex">
-        <div class="content">
-          <img src="/static/img/one-pixel.jpg" data-src="/static/img/cut-mobile.jpg"
-               class="image mobile-visible lazy" alt="Manti">
-          {% include "about/readme" %}
-          {% include "about/resume" %}
-        </div>
-        <div class="image mobile-hidden">
-          <img src="/static/img/one-pixel.jpg" data-src="/static/img/cut.jpg"
-               class="lazy" alt="Manti">
-        </div>
-      </div>
-    </div>
+  <article class="container about">
+    {% include "about/header" %}
+    {% include "about/soft-skills" %}
+    {% include "about/hard-skills" %}
+    {% include "about/employment" %}
+    {% include "about/education" %}
   </article>
+{% endblock %}
+
+{% block styles %}
+  <link type="text/css" rel="stylesheet" href="/static/css/about.css" media="all">
 {% endblock %}

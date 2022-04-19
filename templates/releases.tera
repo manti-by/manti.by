@@ -1,0 +1,3 @@
+{% for post in releases | slice(end=6) %}
+  {% include "partial/item" %}
+{% endfor %}

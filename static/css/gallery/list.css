@@ -27,28 +27,3 @@
     max-width: 100%;
 }
 
-.gallery .list .item h2 {
-    position: relative;
-    left: -0.35em;
-    height: 0.68em;
-    padding: 0;
-    margin: 0;
-    font-size: 6em;
-    text-transform: uppercase;
-    overflow: visible;
-    z-index: -1;
-    opacity: 0.07;
-}
-
-.gallery .list .item h2:hover {
-    z-index: 100;
-}
-
-.gallery .list .item h2 .info {
-    position: relative;
-    top: -3.4rem;
-    font-size: 2rem;
-    font-weight: 400;
-    text-transform: none;
-}
-

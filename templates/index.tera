@@ -62,9 +62,11 @@
   <link type="text/css" rel="stylesheet" href="/static/css/blog/item.css" media="all">
   <link type="text/css" rel="stylesheet" href="/static/css/blog/featured.css" media="all">
   <link type="text/css" rel="stylesheet" href="/static/css/common/slider.css" media="all">
+  <link type="text/css" rel="stylesheet" href="/static/css/common/player.css" media="all">
 {% endblock %}
 
 {% block scripts %}
   <script src="/static/js/widgets/tracklist.js"></script>
   <script src="/static/js/widgets/slider.js"></script>
+  <script src="/static/js/player.js"></script>
 {% endblock %}
