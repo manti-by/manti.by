@@ -4,6 +4,9 @@ check:
 test:
 	cd tests/pytest/ && pytest .
 
+jmeter:
+	jmeter -n -t tests/performance/index.jmx -l tests/performance/result.csv -o tests/performance/test.log
+
 
 clean-gallery:
 	rm -rf content/gallery.json

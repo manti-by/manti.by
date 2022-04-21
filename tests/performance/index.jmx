@@ -93,7 +93,7 @@
               <connectTime>true</connectTime>
             </value>
           </objProp>
-          <stringProp name="filename"></stringProp>
+          <stringProp name="filename">/home/manti/www/manti.by/tests/performance/results.csv</stringProp>
         </ResultCollector>
         <hashTree/>
       </hashTree>

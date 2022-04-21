@@ -17,7 +17,7 @@ def client(xprocess):
         env = {
             "ROCKET_PORT": str(random.randint(9000, 9999)),
             "ROCKET_TEMPLATE_DIR": BASE_DIR / "templates",
-            "ROCKET_SECRET_KEY": base64.b64encode(os.urandom(16).hex().encode())
+            "ROCKET_SECRET_KEY": base64.b64encode(os.urandom(16).hex().encode()),
         }
         args = [BASE_DIR / "dist/app"]
         host = f"http://0.0.0.0:{env['ROCKET_PORT']}"

@@ -7,5 +7,6 @@ content/
 .venv/
 .idea/
 
+*.log
 *.pyc
 *~
