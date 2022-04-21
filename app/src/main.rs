@@ -9,6 +9,7 @@ mod releases;
 mod tags;
 
 use rocket::response::content;
+use rocket::response::content::Json;
 use rocket_contrib::templates::Template;
 use serde::{Deserialize, Serialize};
 use serde_json::json;
@@ -41,7 +42,7 @@ fn get_index_context() -> Result<IndexContext, serde_json::Error> {
         releases: DATA.releases.latest(),
         latest: DATA.releases.latest(),
         images: DATA.images.latest(),
-        tags: DATA.tags.popular(),
+        tags: DATA.popular_tags.to_owned(),
     })
 }
 
@@ -77,7 +78,7 @@ fn get_blog_context(tag: Option<String>) -> Result<BlogContext, serde_json::Erro
     Ok(BlogContext {
         releases,
         latest: DATA.releases.latest(),
-        tags: DATA.tags.popular(),
+        tags: DATA.popular_tags.to_owned(),
     })
 }
 
@@ -137,21 +138,38 @@ fn gallery() -> Template {
     }
 }
 
-#[get("/api?<query>", rank = 1)]
+#[get("/api?<start>&<limit>", rank = 1)]
+fn json_api(start: Option<usize>, limit: Option<usize>) -> Json<String> {
+    let releases = DATA.releases.paginate(start, limit);
+    let json_result = serde_json::to_string(&releases);
+    content::Json(json_result.unwrap())
+}
+
+#[get("/api?<query>", rank = 2)]
 fn search(query: String) -> content::Json<String> {
     let json_result = serde_json::to_string(&DATA.releases.search(query));
     content::Json(json_result.unwrap())
 }
 
-#[get("/api?<start>&<limit>", rank = 2)]
-fn api(start: Option<usize>, limit: Option<usize>) -> content::Json<String> {
-    let json_result = serde_json::to_string(&DATA.releases.paginate(start, limit));
-    content::Json(json_result.unwrap())
+#[derive(Serialize, Deserialize)]
+struct ApiReleases {
+    releases: Vec<Release>,
+}
+
+#[get("/api?format=html&<start>&<limit>", rank = 3)]
+fn html_api(start: Option<usize>, limit: Option<usize>) -> Template {
+    let releases = DATA.releases.paginate(start, limit);
+
+    let context = ApiReleases { releases };
+    Template::render("releases", context)
 }
 
 fn main() {
     rocket::ignite()
         .attach(Template::fairing())
-        .mount("/", routes![index, blog, post, gallery, search, api, about])
+        .mount(
+            "/",
+            routes![index, blog, post, gallery, search, json_api, html_api, about],
+        )
         .launch();
 }
