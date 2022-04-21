@@ -81,95 +81,90 @@ class Player {
     }
 
     document.onclick = (event) => {
-      if (!event.currentTarget.classList.contains("play-pause")) return
+      let button = event.target.classList
 
-      const target = event.currentTarget
-      const id = event.currentTarget.closest(".player").dataset.id
-
-      if (target.classList.contains("play")) {
-        if (this.active_id !== id) {
-          if (this.getData(id)) {
-            this.active_id = id
-            this.reload()
-          }
-        }
-        !this.player.dataset.id && this.reload()
-        this.play()
-      } else {
-        this.pause()
+      if (button.contains("next-track")) {
+        this.next()
+        return
       }
-      this.updateActivePlayer()
-    }
 
-    document.onclick = (event) => {
-      if (!event.currentTarget.classList.contains("next-track")) return
-      this.next()
-    }
+      if (button.contains("prev-track")) {
+        this.prev()
+        return
+      }
 
-    document.onclick = (event) => {
-      if (!event.currentTarget.classList.contains("prev-track")) return
-      this.prev()
-    }
+      if (button.contains("progress-bar")) {
+        this.next()
+        this.updatePosition(event)
+      }
 
-    document.onclick = (event) => {
-      if (!event.currentTarget.classList.contains("progress-bar")) return
-      this.updatePosition(event)
+      if (button.contains("play-pause")) {
+        const id = event.target.closest(".player").dataset.id
+        if (event.target.classList.contains("play")) {
+          if (this.active_id !== id) {
+            if (this.getData(id)) {
+              this.active_id = id
+              this.reload()
+            }
+          }
+          !this.player.dataset.id && this.reload()
+          this.play()
+        } else {
+          this.pause()
+        }
+        this.updateActivePlayer()
+      }
     }
 
     // document.onmousedown = (event) => {
-    //   if (!event.currentTarget.classList.contains("progress-bar")) return
-    //   event.currentTarget.dataset.active = "true"
+    //   if (!event.target.classList.contains("progress-bar")) return
+    //   event.target.dataset.active = "true"
     // }
-
+    //
     // document.onmousemove = (event) => {
-    //   if (!event.currentTarget.classList.contains("progress-bar")) return
-    //   if (event.currentTarget.dataset.active === "true") this.updatePosition(event)
+    //   if (!event.target.classList.contains("progress-bar")) return
+    //   if (event.target.dataset.active === "true") this.updatePosition(event)
     // }
-
+    //
     // document.onmouseup = (event) => {
-    //   if (!event.currentTarget.classList.contains("progress-bar")) return
-    //   event.currentTarget.dataset.active = "false"
+    //   if (!event.target.classList.contains("progress-bar")) return
+    //   event.target.dataset.active = "false"
     // }
   }
 
-  getData(option, full_data) {
+  getData(option) {
     if (!this.data.length) return
 
-    let items = this.active
-    if (full_data) {
-      items = this.data
-    }
+    if (option === "first") return this.data[0]
 
-    if (option === "first") return items[0]
-
-    for (let i = 0; i < items.length; i++) {
+    for (let i = 0; i < this.data.length; i++) {
       switch (option) {
         case "next":
-          if (items[i].id === this.active_id) {
-            if (typeof items[i + 1] !== "undefined") {
-              return items[i + 1]
+          if (this.data[i].id === this.active_id) {
+            if (typeof this.data[i + 1] !== "undefined") {
+              return this.data[i + 1]
             } else {
-              return items[0]
+              return this.data[0]
             }
           }
           break
         case "prev":
-          if (items[i].id === this.active_id) {
-            if (typeof items[i - 1] !== "undefined") {
-              return items[i - 1]
+          if (this.data[i].id === this.active_id) {
+            if (typeof this.data[i - 1] !== undefined) {
+              return this.data[i - 1]
             } else {
-              return items[this.active.length - 1]
+              return this.data[this.active.length - 1]
             }
           }
           break
         case "current":
-          if (items[i].id === this.active_id) {
-            return items[i]
+          if (this.data[i].id === this.active_id) {
+            return this.data[i]
           }
           break
         default:
-          if (items[i].id === parseInt(option)) {
-            return items[i]
+          if (this.data[i].id === parseInt(option)) {
+            return this.data[i]
           }
           break
       }
@@ -183,7 +178,7 @@ class Player {
     this.active = []
 
     for (const element of document.querySelectorAll(".post")) {
-      let data = this.getData(element.dataset.id, true)
+      let data = this.getData(element.dataset.id)
       this.active.indexOf(data) === -1 && this.active.push(data)
     }
 
@@ -237,18 +232,18 @@ class Player {
   }
 
   updatePosition (event) {
-    const active_width = event.currentTarget.querySelector(".progress-line").width()
-    const pixels_value = event.clientX - event.currentTarget.offsetLeft
+    const active_width = event.target.querySelector(".progress-line").width()
+    const pixels_value = event.clientX - event.target.offsetLeft
     let percent_value = Math.floor(pixels_value / active_width * 100)
 
-    if (event.currentTarget.classList.contains("volume")) {
+    if (event.target.classList.contains("volume")) {
       this.volume = percent_value
       this.player.api.volume = percent_value / 100
       this.updateVolumePosition()
     }
 
-    if (event.currentTarget.classList.contains("position")) {
-      const loaded_width = event.currentTarget.querySelector(".progress-line-loaded").offsetWidth
+    if (event.target.classList.contains("position")) {
+      const loaded_width = event.target.querySelector(".progress-line-loaded").offsetWidth
       if (pixels_value > loaded_width) {
         percent_value = Math.floor(loaded_width / active_width * 100)
       }
@@ -261,9 +256,9 @@ class Player {
 
   updateActivePlayer () {
     const all_players = document.querySelectorAll(".player")
-    const all_play_buttons = all_players.querySelectorAll(".play-pause")
+    const all_play_buttons = document.querySelectorAll(".player .play-pause")
     const active_players = document.querySelectorAll("#player, #player-" + this.active_id)
-    const play_buttons = active_players.querySelectorAll(".play-pause")
+    const play_buttons = document.querySelectorAll("#player .play-pause, #player-" + this.active_id)
 
     all_players.classList.remove("active")
     all_play_buttons.classList.remove("pause")
@@ -303,17 +298,18 @@ class Player {
     const quality = this.is_hd ? "release" : "preview"
     const format = this.is_mp3 ? "mp3" : "ogg"
 
-    this.player.data('id', this.active_id)
-    this.player.title.innerHtml = data.title
-    this.player.link.href = data.url
-    this.player.image.src = data.cover
+    //this.player.title.innerHtml = data.name
+    this.player.link.href = data.slug
+    this.player.image.src = data.cover.preview
+    
     this.player.api.src = data[quality][format]
+    this.player.api.dataset.id = this.active_id
 
     this.player.api.load()
 
-    document.querySelectorAll('.player .position .progress-line-label span').innerHtml = '00:00:00'
-    document.querySelectorAll('.player .position .progress-line-loaded').offsetWidth = 0
-    document.querySelectorAll('.player .position .progress-line-active').offsetWidth = 0
+    document.querySelectorAll(".player .position .progress-line-label span").innerHtml = '00:00:00'
+    document.querySelectorAll(".player .position .progress-line-loaded").offsetWidth = 0
+    document.querySelectorAll(".player .position .progress-line-active").offsetWidth = 0
 
     window.loader.hide()
   }
@@ -373,10 +369,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fetch("/api/").then(response => {
     if (response.status === 200) {
-      window.player.data = response.data
-      return
+      return response.json()
     }
     console.error(response.message)
+  }).then(data => {
+    window.player.data = data
   })
 
   setInterval(function () {

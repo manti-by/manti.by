@@ -99,8 +99,10 @@
 {% block styles %}
   <link type="text/css" rel="stylesheet" href="/static/css/blog/featured.css" media="all">
   <link type="text/css" rel="stylesheet" href="/static/css/blog/post.css" media="all">
+  <link type="text/css" rel="stylesheet" href="/static/css/common/player.css" media="all">
 {% endblock %}
 
 {% block scripts %}
   <script type="text/javascript" src="/static/js/widgets/tracklist.js"></script>
+  <script src="/static/js/player.js"></script>
 {% endblock %}

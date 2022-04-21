@@ -1,10 +1,9 @@
 "use strict"
 
 class Ajax {
-  options = {type: "html", start: 6,  limit: 6}
-
   constructor() {
     this.locked = false
+    this.options = {format: "html", start: 6,  limit: 6}
     this.footer = document.querySelector("footer")
 
     const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -17,11 +16,9 @@ class Ajax {
 
   bind() {
     window.onscroll = () => {
-      if (this.footer.offsetTop < window.scrollTop + window.innerHeight) {
+      if (this.footer.offsetTop < window.scrollY + window.innerHeight) {
         if (!this.locked) {
           this.locked = true
-          this.options.start = start
-
           window.loader.show()
 
           let query = Object.keys(this.options)
@@ -29,19 +26,16 @@ class Ajax {
 
           fetch("/api/?" + query).then(response => {
             if (response.status === 200) {
-              this.options.start += 6
-              for (const post of response.data) {
-                document.querySelector(".partial .posts").append(post)
-              }
-
-              window.lazy.bind()
-              window.player.updateActivePosts()
-
-              if (response.data.length) this.locked = false
-              return
+              return response.text()
             }
             console.error(response.message)
+          }).then(data => {
+            this.options.start += 6
+            document.querySelector(".partial .posts").append(data)
+            window.lazy.bind()
+            window.player.updateActivePosts()
           }).finally(() => {
+            this.locked = false
             window.loader.hide()
           })
         }
