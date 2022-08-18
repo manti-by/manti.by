@@ -23,7 +23,7 @@ class Player {
 
     this.player.link = this.player.querySelector(".now-playing a")
     this.player.image = this.player.querySelector(".now-playing img")
-    this.player.title = this.player.querySelector(".now-playing span.title-wrapper")
+    this.player.title = this.player.querySelector(".now-playing .title-wrapper")
 
     this.volume = getCookie("volume", 70)
     this.is_hd = getCookie("is-hd", false)
@@ -190,7 +190,7 @@ class Player {
     const player_progress_line_active = this.player.querySelector(".position .progress-line-active")
     const player_progress_line_loaded = this.player.querySelector(".position .progress-line-loaded")
     const player_progress_label = this.player.querySelector(".progress-label span")
-    const current_player = document.getElementById("#player-" + this.active_id)
+    const current_player = document.getElementById("player-" + this.active_id)
 
     // Skip if not playing or not loaded
     if (this.is_playing !== true || this.player.api.readyState === AUDIO_NOT_READY) return
@@ -200,11 +200,11 @@ class Player {
 
     // Update active progress line
     let position = this.player.api.currentTime / this.player.api.duration * 100
-    let width = position * player_progress_line.offsetWidth / 100
-    player_progress_line_active.offsetWidth = width
+    let width = position * player_progress_line.style.width / 100
+    player_progress_line_active.style.width = width
 
-    width = position * current_player.querySelector(".position .progress-line").offsetWidth / 100
-    current_player.querySelector(".position .progress-line-active").offsetWidth = width
+    width = position * current_player.querySelector(".position .progress-line").style.width / 100
+    current_player.querySelector(".position .progress-line-active").style.width = width
 
     // Update current player timestamps
     let timestamp = secondsToTime(this.player.api.currentTime)
@@ -215,11 +215,11 @@ class Player {
     // Update buffered state
     let buffered = this.player.api.buffered.end(0) / this.duration
 
-    width = buffered * player_progress_line.offsetWidth
-    player_progress_line_loaded.offsetWidth = width
+    width = buffered * player_progress_line.width
+    player_progress_line_loaded.style.width = width
 
-    width = buffered * current_player.querySelector(".position .progress-line").offsetWidth
-    current_player.querySelector(".position .progress-line-loaded").offsetWidth = width
+    width = buffered * current_player.querySelector(".position .progress-line").width
+    current_player.querySelector(".position .progress-line-loaded").style.width = width
   }
 
   updateVolumePosition () {
@@ -258,19 +258,29 @@ class Player {
     const all_players = document.querySelectorAll(".player")
     const all_play_buttons = document.querySelectorAll(".player .play-pause")
     const active_players = document.querySelectorAll("#player, #player-" + this.active_id)
-    const play_buttons = document.querySelectorAll("#player .play-pause, #player-" + this.active_id)
+    const play_buttons = document.querySelectorAll("#player .play-pause, #player-" + this.active_id + " .play-pause")
 
-    all_players.classList.remove("active")
-    all_play_buttons.classList.remove("pause")
-    all_play_buttons.classList.add("play")
-    active_players.classList.add("active")
+    for (let i = 0; i < all_players.length; i++) {
+      all_players[i].classList.remove("active")
+    }
+    
+    for (let i = 0; i < all_play_buttons.length; i++) {
+      all_play_buttons[i].classList.remove("active")
+      all_play_buttons[i].classList.remove("pause")
+    }
 
-    if (this.is_playing) {
-      play_buttons.classList.remove("play")
-      play_buttons.classList.add("pause")
-    } else {
-      play_buttons.classList.remove("pause")
-      play_buttons.classList.add("play")
+    for (let i = 0; i < active_players.length; i++) {
+      active_players[i].classList.add("active")
+    }
+
+    for (let i = 0; i < play_buttons.length; i++) {
+      if (this.is_playing) {
+        play_buttons[i].classList.remove("play")
+        play_buttons[i].classList.add("pause")
+      } else {
+        play_buttons[i].classList.remove("pause")
+        play_buttons[i].classList.add("play")
+      }
     }
   }
 
@@ -298,7 +308,7 @@ class Player {
     const quality = this.is_hd ? "release" : "preview"
     const format = this.is_mp3 ? "mp3" : "ogg"
 
-    //this.player.title.innerHtml = data.name
+    this.player.title.innerHTML = data.name
     this.player.link.href = data.slug
     this.player.image.src = data.cover.preview
     

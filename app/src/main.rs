@@ -138,9 +138,15 @@ fn gallery() -> Template {
     }
 }
 
-#[get("/api?<start>&<limit>", rank = 1)]
-fn json_api(start: Option<usize>, limit: Option<usize>) -> Json<String> {
-    let releases = DATA.releases.paginate(start, limit);
+#[get("/api?<start>&<limit>&<tag>", rank = 1)]
+fn json_api(start: Option<usize>, limit: Option<usize>, tag: Option<String>) -> Json<String> {
+    let start = start.unwrap_or(0);
+    let limit = limit.unwrap_or(DATA.releases.releases.len());
+
+    let releases = match tag {
+        Some(v) => DATA.releases.filter(v)[start..start + limit].to_vec(),
+        None => DATA.releases.latest()[start..start + limit].to_vec(),
+    };
     let json_result = serde_json::to_string(&releases);
     content::Json(json_result.unwrap())
 }
@@ -156,7 +162,7 @@ struct ApiReleases {
     releases: Vec<Release>,
 }
 
-#[get("/api?format=html&<start>&<limit>", rank = 3)]
+#[get("/api/html?<start>&<limit>")]
 fn html_api(start: Option<usize>, limit: Option<usize>) -> Template {
     let releases = DATA.releases.paginate(start, limit);
 
