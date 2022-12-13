@@ -1,6 +1,6 @@
-import pytest
-
 from manti_by.apps.shortener.models import Link
+
+import pytest
 
 
 class LinkModelTest:

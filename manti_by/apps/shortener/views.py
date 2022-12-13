@@ -5,7 +5,6 @@ from django.shortcuts import redirect
 
 from manti_by.apps.shortener.models import Link
 
-
 logger = logging.getLogger(__name__)
 
 

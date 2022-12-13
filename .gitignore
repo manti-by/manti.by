@@ -1,15 +1,23 @@
-#.gitignore
+# PyCharm files
+.idea/
+
+# Virtual environments
+.env
+.venv/
+venv/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*$py.class
+
+# Pyenv
+.python-version
+
+# Project files
 
 manti_by/static/cache/
 
 manti_by/settings/local.py
 manti_by/settings/prod.py
-
-.pytest_cache/
-.venv/
-.idea/
-
-*.pyc
-*~
-
-docker-compose.local.yml

@@ -12,10 +12,9 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 
 import os
 
+PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))
 
-PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
-SECRET_KEY = ""
+SECRET_KEY = ""  # nosec
 
 DEBUG = False
 
@@ -41,7 +40,6 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "compressor",
     "modeltranslation",
-    "django_rq",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -117,18 +115,6 @@ CACHES = {
         "OPTIONS": {"MAX_ENTRIES": 5000, "DB": 0},
     }
 }
-
-
-# Queues
-# https://github.com/rq/django-rq
-
-RQ_QUEUES = {
-    "default": {
-        "USE_REDIS_CACHE": "default",
-    },
-}
-
-RQ_ASYNC = True
 
 
 # Sorl thumbnailer settings

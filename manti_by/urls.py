@@ -3,10 +3,9 @@ from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import include, path
 
-from manti_by.apps.core import views as core_views
 from manti_by.api.resources import OrderableResource, PostResource, SearchResource
-from manti_by.apps.core.sitemap import IndexSitemap, BlogSitemap, StaticSitemap
-
+from manti_by.apps.core import views as core_views
+from manti_by.apps.core.sitemap import BlogSitemap, IndexSitemap, StaticSitemap
 
 sitemaps = {"index": IndexSitemap, "blog": BlogSitemap, "static": StaticSitemap}
 
@@ -27,8 +26,6 @@ urlpatterns = [
     path("profile/", include("manti_by.apps.profiles.urls"), name="profile"),
     # URL shortener
     path("sr/", include("manti_by.apps.shortener.urls")),
-    # Django RQ
-    path("dashboard/django-rq/", include("django_rq.urls")),
     # Admin urls
     path("dashboard/", admin.site.urls),
     # Sitemap

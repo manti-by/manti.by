@@ -1,9 +1,7 @@
 import httpagentparser
-
 from django.conf import settings
 
 from manti_by.apps.blog.models import Post
-
 
 WEBP_VALID_BROWSERS = ["Chrome", "Opera", "Opera Mobile"]
 

@@ -1,19 +1,14 @@
+import logging
 import os
 import random
-import logging
 
-from rq import Queue
-import django_rq
-
-from django.conf import settings
 from django.core.cache import cache
-
 
 logger = logging.getLogger(__name__)
 
 
 def unique_str():
-    return str("".join([str(random.randint(0, 9)) for _ in range(16)]))
+    return str("".join([str(random.randint(0, 9)) for _ in range(16)]))  # nosec
 
 
 def update_cache(cache_key, cached_data, timeout=60 * 60 * 24 * 5):
@@ -38,7 +33,7 @@ def flush_cache(prefixes):
 
 def get_name(instance, filename, typename):
     name, ext = os.path.splitext(filename)
-    return "%s/%s/%s%s" % (
+    return "{}/{}/{}{}".format(
         instance.__class__.__name__.lower(),
         typename,
         unique_str(),
@@ -52,7 +47,7 @@ def profile_image_name(instance, filename):
 
 def original_name(instance, filename):
     name, ext = os.path.splitext(filename)
-    return "gallery/%s/%s%s" % (instance.gallery.slug, name, ext)
+    return f"gallery/{instance.gallery.slug}/{name}{ext}"
 
 
 def preview_name(instance, filename):
@@ -69,17 +64,9 @@ def thumb_name(instance, filename):
 
 def release_name(instance, filename):
     name, ext = os.path.splitext(filename)
-    return "release/%s%s" % (name, ext)
+    return f"release/{name}{ext}"
 
 
 def cover_name(instance, filename):
     name, ext = os.path.splitext(filename)
-    return "covers/%s%s" % (name, ext)
-
-
-def get_rq_queue():
-    if settings.ENVIRONMENT in ("local", "test"):
-        from fakeredis import FakeStrictRedis
-
-        return Queue(connection=FakeStrictRedis())
-    return django_rq.get_queue(is_async=settings.RQ_ASYNC)
+    return f"covers/{name}{ext}"

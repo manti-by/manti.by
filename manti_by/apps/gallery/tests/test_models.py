@@ -1,11 +1,12 @@
 import os
-import uuid
-import pytest
 import shutil
+import uuid
 
 from django.conf import settings
 
 from manti_by.apps.gallery.models import Gallery, Image
+
+import pytest
 
 
 @pytest.mark.django_db

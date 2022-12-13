@@ -1,7 +1,7 @@
 import uuid
 
-from django.db import models
 from django.conf import settings
+from django.db import models
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -12,9 +12,7 @@ class Link(BaseModel):
 
     name = models.CharField(max_length=255, null=True, blank=True)
     original_link = models.URLField(verbose_name=_("Original Link"))
-    short_link = models.URLField(
-        unique=True, null=True, blank=True, verbose_name=_("Short Link")
-    )
+    short_link = models.URLField(unique=True, null=True, blank=True, verbose_name=_("Short Link"))
 
     class Meta:
         verbose_name = _("Link")
@@ -25,7 +23,7 @@ class Link(BaseModel):
 
     @property
     def link(self):
-        return "%s%s" % (
+        return "{}{}".format(
             settings.BASE_URL,
             reverse("shortener", args=[self.short_link]),
         )

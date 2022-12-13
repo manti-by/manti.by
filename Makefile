@@ -1,13 +1,6 @@
 build:
 	docker build -t mantiby/manti.by:latest .
 
-docker-test:
-	docker run --rm \
-		-e DJANGO_SETTINGS_MODULE=manti_by.settings.sqlite \
-		-v /home/manti/www/manti.by/manti/:/srv/manti/src/ \
-		mantiby/manti.by:latest \
-		pytest --create-db --disable-warnings
-
 bash:
 	docker exec -it manti-by-django bash
 
@@ -24,8 +17,8 @@ static:
 	docker exec -it manti-by-django python manage.py collectstatic --no-input
 
 check:
-	flake8 manti_by/
-	black --target-version py39 manti_by/
+	git add .
+	pre-commit run
 
 django-checks:
 	python3 manage.py makemigrations --dry-run --check --verbosity=3

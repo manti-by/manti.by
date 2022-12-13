@@ -7,9 +7,9 @@ from django.utils.translation import gettext_lazy as _
 from djrest.resource import Resource
 
 from manti_by.api.utils import resource_wrapper
+from manti_by.apps.blog.models import Post
 from manti_by.apps.core.context_processors.common import global_template_vars
 from manti_by.apps.core.models import Email
-from manti_by.apps.blog.models import Post
 from manti_by.apps.gallery.models import Gallery, Image
 
 logger = logging.getLogger(__name__)
@@ -97,6 +97,4 @@ class SearchResource(Resource):
             | Q(genre__name__icontains=query)
             | Q(tags__name__icontains=query)
         ).distinct()
-        return JsonResponse(
-            {"status": 200, "data": [item.as_dict() for item in queryset]}, status=200
-        )
+        return JsonResponse({"status": 200, "data": [item.as_dict() for item in queryset]}, status=200)

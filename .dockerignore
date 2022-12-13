@@ -1,0 +1,14 @@
+.git/
+.pytest_cache/
+
+__pycache__/
+*.py[cod]
+*$py.class
+
+.flake8
+.gitignore
+.isort
+.pre-commit-config.yaml
+.pylintrc
+docker-compose.yml
+pyproject.toml

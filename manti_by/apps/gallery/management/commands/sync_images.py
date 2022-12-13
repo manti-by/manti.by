@@ -1,10 +1,9 @@
 import os
 
-from PIL import Image as PILImage
-from imagehash import phash
-
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from imagehash import phash
+from PIL import Image as PILImage
 
 from manti_by.apps.gallery.models import Gallery, Image
 
@@ -32,9 +31,7 @@ class Command(BaseCommand):
                         checked += 1
                         if file_phash not in images:
                             image = Image(phash=file_phash, gallery=gallery)
-                            image.original_image.name = file_name.replace(
-                                settings.MEDIA_ROOT, ""
-                            )[1:]
+                            image.original_image.name = file_name.replace(settings.MEDIA_ROOT, "")[1:]
                             image.save()
                             self.stdout.write("Saved %s" % image.original_image.name)
                             added += 1

@@ -1,6 +1,6 @@
 {
   "name": "manti_by",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "Django custom blog engine for music and photo publishing",
   "repository": {
     "type": "git",

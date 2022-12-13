@@ -1,13 +1,12 @@
 import os
-import exifread
-
 from datetime import datetime
-from PIL import Image as PILImage
-from django.utils.timezone import now
-from imagehash import phash
 
+import exifread
 from django.conf import settings
 from django.core.management.base import BaseCommand
+from django.utils.timezone import now
+from imagehash import phash
+from PIL import Image as PILImage
 
 from manti_by.apps.gallery.models import Gallery, Image
 
@@ -35,17 +34,13 @@ class Command(BaseCommand):
                     tags = exifread.process_file(file_exif)
 
                     created = (
-                        datetime.strptime(
-                            str(tags["EXIF DateTimeOriginal"]), "%Y:%m:%d %H:%M:%S"
-                        )
+                        datetime.strptime(str(tags["EXIF DateTimeOriginal"]), "%Y:%m:%d %H:%M:%S")
                         if "EXIF DateTimeOriginal" in tags
                         else now()
                     )
 
                     image = Image(phash=file_phash, gallery=gallery, created=created)
-                    image.original_image.name = file_name.replace(
-                        settings.MEDIA_ROOT, ""
-                    )
+                    image.original_image.name = file_name.replace(settings.MEDIA_ROOT, "")
                     image.save()
                     self.stdout.write(f"Saved {image.original_image.name}")
                     added += 1

@@ -1,0 +1,36 @@
+[tool.black]
+line-length = 120
+target_version = ['py310']
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.idea
+  | \.venv
+  | \.pytest_cache
+)/
+'''
+
+[tool.prospector]
+exclude = '''
+/(
+    \.git
+  | \.idea
+  | \.venv
+  | \.pytest_cache
+)/
+'''
+
+[tool.bandit]
+exclude = '''
+/(
+    \.git
+  | \.idea
+  | \.venv
+  | \.pytest_cache
+)/
+'''
+
+[tool.curlylint.rules]
+indent = 2
+html_has_lang = true

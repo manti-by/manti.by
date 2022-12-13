@@ -1,12 +1,7 @@
 import logging
-import subprocess
+import subprocess  # nosec
 
-from manti_by.apps.blog.constants import (
-    MP3_PREVIEW,
-    MP3_RELEASE,
-    OGG_PREVIEW,
-    OGG_RELEASE,
-)
+from manti_by.apps.blog.constants import MP3_PREVIEW, MP3_RELEASE, OGG_PREVIEW, OGG_RELEASE
 
 logger = logging.getLogger(__name__)
 
@@ -42,7 +37,7 @@ def convert_release(ffmpeg_format, post_id, output_type=""):
 
     ffmpeg_format.append(result_file_name)
     command = ["ffmpeg", "-y", "-i", post.release.file.name] + ffmpeg_format
-    command_exit_code = subprocess.call(command)
+    command_exit_code = subprocess.call(command, shell=False)  # nosec
     if command_exit_code == 0:
         setattr(post, update_attribute, True)
         post.save()

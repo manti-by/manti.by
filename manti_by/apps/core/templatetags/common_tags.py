@@ -1,11 +1,10 @@
 import os
 
-from PIL import Image
-
 from django import template
 from django.conf import settings
-from django.utils import translation
 from django.templatetags.static import static
+from django.utils import translation
+from PIL import Image
 
 register = template.Library()
 
@@ -15,7 +14,7 @@ def get_locale_domain(context, locale):
     for domain_locale, domain in settings.LOCALE_URLS.items():
         if locale == domain_locale and translation.check_for_language(domain_locale):
             protocol = "http" if context.get("is_secure", False) else "https"
-            return "%s://%s" % (protocol, domain)
+            return f"{protocol}://{domain}"
     return settings.BASE_URL
 
 
@@ -24,11 +23,7 @@ def webp_cover(context, cover):
     is_supports_webp = context.get("is_supports_webp", False)
 
     if not cover:
-        return (
-            static("img/no-image.webp")
-            if is_supports_webp
-            else static("img/no-image.png")
-        )
+        return static("img/no-image.webp") if is_supports_webp else static("img/no-image.png")
 
     if not is_supports_webp:
         return cover.url

@@ -1,10 +1,11 @@
 import json
 import uuid
-import pytest
 
 from django.conf import settings
 
 from manti_by.apps.blog.models import Post
+
+import pytest
 
 
 class ApiViewsTest:

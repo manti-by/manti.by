@@ -1,5 +1,5 @@
-import os
 import logging
+import os
 
 from django.core.management.base import BaseCommand
 
@@ -16,23 +16,19 @@ class Command(BaseCommand):
         for post in Post.objects.all().order_by("created"):
             try:
                 post.mp3_release_ready = (
-                    os.path.exists(post.release_mp3_file)
-                    and os.path.getsize(post.release_mp3_file) > 0
+                    os.path.exists(post.release_mp3_file) and os.path.getsize(post.release_mp3_file) > 0
                 )
 
                 post.ogg_release_ready = (
-                    os.path.exists(post.release_ogg_file)
-                    and os.path.getsize(post.release_ogg_file) > 0
+                    os.path.exists(post.release_ogg_file) and os.path.getsize(post.release_ogg_file) > 0
                 )
 
                 post.mp3_preview_ready = (
-                    os.path.exists(post.preview_mp3_file)
-                    and os.path.getsize(post.preview_mp3_file) > 0
+                    os.path.exists(post.preview_mp3_file) and os.path.getsize(post.preview_mp3_file) > 0
                 )
 
                 post.ogg_preview_ready = (
-                    os.path.exists(post.preview_ogg_file)
-                    and os.path.getsize(post.preview_ogg_file) > 0
+                    os.path.exists(post.preview_ogg_file) and os.path.getsize(post.preview_ogg_file) > 0
                 )
 
                 self.stdout.write(

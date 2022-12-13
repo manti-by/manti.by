@@ -1,20 +1,16 @@
-from typing import Optional, List
-
 from django.db import models
-from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
-
-from taggit.models import TaggedItemBase
+from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
+from taggit.models import TaggedItemBase
 
 from manti_by.apps.blog.constants import TRANSLATED_FIELDS
-from manti_by.apps.core.models import BaseModel
 from manti_by.apps.core.mixins import SlugifyMixin
-from manti_by.apps.core.utils import flush_cache, release_name, cover_name
-from manti_by.apps.blog.services import generate_preview_for_post
+from manti_by.apps.core.models import BaseModel
+from manti_by.apps.core.utils import cover_name, flush_cache, release_name
 
 
 class GenresProxy(TaggedItemBase):
@@ -66,9 +62,7 @@ class Post(SlugifyMixin, BaseModel):
         verbose_name=_("Genre"),
         related_name="post_genres",
     )
-    tags = TaggableManager(
-        blank=True, through=TagsProxy, verbose_name=_("Tags"), related_name="post_tags"
-    )
+    tags = TaggableManager(blank=True, through=TagsProxy, verbose_name=_("Tags"), related_name="post_tags")
 
     viewed = models.IntegerField(blank=True, default=0)
     related = models.ManyToManyField("self", blank=True)
@@ -89,12 +83,7 @@ class Post(SlugifyMixin, BaseModel):
 
     @property
     def files_converted(self):
-        return (
-            self.mp3_preview_ready
-            and self.mp3_release_ready
-            and self.ogg_preview_ready
-            and self.ogg_release_ready
-        )
+        return self.mp3_preview_ready and self.mp3_release_ready and self.ogg_preview_ready and self.ogg_release_ready
 
     @property
     def translations_filled(self) -> bool:
@@ -108,7 +97,7 @@ class Post(SlugifyMixin, BaseModel):
         return reverse("post", kwargs={"slug": self.slug})
 
     @property
-    def release_file_url(self) -> Optional[str]:
+    def release_file_url(self) -> str | None:
         try:
             ext = self.release.url.split(".")[-1]
             return self.release.url.replace(f".{ext}", "")
@@ -116,7 +105,7 @@ class Post(SlugifyMixin, BaseModel):
             return
 
     @property
-    def release_file_name(self) -> Optional[str]:
+    def release_file_name(self) -> str | None:
         try:
             ext = self.release.file.name.split(".")[-1]
             return self.release.file.name.replace(f".{ext}", "")
@@ -124,49 +113,49 @@ class Post(SlugifyMixin, BaseModel):
             return
 
     @property
-    def preview_file_url(self) -> Optional[str]:
+    def preview_file_url(self) -> str | None:
         try:
             return self.release_file_url.replace("release", "preview")
         except (IndexError, AttributeError, ValueError):
             return
 
     @property
-    def preview_file_name(self) -> Optional[str]:
+    def preview_file_name(self) -> str | None:
         try:
             return self.release_file_name.replace("release", "preview")
         except (IndexError, AttributeError, ValueError):
             return
 
     @property
-    def release_mp3_url(self) -> Optional[str]:
+    def release_mp3_url(self) -> str | None:
         return f"{self.release_file_url}.mp3" if self.release_file_url else None
 
     @property
-    def release_mp3_file(self) -> Optional[str]:
+    def release_mp3_file(self) -> str | None:
         return f"{self.release_file_name}.mp3" if self.release_file_name else None
 
     @property
-    def preview_mp3_url(self) -> Optional[str]:
+    def preview_mp3_url(self) -> str | None:
         return f"{self.preview_file_url}.mp3" if self.preview_file_url else None
 
     @property
-    def preview_mp3_file(self) -> Optional[str]:
+    def preview_mp3_file(self) -> str | None:
         return f"{self.preview_file_name}.mp3" if self.preview_file_name else None
 
     @property
-    def release_ogg_url(self) -> Optional[str]:
+    def release_ogg_url(self) -> str | None:
         return f"{self.release_file_url}.ogg" if self.release_file_url else None
 
     @property
-    def release_ogg_file(self) -> Optional[str]:
+    def release_ogg_file(self) -> str | None:
         return f"{self.release_file_name}.ogg" if self.release_file_name else None
 
     @property
-    def preview_ogg_url(self) -> Optional[str]:
+    def preview_ogg_url(self) -> str | None:
         return f"{self.preview_file_url}.ogg" if self.preview_file_url else None
 
     @property
-    def preview_ogg_file(self) -> Optional[str]:
+    def preview_ogg_file(self) -> str | None:
         return f"{self.preview_file_name}.ogg" if self.preview_file_name else None
 
     @property
@@ -178,12 +167,8 @@ class Post(SlugifyMixin, BaseModel):
         return f"{self.name} /{self.genres}/"
 
     @property
-    def most_common_tags(self) -> List[TagsProxy]:
-        return [
-            tag
-            for tag in self.tags.exclude(slug="front")
-            if TagsProxy.objects.filter(tag_id=tag.id).count() > 1
-        ]
+    def most_common_tags(self) -> list[TagsProxy]:
+        return [tag for tag in self.tags.exclude(slug="front") if TagsProxy.objects.filter(tag_id=tag.id).count() > 1]
 
     def as_dict(self) -> dict:
         return {
@@ -200,7 +185,6 @@ class Post(SlugifyMixin, BaseModel):
         return render_to_string("blog/list-item.html", {"item": self, **context})
 
 
-@receiver(post_save, sender=Post, dispatch_uid="convert_release")
-def convert_release(sender, instance, **kwargs):
-    generate_preview_for_post(instance)
+@receiver(post_save, sender=Post, dispatch_uid="flush_caches")
+def blog_post_save(sender, instance, **kwargs):
     flush_cache(["index", "blog", "post-%s" % instance.slug])

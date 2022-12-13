@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 from django.templatetags.static import static
 from django.utils.translation import gettext_lazy as _
 
@@ -16,9 +16,7 @@ class Profile(BaseModel):
         verbose_name=_("Profile Image"),
     )
 
-    user = models.OneToOneField(
-        User, on_delete=models.CASCADE, primary_key=True, related_name="profile"
-    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True, related_name="profile")
 
     class Meta:
         verbose_name = _("Profile")

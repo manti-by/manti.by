@@ -1,10 +1,10 @@
 import logging
 
-from django.http import Http404
-from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
-from django.views.decorators.cache import cache_page
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from django.http import Http404
+from django.shortcuts import redirect, render
+from django.views.decorators.cache import cache_page
 
 from manti_by.apps.profiles.models import Profile
 
@@ -54,17 +54,13 @@ def login_page(request):
                 login(request, user)
                 return redirect("profile")
 
-            data = {
-                "error": "Invalid credentials, please check your email and password"
-            }
+            data = {"error": "Invalid credentials, please check your email and password"}
     except User.DoesNotExist:
         email = request.POST.get("email")
         password = request.POST.get("password")
         username = email.split("@")[0]
 
-        user = User.objects.create_user(
-            email=email, username=username, password=password
-        )
+        user = User.objects.create_user(email=email, username=username, password=password)
         profile = Profile(user=user)
         profile.save()
 

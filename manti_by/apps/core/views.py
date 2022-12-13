@@ -1,20 +1,19 @@
 import logging
 
+from django.core.cache import cache
 from django.http import Http404
 from django.shortcuts import render
-from django.core.cache import cache
 
+from manti_by.apps.blog.models import Post
 from manti_by.apps.core.models import Email
 from manti_by.apps.core.utils import update_cache
-from manti_by.apps.blog.models import Post
 from manti_by.apps.gallery.models import Image
-
 
 logger = logging.getLogger(__name__)
 
 
 def index(request):
-    cache_key = "index-%s-%s" % (request.LANGUAGE_CODE, request.user.id)
+    cache_key = f"index-{request.LANGUAGE_CODE}-{request.user.id}"
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data
@@ -22,9 +21,7 @@ def index(request):
         featured_image = Image.objects.filter(tags__name__iexact="featured")
         if featured_image:
             featured_image = featured_image[0]
-            latest_images = Image.objects.exclude(pk=featured_image.pk).order_by(
-                "-order"
-            )[:6]
+            latest_images = Image.objects.exclude(pk=featured_image.pk).order_by("-order")[:6]
         else:
             latest_images = Image.objects.all().order_by("-order")[:6]
 
@@ -52,7 +49,7 @@ def index(request):
 
 
 def static(request, page):
-    cache_key = "static-%s-%s-%s" % (page, request.LANGUAGE_CODE, request.user.id)
+    cache_key = f"static-{page}-{request.LANGUAGE_CODE}-{request.user.id}"
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data
@@ -65,7 +62,7 @@ def static(request, page):
 
 
 def email(request, email_id):
-    cache_key = "static-%s-%s-%s" % (email_id, request.LANGUAGE_CODE, request.user.id)
+    cache_key = f"static-{email_id}-{request.LANGUAGE_CODE}-{request.user.id}"
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data
