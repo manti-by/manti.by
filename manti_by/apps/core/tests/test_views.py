@@ -1,5 +1,3 @@
-import uuid
-
 from django.conf import settings
 
 from manti_by.apps.blog.models import Post
@@ -30,7 +28,7 @@ class ViewsTest:
         self.assert_template_used(response, "blog/list.html")
 
     def test_post(self, client):
-        post = Post.objects.create(name=str(uuid.uuid4()), is_music=True)
+        post = Post.objects.create(name="test", slug="test", is_music=True)
         response = client.get(post.url, HTTP_HOST=self.host)
 
         assert response.status_code == 200

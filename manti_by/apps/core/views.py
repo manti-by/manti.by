@@ -5,7 +5,6 @@ from django.http import Http404
 from django.shortcuts import render
 
 from manti_by.apps.blog.models import Post
-from manti_by.apps.core.models import Email
 from manti_by.apps.core.utils import update_cache
 from manti_by.apps.gallery.models import Image
 
@@ -55,20 +54,6 @@ def static(request, page):
         return cached_data
     try:
         cached_data = render(request, "static/%s.html" % page)
-        return update_cache(cache_key, cached_data)
-    except Exception as e:
-        logger.exception(e)
-        raise Http404
-
-
-def email(request, email_id):
-    cache_key = f"static-{email_id}-{request.LANGUAGE_CODE}-{request.user.id}"
-    cached_data = cache.get(cache_key)
-    if cached_data:
-        return cached_data
-    try:
-        mail = Email.objects.get(id=email_id)
-        cached_data = render(request, "emails/email.html", {"email": mail})
         return update_cache(cache_key, cached_data)
     except Exception as e:
         logger.exception(e)

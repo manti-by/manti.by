@@ -1,5 +1,0 @@
-Subject: {{email.subject}}
-Created: {{email.created}}
-From:    {% if email.name %}{{ email.name }} <{{ email.email }}>{% else %}{{ email.email }}{% endif %}
-Message:
-{{email.message}}

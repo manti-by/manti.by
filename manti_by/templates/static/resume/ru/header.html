@@ -1,0 +1,22 @@
+{% load static common_tags %}
+<section>
+  <div>
+    <h2>
+      <span class="print-hidden">About me</span>
+      <span class="print-visible">Alexander Chaika, Python Developer</span>
+    </h2>
+    <p>
+      I'm a professional backend developer with an experience in developing web applications.<br>
+      I do my job well both as part of a team and as a sole unit.
+    </p>
+    <ul>
+      <li><a href="mailto:manti.by@gmail.com">manti.by@gmail.com</a></li>
+      <li><a href="https://github.com/manti-by">https://github.com/manti-by</a></li>
+    </ul>
+  </div>
+  <aside>
+    <img src="{% static 'img/one-pixel.jpg' %}" data-src="{% static 'img/resume-mobile.jpg' %}"
+         data-webp="{% webp_static 'img/resume-mobile.jpg' %}"
+         class="image mobile-visible lazy" alt="Manti">
+  </aside>
+</section>

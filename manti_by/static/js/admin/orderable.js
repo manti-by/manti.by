@@ -2,15 +2,9 @@
   'use strict'
 
   $(document).ready(function () {
-    var table = $('#result_list').find('tbody')
-    var type = $('body').attr('class')
-    var counter; var data
-
-    // Clean type
-    type = type.replace('app-gallery', '')
-      .replace('change-list', '')
-      .replace('model-', '')
-      .replace(' ', '')
+    let table = $('#result_list').find('tbody')
+    let counter
+    let data
 
     // Make table sortable
     table.sortable({
@@ -31,7 +25,6 @@
 
         // Send result to DB
         $.post('/api/orderable/', {
-          type: type,
           data: JSON.stringify(data)
         }, function (response) {
           console.log(response)

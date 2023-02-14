@@ -4,7 +4,7 @@ import uuid
 
 from django.conf import settings
 
-from manti_by.apps.gallery.models import Gallery, Image
+from manti_by.apps.gallery.models import Image
 
 import pytest
 
@@ -24,18 +24,7 @@ class GalleryModelTest:
             os.path.join(settings.MEDIA_ROOT, "gallery", "test.jpg"),
         )
 
-    def test_gallery_get(self):
-        gallery = Gallery.objects.create(**self.data)
-
-        assert gallery.name == self.data["name"]
-        assert gallery.slug == self.data["name"].lower()
-        assert gallery.created is not None
-
-    def test_gallery_update(self):
-        gallery = Gallery.objects.create(**self.data, order=1)
-        assert gallery.order is not None
-
     def test_files(self):
-        gallery = Gallery.objects.create(**self.data, order=1)
-        image = Image.objects.create(gallery=gallery, original_image="gallery/test.jpg")
+        image = Image.objects.create(original_image="gallery/test.jpg", order=1)
         assert image.created is not None
+        assert image.order is not None

@@ -6,46 +6,27 @@
 {% block meta %}{% trans 'Resume' %}{% endblock %}
 
 {% block content %}
-    <article class="container resume shadow">
-        <div class="static">
-            <h1>
-                <span class="print-hidden">
-                    {% trans 'Resume' %}
-                </span>
-                <span class="print-visible">
-                    {% trans 'Alexander Chaika' %}
-                </span>
-            </h1>
-            <div class="description flex">
-                <div class="content">
-                    <img src="{% static 'img/one-pixel.jpg' %}"
-                         data-src="{% static 'img/resume-mobile.jpg' %}"
-                         data-webp="{% webp_static 'img/resume-mobile.jpg' %}"
-                         class="image mobile-visible lazy" alt="Manti">
-                    {% if ACTIVE_LANGUAGE == 'ru' %}
-                       {% include 'static/partial/resume_ru.html' %}
-                    {% elif ACTIVE_LANGUAGE == 'en' %}
-                       {% include 'static/partial/resume_en.html' %}
-                    {% else %}
-                        {% include 'static/partial/resume_by.html' %}
-                    {% endif %}
-                    <p>
-                        {% trans 'Code samples' %}:
-                        <a href="https://github.com/manti-by" target="_blank" rel="noopener">
-                            https://github.com/manti-by
-                        </a>
-                    <p>
-                    <p class="print print-hidden">
-                        <a onclick="window.print()">{% trans 'Print this page' %}</a>
-                    </p>
-                </div>
-                <div class="image mobile-hidden">
-                    <img src="{% static 'img/one-pixel.jpg' %}"
-                         data-src="{% static 'img/resume.jpg' %}"
-                         data-webp="{% webp_static 'img/resume.jpg' %}"
-                         class="lazy" alt="Manti">
-                </div>
-            </div>
-        </div>
-    </article>
+  <article class="container resume shadow">
+    <div class="static">
+      {% with "static/resume/"|add:ACTIVE_LANGUAGE|add:"/header.html" as name %}
+        {% include name %}
+      {% endwith %}
+      {% with "static/resume/"|add:ACTIVE_LANGUAGE|add:"/soft-skills.html" as name %}
+        {% include name %}
+      {% endwith %}
+      {% with "static/resume/"|add:ACTIVE_LANGUAGE|add:"/hard-skills.html" as name %}
+        {% include name %}
+      {% endwith %}
+      {% with "static/resume/"|add:ACTIVE_LANGUAGE|add:"/employment.html" as name %}
+        {% include name %}
+      {% endwith %}
+      {% with "static/resume/"|add:ACTIVE_LANGUAGE|add:"/education.html" as name %}
+        {% include name %}
+      {% endwith %}
+    </div>
+  </article>
+{% endblock %}
+
+{% block styles %}
+  <link type="text/css" rel="stylesheet" href="{% static 'css/pages/resume.css' %}" media="all">
 {% endblock %}

@@ -20,7 +20,7 @@ class IndexSitemap(BaseSitemap):
     priority = 1.0
 
     def items(self):
-        return ["index", "blog", "gallery_list"]
+        return ["index", "blog", "gallery"]
 
     def location(self, item):
         return reverse(item)
@@ -47,7 +47,7 @@ class StaticSitemap(BaseSitemap):
     priority = 0.5
 
     def items(self):
-        return ["about", "resume", "copyrights"]
+        return ["about"]
 
     def location(self, item):
         return reverse(item)

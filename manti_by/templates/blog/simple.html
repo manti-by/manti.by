@@ -8,31 +8,31 @@
 {% block meta %}{{ item.meta }}{% endblock %}
 
 {% block open-graph %}
-    <meta name="robots" content="noindex">
+  <meta name="robots" content="noindex">
 {% endblock %}
 
 {% block breadcrumbs %}
+  <span class="spacer">&bull;</span>
+  <a href="{% url 'blog' %}" name="blog">{% trans 'Blog' %}</a>
+  <span class="mobile-hidden">
     <span class="spacer">&bull;</span>
-    <a href="{% url 'blog' %}" name="blog">{% trans 'Blog' %}</a>
-    <span class="mobile-hidden">
-        <span class="spacer">&bull;</span>
-        <h1>{{ item.name }}</h1>
-    </span>
+    <h1>{{ item.name }}</h1>
+  </span>
 {% endblock %}
 
 {% block content %}
-    <article class="post simple container" data-id="{{ item.id }}">
-        <h2>{{ item.name }}</h2>
-        <div class="content">
-            <div class="description">{{ item.description|safe }}</div>
-            <div class="created">
-                <strong>{% trans 'Created' %}</strong>:
-                {{ item.created|date:DATE_FORMAT }}
-            </div>
-        </div>
-    </article>
+  <article class="post simple container" data-id="{{ item.id }}">
+    <h2>{{ item.name }}</h2>
+    <div class="content">
+      <div class="description">{{ item.description|safe }}</div>
+      <div class="created">
+        <strong>{% trans 'Created' %}</strong>:
+        {{ item.created|date:DATE_FORMAT }}
+      </div>
+    </div>
+  </article>
 {% endblock %}
 
 {% block styles %}
-    <link type="text/css" rel="stylesheet" href="{% static 'css/blog/simple.css' %}" media="all">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/blog/simple.css' %}" media="all">
 {% endblock %}

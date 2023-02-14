@@ -13,12 +13,10 @@ import pytest
 class PostModelTest:
     @classmethod
     def setup_class(cls):
-        cls.data = {"name": str(uuid.uuid4())}
-
+        cls.data = {"name": "test", "slug": "test"}
         release_path = os.path.join(settings.MEDIA_ROOT, "release")
         if not os.path.exists(release_path):
             os.makedirs(release_path)
-
         shutil.copy(
             os.path.join(settings.PROJECT_DIR, "static", "test", "test.mp3"),
             os.path.join(settings.MEDIA_ROOT, "release", "test.mp3"),

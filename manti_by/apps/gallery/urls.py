@@ -1,5 +1,5 @@
 from django.urls import path
 
-from manti_by.apps.gallery import views
+from manti_by.apps.gallery.views import index
 
-urlpatterns = [path("", views.index, name="gallery_list")]
+urlpatterns = [path("", index, name="gallery")]

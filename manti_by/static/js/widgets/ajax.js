@@ -14,19 +14,15 @@
           options.start = start
           $.loaderShow()
 
-          $.get('/api/posts/', options, (response) => {
-            if (response.status === 200) {
-              start += 6
-              for (const post of response.data) {
-                $('.blog .posts').append(post)
-              }
-
-              $.initLazyImages()
-              $.player.updateActivePosts()
-              if (response.data.length) locked = false
-            } else {
-              DEBUG && console.error(response.message)
+          $.get('/api/posts/', options, (data) => {
+            start += 6
+            for (const post of data) {
+              $('.blog .posts').append(post)
             }
+
+            $.initLazyImages()
+            $.player.updateActivePosts()
+            if (data.length) locked = false
 
             $.loaderHide()
           })

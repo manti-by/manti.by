@@ -6,120 +6,121 @@
 {% block meta %}{{ item.meta }}{% endblock %}
 
 {% block open-graph %}
-    <meta property="og:type" content="music.song">
-    <meta property="og:title" content="Manti - {{ item.name }}">
-    <meta property="og:site_name" content="{{ META_TITLE }}">
-    {% if item.cover %}
+  <meta property="og:type" content="music.song">
+  <meta property="og:title" content="Manti - {{ item.name }}">
+  <meta property="og:site_name" content="{{ META_TITLE }}">
+  {% if item.cover %}
     <meta property="og:image" content="{{ item.cover.url }}">
-    {% endif %}
-    {% if item.release %}
+  {% endif %}
+  {% if item.release %}
     <meta property="og:audio" content="{{ item.release.url }}">
     <meta property="og:audio:type" content="audio/mpeg">
-    {% endif %}
+  {% endif %}
 {% endblock %}
 
 {% block breadcrumbs %}
+  <span class="spacer">&bull;</span>
+  <a href="{% url 'blog' %}" name="blog">{% trans 'Music' %}</a>
+  <span class="mobile-hidden">
     <span class="spacer">&bull;</span>
-    <a href="{% url 'blog' %}" name="blog">{% trans 'Music' %}</a>
-    <span class="mobile-hidden">
-        <span class="spacer">&bull;</span>
-        <h1>{{ item.name }}</h1>
-    </span>
+    <h1>{{ item.name }}</h1>
+  </span>
 {% endblock %}
 
 {% block content %}
-    <article class="post container" data-id="{{ item.id }}">
-        <h2 class="mobile-visible">{{ item.name }}</h2>
-        <div class="flex">
-            <div class="image shadow">
-                {% thumbnail item.cover "x600" as image %}
-                    {% thumbnail item.cover "x50" as thumb %}
-                        <img src="{{ thumb.url }}"
-                             data-src="{{ image.url }}"
-                             data-webp="{% webp_cover image %}"
-                             alt="{{ item.name }}" class="lazy">
-                    {% endthumbnail %}
-                {% endthumbnail %}
+  <article class="post container" data-id="{{ item.id }}">
+    <h2 class="mobile-visible">{{ item.name }}</h2>
+    <div class="flex">
+      <div class="image shadow">
+        {% thumbnail item.cover "x600" as image %}
+        {% thumbnail item.cover "x50" as thumb %}
+        <img src="{{ thumb.url }}"
+             data-src="{{ image.url }}"
+             data-webp="{% webp_cover image %}"
+             alt="{{ item.name }}" class="lazy">
+        {% endthumbnail %}
+        {% endthumbnail %}
+      </div>
+      <div class="data">
+        <div class="info">
+          <h2 class="mobile-hidden">{{ item.name }}</h2>
+          <div class="description">{{ item.description|safe }}</div>
+          <div class="created">
+            <strong>{% trans 'Created' %}</strong>:
+            {{ item.created|date:DATE_FORMAT }}
+          </div>
+          <div class="catnum">
+            <strong>{% trans 'Catalog No' %}</strong>:
+            {{ item.catnum }}
+          </div>
+          <div class="quality">
+            <strong>{% trans 'Quality' %}</strong>:
+            {{ item.quality }}
+          </div>
+          <div class="length">
+            <strong>{% trans 'Length' %}</strong>:
+            {{ item.length }}
+          </div>
+          <div class="genre">
+            <strong>{% trans 'Genre' %}</strong>:
+            {{ item.genre.all|join:", " }}
+          </div>
+          <div class="preview">
+            <div id="player-{{ item.id }}" class="player inline" data-id="{{ item.id }}">
+              <div class="button play-pause play"></div>
+              <div class="progress-bar position">
+                <div class="progress-line"></div>
+                <div class="progress-line-loaded"></div>
+                <div class="progress-line-active"></div>
+              </div>
+              <div class="progress-label">
+                <span>00:00:00</span>
+              </div>
             </div>
-            <div class="data">
-                <div class="info">
-                    <h2 class="mobile-hidden">{{ item.name }}</h2>
-                    <div class="description">{{ item.description|safe }}</div>
-                    <div class="created">
-                        <strong>{% trans 'Created' %}</strong>:
-                        {{ item.created|date:DATE_FORMAT }}
-                    </div>
-                    <div class="catnum">
-                        <strong>{% trans 'Catalog No' %}</strong>:
-                        {{ item.catnum }}
-                    </div>
-                    <div class="quality">
-                        <strong>{% trans 'Quality' %}</strong>:
-                        {{ item.quality }}
-                    </div>
-                    <div class="length">
-                        <strong>{% trans 'Length' %}</strong>:
-                        {{ item.length }}</div>
-                    <div class="genre">
-                        <strong>{% trans 'Genre' %}</strong>:
-                        {{ item.genre.all|join:", " }}
-                    </div>
-                    <div class="preview">
-                        <div id="player-{{ item.id }}" class="player inline" data-id="{{ item.id }}">
-                            <div class="button play-pause play"></div>
-                            <div class="progress-bar position">
-                                <div class="progress-line"></div>
-                                <div class="progress-line-loaded"></div>
-                                <div class="progress-line-active"></div>
-                            </div>
-                            <div class="progress-label">
-                                <span>00:00:00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tags">
-                        <strong>{% trans 'Tags' %}</strong>:
-                        {% for t in item.most_common_tags %}
-                            <a href="{% url 'blog' %}?tag={{ t.slug }}" class="tag">{{ t.name }}</a>
-                        {% endfor %}
-                    </div>
-                    {% if item.release %}
-                    <div class="links">
-                        <span class="link show-tracklist">{% trans 'Tracklist' %}</span>
-                        <a href="{{ item.release.url }}" class="download">{% trans 'Download' %}</a>
-                    </div>
-                    {% endif %}
-                </div>
-                <div class="tracklist hidden">
-                    <h2>{{ item.name }}</h2>
-                    <div class="tracks">{{ item.tracklist.strip|linebreaksbr }}</div>
-                    <div class="links">
-                        <span class="link hide-tracklist">{% trans 'Hide Tracklist' %}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <h2 class="featured">{% trans 'Related posts' %}</h2>
-        <div class="featured flex">
-            {% for item in item.related.all|slice:":3" %}
-                {% include 'blog/featured-item.html' %}
+          </div>
+          <div class="tags">
+            <strong>{% trans 'Tags' %}</strong>:
+            {% for t in item.most_common_tags %}
+              <a href="{% url 'blog' %}?tag={{ t.slug }}" class="tag">{{ t.name }}</a>
             {% endfor %}
+          </div>
+          {% if item.release %}
+            <div class="links">
+              <span class="link show-tracklist">{% trans 'Tracklist' %}</span>
+              <a href="{{ item.release.url }}" class="download">{% trans 'Download' %}</a>
+            </div>
+          {% endif %}
         </div>
-    </article>
+        <div class="tracklist hidden">
+          <h2>{{ item.name }}</h2>
+          <div class="tracks">{{ item.tracklist.strip|linebreaksbr }}</div>
+          <div class="links">
+            <span class="link hide-tracklist">{% trans 'Hide Tracklist' %}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h2 class="featured">{% trans 'Related posts' %}</h2>
+    <div class="featured flex">
+      {% for item in item.related.all|slice:":3" %}
+        {% include 'blog/featured-item.html' %}
+      {% endfor %}
+    </div>
+  </article>
 {% endblock %}
 
 {% block styles %}
-    <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured-item.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/blog/post.css' %}" media="all">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured-item.css' %}" media="all">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/blog/post.css' %}" media="all">
 {% endblock %}
 
 {% block scripts %}
-    <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
-    <script type="text/javascript">
-        (($) => {
-            $(document).ready(() => {
-                $.initTracklist();
-            });
-        })(jQuery);
-    </script>
+  <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
+  <script type="text/javascript">
+    (($) => {
+      $(document).ready(() => {
+        $.initTracklist();
+      });
+    })(jQuery);
+  </script>
 {% endblock %}

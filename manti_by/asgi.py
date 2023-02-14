@@ -1,5 +1,5 @@
 """
-ASGI config for pinata project.
+ASGI config for the project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

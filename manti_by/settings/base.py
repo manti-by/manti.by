@@ -30,12 +30,10 @@ ENVIRONMENT = "prod"
 # Application definition
 
 INSTALLED_APPS = [
-    "manti_by.api",
+    "manti_by.apps.api",
     "manti_by.apps.blog",
     "manti_by.apps.core",
     "manti_by.apps.gallery",
-    "manti_by.apps.profiles",
-    "manti_by.apps.shortener",
     "taggit",
     "sorl.thumbnail",
     "compressor",

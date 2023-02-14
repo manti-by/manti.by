@@ -3,12 +3,12 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from django.urls import reverse
+from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
 from taggit.models import TaggedItemBase
 
 from manti_by.apps.blog.constants import TRANSLATED_FIELDS
-from manti_by.apps.core.mixins import SlugifyMixin
 from manti_by.apps.core.models import BaseModel
 from manti_by.apps.core.utils import cover_name, flush_cache, release_name
 
@@ -26,9 +26,10 @@ class PostManager(models.Manager):
         return self.get_queryset().order_by("-created")
 
 
-class Post(SlugifyMixin, BaseModel):
+class Post(BaseModel):
 
     name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True, verbose_name=_("Slug"))
 
     meta = models.TextField()
     summary = models.TextField()
@@ -75,11 +76,19 @@ class Post(SlugifyMixin, BaseModel):
     objects = PostManager()
 
     class Meta:
-        verbose_name = _("Post")
-        verbose_name_plural = _("Posts")
+        verbose_name = _("post")
+        verbose_name_plural = _("posts")
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse(self.__class__.__name__.lower(), args=[str(self.slug)])
+
+    def save(self, *args, **kwargs):
+        if self.slug is None:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
     @property
     def files_converted(self):
@@ -181,10 +190,10 @@ class Post(SlugifyMixin, BaseModel):
             "preview": {"mp3": self.preview_mp3_url, "ogg": self.preview_ogg_url},
         }
 
-    def as_html(self, context):
+    def as_html(self, context) -> str:
         return render_to_string("blog/list-item.html", {"item": self, **context})
 
 
 @receiver(post_save, sender=Post, dispatch_uid="flush_caches")
 def blog_post_save(sender, instance, **kwargs):
-    flush_cache(["index", "blog", "post-%s" % instance.slug])
+    flush_cache(["index", "blog", f"post-{instance.slug}"])
