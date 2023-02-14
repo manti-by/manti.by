@@ -27,9 +27,9 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=manti_by.settings.prod
     volumes:
-      - /home/manti/www/manti.by/manti/:/srv/manti/src/
-      - /mnt/nostromo/www/manti/static/:/var/lib/manti/static/
-      - /mnt/nostromo/www/manti/content/:/var/lib/manti/content/
-      - /mnt/nostromo/www/manti/log/:/var/log/manti/
+      - /home/manti/www/manti.by/manti/:/srv/app/src/
+      - /mnt/nostromo/www/manti/static/:/var/lib/app/static/
+      - /mnt/nostromo/www/manti/content/:/var/lib/app/content/
+      - /mnt/nostromo/www/manti/log/:/var/log/app/
     command: |
-      gunicorn manti_by.wsgi:application --bind 0.0.0.0:8080 --workers 2 --log-file /var/log/manti/wsgi.log
+      gunicorn manti_by.wsgi:application --bind 0.0.0.0:8080 --workers 2 --log-file /var/log/app/wsgi.log

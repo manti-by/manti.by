@@ -7,22 +7,8 @@ django-redis-cache==3.0.1
 django-taggit==3.1.0
 django-compressor==4.1
 django-modeltranslation==0.18.7
-git+https://github.com/manti-by/djrest.git#egg=djrest
 
 exifread==3.0.0
-imagehash==4.3.1
 httpagentparser==1.9.5
 
 gunicorn==20.1.0
-
-ipython>=8.7.0
-pytest>=7.2.0
-pytest-django>=4.5.2
-fakeredis>=2.2.0
-
-pre_commit>=2.20.0
-isort>=5.11.1
-pyupgrade>=3.3.1
-black>=22.6.0
-prospector>=1.8.3
-bandit>=1.7.4

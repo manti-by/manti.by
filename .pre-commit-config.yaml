@@ -50,6 +50,12 @@ repos:
       exclude: .+/tests/.+
       types: [python]
 
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.37.3
+    hooks:
+      - id: pyupgrade
+        args: [--py310-plus]
+
   - repo: https://github.com/thibaudcolas/curlylint
     rev: v0.13.0
     hooks:
