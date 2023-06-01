@@ -1,0 +1,6 @@
+User-agent: Yandex
+Host: manti.by
+
+User-agent: *
+
+Sitemap: https://manti.by/sitemap.xml

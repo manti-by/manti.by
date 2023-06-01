@@ -1,0 +1,16 @@
+#result_list {
+    min-width: 400px;
+}
+
+#result_list .action-checkbox-column {
+    width: 20px;
+}
+
+#result_list .ui-sortable {
+    width: 100%;
+    float: none;
+}
+
+#result_list .ui-sortable .ui-sortable-handle {
+    cursor: move;
+}
