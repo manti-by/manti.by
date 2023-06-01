@@ -22,6 +22,10 @@ check:
 
 django-checks:
 	python3 manage.py makemigrations --dry-run --check --verbosity=3
+	python manage.py check --fail-level WARNING
 
 test:
 	pytest
+
+update-requirements:
+	pcu requirements.txt -u

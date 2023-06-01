@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def index(request):
     tag = request.GET.get("tag")
-    cache_key = f"blog-{request.LANGUAGE_CODE}-{request.user.id}-{tag}"
+    cache_key = f"blog-{request.LANGUAGE_CODE}-{tag}"
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data
@@ -34,7 +34,7 @@ def index(request):
 
 
 def post(request, slug):
-    cache_key = f"post-{slug}-{request.LANGUAGE_CODE}-{request.user.id}"
+    cache_key = f"post-{slug}-{request.LANGUAGE_CODE}"
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data

@@ -6,7 +6,7 @@ from manti_by.apps.gallery.models import Image
 
 
 def index(request):
-    cache_key = f"gallery-{request.LANGUAGE_CODE}-{request.user.id}"
+    cache_key = f"gallery-{request.LANGUAGE_CODE}"
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data

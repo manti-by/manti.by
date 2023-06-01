@@ -105,11 +105,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 # Cache backend
 # https://docs.djangoproject.com/en/1.10/topics/cache/
+REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
+REDIS_PORT = os.environ.get('REDIS_PORT', 6379)
 
 CACHES = {
     "default": {
-        "BACKEND": "redis_cache.cache.RedisCache",
-        "LOCATION": f"{os.environ.get('REDIS_HOST', 'localhost')}:{os.environ.get('REDIS_PORT', 6379)}",
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": f"{REDIS_HOST}:{REDIS_PORT}",
         "OPTIONS": {"MAX_ENTRIES": 5000, "DB": 0},
     }
 }
@@ -118,8 +120,8 @@ CACHES = {
 # Sorl thumbnailer settings
 
 THUMBNAIL_KVSTORE = "sorl.thumbnail.kvstores.redis_kvstore.KVStore"
-THUMBNAIL_REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
-THUMBNAIL_REDIS_PORT = os.environ.get("REDIS_PORT", 6379)
+THUMBNAIL_REDIS_HOST = REDIS_HOST
+THUMBNAIL_REDIS_PORT = REDIS_PORT
 THUMBNAIL_QUALITY = 85
 
 
@@ -135,8 +137,8 @@ def _(x):
 
 LANGUAGES = (
     ("be", _("Belarussian")),
-    ("ru", _("Russian")),
     ("en", _("English")),
+    ("ru", _("Russian")),
 )
 
 LOCALE_PATHS = (os.path.join(PROJECT_DIR, "apps", "core", "locale"),)
@@ -144,7 +146,7 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-LOCALE_URLS = {"be": "manti.by", "ru": "ru.manti.by", "en": "en.manti.by"}
+LOCALE_URLS = {"be": "manti.by", "en": "en.manti.by", "ru": "ru.manti.by"}
 
 DATE_FORMAT = "d E Y"
 

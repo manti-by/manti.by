@@ -12,7 +12,7 @@ repos:
     rev: v3.2.0
     hooks:
       - id: pyupgrade
-        args: [--py310-plus]
+        args: [--py311-plus]
 
   - repo: local
     hooks:
@@ -54,7 +54,7 @@ repos:
     rev: v2.37.3
     hooks:
       - id: pyupgrade
-        args: [--py310-plus]
+        args: [--py311-plus]
 
   - repo: https://github.com/thibaudcolas/curlylint
     rev: v0.13.0
@@ -62,5 +62,5 @@ repos:
       - id: curlylint
         types: [ file ]
         files: \.html$
-        language_version: python3.10.5
+        language_version: python3.11.1
         additional_dependencies: ['click<8.1']

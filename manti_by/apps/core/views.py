@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 def index(request):
-    cache_key = f"index-{request.LANGUAGE_CODE}-{request.user.id}"
+    cache_key = f"index-{request.LANGUAGE_CODE}"
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data
@@ -48,12 +48,12 @@ def index(request):
 
 
 def static(request, page):
-    cache_key = f"static-{page}-{request.LANGUAGE_CODE}-{request.user.id}"
+    cache_key = f"static-{page}-{request.LANGUAGE_CODE}"
     cached_data = cache.get(cache_key)
     if cached_data:
         return cached_data
     try:
-        cached_data = render(request, "static/%s.html" % page)
+        cached_data = render(request, f"static/{page}.html")
         return update_cache(cache_key, cached_data)
     except Exception as e:
         logger.exception(e)

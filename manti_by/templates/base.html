@@ -34,7 +34,6 @@
 
     <meta name="description"
           content="{% block meta %}{% endblock %} | {% trans 'Blog of Alex Manti. My music, photos and info about me. Drum and Bass, House, Techno and Chillout.' %}">
-    <meta name="yandex-verification" content="4c23c3980836ae34"/>
 
     {% block open-graph %}
       <meta property="og:type" content="website">
@@ -70,7 +69,7 @@
       <nav class="container">
         <div class="flex">
           <div class="left">
-            <a href="{% url 'index' %}" class="homelink" rel="home">
+            <a href="{% url 'index' %}" class="homelink">
               <span class="icon">
                 <i class="material-icons">settings_input_svideo</i>
               </span>
@@ -81,13 +80,15 @@
             <span class="breadcrumbs">{% block breadcrumbs %}{% endblock %}</span>
           </div>
           <div class="right">
-            <a href="{% url 'blog' %}" rel="bookmark" class="link-item mobile-hidden">
+            <a href="{% url 'blog' %}" class="link-item mobile-hidden">
               <span class="text">{% trans 'Music' %}</span>
             </a>
-            <a href="{% url 'gallery' %}" rel="bookmark" class="link-item mobile-hidden">
+            <a href="{% url 'gallery' %}" class="link-item mobile-hidden">
               <span class="text">{% trans 'Gallery' %}</span>
             </a>
-            <a href="{% url 'about' %}">{% trans 'About' %}</a>
+            <a href="{% url 'about' %}" class="link-item mobile-hidden">
+              <span class="text">{% trans 'About' %}</span>
+            </a>
             <span class="language link-item">
               {% for lang in LANGUAGES %}
                 {% if lang.0 == ACTIVE_LANGUAGE %}
@@ -103,7 +104,7 @@
             <span class="open-search">
               <i class="material-icons">search</i>
             </span>
-            <span class="mobile-menu-button">
+            <span class="mobile-menu-button mobile-visible">
               <i class="material-icons">more_vert</i>
             </span>
           </div>
@@ -117,6 +118,7 @@
           {% trans 'Gallery' %}
         </a>
         <a href="{% url 'about' %}">{% trans 'About' %}</a>
+        <span class="open-search">{% trans 'Search' %}</span>
       </nav>
     </header>
 

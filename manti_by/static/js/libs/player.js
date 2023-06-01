@@ -8,7 +8,6 @@
       this.data = []
       this.active = []
       this.is_mp3 = -1
-      this.is_debug = DEBUG
       this.is_playing = false
 
       this.volume = 70
@@ -17,8 +16,6 @@
     }
 
     init (data) {
-      this.is_debug && console.log('Init')
-
       this.data = data
 
       this.player = $('#player')
@@ -43,8 +40,6 @@
     };
 
     checkMpegSupport () {
-      this.is_debug && console.log('Check mp3 support')
-
       if (this.is_mp3 === -1) {
         const audio = document.createElement('audio')
         if (typeof audio.canPlayType === 'function' && audio.canPlayType('audio/mpeg') !== '') {
@@ -67,8 +62,6 @@
       })
 
       this.player.find('.high-definition').on('click', () => {
-        this.is_debug && console.log('Change quality')
-
         if (this.is_hd === 1) {
           this.is_hd = 0
           this.player.find('.high-definition').removeClass('active')
@@ -96,7 +89,7 @@
               this.active_id = id
               this.reload()
             } else {
-              this.is_debug && console.error('Audio this.' + id + ' not found')
+              console.error('Audio this.' + id + ' not found')
             }
           }
           !this.player.data('id') && this.reload()
@@ -269,8 +262,6 @@
     };
 
     updateActivePlayer () {
-      this.is_debug && console.log('setActivePLayer')
-
       const all_players = $('.player')
       const all_play_buttons = all_players.find('.play-pause')
       const active_players = $('#player, #player-' + this.active_id)
@@ -302,8 +293,6 @@
     };
 
     reload () {
-      this.is_debug && console.log('Reload this.' + this.active_id)
-
       $.loaderShow()
       if (typeof this.player.api.pause !== 'undefined') {
         this.player.api.pause()
@@ -335,8 +324,6 @@
     };
 
     play () {
-      this.is_debug && console.log('Play')
-
       this.show()
       this.is_playing = true
 
@@ -348,8 +335,6 @@
     };
 
     pause () {
-      this.is_debug && console.log('Pause')
-
       this.is_playing = false
 
       if (this.player.api.readyState === AUDIO_LOADED) {
@@ -358,8 +343,6 @@
     };
 
     next () {
-      this.is_debug && console.log('Next')
-
       const data = this.getData('next')
       this.active_id = data.id
 
@@ -368,8 +351,6 @@
     };
 
     prev () {
-      this.is_debug && console.log('Prev')
-
       const data = this.getData('prev')
       this.active_id = data.id
 
@@ -378,12 +359,10 @@
     };
 
     show () {
-      this.is_debug && console.log('Show')
       $('aside').addClass('visible')
     };
 
     hide () {
-      this.is_debug && console.log('Hide')
       $('aside').removeClass('visible')
     };
   }

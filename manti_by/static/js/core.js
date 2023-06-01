@@ -11,20 +11,18 @@
     $.initSearch()
 
     // Init player
-    $.get('/api/posts/', (response) => {
-      if (response.status === 200) {
-        $.player.init(response.data)
+    $.get('/api/posts/', (data) => {
+      $.player.init(data)
 
-        setInterval(function () {
-          $.player.update()
-        }, 1000)
+      setInterval(function () {
+        $.player.update()
+      }, 1000)
 
-        setInterval(function () {
-          $.player.animatePlayerTitle()
-        }, 14000)
-      } else {
-        console.error('Error loading player data')
-      }
+      setInterval(function () {
+        $.player.animatePlayerTitle()
+      }, 14000)
+    }).fail(function() {
+      console.error("Error loading player data")
     })
   })
 })(jQuery)

@@ -281,6 +281,10 @@ header nav .user a img {
     max-width: 100%;
 }
 
+header .open-search {
+    cursor: pointer;
+}
+
 header .mobile-menu-button {
     width: 1em;
     margin-left: 0.25em;
@@ -311,10 +315,6 @@ header .mobile-menu .open-search {
     font-weight: 500;
     text-transform: uppercase;
     border-bottom: none;
-}
-
-header .mobile-menu .open-search {
-    cursor: pointer;
 }
 
 header .mobile-menu a:hover,
@@ -428,7 +428,7 @@ main .sidebar .social a img.smaller {
 
 
 footer {
-    margin: 5em 0 2em 0;
+    margin: 2em 0;
     color: #666;
     font-size: 0.9rem;
 }
@@ -444,7 +444,8 @@ footer a:hover, #footer a:active {
 }
 
 footer #copy {
-    float: right;
+    text-align: center;
+    margin-bottom: 2em;
 }
 
 #loader {

@@ -37,11 +37,9 @@
 .resume .muted,
 .resume .description {
   margin: .5em 0 0;
-  font-size: 1em;
 }
 
 .resume .muted {
   margin-bottom: 1.5em;
-  font-size: 1em;
   color: #666;
 }

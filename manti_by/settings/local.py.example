@@ -2,19 +2,16 @@ from .base import *  # noqa
 
 ENVIRONMENT = "local"
 
-SECRET_KEY = ""
-
 DEBUG = True
-
 TEMPLATE_DEBUG = False
-
 COMPRESS_ENABLED = False
 
+SECRET_KEY = ""
 ALLOWED_HOSTS = ["*"]
 
-BASE_URL = "http://127.0.0.1"
-
-SESSION_COOKIE_DOMAIN = "127.0.0.1"
+BASE_HOST = "127.0.0.1:8000"
+BASE_URL = f"http://{BASE_HOST}"
+SESSION_COOKIE_DOMAIN = BASE_HOST
 
 STATIC_URL = "/static/"
 STATIC_ROOT = "/home/manti/www/manti.by/static"
@@ -22,22 +19,22 @@ STATIC_ROOT = "/home/manti/www/manti.by/static"
 MEDIA_URL = "/content/"
 MEDIA_ROOT = "/home/manti/www/manti.by/content"
 
-LOCALE_URLS = {"be": "localhost", "ru": "localhost", "en": "localhost"}
+LOCALE_URLS = {"be": BASE_HOST, "en": BASE_HOST, "ru": BASE_HOST}
 
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "manti_by",
-        "USER": "manti_by",
-        "PASSWORD": "manti_by",
-        "HOST": "localhost",
-        "PORT": "5432",
+        "NAME": os.environ.get("POSTGRES_NAME", "manti_by"),
+        "USER": os.environ.get("POSTGRES_USER", "manti_by"),
+        "PASSWORD": os.environ.get("POSTGRES_PASS", "manti_by"),
+        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
+        "PORT": os.environ.get("POSTGRES_PORT", 5432),
     }
 }
 
 RQ_ASYNC = False
 
-THUMBNAIL_REDIS_HOST = "localhost"
+THUMBNAIL_REDIS_HOST = os.environ.get("REDIS_HOST", "127.0.0.1")
 
 CACHES = {"default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"}}
 
