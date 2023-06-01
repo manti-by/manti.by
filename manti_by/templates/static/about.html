@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static common_tags i18n %}
+
+{% block title %}{% trans 'Resume' %}{% endblock %}
+{% block meta %}{% trans 'Resume' %}{% endblock %}
+
+{% block content %}
+  <article class="container resume shadow">
+    <div class="static">
+      {% with "static/about/"|add:ACTIVE_LANGUAGE|add:"/header.html" as name %}
+        {% include name %}
+      {% endwith %}
+      {% with "static/about/"|add:ACTIVE_LANGUAGE|add:"/soft-skills.html" as name %}
+        {% include name %}
+      {% endwith %}
+      {% with "static/about/"|add:ACTIVE_LANGUAGE|add:"/hard-skills.html" as name %}
+        {% include name %}
+      {% endwith %}
+      {% with "static/about/"|add:ACTIVE_LANGUAGE|add:"/employment.html" as name %}
+        {% include name %}
+      {% endwith %}
+      {% with "static/about/"|add:ACTIVE_LANGUAGE|add:"/education.html" as name %}
+        {% include name %}
+      {% endwith %}
+    </div>
+  </article>
+{% endblock %}
+
+{% block styles %}
+  <link type="text/css" rel="stylesheet" href="{% static 'css/pages/about.css' %}" media="all">
+{% endblock %}

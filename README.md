@@ -1,70 +1,86 @@
-Manti.by
-========
+# Manti.by
 
 
-About
------
+## About
 
-Custom blog engine for music and photo publishing.
+Django custom blog engine for music and photo publishing.
 
+[![CircleCI](https://img.shields.io/github/actions/workflow/status/manti-by/manti.by/backend.yml?branch=django)](https://github.com/manti-by/manti.by/actions)
+[![Docker](https://img.shields.io/docker/automated/mantiby/manti.by.svg)](https://hub.docker.com/r/mantiby/manti.by/)
 [![License](https://img.shields.io/badge/license-BSD-blue.svg)](https://raw.githubusercontent.com/manti-by/Manti.by/master/LICENSE)
 
 Author: Alexander Chaika <manti.by@gmail.com>
 
 Source link: https://github.com/manti-by/manti.by
 
-Requirements:
-
-    Rust/Rocket, Nginx
+Requirements: Python 3.11, PostgreSQL 15, Redis
 
 
-Setup dev environment
----------------------
+## Setup dev environment
 
-1. Install [Rust](https://www.rust-lang.org/tools/install)
+1. Install base system packages (second line for production servers)
 
-2. Get [FFMpeg](https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu), compile and install
+    ```shell
+    $ sudo apt-get install -y wget git-core \
+         python3-pip python3-dev postgresql libpq-dev
+    ```
 
-        $ sudo apt install -y autoconf automake build-essential cmake git-core libtool \
-            libass-dev libfreetype6-dev libmp3lame-dev libtheora-dev libvorbis-dev \
-            pkg-config texinfo zlib1g-dev yasm
-            
-        $ mkdir -p $HOME/usr/ffmpeg/ && \
-            wget -O ffmpeg-snapshot.tar.bz2 https://ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2 && \
-            tar xjvf ffmpeg-snapshot.tar.bz2 -C $HOME/usr/ffmpeg/
-        
-        $ export PATH="$HOME/bin:$PATH" && export PKG_CONFIG_PATH="$HOME/usr/ffmpeg/build/lib/pkgconfig"
-        $ ./configure \
-            --prefix="$HOME/usr/ffmpeg/build" \
-            --pkg-config-flags="--static" \
-            --extra-cflags="-I$HOME/usr/ffmpeg/build/include" \
-            --extra-ldflags="-L$HOME/usr/ffmpeg/build/lib" \
-            --extra-libs="-lpthread -lm" \
-            --bindir="$HOME/bin" \
-            --enable-libmp3lame \
-            --enable-libtheora \
-            --enable-libvorbis \
-            --enable-nonfree
-        $ make -j4 && make install
+2. Install [Python 3.11](https://www.python.org/downloads/source/)
+   
+3. Install [Postgres server](https://www.postgresql.org/download/linux/ubuntu/)
+
+4. Install [Redis server](https://redis.io/download)
 
 
-Build and run app in dev mode
------------------------------
+## Build and run app in dev mode
 
-1. Build binary app
+1. Create virtual environment and install project dependencies
 
-        $ cd app/ && cargo build
+    ```shell
+    $ python3.11 -m venv --prompt="manti" .venv/
+    $ source .venv/bin/activate
+    $ pip install -r requirements.txt
+    ```
+
+2. Create user and database
+
+    ```shell
+    $ sudo su postgres && psql
+    ```
+
+    ```postgresql
+    CREATE USER manti_by WITH PASSWORD 'manti_by' CREATEDB;
+    CREATE DATABASE manti_by OWNER manti_by;
+    ```
+
+3. Create local config file (dev or prod environment)
+
+    ```shell
+    $ cp manti_by/settings/local.py.example manti_by/settings/local.py
+    ```
+
+4. Migrate, collect static files and create admin user
+
+    ```shell
+    $ ./manage.py migrate
+    $ ./manage.py collectstatic --no-input
+    $ ./manage.py createsuperuser
+    ```
 
 5. Run local development server
 
-        $ cd app/ && cargo run
+    ```shell
+    $ ./manage.py runserver 127.0.0.1:8000
+    ```
 
 
-Production setup
-----------------
+## Production setup
 
-1. Install [Nginx](https://ubuntu.com/tutorials/install-and-configure-nginx)
+1. Install [Docker](https://docs.docker.com/install/)
 
-2. Link nginx config (TBU)
+2. Build and run app using Makefile
 
-3. Create system service (TBU)
+    ```shell
+    $ make build
+    $ docker compose up -d
+    ```

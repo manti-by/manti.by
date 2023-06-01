@@ -26,6 +26,7 @@
     margin-right: 1em;
     border: none;
     border-bottom: 1px solid #CCC;
+    outline: none;
 }
 
 #search .submit-search {

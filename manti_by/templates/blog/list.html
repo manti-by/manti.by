@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% load static i18n %}
+
+{% block title %}{% if tag %}{{ tag }}{% else %}{% trans 'Blog' %}{% endif %}{% endblock %}
+{% block meta %}{% if tag %}{{ tag }}{% else %}{% trans 'Blog' %}{% endif %}{% endblock %}
+
+{% block breadcrumbs %}
+  {% if tag %}
+    <span class="spacer">&gt;</span>
+    <a href="{% url 'blog' %}" name="blog">{% trans 'Music' %}</a>
+    <span class="mobile-hidden">
+      <span class="spacer">&bull;</span>
+      <h1><span class="tag">{{ tag }}</span></h1>
+    </span>
+  {% else %}
+    <span class="spacer">&bull;</span>
+    <h1>{% trans 'Music' %}</h1>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  <h1 class="mobile-visible container">
+    {% if tag %}
+      <span class="tag">{{ tag }}</span>
+    {% endif %}
+  </h1>
+  <div class="blog container flex">
+    <div class="posts">
+      {% for item in item_list %}
+        {% include 'blog/list-item.html' %}
+      {% empty %}
+        <div class="notice">{% trans 'Nothing to show' %}(</div>
+      {% endfor %}
+    </div>
+    {% include 'common/sidebar.html' %}
+  </div>
+{% endblock %}
+
+{% block styles %}
+  <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list.css' %}" media="all">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list-item.css' %}" media="all">
+{% endblock %}
+
+{% block scripts %}
+  <script type="text/javascript" src="{% static 'js/widgets/ajax.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
+  <script type="text/javascript">
+    (function ($) {
+      $(document).ready(() => {
+        $.initBlogAjax('{% if tag %}{{ tag.slug }}{% endif %}');
+        $.initTracklist();
+      });
+    })(jQuery);
+  </script>
+{% endblock %}

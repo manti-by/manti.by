@@ -1,0 +1,35 @@
+version: '3.3'
+services:
+
+  postgres:
+    restart: always
+    image: postgres:latest
+    container_name: manti-by-postgres
+    environment:
+      - POSTGRES_DB=manti_by
+      - POSTGRES_USER=manti_by
+      - POSTGRES_PASSWORD=manti_by
+
+  redis:
+    restart: always
+    image: redis:latest
+    container_name: manti-by-redis
+
+  django:
+    restart: always
+    image: mantiby/manti.by:latest
+    container_name: manti-by-django
+    ports:
+      - 8080:8080
+    links:
+      - postgres
+      - redis
+    environment:
+      - DJANGO_SETTINGS_MODULE=manti_by.settings.prod
+    volumes:
+      - /home/manti/www/manti.by/manti/:/srv/app/src/
+      - /mnt/nostromo/www/manti/static/:/var/lib/app/static/
+      - /mnt/nostromo/www/manti/content/:/var/lib/app/content/
+      - /mnt/nostromo/www/manti/log/:/var/log/app/
+    command: |
+      gunicorn manti_by.wsgi:application --bind 0.0.0.0:8080 --workers 2 --log-file /var/log/app/wsgi.log

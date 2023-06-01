@@ -1,0 +1,45 @@
+.resume {
+  font-size: 1em;
+}
+
+.resume section {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 1050px;
+  margin-bottom: 1.75em;
+}
+
+.resume h3 {
+  font-size: 1.5em;
+  text-transform: none;
+}
+
+.resume aside {
+  padding-top: .325em;
+  width: 24%;
+  color: #666;
+}
+
+.resume div {
+  width: 76%;
+}
+
+.resume ul {
+  margin-bottom: 1.5em;
+  line-height: 1.3;
+}
+
+.resume li {
+  margin-bottom: .75em;
+}
+
+.resume .muted,
+.resume .description {
+  margin: .5em 0 0;
+}
+
+.resume .muted {
+  margin-bottom: 1.5em;
+  color: #666;
+}

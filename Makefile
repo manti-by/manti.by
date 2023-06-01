@@ -1,57 +1,31 @@
+build:
+	docker build -t mantiby/manti.by:latest .
+
+bash:
+	docker exec -it manti-by-django bash
+
+psql:
+	docker exec -it manti-by-postgres psql -U manti_by
+
+pg_dump:
+	docker exec -it manti-by-postgres pg_dump -U manti_by -d manti_by > database.sql
+
+migrate:
+	docker exec -it manti-by-django python manage.py migrate
+
+static:
+	docker exec -it manti-by-django python manage.py collectstatic --no-input
+
 check:
-	black --target-version py39 tests/pytest/
+	git add .
+	pre-commit run
+
+django-checks:
+	python3 manage.py makemigrations --dry-run --check --verbosity=3
+	python manage.py check --fail-level WARNING
 
 test:
-	cd tests/pytest/ && pytest .
+	pytest
 
-jmeter:
-	jmeter -n -t tests/performance/index.jmx -l tests/performance/result.csv -o tests/performance/test.log
-
-
-clean-gallery:
-	rm -rf content/gallery.json
-	rm -rf content/gallery/*.webp
-
-reorder-gallery:
-	./scripts/reorder_gallery.py
-
-update-gallery:
-	./scripts/update_gallery.py
-
-rebuild-gallery: clean-gallery reorder-gallery update-gallery
-
-
-clean-covers:
-	rm -rf content/covers.json
-	rm -rf content/covers/*.webp
-
-reorder-covers:
-	./scripts/reorder_gallery.py
-
-update-covers:
-	./scripts/update_covers.py
-
-rebuild-covers: clean-covers reorder-covers update-covers
-
-
-clean-releases:
-	rm -rf content/preview/*.mp3
-	rm -rf content/preview/*.ogg
-	rm -rf content/release/*.ogg
-
-update-releases:
-	./scripts/update_releases.py
-
-
-build:
-	cd app/ && cargo build
-
-release:
-	cd app/ && cargo build --release
-	cp app/target/release/manti-by dist/app
-
-run:
-	cd app/ && cargo run
-
-env:
-	rustup override set nightly
+update-requirements:
+	pcu requirements.txt -u

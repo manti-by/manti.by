@@ -1,39 +1,41 @@
+{% load common_tags %}
+
 <aside id="player" class="player">
-    <audio preload="auto" class="hidden"></audio>
+  <audio preload="auto" class="hidden"></audio>
 
-    <div class="container flex">
-        <div class="controls flex">
-            <div class="button prev-track"></div>
-            <div class="button play-pause play"></div>
-            <div class="button next-track"></div>
+  <div class="container flex">
+    <div class="controls flex">
+      <div class="button prev-track"></div>
+      <div class="button play-pause play"></div>
+      <div class="button next-track"></div>
 
-            <div class="progress-bar position">
-                <div class="progress-line"></div>
-                <div class="progress-line-loaded"></div>
-                <div class="progress-line-active"></div>
-            </div>
-            <div class="progress-label"><span>00:00:00</span></div>
+      <div class="progress-bar position">
+        <div class="progress-line"></div>
+        <div class="progress-line-loaded"></div>
+        <div class="progress-line-active"></div>
+      </div>
+      <div class="progress-label"><span>00:00:00</span></div>
 
-            <div class="progress-bar volume">
-                <div class="progress-line"></div>
-                <div class="progress-line-active"></div>
-            </div>
-            <div class="volume-label"><span>70</span>%</div>
+      <div class="progress-bar volume">
+        <div class="progress-line"></div>
+        <div class="progress-line-active"></div>
+      </div>
+      <div class="volume-label"><span>70</span>%</div>
 
-            <div class="high-definition">
-                <i class="material-icons">hd</i>
-            </div>
-        </div>
-
-        <div class="now-playing">
-            <a href="#">
-                <span class="image-wrapper">
-                    <img src="/static/img/no-image.webp" alt="No image" width="33" height="33" />
-                </span>
-                <span class="title-wrapper"></span>
-            </a>
-        </div>
-
-        <div class="close"><i class="material-icons">close</i></div>
+      <div class="high-definition">
+        <i class="material-icons">hd</i>
+      </div>
     </div>
+
+    <div class="now-playing">
+      <a id="player-cover">
+        <span class="image-wrapper">
+          <img src="{% webp_static 'img/no-image.png' %}" alt="No image" width="33" height="33"/>
+        </span>
+        <span class="title-wrapper"></span>
+      </a>
+    </div>
+
+    <div class="close"><i class="material-icons">close</i></div>
+  </div>
 </aside>

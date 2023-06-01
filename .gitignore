@@ -1,12 +1,23 @@
-app/target/
-app/Cargo.lock
-
-content/
-
-.pytest_cache/
-.venv/
+# PyCharm files
 .idea/
 
-*.log
-*.pyc
-*~
+# Virtual environments
+.env
+.venv/
+venv/
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*$py.class
+
+# Pyenv
+.python-version
+
+# Project files
+static/*
+manti_by/static/cache/
+
+manti_by/settings/local.py
+manti_by/settings/prod.py

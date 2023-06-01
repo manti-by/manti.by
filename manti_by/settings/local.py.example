@@ -1,0 +1,63 @@
+from .base import *  # noqa
+
+ENVIRONMENT = "local"
+
+DEBUG = True
+TEMPLATE_DEBUG = False
+COMPRESS_ENABLED = False
+
+SECRET_KEY = ""
+ALLOWED_HOSTS = ["*"]
+
+BASE_HOST = "127.0.0.1:8000"
+BASE_URL = f"http://{BASE_HOST}"
+SESSION_COOKIE_DOMAIN = BASE_HOST
+
+STATIC_URL = "/static/"
+STATIC_ROOT = "/home/manti/www/manti.by/static"
+
+MEDIA_URL = "/content/"
+MEDIA_ROOT = "/home/manti/www/manti.by/content"
+
+LOCALE_URLS = {"be": BASE_HOST, "en": BASE_HOST, "ru": BASE_HOST}
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": os.environ.get("POSTGRES_NAME", "manti_by"),
+        "USER": os.environ.get("POSTGRES_USER", "manti_by"),
+        "PASSWORD": os.environ.get("POSTGRES_PASS", "manti_by"),
+        "HOST": os.environ.get("POSTGRES_HOST", "localhost"),
+        "PORT": os.environ.get("POSTGRES_PORT", 5432),
+    }
+}
+
+RQ_ASYNC = False
+
+THUMBNAIL_REDIS_HOST = os.environ.get("REDIS_HOST", "127.0.0.1")
+
+CACHES = {"default": {"BACKEND": "django.core.cache.backends.dummy.DummyCache"}}
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {"level": "DEBUG", "class": "logging.StreamHandler"},
+        "null": {"class": "logging.NullHandler"},
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console"],
+            "level": "WARNING",
+            "propagate": True,
+            "formatter": "verbose",
+        },
+        "django": {
+            "handlers": ["console"],
+            "level": "WARNING",
+            "propagate": True,
+            "formatter": "simple",
+        },
+        "django.template": {"handlers": ["console"], "level": "DEBUG"},
+    },
+}
