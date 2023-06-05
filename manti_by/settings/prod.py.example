@@ -41,9 +41,8 @@ THUMBNAIL_REDIS_HOST = "manti-by-redis"
 
 CACHES = {
     "default": {
-        "BACKEND": "redis_cache.cache.RedisCache",
-        "LOCATION": "manti-by-redis:6379",
-        "OPTIONS": {"MAX_ENTRIES": 5000, "DB": 0},
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://manti-by-redis:6379",
     }
 }
 

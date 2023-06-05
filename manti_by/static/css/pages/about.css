@@ -1,8 +1,8 @@
-.resume {
+.about {
   font-size: 1em;
 }
 
-.resume section {
+.about section {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-between;
@@ -10,36 +10,47 @@
   margin-bottom: 1.75em;
 }
 
-.resume h3 {
+.about h3 {
   font-size: 1.5em;
   text-transform: none;
 }
 
-.resume aside {
+.about aside {
   padding-top: .325em;
   width: 24%;
   color: #666;
 }
 
-.resume div {
+.about div {
   width: 76%;
 }
 
-.resume ul {
+.about ul {
   margin-bottom: 1.5em;
   line-height: 1.3;
 }
 
-.resume li {
+.about li {
   margin-bottom: .75em;
 }
 
-.resume .muted,
-.resume .description {
+.about .muted,
+.about .description {
   margin: .5em 0 0;
 }
 
-.resume .muted {
+.about .muted {
   margin-bottom: 1.5em;
   color: #666;
+}
+
+.about .image {
+  min-width: calc(100% - 2rem);
+  max-width: calc(100% - 2rem);
+}
+
+.about .employment div,
+.about .education div {
+  width: calc(76% - 1.5em);
+  padding-left: 1.5em;
 }

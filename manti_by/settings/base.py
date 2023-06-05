@@ -111,8 +111,7 @@ REDIS_PORT = os.environ.get('REDIS_PORT', 6379)
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": f"{REDIS_HOST}:{REDIS_PORT}",
-        "OPTIONS": {"MAX_ENTRIES": 5000, "DB": 0},
+        "LOCATION": f"redis://{REDIS_HOST}:{REDIS_PORT}",
     }
 }
 

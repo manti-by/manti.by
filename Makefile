@@ -7,7 +7,7 @@ bash:
 psql:
 	docker exec -it manti-by-postgres psql -U manti_by
 
-pg_dump:
+dump:
 	docker exec -it manti-by-postgres pg_dump -U manti_by -d manti_by > database.sql
 
 migrate:

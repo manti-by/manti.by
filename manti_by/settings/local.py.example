@@ -6,7 +6,7 @@ DEBUG = True
 TEMPLATE_DEBUG = False
 COMPRESS_ENABLED = False
 
-SECRET_KEY = ""
+SECRET_KEY = "unsecure-secret-key"
 ALLOWED_HOSTS = ["*"]
 
 BASE_HOST = "127.0.0.1:8000"
