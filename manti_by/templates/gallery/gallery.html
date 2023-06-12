@@ -35,15 +35,10 @@
 {% endblock %}
 
 {% block styles %}
-  <link type="text/css" rel="stylesheet" href="{% static 'css/gallery/overlay.css' %}" media="all">
-  <link type="text/css" rel="stylesheet" href="{% static 'css/gallery/item.css' %}" media="all">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/pages/gallery/overlay.css' %}" media="all">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/pages/gallery/item.css' %}" media="all">
 {% endblock %}
 
 {% block scripts %}
-  <script type="text/javascript" src="{% static 'js/libs/gallery.js' %}"></script>
-  <script type="text/javascript">
-    $(document).ready(() => {
-      $.gallery.init();
-    });
-  </script>
+  <script type="text/javascript" src="{% static 'js/gallery.js' %}"></script>
 {% endblock %}

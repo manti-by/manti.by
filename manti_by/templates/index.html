@@ -12,7 +12,7 @@
       <div id="featured-slider" class="mobile-slider">
         <div class="flex content">
           {% for item in featured_posts %}
-            {% include 'blog/featured-item.html' %}
+            {% include 'blog/featured.html' %}
           {% endfor %}
         </div>
         <div class="controls">
@@ -46,9 +46,9 @@
           </a>
         {% else %}
           <a href="{% url 'gallery' %}">
-            <img src="{% static 'img/featured-min.jpg' %}"
+            <img src="{% static 'img/featured.jpg' %}"
                  data-src="{% static 'img/featured.jpg' %}"
-                 data-webp="{% webp_static 'img/featured.jpg' %}"
+                 data-webp="{% static 'img/featured.webp' %}"
                  alt="{% trans 'Popular image from gallery' %}"
                  title="{% trans 'Popular image from gallery' %}" class="lazy">
           </a>
@@ -82,26 +82,13 @@
 {% endblock %}
 
 {% block styles %}
-  <link type="text/css" rel="stylesheet" href="{% static 'css/index.css' %}" media="all">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/pages/index.css' %}" media="all">
   <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list-item.css' %}" media="all">
   <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured-item.css' %}" media="all">
-  <link type="text/css" rel="stylesheet" href="{% static 'css/common/mobile-slider.css' %}" media="all">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/components/slider.css' %}" media="all">
 {% endblock %}
 
 {% block scripts %}
-  <script src="{% static 'js/libs/jquery-touchswipe-1.6.19/jquery.touchswipe.min.js' %}"></script>
   <script src="{% static 'js/widgets/tracklist.js' %}"></script>
-  <script src="{% static 'js/widgets/mobile-slider.js' %}"></script>
-  <script type="text/javascript">
-    (function ($) {
-      $(document).ready(() => {
-        $.initTracklist();
-        $.initMobileSlider();
-      });
-
-      $(window).on('resize', () => {
-        $.initMobileSlider();
-      });
-    })(jQuery);
-  </script>
+  <script src="{% static 'js/widgets/slider.js' %}"></script>
 {% endblock %}

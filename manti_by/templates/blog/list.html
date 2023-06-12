@@ -8,7 +8,7 @@
 {% block breadcrumbs %}
   {% if tag %}
     <span class="spacer">&gt;</span>
-    <a href="{% url 'blog' %}" name="blog">{% trans 'Music' %}</a>
+    <a href="{% url 'blog' %}" id="blog">{% trans 'Music' %}</a>
     <span class="mobile-hidden">
       <span class="spacer">&bull;</span>
       <h1><span class="tag">{{ tag }}</span></h1>
@@ -45,12 +45,4 @@
 {% block scripts %}
   <script type="text/javascript" src="{% static 'js/widgets/ajax.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
-  <script type="text/javascript">
-    (function ($) {
-      $(document).ready(() => {
-        $.initBlogAjax('{% if tag %}{{ tag.slug }}{% endif %}');
-        $.initTracklist();
-      });
-    })(jQuery);
-  </script>
 {% endblock %}

@@ -1,23 +1,27 @@
-(($) => {
-  'use strict'
+"use strict"
 
-  $.initHeader = () => {
-    const wnd = $(window)
-    const header = $('header')
-    let prev_y = wnd.scrollTop()
-    let curr_y = wnd.scrollTop()
+class FloatingHeader {
 
-    if (header.get(0)) {
-      setInterval(function () {
-        curr_y = wnd.scrollTop()
+  constructor() {
+    let header = document.querySelector("header")
+    if (header) {
+      let prev_y = window.scrollTop
+      let curr_y = window.scrollTop
+
+      setInterval(() => {
+        curr_y = window.scrollTop
 
         if (prev_y === curr_y) return
 
         curr_y < 60 || prev_y > curr_y
-          ? header.addClass('visible') : header.removeClass('visible')
+          ? header.classList.add("visible") : header.classList.remove("visible")
 
         prev_y = curr_y
       }, 250)
     }
   }
-})(jQuery)
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  window.floating_header = new FloatingHeader()
+})

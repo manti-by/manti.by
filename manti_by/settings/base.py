@@ -23,24 +23,11 @@ DEBUG = False
 
 TEMPLATE_DEBUG = False
 
-COMPRESS_ENABLED = True
-
-SITE_ID = 1
-
-ENVIRONMENT = "prod"
-
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
 INSTALLED_APPS = [
-    "manti_by.apps.api",
-    "manti_by.apps.blog",
-    "manti_by.apps.core",
-    "manti_by.apps.gallery",
-    "taggit",
-    "sorl.thumbnail",
-    "compressor",
-    "modeltranslation",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -49,6 +36,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
     "django.contrib.sites",
+    "taggit",
+    "sorl.thumbnail",
+    "modeltranslation",
+    "manti_by.apps.api",
+    "manti_by.apps.blog",
+    "manti_by.apps.core",
+    "manti_by.apps.gallery",
 ]
 
 MIDDLEWARE = [
@@ -130,12 +124,11 @@ THUMBNAIL_QUALITY = 85
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = "be"
-
-
 def _(x):
     return x
 
+
+LANGUAGE_CODE = "be"
 
 LANGUAGES = (
     ("be", _("Belarussian")),
@@ -162,7 +155,7 @@ STATICFILES_FINDERS = [
     "compressor.finders.CompressorFinder",
 ]
 
-STATICFILES_DIRS = [PROJECT_DIR / "static"]
+STATICFILES_DIRS = (PROJECT_DIR / "static",)
 
 STATIC_ROOT = BASE_DIR / "static"
 STATIC_URL = "/static/"
@@ -181,22 +174,6 @@ EMAIL_PORT = 25
 
 DEFAULT_FROM_EMAIL = "admin@manti.by"
 DEFAULT_TO_EMAIL = ""
-
-
-# Allowed hosts
-
-ALLOWED_HOSTS = ["*"]
-
-
-# Static compressor settings
-
-COMPRESS_OUTPUT_DIR = "cache"
-COMPRESS_STORAGE = "compressor.storage.GzipCompressorFileStorage"
-COMPRESS_CSS_FILTERS = [
-    "compressor.filters.css_default.CssAbsoluteFilter",
-    "compressor.filters.cssmin.CSSMinFilter",
-]
-COMPRESS_CSS_HASHING_METHOD = None
 
 
 # Meta tags info

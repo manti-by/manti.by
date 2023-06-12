@@ -1,33 +1,45 @@
-(($) => {
-  'use strict'
+"use strict"
 
-  $.initBlogAjax = (tag) => {
-    const footer = $('footer')
-    const options = { type: 'html', limit: 6 }
-    let start = 6; let locked = false
+class Ajax {
+  constructor() {
+    this.locked = false
+    this.options = {start: 6,  limit: 6}
+    this.footer = document.querySelector("footer")
 
-    if (tag) options.tag = tag
-    $(window).on('scroll', () => {
-      if (footer.offset().top < $(window).scrollTop() + $(window).height()) {
-        if (!locked) {
-          locked = true
-          options.start = start
-          $.loaderShow()
+    const params = new Proxy(new URLSearchParams(window.location.search), {
+      get: (searchParams, prop) => searchParams.get(prop),
+    })
+    if (params.tag) this.options.tag = params.tag
 
-          $.get('/api/posts/', options, (data) => {
-            start += 6
-            for (const post of data) {
-              $('.blog .posts').append(post)
-            }
+    this.bind()
+  }
 
-            $.initLazyImages()
-            $.player.updateActivePosts()
-            if (data.length) locked = false
+  bind() {
+    window.onscroll = () => {
+      if (this.footer.offsetTop < window.scrollY + window.innerHeight) {
+        if (!this.locked) {
+          this.locked = true
+          window.loader.show()
 
-            $.loaderHide()
+          let query = Object.keys(this.options)
+            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(this.options[k])).join('&')
+
+          fetch("/api/html/?" + query).then(data => {
+            let posts = document.querySelector(".posts")
+            posts.innerHTML += data
+            this.options.start += 6
+            window.lazy.bind()
+            window.player.updateActivePosts()
+          }).finally(() => {
+            this.locked = false
+            window.loader.hide()
           })
         }
       }
-    })
+    }
   }
-})(jQuery)
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  window.ajax = new Ajax()
+})

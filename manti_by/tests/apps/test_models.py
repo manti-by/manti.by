@@ -19,7 +19,7 @@ class TestPostModel:
         if not os.path.exists(release_path):
             os.makedirs(release_path)
         shutil.copy(
-            os.path.join(settings.PROJECT_DIR, "static", "test", "test.mp3"),
+            os.path.join(settings.BASE_DIR, "static", "test", "test.mp3"),
             os.path.join(settings.MEDIA_ROOT, "release", "test.mp3"),
         )
 
