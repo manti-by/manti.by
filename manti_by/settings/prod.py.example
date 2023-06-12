@@ -19,10 +19,10 @@ CSRF_TRUSTED_ORIGINS = ("https://manti.by",)
 SESSION_COOKIE_DOMAIN = ".manti.by"
 
 STATIC_URL = "https://static.manti.by/"
-STATIC_ROOT = "/var/lib/manti/static"
+STATIC_ROOT = "/var/lib/app/static"
 
 MEDIA_URL = "https://content.manti.by/"
-MEDIA_ROOT = "/var/lib/manti/content"
+MEDIA_ROOT = "/var/lib/app/content"
 
 LOCALE_URLS = {"be": "manti.by", "ru": "ru.manti.by", "en": "en.manti.by"}
 

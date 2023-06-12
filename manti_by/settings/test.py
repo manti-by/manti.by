@@ -8,9 +8,6 @@ DEBUG = False
 
 TEMPLATE_DEBUG = False
 
-COMPRESS_ENABLED = True
-COMPRESS_ROOT = "/tmp/cache"  # nosec
-
 ALLOWED_HOSTS = ["127.0.0.1"]
 
 BASE_URL = "http://127.0.0.1"

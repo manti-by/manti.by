@@ -103,7 +103,7 @@
     <h2 class="featured">{% trans 'Related posts' %}</h2>
     <div class="featured flex">
       {% for item in item.related.all|slice:":3" %}
-        {% include 'blog/featured-item.html' %}
+        {% include 'blog/featured.html' %}
       {% endfor %}
     </div>
   </article>
@@ -116,11 +116,4 @@
 
 {% block scripts %}
   <script type="text/javascript" src="{% static 'js/widgets/tracklist.js' %}"></script>
-  <script type="text/javascript">
-    (($) => {
-      $(document).ready(() => {
-        $.initTracklist();
-      });
-    })(jQuery);
-  </script>
 {% endblock %}

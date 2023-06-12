@@ -1,15 +1,19 @@
-(($) => {
-  'use strict'
+"use strict"
 
-  $.initLoader = () => {
-    const loader = $('#loader')
-
-    $.loaderShow = () => {
-      loader.addClass('visible')
-    }
-
-    $.loaderHide = () => {
-      loader.removeClass('visible')
-    }
+class Loader {
+  constructor () {
+    this.loader = document.getElementById("loader")
   }
-})(jQuery)
+
+  show () {
+    this.loader.classList.add("visible")
+  }
+
+  hide () {
+    this.loader.classList.remove("visible")
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  window.loader = new Loader()
+})

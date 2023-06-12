@@ -1,4 +1,4 @@
-{% load static compress thumbnail i18n common_tags %}
+{% load static thumbnail i18n common_tags %}
 <!DOCTYPE html>
 <html lang="{{ ACTIVE_LANGUAGE }}">
   <head>
@@ -44,19 +44,11 @@
     {% endblock %}
     <meta property="og:url" content="{{ ABSOLUTE_URL }}">
 
-    {% compress css inline %}
-    <link type="text/css" rel="stylesheet" href="{% static 'css/common/reset.css' %}" media="all">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/reset.css' %}" media="all">
     <link type="text/css" rel="stylesheet" href="{% static 'css/font.css' %}" media="all">
     <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/common/player.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/common/search.css' %}" media="all">
-    {% block styles %}{% endblock %}
-    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/480.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/dark.css' %}" media="all">
-    {% endcompress %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/components/player.css' %}" media="all">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/components/search.css' %}" media="all">
   </head>
   <body>
     <div id="loader">
@@ -149,23 +141,22 @@
       </nav>
     </footer>
 
-    {% compress css inline %}
-    <link type="text/css" rel="stylesheet" href="{% static 'css/common/print.css' %}" media="print">
-    {% endcompress %}
+    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}" media="all">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}" media="all">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}" media="all">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/480.css' %}" media="all">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/dark.css' %}" media="all">
+    {% block styles %}{% endblock %}
 
-    {% compress js %}
-    <script src="{% static 'js/libs/jquery-3.6.0/jquery.min.js' %}"></script>
-    <script src="{% static 'js/libs/jquery-browser-0.1.0/jquery.browser.min.js' %}"></script>
     <script src="{% static 'js/widgets/lazy.js' %}"></script>
     <script src="{% static 'js/widgets/menu.js' %}"></script>
     <script src="{% static 'js/widgets/loader.js' %}"></script>
     <script src="{% static 'js/widgets/header.js' %}"></script>
     <script src="{% static 'js/widgets/search.js' %}"></script>
-    <script src="{% static 'js/libs/common.js' %}"></script>
-    <script src="{% static 'js/libs/player.js' %}"></script>
-    <script src="{% static 'js/core.js' %}"></script>
+    <script src="{% static 'js/common.js' %}"></script>
+    <script src="{% static 'js/player.js' %}"></script>
     {% block scripts %}{% endblock %}
-    {% endcompress %}
 
     <script type="application/ld+json">
       {
