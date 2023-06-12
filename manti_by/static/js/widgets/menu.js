@@ -1,30 +1,33 @@
-(($) => {
-  'use strict'
+"use strict"
 
-  $.initHeaderMenu = () => {
-    const menu = $('.mobile-menu')
-    const button = $('.mobile-menu-button')
+class HeaderMenu {
 
-    button.on('click', (event) => {
-      if (menu.hasClass('open')) {
-        menu.removeClass('open')
+  constructor() {
+    const menu = document.querySelector(".mobile-menu")
+    const button = document.querySelector(".mobile-menu-button")
+
+    button.onclick = (event) => {
+      if (menu.classList.contains("open")) {
+        menu.classList.remove("open")
         return
       }
 
-      const offset = window.innerWidth - event.pageX - 25
-      menu.css('right', offset).addClass('open')
+      menu.style.right = window.innerWidth - event.pageX - 25
+      menu.classList.add("open")
+    }
 
-      return false
-    })
+    document.onclick = () => {
+      menu.classList.remove("open")
+    }
 
-    $(document).on('click', () => {
-      menu.removeClass('open')
-    })
-
-    $(document).on('keydown', (event) => {
-      if (event.which === 27) {
-        menu.removeClass('open')
+    document.onkeydown = (event) => {
+      if (event.code === "Escape") {
+        menu.classList.remove("open")
       }
-    })
+    }
   }
-})(jQuery)
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  new HeaderMenu()
+})

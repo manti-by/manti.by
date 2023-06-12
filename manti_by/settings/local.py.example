@@ -3,11 +3,9 @@ from .base import *  # noqa
 ENVIRONMENT = "local"
 
 DEBUG = True
-TEMPLATE_DEBUG = False
-COMPRESS_ENABLED = False
+TEMPLATE_DEBUG = True
 
 SECRET_KEY = "unsecure-secret-key"
-ALLOWED_HOSTS = ["*"]
 
 BASE_HOST = "127.0.0.1:8000"
 BASE_URL = f"http://{BASE_HOST}"

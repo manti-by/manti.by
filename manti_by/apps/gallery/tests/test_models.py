@@ -20,7 +20,7 @@ class GalleryModelTest:
             os.makedirs(release_path)
 
         shutil.copy(
-            os.path.join(settings.PROJECT_DIR, "static", "test", "test.jpg"),
+            os.path.join(settings.BASE_DIR, "static", "test", "test.jpg"),
             os.path.join(settings.MEDIA_ROOT, "gallery", "test.jpg"),
         )
 

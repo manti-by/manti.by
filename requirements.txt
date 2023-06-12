@@ -4,7 +4,6 @@ psycopg2-binary==2.9.9
 sorl-thumbnail==12.10.0
 
 django-taggit==5.0.1
-django-compressor==4.4
 django-modeltranslation==0.18.11
 
 exifread==3.0.0

@@ -1,28 +1,30 @@
-(($) => {
-  'use strict'
+"use strict"
 
-  $.initLazyImages = () => {
-    const is_webp = ['chrome', 'opera', 'opera mobile'].indexOf($.browser.name) >= 0
-    let has_webp; let src
+class LazyImages {
 
-    const observer = new IntersectionObserver(changes => {
+  constructor() {
+    this.observer = new IntersectionObserver(changes => {
       for (const change of changes) {
-        src = $(change.target).attr('data-src')
-        has_webp = $(change.target)[0].hasAttribute('data-webp')
+        if (!change.target.dataset.src) return
 
-        if (has_webp && is_webp) { src = $(change.target).attr('data-webp') }
-
-        $(change.target).attr('src', src)
-        $(change.target).on('load', () => {
-          $(change.target).removeClass('lazy')
-          $(change.target).removeAttr('data-src')
-          has_webp && $(change.target).removeAttr('data-webp')
-        })
+        change.target.src = change.target.dataset.src
+        change.target.onload = () => {
+          change.target.classList.remove("lazy")
+          delete change.target.dataset.src
+        }
       }
     })
-
-    $.each($('img.lazy'), (index, target) => {
-      observer.observe(target)
-    })
+    this.bind()
   }
-})(jQuery)
+
+  bind() {
+    const images = document.querySelectorAll(".lazy")
+    for (let i = 0; i < images.length; i++) {
+      this.observer.observe(images[i])
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  window.lazy = new LazyImages()
+})

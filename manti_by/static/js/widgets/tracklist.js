@@ -1,21 +1,26 @@
-(($) => {
-  'use strict'
+"use strict"
 
-  $.initTracklist = () => {
-    $(document).on('click', '.show-tracklist', (event) => {
-      $(event.target).closest('.data')
-        .find('.info').addClass('hidden')
+class Tracklist {
+  constructor() {
+    let show_buttons = document.querySelectorAll(".show-tracklist"),
+        hide_buttons = document.querySelectorAll(".hide-tracklist")
 
-      $(event.target).closest('.data')
-        .find('.tracklist').removeClass('hidden')
-    })
+    for (let i = 0; i < show_buttons.length; i++) {
+      show_buttons[i].onclick = (event) => {
+        event.target.closest(".data").querySelector(".info").classList.add("hidden")
+        event.target.closest(".data").querySelector(".tracklist").classList.remove("hidden")
+      }
+    }
 
-    $(document).on('click', '.hide-tracklist', (event) => {
-      $(event.target).closest('.data')
-        .find('.info').removeClass('hidden')
-
-      $(event.target).closest('.data')
-        .find('.tracklist').addClass('hidden')
-    })
+    for (let i = 0; i < hide_buttons.length; i++) {
+      hide_buttons[i].onclick = (event) => {
+        event.target.closest(".data").querySelector(".info").classList.remove("hidden")
+        event.target.closest(".data").querySelector(".tracklist").classList.add("hidden")
+      }
+    }
   }
-})(jQuery)
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  window.tracklist = new Tracklist()
+})
