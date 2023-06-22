@@ -16,8 +16,7 @@
       <div class="images {% if user.is_superuser %}orderable{% endif %}">
         {% for image in images %}
           {% thumbnail image.original_image "1920x1280" as display %}
-          <a href="{{ display.url }}" data-id="{{ image.id }}"
-             class="preview shadow {% if user.is_superuser %}orderable-item{% endif %}">
+          <a id="image-{{ image.id }}" href="{{ display.url }}" class="preview shadow">
             {% thumbnail image.original_image "x400" as preview %}
             {% thumbnail image.original_image "x50" as thumb %}
             <img src="{{ thumb.url }}"
