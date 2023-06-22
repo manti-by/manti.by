@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
 
 from manti_by.apps.core.models import BaseModel
-from manti_by.apps.core.utils import flush_cache, original_name
+from manti_by.apps.core.utils import flush_cache, image_name
 
 
 class ImageManager(models.Manager):
@@ -14,7 +14,7 @@ class ImageManager(models.Manager):
 
 
 class Image(BaseModel):
-    original_image = models.ImageField(upload_to=original_name, blank=True, null=True, verbose_name=_("Image"))
+    original_image = models.ImageField(upload_to=image_name, blank=True, null=True, verbose_name=_("Image"))
     order = models.IntegerField(blank=True, default=0)
     tags = TaggableManager(blank=True)
 

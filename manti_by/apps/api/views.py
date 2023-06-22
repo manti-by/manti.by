@@ -1,33 +1,12 @@
-import json
 import logging
 
 from django.db.models import Q
-from django.http import HttpResponseForbidden, JsonResponse
-from django.utils.translation import gettext_lazy as _
+from django.http import JsonResponse
 
 from manti_by.apps.blog.models import Post
 from manti_by.apps.core.context_processors.common import global_template_vars
-from manti_by.apps.gallery.models import Image
 
 logger = logging.getLogger(__name__)
-
-
-def orderable(request):
-    if not request.user.is_superuser:
-        return HttpResponseForbidden()
-
-    data = json.loads(request.POST.get("data"))
-    if len(data):
-        for item in data:
-            try:
-                obj = Image.objects.get(pk=item["id"])
-                obj.order = item["order"]
-                obj.save()
-                item["result"] = _("Updated")
-            except Exception as e:
-                logger.exception(e)
-                item["result"] = e
-        return JsonResponse(data, safe=False)
 
 
 def posts(request):

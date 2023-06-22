@@ -27,7 +27,3 @@ class ImageAdmin(admin.ModelAdmin):
 
     is_ready.boolean = True
     is_ready.short_description = _("Ready")
-
-    class Media:
-        js = ("js/libs/jquery-ui-1.12.1/jquery-ui.js", "js/admin/orderable.js")
-        css = {"all": ("css/admin/orderable.css",)}
