@@ -6,5 +6,5 @@ class GalleryConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
     name = "manti_by.apps.gallery"
 
-    verbose_name = _("Gallery")
-    verbose_name_plural = _("Galleries")
+    verbose_name = _("gallery")
+    verbose_name_plural = _("galleries")

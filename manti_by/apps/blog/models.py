@@ -5,6 +5,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
+from sorl.thumbnail import get_thumbnail
 from taggit.managers import TaggableManager
 from taggit.models import TaggedItemBase
 
@@ -78,10 +79,10 @@ class Post(BaseModel):
         verbose_name = _("post")
         verbose_name_plural = _("posts")
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
-    def get_absolute_url(self):
+    def get_absolute_url(self) -> str:
         return reverse(self.__class__.__name__.lower(), args=[str(self.slug)])
 
     def save(self, *args, **kwargs):
@@ -90,8 +91,8 @@ class Post(BaseModel):
         super().save(*args, **kwargs)
 
     @property
-    def files_converted(self):
-        return self.mp3_preview_ready and self.mp3_release_ready and self.ogg_preview_ready and self.ogg_release_ready
+    def files_converted(self) -> bool:
+        return all((self.mp3_preview_ready, self.mp3_release_ready, self.ogg_preview_ready, self.ogg_release_ready))
 
     @property
     def translations_filled(self) -> bool:
@@ -162,13 +163,18 @@ class Post(BaseModel):
     def most_common_tags(self) -> list[TagsProxy]:
         return [tag for tag in self.tags.exclude(slug="front") if TagsProxy.objects.filter(tag_id=tag.id).count() > 1]
 
+    @property
+    def cover_thumbnail(self) -> str:
+        return get_thumbnail(self.cover.file, "50x50", crop="center", quality=85).url
+
     def as_dict(self) -> dict:
         return {
             "id": self.id,
             "url": self.url,
             "name": self.name,
+            "slug": self.slug,
             "title": self.title,
-            "cover": self.cover.url if self.cover else None,
+            "cover": {"original": self.cover.url, "thumbnail": self.cover_thumbnail} if self.cover else None,
             "release": {"mp3": self.release_mp3_url},
             "preview": {"mp3": self.preview_mp3_url},
         }

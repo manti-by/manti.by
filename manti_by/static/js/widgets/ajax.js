@@ -24,9 +24,11 @@ class Ajax {
           let query = Object.keys(this.options)
             .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(this.options[k])).join('&')
 
-          fetch("/api/html/?" + query).then(data => {
+          fetch("/api/posts/?type=html&" + query).then(
+            response => response.json()
+          ).then(data => {
             let posts = document.querySelector(".posts")
-            posts.innerHTML += data
+            posts.innerHTML += data.join("")
             this.options.start += 6
             window.lazy.bind()
             window.player.updateActivePosts()

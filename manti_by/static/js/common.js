@@ -5,7 +5,7 @@ const setCookie = (name, value, expire) => {
 
   expire_date.setDate(expire_date.getDate() + expire)
   value = encodeURIComponent(value) +
-    (expire === null ? "" : "; expires=" + expire_date.toUTCString())
+    (expire === null ? "" : "; expires=" + expire_date.toUTCString()) + "; SameSite=None;"
 
   document.cookie = name + "=" + value
 }
