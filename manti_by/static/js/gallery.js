@@ -5,7 +5,6 @@ class Gallery {
   constructor() {
     this.image = null
     this.overlay = null
-    this.id_map = []
     this.current_id = null
 
     this.init()
@@ -49,13 +48,16 @@ class Gallery {
     document.body.appendChild(this.overlay)
 
     // Bind overlay actions
-    this.overlay.onclick = () => {
+    this.overlay.onclick = (event) => {
+      event.stopPropagation()
       this.next()
     }
-    next_pointer.onclick = () => {
+    next_pointer.onclick = (event) => {
+      event.stopPropagation()
       this.next()
     }
-    prev_pointer.onclick = () => {
+    prev_pointer.onclick = (event) => {
+      event.stopPropagation()
       this.prev()
     }
 
@@ -80,34 +82,29 @@ class Gallery {
       }
     }
 
+    // Image box
+    this.image = document.createElement("img")
+    this.image.classList.add("original", "resizible", "shadow")
+
     // Bind image actions
     let previews = document.querySelectorAll(".preview")
     for (let i = 0; i < previews.length; i++) {
-      const id = previews[i].dataset.id
-      const link = previews[i].href
-
       previews[i].onclick = (event) => {
         event.preventDefault()
-        this.build(id, link)
+        this.build(previews[i])
       }
-      this.id_map.push([id, link])
     }
   }
 
-  build(id, link) {
+  build(target) {
     window.loader.show()
 
-    let original = this.overlay.querySelector(".original")
-    if (original) original.remove()
-
-    this.image = document.createElement("img")
-    this.image.classList.add("original", "resizible", "shadow")
-    this.image.src = link
-    this.image.alt = "Image #" + id
+    this.image.src = target.href
+    this.image.alt = "Image #" + target.id
 
     this.image.onload = () => {
-      this.current_id = id
       this.overlay.append(this.image)
+      this.current_id = target.id
 
       this.open()
       this.resize()
@@ -120,34 +117,21 @@ class Gallery {
     const shift_x = (window.innerWidth - this.image.offsetWidth) / 2
     const shift_y = (window.innerHeight - this.image.offsetHeight) / 2
 
-    if (shift_x > 0) this.image.style.left = shift_x
-    if (shift_y > 0) this.image.style.top = shift_y
+    if (shift_x > 0) this.image.style.left = shift_x + "px"
+    if (shift_y > 0) this.image.style.top = shift_y + "px"
   }
 
   next() {
-    for (let i = 0; i < this.id_map.length; i++) {
-      if (this.current_id === this.id_map[i][0]) {
-        if (i + 1 === this.id_map.length) {
-          this.build(this.id_map[0][0], this.id_map[0][1])
-        } else {
-          this.build(this.id_map[i + 1][0], this.id_map[i + 1][1])
-        }
-        return
-      }
-    }
+    let target = document.getElementById(this.current_id).nextElementSibling
+    if (!target) target = document.querySelector(".preview:first-child")
+
+    this.build(target)
   }
 
   prev() {
-    for (let i = 0; i < this.id_map.length; i++) {
-      if (this.current_id === this.id_map[i][0]) {
-        if (i - 1 < 0) {
-          this.build(this.id_map[this.id_map.length][0], this.id_map[this.id_map.length][1])
-        } else {
-          this.build(this.id_map[i - 1][0], this.id_map[i - 1][1])
-        }
-        return
-      }
-    }
+    let target = document.getElementById(this.current_id).previousElementSibling
+    if (!target) target = document.querySelector(".preview:last-child")
+    this.build(target)
   }
 
   open() {
