@@ -3,8 +3,6 @@
 import django.utils.timezone
 from django.db import migrations, models
 
-from manti_by.apps.core.utils import gallery_name, original_name, preview_name, thumb_name
-
 
 class Migration(migrations.Migration):
     initial = True
@@ -58,7 +56,7 @@ class Migration(migrations.Migration):
                     models.ImageField(
                         blank=True,
                         null=True,
-                        upload_to=original_name,
+                        upload_to="originals/",
                         verbose_name="Image",
                     ),
                 ),
@@ -67,7 +65,7 @@ class Migration(migrations.Migration):
                     models.ImageField(
                         blank=True,
                         null=True,
-                        upload_to=thumb_name,
+                        upload_to="thumbs/",
                         verbose_name="Thumbnail Image",
                     ),
                 ),
@@ -76,7 +74,7 @@ class Migration(migrations.Migration):
                     models.ImageField(
                         blank=True,
                         null=True,
-                        upload_to=preview_name,
+                        upload_to="previews/",
                         verbose_name="Preview Image",
                     ),
                 ),
@@ -85,7 +83,7 @@ class Migration(migrations.Migration):
                     models.ImageField(
                         blank=True,
                         null=True,
-                        upload_to=gallery_name,
+                        upload_to="galleries/",
                         verbose_name="Gallery Image",
                     ),
                 ),

@@ -41,21 +41,9 @@ def get_name(instance, filename, typename):
     )
 
 
-def original_name(instance, filename):
+def image_name(instance, filename):
     name, ext = os.path.splitext(filename)
-    return f"gallery/{instance.gallery.slug}/{name}{ext}"
-
-
-def preview_name(instance, filename):
-    return get_name(instance, filename, "preview")
-
-
-def gallery_name(instance, filename):
-    return get_name(instance, filename, "gallery")
-
-
-def thumb_name(instance, filename):
-    return get_name(instance, filename, "thumb")
+    return f"gallery/{name}{ext}"
 
 
 def release_name(instance, filename):
