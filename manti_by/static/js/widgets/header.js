@@ -1,6 +1,6 @@
 "use strict"
 
-class FloatingHeader {
+class Header {
 
   constructor() {
     let header = document.querySelector("header")
@@ -23,5 +23,5 @@ class FloatingHeader {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  window.floating_header = new FloatingHeader()
+  window.header = new Header()
 })

@@ -1,6 +1,6 @@
 "use strict"
 
-class LazyImages {
+class Lazy {
 
   constructor() {
     this.observer = new IntersectionObserver(changes => {
@@ -26,5 +26,5 @@ class LazyImages {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  window.lazy = new LazyImages()
+  window.lazy = new Lazy()
 })

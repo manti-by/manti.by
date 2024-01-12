@@ -47,6 +47,7 @@
     <link type="text/css" rel="stylesheet" href="{% static 'css/reset.css' %}" media="all">
     <link type="text/css" rel="stylesheet" href="{% static 'css/font.css' %}" media="all">
     <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}" media="all">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/components/menu.css' %}" media="all">
     <link type="text/css" rel="stylesheet" href="{% static 'css/components/player.css' %}" media="all">
     <link type="text/css" rel="stylesheet" href="{% static 'css/components/search.css' %}" media="all">
   </head>
@@ -81,7 +82,7 @@
             <a href="{% url 'about' %}" class="link-item mobile-hidden">
               <span class="text">{% trans 'About' %}</span>
             </a>
-            <span class="language link-item">
+            <span class="language link-item mobile-hidden">
               {% for lang in LANGUAGES %}
                 {% if lang.0 == ACTIVE_LANGUAGE %}
                   <span class="item text active">{{ lang.0 }}</span>
@@ -93,13 +94,39 @@
                 <span class="item spacer">/</span>
               {% endfor %}
             </span>
-            <span class="open-search">
+            <span class="open-search mobile-hidden">
               <i class="material-icons">search</i>
+            </span>
+            <span id="mobile-menu-button" class="mobile-visible">
+              <i class="material-icons">more_vert</i>
             </span>
           </div>
         </div>
       </nav>
     </header>
+
+    <nav id="mobile-menu" class="shadow">
+      <a href="{% url 'blog' %}">
+        {% trans 'Music' %}
+      </a>
+      <a href="{% url 'gallery' %}">
+        {% trans 'Gallery' %}
+      </a>
+      <a href="{% url 'about' %}">{% trans 'About' %}</a>
+      <span class="language link-item">
+        {% for lang in LANGUAGES %}
+          {% if lang.0 == ACTIVE_LANGUAGE %}
+            <span class="item text active">{{ lang.0 }}</span>
+          {% else %}
+            <a href="{% get_locale_domain lang.0 %}{{ request.path }}" class="item text">
+              {{ lang.0 }}
+            </a>
+          {% endif %}
+          <span class="item spacer">/</span>
+        {% endfor %}
+      </span>
+      <span class="open-search">{% translate "Search" %}</span>
+    </nav>
 
     <section id="search" class="shadow">
       <div class="container">
@@ -136,8 +163,19 @@
     <link type="text/css" rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
     <link type="text/css" rel="stylesheet" href="{% static 'css/dark.css' %}" media="all">
 
+    <link rel="preload" href="{% static 'fonts/material-icons.woff2' %}" as="font" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'fonts/roboto-cyrillic.woff2' %}" as="font" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'fonts/roboto-cyrillic-ext.woff2' %}" as="font" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'fonts/roboto-latin.woff2' %}" as="font" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'fonts/roboto-latin-ext.woff2' %}" as="font" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'fonts/roboto-medium-cyrillic.woff2' %}" as="font" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'fonts/roboto-medium-cyrillic-ext.woff2' %}" as="font" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'fonts/roboto-medium-latin.woff2' %}" as="font" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'fonts/roboto-medium-latin-ext.woff2' %}" as="font" crossorigin="anonymous">
+
     <script src="{% static 'js/widgets/lazy.js' %}"></script>
     <script src="{% static 'js/widgets/loader.js' %}"></script>
+    <script src="{% static 'js/widgets/menu.js' %}"></script>
     <script src="{% static 'js/widgets/header.js' %}"></script>
     <script src="{% static 'js/widgets/search.js' %}"></script>
     <script src="{% static 'js/common.js' %}"></script>

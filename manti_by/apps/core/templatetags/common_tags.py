@@ -19,7 +19,7 @@ def get_locale_domain(context, locale):
 
 
 @register.simple_tag(takes_context=True)
-def webp_cover(context, cover):
+def webp(context, cover):
     is_supports_webp = context.get("is_supports_webp", False)
 
     if not cover:

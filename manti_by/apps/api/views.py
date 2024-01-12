@@ -16,7 +16,7 @@ def posts(request):
     is_music = bool(request.GET.get("is_music", True))
     return_type = request.GET.get("type", "json")
 
-    result = []
+    result = [] if return_type == "html" else {}
     queryset = Post.objects.ordered().filter(is_music=is_music)
     if tag is not None:
         queryset = queryset.filter(tags__slug=tag)
@@ -26,7 +26,7 @@ def posts(request):
             context = global_template_vars(request)
             result.append(p.as_html(context))
         else:
-            result.append(p.as_dict())
+            result[p.id] = p.as_dict()
     return JsonResponse(result, safe=False)
 
 
