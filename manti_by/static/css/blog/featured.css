@@ -37,7 +37,7 @@
 }
 
 .featured .post .info h3 {
-    margin: 0 0 0.35rem 1rem;
+    margin: 0 0 0.35rem 0;
     font-size: 1.5em;
     text-align: left;
     text-transform: uppercase;
@@ -46,20 +46,20 @@
 .featured .post .info h3 a {
     display: block;
     color: #333;
-    max-width:  100%;
-    max-height:  1em;
-    overflow:  hidden;
-}
-
-.featured .post .info .genre {
-    margin-left: 1rem;
-    font-weight: 400;
-    color: #666;
 }
 
 .featured .post .info .created {
-    margin-left: 1rem;
     margin-top: 0.35em;
     text-transform: capitalize;
     color: #666;
+}
+
+@media (prefers-color-scheme: dark) {
+    .featured .post .info h3 a {
+        color: #999;
+    }
+
+    .featured .post .info .created {
+        color: #333;
+    }
 }

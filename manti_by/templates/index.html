@@ -35,36 +35,29 @@
       <div class="featured">
         {% if featured_image %}
           <a href="{% url 'gallery' %}">
-            {% thumbnail featured_image.original_image "x1080" as image %}
+            {% thumbnail featured_image.original_image "x1080" as preview %}
             {% thumbnail featured_image.original_image "x50" as thumb %}
-            <img src="{{ thumb.url }}"
-                 data-src="{{ image.url }}"
-                 data-webp="{% webp_cover image %}"
+            <img src="{% webp thumb %}" data-src="{% webp preview %}"
+                 width="{{ preview.width }}" height="{{ preview.height }}"
                  alt="{% trans 'Popular image from gallery' %}" class="lazy">
             {% endthumbnail %}
             {% endthumbnail %}
           </a>
         {% else %}
           <a href="{% url 'gallery' %}">
-            <img src="{% static 'img/featured.jpg' %}"
-                 data-src="{% static 'img/featured.jpg' %}"
-                 data-webp="{% static 'img/featured.webp' %}"
+            <img src="{% static 'img/featured.webp' %}"
                  alt="{% trans 'Popular image from gallery' %}"
-                 title="{% trans 'Popular image from gallery' %}" class="lazy">
+                 title="{% trans 'Popular image from gallery' %}">
           </a>
         {% endif %}
         <div class="latest flex">
           {% for image in latest_images %}
-            {% thumbnail image.original_image "x150" as preview %}
-            {% thumbnail image.original_image "x50" as thumb %}
             <a href="{% url 'gallery' %}" class="thumbnail">
-              <img src="{{ thumb.url }}"
-                   data-src="{{ preview.url }}"
-                   data-webp="{% webp_cover preview %}"
-                   alt="{% trans 'Image #' %}{{ image.id }}" class="lazy">
+              {% thumbnail image.original_image "100x100" crop="center" as thumb %}
+              <img src="{% webp thumb %}" width="{{ thumb.width }}" height="{{ thumb.height }}"
+                   alt="{% trans 'Popular image from gallery' %}">
+              {% endthumbnail %}
             </a>
-            {% endthumbnail %}
-            {% endthumbnail %}
           {% endfor %}
         </div>
       </div>
@@ -84,7 +77,7 @@
 {% block styles %}
   <link type="text/css" rel="stylesheet" href="{% static 'css/pages/index.css' %}" media="all">
   <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list-item.css' %}" media="all">
-  <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured-item.css' %}" media="all">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured.css' %}" media="all">
   <link type="text/css" rel="stylesheet" href="{% static 'css/components/slider.css' %}" media="all">
 {% endblock %}
 

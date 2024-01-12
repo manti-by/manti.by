@@ -36,7 +36,7 @@
         {% thumbnail item.cover "x50" as thumb %}
         <img src="{{ thumb.url }}"
              data-src="{{ image.url }}"
-             data-webp="{% webp_cover image %}"
+             data-webp="{% webp image %}"
              alt="{{ item.name }}" class="lazy">
         {% endthumbnail %}
         {% endthumbnail %}
@@ -110,7 +110,7 @@
 {% endblock %}
 
 {% block styles %}
-  <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured-item.css' %}" media="all">
+  <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured.css' %}" media="all">
   <link type="text/css" rel="stylesheet" href="{% static 'css/blog/post.css' %}" media="all">
 {% endblock %}
 

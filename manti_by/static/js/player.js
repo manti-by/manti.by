@@ -19,11 +19,11 @@ class Player {
 
   init() {
     this.player = document.getElementById("player")
-    this.player.api = this.player.querySelector("audio")
+    this.api = this.player.querySelector("audio")
 
-    this.player.link = this.player.querySelector(".now-playing a")
-    this.player.image = this.player.querySelector(".now-playing img")
-    this.player.title = this.player.querySelector(".now-playing .title-wrapper")
+    this.link = this.player.querySelector(".now-playing a")
+    this.image = this.player.querySelector(".now-playing img")
+    this.title = this.player.querySelector(".now-playing .title-wrapper")
 
     this.volume = getCookie("volume", 70)
     this.is_hd = getCookie("is-hd", false)
@@ -52,13 +52,13 @@ class Player {
   }
 
   bind() {
-    this.player.api.oncanplay = () => {
+    this.api.oncanplay = () => {
       if (this.is_playing) {
-        this.player.api.play()
+        this.api.play()
       }
     }
 
-    this.player.api.onended = () => {
+    this.api.onended = () => {
       this.next()
     }
 
@@ -103,7 +103,7 @@ class Player {
         if (event.target.classList.contains("play")) {
           if (this.active_id !== id) {
             if (this.getData(id)) {
-              this.active_id = id
+              this.active_id = parseInt(id)
               this.reload()
             }
           }
@@ -116,75 +116,50 @@ class Player {
       }
     }
 
-    // document.onmousedown = (event) => {
-    //   if (!event.target.classList.contains("progress-bar")) return
-    //   event.target.dataset.active = "true"
-    // }
-    //
-    // document.onmousemove = (event) => {
-    //   if (!event.target.classList.contains("progress-bar")) return
-    //   if (event.target.dataset.active === "true") this.updatePosition(event)
-    // }
-    //
-    // document.onmouseup = (event) => {
-    //   if (!event.target.classList.contains("progress-bar")) return
-    //   event.target.dataset.active = "false"
-    // }
+    document.onmousedown = (event) => {
+      if (!event.target.classList.contains("progress-bar")) return
+      event.target.dataset.active = "true"
+    }
+
+    document.onmousemove = (event) => {
+      if (!event.target.classList.contains("progress-bar")) return
+      if (event.target.dataset.active === "true") this.updatePosition(event)
+    }
+
+    document.onmouseup = (event) => {
+      if (!event.target.classList.contains("progress-bar")) return
+      event.target.dataset.active = "false"
+    }
   }
 
   getData(option) {
-    if (!this.data.length) return
+    if (!this.active.length) return
 
-    if (option === "first") return this.data[0]
+    let target_id
 
-    for (let i = 0; i < this.data.length; i++) {
-      switch (option) {
-        case "next":
-          if (this.data[i].id === this.active_id) {
-            if (typeof this.data[i + 1] !== "undefined") {
-              return this.data[i + 1]
-            } else {
-              return this.data[0]
-            }
-          }
-          break
-        case "prev":
-          if (this.data[i].id === this.active_id) {
-            if (typeof this.data[i - 1] !== undefined) {
-              return this.data[i - 1]
-            } else {
-              return this.data[this.active.length - 1]
-            }
-          }
-          break
-        case "current":
-          if (this.data[i].id === this.active_id) {
-            return this.data[i]
-          }
-          break
-        default:
-          if (this.data[i].id === parseInt(option)) {
-            return this.data[i]
-          }
-          break
+    if (option === "first") target_id = this.active[0]
+    if (option === "current") target_id = this.active_id
+    if (Number.isInteger(parseInt(option))) target_id = parseInt(option)
+
+    const index = this.active.indexOf(this.active_id)
+    if (index !== -1) {
+      if (option === "next" && typeof this.active[index + 1] !== "undefined") {
+        target_id = this.active[index + 1]
       }
+      if (option === "prev" && typeof this.active[index - 1] !== "undefined") {
+        target_id = this.active[index - 1]
+      }
+      if (typeof target_id === "undefined") target_id = this.active[0]
     }
 
-    if (option !== "current") {
-      return this.getData("current")
-    }
-    return this.getData("first")
+    return this.data[target_id]
   }
 
   updateActivePosts() {
     this.active = []
-
     for (const element of document.querySelectorAll(".post")) {
-      let data = this.getData(element.dataset.id)
-      this.active.indexOf(data) === -1 && this.active.push(data)
+      this.active.push(element.dataset.id)
     }
-
-    if (this.active.length === 0) this.active = this.data
   }
 
   updateProgressPosition() {
@@ -195,33 +170,33 @@ class Player {
     const current_player = document.getElementById("player-" + this.active_id)
 
     // Skip if not playing or not loaded
-    if (this.is_playing !== true || this.player.api.readyState === AUDIO_NOT_READY) return
+    if (this.is_playing !== true || this.api.readyState === AUDIO_NOT_READY) return
 
     // Update internals
-    this.duration = this.player.api.duration
+    this.duration = this.api.duration
 
     // Update active progress line
-    let position = this.player.api.currentTime / this.player.api.duration * 100
+    let position = this.api.currentTime / this.api.duration * 100
     let width = position * player_progress_line.style.width / 100
-    player_progress_line_active.style.width = width
+    player_progress_line_active.style.width = width + "px"
 
     width = position * current_player.querySelector(".position .progress-line").style.width / 100
-    current_player.querySelector(".position .progress-line-active").style.width = width
+    current_player.querySelector(".position .progress-line-active").style.width = width + "px"
 
     // Update current player timestamps
-    let timestamp = secondsToTime(this.player.api.currentTime)
+    let timestamp = secondsToTime(this.api.currentTime)
 
     player_progress_label.innerHTML = timestamp
     current_player.querySelector(".progress-label span").innerHTML = timestamp
 
     // Update buffered state
-    let buffered = this.player.api.buffered.end(0) / this.duration
+    let buffered = this.api.buffered.end(0) / this.duration
 
-    width = buffered * player_progress_line.width
-    player_progress_line_loaded.style.width = width
+    width = buffered * player_progress_line.offsetWidth
+    player_progress_line_loaded.style.width = width + "px"
 
-    width = buffered * current_player.querySelector(".position .progress-line").width
-    current_player.querySelector(".position .progress-line-loaded").style.width = width
+    width = buffered * current_player.querySelector(".position .progress-line").offsetWidth
+    current_player.querySelector(".position .progress-line-loaded").style.width = width + "px"
   }
 
   updateVolumePosition() {
@@ -234,13 +209,13 @@ class Player {
   }
 
   updatePosition(event) {
-    const active_width = event.target.querySelector(".progress-line").width()
+    const active_width = event.target.querySelector(".progress-line").offsetWidth
     const pixels_value = event.clientX - event.target.offsetLeft
     let percent_value = Math.floor(pixels_value / active_width * 100)
 
     if (event.target.classList.contains("volume")) {
       this.volume = percent_value
-      this.player.api.volume = percent_value / 100
+      this.api.volume = percent_value / 100
       this.updateVolumePosition()
     }
 
@@ -250,7 +225,7 @@ class Player {
         percent_value = Math.floor(loaded_width / active_width * 100)
       }
 
-      this.player.api.currentTime = this.duration * percent_value / 100
+      this.api.currentTime = this.duration * percent_value / 100
       this.position = percent_value
       this.updateProgressPosition()
     }
@@ -287,37 +262,33 @@ class Player {
   }
 
   animatePlayerTitle() {
-    const link = this.player.link
-    const title = this.player.title
-    const overflow = link.innerWidth - title.outerWidth
-
+    const overflow = this.link.innerWidth - this.title.outerWidth
     if (overflow < 0) {
-      title.animate({left: overflow}, 2500, function () {
-        setTimeout(() => {
-          title.animate({left: 42}, 2500)
-        }, 2500)
+      this.title.animate([{left: overflow}, {left: 42}], {
+        duration: 1000,
+        iterations: Infinity
       })
     }
   }
 
   reload() {
     window.loader.show()
-    if (typeof this.player.api.pause !== "undefined") {
-      this.player.api.pause()
+    if (typeof this.api.pause !== "undefined") {
+      this.api.pause()
     }
 
     const data = this.getData("current")
     const quality = this.is_hd ? "release" : "preview"
     const format = this.is_mp3 ? "mp3" : "ogg"
 
-    this.player.title.innerHTML = data.name
-    this.player.link.href = data.slug
-    this.player.image.src = data.cover.preview
+    this.title.innerHTML = data.title
+    this.link.href = data.slug
+    this.image.src = data.cover.thumbnail
 
-    this.player.api.src = data[quality][format]
-    this.player.api.dataset.id = this.active_id
+    this.api.src = data[quality][format]
+    this.api.dataset.id = this.active_id
 
-    this.player.api.load()
+    this.api.load()
 
     document.querySelectorAll(".player .position .progress-line-label span").innerHtml = '00:00:00'
     document.querySelectorAll(".player .position .progress-line-loaded").offsetWidth = 0
@@ -336,18 +307,18 @@ class Player {
     this.show()
     this.is_playing = true
 
-    if (this.player.api.readyState === AUDIO_LOADED) {
-      this.player.api.play()
+    if (this.api.readyState === AUDIO_LOADED) {
+      this.api.play()
     } else {
-      this.player.api.load()
+      this.api.load()
     }
   }
 
   pause() {
     this.is_playing = false
 
-    if (this.player.api.readyState === AUDIO_LOADED) {
-      this.player.api.pause()
+    if (this.api.readyState === AUDIO_LOADED) {
+      this.api.pause()
     }
   }
 
@@ -377,19 +348,19 @@ class Player {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  window.player = new Player([])
+  fetch("/api/posts/").then(
+    response => response.json()
+  ).then(data => {
+      window.player = new Player(data)
 
-  fetch("/api/posts/").then(data => {
-    window.player.data = data
+      setInterval(function () {
+        window.player.update()
+      }, 1000)
+
+      setInterval(function () {
+        window.player.animatePlayerTitle()
+      }, 14000)
   }).catch(error => {
-    console.error(error);
-  });
-
-  setInterval(function () {
-    window.player.update()
-  }, 1000)
-
-  setInterval(function () {
-    window.player.animatePlayerTitle()
-  }, 14000)
+    console.error(error)
+  })
 })

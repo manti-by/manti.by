@@ -4,17 +4,15 @@
     background: #121212;
   }
 
-  h1, h2, .post h2 {
-    color: #aaa;
+  h1, h2, .post h2, h3 {
+    color: #999;
   }
 
   a, p, b, li {
     color: #666;
   }
 
-  h1 a,
-  h2 a,
-  h3 a {
+  h1 a, h2 a, h3 a {
       color: #999;
   }
 
@@ -45,6 +43,11 @@
     background: #121212;
   }
 
+  #mobile-menu {
+    color: #999;
+    background: #121212;
+  }
+
   .static {
     background: #121212;
   }
@@ -59,10 +62,7 @@
     color: #aaa;
   }
 
-  .shadow {
-    border: 1px solid #232323;
-    box-shadow: none;
-  }
+  .shadow {}
 
   #player {
     border-top: 1px solid #333;

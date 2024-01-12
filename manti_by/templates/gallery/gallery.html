@@ -17,11 +17,10 @@
         {% for image in images %}
           {% thumbnail image.original_image "1920x1280" as display %}
           <a id="image-{{ image.id }}" href="{{ display.url }}" class="preview shadow">
-            {% thumbnail image.original_image "x400" as preview %}
+            {% thumbnail image.original_image "394x219" crop="center" as preview %}
             {% thumbnail image.original_image "x50" as thumb %}
-            <img src="{{ thumb.url }}"
-                 data-src="{{ preview.url }}"
-                 data-webp="{% webp_cover preview %}"
+            <img src="{% webp thumb %}" data-src="{% webp preview %}"
+                 width="{{ preview.width }}" height="{{ preview.height }}"
                  alt="{% trans 'Image #' %}{{ image.id }}" class="lazy">
             {% endthumbnail %}
             {% endthumbnail %}
