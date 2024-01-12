@@ -6,10 +6,8 @@
       <a href="{% url 'post' item.slug %}" class="shadow">
         {% thumbnail item.cover "x400" as image %}
         {% thumbnail item.cover "x50" as thumb %}
-        <img src="{{ thumb.url }}"
-             data-src="{{ image.url }}"
-             data-webp="{% webp_cover image %}" alt="{{ item.name }}"
-             title="{{ item.name }}" class="lazy">
+        <img src="{% webp thumb %}" data-src="{% webp image %}" width="{{ image.width }}" height="{{ image.height }}"
+             alt="{{ item.name }}" title="{{ item.name }}" class="lazy">
         {% endthumbnail %}
         {% endthumbnail %}
       </a>
