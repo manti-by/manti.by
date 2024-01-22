@@ -27,7 +27,7 @@ services:
     environment:
       - DJANGO_SETTINGS_MODULE=manti_by.settings.prod
     volumes:
-      - /home/manti/www/manti.by/manti/:/srv/app/src/
+      - /home/manti/www/manti/:/srv/app/src/
       - /mnt/nostromo/www/manti/static/:/var/lib/app/static/
       - /mnt/nostromo/www/manti/content/:/var/lib/app/content/
       - /mnt/nostromo/www/manti/log/:/var/log/app/
