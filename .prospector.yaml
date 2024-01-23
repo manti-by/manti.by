@@ -6,6 +6,7 @@ doc-warnings: false
 member-warnings: true
 
 ignore-patterns:
+  - ^settings?/?
   - ^tests?/?
   - /tests?(/|$)
   - (^|/)test_[_a-zA-Z0-9]+.py$

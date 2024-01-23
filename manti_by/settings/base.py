@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
+from pathlib import Path
 
-PROJECT_DIR = os.path.dirname(os.path.dirname(__file__))
+PROJECT_DIR = Path(__file__).resolve().parent
+
+BASE_DIR = PROJECT_DIR.parent
 
 SECRET_KEY = ""  # nosec
 
@@ -66,7 +69,7 @@ ROOT_URLCONF = "manti_by.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(PROJECT_DIR, "templates")],
+        "DIRS": [PROJECT_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -140,7 +143,7 @@ LANGUAGES = (
     ("ru", _("Russian")),
 )
 
-LOCALE_PATHS = (os.path.join(PROJECT_DIR, "apps", "core", "locale"),)
+LOCALE_PATHS = (PROJECT_DIR / "apps" / "core" / "locale",)
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
@@ -159,12 +162,12 @@ STATICFILES_FINDERS = [
     "compressor.finders.CompressorFinder",
 ]
 
-STATICFILES_DIRS = [os.path.join(PROJECT_DIR, "static")]
+STATICFILES_DIRS = [PROJECT_DIR / "static"]
 
-STATIC_ROOT = os.path.join(PROJECT_DIR, "static")
+STATIC_ROOT = BASE_DIR / "static"
 STATIC_URL = "/static/"
 
-MEDIA_ROOT = os.path.join(PROJECT_DIR, "content")
+MEDIA_ROOT = BASE_DIR / "content"
 MEDIA_URL = "/content/"
 
 FILE_UPLOAD_PERMISSIONS = 0o644

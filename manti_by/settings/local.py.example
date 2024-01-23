@@ -14,10 +14,10 @@ BASE_URL = f"http://{BASE_HOST}"
 SESSION_COOKIE_DOMAIN = BASE_HOST
 
 STATIC_URL = "/static/"
-STATIC_ROOT = "/home/manti/www/manti.by/static"
+STATIC_ROOT = "/home/manti/www/manti/static"
 
 MEDIA_URL = "/content/"
-MEDIA_ROOT = "/home/manti/www/manti.by/content"
+MEDIA_ROOT = "/home/manti/www/manti/content"
 
 LOCALE_URLS = {"be": BASE_HOST, "en": BASE_HOST, "ru": BASE_HOST}
 
