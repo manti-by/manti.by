@@ -1,11 +1,12 @@
 {% load static thumbnail i18n common_tags %}
 <!DOCTYPE html>
-<html lang="{{ ACTIVE_LANGUAGE }}">
+<html class="no-js" lang="{{ ACTIVE_LANGUAGE }}">
   <head>
     <title>{% block title %}{% endblock %} | {% trans 'Drum and Bass, House, Techno and Chillout.' %}</title>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
     <meta name="theme-color" content="#B40303">
@@ -13,7 +14,7 @@
     <link rel="canonical" href="{{ ABSOLUTE_URL }}">
 
     <!-- Add to homescreen for Chrome on Android -->
-    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" type="image/x-icon" href="{% static "favicon.ico" %}">
     <link rel="icon" type="image/png" sizes="48x48" href="{% static 'img/logo/48.png' %}">
     <link rel="icon" type="image/png" sizes="72x72" href="{% static 'img/logo/72.png' %}">
     <link rel="icon" type="image/png" sizes="96x96" href="{% static 'img/logo/96.png' %}">
@@ -44,12 +45,7 @@
     {% endblock %}
     <meta property="og:url" content="{{ ABSOLUTE_URL }}">
 
-    <link type="text/css" rel="stylesheet" href="{% static 'css/reset.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/font.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/base.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/components/menu.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/components/player.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/components/search.css' %}" media="all">
+    <link type="text/css" rel="stylesheet" href="{% static 'css/index.css' %}" media="all">
   </head>
   <body>
     <div id="loader">
@@ -156,29 +152,23 @@
     </footer>
 
     {% block styles %}{% endblock %}
-    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1600.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/1024.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/767.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/responsive/480.css' %}" media="all">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/print.css' %}" media="print">
-    <link type="text/css" rel="stylesheet" href="{% static 'css/dark.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}" type="text/css" media="screen">
+    <link rel="stylesheet" href="{% static 'css/animate.css' %}" type="text/css" media="screen">
+    <link rel="stylesheet" href="{% static 'css/dark.css' %}" type="text/css" media="screen">
+    <link rel="stylesheet" href="{% static 'css/print.css' %}" type="text/css" media="print">
 
-    <link rel="preload" href="{% static 'fonts/material-icons.woff2' %}" as="font" crossorigin="anonymous">
-    <link rel="preload" href="{% static 'fonts/roboto-cyrillic.woff2' %}" as="font" crossorigin="anonymous">
-    <link rel="preload" href="{% static 'fonts/roboto-cyrillic-ext.woff2' %}" as="font" crossorigin="anonymous">
-    <link rel="preload" href="{% static 'fonts/roboto-latin.woff2' %}" as="font" crossorigin="anonymous">
-    <link rel="preload" href="{% static 'fonts/roboto-latin-ext.woff2' %}" as="font" crossorigin="anonymous">
-    <link rel="preload" href="{% static 'fonts/roboto-medium-cyrillic.woff2' %}" as="font" crossorigin="anonymous">
-    <link rel="preload" href="{% static 'fonts/roboto-medium-cyrillic-ext.woff2' %}" as="font" crossorigin="anonymous">
-    <link rel="preload" href="{% static 'fonts/roboto-medium-latin.woff2' %}" as="font" crossorigin="anonymous">
-    <link rel="preload" href="{% static 'fonts/roboto-medium-latin-ext.woff2' %}" as="font" crossorigin="anonymous">
+    <link rel="preload" href="{% static 'fonts/material-icons.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{% static 'fonts/roboto-cyrillic.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{% static 'fonts/roboto-cyrillic-ext.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{% static 'fonts/roboto-latin.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{% static 'fonts/roboto-latin-ext.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{% static 'fonts/roboto-medium-cyrillic.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{% static 'fonts/roboto-medium-cyrillic-ext.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{% static 'fonts/roboto-medium-latin.woff2' %}" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="{% static 'fonts/roboto-medium-latin-ext.woff2' %}" as="font" type="font/woff2" crossorigin>
+    {% block preload %}{% endblock %}
 
-    <script src="{% static 'js/widgets/lazy.js' %}"></script>
-    <script src="{% static 'js/widgets/loader.js' %}"></script>
-    <script src="{% static 'js/widgets/menu.js' %}"></script>
-    <script src="{% static 'js/widgets/header.js' %}"></script>
-    <script src="{% static 'js/widgets/search.js' %}"></script>
-    <script src="{% static 'js/common.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
     <script src="{% static 'js/player.js' %}"></script>
     {% block scripts %}{% endblock %}
 
