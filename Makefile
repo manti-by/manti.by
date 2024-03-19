@@ -31,5 +31,8 @@ django-checks:
 test:
 	pytest
 
+pip:
+	pip install -r requirements.txt
+
 update-requirements:
 	pcu requirements.txt -u

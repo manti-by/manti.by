@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 # Add directories
 RUN mkdir -p /srv/app/src/ /var/log/app/ /var/lib/app/static/ /var/lib/app/content/
@@ -16,4 +16,3 @@ RUN pip install --trusted-host pypi.org --no-cache-dir --upgrade pip && \
 USER manti
 WORKDIR /srv/app/src/
 CMD python manage.py runserver
-

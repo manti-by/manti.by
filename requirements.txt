@@ -1,4 +1,4 @@
-django==5.0.1
+django==5.0.3
 pillow==10.2.0
 psycopg2-binary==2.9.9
 sorl-thumbnail==12.10.0
@@ -10,15 +10,15 @@ django-modeltranslation==0.18.11
 exifread==3.0.0
 gunicorn==21.2.0
 
-ipython>=8.20.0
-pytest>=7.4.4
-pytest-django>=4.7.0
-fakeredis>=2.20.1
+ipython>=8.22.2
+pytest>=8.1.1
+pytest-django>=4.8.0
+fakeredis>=2.21.3
 
-pre_commit>=3.6.0
+pre_commit>=3.6.2
 isort>=5.13.2
-pyupgrade>=3.15.0
-black>=23.12.1
+pyupgrade>=3.15.1
+black>=24.3.0
 prospector>=1.10.3
-bandit>=1.7.6
-pip-check-updates>=0.23.0
+bandit>=1.7.8
+pip-check-updates>=0.26.1
