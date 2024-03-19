@@ -20,3 +20,4 @@ static/
 content/
 manti_by/settings/local.py
 manti_by/settings/prod.py
+database.sql

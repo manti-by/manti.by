@@ -10,6 +10,10 @@ psql:
 dump:
 	docker exec -it manti-by-postgres pg_dump -U manti_by -d manti_by > database.sql
 
+restore:
+	docker cp database.sql manti-by-postgres:/tmp/database.sql
+	docker exec -it manti-by-postgres psql -U manti_by manti_by -f /tmp/database.sql
+
 migrate:
 	docker exec -it manti-by-django python manage.py migrate
 

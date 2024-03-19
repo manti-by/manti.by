@@ -16,7 +16,4 @@ RUN pip install --trusted-host pypi.org --no-cache-dir --upgrade pip && \
 USER manti
 WORKDIR /srv/app/src/
 CMD python manage.py runserver
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
