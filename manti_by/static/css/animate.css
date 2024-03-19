@@ -1,0 +1,4 @@
+header {
+  background: #FFF;
+  transition: transform .2s linear, background 1s ease, height .5s ease;
+}

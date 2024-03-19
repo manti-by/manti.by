@@ -33,23 +33,11 @@
     <div class="gallery">
       <h2>{% trans 'Latest Images' %}</h2>
       <div class="featured">
-        {% if featured_image %}
-          <a href="{% url 'gallery' %}">
-            {% thumbnail featured_image.original_image "x1080" as preview %}
-            {% thumbnail featured_image.original_image "x50" as thumb %}
-            <img src="{% webp thumb %}" data-src="{% webp preview %}"
-                 width="{{ preview.width }}" height="{{ preview.height }}"
-                 alt="{% trans 'Popular image from gallery' %}" class="lazy">
-            {% endthumbnail %}
-            {% endthumbnail %}
-          </a>
-        {% else %}
-          <a href="{% url 'gallery' %}">
-            <img src="{% static 'img/featured.webp' %}"
-                 alt="{% trans 'Popular image from gallery' %}"
-                 title="{% trans 'Popular image from gallery' %}">
-          </a>
-        {% endif %}
+        <a href="{% url 'gallery' %}">
+          <img src="{% static 'img/featured.webp' %}"
+               alt="{% trans 'Popular image from gallery' %}"
+               title="{% trans 'Popular image from gallery' %}">
+        </a>
         <div class="latest flex">
           {% for image in latest_images %}
             <a href="{% url 'gallery' %}" class="thumbnail">
@@ -78,10 +66,13 @@
   <link type="text/css" rel="stylesheet" href="{% static 'css/pages/index.css' %}" media="all">
   <link type="text/css" rel="stylesheet" href="{% static 'css/blog/list-item.css' %}" media="all">
   <link type="text/css" rel="stylesheet" href="{% static 'css/blog/featured.css' %}" media="all">
-  <link type="text/css" rel="stylesheet" href="{% static 'css/components/slider.css' %}" media="all">
+{% endblock %}
+
+{% block preload %}
+  <link rel="preload" href="{% static 'img/featured.webp' %}" as="image" type="image/webp">
 {% endblock %}
 
 {% block scripts %}
-  <script src="{% static 'js/widgets/tracklist.js' %}"></script>
-  <script src="{% static 'js/widgets/slider.js' %}"></script>
+  <script src="{% static 'js/tracklist.js' %}"></script>
+  <script src="{% static 'js/slider.js' %}"></script>
 {% endblock %}

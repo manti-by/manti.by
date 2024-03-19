@@ -16,7 +16,7 @@ __pycache__/
 .python-version
 
 # Project files
-static/
-content/
+static/*
+content/*
 manti_by/settings/local.py
 manti_by/settings/prod.py
