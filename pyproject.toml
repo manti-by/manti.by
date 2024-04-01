@@ -1,33 +1,27 @@
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_format = "%(levelname)s %(asctime)s %(message)s"
+django_find_project = true
+addopts = '-p no:warnings --color=yes --ds=db_benchmarks.core.settings'
+norecursedirs = '''
+.git
+'''
+
 [tool.black]
 line-length = 120
-target_version = ['py311']
+target_version = ['py312']
 include = '\.pyi?$'
 exclude = '''
 /(
     \.git
-  | \.idea
+  | \.hg
+  | \.mypy_cache
+  | \.tox
   | \.venv
-  | \.pytest_cache
-)/
-'''
-
-[tool.prospector]
-exclude = '''
-/(
-    \.git
-  | \.idea
-  | \.venv
-  | \.pytest_cache
-)/
-'''
-
-[tool.bandit]
-exclude = '''
-/(
-    \.git
-  | \.idea
-  | \.venv
-  | \.pytest_cache
+  | _build
+  | buck-out
+  | build
+  | dist
 )/
 '''
 

@@ -25,11 +25,11 @@ check:
 	pre-commit run
 
 django-checks:
-	python3 manage.py makemigrations --dry-run --check --verbosity=3
+	python manage.py makemigrations --dry-run --check --verbosity=3
 	python manage.py check --fail-level WARNING
 
 test:
-	pytest
+	pytest manti_by/
 
 pip:
 	pip install -r requirements.txt
