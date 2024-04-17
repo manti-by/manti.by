@@ -8,7 +8,7 @@ django-compressor==4.4
 django-modeltranslation==0.18.11
 
 exifread==3.0.0
-gunicorn==21.2.0
+gunicorn==22.0.0
 
 ipython>=8.23.0
 pytest>=8.1.1
