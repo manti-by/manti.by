@@ -15,4 +15,4 @@ RUN pip install --trusted-host pypi.org --no-cache-dir --upgrade pip && \
 # Select user, set working directory and run server
 USER manti
 WORKDIR /srv/app/src/
-CMD python manage.py runserver
+CMD ["python", "manage.py", "runserver"]
