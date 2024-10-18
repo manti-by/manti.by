@@ -10,7 +10,7 @@ import pytest
 
 
 @pytest.mark.django_db
-class PostModelTest:
+class TestPostModel:
     @classmethod
     def setup_class(cls):
         cls.data = {"name": "test", "slug": "test"}

@@ -2,24 +2,29 @@
 log_cli = true
 log_cli_format = "%(levelname)s %(asctime)s %(message)s"
 django_find_project = true
-addopts = '-p no:warnings --color=yes --ds=db_benchmarks.core.settings'
+addopts = '-p no:warnings --reuse-db --durations=15 --showlocals --color=yes --ds=manti_by.settings.sqlite'
 norecursedirs = '''
 .git
+.github
+.pytest_cache
+.ruff_cache
 '''
+
+[tool.bandit]
+exclude_dirs = ["danelex/tests/"]
+tests = ["B101"]
 
 [tool.black]
 line-length = 120
-target_version = ['py312']
+target_version = ["py312"]
 include = '\.pyi?$'
 exclude = '''
 /(
     \.git
-  | \.hg
   | \.mypy_cache
-  | \.tox
+  | \.pytest_cache
   | \.venv
   | _build
-  | buck-out
   | build
   | dist
 )/
@@ -28,3 +33,84 @@ exclude = '''
 [tool.curlylint.rules]
 indent = 2
 html_has_lang = true
+
+[tool.ruff]
+line-length = 120
+indent-width = 4
+target-version = "py312"
+
+[tool.ruff.lint]
+select = [
+    "E",  # pycodestyle
+    "F",  # Pyflakes
+    "N",  # pep8-naming
+    "UP",  # pyupgrade
+    "B",  # flake8-bugbear
+    "S",  # flake8-bandit
+    "BLE",  # flake8-blind-except
+    "A",  # flake8-builtins
+    "DJ",  # flake8-django
+    "I",  # isort
+    "INP",  # flake8-no-pep420
+    "RUF"  # Ruff-specific rules
+]
+exclude = [
+    ".bzr",
+    ".direnv",
+    ".eggs",
+    ".git",
+    ".git-rewrite",
+    ".mypy_cache",
+    ".pytype",
+    ".ruff_cache",
+    ".venv",
+    "venv",
+    "__pypackages__",
+    "pinata_ui/settings/*",
+]
+ignore = [
+    "DJ001", # Null values for model char fields
+    "ERA001",  # Disable eradicate (commented code removal)
+    # Disable Conflicting lint rules,
+    # see https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
+    "W191",
+    "E501",
+    "E111",
+    "E117",
+    "D206",
+    "D300",
+    "Q000",
+    "Q001",
+    "Q002",
+    "Q003",
+    "COM812",
+    "COM819",
+    "ISC001",
+    "ISC002",
+    "S603",
+    # Disable unused `noqa` directive
+    "RUF100",
+    "RUF012",  # Mutable class attributes should be annotated with `typing.ClassVar`
+    "N806",  # Variable `CONSTANT_NAME` in function should be lowercase
+]
+
+[tool.ruff.lint.pycodestyle]
+ignore-overlong-task-comments = true
+
+[tool.ruff.lint.isort]
+section-order = ["future", "standard-library", "django", "third-party", "first-party", "local-folder"]
+lines-after-imports = 2
+
+[tool.ruff.lint.isort.sections]
+# Group all Django imports into a separate section.
+"django" = ["django"]
+
+[tool.ruff.lint.per-file-ignores]
+# Ignore "E402", "F403", "F405" (import violations) in __init__.py files.
+# Ignore "S" (flake8-bandit) and "N802" (function name should be lowercase) in tests and docs.
+# Ignore "RUF" (Ruff-specific rules) and "I" (isort) in migrations.
+"__init__.py" = ["E402", "F403", "F405"]
+"**/{tests,docs}/*" = ["E402", "F403", "F405", "S", "N802", "N815"]
+"**/*test*.py" = ["E402", "F403", "F405", "S", "N802"]
+"**/{settings}/*" = ["E402", "F403", "F405"]
+"**/migrations/*" = ["RUF", "I"]

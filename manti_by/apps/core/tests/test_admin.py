@@ -4,7 +4,7 @@ import pytest
 
 
 @pytest.mark.django_db
-class AdminTest:
+class TestAdmin:
     @classmethod
     def setup_class(cls):
         cls.host = settings.LOCALE_URLS[settings.LANGUAGE_CODE]

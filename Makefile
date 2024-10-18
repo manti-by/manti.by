@@ -32,7 +32,7 @@ test:
 	pytest manti_by/
 
 pip:
-	pip install -r requirements.txt
+	uv pip install -r requirements.txt
 
 update:
 	pcu requirements.txt -u

@@ -3,7 +3,7 @@ from django.core.cache import cache
 from manti_by.apps.core.utils import flush_cache, update_cache
 
 
-class CacheTest:
+class TestCache:
     @staticmethod
     def test_set_and_flush():
         cache_key_1 = "default-cache-key"

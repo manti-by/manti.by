@@ -108,8 +108,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
 # Cache backend
 # https://docs.djangoproject.com/en/1.10/topics/cache/
-REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')
-REDIS_PORT = os.environ.get('REDIS_PORT', 6379)
+REDIS_HOST = os.environ.get("REDIS_HOST", "localhost")
+REDIS_PORT = os.environ.get("REDIS_PORT", 6379)
 
 CACHES = {
     "default": {
