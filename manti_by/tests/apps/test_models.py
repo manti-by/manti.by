@@ -4,9 +4,10 @@ import uuid
 
 from django.conf import settings
 
-from manti_by.apps.blog.models import Post
-
 import pytest
+
+from manti_by.apps.blog.models import Post
+from manti_by.apps.gallery.models import Image
 
 
 @pytest.mark.django_db
@@ -64,3 +65,24 @@ class TestPostModel:
         assert post.release_ogg_file is not None
         assert post.preview_ogg_url is not None
         assert post.preview_ogg_file is not None
+
+
+@pytest.mark.django_db
+class TestGalleryModel:
+    @classmethod
+    def setup_class(cls):
+        cls.data = {"name": str(uuid.uuid4())}
+
+        release_path = os.path.join(settings.MEDIA_ROOT, "gallery")
+        if not os.path.exists(release_path):
+            os.makedirs(release_path)
+
+        shutil.copy(
+            os.path.join(settings.PROJECT_DIR, "static", "test", "test.jpg"),
+            os.path.join(settings.MEDIA_ROOT, "gallery", "test.jpg"),
+        )
+
+    def test_files(self):
+        image = Image.objects.create(original_image="gallery/test.jpg", order=1)
+        assert image.created is not None
+        assert image.order is not None

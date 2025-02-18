@@ -1,8 +1,8 @@
 from django.conf import settings
 
-from manti_by.apps.blog.models import Post
-
 import pytest
+
+from manti_by.apps.blog.models import Post
 
 
 @pytest.mark.django_db

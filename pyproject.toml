@@ -11,8 +11,8 @@ norecursedirs = '''
 '''
 
 [tool.bandit]
-exclude_dirs = ["danelex/tests/"]
-tests = ["B101"]
+exclude_dirs = []
+skips = ["B101"]
 
 [tool.black]
 line-length = 120
