@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.db import models
 from django.forms import Textarea
+from django.http import HttpRequest
 from django.templatetags.static import static as static_file
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
@@ -55,24 +56,24 @@ class PostAdmin(admin.ModelAdmin):
         ),
     )
 
-    def get_queryset(self, request):
+    def get_queryset(self, request: HttpRequest) -> models.QuerySet:
         return super().get_queryset(request).prefetch_related("genre", "tags")
 
-    def thumb_image(self, obj):
+    def thumb_image(self, obj: Post) -> str:
         image = static_file("img/no-image.png")
         if obj.cover:
             image = obj.cover.url
-        return mark_safe(f'<img src="{image.url}" width="50" />')  # nosec
+        return mark_safe(f'<img src="{image}" width="50" />')  # noqa
 
     thumb_image.short_description = _("Image")
 
-    def is_files_converted(self, obj):
+    def is_files_converted(self, obj: Post) -> bool:
         return obj.files_converted
 
     is_files_converted.boolean = True
     is_files_converted.short_description = _("Files Ready")
 
-    def is_translations_filled(self, obj):
+    def is_translations_filled(self, obj: Post) -> bool:
         return obj.translations_filled
 
     is_translations_filled.boolean = True
