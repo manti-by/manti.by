@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 import os
 from pathlib import Path
 
+
 PROJECT_DIR = Path(__file__).resolve().parent.parent
 
 BASE_DIR = PROJECT_DIR.parent
@@ -35,10 +36,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.sitemaps",
-    "django.contrib.sites",
-    "taggit",
     "sorl.thumbnail",
-    "modeltranslation",
     "manti_by.apps.api",
     "manti_by.apps.blog",
     "manti_by.apps.core",
@@ -71,7 +69,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-                "manti_by.apps.core.context_processors.common.global_template_vars",
+                "manti_by.apps.core.context.template_vars",
             ],
             "debug": False,
         },
@@ -124,16 +122,16 @@ THUMBNAIL_QUALITY = 85
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
+
 def _(x):
     return x
 
 
-LANGUAGE_CODE = "be"
+LANGUAGE_CODE = "by"
 
 LANGUAGES = (
-    ("be", _("Belarussian")),
+    ("by", _("Belarus")),
     ("en", _("English")),
-    ("ru", _("Russian")),
 )
 
 LOCALE_PATHS = (PROJECT_DIR / "apps" / "core" / "locale",)
@@ -141,7 +139,7 @@ TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
 
-LOCALE_URLS = {"be": "manti.by", "en": "en.manti.by", "ru": "ru.manti.by"}
+LOCALE_URLS = {"by": "manti.by", "en": "en.manti.by"}
 
 DATE_FORMAT = "d E Y"
 

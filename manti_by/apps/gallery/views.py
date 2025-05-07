@@ -1,11 +1,12 @@
 from django.core.cache import cache
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
 from manti_by.apps.core.utils import update_cache
 from manti_by.apps.gallery.models import Image
 
 
-def index(request):
+def index(request: HttpRequest) -> HttpResponse:
     cache_key = f"gallery-{request.LANGUAGE_CODE}"
     cached_data = cache.get(cache_key)
     if cached_data:

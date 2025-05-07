@@ -43,7 +43,7 @@
         </div>
         <div class="tags">
           <strong>{% trans 'Tags' %}</strong>:
-          {% for t in item.most_common_tags %}
+          {% for t in item.tags.all %}
             <a href="{% url 'blog' %}?tag={{ t.slug }}" class="tag">{{ t.name }}</a>
           {% endfor %}
         </div>

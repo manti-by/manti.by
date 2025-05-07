@@ -18,7 +18,6 @@ class PostAdmin(admin.ModelAdmin):
         "name",
         "is_music",
         "catnum",
-        "is_files_converted",
         "is_translations_filled",
         "created",
     )
@@ -31,7 +30,6 @@ class PostAdmin(admin.ModelAdmin):
             _("Description"),
             {"fields": ("description_be", "description_ru", "description_en")},
         ),
-        (_("Tags"), {"fields": ("genre", "tags")}),
         (_("Related"), {"classes": ("collapse",), "fields": ("related",)}),
         (
             _("Music params"),
@@ -47,10 +45,6 @@ class PostAdmin(admin.ModelAdmin):
                 "fields": (
                     "cover",
                     "release",
-                    "mp3_release_ready",
-                    "mp3_preview_ready",
-                    "ogg_preview_ready",
-                    "ogg_release_ready",
                 ),
             },
         ),
@@ -66,12 +60,6 @@ class PostAdmin(admin.ModelAdmin):
         return mark_safe(f'<img src="{image}" width="50" />')  # noqa
 
     thumb_image.short_description = _("Image")
-
-    def is_files_converted(self, obj: Post) -> bool:
-        return obj.files_converted
-
-    is_files_converted.boolean = True
-    is_files_converted.short_description = _("Files Ready")
 
     def is_translations_filled(self, obj: Post) -> bool:
         return obj.translations_filled

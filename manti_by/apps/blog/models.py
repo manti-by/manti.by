@@ -5,49 +5,63 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
+
 from sorl.thumbnail import get_thumbnail
-from taggit.managers import TaggableManager
-from taggit.models import TaggedItemBase
 
-from manti_by.apps.blog.constants import TRANSLATED_FIELDS
 from manti_by.apps.core.models import BaseModel
-from manti_by.apps.core.utils import cover_name, flush_cache, release_name
+from manti_by.apps.core.utils import cover_path, flush_cache, release_path
 
 
-class GenresProxy(TaggedItemBase):
-    content_object = models.ForeignKey("Post", on_delete=models.CASCADE)
+class Genres(models.Model):
+    tag = models.ForeignKey("core.Tag", related_name="post_to_genre_tags", on_delete=models.CASCADE)
+    post = models.ForeignKey("blog.Post", related_name="post_to_genre_posts", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Genre #{self.tag} for post #{self.post.id}"
 
 
-class TagsProxy(TaggedItemBase):
-    content_object = models.ForeignKey("Post", on_delete=models.CASCADE)
+class Tags(models.Model):
+    tag = models.ForeignKey("core.Tag", related_name="post_to_tag_tags", on_delete=models.CASCADE)
+    post = models.ForeignKey("blog.Post", related_name="post_to_tag_posts", on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Tag #{self.tag} for post #{self.post.id}"
 
 
 class PostManager(models.Manager):
     def ordered(self):
         return self.get_queryset().order_by("-created")
 
+    def music(self):
+        return self.get_queryset().filter(is_music=True).order_by("-created")
+
 
 class Post(BaseModel):
     name = models.CharField(max_length=255)
-    slug = models.SlugField(unique=True, verbose_name=_("Slug"))
+    name_by = models.CharField(max_length=255)
 
     meta = models.TextField()
-    summary = models.TextField()
-    description = models.TextField()
+    meta_by = models.TextField()
 
+    summary = models.TextField()
+    summary_by = models.TextField()
+
+    description = models.TextField()
+    description_by = models.TextField()
+
+    slug = models.SlugField(unique=True, verbose_name=_("Slug"))
     release = models.FileField(
         max_length=255,
         null=True,
         blank=True,
-        upload_to=release_name,
+        upload_to=release_path,
         verbose_name=_("Release File"),
     )
-
     cover = models.ImageField(
         max_length=255,
         null=True,
         blank=True,
-        upload_to=cover_name,
+        upload_to=cover_path,
         verbose_name=_("Cover Image"),
     )
 
@@ -57,21 +71,23 @@ class Post(BaseModel):
     length = models.CharField(max_length=16, blank=True)
     tracklist = models.TextField(blank=True)
 
-    genre = TaggableManager(
-        blank=True,
-        through=GenresProxy,
+    genres = models.ManyToManyField(
+        to="core.Tag",
+        through=Genres,
         verbose_name=_("Genre"),
         related_name="post_genres",
+        blank=True,
     )
-    tags = TaggableManager(blank=True, through=TagsProxy, verbose_name=_("Tags"), related_name="post_tags")
+    tags = models.ManyToManyField(
+        to="core.Tag",
+        through=Tags,
+        verbose_name=_("Tags"),
+        related_name="post_tags",
+        blank=True,
+    )
 
     viewed = models.IntegerField(blank=True, default=0)
     related = models.ManyToManyField("self", blank=True)
-
-    mp3_preview_ready = models.BooleanField(blank=True, default=False)
-    mp3_release_ready = models.BooleanField(blank=True, default=False)
-    ogg_preview_ready = models.BooleanField(blank=True, default=False)
-    ogg_release_ready = models.BooleanField(blank=True, default=False)
 
     objects = PostManager()
 
@@ -91,17 +107,6 @@ class Post(BaseModel):
         super().save(*args, **kwargs)
 
     @property
-    def files_converted(self) -> bool:
-        return all((self.mp3_preview_ready, self.mp3_release_ready, self.ogg_preview_ready, self.ogg_release_ready))
-
-    @property
-    def translations_filled(self) -> bool:
-        for field in TRANSLATED_FIELDS:
-            if not getattr(self, field):
-                return False
-        return True
-
-    @property
     def url(self) -> str:
         return reverse("post", kwargs={"slug": self.slug})
 
@@ -111,7 +116,7 @@ class Post(BaseModel):
             ext = self.release.url.split(".")[-1]
             return self.release.url.replace(f".{ext}", "")
         except (IndexError, AttributeError, ValueError):
-            return
+            return None
 
     @property
     def release_file_name(self) -> str | None:
@@ -119,49 +124,29 @@ class Post(BaseModel):
             ext = self.release.file.name.split(".")[-1]
             return self.release.file.name.replace(f".{ext}", "")
         except (IndexError, AttributeError, ValueError):
-            return
+            return None
 
     @property
     def preview_file_url(self) -> str | None:
         try:
             return self.release_file_url.replace("release", "preview")
         except (IndexError, AttributeError, ValueError):
-            return
+            return None
 
     @property
     def preview_file_name(self) -> str | None:
         try:
             return self.release_file_name.replace("release", "preview")
         except (IndexError, AttributeError, ValueError):
-            return
+            return None
 
     @property
-    def release_mp3_url(self) -> str | None:
-        return f"{self.release_file_url}.mp3" if self.release_file_url else None
-
-    @property
-    def release_mp3_file(self) -> str | None:
-        return f"{self.release_file_name}.mp3" if self.release_file_name else None
-
-    @property
-    def preview_mp3_url(self) -> str | None:
-        return f"{self.preview_file_url}.mp3" if self.preview_file_url else None
-
-    @property
-    def preview_mp3_file(self) -> str | None:
-        return f"{self.preview_file_name}.mp3" if self.preview_file_name else None
-
-    @property
-    def genres(self) -> str:
-        return ", ".join(self.genre.values_list("name", flat=True))
+    def genres_list(self) -> str:
+        return ", ".join(self.genres.values_list("name", flat=True))
 
     @property
     def title(self) -> str:
-        return f"{self.name} /{self.genres}/"
-
-    @property
-    def most_common_tags(self) -> list[TagsProxy]:
-        return [tag for tag in self.tags.exclude(slug="front") if TagsProxy.objects.filter(tag_id=tag.id).count() > 1]
+        return f"{self.name} /{self.genres_list}/"
 
     @property
     def cover_thumbnail(self) -> str:
@@ -169,14 +154,14 @@ class Post(BaseModel):
 
     def as_dict(self) -> dict:
         return {
-            "id": self.id,
+            "id": self.pk,
             "url": self.url,
             "name": self.name,
             "slug": self.slug,
             "title": self.title,
             "cover": {"original": self.cover.url, "thumbnail": self.cover_thumbnail} if self.cover else None,
-            "release": {"mp3": self.release_mp3_url},
-            "preview": {"mp3": self.preview_mp3_url},
+            "release": {"mp3": self.release_file_url},
+            "preview": {"mp3": self.preview_file_url},
         }
 
     def as_html(self, context) -> str:
@@ -184,5 +169,5 @@ class Post(BaseModel):
 
 
 @receiver(post_save, sender=Post, dispatch_uid="flush_caches")
-def blog_post_save(sender, instance, **kwargs):
+def blog_post_save(sender: str, instance: Post, **kwargs: dict):
     flush_cache(["index", "blog", f"post-{instance.slug}"])

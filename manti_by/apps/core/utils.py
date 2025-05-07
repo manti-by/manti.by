@@ -40,33 +40,16 @@ def flush_cache(prefixes: list[str]) -> None:
     cache.delete_many(keys_to_delete)
 
 
-def get_name(instance: Image, filename: str, typename: str) -> str:
-    name, ext = os.path.splitext(filename)
-    return f"{instance.__class__.__name__.lower()}/{typename}/{unique_str()}{ext}"
-
-
-def original_name(instance: Image, filename: str) -> str:
+def images_path(instance: Image, filename: str) -> str:
     name, ext = os.path.splitext(filename)
     return f"gallery/{name}{ext}"
 
 
-def preview_name(instance: Image, filename: str) -> str:
-    return get_name(instance, filename, "preview")
-
-
-def gallery_name(instance: Image, filename: str) -> str:
-    return get_name(instance, filename, "gallery")
-
-
-def thumb_name(instance: Image, filename: str) -> str:
-    return get_name(instance, filename, "thumb")
-
-
-def release_name(instance: Post, filename: str) -> str:
+def release_path(instance: Post, filename: str) -> str:
     name, ext = os.path.splitext(filename)
     return f"release/{name}{ext}"
 
 
-def cover_name(instance: Post, filename: str) -> str:
+def cover_path(instance: Post, filename: str) -> str:
     name, ext = os.path.splitext(filename)
     return f"covers/{name}{ext}"

@@ -18,13 +18,7 @@ def index(request: HttpRequest) -> str:
     if cached_data:
         return cached_data
     try:
-        featured_image = Image.objects.filter(tags__name__iexact="featured")
-        if featured_image:
-            featured_image = featured_image[0]
-            latest_images = Image.objects.exclude(pk=featured_image.pk).order_by("-order")[:6]
-        else:
-            latest_images = Image.objects.all().order_by("-order")[:6]
-
+        latest_images = Image.objects.all().order_by("-order")[:6]
         featured_posts = Post.objects.filter(tags__name__iexact="featured").order_by("created")[:3]
         latest_posts = (
             Post.objects.exclude(pk__in=[p.pk for p in featured_posts])
@@ -36,7 +30,6 @@ def index(request: HttpRequest) -> str:
             request,
             "index.html",
             {
-                "featured_image": featured_image,
                 "latest_images": latest_images,
                 "featured_posts": featured_posts,
                 "latest_posts": latest_posts,

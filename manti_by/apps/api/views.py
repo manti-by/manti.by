@@ -1,15 +1,11 @@
-import logging
-
 from django.db.models import Q
-from django.http import JsonResponse
+from django.http import HttpRequest, HttpResponse, JsonResponse
 
 from manti_by.apps.blog.models import Post
-from manti_by.apps.core.context_processors.common import global_template_vars
-
-logger = logging.getLogger(__name__)
+from manti_by.apps.core.context import template_vars
 
 
-def posts(request):
+def posts(request: HttpRequest) -> HttpResponse:
     tag = request.GET.get("tag", None)
     start = int(request.GET.get("start", 0))
     limit = int(request.GET.get("limit", 100))
@@ -23,20 +19,20 @@ def posts(request):
 
     for p in queryset[start : start + limit]:  # noqa
         if return_type == "html":
-            context = global_template_vars(request)
+            context = template_vars(request)
             result.append(p.as_html(context))
         else:
             result[p.id] = p.as_dict()
     return JsonResponse(result, safe=False)
 
 
-def search(request):
+def search(request: HttpRequest) -> HttpResponse:
     query = request.GET.get("q")
     queryset = Post.objects.filter(
         Q(name__icontains=query)
         | Q(description__icontains=query)
         | Q(tracklist__icontains=query)
-        | Q(genre__name__icontains=query)
+        | Q(genres__name__icontains=query)
         | Q(tags__name__icontains=query)
     ).distinct()
     return JsonResponse([item.as_dict() for item in queryset], safe=False)

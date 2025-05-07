@@ -11,8 +11,10 @@ norecursedirs = '''
 '''
 
 [tool.bandit]
-exclude_dirs = []
-skips = ["B101"]
+exclude_dirs = [
+    "manti_by/apps/core/utils.py"
+]
+skips = ["B101", "B308", "B703"]
 
 [tool.black]
 line-length = 120

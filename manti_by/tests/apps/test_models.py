@@ -7,6 +7,7 @@ from django.conf import settings
 import pytest
 
 from manti_by.apps.blog.models import Post
+from manti_by.apps.core.models import Tag
 from manti_by.apps.gallery.models import Image
 
 
@@ -15,29 +16,12 @@ class TestPostModel:
     @classmethod
     def setup_class(cls):
         cls.data = {"name": "test", "slug": "test"}
-        release_path = os.path.join(settings.MEDIA_ROOT, "release")
-        if not os.path.exists(release_path):
-            os.makedirs(release_path)
-        shutil.copy(
-            os.path.join(settings.BASE_DIR, "static", "test", "test.mp3"),
-            os.path.join(settings.MEDIA_ROOT, "release", "test.mp3"),
-        )
-
-    @classmethod
-    def teardown_class(cls):
-        release_path = os.path.join(settings.MEDIA_ROOT, "release")
-        if os.path.exists(release_path):
-            shutil.rmtree(release_path)
 
     def test_get(self):
         post = Post.objects.create(**self.data)
-
         assert post.name == self.data["name"]
         assert post.slug == self.data["name"].lower()
-
         assert post.created is not None
-        assert post.translations_filled is False
-        assert post.files_converted is False
 
     def test_update(self):
         post = Post.objects.create(**self.data, is_music=True)
@@ -45,26 +29,12 @@ class TestPostModel:
 
     def test_tags(self):
         post = Post.objects.create(**self.data)
-        genre = str(uuid.uuid4())
-        post.genre.add(genre)
-        tag = str(uuid.uuid4())
-        post.tags.add(tag)
+        post.genres.add(Tag.objects.create(name="Genre", slug="genre"))
+        post.tags.add(Tag.objects.create(name="Tag", slug="tag"))
 
-        assert genre in post.genre.names()
-        assert tag in post.tags.names()
-        assert post.title == f"{self.data['name']} /{genre}/"
-
-    def test_files(self):
-        post = Post.objects.create(**self.data, release="release/test.mp3")
-
-        assert post.release_mp3_url is not None
-        assert post.release_mp3_file is not None
-        assert post.preview_mp3_url is not None
-        assert post.preview_mp3_file is not None
-        assert post.release_ogg_url is not None
-        assert post.release_ogg_file is not None
-        assert post.preview_ogg_url is not None
-        assert post.preview_ogg_file is not None
+        assert "Genre" in list(post.genres.values_list("name", flat=True))
+        assert "Tag" in list(post.tags.values_list("name", flat=True))
+        assert post.title == f"{self.data['name']} /Genre/"
 
 
 @pytest.mark.django_db
@@ -72,15 +42,6 @@ class TestGalleryModel:
     @classmethod
     def setup_class(cls):
         cls.data = {"name": str(uuid.uuid4())}
-
-        release_path = os.path.join(settings.MEDIA_ROOT, "gallery")
-        if not os.path.exists(release_path):
-            os.makedirs(release_path)
-
-        shutil.copy(
-            os.path.join(settings.PROJECT_DIR, "static", "test", "test.jpg"),
-            os.path.join(settings.MEDIA_ROOT, "gallery", "test.jpg"),
-        )
 
     def test_files(self):
         image = Image.objects.create(original_image="gallery/test.jpg", order=1)

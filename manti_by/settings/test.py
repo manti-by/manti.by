@@ -12,7 +12,7 @@ ALLOWED_HOSTS = ["127.0.0.1"]
 
 BASE_URL = "http://127.0.0.1"
 
-LOCALE_URLS = {"be": "127.0.0.1", "ru": "127.0.0.1", "en": "127.0.0.1"}
+LOCALE_URLS = {"by": "127.0.0.1", "en": "127.0.0.1"}
 
 STATIC_URL = "/static/"
 STATIC_ROOT = "/tmp/static"  # nosec
@@ -42,7 +42,7 @@ LOGGING = {
     "loggers": {
         "": {
             "handlers": ["console"],
-            "level": "DEBUG",
+            "level": "INFO",
             "propagate": True,
             "formatter": "simple",
         },
