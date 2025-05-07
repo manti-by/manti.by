@@ -31,9 +31,12 @@ django-checks:
 test:
 	pytest manti_by/
 
+venv:
+	uv venv --python 3.12.7 --prompt=mnt
+
 pip:
-	uv pip install -r requirements.txt
+	uv sync
 
 update:
-	pcu requirements.txt -u
+	pcu pyproject.toml -u
 	pre-commit autoupdate

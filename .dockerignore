@@ -7,18 +7,13 @@ __pycache__/
 *$py.class
 
 config/
+.venv/
 
-.flake8
 .gitattributes
 .gitignore
-.isort
 .pre-commit-config.yaml
-.prospector.yaml
-.pylintrc
 .python-version
 docker-compose.yml
 Dockerfile
 LICENSE
-package.json
-pyproject.toml
 README.md

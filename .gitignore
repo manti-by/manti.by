@@ -12,8 +12,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Pyenv
-.python-version
+# UV packages lock
+uv.lock
 
 # Project files
 static/*

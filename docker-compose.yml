@@ -31,4 +31,4 @@ services:
       - /mnt/data/www/manti/content/:/var/lib/app/content/
       - /mnt/data/www/manti/log/:/var/log/app/
     command: |
-      gunicorn manti_by.wsgi:application --bind 0.0.0.0:8080 --workers 2 --log-file /var/log/app/wsgi.log
+      gunicorn manti_by.asgi:application --bind 0.0.0.0:8000 --workers 2 --worker-class uvicorn.workers.UvicornWorker --log-file /var/log/app/wsgi.log

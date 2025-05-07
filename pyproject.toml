@@ -1,3 +1,29 @@
+[project]
+name = "manti_by"
+version = "v3.1.0a"
+description = "Django custom blog engine for music and photo publishing"
+readme = "README.md"
+requires-python = ">=3.12.4"
+dependencies = [
+    "django==5.2.1",
+    "django-compressor==4.5.1",
+    "django-stubs==5.2.0",
+    "gunicorn==23.0.0",
+    "ipython>=9.2.0",
+    "pillow==11.2.1",
+    "pip-check-updates>=0.27.0",
+    "psycopg2-binary==2.9.10",
+    "pytest>=8.3.5",
+    "pytest-django>=4.11.1",
+    "redis==6.0.0",
+    "sorl-thumbnail==12.11.0",
+    "pre_commit>=4.2.0",
+    "uvicorn==0.34.2"
+]
+
+[tool.setuptools]
+py-modules = []
+
 [tool.pytest.ini_options]
 log_cli = true
 log_cli_format = "%(levelname)s %(asctime)s %(message)s"
@@ -23,12 +49,8 @@ include = '\.pyi?$'
 exclude = '''
 /(
     \.git
-  | \.mypy_cache
   | \.pytest_cache
   | \.venv
-  | _build
-  | build
-  | dist
 )/
 '''
 
@@ -57,18 +79,11 @@ select = [
     "RUF"  # Ruff-specific rules
 ]
 exclude = [
-    ".bzr",
-    ".direnv",
-    ".eggs",
     ".git",
     ".git-rewrite",
-    ".mypy_cache",
-    ".pytype",
     ".ruff_cache",
     ".venv",
     "venv",
-    "__pypackages__",
-    "pinata_ui/settings/*",
 ]
 ignore = [
     "DJ001", # Null values for model char fields
