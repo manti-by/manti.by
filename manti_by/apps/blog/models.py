@@ -151,22 +151,6 @@ class Post(BaseModel):
         return f"{self.preview_file_name}.mp3" if self.preview_file_name else None
 
     @property
-    def release_ogg_url(self) -> str | None:
-        return f"{self.release_file_url}.ogg" if self.release_file_url else None
-
-    @property
-    def release_ogg_file(self) -> str | None:
-        return f"{self.release_file_name}.ogg" if self.release_file_name else None
-
-    @property
-    def preview_ogg_url(self) -> str | None:
-        return f"{self.preview_file_url}.ogg" if self.preview_file_url else None
-
-    @property
-    def preview_ogg_file(self) -> str | None:
-        return f"{self.preview_file_name}.ogg" if self.preview_file_name else None
-
-    @property
     def genres(self) -> str:
         return ", ".join(self.genre.values_list("name", flat=True))
 
@@ -185,8 +169,8 @@ class Post(BaseModel):
             "name": self.name,
             "title": self.title,
             "cover": self.cover.url if self.cover else None,
-            "release": {"mp3": self.release_mp3_url, "ogg": self.release_ogg_url},
-            "preview": {"mp3": self.preview_mp3_url, "ogg": self.preview_ogg_url},
+            "release": {"mp3": self.release_mp3_url},
+            "preview": {"mp3": self.preview_mp3_url},
         }
 
     def as_html(self, context) -> str:

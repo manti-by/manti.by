@@ -7,7 +7,7 @@
     constructor () {
       this.data = []
       this.active = []
-      this.is_mp3 = -1
+      this.is_mp3 = 1
       this.is_playing = false
 
       this.volume = 70
@@ -35,19 +35,7 @@
       this.updateActivePosts()
       this.active_id = this.getData('first').id
 
-      this.checkMpegSupport()
       this.bind()
-    };
-
-    checkMpegSupport () {
-      if (this.is_mp3 === -1) {
-        const audio = document.createElement('audio')
-        if (typeof audio.canPlayType === 'function' && audio.canPlayType('audio/mpeg') !== '') {
-          this.is_mp3 = 1
-        } else {
-          this.is_mp3 = 0
-        }
-      }
     };
 
     bind () {
@@ -300,13 +288,12 @@
 
       const data = this.getData('current')
       const quality = this.is_hd ? 'release' : 'preview'
-      const format = this.is_mp3 ? 'mp3' : 'ogg'
 
       this.player.data('id', this.active_id)
       this.player.title.html(data.title)
       this.player.link.attr('href', data.url)
       this.player.image.attr('src', data.cover)
-      this.player.audio.attr('src', data[quality][format])
+      this.player.audio.attr('src', data[quality]['mp3'])
 
       this.player.api.load()
 
