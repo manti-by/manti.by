@@ -9,6 +9,22 @@ from django.utils.translation import gettext_lazy as _
 from manti_by.apps.blog.models import Post
 
 
+class PostTagsInline(admin.TabularInline):
+    model = Post.tags.through
+    extra = 0
+
+
+class PostGenresInline(admin.TabularInline):
+    model = Post.genres.through
+    extra = 0
+
+
+# class PostRelatedInline(admin.TabularInline):
+#     model = Post.related.through
+#     fk_name = "pk"
+#     extra = 0
+
+
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     formfield_overrides = {models.TextField: {"widget": Textarea(attrs={"rows": 4, "cols": 80})}}
@@ -16,21 +32,22 @@ class PostAdmin(admin.ModelAdmin):
     list_display = (
         "thumb_image",
         "name",
-        "is_music",
         "catnum",
-        "is_translations_filled",
+        "quality",
+        "length",
+        "is_music",
         "created",
     )
 
     fieldsets = (
-        (_("Base Info"), {"fields": ("name_be", "name_ru", "name_en", "slug")}),
-        (_("Meta Description"), {"fields": ("meta_be", "meta_ru", "meta_en")}),
-        (_("Summary"), {"fields": ("summary_be", "summary_ru", "summary_en")}),
+        (_("Base Info"), {"fields": ("name", "name_by", "slug")}),
+        (_("Meta Description"), {"fields": ("meta", "meta_by")}),
+        (_("Summary"), {"fields": ("summary", "summary_by")}),
         (
             _("Description"),
-            {"fields": ("description_be", "description_ru", "description_en")},
+            {"fields": ("description", "description_by")},
         ),
-        (_("Related"), {"classes": ("collapse",), "fields": ("related",)}),
+        # (_("Related"), {"classes": ("collapse",), "fields": ("related",)}),
         (
             _("Music params"),
             {
@@ -50,8 +67,14 @@ class PostAdmin(admin.ModelAdmin):
         ),
     )
 
+    inlines = (
+        PostTagsInline,
+        PostGenresInline,
+        # PostRelatedInline,
+    )
+
     def get_queryset(self, request: HttpRequest) -> models.QuerySet:
-        return super().get_queryset(request).prefetch_related("genre", "tags")
+        return super().get_queryset(request).prefetch_related("genres", "tags", "related")
 
     def thumb_image(self, obj: Post) -> str:
         image = static_file("img/no-image.png")
@@ -60,9 +83,3 @@ class PostAdmin(admin.ModelAdmin):
         return mark_safe(f'<img src="{image}" width="50" />')  # noqa
 
     thumb_image.short_description = _("Image")
-
-    def is_translations_filled(self, obj: Post) -> bool:
-        return obj.translations_filled
-
-    is_translations_filled.boolean = True
-    is_translations_filled.short_description = _("Translations Ready")

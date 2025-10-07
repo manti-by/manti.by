@@ -1,5 +1,5 @@
 from django.db import models
-from django.db.models import QuerySet, Count
+from django.db.models import Count, QuerySet
 from django.utils.timezone import now
 from django.utils.translation import gettext_lazy as _
 
@@ -36,6 +36,7 @@ class Tag(models.Model):
     slug = models.SlugField(unique=True, max_length=100)
 
     class Meta:
+        ordering = ("name",)
         verbose_name = _("tag")
         verbose_name_plural = _("tags")
 
@@ -44,7 +45,8 @@ class Tag(models.Model):
 
     @staticmethod
     def most_common() -> QuerySet:
-        return Tag.objects.exclude(slug="front").annotate(
-            posts_count=Count("post_to_tag_tags__post")
-        ).order_by("-posts_count")
-
+        return (
+            Tag.objects.exclude(slug="front")
+            .annotate(posts_count=Count("post_to_tag_tags__post"))
+            .order_by("-posts_count")
+        )

@@ -12,8 +12,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# UV packages lock
+# UV generated files
 uv.lock
+manti_by.egg-info/
 
 # Project files
 static/*

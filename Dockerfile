@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.13-slim
 
 LABEL maintainer="Alex Chaika <manti.by@gmail.com>"
 
@@ -18,4 +18,3 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 USER manti
 WORKDIR /srv/app/src/
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-

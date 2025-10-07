@@ -10,7 +10,7 @@ class Player {
     this.is_mp3 = -1
     this.is_playing = false
 
-    this.volume = 70
+    this.volume = 30
     this.position = 0
     this.duration = 0
 

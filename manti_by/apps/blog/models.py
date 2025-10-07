@@ -38,16 +38,16 @@ class PostManager(models.Manager):
 
 class Post(BaseModel):
     name = models.CharField(max_length=255)
-    name_by = models.CharField(max_length=255)
+    name_by = models.CharField(max_length=255, null=True)
 
     meta = models.TextField()
-    meta_by = models.TextField()
+    meta_by = models.TextField(null=True)
 
     summary = models.TextField()
-    summary_by = models.TextField()
+    summary_by = models.TextField(null=True)
 
     description = models.TextField()
-    description_by = models.TextField()
+    description_by = models.TextField(null=True)
 
     slug = models.SlugField(unique=True, verbose_name=_("Slug"))
     release = models.FileField(

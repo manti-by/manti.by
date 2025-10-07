@@ -32,10 +32,10 @@ test:
 	pytest manti_by/
 
 venv:
-	uv venv --python 3.12.7 --prompt=mnt
+	uv venv --python 3.13.6 --prompt=mnt
 
 pip:
-	uv sync
+	uv sync --active
 
 update:
 	pcu pyproject.toml -u
