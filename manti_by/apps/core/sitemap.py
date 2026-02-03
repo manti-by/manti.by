@@ -8,9 +8,9 @@ from manti_by.apps.blog.models import Post
 class BaseSitemap(Sitemap):
     def get_urls(self, page=1, site=None, protocol=None):
         urls = []
-        for lang_code, lang_name in settings.LANGUAGES:
+        for lang_code, _ in settings.LANGUAGES:
             domain = settings.LOCALE_URLS.get(lang_code)
-            urls += self._urls(page, "https", domain)
+            urls += self._urls(page, "https", domain)  # ty: ignore[unresolved-attribute]
         return urls
 
 
@@ -32,11 +32,11 @@ class BlogSitemap(BaseSitemap):
     def items(self):
         return Post.objects.all()
 
-    def lastmod(self, obj):
-        return obj.updated
+    def lastmod(self, item):
+        return item.updated
 
-    def location(self, obj):
-        return obj.get_absolute_url()
+    def location(self, item):
+        return item.get_absolute_url()
 
 
 class StaticSitemap(BaseSitemap):

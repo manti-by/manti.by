@@ -1,7 +1,7 @@
 from django.conf import settings
 
-from manti_by.apps.core.models import Tag
 from manti_by.apps.blog.models import Post
+from manti_by.apps.core.models import Tag
 
 
 def template_vars(request):

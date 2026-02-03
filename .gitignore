@@ -1,5 +1,6 @@
-# PyCharm files
+# IDE files
 .idea/
+.vscode/
 
 # Virtual environments
 .env
@@ -11,10 +12,6 @@ __pycache__/
 .pytest_cache/
 *.py[cod]
 *$py.class
-
-# UV generated files
-uv.lock
-manti_by.egg-info/
 
 # Project files
 static/*

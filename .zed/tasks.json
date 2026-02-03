@@ -1,0 +1,8 @@
+[
+  {
+    "label": "Django Server",
+    "command": "uv",
+    "args": ["run", "manage.py", "runserver"],
+    "reveal": "always",
+  },
+]

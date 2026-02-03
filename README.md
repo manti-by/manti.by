@@ -13,7 +13,7 @@ Author: Alexander Chaika <manti.by@gmail.com>
 
 Source link: https://github.com/manti-by/manti.by
 
-Requirements: Python 3.12, PostgreSQL 17, Redis
+Requirements: Python 3.13, PostgreSQL 18, Redis 7
 
 
 ## Setup dev environment

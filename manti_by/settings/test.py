@@ -1,50 +1,24 @@
 from .base import *  # noqa
 
-ENVIRONMENT = "test"
-
-SECRET_KEY = "some_very_secret_ley"  # nosec
+SECRET_KEY = "some-very-secret-ley"
 
 DEBUG = False
 
 TEMPLATE_DEBUG = False
-
-ALLOWED_HOSTS = ["127.0.0.1"]
 
 BASE_URL = "http://127.0.0.1"
 
 LOCALE_URLS = {"by": "127.0.0.1", "en": "127.0.0.1"}
 
 STATIC_URL = "/static/"
-STATIC_ROOT = "/tmp/static"  # nosec
+STATIC_ROOT = "/tmp/static"
 
 MEDIA_URL = "/content/"
-MEDIA_ROOT = "/tmp/content"  # nosec
+MEDIA_ROOT = "/tmp/content"
 
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
         "LOCATION": "manti_by",
     }
-}
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "simple": {
-            "format": "%(asctime)s [%(levelname)s] %(message)s",
-            "datefmt": "%H:%M:%S",
-        }
-    },
-    "handlers": {
-        "console": {"class": "logging.StreamHandler"},
-    },
-    "loggers": {
-        "": {
-            "handlers": ["console"],
-            "level": "INFO",
-            "propagate": True,
-            "formatter": "simple",
-        },
-    },
 }

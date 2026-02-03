@@ -12,7 +12,7 @@ class Tags(models.Model):
     image = models.ForeignKey("gallery.Image", related_name="tags_image_items", on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Tag #{self.tag} for image #{self.post.id}"
+        return f"Tag #{self.tag} for image #{self.image.id}"
 
 
 class ImageManager(models.Manager):

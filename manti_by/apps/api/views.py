@@ -20,7 +20,7 @@ def posts(request: HttpRequest) -> HttpResponse:
     for p in queryset[start : start + limit]:  # noqa
         if return_type == "html":
             context = template_vars(request)
-            result.append(p.as_html(context))
+            result.append(p.as_html(context))  # ty: ignore[possibly-missing-attribute]
         else:
             result[p.id] = p.as_dict()
     return JsonResponse(result, safe=False)

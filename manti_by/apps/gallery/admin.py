@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.templatetags.static import static as static_file
-from django.utils.safestring import mark_safe
+from django.utils.html import format_html
 from django.utils.translation import gettext_lazy as _
 
 from sorl.thumbnail import get_thumbnail
@@ -15,16 +15,9 @@ class ImageAdmin(admin.ModelAdmin):
 
     fieldsets = ((_("Info"), {"fields": ("original_image", "order")}),)
 
-    def image(self, obj):
+    @admin.display(description=_("Image"))
+    def image(self, obj: Image) -> str:
         image = static_file("img/no-image.png")
         if obj.original_image:
             image = get_thumbnail(obj.original_image, "100x100", crop="center", quality=60)
-        return mark_safe(f'<img src="{image.url}" width="50" />')  # noqa
-
-    image.short_description = _("Image")
-
-    def is_ready(self, obj):
-        return obj.ready
-
-    is_ready.boolean = True
-    is_ready.short_description = _("Ready")
+        return format_html(f'<img src="{image.url}" width="50" />')  # ty: ignore[possibly-missing-attribute]

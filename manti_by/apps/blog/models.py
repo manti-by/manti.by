@@ -128,17 +128,15 @@ class Post(BaseModel):
 
     @property
     def preview_file_url(self) -> str | None:
-        try:
-            return self.release_file_url.replace("release", "preview")
-        except (IndexError, AttributeError, ValueError):
+        if not self.release_file_url:
             return None
+        return self.release_file_url.replace("release", "preview")
 
     @property
     def preview_file_name(self) -> str | None:
-        try:
-            return self.release_file_name.replace("release", "preview")
-        except (IndexError, AttributeError, ValueError):
+        if not self.release_file_name:
             return None
+        return self.release_file_name.replace("release", "preview")
 
     @property
     def genres_list(self) -> str:

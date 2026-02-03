@@ -1,8 +1,7 @@
 services:
-
   postgres:
     restart: always
-    image: postgres:latest
+    image: postgres:18
     container_name: manti-by-postgres
     environment:
       - POSTGRES_DB=manti_by
@@ -11,7 +10,7 @@ services:
 
   redis:
     restart: always
-    image: redis:latest
+    image: redis:7
     container_name: manti-by-redis
 
   django:

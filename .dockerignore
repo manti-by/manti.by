@@ -1,5 +1,8 @@
 .git/
 .github/
+.idea/
+.vscode/
+.zed/
 
 .pytest_cache/
 __pycache__/
@@ -15,6 +18,8 @@ manti_by.egg-info/
 .pre-commit-config.yaml
 .python-version
 docker-compose.yml
+opencode.json
 Dockerfile
+AGENTS.md
 LICENSE
 README.md

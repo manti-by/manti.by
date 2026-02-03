@@ -76,10 +76,9 @@ class PostAdmin(admin.ModelAdmin):
     def get_queryset(self, request: HttpRequest) -> models.QuerySet:
         return super().get_queryset(request).prefetch_related("genres", "tags", "related")
 
+    @admin.display(description=_("Image"))
     def thumb_image(self, obj: Post) -> str:
         image = static_file("img/no-image.png")
         if obj.cover:
             image = obj.cover.url
         return mark_safe(f'<img src="{image}" width="50" />')  # noqa
-
-    thumb_image.short_description = _("Image")

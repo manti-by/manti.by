@@ -18,13 +18,13 @@ PROJECT_DIR = Path(__file__).resolve().parent.parent
 
 BASE_DIR = PROJECT_DIR.parent
 
-SECRET_KEY = ""  # nosec
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = False
 
 TEMPLATE_DEBUG = False
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ("*",)
 
 # Application definition
 
@@ -162,6 +162,27 @@ MEDIA_ROOT = BASE_DIR / "content"
 MEDIA_URL = "/content/"
 
 FILE_UPLOAD_PERMISSIONS = 0o644
+
+
+# https://docs.djangoproject.com/en/5.2/ref/logging/
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {"format": "%(levelname)s %(asctime)s %(message)s"},
+    },
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+    },
+    "loggers": {
+        "": {"handlers": ["console"], "level": "INFO"},
+    },
+}
 
 
 # Email settings

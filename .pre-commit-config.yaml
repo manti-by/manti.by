@@ -13,7 +13,7 @@ repos:
     rev: v3.20.0
     hooks:
       - id: pyupgrade
-        args: [--py312-plus]
+        args: [--py313-plus]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
     rev: v0.13.3
@@ -22,24 +22,18 @@ repos:
         args: [--fix]
       - id: ruff-format
 
-  # Search common security issues in Python code
-  - repo: local
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.6
     hooks:
-    - id: bandit
-      name: bandit
-      entry: bandit
-      language: python
-      language_version: python3.12
-      types: [ python ]
-      args: [-c, pyproject.toml]
-      additional_dependencies: ["bandit[toml]"]
+      - id: bandit
+        language: python
+        language_version: python3.13
+        types: [python]
+        args: [-c, pyproject.toml]
 
-  # Linting for Django templates
   - repo: https://github.com/thibaudcolas/curlylint
     rev: v0.13.1
     hooks:
       - id: curlylint
-        types: [ file ]
-        files: \.(html|sls)$
-        language_version: python3.12
-        additional_dependencies: [click<8.1]
+        types: [file]
+        files: \.html$
